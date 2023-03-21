@@ -2,7 +2,7 @@
  * @Author: August-Rushme
  * @Date: 2023-03-21 09:28:28
  * @LastEditors: August-Rushme 864011713zqy@gmail.com
- * @LastEditTime: 2023-03-21 09:52:28
+ * @LastEditTime: 2023-03-21 10:27:45
  * @FilePath: \he-she-honey\README.md
  * @Description:
  *
@@ -47,7 +47,7 @@
 4. npm 版本 7.x
 
 # 克隆项目
-git clone https://github.com/August-Rushme/yiya-straight.git
+git clone https://github.com/August-Rushme/he-she-honey.git
 
 # 进入项目目录
 cd he-she-honey
