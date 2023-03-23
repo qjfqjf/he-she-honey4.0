@@ -58,8 +58,12 @@
 			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
 			<text>瀑布流列表</text>
 		</view>
-		
+		<view class="nav_list" @click="onPageJump('/pages/healthMonitor/index')">
+			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
+			<text>健康监测</text>
+		</view>
 		<z-navigation></z-navigation>
+		
 	</view>
 </template>
 
@@ -84,6 +88,7 @@ export default {
 			uni.navigateTo({
 				url: url
 			});
+			console.log(111)
 		},
 		onTokenJump(url) {
 			this.judgeLogin(() => {

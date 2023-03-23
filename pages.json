@@ -1,9 +1,14 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/template/addTemplate",
 			"style": {
 				"navigationBarTitleText": "新增功能"
+			}
+		},
+		{
+			"path": "pages/healthMonitor/index",
+			"style": {
+		 	"navigationBarTitleText": "健康监测"
 			}
 		},
 		{
@@ -18,7 +23,6 @@
 				"navigationBarTitleText": "列表"
 			}
 		},
-
 		{
 			"path": "pages/demo/areaSelect",
 			"style": {
@@ -170,7 +174,6 @@
 				"navigationBarTitleText": "模板"
 			}
 		},
-
 		{
 			"path": "pages/user/bindPhone",
 			"style": {
@@ -328,7 +331,7 @@
 					}]
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/template/home",
 			"style": {
@@ -352,17 +355,23 @@
 			"style": {
 				"navigationBarTitleText": "推广海报生成"
 			}
+		},
+		{
+			"path": "pages/demo/datePopup",
+			"style": {
+				"navigationBarTitleText": "日期时间选择器",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/bloodPressure/bloodPressure",
+			"style": {
+				"navigationBarTitleText": "血压",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/demo/datePopup",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "日期时间选择器",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -401,7 +410,8 @@
 			}
 		]
 	},
-	"condition": { //模式配置，仅开发期间生效
+	"condition": {
+		//模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [{
 			"name": "", //模式名称
