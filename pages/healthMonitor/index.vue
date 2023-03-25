@@ -58,7 +58,8 @@
 					},
 					{
 						name: 'star',
-						title: '额温枪'
+						title: '额温枪',
+						url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometer'
 					},
 					{
 						name: 'star',
