@@ -380,6 +380,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthMonitor/oximeter/oximeter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthMonitor/bloodSugar/bloodSugar",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

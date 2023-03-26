@@ -63,7 +63,8 @@
 					},
 					{
 						name: 'star',
-						title: '血氧'
+						title: '血氧',
+						url: '/pages/healthMonitor/oximeter/oximeter'
 					},
 					{
 						name: 'star',
