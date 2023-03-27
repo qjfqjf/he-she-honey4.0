@@ -3,7 +3,7 @@
 		<view class="footer_box" :class="{ footer_bg: bg }">
 			<view v-for="(item, index) of navigationList" :key="index" class="footer_item">
 				<view v-if="item.raised" class="footer_raised_item" @click="onRaised">
-					<image class="footer_raised_item_image" :src="'/' + item.iconPath" mode="aspectFit"></image>
+					<image class="footer_raised_item_image" :src="'/' + item.iconPath" mode="scaleToFill"></image>
 				</view>
 				<view v-else class="footer_nav_item" @click="onPageJump(item.pagePath)">
 					<image v-if="item.pagePath == path" class="footer_nav_item_image" :src="'/' + item.selectedIconPath" mode="aspectFit"></image>
@@ -37,30 +37,30 @@ export default {
 					pagePath: 'pages/template/addTemplate',
 					iconPath: 'static/icon/tab/icon_home.png',
 					selectedIconPath: 'static/icon/tab/icon_home_c.png',
-					text: '新增功能'
+					text: '首页'
 				},
 				{
-					pagePath: 'pages/demo/common',
-					iconPath: 'static/icon/tab/icon_wode.png',
-					selectedIconPath: 'static/icon/tab/icon_wode_c.png',
-					text: '组件示例'
+					"pagePath": "pages/demo/common",
+					"iconPath": "static/icon/tab/icon_message.png",
+					"selectedIconPath": "static/icon/tab/icon_message_c.png",
+					"text": "消息"
 				},
 				{
-					iconPath: 'static/icon/tab/icon_home_c.png',
-					text: '凸起导航',
+					iconPath: 'static/icon/tab/icon_phone_c.png',
+					text: '',
 					raised: true
 				},
 				{
-					pagePath: 'pages/sdkDemo/common',
-					iconPath: 'static/icon/tab/icon_xiaoxi.png',
-					selectedIconPath: 'static/icon/tab/icon_xiaoxi_c.png',
-					text: 'SDK示例'
+					"pagePath": "pages/sdkDemo/common",
+					"iconPath": "static/icon/tab/icon_service.png",
+					"selectedIconPath": "static/icon/tab/icon_service_c.png",
+					"text": "社区"
 				},
 				{
-					pagePath: 'pages/template/common',
-					iconPath: 'static/icon/tab/icon_xiaoxi.png',
-					selectedIconPath: 'static/icon/tab/icon_xiaoxi_c.png',
-					text: '模板页面'
+					"pagePath": "pages/template/common",
+					"iconPath": "static/icon/tab/icon_my.png",
+					"selectedIconPath": "static/icon/tab/icon_my_c.png",
+					"text": "我的"
 				}
 			],
 			popupShow: false
@@ -158,8 +158,8 @@ export default {
 	justify-content: center;
 }
 .footer_raised_item_image {
-	width: 70rpx;
-	height: 70rpx;
+	width: 125rpx;
+	height: 125rpx;
 }
 .popup_content {
 	background-color: #FFF;

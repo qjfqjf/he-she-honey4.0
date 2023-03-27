@@ -375,7 +375,7 @@
             "path" : "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "额温枪",
                 "enablePullDownRefresh": false
             }
             
@@ -384,7 +384,7 @@
             "path" : "pages/healthMonitor/oximeter/oximeter",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "血氧仪",
                 "enablePullDownRefresh": false
             }
             
@@ -393,7 +393,7 @@
             "path" : "pages/healthMonitor/bloodSugar/bloodSugar",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "血糖",
                 "enablePullDownRefresh": false
             }
             
@@ -408,32 +408,32 @@
 	},
 	"tabBar": {
 		"color": "#444444",
-		"selectedColor": "#FF80AB",
+		"selectedColor": "#20c6a2",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/template/addTemplate",
 				"iconPath": "static/icon/tab/icon_home.png",
 				"selectedIconPath": "static/icon/tab/icon_home_c.png",
-				"text": "新增功能"
+				"text": "首页"
 			},
 			{
 				"pagePath": "pages/demo/common",
-				"iconPath": "static/icon/tab/icon_wode.png",
-				"selectedIconPath": "static/icon/tab/icon_wode_c.png",
-				"text": "组件示例"
+				"iconPath": "static/icon/tab/icon_message.png",
+				"selectedIconPath": "static/icon/tab/icon_message_c.png",
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/sdkDemo/common",
-				"iconPath": "static/icon/tab/icon_xiaoxi.png",
-				"selectedIconPath": "static/icon/tab/icon_xiaoxi_c.png",
-				"text": "SDK示例"
+				"iconPath": "static/icon/tab/icon_service.png",
+				"selectedIconPath": "static/icon/tab/icon_service_c.png",
+				"text": "社区"
 			},
 			{
 				"pagePath": "pages/template/common",
-				"iconPath": "static/icon/tab/icon_xiaoxi.png",
-				"selectedIconPath": "static/icon/tab/icon_xiaoxi_c.png",
-				"text": "模板页面"
+				"iconPath": "static/icon/tab/icon_my.png",
+				"selectedIconPath": "static/icon/tab/icon_my_c.png",
+				"text": "我的"
 			}
 		]
 	},
