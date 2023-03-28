@@ -34,7 +34,7 @@ export default {
 			path: '',
 			navigationList: [
 				{
-					pagePath: 'pages/template/addTemplate',
+					pagePath: 'pages/homePage/homePage',
 					iconPath: 'static/icon/tab/icon_home.png',
 					selectedIconPath: 'static/icon/tab/icon_home_c.png',
 					text: '首页'

@@ -1,40 +1,78 @@
 <template>
-	<view>
+	<view class="p-2">
 		<z-nav-bar title="血糖"></z-nav-bar>
 		<public-module></public-module>
-		<scroll-view scroll-y class="box">
-			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
-				<view>
-					<text>id: {{ item.deviceId }}</text>
-				</view>
-				<view>
-					<text>name: {{ item.name }}</text>
-				</view>
-			</view>
-		</scroll-view>
-
-		<button @click="discovery">2 搜索附近蓝牙设备</button>
-
-		<button @click="getServices">3 获取蓝牙服务</button>
-
-		<button @click="getCharacteristics">4 获取特征值</button>
-		<button @click="notify">5 开启消息监听</button>
-		<!-- <button @click="clear">8 清空蓝牙列表</button> -->
-		<view class="heat">
-			<view class="">
-				血糖值：{{value}}
+		<HealthHeader></HealthHeader>
+		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="value.length===0?0:value" unit="mmol/L" color="#ff8575">
+		</MyCircle>
+		<TipInfo title="血糖趋势"></TipInfo>
+		<view class="d-flex j-sb flex-wrap mb-3 py-2 tags">
+			<view class="m-1 tag-item" v-for="(item, index) in radios" :key="index">
+				<u-tag :text="item.text" shape="circle" :color="!item.checked?'#02b19b':'#fff'" border-color="#01b09a"
+					:bg-color="item.checked?'#01b09a':''" :plain="!item.checked" :name="index" @click="radioClick">
+				</u-tag>
 			</view>
 		</view>
+
+		<u--text class="d-flex j-center" color="#01b09a"
+			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
+		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveSugar"></u-button>
+		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
+			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
+		</u--text>
+		<BottomNavigation></BottomNavigation>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
-	import {
-		handleJKBPData
-	} from '@/pages/healthMonitor/bloodPressure/bloodpressure.js'
+	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
+	import TipInfo from '../components/tipInfo/TipInfo.vue'
+	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
+	import MyCircle from '../components/circle/Circle.vue'
 	export default {
+		components: {
+			HealthHeader,
+			TipInfo,
+			BottomNavigation,
+			MyCircle
+		},
 		data() {
 			return {
+				radios: [{
+						text: '空腹',
+						checked: false
+					},
+					{
+						text: '早餐后',
+						checked: false
+					},
+					{
+						text: '午餐前',
+						checked: false
+					},
+					{
+						text: '午餐后',
+						checked: false
+					},
+					{
+						text: '晚餐前',
+						checked: false
+					},
+					{
+						text: '晚餐后',
+						checked: false
+					},
+					{
+						text: '睡前',
+						checked: false
+					}, {
+						text: '睡后',
+						checked: false
+					}
+				],
+
+				btnColor: '#dadada',
 				value: new Int8Array(), //数据
 				blueDeviceList: [],
 				deviceId: 'E9:D1:6B:E3:29:1F', // 蓝牙设备的id
@@ -45,28 +83,31 @@
 		},
 		onLoad(e) {
 			this.initBlue()
-			// if (this.deviceId.length > 0) {
-			// 	uni.createBLEConnection({
-			// 		deviceId: this.deviceId,
-			// 		success(res) {
-			// 			console.log('连接成功')
-			// 			console.log(res)
-			// 			uni.showToast({
-			// 				title: '连接成功'
-			// 			})
-			// 		},
-			// 		fail(err) {
-			// 			console.log('连接失败')
-			// 			console.error(err)
-			// 			uni.showToast({
-			// 				title: '连接失败',
-			// 				icon: 'error'
-			// 			})
-			// 		}
-			// 	})
-			// }
+
 		},
 		methods: {
+			radioClick(name) {
+
+				this.radios.map((item, index) => {
+					item.checked = index === name ? true : false
+
+				})
+			},
+			handleSaveSugar() {
+				if (this.value.length > 0) {
+					this.$refs.uToast.show({
+						message: '保存成功',
+						type: 'success',
+					})
+					this.btnColor = '#dadada'
+					this.value = 0
+				}
+			},
+			handleDevelop() {
+				this.$refs.uToast.show({
+					message: '开发中...'
+				})
+			},
 			// 初始化蓝牙
 			initBlue() {
 				uni.openBluetoothAdapter({
@@ -115,26 +156,29 @@
 			connect(data) {
 				console.log(data)
 				const _this = this
-				this.deviceId = data.deviceId
+				if (this.deviceId.length === 0) {
+					this.deviceId = data.deviceId
+				}
 
 				uni.createBLEConnection({
 					deviceId: this.deviceId,
 					success(res) {
 						console.log('连接成功')
 						console.log(res)
-						// 停止搜索
-						_this.stopDiscovery()
-						uni.showToast({
-							title: '连接成功'
-						})
+						_this.deviceStatus = 1
+						setTimeout(() => {
+							_this.notify()
+						}, 1000)
+
 					},
 					fail(err) {
 						console.log('连接失败')
 						console.error(err)
-						uni.showToast({
-							title: '连接失败',
-							icon: 'error'
-						})
+						if (err.errCode === -1) {
+							_this.deviceStatus = 1
+							_this.notify()
+							return
+						}
 					}
 				})
 			},
@@ -259,7 +303,7 @@
 					console.log(data)
 				}
 				if (this.value.length >= 24) {
-					 // [-1, 1, 1, 0, 0, 2, 2, 0, 12, -128, 0, 30, 5, 1, 17, 13, 25, 0, 0, 0, 0, -37, 0, -2,] 1.6
+					// [-1, 1, 1, 0, 0, 2, 2, 0, 12, -128, 0, 30, 5, 1, 17, 13, 25, 0, 0, 0, 0, -37, 0, -2,] 1.6
 					const v = ((this.value[10] & 0xff) << 8) + (this.value[11] & 0xff)
 					this.divideWithPrecision(v, 18, 1)
 				}
@@ -279,33 +323,14 @@
 </script>
 
 <style lang="scss">
-	.box {
-		width: 98%;
-		height: 400rpx;
-		box-sizing: border-box;
-		margin: 0 auto 20rpx;
-		border: 2px solid dodgerblue;
-	}
+	.tags {
+		tag-item {
+			width: 60rpx;
+		}
 
-	.item {
-		box-sizing: border-box;
-		padding: 10rpx;
-		border-bottom: 1px solid #ccc;
-	}
-
-	button {
-		margin-bottom: 20rpx;
-	}
-
-	.msg_x {
-		border: 2px solid seagreen;
-		width: 98%;
-		margin: 10rpx auto;
-		box-sizing: border-box;
-		padding: 20rpx;
-	}
-
-	.msg_x .msg_txt {
-		margin-bottom: 20rpx;
+		&::after {
+			content: '';
+			width: 240rpx;
+		}
 	}
 </style>

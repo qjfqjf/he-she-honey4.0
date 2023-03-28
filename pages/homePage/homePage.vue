@@ -37,7 +37,7 @@
 		<u-swiper class="swiper mx-1" :list="wisperImage"></u-swiper>
 		<view class="appManeger w-100 h-100 m-1">
 			<u-row justify="space-between " class="appManeger_row" v-for="row in appManage" gutter="5">
-				<u-col span="4" class="appManeger_block d-flex flex-column j-center a-center" v-for="block in row">
+				<u-col span="4" class="appManeger_block d-flex flex-column j-center a-center" v-for="block in row" @click="onPageJump(block.path)">
 					<u--image class="appManeger_block_icon" :src="block.icon" height="120upx" width="120upx">
 					</u--image>
 					<u--text type="info" :text="block.name" class="appManeger_block_name" align="center">
@@ -128,7 +128,8 @@
 				appManage: [
 					[{
 							name: "健康检测",
-							icon: "https://cdn.uviewui.com/uview/swiper/swiper3.png"
+							icon: "https://cdn.uviewui.com/uview/swiper/swiper3.png",
+							path: "/pages/healthMonitor/index"
 						},
 						{
 							name: "健康检测",
@@ -169,7 +170,7 @@
 			};
 		},
 		components: {
-		
+
 		},
 		//第一次加载
 		onLoad(e) {
@@ -223,13 +224,14 @@
 	};
 </script>
 <style lang="scss" scoped>
-
-	.QRCodeImage{
+	.QRCodeImage {
 		background-image: url('@/static/icon/homePage/Scaning.png');
 	}
-	.locationImage{
+
+	.locationImage {
 		background-image: url('@/static/icon/homePage/Location.png');
 	}
+
 	.leftRoundButton {
 		width: 150upx;
 		border-bottom-right-radius: 50px;
@@ -255,7 +257,7 @@
 			border: 2px white;
 			height: 120upx;
 			border-radius: 5px;
-		
+
 		}
 	}
 

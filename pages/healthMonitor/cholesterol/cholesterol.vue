@@ -1,12 +1,12 @@
 <template>
 	<view class="fr p-2">
-		<z-nav-bar title="额温枪">
+		<z-nav-bar title="胆固醇">
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader></HealthHeader>
-		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="heat" unit="°C" color="#2fba9c"></MyCircle>
-		<TipInfo title="体温趋势"></TipInfo>
+		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="heat" unit="mmol/L" color="#fba723"></MyCircle>
+		<TipInfo title="胆固醇趋势"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveHeat"></u-button>
@@ -58,9 +58,9 @@
 				deviceStatus: 0,
 				heat: 0, //测量温度
 				blueDeviceList: [],
-				deviceId: 'F0:B5:D1:88:38:15', // 蓝牙设备的id
-				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
-				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
+				deviceId: '', // 蓝牙设备的id
+				serviceId: '', //设备的服务值
+				characteristicId: '', // 设备的特征值
 
 			};
 		},

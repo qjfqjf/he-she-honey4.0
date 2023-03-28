@@ -392,15 +392,33 @@
 			}
 
 		}, {
-			"path": "pages/demo/echarrtsdemo/echarrtsdemo",
 			"path": "pages/homePage/homePage",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": false
 			}
 
 		}
-	],
+
+	    ,{
+            "path" : "pages/healthMonitor/bloodSUA/bloodSUA",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "血尿酸",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthMonitor/cholesterol/cholesterol",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "胆固醇",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

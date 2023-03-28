@@ -1,48 +1,31 @@
 <template>
 	<view class="b-content p-2">
 		<z-nav-bar title="血压">
-			<view slot="right" class="p-2">预警规则</view>
+			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<view class="header d-flex j-sb">
-			<view class="left">
-				切换会员：<span>{{user}}</span>
-			</view>
-			<view class="member pr-2">
-				切换会员
-			</view>
-		</view>
+		<HealthHeader></HealthHeader>
 		<!-- tab切换 -->
 		<view class="tab-container d-flex j-center my-3">
-			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="currentTab = 'tab1'">左侧</view>
-			<view class="tab" :class="{ active: currentTab === 'tab2' }" @click="currentTab = 'tab2'">右侧</view>
+			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="()=>currentTab = 'tab1'">左侧</view>
+			<view class="tab" :class="{ active: currentTab === 'tab2' }" @click="()=>currentTab = 'tab2'">右侧</view>
 		</view>
 		<view class="echarts-content">
 			<!-- #ifdef APP-PLUS || H5 -->
 			<view @click="echarts.onClick" :prop="option" :change:prop="echarts.updateEcharts" id="echarts"
 				class="echarts">
 			</view>
-			<button @click="changeOption">更新数据</button>
 			<!-- #endif -->
 			<!-- #ifndef APP-PLUS || H5 -->
 			<view>非 APP、H5 环境不支持</view>
 			<!-- #endif -->
 		</view>
-		<view class="tip d-flex j-sb">
-			<view class="trend d-flex a-center">
-				<image style="width: 100rpx; height: 100rpx;margin-top: 20rpx;"
-					src="@/static/icon/bloodPressure/trend.png" mode="aspectFit"></image>
-				<text>血压趋势</text>
-			</view>
-			<view class="notice d-flex a-center">
-				<image style="width: 58rpx; height: 58rpx;margin-right: 18rpx"
-					src="@/static/icon/bloodPressure/notice.png" mode="scaleToFill"></image>
-				<text>语音播报</text>
-			</view>
-		</view>
-		<u-button color="#01b09a" :text="deviceStatus===0?'请先绑定设备(设备状态：未连接)':'设备已连接'"></u-button>
+		<TipInfo title="血压趋势"></TipInfo>
+		<u--text class="d-flex j-center" color="#01b09a"
+			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
+		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSavePressure"></u-button>
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
-			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史">
+			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
 		<view class="measureData">
 			<u--text class="pb-2" text="血压数值"></u--text>
@@ -81,37 +64,24 @@
 			</view>
 
 		</view>
-		<view class="tools d-flex j-sb mt-5">
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/doctor.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>找医生</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/month.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>月报</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/device.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>设备</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/write.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>手动录入</text>
-			</view>
-		</view>
+		<!-- 底部操作 -->
+		<BottomNavigation></BottomNavigation>
+		<u-toast ref="uToast"></u-toast>
 	</view>
+
 	</view>
 </template>
 
 <script>
-	import {
-		handleJKBPData
-	} from '@/pages/healthMonitor/bloodPressure/bloodpressure.js'
+	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
+	import TipInfo from '../components/tipInfo/TipInfo.vue'
+	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	export default {
+		components: {
+			HealthHeader,
+			TipInfo,
+			BottomNavigation
+		},
 		data() {
 			return {
 				user: '王大大',
@@ -155,6 +125,7 @@
 					DIA: 0, // 舒张压值
 					PUL: 0, // 脉搏值
 				},
+				btnColor: '#dadada',
 				lastReceivedData: null,
 				value: new Int8Array(), // 接收到设备的传输结果
 				blueDeviceList: [],
@@ -173,15 +144,27 @@
 
 		},
 		methods: {
-
+			// 数据发生变化时
 			changeOption(value) {
 				const data = this.option.series[0].data
 				data[0].value = value
 				this.measureResult.pressure = value
-
 			},
 			onViewClick(options) {
 				console.log(options)
+			},
+			handleDevelop() {
+				this.$refs.uToast.show({
+					message: '开发中...'
+				})
+			},
+			handleSavePressure() {
+				if (this.measureResult.DIA !== 0) {
+					this.$refs.uToast.show({
+						message: '保存成功',
+						type: 'success',
+					})
+				}
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -254,7 +237,7 @@
 							_this.notify()
 							return
 						}
-						
+
 					}
 				})
 			},
@@ -327,9 +310,9 @@
 					success(res) {
 						console.log(res)
 						_this.listenValueChange()
-						uni.showToast({
-							title: '已开启监听'
-						})
+						// uni.showToast({
+						// 	title: '已开启监听'
+						// })
 					},
 					fail(err) {
 						console.error(err)
@@ -348,6 +331,21 @@
 						return ('00' + bit.toString(16)).slice(-2)
 					}
 				)
+
+
+				return hexArr.join('')
+			},
+			// 【9】监听消息变化
+			listenValueChange() {
+				uni.onBLECharacteristicValueChange(res => {
+					// console.log(res)
+					let resHex = this.ab2hex(res.value)
+					this.processMeasureData(res.value)
+					// this.changeOption(this.measureResult.pressure)
+					// console.log(resHex)
+				})
+			},
+			processMeasureData(buffer) {
 				const data = new Int8Array(buffer);
 				//处理动态血压
 				if (data.length === 6 && data[0] === -2 && data[1] === -124 && data[5] === 4) {
@@ -377,19 +375,8 @@
 					this.measureResult.SYS = this.value[10] & 0xff
 					this.measureResult.DIA = this.value[11] & 0xff
 					this.measureResult.PUL = this.value[12] & 0xff
+					this.btnColor = '#01b09a'
 				}
-
-				return hexArr.join('')
-			},
-			// 【9】监听消息变化
-			listenValueChange() {
-				uni.onBLECharacteristicValueChange(res => {
-					// console.log(res)
-					let resHex = this.ab2hex(res.value)
-
-					// this.changeOption(this.measureResult.pressure)
-					// console.log(resHex)
-				})
 			}
 
 		}
@@ -465,31 +452,31 @@
 	.b-content {
 		background-color: #fff;
 
-		.header {
-			position: relative;
+		// .header {
+		// 	position: relative;
 
-			.left {
-				sppan {
-					color: #424242;
-				}
-			}
+		// 	.left {
+		// 		sppan {
+		// 			color: #424242;
+		// 		}
+		// 	}
 
-			.member {
-				color: #20c49f;
+		// 	.member {
+		// 		color: #20c49f;
 
-				&::after {
-					content: '';
-					position: absolute;
-					// right: 12rpx;
-					top: 50%;
-					transform: translateY(-50%);
-					width: 20rpx;
-					height: 20rpx;
-					background: url('@/static/icon/bloodPressure/arrow-right.png') no-repeat center/cover;
+		// 		&::after {
+		// 			content: '';
+		// 			position: absolute;
+		// 			// right: 12rpx;
+		// 			top: 50%;
+		// 			transform: translateY(-50%);
+		// 			width: 20rpx;
+		// 			height: 20rpx;
+		// 			background: url('@/static/icon/bloodPressure/arrow-right.png') no-repeat center/cover;
 
-				}
-			}
-		}
+		// 		}
+		// 	}
+		// }
 
 		.tab {
 			padding: 10rpx;
@@ -527,18 +514,7 @@
 			}
 		}
 
-		.tip {
 
-			.trend {
-				text-align: center;
-			}
-
-			.notice {
-				padding-right: 20rpx;
-				text-align: center;
-
-			}
-		}
 
 		.data-box-SYS {
 			position: relative;

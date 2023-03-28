@@ -30,11 +30,13 @@
 					},
 					{
 						name: 'lock',
-						title: '血糖'
+						title: '血糖',
+						url: '/pages/healthMonitor/bloodSugar/bloodSugar'
 					},
 					{
 						name: 'star',
-						title: '血尿酸'
+						title: '血尿酸',
+						url: '/pages/healthMonitor/bloodSUA/bloodSUA'
 					},
 					{
 						name: 'star',
@@ -50,7 +52,8 @@
 					},
 					{
 						name: 'star',
-						title: '胆固醇'
+						title: '胆固醇',
+						url:'/pages/healthMonitor/cholesterol/cholesterol'
 					},
 					{
 						name: 'star',
