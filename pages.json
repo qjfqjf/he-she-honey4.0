@@ -398,6 +398,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/demo/echarrtsdemo/echarrtsdemo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -62,6 +62,11 @@
 			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
 			<text>健康监测</text>
 		</view>
+		<view class="nav_list" @click="onPageJump('/pages/demo/echarrtsdemo/echarrtsdemo')">
+			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
+			<text>echarts</text>
+		</view>
+		
 		<z-navigation></z-navigation>
 		
 	</view>
