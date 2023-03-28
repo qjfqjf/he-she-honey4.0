@@ -51,10 +51,6 @@
 			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
 			<text>防抖音滑动视频（进度调整，丝滑流畅，支持app，小程序、H5)</text>
 		</view>
-		<view class="nav_list" @click="onPageJump('/pages/view/login/loginPage/loginPage')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>防抖音滑动视频（进度调整，丝滑流畅，支持app，小程序、H5)</text>
-		</view>
 		<z-navigation></z-navigation>
 	</view>
 </template>
