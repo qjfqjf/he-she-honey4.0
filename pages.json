@@ -370,44 +370,37 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
+			"style": {
+				"navigationBarTitleText": "额温枪",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/oximeter/oximeter",
+			"style": {
+				"navigationBarTitleText": "血氧仪",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodSugar/bloodSugar",
+			"style": {
+				"navigationBarTitleText": "血糖",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/demo/echarrtsdemo/echarrtsdemo",
+			"path": "pages/homePage/homePage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "额温枪",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/oximeter/oximeter",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "血氧仪",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/bloodSugar/bloodSugar",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "血糖",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/demo/echarrtsdemo/echarrtsdemo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -421,7 +414,7 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/template/addTemplate",
+				"pagePath": "pages/homePage/homePage",
 				"iconPath": "static/icon/tab/icon_home.png",
 				"selectedIconPath": "static/icon/tab/icon_home_c.png",
 				"text": "首页"

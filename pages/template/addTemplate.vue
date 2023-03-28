@@ -58,6 +58,7 @@
 			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
 			<text>瀑布流列表</text>
 		</view>
+<<<<<<< HEAD
 		<view class="nav_list" @click="onPageJump('/pages/healthMonitor/index')">
 			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
 			<text>健康监测</text>
