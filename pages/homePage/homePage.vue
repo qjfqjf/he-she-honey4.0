@@ -1,4 +1,3 @@
-
 <template>
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
@@ -24,81 +23,49 @@
 				<u-button class="rightRoundButton">提醒</u-button>
 			</view>
 		</view>
-<!-- 		 <view>
-		        <swiper
-		                :indicator-dots="true"
-		                class="swiper"
-		        >
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index + 9"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index + 18"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ "宫格" + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		        </swiper>
-		    </view> -->
-<!-- 		<view class="appFeature w-100 h-100 mx-1">
-			<u-row class="appFeature_Row" justify="space-between" gutter="0" v-for="rowBlock in featureBlog">
-				<u-col span="2" class="appFeatureBLock d-flex a-end j-center h-100" v-for="block in rowBlock"
-					:style="{'background-color': block.color}">
-					<view class="">
-						<u--text :text="block.name" align="center"></u--text>
-					</view>
-				</u-col>
-			</u-row>
-		</view> -->
-		<u-swiper class="swiper mx-1" :list="wisperImage"></u-swiper>
-		<view class="m-1 pb-3">
-			<u-grid :border="false" col="4">
-				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" @click="onPageJump(listItem.url)">
-					<u--image class="appManeger_block_icon" :src="listItem.icon" height="120upx" width="120upx">
-					</u--image>
-					<text class="grid-text">{{listItem.name}}</text>
+<!-- 		    <u-scroll-list>
+		        <view v-for="(item, index) in appFeature" :key="index">
+		            <image :src="item.thumb"></image>
+		        </view>
+		    </u-scroll-list> -->
+
+<!--
+			<swiper :indicator-dots="true" class="swiper">
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+						 v-for="(item,index) in appFeature"
+						 :index="index" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+							v-for="(item, index) in appFeature" :index="index + 8" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+			</swiper> -->
+
+		<u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
+			radius="5" bgColor="#ffffff"></u-swiper>
+		<view class="m-1">
+			<u-grid :border="false" col="3">
+				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
+					<navigator :url="listItem.path">
+						<u--image class="appManeger_block_icon" :src="listItem.icon" height="120upx" width="120upx">
+						</u--image>
+						<u--text :text="listItem.name" align="center"></u--text>
+					</navigator>
 				</u-grid-item>
 			</u-grid>
 			<u-toast ref="uToast" />
@@ -126,41 +93,82 @@
 					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
 				],
-			
+
 				appManage: [{
 						name: "健康检测",
-						icon: "../../static/icon/homePage/健康检测.png",
-						url:'/pages/healthMonitor/index'
+						icon: "/static/icon/homePage/healthMonitor.png",
+						path: "/pages/healthMonitor/index"
 					},
 					{
-						name: "健康评估",
-						icon: "../../static/icon/homePage/健康评估.png"
+						name: "健康档案",
+						icon: "/static/icon/homePage/healthAssessment.png",
+						path: "/pages/healthAssessment/index"
 					},
 					{
 						name: "诊辽",
-						icon: "../../static/icon/homePage/诊辽.png"
+						icon: "/static/icon/homePage/treat.png",
+						path: "/pages/treat/index"
 					},
 					{
 						name: "AI智能",
-						icon: "../../static/icon/homePage/AI智能.png"
+						icon: "/static/icon/homePage/ai.png",
+						path: "/pages/ai/index"
 					},
 					{
 						name: "专业社区",
-						icon: "../../static/icon/homePage/专业社区.png"
+						icon: "/static/icon/homePage/professionalCommunity.png",
+						path: "/pages/professionalCommunity/index"
 					},
 
 					{
 						name: "工作单位",
-						icon: "../../static/icon/homePage/工作单位.png"
+						icon: "/static/icon/homePage/employer.png",
+						path: "/pages/employer/index"
 					},
 					{
 						name: "监管",
-						icon: "../../static/icon/homePage/监管.png"
+						icon: "/static/icon/homePage/supervision.png",
+						path: "/pages/supervision/index"
 					},
 					{
 						name: "教育",
-						icon: "../../static/icon/homePage/教育.png"
+						icon: "/static/icon/homePage/educate.png",
+						path: "/pages/educate/index"
 					},
+				],
+				appFeature: [
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					},
+					{
+						name: "医疗",
+						icon: ""
+					}
 
 				]
 			};
@@ -274,5 +282,7 @@
 			&_name {}
 		}
 	}
+	.swiper{
+		height: 150px;
+	}
 </style>
-
