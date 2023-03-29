@@ -95,7 +95,7 @@
 		<u-swiper class="swiper mx-1" :list="wisperImage"></u-swiper>
 		<view class="m-1 pb-3">
 			<u-grid :border="false" col="4">
-				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
+				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" @click="onPageJump(listItem.url)">
 					<u--image class="appManeger_block_icon" :src="listItem.icon" height="120upx" width="120upx">
 					</u--image>
 					<text class="grid-text">{{listItem.name}}</text>
@@ -129,7 +129,8 @@
 			
 				appManage: [{
 						name: "健康检测",
-						icon: "../../static/icon/homePage/健康检测.png"
+						icon: "../../static/icon/homePage/健康检测.png",
+						url:'/pages/healthMonitor/index'
 					},
 					{
 						name: "健康评估",

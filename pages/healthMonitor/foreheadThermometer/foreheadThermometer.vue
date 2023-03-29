@@ -144,9 +144,7 @@
 						setTimeout(() => {
 							_this.notify()
 						}, 1000)
-						uni.showToast({
-							title: '连接成功'
-						})
+					
 					},
 					fail(err) {
 						console.log('连接失败')

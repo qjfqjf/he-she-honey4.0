@@ -1,25 +1,9 @@
 <template>
 	<view>
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/doctor.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>找医生</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/month.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>月报</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/device.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>设备</text>
-			</view>
-			<view class="d-flex flex-column a-center">
-				<image src="@/static/icon/bloodPressure/write.png" style="width: 100rpx; height: 100rpx;"
-					mode="aspectFit"></image>
-				<text>手动录入</text>
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title" @click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">找医生</text>
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
@@ -36,7 +20,29 @@
 		},
 		data() {
 			return {
-				user: '王大大'
+				user: '王大大',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/doctor.png'),
+						title: '找医生',
+						url: ''
+					},
+					{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: ''
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: ''
+					},
+				],
+
 			};
 		},
 		methods: {
@@ -44,6 +50,12 @@
 				this.$refs.uToast.show({
 					message: '开发中...'
 				})
+			},
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+				
 			},
 		}
 	}

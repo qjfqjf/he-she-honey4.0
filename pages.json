@@ -435,6 +435,33 @@
 		// 	    "enablePullDownRefresh": false
 		// 	}
 		// }
+        ,{
+            "path" : "pages/healthMonitor/bodyFat/bodyFat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthMonitor/bloodPressure/bloodpressureHistory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthMonitor/bloodPressure/bloodPressureMonth",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
