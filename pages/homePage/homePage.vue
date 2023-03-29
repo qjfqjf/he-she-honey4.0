@@ -24,7 +24,7 @@
 				<u-button class="rightRoundButton">提醒</u-button>
 			</view>
 		</view>
-		 <view>
+<!-- 		 <view>
 		        <swiper
 		                :indicator-dots="true"
 		                class="swiper"
@@ -81,7 +81,7 @@
 		                </u-grid>
 		            </swiper-item>
 		        </swiper>
-		    </view>
+		    </view> -->
 <!-- 		<view class="appFeature w-100 h-100 mx-1">
 			<u-row class="appFeature_Row" justify="space-between" gutter="0" v-for="rowBlock in featureBlog">
 				<u-col span="2" class="appFeatureBLock d-flex a-end j-center h-100" v-for="block in rowBlock"
