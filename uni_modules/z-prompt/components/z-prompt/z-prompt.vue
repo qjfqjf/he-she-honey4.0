@@ -13,7 +13,6 @@
 					adjust-position="true"
 					:password="popupConfig.password"
 					v-model="popupInput"
-					:placeholder="popupConfig.placeholder"
 					:maxlength="popupConfig.maxlength"
 					focus="true"
 					placeholder-style="color:#999"
@@ -156,12 +155,12 @@ export default {
 	border-radius: 10upx;
 	border: 1px solid #eee;
 	height: 80upx;
-	font-size: 30upx;
+	font-size: 34upx;
 	padding: 0 20upx;
 	box-sizing: border-box;
 }
 .popupContentBox .popupContent .introduce {
-	font-size: 28upx;
+	font-size: 34upx;
 	color: #999;
 	padding-bottom: 10upx;
 }
@@ -169,8 +168,10 @@ export default {
 	padding: 20upx 20upx 20upx 20upx;
 }
 .popupContentBox .popupBut button {
-	background-color:$themeColor;
-	color: #fff;
+	background-color: rgb(32, 198, 162);
+	color: #ffffff;
+	border-radius: 50upx;
+	font-size: 34upx;
 }
 @keyframes popupMask {
 	0% {

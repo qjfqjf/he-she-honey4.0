@@ -1,40 +1,22 @@
 <template>
 	<view>
 		<z-nav-bar backState="2000" title="模板页面"></z-nav-bar>
+		<u-gap
+			height="10"
+			bgColor="#fff"
+		></u-gap>
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
-		<view class="nav_list" @click="onPageJump('/pages/user/login')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>登录</text>
-		</view>
-		<view class="nav_list" @click="onPageJump('/pages/user/register')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>注册</text>
-		</view>
-		<view class="nav_list" @click="onPageJump('/pages/user/forget')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>忘记密码</text>
-		</view>
-		<view class="nav_list" @click="onPageJump('/pages/user/bindPhone')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>绑定手机号</text>
-		</view>
-		<view class="nav_list" @click="onPageJump('/pages/user/protocol')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>协议</text>
-		</view>
-		<view class="nav_list" @click="onTokenJump('/pages/template/editInfo')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>个人信息</text>
-		</view>
-		<view class="nav_list" @click="onPageJump('/pages/template/poster/goodsPoster')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>商品海报生成</text>
-		</view>
-		<view class="nav_list" @click="onTokenJump('/pages/template/poster/scanCode')">
-			<image src="../../static/demo/icon_case.png" mode="aspectFit"></image>
-			<text>推广海报生成</text>
-		</view>
+		<u-cell-group>
+			<u-cell class="message" icon="account" url="/pages/template/editInfo" title="我的资料"></u-cell>
+			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的设备"></u-cell>
+			<u-cell class="message" icon="rmb-circle" url="/pages/user/bindPhone" title="我的积分"></u-cell>
+			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的评价"></u-cell>
+			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="订单记录"></u-cell>
+			<u-cell class="message" icon="setting" url="/pages/user/bindPhone" title="设置"></u-cell>
+			<u-cell class="message" icon="bell" url="/pages/user/bindPhone" title="帮助"></u-cell>
+			<u-cell class="message" icon="share-square" url="/pages/user/bindPhone" title="退出"></u-cell>
+		</u-cell-group>
 		<z-navigation></z-navigation>
 	</view>
 </template>
@@ -86,6 +68,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/style/mixin.scss';
+.message{
+	background-color: #fff;
+	height: 86upx;
+}
 .nav_list {
 	background-color: #fff;
 	padding: 30upx;
@@ -97,13 +83,14 @@ export default {
 		background-color: #f5f5f5;
 	}
 	image {
-		width: 40upx;
-		height: 40upx;
+		width: 38upx;
+		height: 38upx;
+		margin-left: 10upx;
 	}
 	text {
-		font-size: 28upx;
+		font-size: 32upx;
 		color: #333;
-		margin-left: 30upx;
+		margin-left: 10upx;
 	}
 	&::after {
 		content: '';
@@ -113,7 +100,6 @@ export default {
 		transform: translateY(-50%);
 		width: 40upx;
 		height: 40upx;
-		background-image: url('../../static/demo/icon_right.png');
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
