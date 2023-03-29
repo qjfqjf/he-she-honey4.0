@@ -1,26 +1,70 @@
 <template>
 	<view class="page">
-		<z-nav-bar title="个人信息" bgColor="#F5f5f5"></z-nav-bar>
-		<view class="cell_list" @click="onUnloadImg">
-			<view class="cell_left txt">头像</view>
-			<view class="cell_right">
-				<image :src="avatar" mode="aspectFill"></image>
+		<z-nav-bar title="个人信息" bgColor="#ffffff"></z-nav-bar>
+		<u-gap
+			height="10"
+			bgColor="#fff"
+		></u-gap>
+		<u-cell-group>
+			<u-cell
+				title="头像"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="姓名"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="姓别"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="出生日期"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="身份证号"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="亲属关系"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="手机号"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="身高(cm)"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-cell
+				title="体重(kg)"
+				:value="name"
+				:isLink="true"
+			></u-cell>
+			<u-gap
+				height="40"
+			></u-gap>
+			<view class="d-flex j-center">
+				<u-button
+					text="保存"
+					size="normal"
+					type="success"
+					shape="circle"
+					color="rgb(10, 185, 156)"
+					style="width: 660rpx;"
+				></u-button>
 			</view>
-		</view>
-		<z-prompt :value="nickname" text="请输入昵称" @confirm="onNameChange" :options="popupOptions">
-			<view class="cell_list">
-				<view class="cell_left txt">昵称</view>
-				<view class="cell_right arrow">{{ nickname }}</view>
-			</view>
-		</z-prompt>
-		<z-prompt :value="phone" text="请输入手机号" @confirm="onPhoneChange" :options="popupOptions">
-			<view class="cell_list">
-				<view class="cell_left txt">手机号</view>
-				<view class="cell_right arrow">{{ phone }}</view>
-			</view>
-		</z-prompt>
-		<!-- 按钮 -->
-		<view class="form_but"><button class="active" @click="onSubmit">保存</button></view>
+		</u-cell-group>
 	</view>
 </template>
 
@@ -32,12 +76,16 @@
 	export default {
 		data() {
 			return {
+				showName: false,
+				showSex: false,
 				popupOptions: {
 					placeholder: ''
 				},
 				avatar: '',
-				nickname: '',
-				phone: ""
+				gender: '',
+				name: '',
+				phone: "",
+				birth: "",
 			};
 		},
 		computed: {
@@ -53,33 +101,6 @@
 		onShow() {},
 		//方法
 		methods: {
-			...mapMutations(['setUserInfo']),
-			//修改昵称
-			onNameChange(e) {
-				this.nickname = e.value;
-				e.close();
-			},
-			//修改手机号
-			onPhoneChange(e) {
-				if (!this.$base.phoneRegular.test(e.value)) {
-					uni.showToast({
-						title: '请输入正确的手机号',
-						icon: 'none'
-					});
-					return;
-				}
-				this.phone = e.value;
-				e.close();
-			},
-			//修改头像
-			onUnloadImg() {
-				this.$http.urlImgUpload("api/common/v1/upload_image", {
-					count: 1
-				}).then(res => {
-					this.avatar = res[0].url;
-				});
-			},
-			//提交
 			onSubmit() {
 				if (this.avatar == '') {
 					uni.showToast({
@@ -139,17 +160,16 @@
 		}
 	};
 </script>
-<style lang="scss" scoped>
-	@import '@/style/mixin.scss';
-	.cell_list {
-		padding: 30rpx 30rpx;
-		margin: 20rpx 30rpx 0 30rpx;
-		border-radius: 8rpx;
-	}
+<style lang="scss">
+@import '@/style/mixin.scss';
+.page{
+	height: 100%;
+	background-color: #ffffff;
+}
 
-	.cell_right image {
-		width: 140rpx;
-		height: 140rpx;
-		border-radius: 50%;
-	}
+.form_but {
+	background-color: rgb(32, 198, 162);
+	color: #ffffff;
+	border-radius: 50upx;
+}
 </style>
