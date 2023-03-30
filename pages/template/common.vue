@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<z-nav-bar backState="2000" title="模板页面"></z-nav-bar>
+		<z-nav-bar backState="2000" title="我的"></z-nav-bar>
 		<u-gap
 			height="10"
 			bgColor="#fff"
@@ -8,15 +8,31 @@
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
 		<u-cell-group>
-			<u-cell class="message" icon="account" url="/pages/template/editInfo" title="我的资料"></u-cell>
-			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的设备"></u-cell>
-			<u-cell class="message" icon="rmb-circle" url="/pages/user/bindPhone" title="我的积分"></u-cell>
-			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的评价"></u-cell>
-			<u-cell class="message" icon="integral-fill" url="/pages/user/bindPhone" title="订单记录"></u-cell>
-			<u-cell class="message" icon="setting" url="/pages/user/bindPhone" title="设置"></u-cell>
-			<u-cell class="message" icon="bell" url="/pages/user/bindPhone" title="帮助"></u-cell>
-			<u-cell class="message" icon="share-square" url="/pages/user/bindPhone" title="退出"></u-cell>
+			<u-cell size="large" class="message" icon="account" url="/pages/template/editInfo" title="我的资料"></u-cell>
+			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的设备"></u-cell>
+			<u-cell size="large" class="message" icon="rmb-circle" url="/pages/user/bindPhone" title="我的积分"></u-cell>
+			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的评价"></u-cell>	
+			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="订单记录"></u-cell>
 		</u-cell-group>
+		<u-gap
+			height="10"
+		></u-gap>
+		<u-cell-group>
+			<u-cell size="large" class="message" icon="setting" url="/pages/user/bindPhone" title="设置"></u-cell>
+			<u-cell size="large" class="message" icon="bell" url="/pages/user/bindPhone" title="帮助"></u-cell>
+		</u-cell-group>	
+		<u-gap
+			height="50"
+		></u-gap>
+		<view class="but">
+			<u-button
+				text="退出"
+				size="normal"
+				type="error"
+				shape="circle"
+				style="height: 100rpx; width:660rpx"
+			></u-button>
+		</view>
 		<z-navigation></z-navigation>
 	</view>
 </template>
@@ -70,39 +86,9 @@ export default {
 @import '@/style/mixin.scss';
 .message{
 	background-color: #fff;
-	height: 86upx;
 }
-.nav_list {
-	background-color: #fff;
-	padding: 30upx;
-	display: flex;
-	align-items: center;
-	position: relative;
-	margin-bottom: 10upx;
-	&:active {
-		background-color: #f5f5f5;
-	}
-	image {
-		width: 38upx;
-		height: 38upx;
-		margin-left: 10upx;
-	}
-	text {
-		font-size: 32upx;
-		color: #333;
-		margin-left: 10upx;
-	}
-	&::after {
-		content: '';
-		position: absolute;
-		right: 30upx;
-		top: 50%;
-		transform: translateY(-50%);
-		width: 40upx;
-		height: 40upx;
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
+.but {
+	display: flex; 
+	justify-content: center;
 }
 </style>
