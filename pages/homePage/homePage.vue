@@ -1,11 +1,55 @@
 <template>
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
-		<z-nav-bar home bgColor="#C8E6C9" title="数字健康管理" class="HomeNavBar">
-			<view slot="left" class="QRCodeImage"></view>
-			<view slot="right" class="locationImage"></view>
+		<z-nav-bar home title="数字健康管理" class="HomeNavBar">
+		<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt=""></img>
+		<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
 		</z-nav-bar>
-		<view class="topbar d-flex j-sb w-100 a-center py-1" style="background-color: #C8E6C9;">
+    <view class="status-bar d-flex m-3" >
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center ">
+            <img :src="homePageIcons.Bp.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+          <img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 style="color: red">145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center">
+            <img :src="homePageIcons.Glu.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+          <img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 style="color: green">145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center">
+            <img :src="homePageIcons.UricAcid.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+<!--          <img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">-->
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 >145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+    </view>
+		<view class="top-bar d-flex j-sb w-100 a-center py-1" >
 			<view>
 				<u-button class="leftRoundButton">用户</u-button>
 			</view>
@@ -85,97 +129,28 @@
 </template>
 
 <script>
+
+import {wisperImage,appManage,appFeature,homePageIcons} from "../../static/js/homePage/staticData";
+import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
+import home from "../template/home.vue";
 	export default {
+    computed: {
+      home() {
+        return home
+      }
+    },
 		data() {
 			return {
-				wisperImage: [
-					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-				],
-
-				appManage: [{
-						name: "健康检测",
-						icon: "/static/icon/homePage/healthMonitor.png",
-						path: "/pages/healthMonitor/index"
-					},
-					{
-						name: "健康档案",
-						icon: "/static/icon/homePage/healthAssessment.png",
-						path: "/pages/healthAssessment/index"
-					},
-					{
-						name: "诊辽",
-						icon: "/static/icon/homePage/treat.png",
-						path: "/pages/treat/index"
-					},
-					{
-						name: "AI智能",
-						icon: "/static/icon/homePage/ai.png",
-						path: "/pages/ai/index"
-					},
-					{
-						name: "专业社区",
-						icon: "/static/icon/homePage/professionalCommunity.png",
-						path: "/pages/professionalCommunity/index"
-					},
-
-					{
-						name: "工作单位",
-						icon: "/static/icon/homePage/employer.png",
-						path: "/pages/employer/index"
-					},
-					{
-						name: "监管",
-						icon: "/static/icon/homePage/supervision.png",
-						path: "/pages/supervision/index"
-					},
-					{
-						name: "教育",
-						icon: "/static/icon/homePage/educate.png",
-						path: "/pages/educate/index"
-					},
-				],
-				appFeature: [
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					},
-					{
-						name: "医疗",
-						icon: ""
-					}
-
-				]
+				wisperImage,
+				appManage,
+				appFeature,
+        homePageIcons
 			};
 		},
 		components: {
+      UImage
 
-		},
+    },
 		//第一次加载
 		onLoad(e) {
 			// 隐藏原生的tabbar
@@ -228,14 +203,18 @@
 	};
 </script>
 <style lang="scss" scoped>
-	.QRCodeImage {
-		background-image: url('@/static/icon/homePage/Scaning.png');
-	}
-
-	.locationImage {
-		background-image: url('@/static/icon/homePage/Location.png');
-	}
-
+  .small-icon{
+    height: 40upx;
+    width: 40upx;
+  }
+  .medium-icon{
+    height: 60upx;
+    width: 60upx;
+  }
+  .statusBar{
+    border-radius: 30%;
+    background-color: white;
+  }
 	.leftRoundButton {
 		width: 150upx;
 		border-bottom-right-radius: 50px;
