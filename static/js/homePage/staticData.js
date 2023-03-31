@@ -6,60 +6,67 @@ export const wisperImage= [
 export const   appManage= [
     {
         name: "健康检测",
-        icon: "static/icon/homePage/healthMonitor.png",
+        icon: "/static/icon/homePage/healthMonitor.png",
         path: "/pages/healthMonitor/index"
     },
     {
         name: "健康档案",
-        icon: "static/icon/homePage/healthRecords.png",
+        icon: "/static/icon/homePage/healthRecords.png",
         path: "/pages/healthAssessment/index"
     },
     {
+        name: "健康管理",
+        icon: "/static/icon/homePage/healthManagement.png",
+        path: "/pages/healthAssessment/index"
+    },
+    {
+        name: "健康评估",
+        icon: "/static/icon/homePage/healthAssessment.png",
+        path: "/pages/supervision/index"
+    },
+    {
         name: "数据分析",
-        icon: "static/icon/homePage/HealthAdvisory.png",
+        icon: "/static/icon/homePage/dataAnalysis.png",
         path: "/pages/treat/index"
     },
     {
-        name: "血尿酸",
-        icon: "static/icon/homePage/UricAcid.png",
+        name: "健康咨询",
+        icon: "/static/icon/homePage/HealthAdvisory.png",
         path: "/pages/ai/index"
     },
     {
+        name: "健康教育",
+        icon: "/static/icon/homePage/educate.png",
+        path: "/pages/educate/index"
+    },
+    {
         name: "远程监控",
-        icon: "static/icon/homePage/healthMonitor.png",
+        icon: "/static/icon/homePage/healthMonitor.png",
         path: "/pages/professionalCommunity/index"
     },
     {
         name: "申请服务",
-        icon: "static/icon/homePage/applicationService.png",
+        icon: "/static/icon/homePage/applicationService.png",
         path: "/pages/employer/index"
     },
-    {
-        name: "健康评估",
-        icon: "static/icon/homePage/healthAssessment.png",
-        path: "/pages/supervision/index"
-    },
-    {
-        name: "健康教育",
-        icon: "static/icon/homePage/educate.png",
-        path: "/pages/educate/index"
-    },
+
+
 ]
 export const  appFeature= [
-    {
+    [{
         name: "医疗",
         icon: "static/icon/homePage/medical.png",
         path: "/pages/educate/index"
     },
     {
         name: "保健",
-        icon: "static/icon/homePage/healthCare.png.",
+        icon: "static/icon/homePage/healthCare.png",
          path: "/pages/educate/index"
 
     },
     {
         name: "体检",
-        icon: "static/icon/homePage/healthAssessment",
+        icon: "static/icon/homePage/physicalExamination.png",
          path: "/pages/educate/index"
 
     },
@@ -72,7 +79,7 @@ export const  appFeature= [
         name: "美容",
         icon: "static/icon/homePage/cosmetic.png",
         path: "/pages/educate/index"
-    }
+    }]
 ]
 export const homePageIcons = {
     Scanning:{
