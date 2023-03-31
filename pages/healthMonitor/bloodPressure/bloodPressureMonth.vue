@@ -5,14 +5,7 @@
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<view class="time d-flex j-sb mb-3">
-			<view class="startTime">
-				开始时间：2023-03-01
-			</view>
-			<view class="endTime">
-				结束时间：2023-03-31
-			</view>
-		</view>
+		<TimeRage></TimeRage>
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="position">
@@ -35,13 +28,20 @@
 				</view>
 			</view>
 		</view>
+
+
 	</view>
 </template>
 
 <script>
+	import TimeRage from '../components/timeRage/TimeRage.vue'
 	export default {
+		components: {
+			TimeRage
+		},
 		data() {
 			return {
+
 				dataList: [{
 						position: "左侧",
 						time: "2023-3-29 15:30",
@@ -73,18 +73,31 @@
 				]
 			};
 		},
+		onLoad() {
+
+		},
 		methods: {
 			handleDevelop() {
 				this.$refs.uToast.show({
 					message: '开发中...'
 				})
 			},
+
 		}
 	}
 </script>
 
 <style lang="scss">
 	.b-content {
+		.timeRange {
+			.startTime {
+				color: #2fa290;
+			}
+
+			.endTime {
+				color: #2fa290;
+			}
+		}
 
 		.historyCard {
 			padding: 40rpx;
@@ -100,6 +113,8 @@
 
 				.time {
 					color: #666;
+
+
 				}
 			}
 

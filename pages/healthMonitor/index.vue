@@ -6,12 +6,12 @@
 			<span>健康监测</span>
 		</view>
 		<!-- 设备板块 -->
-		<view class="devices-warp">
+		<view class="devices-warp mt-2">
 			<u-grid :border="false" col="4">
-				<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
+				<u-grid-item class="item" v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
 					@click="click(baseListItem.url,baseListItem.title)">
-					<u-icon :customStyle="{paddingTop:20+'rpx'}" :name="baseListItem.name" :size="22"></u-icon>
-					<text class="grid-text">{{baseListItem.title}}</text>
+					<image style="width: 80rpx;height: 80rpx;" :src="baseListItem.img" mode="aspectFit"></image>
+					<text class="grid-text mt-2">{{baseListItem.title}}</text>
 				</u-grid-item>
 			</u-grid>
 		</view>
@@ -24,59 +24,52 @@
 		data() {
 			return {
 				baseList: [{
-						name: 'photo',
+						img: require('@/static/icon/health/bloodPressure.png'),
 						title: '血压',
 						url: '/pages/healthMonitor/bloodPressure/bloodPressure'
 					},
 					{
-						name: 'lock',
+						img: require('@/static/icon/health/bloodSugar.png'),
 						title: '血糖',
 						url: '/pages/healthMonitor/bloodSugar/bloodSugar'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/bloodSua.png'),
 						title: '血尿酸',
 						url: '/pages/healthMonitor/bloodSUA/bloodSUA'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/bloodFat.png'),
 						title: '血脂'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/heart.png'),
 						title: '心电图'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/bodyFat.png'),
 						title: '体脂率'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/cholesterol.png'),
 						title: '胆固醇',
-						url:'/pages/healthMonitor/cholesterol/cholesterol'
+						url: '/pages/healthMonitor/cholesterol/cholesterol'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/AI.png'),
 						title: 'AI'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/heat.png'),
 						title: '额温枪',
 						url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometer'
 					},
 					{
-						name: 'star',
+						img: require('@/static/icon/health/bloodOx.png'),
 						title: '血氧',
 						url: '/pages/healthMonitor/oximeter/oximeter'
 					},
-					{
-						name: 'star',
-						title: '跳绳'
-					},
-					{
-						name: 'star',
-						title: '营养秤'
-					},
+					
 				]
 			};
 		},
@@ -105,6 +98,20 @@
 			span {
 				border-left: 8rpx #28be9e solid;
 				padding-left: 20rpx;
+			}
+		}
+
+		.devices-warp {
+			.item {
+				padding: 20rpx;
+				margin: 10rpx;
+				width: 160rpx !important;
+				border-radius: 16rpx;
+				background-color: #fff !important;
+				box-shadow: 0px 3px 3px hsla(0, 0, 0, 0.1);
+				&:nth-child(4n){
+					margin-right: 0;
+				}
 			}
 		}
 	}

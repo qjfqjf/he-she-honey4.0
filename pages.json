@@ -1,9 +1,9 @@
 {
 	"pages": [
 		{
-			"path": "pages/template/home",
+			"path": "pages/homePage/homePage",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "数字健康管理"
 			}
 		},
 		{
