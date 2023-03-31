@@ -1,12 +1,55 @@
-
 <template>
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
-		<z-nav-bar home bgColor="#C8E6C9" title="数字健康管理" class="HomeNavBar">
-			<view slot="left" class="QRCodeImage"></view>
-			<view slot="right" class="locationImage"></view>
+		<z-nav-bar home title="数字健康管理" class="HomeNavBar">
+		<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt=""></img>
+		<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
 		</z-nav-bar>
-		<view class="topbar d-flex j-sb w-100 a-center py-1" style="background-color: #C8E6C9;">
+    <view class="status-bar d-flex m-3" >
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center ">
+            <img :src="homePageIcons.Bp.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+          <img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 style="color: red">145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center">
+            <img :src="homePageIcons.Glu.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+          <img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 style="color: green">145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+      <view class="f-grow-1 flex-column h-50 px-2 py-1">
+        <view class="d-flex j-sb a-center">
+          <div class="d-flex j-center a-center">
+            <img :src="homePageIcons.UricAcid.icon" class="medium-icon" alt="">
+            <span class="mx-1"><h3>血压</h3></span>
+          </div>
+<!--          <img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">-->
+        </view>
+        <view class="d-flex j-sb a-center">
+          <view class="d-flex j-center a-center"><h3 >145</h3></view>
+          <view class="unit">mmHg</view>
+        </view>
+      </view>
+
+    </view>
+		<view class="top-bar d-flex j-sb w-100 a-center py-1" >
 			<view>
 				<u-button class="leftRoundButton">用户</u-button>
 			</view>
@@ -24,81 +67,49 @@
 				<u-button class="rightRoundButton">提醒</u-button>
 			</view>
 		</view>
-<!-- 		 <view>
-		        <swiper
-		                :indicator-dots="true"
-		                class="swiper"
-		        >
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index + 9"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ '宫格' + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		            <swiper-item>
-		                <u-grid :border="true">
-		                    <u-grid-item
-		                            :customStyle="{width:220+'rpx',height:220+'rpx'}"
-		                            v-for="(item, index) in swiperList"
-		                            :index="index + 18"
-		                            :key="index"
-		                    >
-		                        <u-icon
-		                                :customStyle="{paddingTop:20+'rpx'}"
-		                                :name="item"
-		                                :size="22"
-		                        ></u-icon>
-		                        <text class="grid-text">{{ "宫格" + (index + 1) }}</text>
-		                    </u-grid-item>
-		                </u-grid>
-		            </swiper-item>
-		        </swiper>
-		    </view> -->
-<!-- 		<view class="appFeature w-100 h-100 mx-1">
-			<u-row class="appFeature_Row" justify="space-between" gutter="0" v-for="rowBlock in featureBlog">
-				<u-col span="2" class="appFeatureBLock d-flex a-end j-center h-100" v-for="block in rowBlock"
-					:style="{'background-color': block.color}">
-					<view class="">
-						<u--text :text="block.name" align="center"></u--text>
-					</view>
-				</u-col>
-			</u-row>
-		</view> -->
-		<u-swiper class="swiper mx-1" :list="wisperImage"></u-swiper>
-		<view class="m-1 pb-3">
-			<u-grid :border="false" col="4">
-				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" @click="onPageJump(listItem.url)">
-					<u--image class="appManeger_block_icon" :src="listItem.icon" height="120upx" width="120upx">
-					</u--image>
-					<text class="grid-text">{{listItem.name}}</text>
+<!-- 		    <u-scroll-list>
+		        <view v-for="(item, index) in appFeature" :key="index">
+		            <image :src="item.thumb"></image>
+		        </view>
+		    </u-scroll-list> -->
+
+<!--
+			<swiper :indicator-dots="true" class="swiper">
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+						 v-for="(item,index) in appFeature"
+						 :index="index" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+							v-for="(item, index) in appFeature" :index="index + 8" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+			</swiper> -->
+
+		<u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
+			radius="5" bgColor="#ffffff"></u-swiper>
+		<view class="m-1">
+			<u-grid :border="false" col="3">
+				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
+					<navigator :url="listItem.path">
+						<u--image class="appManeger_block_icon" :src="listItem.icon" height="120upx" width="120upx">
+						</u--image>
+						<u--text :text="listItem.name" align="center"></u--text>
+					</navigator>
 				</u-grid-item>
 			</u-grid>
 			<u-toast ref="uToast" />
@@ -118,56 +129,28 @@
 </template>
 
 <script>
+
+import {wisperImage,appManage,appFeature,homePageIcons} from "../../static/js/homePage/staticData";
+import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
+import home from "../template/home.vue";
 	export default {
+    computed: {
+      home() {
+        return home
+      }
+    },
 		data() {
 			return {
-				wisperImage: [
-					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-				],
-			
-				appManage: [{
-						name: "健康检测",
-						icon: "../../static/icon/homePage/健康检测.png",
-						url:'/pages/healthMonitor/index'
-					},
-					{
-						name: "健康评估",
-						icon: "../../static/icon/homePage/健康评估.png"
-					},
-					{
-						name: "诊辽",
-						icon: "../../static/icon/homePage/诊辽.png"
-					},
-					{
-						name: "AI智能",
-						icon: "../../static/icon/homePage/AI智能.png"
-					},
-					{
-						name: "专业社区",
-						icon: "../../static/icon/homePage/专业社区.png"
-					},
-
-					{
-						name: "工作单位",
-						icon: "../../static/icon/homePage/工作单位.png"
-					},
-					{
-						name: "监管",
-						icon: "../../static/icon/homePage/监管.png"
-					},
-					{
-						name: "教育",
-						icon: "../../static/icon/homePage/教育.png"
-					},
-
-				]
+				wisperImage,
+				appManage,
+				appFeature,
+        homePageIcons
 			};
 		},
 		components: {
+      UImage
 
-		},
+    },
 		//第一次加载
 		onLoad(e) {
 			// 隐藏原生的tabbar
@@ -220,14 +203,18 @@
 	};
 </script>
 <style lang="scss" scoped>
-	.QRCodeImage {
-		background-image: url('@/static/icon/homePage/Scaning.png');
-	}
-
-	.locationImage {
-		background-image: url('@/static/icon/homePage/Location.png');
-	}
-
+  .small-icon{
+    height: 40upx;
+    width: 40upx;
+  }
+  .medium-icon{
+    height: 60upx;
+    width: 60upx;
+  }
+  .statusBar{
+    border-radius: 30%;
+    background-color: white;
+  }
 	.leftRoundButton {
 		width: 150upx;
 		border-bottom-right-radius: 50px;
@@ -274,5 +261,7 @@
 			&_name {}
 		}
 	}
+	.swiper{
+		height: 150px;
+	}
 </style>
-
