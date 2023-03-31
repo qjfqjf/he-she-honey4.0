@@ -1,0 +1,9 @@
+{
+    "id": "swiper-list",
+    "name": "滑动展示详情-插件",
+    "version": "1.0.0",
+    "description": "滑动查看对应的item的详情",
+    "keywords": [
+        "滑动,列表，展示详情，动画"
+    ]
+}
