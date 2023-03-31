@@ -9,10 +9,10 @@
 		<public-module></public-module>
 		<u-cell-group>
 			<u-cell size="large" class="message" icon="account" url="/pages/template/editInfo" title="我的资料"></u-cell>
-			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的设备"></u-cell>
+			<u-cell size="large" class="message" icon="list-dot" url="/pages/user/bindPhone" title="我的设备"></u-cell>
 			<u-cell size="large" class="message" icon="rmb-circle" url="/pages/user/bindPhone" title="我的积分"></u-cell>
-			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="我的评价"></u-cell>	
-			<u-cell size="large" class="message" icon="integral-fill" url="/pages/user/bindPhone" title="订单记录"></u-cell>
+			<u-cell size="large" class="message" icon="chat" url="/pages/user/bindPhone" title="我的评价"></u-cell>	
+			<u-cell size="large" class="message" icon="file-text" url="/pages/user/bindPhone" title="订单记录"></u-cell>
 		</u-cell-group>
 		<u-gap
 			height="10"
