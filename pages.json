@@ -1,5 +1,12 @@
 {
-	"pages": [{
+	"pages": [
+		{
+			"path": "pages/template/home",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
 			"path": "pages/template/addTemplate",
 			"style": {
 				"navigationBarTitleText": "新增功能"
@@ -332,12 +339,7 @@
 				}
 			}
 		},
-		{
-			"path": "pages/template/home",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
+	
 		{
 			"path": "pages/template/editInfo",
 			"style": {
