@@ -19,7 +19,7 @@
 		></u-gap>
 		<u-cell-group>
 			<u-cell size="large" class="message" icon="setting" url="/pages/template/setting" title="设置"></u-cell>
-			<u-cell size="large" class="message" icon="bell" url="/pages/user/bindPhone" title="帮助"></u-cell>
+			<u-cell size="large" class="message" icon="bell" url="/pages/template/help" title="帮助"></u-cell>
 		</u-cell-group>	
 		<u-gap
 			height="50"

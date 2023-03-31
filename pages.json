@@ -555,6 +555,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/template/help",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
