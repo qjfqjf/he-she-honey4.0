@@ -3,7 +3,7 @@
 		<view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title" @click="onPageJump(item.url)">
 				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-				<text class="mt-1">找医生</text>
+				<text class="mt-1">{{item.title}}</text>
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>

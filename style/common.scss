@@ -454,6 +454,12 @@ body {
 .a-self-baseline {
   align-self: baseline;
 }
+.f-grow-1 {
+  flex-grow: 1;
+}
+.f-basis-0{
+  flex-basis: 0;
+}
 /* Border */
 .border {
   border-width: 1rpx;
