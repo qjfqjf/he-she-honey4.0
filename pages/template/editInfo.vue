@@ -1,6 +1,8 @@
 <template>
 	<view>
 		<z-nav-bar title="个人信息" bgColor="#ffffff"></z-nav-bar>
+		<!-- 公共组件-每个页面必须引入 -->
+		<public-module></public-module>
 		<u-cell-group :border="false" class="message">
 			<u-cell title="基本信息" titleStyle="font-weight: bold; font-size: 16px" :border="false"></u-cell>
 			<u-cell size="large" title="头像" titleStyle="font-size: 14px">

@@ -18,7 +18,7 @@
 			height="10"
 		></u-gap>
 		<u-cell-group>
-			<u-cell size="large" class="message" icon="setting" url="/pages/user/bindPhone" title="设置"></u-cell>
+			<u-cell size="large" class="message" icon="setting" url="/pages/template/setting" title="设置"></u-cell>
 			<u-cell size="large" class="message" icon="bell" url="/pages/user/bindPhone" title="帮助"></u-cell>
 		</u-cell-group>	
 		<u-gap
@@ -26,6 +26,7 @@
 		></u-gap>
 		<view class="but">
 			<u-button
+				@click="exit"
 				text="退出"
 				size="normal"
 				type="error"
@@ -33,6 +34,15 @@
 				style="height: 100rpx; width:660rpx"
 			></u-button>
 		</view>
+		<u-modal
+			title="温馨提示"
+			:show="showExit"
+			showCancelButton
+			confirmColor="rgb(10, 185, 156)"
+			@confirm="confirmExit"
+			@cancel="() => showExit = false"
+		><text>你确定要退出登录吗？</text>
+		</u-modal>
 		<z-navigation></z-navigation>
 	</view>
 </template>
@@ -40,7 +50,9 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			showExit: false,
+		};
 	},
 	//第一次加载
 	onLoad(e) {
@@ -54,6 +66,13 @@ export default {
 	},
 	//方法
 	methods: {
+		exit() {
+			this.showExit = true;
+			console.log("1111111111111");
+		},
+		confirmExit() {
+			this.showExit = false;
+		},
 		onPageJump(url) {
 			uni.navigateTo({
 				url: url
