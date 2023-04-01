@@ -537,6 +537,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthMonitor/bloodPressure/manualEntry",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
