@@ -88,7 +88,7 @@
 						shape="circle"
 						@click="submit"
 						color="rgb(10, 185, 156)"
-						style="width: 660rpx; height: 110rpx;"
+						style="width: 660rpx; height: 96rpx;"
 					></u-button>
 				</view>
 				<u-code

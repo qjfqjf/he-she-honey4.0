@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/homePage/homePage",
 			"style": {
 				"navigationBarTitleText": "数字健康管理"
@@ -339,7 +338,7 @@
 				}
 			}
 		},
-	
+
 		{
 			"path": "pages/template/editInfo",
 			"style": {
@@ -402,88 +401,78 @@
 
 		}
 
-	    ,{
-            "path" : "pages/healthMonitor/bloodSUA/bloodSUA",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "血尿酸",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/cholesterol/cholesterol",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "胆固醇",
-                "enablePullDownRefresh": false
-            }
-        },
-		{
-		    "path" : "pages/healthAssessment/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "健康评估",
-		        "enablePullDownRefresh": false
-		    }
+		, {
+			"path": "pages/healthMonitor/bloodSUA/bloodSUA",
+			"style": {
+				"navigationBarTitleText": "血尿酸",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/cholesterol/cholesterol",
+			"style": {
+				"navigationBarTitleText": "胆固醇",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/treat/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "诊辽",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/healthAssessment/index",
+			"style": {
+				"navigationBarTitleText": "健康评估",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/ai/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "AI智能",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/treat/index",
+			"style": {
+				"navigationBarTitleText": "诊辽",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/professionalCommunity/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "专业社区",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/ai/index",
+			"style": {
+				"navigationBarTitleText": "AI智能",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/employer/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "工作单位",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/professionalCommunity/index",
+			"style": {
+				"navigationBarTitleText": "专业社区",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/supervision/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "监管",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/employer/index",
+			"style": {
+				"navigationBarTitleText": "工作单位",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/educate/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "教育",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/supervision/index",
+			"style": {
+				"navigationBarTitleText": "监管",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/index",
+			"style": {
+				"navigationBarTitleText": "教育",
+				"enablePullDownRefresh": false
+			}
 		}
-	 //    ,{
-  //           "path" : "pages/memberRecord/memberRecord",
-  //           "style" :                                                                                    
-  //           {
-  //               "navigationBarTitleText": "",
-  //               "enablePullDownRefresh": false
-  //           }
-            
-  //       },
+		//    ,{
+		//           "path" : "pages/memberRecord/memberRecord",
+		//           "style" :                                                                                    
+		//           {
+		//               "navigationBarTitleText": "",
+		//               "enablePullDownRefresh": false
+		//           }
+
+		//       },
 		// {
 		// 	"path" : "pages/memberProfile/memberProfile",
 		// 	"style" :                                                                                    
@@ -492,61 +481,73 @@
 		// 	    "enablePullDownRefresh": false
 		// 	}
 		// }
-        ,{
-            "path" : "pages/healthMonitor/bodyFat/bodyFat",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/bloodPressure/bloodpressureHistory",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/bloodPressure/bloodPressureMonth",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/template/setting",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/template/setPassword",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthMonitor/bloodPressure/manualEntry",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+		, {
+			"path": "pages/healthMonitor/bodyFat/bodyFat",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodPressure/bloodpressureHistory",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodPressure/bloodPressureMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/template/setting",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/template/setPassword",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodPressure/manualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+
+
+			"path": "pages/template/messageReminder",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/template/aboutUs",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/template/help",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
