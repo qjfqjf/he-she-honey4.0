@@ -546,6 +546,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/healthMonitor/bloodSugar/sugarManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {

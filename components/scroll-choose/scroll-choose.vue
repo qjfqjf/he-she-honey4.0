@@ -10,8 +10,14 @@
 						v-for="(item,index) in scrollList" :key="index"></view>
 				</view>
 				<view class="bottomNum" :style="{'paddingLeft': allNumLeft}">
-					<text class="allNum" :style="{width: (maginL + 2) * 10 + 'px',left: -((maginL + 2) * 5) + 'px'}"
+					<text v-show="!isPoint" class="allNum"
+						:style="{width: (maginL + 2) * 10 + 'px',left: -((maginL + 2) * 5) + 'px'} "
 						v-for="(item,index) in scrollNumList" :key="index">
+						{{item}}
+					</text>
+					<text v-show="isPoint" class="allNum"
+						:style="{width: (maginL + 2)  + 'px',left: -((maginL + 2) /2) + 'px'} "
+						v-for="(item,index) in scrollNumList" :key="item+'abc'">
 						{{item}}
 					</text>
 				</view>
@@ -24,16 +30,16 @@
 	export default {
 		name: 'ScrollChoose',
 		props: {
-			//起始值和终止值差距不要过大，否则会影响页面性能(暂不支持设置小数)
+			//起始值和终止值差距不要过大，否则会影响页面性能
 			/**
-			 * 初始值（注意：初始值应在起始值和终止值之间）
+			 * 初始值（初始值应在起始值和终止值之间）
 			 */
 			scrollLeft: {
 				type: Number,
 				default: 0
 			},
 			/**
-			 * 滚动区域起始值（注意：起始值不能大于终止值）
+			 * 滚动区域起始值（起始值不能大于终止值）
 			 */
 			scrollStart: {
 				type: Number,
@@ -53,6 +59,11 @@
 				type: Number,
 				default: 10
 			},
+			// 是否开启小数点模式
+			isPoint: {
+				type: Boolean,
+				default: false
+			}
 		},
 		data() {
 			return {
@@ -73,10 +84,14 @@
 			init() {
 				for (let i = this.scrollStart; i < (this.scrollEnd + 1); i++) {
 					let _line = {};
-					this.scrollNumList.push(i);
+					if (this.isPoint) {
+						this.scrollNumList.push(i);
+					}
 					if (i % 5 == 0) {
 						if (i % 10 == 0) {
-							// this.scrollNumList.push(i);
+							if (!this.isPoint) {
+								this.scrollNumList.push(i);
+							}
 							_line.type = 'LLine'
 						} else {
 							_line.type = 'MLine'
@@ -89,7 +104,9 @@
 				this.scrollWid = uni.upx2px(750) + (this.scrollEnd - this.scrollStart) * (this.maginL + 2) + 'px';
 				if (this.scrollStart % 10 != 0) {
 					if (this.scrollStart > 0) {
-						this.allNumLeft = (10 - this.scrollStart % 10) * (this.maginL + 2) + uni.upx2px(372) + 'px';
+						if (!this.isPoint) {
+							this.allNumLeft = (10 - this.scrollStart % 10) * (this.maginL + 2) + uni.upx2px(372) + 'px';
+						}
 					} else {
 						this.allNumLeft = Math.abs(this.scrollStart % 10) * (this.maginL + 2) + uni.upx2px(372) + 'px';
 					}
@@ -113,11 +130,17 @@
 				}, 50)
 			},
 			scroll: function(e) {
-				const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
+				if (this.isPoint) {
+					const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
+					this.$emit('scroll', (this.scrollStart + value).toFixed(1));
+				} else {
+					this.$emit('scroll', Math.round(e.detail.scrollLeft / (this.maginL + 2)) + this.scrollStart);
+				}
+				// const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
 
-				console.log((this.scrollStart + value).toFixed(1))
-				console.log(this.scrollStart)
-				this.$emit('scroll', (this.scrollStart + value).toFixed(1));
+				// console.log((this.scrollStart + value).toFixed(1))
+				// console.log(this.scrollStart)
+				// this.$emit('scroll', (this.scrollStart + value).toFixed(1));
 			}
 		}
 	}

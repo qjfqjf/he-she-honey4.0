@@ -20,7 +20,7 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<BottomNavigation></BottomNavigation>
+		<BottomNavigation page="bloodSugar/sugarManualEntry"></BottomNavigation>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
