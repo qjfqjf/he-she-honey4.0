@@ -29,7 +29,7 @@
 		<view class="p-3">
 			<u-button class="mt-4" type="primary" text="确定" @click="handleSaveInfo"></u-button>
 		</view>
-
+ 
 		<u-datetime-picker :show="show" v-model="time" mode="datetime" closeOnClickOverlay @confirm="confirm"
 			@cancel="cancel" @close="close"></u-datetime-picker>
 		<u-toast ref="uToast"></u-toast>

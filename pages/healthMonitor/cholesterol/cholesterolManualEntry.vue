@@ -51,7 +51,7 @@
 				scrollLeft: 3.30, //初始值
 				scrollStart: 2.00, //滚动区域起始值
 				scrollEnd: 10.00, //滚动区域终止值
-				maginL: 200, //线间距
+				maginL: 50, //线间距
 
 
 			};

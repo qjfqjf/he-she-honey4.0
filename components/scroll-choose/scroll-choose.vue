@@ -87,26 +87,53 @@
 		},
 		methods: {
 			init() {
-				for (let i = this.scrollStart; i < (this.scrollEnd + 1); i++) {
-					let _line = {};
+				for (let i = this.scrollStart; i < this.scrollEnd + 1; i++) {
+					const _line = {};
+					this.scrollNumList.push(i);
 					if (this.isPoint) {
-						this.scrollNumList.push(i);
-					}
-					if (i % 5 == 0) {
-						if (i % 10 == 0) {
-							if (!this.isPoint) {
-								this.scrollNumList.push(i);
+						if (this.pointNum === 2) {
+							// 小数位数为两位时
+							for (let j = 1; j < 10; j++) {
+								const num = i + j / 10
+								_line.type = 'SLine';
+								this.scrollList.push(_line);
+								if (i !== this.scrollEnd) {
+									this.scrollNumList.push(num);
+								}
 							}
-							_line.type = 'LLine'
 						} else {
-							_line.type = 'MLine'
+							// 小数位数为一位时
+							if (i % 10 === 0) {
+								_line.type = 'LLine';
+
+							} else {
+								_line.type = 'SLine';
+							}
+							this.scrollList.push(_line);
 						}
 					} else {
-						_line.type = 'SLine'
+						// 没有小数时
+						if (i % 5 === 0) {
+							if (i % 10 === 0) {
+								_line.type = 'LLine';
+
+							} else {
+								_line.type = 'MLine';
+							}
+						} else {
+							_line.type = 'SLine';
+						}
+						this.scrollList.push(_line);
 					}
-					this.scrollList.push(_line);
+
 				}
-				this.scrollWid = uni.upx2px(750) + (this.scrollEnd - this.scrollStart) * (this.maginL + 2) + 'px';
+				// 小数位数为两位时
+				if (this.pointNum === 2) {
+					this.scrollWid = uni.upx2px(750) + (this.scrollEnd - this.scrollStart) * 10 * (this.maginL + 2) + 'px';
+				} else {
+					this.scrollWid = uni.upx2px(750) + (this.scrollEnd - this.scrollStart) * (this.maginL + 2) + 'px';
+				}
+
 				if (this.scrollStart % 10 != 0) {
 					if (this.scrollStart > 0) {
 						if (!this.isPoint) {
@@ -140,7 +167,7 @@
 					this.$emit('scroll', (this.scrollStart + value).toFixed(1));
 				} else if (this.isPoint && this.pointNum === 2) {
 					const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
-					this.$emit('scroll', (this.scrollStart + value).toFixed(2));
+					this.$emit('scroll', (this.scrollStart + value / 10).toFixed(2));
 				} else {
 					this.$emit('scroll', Math.round(e.detail.scrollLeft / (this.maginL + 2)) + this.scrollStart);
 				}
