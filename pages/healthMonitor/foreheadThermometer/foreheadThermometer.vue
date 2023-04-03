@@ -13,7 +13,7 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<BottomNavigation></BottomNavigation>
+		<BottomNavigation page="foreheadThermometer/frManualEntry"></BottomNavigation>
 		<u-toast ref="uToast"></u-toast>
 		<!-- 	<scroll-view scroll-y class="box">
 			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
@@ -144,7 +144,7 @@
 						setTimeout(() => {
 							_this.notify()
 						}, 1000)
-					
+
 					},
 					fail(err) {
 						console.log('连接失败')

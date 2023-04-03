@@ -63,6 +63,11 @@
 			isPoint: {
 				type: Boolean,
 				default: false
+			},
+			// 保留到小数点几位
+			pointNum: {
+				type: Number,
+				default: 1
 			}
 		},
 		data() {
@@ -130,9 +135,12 @@
 				}, 50)
 			},
 			scroll: function(e) {
-				if (this.isPoint) {
+				if (this.isPoint && this.pointNum === 1) {
 					const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
 					this.$emit('scroll', (this.scrollStart + value).toFixed(1));
+				} else if (this.isPoint && this.pointNum === 2) {
+					const value = parseFloat(e.detail.scrollLeft / (this.maginL + 2))
+					this.$emit('scroll', (this.scrollStart + value).toFixed(2));
 				} else {
 					this.$emit('scroll', Math.round(e.detail.scrollLeft / (this.maginL + 2)) + this.scrollStart);
 				}
