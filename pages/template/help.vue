@@ -3,7 +3,7 @@
 		<z-nav-bar title="帮助"></z-nav-bar>
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
-			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
+			<view class="bg-purple-light m-4" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
 				<u--image :src="item.img" width="80px" height="80px" style="padding-left: 70rpx;"></u--image>
 				<text class="text" text-anchor="middle">{{item.title}}</text>
 			</view>
@@ -17,27 +17,27 @@
 		data() {
 			return {
 				baseList: [{
-						img: require('@/static/icon/health/bloodPressure.png'),
+						img: require('@/static/icon/help/account.png'),
 						title: '账户相关',
 					},
 					{
-						img: require('@/static/icon/health/bloodSugar.png'),
+						img: require('@/static/icon/help/transactionHistory.png'),
 						title: '购买支付',
 					},
 					{
-						img: require('@/static/icon/health/bloodSua.png'),
+						img: require('@/static/icon/help/Logistics.png'),
 						title: '物流配送',
 					},
 					{
-						img: require('@/static/icon/health/bloodFat.png'),
+						img: require('@/static/icon/help/AfterService.png'),
 						title: '售后服务'
 					},
 					{
-						img: require('@/static/icon/health/heart.png'),
-						title: '优惠先关'
+						img: require('@/static/icon/help/discount.png'),
+						title: '优惠相关'
 					},
 					{
-						img: require('@/static/icon/health/bodyFat.png'),
+						img: require('@/static/icon/help/problem.png'),
 						title: '常见问题'
 					},
 				]
