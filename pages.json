@@ -562,6 +562,14 @@
 
 		}
 	    ,{
+            "path" : "pages/template/myDevice",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
             "path" : "pages/healthMonitor/bloodSUA/suaManualEntry",
             "style" :                                                                                    
             {

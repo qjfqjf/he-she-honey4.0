@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<z-nav-bar title="我的"></z-nav-bar>
+		<z-nav-bar title="我的积分"></z-nav-bar>
 		<view class="count-wrapper">
 		  <view class="count">
 		    <u-count-to ref="uCountTo" :fontSize="fontSize" bold :endVal="endVal"></u-count-to>
