@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title" @click="onPageJump(item.url)">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
 				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
 				<text class="mt-1">{{item.title}}</text>
 			</view>
@@ -16,16 +17,21 @@
 			title: {
 				type: String,
 				default: '我是名字'
+			},
+			page: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
 			return {
 				user: '王大大',
-				toolList: [{
-						img: require('@/static/icon/bloodPressure/doctor.png'),
-						title: '找医生',
-						url: ''
-					},
+				toolList: [
+					// {
+					// 	img: require('@/static/icon/bloodPressure/doctor.png'),
+					// 	title: '找医生',
+					// 	url: ''
+					// },
 					{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
@@ -39,7 +45,7 @@
 					{
 						img: require('@/static/icon/bloodPressure/write.png'),
 						title: '手动录入',
-						url: ''
+						url: '/pages/healthMonitor/' + this.page
 					},
 				],
 
@@ -55,7 +61,7 @@
 				uni.navigateTo({
 					url: url
 				});
-				
+
 			},
 		}
 	}

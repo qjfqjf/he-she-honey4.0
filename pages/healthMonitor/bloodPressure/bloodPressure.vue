@@ -65,7 +65,7 @@
 
 		</view>
 		<!-- 底部操作 -->
-		<BottomNavigation></BottomNavigation>
+		<BottomNavigation page="bloodPressure/manualEntry"></BottomNavigation>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 

@@ -77,10 +77,13 @@
 		methods: {
 
 			click(url, name) {
+				if(!url) {
+					this.$refs.uToast.default('开发中...')
+				}
 				uni.navigateTo({
 					url: url
 				});
-				console.log(name, url)
+				
 			}
 
 		},
