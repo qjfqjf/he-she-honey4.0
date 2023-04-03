@@ -562,9 +562,14 @@
 
 		}
 	    ,{
-<<<<<<< HEAD
             "path" : "pages/template/myDevice",
-=======
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
             "path" : "pages/healthMonitor/bloodSUA/suaManualEntry",
             "style" :                                                                                    
             {
@@ -593,7 +598,6 @@
         }
         ,{
             "path" : "pages/healthMonitor/cholesterol/cholesterolManualEntry",
->>>>>>> e1996512c2313345aa3c6eb18be0bec6308c37c8
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
