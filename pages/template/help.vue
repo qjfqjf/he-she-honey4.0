@@ -3,7 +3,7 @@
 		<z-nav-bar title="帮助"></z-nav-bar>
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
-			<view class="bg-purple-light m-4" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
+			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
 				<u--image :src="item.img" width="80px" height="80px" style="padding-left: 70rpx;"></u--image>
 				<text class="text" text-anchor="middle">{{item.title}}</text>
 			</view>

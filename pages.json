@@ -553,6 +553,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		},{
+			"path": "pages/template/myPoints",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {
