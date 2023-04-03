@@ -1,11 +1,12 @@
 <template>
 	<view class="content p-2">
-		<z-nav-bar title="帮助"></z-nav-bar>
+		<z-nav-bar title="我的设备"></z-nav-bar>
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
 			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
 				<u--image :src="item.img" width="80px" height="80px"></u--image>
 				<text class="text" text-anchor="middle">{{item.title}}</text>
+				<text class="text2" text-anchor="middle">{{item.detail}}</text>
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
@@ -17,28 +18,55 @@
 		data() {
 			return {
 				baseList: [{
-						img: require('@/static/icon/help/account.png'),
-						title: '账户相关',
+						img: require('@/static/icon/device/BTBP.png'),
+						title: '血压计',
+						detail: '(倍泰静态/动态血压计)',
 					},
 					{
-						img: require('@/static/icon/help/transactionHistory.png'),
-						title: '购买支付',
+						img: require('@/static/icon/device/JKBP.png'),
+						title: '血压计',
+						detail: '(佳康静态血压计)',
 					},
 					{
-						img: require('@/static/icon/help/Logistics.png'),
-						title: '物流配送',
+						img: require('@/static/icon/device/JKBGM.png'),
+						title: '血糖仪',
+						detail: '(佳康静态血糖仪)',
 					},
 					{
-						img: require('@/static/icon/help/AfterService.png'),
-						title: '售后服务'
+						img: require('@/static/icon/device/yitiji.png'),
+						title: '血糖尿酸',
+						detail: '胆固醇一体机',
 					},
 					{
-						img: require('@/static/icon/help/discount.png'),
-						title: '优惠相关'
+						img: require('@/static/icon/device/tizhi.png'),
+						title: '体脂秤',
 					},
 					{
-						img: require('@/static/icon/help/problem.png'),
-						title: '常见问题'
+						img: require('@/static/icon/device/ewenqiang.png'),
+						title: '额温枪'
+					},
+					{
+						img: require('@/static/icon/device/xuezhi.png'),
+						title: '血脂四项仪'
+					},
+					{
+						img: require('@/static/icon/device/xindiantu.png'),
+						title: '心电图仪'
+					},{
+						img: require('@/static/icon/device/shouhuan.png'),
+						title: '心电记录仪'
+					},
+					{
+						img: require('@/static/icon/device/xueyang.png'),
+						title: '血氧仪'
+					},
+					{
+						img: require('@/static/icon/device/tiaosheng.png'),
+						title: '跳绳'
+					},
+					{
+						img: require('@/static/icon/device/nutritionScale.png'),
+						title: '营养秤'
 					},
 				]
 			};
@@ -79,7 +107,10 @@
 		justify-content: center;
 	}
 	.text{
-		font-size: 34rpx; 
+		font-size: 30rpx; 
+	}
+	.text2{
+		font-size: 20rpx; 
 	}
 	.content {
 		.title {

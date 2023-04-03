@@ -561,7 +561,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/template/myDevice",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
