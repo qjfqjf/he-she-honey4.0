@@ -4,7 +4,7 @@
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
 			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
-				<u--image :src="item.img" width="80px" height="80px"></u--image>
+				<u--image :src="item.img" width="60px" height="60px"></u--image>
 				<text class="text" text-anchor="middle">{{item.title}}</text>
 			</view>
 		</view>

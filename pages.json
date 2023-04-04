@@ -604,6 +604,33 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+		{
+		    "path" : "pages/template/myComment",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/template/commentDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/template/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
         ,{
             "path" : "pages/healthMonitor/bloodFat/bloodFat",
