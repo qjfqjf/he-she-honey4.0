@@ -12,7 +12,7 @@
 			<u-cell size="large" class="message" icon="list-dot" url="/pages/template/myDevice" title="我的设备"></u-cell>
 			<u-cell size="large" class="message" icon="rmb-circle" url="/pages/template/myPoints" title="我的积分"></u-cell>
 			<u-cell size="large" class="message" icon="chat" url="/pages/template/myComment" title="我的评价"></u-cell>	
-			<u-cell size="large" class="message" icon="file-text" url="/pages/user/bindPhone" title="订单记录"></u-cell>
+			<u-cell size="large" class="message" icon="file-text" url="/pages/template/order" title="订单记录"></u-cell>
 		</u-cell-group>
 		<u-gap
 			height="10"

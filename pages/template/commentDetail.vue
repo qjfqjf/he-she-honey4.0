@@ -1,6 +1,6 @@
 <template>
 	<view style="background-color: #ffffff;">
-		<z-nav-bar title="我的评价"></z-nav-bar>
+		<z-nav-bar title="评价详情"></z-nav-bar>
 		<view class="u-demo-block">
 			<view class="u-demo-block__content">
 				<view class="album">
@@ -37,7 +37,7 @@
 						<u-gap
 							height="5"
 						></u-gap>
-						<u-rate syactive-color="#26c2a2" inactive-color="#b2b2b2" :count="count" v-model="value" readonly></u-rate>
+						<u-rate active-color="#26c2a2" inactive-color="#b2b2b2" :count="count" v-model="value" readonly></u-rate>
 						<u-gap
 							height="5"
 						></u-gap>

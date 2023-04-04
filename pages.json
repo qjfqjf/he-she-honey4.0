@@ -623,6 +623,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/template/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
