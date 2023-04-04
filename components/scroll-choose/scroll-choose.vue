@@ -1,4 +1,6 @@
 <template>
+
+
 	<view class="scroll-choose-all">
 		<view class="middleLine"></view>
 		<scroll-view class="scroll-choose" scroll-x="true" upper-threshold="5" lower-threshold="5"
@@ -24,6 +26,8 @@
 			</view>
 		</scroll-view>
 	</view>
+
+
 </template>
 
 <script>
@@ -67,7 +71,7 @@
 			// 保留到小数点几位
 			pointNum: {
 				type: Number,
-				default: 1
+				default: 0
 			}
 		},
 		data() {
@@ -89,8 +93,9 @@
 			init() {
 				for (let i = this.scrollStart; i < this.scrollEnd + 1; i++) {
 					const _line = {};
-					this.scrollNumList.push(i);
+
 					if (this.isPoint) {
+						this.scrollNumList.push(i);
 						if (this.pointNum === 2) {
 							// 小数位数为两位时
 							for (let j = 1; j < 10; j++) {
@@ -115,6 +120,7 @@
 						// 没有小数时
 						if (i % 5 === 0) {
 							if (i % 10 === 0) {
+								this.scrollNumList.push(i);
 								_line.type = 'LLine';
 
 							} else {
