@@ -604,6 +604,24 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+		{
+		    "path" : "pages/template/myComment",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/template/commentDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {
