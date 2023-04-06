@@ -14,7 +14,7 @@
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
-		<z-navigation></z-navigation>
+
 
 	</view>
 </template>

@@ -71,7 +71,7 @@
 			return {
 				timer: null,
 				blueDeviceList: [],
-				deviceId: 'E9:D1:6B:E3:29:1F', // 蓝牙设备的id
+				deviceId: uni.getStorageSync('jkDeviceId')||'', // 蓝牙设备的id
 				serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
 				characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
 
@@ -81,9 +81,21 @@
 			this.initBlue()
 			this.discovery()
 		},
+		onUnload(){
+			this.stopDiscovery()
+		},
 		methods: {
 			// 取消绑定
 			cancelBind() {
+				uni.closeBLEConnection({
+				  deviceId: this.deviceId,
+				  success: function(res) {
+				    console.log('取消蓝牙连接成功');
+				  },
+				  fail: function(err) {
+				    console.log('取消蓝牙连接失败：' + JSON.stringify(err));
+				  }
+				});
 				this.deviceId = ''
 				uni.removeStorageSync('jkDeviceId')
 			},

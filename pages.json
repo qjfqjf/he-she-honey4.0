@@ -615,13 +615,8 @@
 
         },
 		{
-<<<<<<< HEAD
-		    "path" : "pages/template/myComment",
-		    "style" :
-=======
 		    "path" : "pages/mine/myComment",
 		    "style" :                                                                                    
->>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
@@ -629,13 +624,8 @@
 
 		}
         ,{
-<<<<<<< HEAD
-            "path" : "pages/template/commentDetail",
-            "style" :
-=======
             "path" : "pages/mine/commentDetail",
             "style" :                                                                                    
->>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -643,13 +633,8 @@
 
         }
         ,{
-<<<<<<< HEAD
-            "path" : "pages/template/order",
-            "style" :
-=======
             "path" : "pages/mine/order",
             "style" :                                                                                    
->>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -701,7 +686,6 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-<<<<<<< HEAD
         }
 
 		,{
@@ -722,9 +706,7 @@
 			}
 
 		}
-=======
             
-        }
         ,{
             "path" : "pages/serve/common",
             "style" :                                                                                    
@@ -751,7 +733,6 @@
             }
             
         }
->>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

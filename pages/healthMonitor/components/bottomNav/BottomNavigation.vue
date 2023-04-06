@@ -40,7 +40,7 @@
 					{
 						img: require('@/static/icon/bloodPressure/device.png'),
 						title: '设备',
-						url: ''
+						url: '/pages/mine/myDevice'
 					},
 					{
 						img: require('@/static/icon/bloodPressure/write.png'),
