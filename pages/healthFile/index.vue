@@ -44,7 +44,6 @@
 				</u-grid-item>
 			</u-grid>
 		</view>
-		<z-navigation></z-navigation>
 	</view>
 </template>
 
@@ -60,12 +59,12 @@
 					{
 						img: require('@/static/icon/healthFile/physiologicalIndex.png'),
 						title: '生理指标',
-						url: '/pages/healthMonitor/bloodSugar/bloodSugar'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/healthStatus.png'),
 						title: '健康状况',
-						url: '/pages/healthMonitor/bloodSUA/bloodSUA'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/habit.png'),
@@ -79,24 +78,24 @@
 				medicalList: [{
 						img: require('@/static/icon/healthFile/outpatientArchives.png'),
 						title: '门诊档案',
-						url: '/pages/healthMonitor/bloodPressure/bloodPressure'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/inpatientRecords.png'),
 						title: '住院档案',
-						url: '/pages/healthMonitor/bloodSugar/bloodSugar'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/publicHealth.png'),
 						title: '基本公卫',
-						url: '/pages/healthMonitor/bloodSUA/bloodSUA'
+						url: ''
 					},
 				],
 				
 				healthCheckList: [{
 						img: require('@/static/icon/healthFile/medicalExam.png'),
 						title: '体检档案',
-						url: '/pages/healthMonitor/bloodPressure/bloodPressure'
+						url: ''
 					},
 				],
 			}

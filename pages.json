@@ -463,8 +463,7 @@
 				"navigationBarTitleText": "教育",
 				"enablePullDownRefresh": false
 			}
-		}
-	,
+		},
 		{
 			"path": "pages/message/message",
 			"style": {
@@ -562,16 +561,15 @@
 				"enablePullDownRefresh": false
 			}
 
-		},{
+		}, {
 			"path": "pages/mine/myPoints",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
-		}
-	    ,{
-            "path" : "pages/mine/myDevice",
+		}, {
+			"path": "pages/mine/myDevice",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -579,161 +577,150 @@
 
 		},
 		{
-            "path" : "pages/healthMonitor/bloodSUA/suaManualEntry",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+			"path": "pages/healthMonitor/bloodSUA/suaManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-        ,{
-            "path" : "pages/healthMonitor/bodyFat/fatManualEntry",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/healthMonitor/bodyFat/fatManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-        ,{
-            "path" : "pages/healthMonitor/foreheadThermometer/frManualEntry",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/healthMonitor/foreheadThermometer/frManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-        ,{
-            "path" : "pages/healthMonitor/cholesterol/cholesterolManualEntry",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/healthMonitor/cholesterol/cholesterolManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        },
+		},
 		{
-		    "path" : "pages/mine/myComment",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/mine/myComment",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-		}
-        ,{
-            "path" : "pages/mine/commentDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/mine/commentDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-        ,{
-            "path" : "pages/mine/order",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/mine/order",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-        ,{
-            "path" : "pages/healthMonitor/bloodFat/bloodFat",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+		}, {
+			"path": "pages/healthMonitor/bloodFat/bloodFat",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 
-        }
-	,{
-			"path" : "pages/message/addressBook",
-			"style" :
-			{
+		}, {
+			"path": "pages/message/addressBook",
+			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
 		}
 
-	,{
-			"path" : "pages/message/addFriend",
-			"style" :
-			{
+		, {
+			"path": "pages/message/addFriend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/message/healthyCommunity",
+			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
 		}
-	,{
-			"path" : "pages/message/healthyCommunity",
-			"style" :
-			{
+
+		, {
+			"path": "pages/healthMonitor/bloodFat/bloodFatManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}
+
+		, {
+			"path": "pages/message/earlyWarning",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/message/systemNotification",
+			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
 		}
 
-        ,{
-            "path" : "pages/healthMonitor/bloodFat/bloodFatManualEntry",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-
-		,{
-			"path" : "pages/message/earlyWarning",
-			"style" :
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-		,{
-			"path" : "pages/message/systemNotification",
-			"style" :
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-            
-        ,{
-            "path" : "pages/serve/common",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "健康服务",
+		, {
+			"path": "pages/serve/common",
+			"style": {
+				"navigationBarTitleText": "健康服务",
 				"enablePullDownRefresh": false
 			}
 		},
-		{	
-            "path" : "pages/healthMonitor/ergometer/ergometer",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/template/deviceConnection",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+		{
+			"path": "pages/healthMonitor/ergometer/ergometer",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/template/deviceConnection",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthFile/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/healthFile/basicFile/basicFile",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

@@ -81,6 +81,9 @@
             "splashscreen" : {
                 "iosStyle" : "storyboard",
                 "androidStyle" : "common"
+            },
+            "ios" : {
+                "dSYMs" : false
             }
         },
         "compilerVersion" : 3,
