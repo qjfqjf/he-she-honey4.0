@@ -8,18 +8,18 @@
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
 		<u-cell-group>
-			<u-cell size="large" class="message" icon="account" url="/pages/template/editInfo" title="我的资料"></u-cell>
-			<u-cell size="large" class="message" icon="list-dot" url="/pages/template/myDevice" title="我的设备"></u-cell>
-			<u-cell size="large" class="message" icon="rmb-circle" url="/pages/template/myPoints" title="我的积分"></u-cell>
-			<u-cell size="large" class="message" icon="chat" url="/pages/template/myComment" title="我的评价"></u-cell>	
-			<u-cell size="large" class="message" icon="file-text" url="/pages/template/order" title="订单记录"></u-cell>
+			<u-cell size="large" class="message" icon="account" url="/pages/mine/editInfo" title="我的资料"></u-cell>
+			<u-cell size="large" class="message" icon="list-dot" url="/pages/mine/myDevice" title="我的设备"></u-cell>
+			<u-cell size="large" class="message" icon="rmb-circle" url="/pages/mine/myPoints" title="我的积分"></u-cell>
+			<u-cell size="large" class="message" icon="chat" url="/pages/mine/myComment" title="我的评价"></u-cell>	
+			<u-cell size="large" class="message" icon="file-text" url="/pages/mine/order" title="订单记录"></u-cell>
 		</u-cell-group>
 		<u-gap
 			height="10"
 		></u-gap>
 		<u-cell-group>
-			<u-cell size="large" class="message" icon="setting" url="/pages/template/setting" title="设置"></u-cell>
-			<u-cell size="large" class="message" icon="bell" url="/pages/template/help" title="帮助"></u-cell>
+			<u-cell size="large" class="message" icon="setting" url="/pages/mine/setting" title="设置"></u-cell>
+			<u-cell size="large" class="message" icon="bell" url="/pages/mine/help" title="帮助"></u-cell>
 		</u-cell-group>	
 		<u-gap
 			height="50"
