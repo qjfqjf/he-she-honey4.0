@@ -4,7 +4,8 @@
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
 
-			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)">
+			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)"
+				:key="index">
 				<u-badge class="mb-2" numberType="overflow" :type="item.deviceInfo?'success':'error'"
 					:value="item.deviceInfo?'已绑定':'未绑定'"></u-badge>
 				<u--image :src="item.img" width="80px" height="80px"></u--image>
@@ -14,7 +15,7 @@
 		</view>
 		<u-toast ref="uToast"></u-toast>
 		<z-navigation></z-navigation>
-		<u-toast ref="uToast"></u-toast>
+
 	</view>
 </template>
 
@@ -26,7 +27,9 @@
 				baseList: []
 			};
 		},
-	
+		onLoad(val) {
+			console.log(val)
+		},
 		mounted() {
 			this.baseList = [{
 					img: require('@/static/icon/device/BTBP.png'),
