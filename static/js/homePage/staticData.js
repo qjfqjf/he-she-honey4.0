@@ -48,7 +48,7 @@ export const   appManage= [
         name: "申请服务",
         icon: "/static/icon/homePage/applicationService.png",
         path: "/pages/employer/index"
-    },
+    }
 
 
 ]
