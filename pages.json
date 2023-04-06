@@ -633,7 +633,6 @@
             
         }
         ,{
-<<<<<<< HEAD
             "path" : "pages/healthFile/index",
             "style" :                                                                                    
             {
@@ -644,7 +643,13 @@
         }
         ,{
             "path" : "pages/healthFile/basicFile/basicFile",
-=======
+			"style" :                                                                                    
+            {
+                "navigationBarTitleText": "健康档案",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
             "path" : "pages/healthMonitor/bloodFat/bloodFat",
             "style" :                                                                                    
             {
@@ -655,7 +660,6 @@
         }
         ,{
             "path" : "pages/healthMonitor/bloodFat/bloodFatManualEntry",
->>>>>>> e1426a291a7a9c62867332cf2e59e22666e3cd5d
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
