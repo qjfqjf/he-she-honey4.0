@@ -129,7 +129,7 @@
 				lastReceivedData: null,
 				value: new Int8Array(), // 接收到设备的传输结果
 				blueDeviceList: [],
-				deviceId: 'B0:7E:11:F4:4A:68', // 蓝牙设备的id
+				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				urlList:{

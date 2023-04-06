@@ -676,6 +676,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/template/deviceConnection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
