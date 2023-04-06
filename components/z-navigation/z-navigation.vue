@@ -40,7 +40,7 @@ export default {
 					text: '首页'
 				},
 				{
-					"pagePath": "pages/demo/common",
+					"pagePath": "pages/message/message",
 					"iconPath": "static/icon/tab/icon_message.png",
 					"selectedIconPath": "static/icon/tab/icon_message_c.png",
 					"text": "消息"
@@ -50,6 +50,19 @@ export default {
 					text: '',
 					raised: true
 				},
+<<<<<<< HEAD
+				{
+					"pagePath": "pages/sdkDemo/common",
+					"iconPath": "static/icon/tab/icon_service.png",
+					"selectedIconPath": "static/icon/tab/icon_service_c.png",
+					"text": "社区"
+				},
+				{
+					"pagePath": "pages/template/common",
+					"iconPath": "static/icon/tab/icon_my.png",
+					"selectedIconPath": "static/icon/tab/icon_my_c.png",
+					"text": "我的"
+=======
 				{
 					"pagePath": "pages/serve/common",
 					"iconPath": "static/icon/tab/icon_service.png",
@@ -61,6 +74,7 @@ export default {
 					"iconPath": "static/icon/tab/icon_my.png",
 					"selectedIconPath": "static/icon/tab/icon_my_c.png",
 					"text": "我的"
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 				}
 			],
 			popupShow: false
@@ -93,8 +107,8 @@ export default {
 .footer_station {
 	height: 100rpx;
 	box-sizing: content-box;
-	padding-bottom: constant(safe-area-inset-bottom);  
-	padding-bottom: env(safe-area-inset-bottom); 
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
 }
 .footer_box {
 	height: 100rpx;
@@ -108,8 +122,8 @@ export default {
 	flex-direction: row;
 	z-index: 502;
 	box-sizing: content-box;
-	padding-bottom: constant(safe-area-inset-bottom);  
-	padding-bottom: env(safe-area-inset-bottom); 
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
 }
 .footer_bg {
 	background-color: #FFF;

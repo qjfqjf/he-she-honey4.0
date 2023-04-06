@@ -464,9 +464,18 @@
 				"enablePullDownRefresh": false
 			}
 		}
+	,
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}
+
 		//    ,{
 		//           "path" : "pages/memberRecord/memberRecord",
-		//           "style" :                                                                                    
+		//           "style" :
 		//           {
 		//               "navigationBarTitleText": "",
 		//               "enablePullDownRefresh": false
@@ -475,7 +484,7 @@
 		//       },
 		// {
 		// 	"path" : "pages/memberProfile/memberProfile",
-		// 	"style" :                                                                                    
+		// 	"style" :
 		// 	{
 		// 	    "navigationBarTitleText": "",
 		// 	    "enablePullDownRefresh": false
@@ -571,100 +580,149 @@
 		},
 		{
             "path" : "pages/healthMonitor/bloodSUA/suaManualEntry",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/healthMonitor/bodyFat/fatManualEntry",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/healthMonitor/foreheadThermometer/frManualEntry",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/healthMonitor/cholesterol/cholesterolManualEntry",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         },
 		{
+<<<<<<< HEAD
+		    "path" : "pages/template/myComment",
+		    "style" :
+=======
 		    "path" : "pages/mine/myComment",
 		    "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
 		    }
-		    
+
 		}
         ,{
+<<<<<<< HEAD
+            "path" : "pages/template/commentDetail",
+            "style" :
+=======
             "path" : "pages/mine/commentDetail",
             "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
+<<<<<<< HEAD
+            "path" : "pages/template/order",
+            "style" :
+=======
             "path" : "pages/mine/order",
             "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
-            "path" : "pages/healthFile/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "健康档案",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/basicFile/basicFile",
-			"style" :                                                                                    
-            {
-                "navigationBarTitleText": "健康档案",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
             "path" : "pages/healthMonitor/bloodFat/bloodFat",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
+	,{
+			"path" : "pages/message/addressBook",
+			"style" :
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+
+	,{
+			"path" : "pages/message/addFriend",
+			"style" :
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	,{
+			"path" : "pages/message/healthyCommunity",
+			"style" :
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+
         ,{
             "path" : "pages/healthMonitor/bloodFat/bloodFatManualEntry",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
+<<<<<<< HEAD
+        }
+
+		,{
+			"path" : "pages/message/earlyWarning",
+			"style" :
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+		,{
+			"path" : "pages/message/systemNotification",
+			"style" :
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+=======
             
         }
         ,{
@@ -693,6 +751,7 @@
             }
             
         }
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -713,7 +772,7 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/demo/common",
+				"pagePath": "pages/message/message",
 				"iconPath": "static/icon/tab/icon_message.png",
 				"selectedIconPath": "static/icon/tab/icon_message_c.png",
 				"text": "消息"
