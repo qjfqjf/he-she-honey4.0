@@ -175,9 +175,9 @@
 			}
 		},
 		{
-			"path": "pages/template/common",
+			"path": "pages/mine/common",
 			"style": {
-				"navigationBarTitleText": "模板"
+				"navigationBarTitleText": "我的"
 			}
 		},
 		{
@@ -340,7 +340,7 @@
 		},
 
 		{
-			"path": "pages/template/editInfo",
+			"path": "pages/mine/editInfo",
 			"style": {
 				"navigationBarTitleText": "个人信息"
 			}
@@ -512,7 +512,7 @@
 			}
 
 		}, {
-			"path": "pages/template/setting",
+			"path": "pages/mine/setting",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -535,21 +535,21 @@
 		}, {
 
 
-			"path": "pages/template/messageReminder",
+			"path": "pages/mine/messageReminder",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
-			"path": "pages/template/aboutUs",
+			"path": "pages/mine/aboutUs",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
-			"path": "pages/template/help",
+			"path": "pages/mine/help",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -563,7 +563,7 @@
 			}
 
 		},{
-			"path": "pages/template/myPoints",
+			"path": "pages/mine/myPoints",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -571,7 +571,7 @@
 
 		}
 	    ,{
-            "path" : "pages/template/myDevice",
+            "path" : "pages/mine/myDevice",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -615,8 +615,13 @@
 
         },
 		{
+<<<<<<< HEAD
 		    "path" : "pages/template/myComment",
 		    "style" :
+=======
+		    "path" : "pages/mine/myComment",
+		    "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
@@ -624,8 +629,13 @@
 
 		}
         ,{
+<<<<<<< HEAD
             "path" : "pages/template/commentDetail",
             "style" :
+=======
+            "path" : "pages/mine/commentDetail",
+            "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -633,8 +643,13 @@
 
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/template/order",
             "style" :
+=======
+            "path" : "pages/mine/order",
+            "style" :                                                                                    
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -686,6 +701,7 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
+<<<<<<< HEAD
         }
 
 		,{
@@ -706,6 +722,36 @@
 			}
 
 		}
+=======
+            
+        }
+        ,{
+            "path" : "pages/serve/common",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "健康服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{	
+            "path" : "pages/healthMonitor/ergometer/ergometer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/template/deviceConnection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -732,13 +778,13 @@
 				"text": "消息"
 			},
 			{
-				"pagePath": "pages/sdkDemo/common",
+				"pagePath": "pages/serve/common",
 				"iconPath": "static/icon/tab/icon_service.png",
 				"selectedIconPath": "static/icon/tab/icon_service_c.png",
-				"text": "社区"
+				"text": "服务"
 			},
 			{
-				"pagePath": "pages/template/common",
+				"pagePath": "pages/mine/common",
 				"iconPath": "static/icon/tab/icon_my.png",
 				"selectedIconPath": "static/icon/tab/icon_my_c.png",
 				"text": "我的"

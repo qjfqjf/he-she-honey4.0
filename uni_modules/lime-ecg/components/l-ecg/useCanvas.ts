@@ -72,5 +72,5 @@ export function useCanvas(selector: string, options) {
 			})
 		}
 	})
-	return computed(() => canvas.value) 
+	return  canvas // computed(() => canvas.value) 
 }

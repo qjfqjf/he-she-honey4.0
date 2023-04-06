@@ -49,14 +49,28 @@
     </view>
 
 		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100" >
-				<u-button class="leftRoundButton shadow h-100 shadow-lg border">
-          <view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #2b85e4"><span>用户</span></view>
-        </u-button>
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
+			<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #2b85e4"><span>用户</span></view>
+			</u-button>
 			<view class="scrollAvatar">
+<<<<<<< HEAD
+=======
+			<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;"/>
+			<!-- <HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="imgs"> -->
+
+	<!--				<div>-->
+	<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
+	<!--					<h3 class="text-center">Lorem.</h3>-->
+	<!--				</div>-->
+	<!--				<div>-->
+	<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
+	<!--					<h3 class="text-center">Lorem.</h3>-->
+	<!--				</div>-->
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 			</view>
-        <u-button class="rightRoundButton shadow-lg border">
-          <view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #18b566">提醒</view>
-        </u-button>
+			<u-button class="rightRoundButton shadow-lg border">
+			<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #18b566">提醒</view>
+			</u-button>
 		</view>
 
     <view class="m-2 p-1">
@@ -75,9 +89,52 @@
         </swiper>
       </view>
     </view>
+<<<<<<< HEAD
 		<u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
 			radius="5" bgColor="#ffffff"></u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
+=======
+<!-- 		    <u-scroll-list>
+		        <view v-for="(item, index) in appFeature" :key="index">
+		            <image :src="item.thumb"></image>
+		        </view>
+		    </u-scroll-list> -->
+
+<!--
+			<swiper :indicator-dots="true" class="swiper">
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+						 v-for="(item,index) in appFeature"
+						 :index="index" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+				<swiper-item>
+					<u-grid :border="true" col="4" >
+						<u-grid-item :customStyle="{width:220+'rpx',height:220+'rpx'}"
+							v-for="(item, index) in appFeature" :index="index + 8" :key="index">
+							<u--image class="appManeger_block_icon" :src="item.icon" height="120upx" width="120upx">
+							</u--image>
+							<u--text :text="item.name" align="center"></u--text>
+						</u-grid-item>
+					</u-grid>
+				</swiper-item>
+
+			</swiper> -->
+
+		<u-swiper class="swiper mx-1" :list="wisperImage" indicator
+            indicatorMode="line" circular :autoplay="false"
+			radius="5" bgColor="#ffffff"></u-swiper>
+		<u-gap
+			height="10"
+		></u-gap>
+		<view class="m-1 rounded-20 bg-white">
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 			<u-grid :border="false" col="3">
 				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
 					<navigator :url="listItem.path">

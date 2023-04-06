@@ -50,6 +50,7 @@ export default {
 					text: '',
 					raised: true
 				},
+<<<<<<< HEAD
 				{
 					"pagePath": "pages/sdkDemo/common",
 					"iconPath": "static/icon/tab/icon_service.png",
@@ -61,6 +62,19 @@ export default {
 					"iconPath": "static/icon/tab/icon_my.png",
 					"selectedIconPath": "static/icon/tab/icon_my_c.png",
 					"text": "我的"
+=======
+				{
+					"pagePath": "pages/serve/common",
+					"iconPath": "static/icon/tab/icon_service.png",
+					"selectedIconPath": "static/icon/tab/icon_service_c.png",
+					"text": "服务"
+				},
+				{
+					"pagePath": "pages/mine/common",
+					"iconPath": "static/icon/tab/icon_my.png",
+					"selectedIconPath": "static/icon/tab/icon_my_c.png",
+					"text": "我的"
+>>>>>>> cafd7775adcad4d9bd60f6da80d437b98ae4f742
 				}
 			],
 			popupShow: false
