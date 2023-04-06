@@ -40,7 +40,8 @@
 					},
 					{
 						img: require('@/static/icon/health/bloodFat.png'),
-						title: '血脂'
+						title: '血脂',
+						url: '/pages/healthMonitor/bloodFat/bloodFat'
 					},
 					{
 						img: require('@/static/icon/health/heart.png'),
@@ -48,7 +49,8 @@
 					},
 					{
 						img: require('@/static/icon/health/bodyFat.png'),
-						title: '体脂率'
+						title: '体脂率',
+						url:'/pages/healthMonitor/bodyFat/bodyFat'
 					},
 					{
 						img: require('@/static/icon/health/cholesterol.png'),

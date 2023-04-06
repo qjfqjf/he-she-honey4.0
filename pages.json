@@ -633,6 +633,7 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/healthFile/index",
             "style" :                                                                                    
             {
@@ -643,6 +644,18 @@
         }
         ,{
             "path" : "pages/healthFile/basicFile/basicFile",
+=======
+            "path" : "pages/healthMonitor/bloodFat/bloodFat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthMonitor/bloodFat/bloodFatManualEntry",
+>>>>>>> e1426a291a7a9c62867332cf2e59e22666e3cd5d
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
