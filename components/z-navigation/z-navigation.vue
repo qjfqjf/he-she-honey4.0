@@ -51,13 +51,13 @@ export default {
 					raised: true
 				},
 				{
-					"pagePath": "pages/sdkDemo/common",
+					"pagePath": "pages/serve/common",
 					"iconPath": "static/icon/tab/icon_service.png",
 					"selectedIconPath": "static/icon/tab/icon_service_c.png",
-					"text": "社区"
+					"text": "服务"
 				},
 				{
-					"pagePath": "pages/template/common",
+					"pagePath": "pages/mine/common",
 					"iconPath": "static/icon/tab/icon_my.png",
 					"selectedIconPath": "static/icon/tab/icon_my_c.png",
 					"text": "我的"

@@ -51,25 +51,25 @@
     </view>
 
 		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100" >
-				<u-button class="leftRoundButton shadow h-100 shadow-lg border">
-          <view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #2b85e4"><span>用户</span></view>
-        </u-button>
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
+			<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #2b85e4"><span>用户</span></view>
+			</u-button>
 			<view class="scrollAvatar">
-        <swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;"/>
-        <!-- <HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="imgs"> -->
+			<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;"/>
+			<!-- <HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="imgs"> -->
 
-<!--				<div>-->
-<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
-<!--					<h3 class="text-center">Lorem.</h3>-->
-<!--				</div>-->
-<!--				<div>-->
-<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
-<!--					<h3 class="text-center">Lorem.</h3>-->
-<!--				</div>-->
+	<!--				<div>-->
+	<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
+	<!--					<h3 class="text-center">Lorem.</h3>-->
+	<!--				</div>-->
+	<!--				<div>-->
+	<!--					<u&#45;&#45;image class="roundAvatar mx-5" shape="circle" height="80upx" width="80upx">lorem</u&#45;&#45;image>-->
+	<!--					<h3 class="text-center">Lorem.</h3>-->
+	<!--				</div>-->
 			</view>
-        <u-button class="rightRoundButton shadow-lg border">
-          <view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #18b566">提醒</view>
-        </u-button>
+			<u-button class="rightRoundButton shadow-lg border">
+			<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center" style = "background-color: #18b566">提醒</view>
+			</u-button>
 		</view>
 
     <view class="m-2 p-1">
@@ -121,8 +121,12 @@
 
 			</swiper> -->
 
-		<u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
+		<u-swiper class="swiper mx-1" :list="wisperImage" indicator
+            indicatorMode="line" circular :autoplay="false"
 			radius="5" bgColor="#ffffff"></u-swiper>
+		<u-gap
+			height="10"
+		></u-gap>
 		<view class="m-1 rounded-20 bg-white">
 			<u-grid :border="false" col="3">
 				<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
