@@ -633,6 +633,23 @@
             
         }
         ,{
+            "path" : "pages/healthFile/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "健康档案",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/basicFile/basicFile",
+			"style" :                                                                                    
+            {
+                "navigationBarTitleText": "健康档案",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
             "path" : "pages/healthMonitor/bloodFat/bloodFat",
             "style" :                                                                                    
             {
