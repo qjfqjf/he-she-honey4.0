@@ -672,6 +672,14 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "健康服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{	
+            "path" : "pages/healthMonitor/ergometer/ergometer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             

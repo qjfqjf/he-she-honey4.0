@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type {PropType} from './vue'
 export default {
 	gridLength: {

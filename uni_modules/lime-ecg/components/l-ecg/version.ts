@@ -1,3 +1,4 @@
+// @ts-nocheck
 let systemInfo: UniNamespace.GetSystemInfoResult;
 interface My {
 	SDKVersion: string

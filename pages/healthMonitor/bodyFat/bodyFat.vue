@@ -6,7 +6,10 @@
 		<public-module></public-module>
 		<HealthHeader></HealthHeader>
 		<u-read-more class="p-2 mt-3" :toggle="true" closeText="查看更多">
-			<image src="@/static/icon/bodyFat/logo.png" mode="aspectFit"></image>
+			<view class="d-flex j-center">
+				<image src="@/static/icon/bodyFat/logo.png" mode="aspectFit"></image>
+			</view>
+
 			<view class="data-item d-flex j-sb a-center mt-3" v-for="(item,index) in data" :key="index">
 				<view class="left d-flex a-center">
 					<view class="icon">
@@ -28,7 +31,7 @@
 		</u-read-more>
 		<!-- <TipInfo title="血脂趋势"></TipInfo> -->
 		<view class="mt-5">
-			
+
 		</view>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>

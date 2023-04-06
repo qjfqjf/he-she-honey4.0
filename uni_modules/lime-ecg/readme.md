@@ -55,7 +55,7 @@ const pause = () => {
 ### 查看示例
 - 导入后直接使用这个标签查看演示效果
 
-```vue
+```html
 // 代码位于 uni_modules/lime-ecg/compoents/lime-ecg
 <lime-ecg />
 ```

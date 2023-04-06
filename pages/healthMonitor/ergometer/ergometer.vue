@@ -10,13 +10,12 @@
 		</view>
 		<u-button type="primary" @click="resume">测试</u-button>
 		<view class="mb-3">
-
+			
 		</view>
 		<u-button type="primary" @click="pause">暂停</u-button>
 		<view class="mt-5">
 
 		</view>
-		<TipInfo title="血氧趋势"></TipInfo>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSave"></u-button>
@@ -26,17 +25,6 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-
-		<view class="data d-flex j-sb">
-			<view class="item text-center" v-for="(item,index) in data" :key="item.name">
-				<view class="value">
-					{{item.value || '--'}}
-				</view>
-				<view class="name">
-					{{item.name}}
-				</view>
-			</view>
-		</view>
 		<BottomNavigation></BottomNavigation>
 		<u-toast ref="uToast"></u-toast>
 	</view>
@@ -49,28 +37,14 @@
 	// 	onMounted
 	// } from '@vue/composition-api'
 	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
-	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	export default {
 		components: {
 			HealthHeader,
-			BottomNavigation,
-			TipInfo
+			BottomNavigation
 		},
 		data() {
 			return {
-				data: [{
-						value: 0,
-						name: '血氧'
-					},
-					{
-						value: 0,
-						name: 'PI'
-					}, {
-						value: 0,
-						name: '脉率'
-					}
-				],
 				btnColor: '#dadada',
 				deviceStatus: 0,
 				ecgRef: null,
@@ -139,18 +113,5 @@
 </script>
 
 <style lang="scss">
-	.content {
-		.data {
-			padding: 60rpx 80rpx 0 80rpx;
-			.item {
-				.value {
-					color: #55b880;
-				}
-				.name {
-					font-size: 16px;
-				}
-			}
 
-		}
-	}
 </style>

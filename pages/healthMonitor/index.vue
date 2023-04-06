@@ -45,7 +45,8 @@
 					},
 					{
 						img: require('@/static/icon/health/heart.png'),
-						title: '心电图'
+						title: '心电图',
+						url:'/pages/healthMonitor/ergometer/ergometer'
 					},
 					{
 						img: require('@/static/icon/health/bodyFat.png'),
@@ -57,10 +58,10 @@
 						title: '胆固醇',
 						url: '/pages/healthMonitor/cholesterol/cholesterol'
 					},
-					{
-						img: require('@/static/icon/health/AI.png'),
-						title: 'AI'
-					},
+					// {
+					// 	img: require('@/static/icon/health/AI.png'),
+					// 	title: 'AI'
+					// },
 					{
 						img: require('@/static/icon/health/heat.png'),
 						title: '额温枪',
