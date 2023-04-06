@@ -12,7 +12,7 @@ export const   appManage= [
     {
         name: "健康档案",
         icon: "/static/icon/homePage/healthRecords.png",
-        path: "/pages/healthAssessment/index"
+        path: "/pages/healthFile/index"
     },
     {
         name: "健康管理",
@@ -48,7 +48,7 @@ export const   appManage= [
         name: "申请服务",
         icon: "/static/icon/homePage/applicationService.png",
         path: "/pages/employer/index"
-    },
+    }
 
 
 ]

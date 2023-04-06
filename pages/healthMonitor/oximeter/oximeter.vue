@@ -1,274 +1,156 @@
 <template>
-	<view>
-		<z-nav-bar title="血氧仪"></z-nav-bar>
+	<view class="content p-2">
+		<z-nav-bar title="心电图">
+
+		</z-nav-bar>
 		<public-module></public-module>
-		<scroll-view scroll-y class="box">
-			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
-				<view>
-					<text>id: {{ item.deviceId }}</text>
+		<HealthHeader></HealthHeader>
+		<view class="mt-3 mb-3" style="height: 350rpx;">
+			<l-ecg ref="ecgRef"></l-ecg>
+		</view>
+		<u-button type="primary" @click="resume">测试</u-button>
+		<view class="mb-3">
+
+		</view>
+		<u-button type="primary" @click="pause">暂停</u-button>
+		<view class="mt-5">
+
+		</view>
+		<TipInfo title="血氧趋势"></TipInfo>
+		<u--text class="d-flex j-center mb-3" color="#01b09a"
+			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
+		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSave"></u-button>
+		<view class="mb-3">
+
+		</view>
+		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
+			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
+		</u--text>
+
+		<view class="data d-flex j-sb">
+			<view class="item text-center" v-for="(item,index) in data" :key="item.name">
+				<view class="value">
+					{{item.value || '--'}}
 				</view>
-				<view>
-					<text>name: {{ item.name }}</text>
+				<view class="name">
+					{{item.name}}
 				</view>
-			</view>
-		</scroll-view>
-
-		<button @click="discovery">2 搜索附近蓝牙设备</button>
-
-		<button @click="getServices">3 获取蓝牙服务</button>
-
-		<button @click="getCharacteristics">4 获取特征值</button>
-		<button @click="notify">5 开启消息监听</button>
-		<!-- <button @click="clear">8 清空蓝牙列表</button> -->
-		<view class="heat">
-			<view class="">
-				数据：{{value}}
 			</view>
 		</view>
+		<BottomNavigation></BottomNavigation>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
-	import {
-		handleJKBPData
-	} from '@/pages/healthMonitor/bloodPressure/bloodpressure.js'
+	// import {
+	// 	defineComponent,
+	// 	ref,
+	// 	onMounted
+	// } from '@vue/composition-api'
+	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
+	import TipInfo from '../components/tipInfo/TipInfo.vue'
+	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	export default {
+		components: {
+			HealthHeader,
+			BottomNavigation,
+			TipInfo
+		},
 		data() {
 			return {
-				value: '', //测量温度
-				blueDeviceList: [],
-				deviceId: 'E9:D1:6B:E3:29:1F', // 蓝牙设备的id
-				serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
-				characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
-
-			};
+				data: [{
+						value: 0,
+						name: '血氧'
+					},
+					{
+						value: 0,
+						name: 'PI'
+					}, {
+						value: 0,
+						name: '脉率'
+					}
+				],
+				btnColor: '#dadada',
+				deviceStatus: 0,
+				ecgRef: null,
+				value: [122, 122, 122, 122, -122, -122, -122, -122, -122, -122, -122, -122, -122, -122, 122, 122, 122, 123,
+					125, 127, 130, 133, 135, 137, 138, 139, 140, 140, 139, 138, 136, 134, 130, 127, 125, 124, 123, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 121, 119,
+					116, 113, 111, 132, 151, 171, 190, 210, 229, 210, 190, 171, 151, 132, 112, 114, 117, 120, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 123, 124, 124, 126, 128, 131, 133, 134, 136, 140, 143, 144,
+					146, 149, 150, 152, 153, 153, 154, 155, 156, 157, 156, 155, 153, 153, 152, 150, 149, 146, 145, 142,
+					138, 135, 133, 129, 127, 124, 123, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
+					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122
+				],
+				time: null
+			}
 		},
-		onLoad(e) {
-			this.initBlue()
-			// if (this.deviceId.length > 0) {
-			// 	uni.createBLEConnection({
-			// 		deviceId: this.deviceId,
-			// 		success(res) {
-			// 			console.log('连接成功')
-			// 			console.log(res)
-			// 			uni.showToast({
-			// 				title: '连接成功'
-			// 			})
-			// 		},
-			// 		fail(err) {
-			// 			console.log('连接失败')
-			// 			console.error(err)
-			// 			uni.showToast({
-			// 				title: '连接失败',
-			// 				icon: 'error'
-			// 			})
-			// 		}
-			// 	})
-			// }
+		mounted() {
+			this.$refs.ecgRef.init({
+				// 小格和大格的border color
+				lineColor: ['#c7dff5', '#63b3f8'],
+				// ampTime: 'Amp: 10mm/mv  Time: 25mm/sec',
+				textColor: '#000',
+				wave: {
+					// ecg
+					// 1秒多少个点
+					frameSize: 250,
+					yMax: 250,
+					waveHeight: 100,
+					// 每次画几个点
+					step: 10,
+					// 扫纸速度，1 默认 表示 25mm/s (1秒25个小格子 每个小格子0.04s)。 0.5表示扫纸速度为 12.5mm/s。2表示扫纸速度为 50mm/s。
+					speedRatio: 1,
+					lineColor: 'red'
+				},
+
+			})
+
 		},
 		methods: {
-			// 初始化蓝牙
-			initBlue() {
-				uni.openBluetoothAdapter({
-					success(res) {
-						console.log('初始化蓝牙成功')
-						console.log(res)
-					},
-					fail(err) {
-						console.log('初始化蓝牙失败')
-						console.error(err)
-					}
+			resume() {
+				// console.log(ecgRef.value)
+				this.$refs.ecgRef.update(this.value)
+				this.$refs.ecgRef.resume()
+				this.time = setInterval(() => {
+					this.$refs.ecgRef.update(this.value)
+				}, 1000)
+			},
+			pause() {
+				this.$refs.ecgRef.pause()
+				clearInterval(this.time)
+			},
+			handleDevelop() {
+				this.$refs.uToast.show({
+					message: '开发中...'
 				})
 			},
-			// 开始搜寻附近设备
-			discovery() {
-				const _this = this
-				uni.startBluetoothDevicesDiscovery({
-					success(res) {
-						console.log('开始搜索')
-						// 开启监听回调
-						console.log(res)
-						uni.onBluetoothDeviceFound(function(devices) {
-							console.log(devices)
-							_this.blueDeviceList.push(devices.devices[0])
-						})
-					},
-					fail(err) {
-						console.log('搜索失败')
-						console.error(err)
-					}
-				})
-			},
-			// 【3】找到新设备就触发该方法
-			found(res) {
-				console.log(res)
-				this.blueDeviceList.push(res.devices[0])
-
-			},
-
-			// 【4】连接设备
-			connect(data) {
-				console.log(data)
-				const _this = this
-				this.deviceId = data.deviceId
-
-				uni.createBLEConnection({
-					deviceId: this.deviceId,
-					success(res) {
-						console.log('连接成功')
-						console.log(res)
-						// 停止搜索
-						_this.stopDiscovery()
-						uni.showToast({
-							title: '连接成功'
-						})
-					},
-					fail(err) {
-						console.log('连接失败')
-						console.error(err)
-						uni.showToast({
-							title: '连接失败',
-							icon: 'error'
-						})
-					}
-				})
-			},
-
-			// 【5】停止搜索
-			stopDiscovery() {
-				uni.stopBluetoothDevicesDiscovery({
-					success(res) {
-						console.log('停止成功')
-						console.log(res)
-					},
-					fail(err) {
-						console.log('停止失败')
-						console.error(err)
-					}
-				})
-			},
-
-			// 【6】获取服务
-			getServices() {
-				uni.getBLEDeviceServices({
-					deviceId: this.deviceId,
-					success(res) {
-						console.log(res)
-						uni.showToast({
-							title: '获取服务成功'
-						})
-					},
-					fail(err) {
-						console.error(err)
-						uni.showToast({
-							title: '获取服务失败',
-							icon: 'error'
-						})
-					}
-				})
-			},
-
-
-
-			// 【7】获取特征值
-			getCharacteristics() {
-				uni.getBLEDeviceCharacteristics({
-					deviceId: this.deviceId,
-					serviceId: this.serviceId,
-					success(res) {
-						console.log(res)
-						uni.showToast({
-							title: '获取特征值成功'
-						})
-					},
-					fail(err) {
-						console.error(err)
-						uni.showToast({
-							title: '获取特征值失败',
-							icon: 'error'
-						})
-					}
-				})
-			},
-
-
-			// 【8】开启消息监听
-			notify() {
-				const _this = this
-				uni.notifyBLECharacteristicValueChange({
-					deviceId: this.deviceId,
-					serviceId: this.serviceId,
-					characteristicId: this.characteristicId,
-					success(res) {
-						console.log(res)
-						_this.listenValueChange()
-						uni.showToast({
-							title: '已开启监听'
-						})
-					},
-					fail(err) {
-						console.error(err)
-						uni.showToast({
-							title: '监听失败',
-							icon: 'error'
-						})
-					}
-				})
-			},
-			// ArrayBuffer转16进度字符串示例
-			ab2hex(buffer) {
-				const hexArr = Array.prototype.map.call(
-					new Uint8Array(buffer),
-					function(bit) {
-						return ('00' + bit.toString(16)).slice(-2)
-					}
-				)
-
-				return hexArr.join('')
-			},
-			// 【9】监听消息变化
-			listenValueChange() {
-				uni.onBLECharacteristicValueChange(res => {
-					console.log(res)
-					let resHex = this.ab2hex(res.value)
-				
-					console.log(resHex)
-				})
-			},
-	
-
-		}
+			handleSave() {
+				console.log('提交')
+			}
+		},
 	}
 </script>
 
 <style lang="scss">
-	.box {
-		width: 98%;
-		height: 400rpx;
-		box-sizing: border-box;
-		margin: 0 auto 20rpx;
-		border: 2px solid dodgerblue;
-	}
+	.content {
+		.data {
+			padding: 60rpx 80rpx 0 80rpx;
+			.item {
+				.value {
+					color: #55b880;
+				}
+				.name {
+					font-size: 16px;
+				}
+			}
 
-	.item {
-		box-sizing: border-box;
-		padding: 10rpx;
-		border-bottom: 1px solid #ccc;
-	}
-
-	button {
-		margin-bottom: 20rpx;
-	}
-
-	.msg_x {
-		border: 2px solid seagreen;
-		width: 98%;
-		margin: 10rpx auto;
-		box-sizing: border-box;
-		padding: 20rpx;
-	}
-
-	.msg_x .msg_txt {
-		margin-bottom: 20rpx;
+		}
 	}
 </style>

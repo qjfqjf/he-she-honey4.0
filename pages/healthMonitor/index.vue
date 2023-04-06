@@ -40,25 +40,28 @@
 					},
 					{
 						img: require('@/static/icon/health/bloodFat.png'),
-						title: '血脂'
+						title: '血脂',
+						url: '/pages/healthMonitor/bloodFat/bloodFat'
 					},
 					{
 						img: require('@/static/icon/health/heart.png'),
-						title: '心电图'
+						title: '心电图',
+						url:'/pages/healthMonitor/ergometer/ergometer'
 					},
 					{
 						img: require('@/static/icon/health/bodyFat.png'),
-						title: '体脂率'
+						title: '体脂率',
+						url:'/pages/healthMonitor/bodyFat/bodyFat'
 					},
 					{
 						img: require('@/static/icon/health/cholesterol.png'),
 						title: '胆固醇',
 						url: '/pages/healthMonitor/cholesterol/cholesterol'
 					},
-					{
-						img: require('@/static/icon/health/AI.png'),
-						title: 'AI'
-					},
+					// {
+					// 	img: require('@/static/icon/health/AI.png'),
+					// 	title: 'AI'
+					// },
 					{
 						img: require('@/static/icon/health/heat.png'),
 						title: '额温枪',

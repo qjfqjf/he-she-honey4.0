@@ -15,8 +15,11 @@
 		<view v-if="bg" class="footer_station"></view>
 		<z-popup v-model="popupShow" type="center">
 			<view class="popup_content">
-				<view>凸起导航解决方案，请看components/module/navigation.vue</view>
-				<view>和pages/demo/common.vue</view>
+				<!-- <view>凸起导航解决方案，请看components/module/navigation.vue</view>
+				<view>和pages/demo/common.vue</view> -->
+				<view class="">
+					开发中！
+				</view>
 			</view>
 		</z-popup>
 	</view>
@@ -40,7 +43,7 @@ export default {
 					text: '首页'
 				},
 				{
-					"pagePath": "pages/demo/common",
+					"pagePath": "pages/message/message",
 					"iconPath": "static/icon/tab/icon_message.png",
 					"selectedIconPath": "static/icon/tab/icon_message_c.png",
 					"text": "消息"
@@ -51,13 +54,14 @@ export default {
 					raised: true
 				},
 				{
-					"pagePath": "pages/sdkDemo/common",
+					"pagePath": "pages/serve/common",
 					"iconPath": "static/icon/tab/icon_service.png",
 					"selectedIconPath": "static/icon/tab/icon_service_c.png",
 					"text": "社区"
 				},
+
 				{
-					"pagePath": "pages/template/common",
+					"pagePath": "pages/mine/common",
 					"iconPath": "static/icon/tab/icon_my.png",
 					"selectedIconPath": "static/icon/tab/icon_my_c.png",
 					"text": "我的"
@@ -93,8 +97,8 @@ export default {
 .footer_station {
 	height: 100rpx;
 	box-sizing: content-box;
-	padding-bottom: constant(safe-area-inset-bottom);  
-	padding-bottom: env(safe-area-inset-bottom); 
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
 }
 .footer_box {
 	height: 100rpx;
@@ -108,8 +112,8 @@ export default {
 	flex-direction: row;
 	z-index: 502;
 	box-sizing: content-box;
-	padding-bottom: constant(safe-area-inset-bottom);  
-	padding-bottom: env(safe-area-inset-bottom); 
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
 }
 .footer_bg {
 	background-color: #FFF;
