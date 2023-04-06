@@ -10,6 +10,8 @@
  */
 import Vue from 'vue'
 import App from './App'
+import VueCompositionAPI from '@vue/composition-api'
+Vue.use(VueCompositionAPI)
 //数据管理中心
 import store from '@/store'
 // uview

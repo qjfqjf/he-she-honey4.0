@@ -1,10 +1,11 @@
 <template>
-	<view class="l-ecg" :style="[styles]">
+	<view class="l-ecg l-class" :style="[styles]">
 		<canvas class="l-ecg__canvas" :canvas-id="canvasId" :id="canvasId" type="2d"></canvas>
 		<canvas class="l-ecg__canvas" :canvas-id="canvasId + 'line'" :id="canvasId + 'line'" type="2d"></canvas>
 	</view>
 </template>
 <script lang="ts">
+	// @ts-nocheck
 	import {computed, getCurrentInstance, watch, reactive, defineComponent} from './vue'
 	import {useCanvas} from './useCanvas';
 	import {Ecg} from './ecg';
@@ -13,6 +14,11 @@
 	
 	export default defineComponent({
 		name: 'l-ecg',
+		externalClasses: ['l-class'],
+		options: {
+			addGlobalClass: true,
+			virtualHost: true,
+		},
 		props: EcgProps,
 		setup(props, {expose}) {
 			const app = getCurrentInstance()
@@ -48,15 +54,25 @@
 			const update = (data: number[]) => ecgChart.update(data)
 			const resume = () => ecgChart.resume()
 			const pause = () => ecgChart.pause()
+			
+			// #ifdef VUE3
 			expose({
 				init,
 				update,
 				resume,
 				pause
 			})
+			// #endif
+			
 			return {
 				styles,
-				canvasId
+				canvasId,
+				// #ifndef VUE3
+				init,
+				update,
+				resume,
+				pause
+				// #endif
 			}
 		}
 	})

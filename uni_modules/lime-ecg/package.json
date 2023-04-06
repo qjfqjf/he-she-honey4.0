@@ -1,13 +1,14 @@
 {
   "id": "lime-ecg",
   "displayName": "心电图",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "uniapp vue3 canvas 心电图插件， vue2只要配置@vue/composition-api。",
   "keywords": [
     "心电图"
 ],
   "repository": "",
-"engines": {
+  "engines": {
+    "HBuilderX": "^3.1.0"
   },
   "dcloudext": {
     "type": "component-vue",
@@ -39,7 +40,7 @@
       },
       "client": {
         "Vue": {
-          "vue2": "u",
+          "vue2": "n",
           "vue3": "y"
         },
         "App": {

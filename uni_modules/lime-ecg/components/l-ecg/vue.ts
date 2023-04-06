@@ -1,3 +1,4 @@
+// @ts-nocheck
 // export * from '@/uni_modules/lime-vue'
 
 // #ifdef VUE3

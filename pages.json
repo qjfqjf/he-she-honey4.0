@@ -650,6 +650,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthMonitor/ergometer/ergometer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

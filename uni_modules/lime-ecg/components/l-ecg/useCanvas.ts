@@ -1,3 +1,4 @@
+// @ts-nocheck
 // #ifdef VUE3
 // import {computed, onMounted, ref} from 'vue';
 // #endif
@@ -7,7 +8,7 @@
 
 import {canIUseCanvas2d, getSystemInfoSync} from './version'
 // import {getRect} from '@/uni_modules/lime-ui'
-import {computed, onMounted, ref} from '@/uni_modules/lime-vue'
+import {computed, onMounted, ref} from './vue'
 import {Canvas} from './type'
 
 export function getRect(selector : string, options: any = {}) {
