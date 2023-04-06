@@ -25,10 +25,11 @@
 						></u-avatar>
 <!--						<u&#45;&#45;text class="" slot="value" type ="info" text="我用十年青春,赴你最后之约"></u&#45;&#45;text>-->
 					</u-cell>
-					</navigator>
+				</navigator>
 				</u-list-item>
 			</u-list>
 		</view>
+		<z-navigation></z-navigation>
 	</view>
 </template>
 
@@ -40,8 +41,9 @@
 	import UAvatar from "../../uni_modules/uview-ui/components/u-avatar/u-avatar.vue";
 	import USearch from "../../uni_modules/uview-ui/components/u-search/u-search.vue";
 	import {messageIcons} from "static/js/message/staticData.js"
+	import ZNavigation from "../../components/z-navigation/z-navigation.vue";
 	export default {
-		components: {USearch, UAvatar, UCell, UListItem, UList, ZNavBar},
+		components: {ZNavigation, USearch, UAvatar, UCell, UListItem, UList, ZNavBar},
 		data() {
 			return {
 				keyword: "",
