@@ -305,7 +305,7 @@
 					}
 					console.log('------结束-------')
 				}
-				if (data[0] == -1 && data.length >= 1) {
+				if (data[0] == -1 && data.length > 1) {
 					this.value = data
 					console.log(data)
 				}
