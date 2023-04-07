@@ -1,4 +1,757 @@
 {
+<<<<<<< HEAD
+  "pages": [{
+      "path": "pages/homePage/homePage",
+      "style": {
+        "navigationBarTitleText": "数字健康管理"
+      }
+    },
+    {
+      "path": "pages/template/addTemplate",
+      "style": {
+        "navigationBarTitleText": "新增功能"
+      }
+    },
+    {
+      "path": "pages/healthMonitor/index",
+      "style": {
+        "navigationBarTitleText": "健康监测"
+      }
+    },
+    {
+      "path": "pages/demo/common",
+      "style": {
+        "navigationBarTitleText": "功能示例"
+      }
+    },
+    {
+      "path": "pages/demo/list",
+      "style": {
+        "navigationBarTitleText": "列表"
+      }
+    },
+    {
+      "path": "pages/demo/areaSelect",
+      "style": {
+        "navigationBarTitleText": "地区选择"
+      }
+    },
+    {
+      "path": "pages/demo/popup",
+      "style": {
+        "navigationBarTitleText": "弹窗"
+      }
+    },
+    {
+      "path": "pages/demo/prompt",
+      "style": {
+        "navigationBarTitleText": "弹窗输入框"
+      }
+    },
+    {
+      "path": "pages/demo/swipeAction",
+      "style": {
+        "navigationBarTitleText": "滑动操作"
+      }
+    },
+    {
+      "path": "pages/demo/parser",
+      "style": {
+        "navigationBarTitleText": "富文本预览"
+      }
+    },
+    {
+      "path": "pages/demo/formDemo",
+      "style": {
+        "navigationBarTitleText": "表单模板"
+      }
+    },
+    {
+      "path": "pages/demo/themeColor",
+      "style": {
+        "navigationBarTitleText": "项目主题色介绍"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/index",
+      "style": {
+        "navigationBarTitleText": "头部导航示例"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo",
+      "style": {
+        "navigationBarTitleText": "案例"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo1",
+      "style": {
+        "navigationBarTitleText": "案例1"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo2",
+      "style": {
+        "navigationBarTitleText": "案例2"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo3",
+      "style": {
+        "navigationBarTitleText": "案例3"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo4",
+      "style": {
+        "navigationBarTitleText": "案例4"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo5",
+      "style": {
+        "navigationBarTitleText": "案例5"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo6",
+      "style": {
+        "navigationBarTitleText": "案例6"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo7",
+      "style": {
+        "navigationBarTitleText": "案例7"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo8",
+      "style": {
+        "navigationBarTitleText": "案例8"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo9",
+      "style": {
+        "navigationBarTitleText": "案例9"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo10",
+      "style": {
+        "navigationBarTitleText": "案例10"
+      }
+    },
+    {
+      "path": "pages/demo/navBarMemo/demo11",
+      "style": {
+        "navigationBarTitleText": "案例11"
+      }
+    },
+    {
+      "path": "pages/demo/waterfall/common",
+      "style": {
+        "navigationBarTitleText": "瀑布流列表"
+      }
+    },
+    {
+      "path": "pages/demo/waterfall/stableWaterfall",
+      "style": {
+        "navigationBarTitleText": "稳定版瀑布流"
+      }
+    },
+    {
+      "path": "pages/demo/waterfall/completeWaterfall",
+      "style": {
+        "navigationBarTitleText": "完全版瀑布流"
+      }
+    },
+    {
+      "path": "pages/template/webView",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/template/common",
+      "style": {
+        "navigationBarTitleText": "模板"
+      }
+    },
+    {
+      "path": "pages/user/bindPhone",
+      "style": {
+        "navigationBarTitleText": "绑定手机号"
+      }
+    },
+    {
+      "path": "pages/user/forget",
+      "style": {
+        "navigationBarTitleText": "忘记密码"
+      }
+    },
+    {
+      "path": "pages/user/protocol",
+      "style": {
+        "navigationBarTitleText": "协议"
+      }
+    },
+    {
+      "path": "pages/user/register",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    },
+    {
+      "path": "pages/user/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/common",
+      "style": {
+        "navigationBarTitleText": "API示例"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/uploadFile",
+      "style": {
+        "navigationBarTitleText": "图片上传/文件上传"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/quUploadFile",
+      "style": {
+        "navigationBarTitleText": "七牛云图片上传/文件上传"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/appletsLogin",
+      "style": {
+        "navigationBarTitleText": "小程序登录"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/appUpdate",
+      "style": {
+        "navigationBarTitleText": "APP版本更新"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/location",
+      "style": {
+        "navigationBarTitleText": "获取当前经纬度（兼容公众号、APP、微信小程序）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/pay",
+      "style": {
+        "navigationBarTitleText": "支付（兼容公众号、APP、微信小程序）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/permission",
+      "style": {
+        "navigationBarTitleText": "APP权限判断和跳转到系统设置"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/publicLogin",
+      "style": {
+        "navigationBarTitleText": "公众号登录（附带推荐人code）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/publicSdk",
+      "style": {
+        "navigationBarTitleText": "公众号SDK权限获取"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/request",
+      "style": {
+        "navigationBarTitleText": "接口请求（全端支持）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/saveImg",
+      "style": {
+        "navigationBarTitleText": "保存图片到相册（APP、小程序支持）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/share",
+      "style": {
+        "navigationBarTitleText": "分享（APP、小程序、公众号支持）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/socket",
+      "style": {
+        "navigationBarTitleText": "webSocket介绍"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/loginIntercept",
+      "style": {
+        "navigationBarTitleText": "登录拦截（公众号、APP、微信小程序）"
+      }
+    },
+    {
+      "path": "pages/sdkDemo/utils",
+      "style": {
+        "navigationBarTitleText": "常用工具"
+      }
+    },
+    {
+      "path": "pages/template/pay",
+      "style": {
+        "navigationBarTitleText": "支付"
+      }
+    },
+    {
+      "path": "pages/shortVideo",
+      "style": {
+        "navigationBarTitleText": "防抖音滑动视频",
+        "enablePullDownRefresh": false,
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": false,
+          "subNVues": [{
+            "id": "comment",
+            "path": "pages/subnvue/comment",
+            "type": "popup",
+            "style": {
+              "height": "80%",
+              "dock": "bottom",
+              "position": "dock",
+              "bottom": "0",
+              "background": "transparent",
+              "zindex": 10,
+              "mask": "rgba(0,0,0,0.4)"
+            }
+          }]
+        }
+      }
+    },
+
+    {
+      "path": "pages/template/editInfo",
+      "style": {
+        "navigationBarTitleText": "个人信息"
+      }
+    },
+    {
+      "path": "pages/template/poster/goodsPoster",
+      "style": {
+        "navigationBarTitleText": "商品海报生成"
+      }
+    },
+    {
+      "path": "pages/template/poster/scanCode",
+      "style": {
+        "navigationBarTitleText": "推广海报生成"
+      }
+    },
+    {
+      "path": "pages/demo/datePopup",
+      "style": {
+        "navigationBarTitleText": "日期时间选择器",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/healthMonitor/bloodPressure/bloodPressure",
+      "style": {
+        "navigationBarTitleText": "血压",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
+      "style": {
+        "navigationBarTitleText": "额温枪",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/oximeter/oximeter",
+      "style": {
+        "navigationBarTitleText": "血氧仪",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bloodSugar/bloodSugar",
+      "style": {
+        "navigationBarTitleText": "血糖",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/homePage/homePage",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "enablePullDownRefresh": false
+      }
+
+    }
+
+    , {
+      "path": "pages/healthMonitor/bloodSUA/bloodSUA",
+      "style": {
+        "navigationBarTitleText": "血尿酸",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/cholesterol/cholesterol",
+      "style": {
+        "navigationBarTitleText": "胆固醇",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/healthAssessment/index",
+      "style": {
+        "navigationBarTitleText": "健康评估",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/treat/index",
+      "style": {
+        "navigationBarTitleText": "诊辽",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/ai/index",
+      "style": {
+        "navigationBarTitleText": "AI智能",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/professionalCommunity/index",
+      "style": {
+        "navigationBarTitleText": "专业社区",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/employer/index",
+      "style": {
+        "navigationBarTitleText": "工作单位",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/supervision/index",
+      "style": {
+        "navigationBarTitleText": "监管",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/educate/index",
+      "style": {
+        "navigationBarTitleText": "教育",
+        "enablePullDownRefresh": false
+      }
+    }
+    //    ,{
+    //           "path" : "pages/memberRecord/memberRecord",
+    //           "style" :                                                                                    
+    //           {
+    //               "navigationBarTitleText": "",
+    //               "enablePullDownRefresh": false
+    //           }
+
+    //       },
+    // {
+    // 	"path" : "pages/memberProfile/memberProfile",
+    // 	"style" :                                                                                    
+    // 	{
+    // 	    "navigationBarTitleText": "",
+    // 	    "enablePullDownRefresh": false
+    // 	}
+    // }
+    , {
+      "path": "pages/healthMonitor/bodyFat/bodyFat",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bloodPressure/bloodpressureHistory",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bloodPressure/bloodPressureMonth",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/setting",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/setPassword",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bloodPressure/manualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+
+
+      "path": "pages/template/messageReminder",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/aboutUs",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/help",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bloodSugar/sugarManualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/myPoints",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/myDevice",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    },
+    {
+      "path": "pages/healthMonitor/bloodSUA/suaManualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/bodyFat/fatManualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/foreheadThermometer/frManualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthMonitor/cholesterol/cholesterolManualEntry",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    },
+    {
+      "path": "pages/template/myComment",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/template/commentDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    },
+
+
+    // 健康管理模块
+    {
+      "path": "pages/healthAssessment/diet/diet",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/beauty/beauty",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/bodyBuilding/bodyBuilding",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/conditioning/conditioning",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/health/health",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/medical/medical",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/psychology/psychology",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/sleep/sleep",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/sports/sports",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    },
+    // 饮食管理
+    {
+      "path": "pages/healthAssessment/diet/dietRecords",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/diet/nutritionScale",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },{
+      "path": "pages/healthAssessment/diet/addDietRecords",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    }
+
+
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#444444",
+    "selectedColor": "#20c6a2",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+        "pagePath": "pages/homePage/homePage",
+        "iconPath": "static/icon/tab/icon_home.png",
+        "selectedIconPath": "static/icon/tab/icon_home_c.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/demo/common",
+        "iconPath": "static/icon/tab/icon_message.png",
+        "selectedIconPath": "static/icon/tab/icon_message_c.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/sdkDemo/common",
+        "iconPath": "static/icon/tab/icon_service.png",
+        "selectedIconPath": "static/icon/tab/icon_service_c.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/template/common",
+        "iconPath": "static/icon/tab/icon_my.png",
+        "selectedIconPath": "static/icon/tab/icon_my_c.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "condition": {
+    //模式配置，仅开发期间生效
+    "current": 0, //当前激活的模式(list 的索引项)
+    "list": [{
+      "name": "", //模式名称
+      "path": "", //启动页面，必选
+      "query": "" //启动参数，在页面的onLoad函数里面得到
+    }]
+  }
+=======
 	"pages": [{
 			"path": "pages/homePage/homePage",
 			"style": {
@@ -768,5 +1521,6 @@
 			"query": "" //启动参数，在页面的onLoad函数里面得到
 		}]
 	}
+>>>>>>> e5c8cd564095e470aad136fa7ba7601e836e4a45
 
 }
