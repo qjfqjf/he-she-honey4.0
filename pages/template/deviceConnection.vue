@@ -8,7 +8,7 @@
 					血压计（家康血压计）
 				</view>
 				<text class="deviceId">
-					{{this.deviceId}}
+					{{this.deviceId||'未绑定'}}
 				</text>
 			</view>
 			<view class="right">
@@ -71,7 +71,7 @@
 			return {
 				timer: null,
 				blueDeviceList: [],
-				deviceId: uni.getStorageSync('jkDeviceId')||'', // 蓝牙设备的id
+				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
 				serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
 				characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
 
@@ -102,7 +102,7 @@
 			// 重新搜索设备
 			resetDevice() {
 				this.discovery()
-				console.log(111)
+				
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -121,7 +121,7 @@
 			discovery() {
 				const _this = this
 				clearTimeout(this.timer)
-				// this.blueDeviceList = []
+				this.blueDeviceList = []
 				uni.startBluetoothDevicesDiscovery({
 					success(res) {
 						console.log('开始搜索')
@@ -156,6 +156,9 @@
 
 			// 【4】连接设备
 			connect(data) {
+				if(this.deviceId){
+					this.cancelBind()
+				}
 				console.log(data)
 				const _this = this
 				this.deviceId = data.deviceId
