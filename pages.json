@@ -1471,7 +1471,94 @@
 				"enablePullDownRefresh": false
 			}
 
-		}
+		},
+		    // 健康管理模块
+		    {
+		      "path": "pages/healthAssessment/diet/diet",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/beauty/beauty",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/bodyBuilding/bodyBuilding",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/conditioning/conditioning",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/health/health",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/medical/medical",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/psychology/psychology",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/sleep/sleep",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/sports/sports",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    },
+		    // 饮食管理
+		    {
+		      "path": "pages/healthAssessment/diet/dietRecords",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		
+		    }, {
+		      "path": "pages/healthAssessment/diet/nutritionScale",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		    },{
+		      "path": "pages/healthAssessment/diet/addDietRecords",
+		      "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		      }
+		    }
+		
 
 	],
 	"globalStyle": {
