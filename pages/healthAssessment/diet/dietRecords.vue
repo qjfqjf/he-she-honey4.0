@@ -53,8 +53,6 @@
 <style lang="scss">
 .content{
   .diet-records{
-    // background-color: white;
-    padding: 12rpx;
     .diet-item{
       background-color: white;
       border-top: 1rpx solid #ececec;

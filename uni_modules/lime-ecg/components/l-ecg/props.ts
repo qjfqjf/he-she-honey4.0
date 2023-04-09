@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type {PropType} from './vue'
+import type {PropType} from './vue';
 export default {
 	gridLength: {
 		type: Array as PropType<number[]>,

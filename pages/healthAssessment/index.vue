@@ -36,7 +36,7 @@
           {
             img: require('@/static/icon/healthAssessment/sleep.png'),
             title: '睡眠管理',
-            url: '/pages/healthAssessment/sleep/sleep'
+            url: '/pages/healthAssessment/sleep/sleepRecord'
           },
           {
             img: require('@/static/icon/healthAssessment/medical.png'),
