@@ -132,9 +132,9 @@
 				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
-				urlList:{
-					history:'/pages/healthMonitor/bloodPressure/bloodpressureHistory',
-					
+				urlList: {
+					history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
+
 				}
 
 			};
@@ -169,6 +169,7 @@
 			},
 			handleSavePressure() {
 				if (this.measureResult.DIA !== 0) {
+					this.btnColor = "#dadada"
 					this.$refs.uToast.show({
 						message: '保存成功',
 						type: 'success',
@@ -340,21 +341,19 @@
 						return ('00' + bit.toString(16)).slice(-2)
 					}
 				)
-
-
-				return hexArr.join('')
+				return hexArr
 			},
 			// 【9】监听消息变化
 			listenValueChange() {
 				uni.onBLECharacteristicValueChange(res => {
 					// console.log(res)
 					let resHex = this.ab2hex(res.value)
-					this.processMeasureData(res.value)
+					this.processMeasureData(res.value, resHex)
 					// this.changeOption(this.measureResult.pressure)
 					// console.log(resHex)
 				})
 			},
-			processMeasureData(buffer) {
+			processMeasureData(buffer,hexArr) {
 				const data = new Int8Array(buffer);
 				//处理动态血压
 				if (data.length === 6 && data[0] === -2 && data[1] === -124 && data[5] === 4) {
@@ -414,7 +413,6 @@
 			},
 			updateEcharts(newValue, oldValue, ownerInstance, instance) {
 				// 监听 service 层数据变更
-				console.log(2)
 				myChart.setOption(newValue)
 			},
 			onClick(event, ownerInstance) {

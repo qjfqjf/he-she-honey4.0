@@ -71,11 +71,11 @@
 						checked: false
 					}
 				],
-
+				deviceStatus: 0,
 				btnColor: '#dadada',
 				value: new Int8Array(), //数据
 				blueDeviceList: [],
-				deviceId: 'E9:D1:6B:E3:29:1F', // 蓝牙设备的id
+				deviceId: '90:E2:02:22:CD:D5', // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 
@@ -83,7 +83,11 @@
 		},
 		onLoad(e) {
 			this.initBlue()
+			if (this.deviceId && this.deviceStatus === 0) {
 
+					this.connect()
+
+			}
 		},
 		methods: {
 			radioClick(name) {
@@ -110,10 +114,12 @@
 			},
 			// 初始化蓝牙
 			initBlue() {
+				const _this = this
 				uni.openBluetoothAdapter({
 					success(res) {
 						console.log('初始化蓝牙成功')
 						console.log(res)
+					
 					},
 					fail(err) {
 						console.log('初始化蓝牙失败')
@@ -154,6 +160,7 @@
 
 			// 【4】连接设备
 			connect(data) {
+				console.log(111)
 				console.log(data)
 				const _this = this
 				if (this.deviceId.length === 0) {
@@ -251,9 +258,9 @@
 					success(res) {
 						console.log(res)
 						_this.listenValueChange()
-						uni.showToast({
-							title: '已开启监听'
-						})
+						// uni.showToast({
+						// 	title: '已开启监听'
+						// })
 					},
 					fail(err) {
 						console.error(err)
@@ -298,7 +305,7 @@
 					}
 					console.log('------结束-------')
 				}
-				if (data[0] == -1 && data.length >= 1) {
+				if (data[0] == -1 && data.length > 1) {
 					this.value = data
 					console.log(data)
 				}
