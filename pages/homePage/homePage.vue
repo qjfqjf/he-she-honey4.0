@@ -63,14 +63,14 @@
 		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100">
 			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: #2b85e4"><span>用户</span></view>
+					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 			<view class="scrollAvatar">
 				<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;" />
 			</view>
 			<u-button class="rightRoundButton shadow-lg border">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: #18b566">提醒</view>
+					style="background-color: #18b566; color: aliceblue;">提醒</view>
 			</u-button>
 		</view>
 
@@ -103,7 +103,7 @@
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
 						<navigator :url="listItem.path">
-							<u--image class="appManeger_block_icon" :src="listItem.icon" height="110upx" width="110upx">
+							<u--image class="appManeger_block_icon" :src="listItem.icon" :customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 							</u--image>
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
@@ -287,11 +287,11 @@
 
 	.appManeger {
 		&_block {
-
 			height: 180upx;
-
+			
 			&_icon {
 				padding-top: 20rpx;
+				padding-bottom: 15upx;
 			}
 
 			&_name {}
