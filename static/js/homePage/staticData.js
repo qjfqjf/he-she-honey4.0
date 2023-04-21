@@ -53,34 +53,59 @@ export const   appManage= [
 
 ]
 export const  appFeature= [
-    [{
-        name: "医疗",
-        icon: "static/icon/homePage/medical.png",
-        path: "/pages/educate/index"
-    },
-    {
-        name: "保健",
-        icon: "static/icon/homePage/healthCare.png",
-         path: "/pages/educate/index"
-
-    },
-    {
-        name: "体检",
-        icon: "static/icon/homePage/physicalExamination.png",
-         path: "/pages/educate/index"
-
-    },
-    {
-        name: "心理",
-        icon: "static/icon/homePage/psychology.png",
-         path: "/pages/educate/index"
-    },
-    {
-        name: "美容",
-        icon: "static/icon/homePage/cosmetic.png",
-        path: "/pages/educate/index"
-    }]
-]
+   [{
+           name: "医疗",
+           icon: "static/icon/homePage/medical.png",
+           path: "/pages/educate/index"
+       },
+       {
+           name: "保健",
+           icon: "static/icon/homePage/healthCare.png",
+            path: "/pages/educate/index"
+   
+       },
+       {
+           name: "体检",
+           icon: "static/icon/homePage/physicalExamination.png",
+            path: "/pages/educate/index"
+   
+       },
+       {
+           name: "心理",
+           icon: "static/icon/homePage/psychology.png",
+            path: "/pages/educate/index"
+       },
+       {
+           name: "美容",
+           icon: "static/icon/homePage/cosmetic.png",
+           path: "/pages/educate/index"
+       }],
+   	[{
+   	    name: "健身",
+   	    icon: "static/icon/homePage/jianshen.png",
+   	    path: "/pages/educate/index"
+   	},
+   	{
+   	    name: "养老",
+   	    icon: "static/icon/homePage/yanglao.png",
+   	    path: "/pages/educate/index"
+   	},
+   	{
+   	    name: "助残",
+   	    icon: "static/icon/homePage/zhucan.png",
+   	    path: "/pages/educate/index" 
+   	},
+   	{
+   	    name: "商城",
+   	    icon: "static/icon/homePage/shangcheng.png",
+   	    path: "/pages/educate/index"
+   	},
+   	{
+   	    name: "直播",
+   	    icon: "static/icon/homePage/zhibo.png",
+   	    path: "/pages/educate/index"
+   	}]
+   ]
 export const homePageIcons = {
     Scanning:{
         name: "扫描二维码",
