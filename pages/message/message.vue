@@ -29,7 +29,7 @@
 				</u-list-item>
 			</u-list>
 		</view>
-		<z-navigation></z-navigation>
+		<z-navigation/>
 	</view>
 </template>
 
