@@ -24,7 +24,7 @@
 				baseList: [{
 						img: require('@/static/icon/healthFile/medicalRecord.png'),
 						title: '门诊病历',
-						url: '/pages/healthFile/basicFile/basicFile'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/record.png'),
@@ -39,17 +39,17 @@
 					{
 						img: require('@/static/icon/healthFile/imagingExamination.png'),
 						title: '影像检查',
-						url: '/pages/healthFile/habit/habit'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/operation.png'),
 						title: '门诊手术', 
-						url: '/pages/healthFile/healthReport/healthReport'
+						url: ''
 					},
 					{
 						img: require('@/static/icon/healthFile/consultation.png'),
 						title: '转诊会诊', 
-						url: '/pages/healthFile/healthReport/healthReport'
+						url: ''
 					}
 				],
 			}
@@ -72,6 +72,7 @@
 		.title {
 			span {
 				padding-left: 20rpx;
+				border-left: 8rpx #28be9e solid;
 				font-weight: bold;
 			}
 		}

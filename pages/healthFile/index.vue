@@ -121,6 +121,7 @@
 		.title {
 			span {
 				padding-left: 20rpx;
+				border-left: 8rpx #28be9e solid;
 				font-weight: bold;
 			}
 		}
