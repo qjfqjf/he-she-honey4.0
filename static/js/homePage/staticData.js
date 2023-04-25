@@ -25,23 +25,23 @@ export const   appManage= [
         path: "/pages/supervision/index"
     },
     {
-        name: "数据分析",
-        icon: "/static/icon/homePage/dataAnalysis.png",
-        path: "/pages/treat/index"
-    },
+        name: "健康服务",
+        icon: "/static/icon/homePage/jiankangfuwu.png",
+        path: "/pages/treat/index" 
+    }, 
     {
         name: "健康咨询",
         icon: "/static/icon/homePage/HealthAdvisory.png",
         path: "/pages/ai/index"
     },
     {
-        name: "健康教育",
+        name: "健康教育", 
         icon: "/static/icon/homePage/educate.png",
         path: "/pages/educate/index"
     },
     {
-        name: "远程监控",
-        icon: "/static/icon/homePage/healthMonitor.png",
+        name: "监管/预警",
+        icon: "/static/icon/homePage/fengxian.png",
         path: "/pages/professionalCommunity/index"
     },
     {

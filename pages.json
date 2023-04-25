@@ -1022,9 +1022,43 @@
         "enablePullDownRefresh": false
       }
     }
-
-
-  ],
+        ,{
+            "path" : "pages/healthFile/habit/habit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/healthReport/healthReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/healthReport/physiologicalIndicators",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/outpatientArchives",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 
   "globalStyle": {
     "navigationBarTextStyle": "black",
