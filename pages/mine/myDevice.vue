@@ -4,8 +4,8 @@
 		<public-module></public-module>
 		<view class="d-flex j-sb flex-wrap">
 
-			<view class="bg-purple-light m-2" v-for="(item, index) in baseList" @click="click(item.url, item.title)"
-				:key="index">
+			<view class="bg-purple-light m-2" v-for="(item, index) in baseList"
+				@click="click(item.url, (item.title+item.detail),item.deviceInfo)" :key="index">
 				<u-badge class="mb-2" numberType="overflow" :type="item.deviceInfo?'success':'error'"
 					:value="item.deviceInfo?'已绑定':'未绑定'"></u-badge>
 				<u--image :src="item.img" width="80px" height="80px"></u--image>
@@ -41,7 +41,11 @@
 					title: '血压计',
 					detail: '(佳康静态血压计)',
 					url: '/pages/template/deviceConnection',
-					deviceInfo: uni.getStorageSync('jkDeviceId'),
+					deviceInfo: {
+						deviceInfo: uni.getStorageSync('jkDeviceId'),
+						serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
+						characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
+					}
 				},
 				{
 					img: require('@/static/icon/device/JKBGM.png'),
@@ -89,14 +93,29 @@
 		//方法
 		methods: {
 
-			click(url, name) {
+			click(url, name, deviceInfo) {
 				if (!url) {
 					return this.$refs.uToast.default('开发中...')
 				}
 				uni.navigateTo({
-					url: url
+					url: url,
+					events: {
+						// 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+						deviceInfo: function(data) {
+							console.log(data)
+						},
+					},
+					success: function(res) {
+						// 通过eventChannel向被打开页面传送数据
+						res.eventChannel.emit('deviceInfo', {
+							data: {
+								name,
+								...deviceInfo
+							}
+						})
+					}
 				});
-				console.log(name, url)
+				// console.log(name, url)
 			}
 
 		},

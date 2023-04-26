@@ -67,6 +67,24 @@
 		handleJKBPData
 	} from '@/pages/healthMonitor/bloodPressure/bloodpressure.js'
 	export default {
+		propos: {
+			deviceName: {
+				type: String,
+				default: ''
+			},
+			deviceID: {
+				type: String,
+				default: ''
+			},
+			serviceId: {
+				type: String,
+				default: ''
+			},
+			characteristicId: {
+				type: String,
+				default: ''
+			}
+		},
 		data() {
 			return {
 				timer: null,
@@ -78,23 +96,35 @@
 			};
 		},
 		onLoad(e) {
+			console.log(e)
+			console.log(111)
+			const eventChannel = this.getOpenerEventChannel();
+			eventChannel.emit('deviceInfo', {
+				data: 'data from test page'
+			});
+			
+			// 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+			eventChannel.on('deviceInfo', function(data) {
+				console.log(data,1)
+			})
 			this.initBlue()
 			this.discovery()
+		
 		},
-		onUnload(){
+		onUnload() {
 			this.stopDiscovery()
 		},
 		methods: {
 			// 取消绑定
 			cancelBind() {
 				uni.closeBLEConnection({
-				  deviceId: this.deviceId,
-				  success: function(res) {
-				    console.log('取消蓝牙连接成功');
-				  },
-				  fail: function(err) {
-				    console.log('取消蓝牙连接失败：' + JSON.stringify(err));
-				  }
+					deviceId: this.deviceId,
+					success: function(res) {
+						console.log('取消蓝牙连接成功');
+					},
+					fail: function(err) {
+						console.log('取消蓝牙连接失败：' + JSON.stringify(err));
+					}
 				});
 				this.deviceId = ''
 				uni.removeStorageSync('jkDeviceId')
@@ -102,7 +132,7 @@
 			// 重新搜索设备
 			resetDevice() {
 				this.discovery()
-				
+
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -156,7 +186,7 @@
 
 			// 【4】连接设备
 			connect(data) {
-				if(this.deviceId){
+				if (this.deviceId) {
 					this.cancelBind()
 				}
 				console.log(data)
