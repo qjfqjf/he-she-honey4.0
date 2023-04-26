@@ -7,21 +7,12 @@
 		</z-nav-bar>
         <u-search placeholder="请输入关键字" :show-action="false" shape="round" class="searchBar m-3" margin="20rpx" v-model="searchWords" height="40"
                   :clearabled="true"></u-search>
-        <u-tabs
-            :list="tabList"
-        			  class="tab_top"
-            :activeStyle="{
-                color: '#303133',
-                fontWeight: 'bold',
-                transform: 'scale(1.05)'
-            }"
-            :inactiveStyle="{
-                color: '#606266',
-                transform: 'scale(1)'
-            }"
-            itemStyle="padding-left: 15px; padding-right: 15px; height: 34px; width: 50%"
-        >
-        </u-tabs>
+        <view class="d-flex a-center j-center buttonGrounp my-1">
+            <u-button  :hairline="hairline"  color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
+                      ></u-button>
+            <u-button  :hairline="hairline"  color="#71d5a1" text="关注医生" class="rightButton" :plain="true"
+                      ></u-button>
+        </view>
         <view>
             <u-index-list :index-list="indexList" active-color="#71d5a1">
                 <template v-for="(item, index) in itemArr">
@@ -50,7 +41,6 @@ import IndexList from './indexList.vue'
 export default {
     data() {
         return {
-			tabList: [{name:'签到医生'}, {name:'关注医生'}],
             searchWords: "",
             indexList: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"]
             ,
@@ -101,14 +91,14 @@ export default {
 .buttonGrounp {
 
   .leftButton {
-    border: none;
+    border: 0;
     width: 40%;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
   }
 
   .rightButton {
-    border: none;
+    border: 0;
     width: 40%;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;

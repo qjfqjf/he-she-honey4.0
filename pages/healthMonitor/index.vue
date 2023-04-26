@@ -10,7 +10,7 @@
 			<u-grid :border="false" col="4">
 				<u-grid-item class="item" v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
 					@click="click(baseListItem.url,baseListItem.title)">
-					<image style="width: 80rpx;height: 80rpx;" :src="baseListItem.img" mode="aspectFit"></image>
+					<image style="width: 60rpx;height: 60rpx;" :src="baseListItem.img" mode="aspectFit"></image>
 					<text class="grid-text mt-2">{{baseListItem.title}}</text>
 				</u-grid-item>
 			</u-grid>
