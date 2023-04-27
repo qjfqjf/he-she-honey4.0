@@ -96,7 +96,13 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .icon-add[data-v-363ace0e] {
+    width: 10px; /* 更新宽度 */
+    height: 5px;
+    background-color: #FF0000; /* 更新背景颜色 */
+    border-radius: 2px;
+  }
   .content {
 
     .cate {
@@ -117,7 +123,9 @@
       margin-top: 14rpx;
       padding: 20rpx;
       background-color: white;
-
+      .example-body{
+        
+      }
       .tip {
         color: #e0584b;
         font-size: 24rpx

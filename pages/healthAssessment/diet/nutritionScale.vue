@@ -28,11 +28,11 @@
           <view class="record-content" v-for="(item, index) in recordList" :key="index">
             <view class="date">
               <text>{{item.date}}</text>
-              <!-- <image :src="item.img" mode=""></image> -->
+              <image :src="item.img" style="width:50rpx;height:50rpx" mode="aspectFill"></image>
             </view>
             <view class="line">
               <text class="title">名称</text>
-              <text class="result">{{item.name}}</text>
+              <text class="result right">{{item.name}}</text>
             </view>
             <view class="line">
               <text class="title">数量</text>
@@ -58,7 +58,7 @@
           </view>
           <view class="food">
             <!-- 重置 -->
-            <view class="reset">
+            <view class="reset" @click="reset">
               <uni-icons class="icon" type="refreshempty" size="16"></uni-icons>
             </view>
             <view class="input">
@@ -77,48 +77,51 @@
 
         <!-- 营养素含量 -->
         <view class="nutrientContent">
-          <text class="nutrition-title" style="padding-top: 100rpx;">营养素含量</text>
           <!-- 当前，当天 -->
-          <view class="current">
-
+          <view class="nutrient-content">
+            <view class="title">营养素含量</view>
+            <!-- checkbox -->
+            <u-radio-group v-model="radiovalue1" class="checkbox">
+              <u-radio activeColor="#04af96" shape="square" v-for="(item, index) in radiolist1"
+                :key="index" :label="item.name" :name="item.name" @change="radioChange"></u-radio>
+          
+            </u-radio-group>
+            <!--  -->
           </view>
           <!-- 含量 -->
           <view class="content">
             <view class="item">
               <view class="title">热量(345.8kcal)</view>
               <view class="slide">
-                <text> 0</text>
+                <text> 890</text>
                 <view class="slider">
-                  <slider value="22" block-size="12" @change="sliderChange" show-value />
+                 <u-line-progress :percentage="percentageValue" height="14" :showText="false" activeColor="#1ec4a1">
+                 </u-line-progress>
                 </view>
+                <text class="right">22</text>
               </view>
             </view>
-            <view class="item">
-              <view class="title">热量(345.8kcal)</view>
-              <view class="slide">
-                <text> 0</text>
-                <view class="slider">
-                  <slider value="22" block-size="12" @change="sliderChange" show-value />
-                </view>
-              </view>
-            </view>
+            
           </view>
-         
+
         </view>
         <!-- 维生素 -->
         <view class="vitamin">
           <view class="item">
             <text>维生素A(800微克)</text>
-            <text>0</text>
-          </view><view class="item">
+            <text class="right">0</text>
+          </view>
+          <view class="item">
             <text>胡萝卜素(60微克)</text>
-            <text>0</text>
-          </view><view class="item">
+            <text class="right">0</text>
+          </view>
+          <view class="item">
             <text>维生素A(800微克)</text>
-            <text>0</text>
-          </view><view class="item">
+            <text class="right">0</text>
+          </view>
+          <view class="item">
             <text>维生素A(800微克)</text>
-            <text>0</text>
+            <text class="right">0</text>
           </view>
         </view>
       </view>
@@ -135,47 +138,46 @@
     data() {
       return {
         currentTab: 'tab1', //但前选项卡
-        baseList: [{
-            img: require('@/static/icon/healthAssessment/sportsRecord.png'),
-            title: '自由跳',
-            url: '/pages/healthAssessment/sports/demo'
-          },
-          {
-            img: require('@/static/icon/healthAssessment/skipping.png'),
-            title: '倒计时',
-            url: '/pages/healthAssessment/sports/demo'
-          },
-          {
-            img: require('@/static/icon/healthAssessment/sportsReport.png'),
-            title: '倒计数',
-            url: '/pages/healthAssessment/sports/demo'
-          },
-
-        ],
+  
         // 日期范围
-        range: ['2021-02-1', '2021-3-28'],
+        range: ['2021-02-1', '2024-3-28'],
         // 设备状态
         deviceState: '未连接',
         recordList: [{
           date: '2022-03-11 23:34',
-          img: '@/static/icon/healthSeeseement/egg.png',
+          img: require('@/static/icon/healthAssessment/egg.png'),
           name: '煎蛋',
           count: 10,
           heal: 67
         }, {
           date: '2022-03-11 23:34',
-          img: '@/static/icon/healthSeeseement/egg.png',
+          img: require('@/static/icon/healthAssessment/egg.png'),
           name: '煎蛋',
           count: 10,
           heal: 67
         }, {
           date: '2022-03-11 23:34',
-          img: '@/static/icon/healthSeeseement/egg.png',
+          img: require('@/static/icon/healthAssessment/egg.png'),
           name: '煎蛋',
           count: 10,
           heal: 67
         }, ],
-        inputValue: ''
+        inputValue: '',
+        sliderHeight: 100,
+        value: 10,
+        // 基本案列数据
+        radiolist1: [{
+            name: '当前',
+            disabled: false
+          },
+          {
+            name: '推荐',
+            disabled: false
+          },
+        ],
+        // u-radio-group的v-model绑定的值如果设置为某个radio的name，就会被默认选中
+        radiovalue1: '当前',
+        percentageValue: 70,
       };
     },
     watch: {
@@ -207,19 +209,25 @@
       sliderChange(e) {
         console.log('value 发生变化：' + e.detail.value)
       },
-      save(){
+      save() {
         console.log('save====')
       },
-      
-      selectFood(){
+
+      selectFood() {
         console.log('选择食物')
+      },
+      reset() {
+        this.inputValue = ''
       }
-      
+
     },
   }
 </script>
 
 <style lang="scss">
+  .right{
+    text-align: right;
+  }
   .contaner {
     .analysis-report {
       font-size: 28rpx;
@@ -228,10 +236,8 @@
     .content {
       border-top: 1rpx solid #ececec;
       font-size: 30rpx;
-
       .tab-container {
         background-color: white;
-
         .tab {
           padding: 18rpx;
           width: 100%;
@@ -282,7 +288,7 @@
               padding: 10rpx 20rpx;
               display: flex;
               justify-content: space-between;
-
+              
               .title {}
 
               .result {}
@@ -323,10 +329,11 @@
               border-radius: 20rpx;
               margin-bottom: 20rpx;
             }
+
             .input {
               display: flex;
               align-items: center;
-            
+
               input {
                 border-bottom: #999 1rpx solid;
                 width: 200rpx;
@@ -373,44 +380,55 @@
 
         .nutrientContent {
           background-color: #fff;
-          margin: 10rpx;
+          margin: 16rpx;
           color: #19a99b;
-          // display: flex;
-          // justify-content: center;
-          .nutrition-title {
-            margin-left: 300rpx;
+          .nutrient-content {
+            padding: 14rpx;
+            .title {
+              text-align: center;
+              font-size: 32rpx;
+            }
+            .checkbox {
+              display: flex;
+              justify-content: space-between;
+            }
           }
-
-          .current {}
           .content {
-            .item{
-              border-top: 1rpx solid #ececec;
-              padding: 20rpx;
-              .title{
-                
+            .item {
+              padding: 10rpx 14rpx;
+              .title {
               }
-              .slide{
+              .slide {
                 display: flex;
                 align-items: center;
-                text{
+                justify-content: space-between ;
+                text {
+                  width: 100rpx;
                 }
-                .slider{
-                  width: 100%;
+
+                .slider {
+                  width: 58%;
+
+                  u-slider {
+                    --slider-height: 50rpx;
+                  }
                 }
               }
             }
           }
         }
-        
-        .vitamin{
+
+        .vitamin {
           background-color: #fff;
           padding: 14rpx;
           color: #19a99b;
-          .item{
+
+          .item {
             display: flex;
             justify-content: space-between;
             padding: 14rpx;
             border-bottom: 1rpx solid #eeeeec;
+           
           }
         }
       }
