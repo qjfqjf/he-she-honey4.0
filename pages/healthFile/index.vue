@@ -68,17 +68,19 @@
 					},
 					{
 						img: require('@/static/icon/healthFile/habit.png'),
-						title: '生活习惯'
+						title: '生活习惯',
+						url: '/pages/healthFile/habit/habit'
 					},
 					{
 						img: require('@/static/icon/healthFile/healthReport.png'),
-						title: '健康报告'
+						title: '健康报告', 
+						url: '/pages/healthFile/healthReport/healthReport'
 					},
 				],
 				medicalList: [{
 						img: require('@/static/icon/healthFile/outpatientArchives.png'),
 						title: '门诊档案',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/outpatientArchives'
 					},
 					{
 						img: require('@/static/icon/healthFile/inpatientRecords.png'),
@@ -119,6 +121,7 @@
 		.title {
 			span {
 				padding-left: 20rpx;
+				border-left: 8rpx #28be9e solid;
 				font-weight: bold;
 			}
 		}

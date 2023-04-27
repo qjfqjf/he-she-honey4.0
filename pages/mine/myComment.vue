@@ -31,28 +31,28 @@
 					note: '666666',
 					time: '2023-02-02 20:20',
 					avatarUrl: 'https://img.36krcdn.com/20200410/v2_224a699a06504292804e4bdf70ca87bb_img_png',
-					url: '/pages/template/commentDetail',
+					url: '/pages/mine/commentDetail',
 					},
 					{
 					title: '肖子杨',
 					note: '666666',
 					time: '2023-02-02 20:20',
 					avatarUrl: 'https://cdn.uviewui.com/uview/album/1.jpg',
-					url: '/pages/template/commentDetail',
+					url: '/pages/mine/commentDetail',
 					},
 					{
 					title: '翔子',
 					note: '666666',
 					time: '2023-02-02 20:20',
 					avatarUrl: 'https://cdn.uviewui.com/uview/album/3.jpg',
-					url: '/pages/template/commentDetail',
+					url: '/pages/mine/commentDetail',
 					},
 					{
 					title: '朱朱侠',
 					note: '666666',
 					time: '2023-02-02 20:20',
 					avatarUrl: 'https://cdn.uviewui.com/uview/album/7.jpg',
-					url: '/pages/template/commentDetail',
+					url: '/pages/mine/commentDetail',
 					},
 				]
 			}

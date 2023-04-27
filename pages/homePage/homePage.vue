@@ -18,12 +18,12 @@
 				</view>
 				<view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
-						<h3 style="color: red; ">145</h3>
+						<h3 style="color: red; ">123</h3>
 					</view>
 					<h4 class="unit" style="color: red">mmHg</h4>
 				</view>
 			</view>
-
+		
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center">
@@ -36,12 +36,12 @@
 				</view>
 				<view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
-						<h3 style="color: green">145</h3>
+						<h3 style="color: green">72</h3>
 					</view>
 					<h4 class="unit">mmHg</h4>
 				</view>
 			</view>
-
+		
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center">
@@ -53,12 +53,13 @@
 				</view>
 				<view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
-						<h3>145</h3>
+						<h3>279</h3>
 					</view>
-					<h4 class="unit">mmHg</h4>
+					<h4 class="unit">μmol/L</h4>
 				</view>
 			</view>
 		</view>
+		   
 
 		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100">
 			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
