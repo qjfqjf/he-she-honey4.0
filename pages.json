@@ -1116,6 +1116,30 @@
 		    "navigationBarTitleText": "",
 		    "enablePullDownRefresh": false
 		  }
+		},{
+		  "path": "pages/healthEstimate/record/psychologyRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/psychologyTestRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/healthRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/healthTestRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
 		}
     ],
 

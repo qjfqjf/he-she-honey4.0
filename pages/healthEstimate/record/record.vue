@@ -43,14 +43,14 @@
           url:'/pages/healthEstimate/record/constitutionRecord'
         })
       },
-      gotoSportManagemen(){
+      gotoPsychologyRecord(){
         uni.navigateTo({
-          url:'/pages/healthAssessment/conditioning/sportManagemen'
+          url:'/pages/healthEstimate/record/psychologyRecord'
         })
       },
-      gotoSleepManagemen(){
+      gotoHealthRecord(){
         uni.navigateTo({
-          url:'/pages/healthAssessment/conditioning/sleepManagemen'
+          url:'/pages/healthEstimate/record/healthRecord'
         })
       },
     }
