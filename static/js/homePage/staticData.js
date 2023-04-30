@@ -17,22 +17,22 @@ export const   appManage= [
     {
         name: "健康管理",
         icon: "/static/icon/homePage/healthManagement.png",
-        path: "/pages/healthAssessment/index"
+        path: "/pages/healthManagement/index"
     },
     {
         name: "健康评估",
         icon: "/static/icon/homePage/healthAssessment.png",
-        path: "/pages/supervision/index"
+        path: "/pages/healthAssessment/index"
     },
     {
         name: "健康服务",
         icon: "/static/icon/homePage/jiankangfuwu.png",
-        path: "/pages/treat/index" 
+        path: "/pages/healthServices/index" 
     }, 
     {
         name: "健康咨询",
         icon: "/static/icon/homePage/HealthAdvisory.png",
-        path: "/pages/ai/index"
+        path: "/pages/healthAdvisory/index"
     },
     {
         name: "健康教育", 
