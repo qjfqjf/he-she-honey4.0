@@ -17,6 +17,12 @@
         "navigationBarTitleText": "健康监测"
       }
     },
+	{
+	  "path": "pages/healthEstimate/index",
+	  "style": {
+	    "navigationBarTitleText": "健康评估"
+	  }
+	},
     {
       "path": "pages/demo/common",
       "style": {
@@ -418,7 +424,7 @@
     {
       "path": "pages/healthAssessment/index",
       "style": {
-        "navigationBarTitleText": "健康评估",
+        "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     },
@@ -1057,7 +1063,60 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		  "path": "pages/healthEstimate/emotion/emotion",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
+		  "path": "pages/healthEstimate/constitution/constitution",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
+		  "path": "pages/healthEstimate/psychology/psychology",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
+		  "path": "pages/healthEstimate/record/record",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
+		  "path": "pages/healthEstimate/record/emotionRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/emotionManage",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/constitutionRecord",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},{
+		  "path": "pages/healthEstimate/record/constitutionManage",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		}
     ],
 
   "globalStyle": {

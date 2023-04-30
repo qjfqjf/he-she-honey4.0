@@ -22,7 +22,7 @@ export const   appManage= [
     {
         name: "健康评估",
         icon: "/static/icon/homePage/healthAssessment.png",
-        path: "/pages/supervision/index"
+        path: "/pages/healthEstimate/index"
     },
     {
         name: "健康服务",
