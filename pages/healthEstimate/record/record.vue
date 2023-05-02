@@ -35,22 +35,22 @@
     methods: {
       gotoEmotionRecord(){
         uni.navigateTo({
-          url:'/pages/healthEstimate/record/emotionRecord'
+          url:'/pages/healthEstimate/record/emotionRecord/emotionRecord'
         })
       },
       gotoConstitutionRecord(){
         uni.navigateTo({
-          url:'/pages/healthEstimate/record/constitutionRecord'
+          url:'/pages/healthEstimate/record/constitutionRecord/constitutionRecord'
         })
       },
       gotoPsychologyRecord(){
         uni.navigateTo({
-          url:'/pages/healthEstimate/record/psychologyRecord'
+          url:'/pages/healthEstimate/record/psychologyRecord/psychologyRecord'
         })
       },
       gotoHealthRecord(){
         uni.navigateTo({
-          url:'/pages/healthEstimate/record/healthRecord'
+          url:'/pages/healthEstimate/record/healthRecord/healthRecord'
         })
       },
     }

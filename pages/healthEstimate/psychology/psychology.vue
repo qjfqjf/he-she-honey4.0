@@ -7,10 +7,13 @@
     </z-nav-bar>
     <public-module></public-module>
 	
-	<image class="img" src="/static/icon/healthEstimate/bigpsy.png" shape="circle"></image>
-	<u-collapse @change="change" @close="close" @open="open">
-	    <u-collapse-item title="热度优先" name="Docs guide"></u-collapse-item>
-	</u-collapse>
+	<image class="img" src="/static/icon/healthEstimate/bigpsy.png" shape="circle" mode="aspectFill"></image>
+	<!-- 筛选区域 -->
+	<view class="select">
+	  <view class="select-list">
+	    <uni-data-select v-model="selectValue" :localdata="range" :clear="false" @change="changeState"></uni-data-select>
+	  </view>
+	</view>
 	<view class="container">
 	    <scroll-view class="nav" scroll-y>
 	        <view
@@ -46,6 +49,16 @@
 	export default {
 		data() {
 			return {
+				selectValue: 0,
+				range: [{
+				    value: 0,
+				    text: "热度优先"
+				  },
+				  {
+				    value: 1,
+				    text: "流量优先"
+				  },
+				],
 				navList: [
 					{
 						title: '健康',
@@ -186,6 +199,12 @@
 			        this.dataList = this.navList[this.currentIndex].data;
 			    }
 			},
+			changeState(e) {
+			  console.log("e:", e);
+			},
+			selectItem(index) {
+			  this.selectedItem = index;
+			},
 			gotoSearch(){
 			  uni.navigateTo({
 			    url:'/pages/healthEstimate/psychology/search'
@@ -211,6 +230,21 @@
 		height: 400rpx;
 		margin-left: 28rpx;
 	}
+	
+	.select {
+	  width: 100%;
+	  background-color: white;
+	  display: flex;
+	  justify-content: left;
+	  padding: 14rpx;
+	
+	  .select-list {
+	    display: flex;
+	    // justify-content: right;
+	    width: 250rpx;
+	    background-color: white;
+	  }
+	}
 	.container {
 	  display: flex;
 	  height: 100%;
@@ -232,8 +266,30 @@
 	}
 	.nav view.active {
 	  background-color: #ddd;
+	  // 激活项的样式
+	  &.active {
+	    background-color: #ffffff;
+	    position: relative;
+		color: #1AB76C;
+	  
+	    // 渲染激活项左侧的绿色指示边线
+	    &::before {
+	      content: ' ';
+	      display: block;
+	      width: 3px;
+	      height: 30px;
+	      background-color: #1AB76C;
+	      position: absolute;
+	      left: 0;
+	      top: 50%;
+	      transform: translateY(-50%);
+	    }
+	  }
 	}
+	
+	
 	.bigcontent{
+		background-color: #FFFFFF;
 	}
 	
 	.content {
@@ -300,7 +356,7 @@
 	.content-buttom {
 	    height: 2px;
 		width: 90%;
-	    background-color: #ebebeb;
+	    background-color: #F6F6F6;
 		text-align: center;
 		margin-left: 25rpx;
 		margin-top: 10rpx;
