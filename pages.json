@@ -1086,6 +1086,20 @@
 		  }
 		},
 		{
+		  "path": "pages/healthEstimate/psychology/search",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
+		  "path": "pages/healthEstimate/health/health",
+		  "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		  }
+		},
+		{
 		  "path": "pages/healthEstimate/record/record",
 		  "style": {
 		    "navigationBarTitleText": "",
