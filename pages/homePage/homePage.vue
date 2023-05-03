@@ -23,7 +23,7 @@
 					<h4 class="unit" style="color: red">mmHg</h4>
 				</view>
 			</view>
-		
+
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center">
@@ -41,7 +41,7 @@
 					<h4 class="unit">mmHg</h4>
 				</view>
 			</view>
-		
+
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center">
@@ -59,16 +59,14 @@
 				</view>
 			</view>
 		</view>
-		   
+
 
 		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100">
 			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
-<!--			<view class="scrollAvatar">-->
-<!--				<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;" />-->
-<!--			</view>-->
+
 			<u-button class="rightRoundButton shadow-lg border">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: #18b566; color: aliceblue;">提醒</view>
@@ -128,7 +126,6 @@
 	import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
 	import home from "../template/home.vue";
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
-	// import SwiperList from "../../scrollAvatar/components/swiper-list/swiper-list.vue";
 	export default {
 		computed: {
 			home() {
@@ -147,7 +144,6 @@
 		components: {
 			UButton,
 			UImage,
-			// SwiperList
 		},
 		//第一次加载
 		onLoad(e) {
