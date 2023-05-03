@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<z-nav-bar title="心理咨询">
+		<z-nav-bar title="健身咨询">
 			<u-icon @click="goBack" class="ml-2" name="arrow-left" slot="left" color="#000000" size="24"></u-icon>
 			<!--            <u-icon class="mr-2" @click="goAddFriend" name="plus" slot="right" color="#000000" size="24"></u-icon>-->
 		</z-nav-bar>
@@ -17,7 +17,7 @@ import Advisory from "../componment/advisory.vue";
 		components: {Advisory},
 		data() {
 			return {
-				tabList: [{name:'我的咨询师'}, {name:'找咨询师'}]
+				tabList: [{name:'我的健身教练'}, {name:'找机构'}]
 			}
 		},
 		componments:{

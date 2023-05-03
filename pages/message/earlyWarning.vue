@@ -12,7 +12,7 @@
               :list="tabList"
               lineWidth="140"
               lineColor="#5becbc"
-			  class="tab_top"
+			  			class="tab_top"
               :activeStyle="{
                   color: '#303133',
                   fontWeight: 'bold',
@@ -90,7 +90,7 @@ export default {
     border-top-right-radius: 10px;
   }
 }
-	
+
 .tab_top{
 	width: 100%;
 }

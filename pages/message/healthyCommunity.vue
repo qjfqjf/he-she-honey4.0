@@ -1,12 +1,8 @@
 <template>
     <view class="d-flex flex-column bg-white">
         <z-nav-bar title="健康圈">
-
 			<u-icon @click="goBack" class="ml-2" name="arrow-left" slot="left" color="#000000" size="24"></u-icon>
-
-
 			<u-icon class="mr-2" @click="goAddFriend" name="plus" slot="right" color="#000000" size="24"></u-icon>
-
 		</z-nav-bar>
         <view>
             <u-index-list :index-list="indexList">
@@ -89,7 +85,6 @@ export default {
 }
 
 .buttonGrounp {
-
   .leftButton {
     border: 0px;
     width: 40%;

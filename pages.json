@@ -17,7 +17,6 @@
         "navigationBarTitleText": "健康监测"
       }
     },
-
     {
       "path": "pages/demo/common",
       "style": {
@@ -419,7 +418,7 @@
     {
       "path": "pages/healthAssessment/index",
       "style": {
-        "navigationBarTitleText": "",
+        "navigationBarTitleText": "健康评估",
         "enablePullDownRefresh": false
       }
     },
@@ -431,9 +430,9 @@
       }
     },
     {
-      "path": "pages/ai/index",
+      "path": "pages/healthAdvisory/index",
       "style": {
-        "navigationBarTitleText": "AI智能",
+        "navigationBarTitleText": "健康服务",
         "enablePullDownRefresh": false
       }
     },
@@ -451,13 +450,13 @@
         "enablePullDownRefresh": false
       }
     },
-    // {
-    //   "path": "pages/healthAssessment/index",
-    //   "style": {
-    //     "navigationBarTitleText": "监管",
-    //     "enablePullDownRefresh": false
-    //   }
-    // },
+    {
+      "path": "pages/supervision/index",
+      "style": {
+        "navigationBarTitleText": "监管",
+        "enablePullDownRefresh": false
+      }
+    },
     {
       "path": "pages/educate/index",
       "style": {
@@ -722,71 +721,63 @@
     },
     // 健康管理模块
     {
-      "path": "pages/healthManagement/index",
-      "style": {
-        "navigationBarTitleText": "健康管理",
-        "enablePullDownRefresh": false
-      }
-    
-    }, 
-    {
-      "path": "pages/healthManagement/diet/diet",
+      "path": "pages/healthAssessment/diet/diet",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/beauty/beauty",
+      "path": "pages/healthAssessment/beauty/beauty",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/bodyBuilding/bodyBuilding",
+      "path": "pages/healthAssessment/bodyBuilding/bodyBuilding",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/conditioning/conditioning",
+      "path": "pages/healthAssessment/conditioning/conditioning",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/health/health",
+      "path": "pages/healthAssessment/health/health",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/medical/medical",
+      "path": "pages/healthAssessment/medical/medical",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/psychology/psychology",
+      "path": "pages/healthAssessment/psychology/psychology",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sleep/sleep",
+      "path": "pages/healthAssessment/sleep/sleep",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/sports",
+      "path": "pages/healthAssessment/sports/sports",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -795,20 +786,20 @@
     },
     // 饮食管理
     {
-      "path": "pages/healthManagement/diet/dietRecords",
+      "path": "pages/healthAssessment/diet/dietRecords",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/diet/nutritionScale",
+      "path": "pages/healthAssessment/diet/nutritionScale",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     }, {
-      "path": "pages/healthManagement/diet/addDietRecords",
+      "path": "pages/healthAssessment/diet/addDietRecords",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -817,118 +808,118 @@
 
     // 营养秤
     , {
-      "path": "pages/healthManagement/diet/nutritionReport",
+      "path": "pages/healthAssessment/diet/nutritionReport",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/components/healthHeader",
+      "path": "pages/healthAssessment/components/healthHeader",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/sportsRecord",
+      "path": "pages/healthAssessment/sports/sportsRecord",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/addSportsRecord",
+      "path": "pages/healthAssessment/sports/addSportsRecord",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/components/emptyState",
+      "path": "pages/healthAssessment/components/emptyState",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/sportsReport",
+      "path": "pages/healthAssessment/sports/sportsReport",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/skipping",
+      "path": "pages/healthAssessment/sports/skipping",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sports/demo",
+      "path": "pages/healthAssessment/sports/demo",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sleep/sleepRecord",
+      "path": "pages/healthAssessment/sleep/sleepRecord",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/sleep/addSleepRecord",
+      "path": "pages/healthAssessment/sleep/addSleepRecord",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/medical/doctorAdvice",
+      "path": "pages/healthAssessment/medical/doctorAdvice",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     }, {
-      "path": "pages/healthManagement/medical/symptomSelfReport",
-      "style": {
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
-      }
-
-    }, {
-      "path": "pages/healthManagement/medical/addSymptomSelfReport",
+      "path": "pages/healthAssessment/medical/symptomSelfReport",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/conditioning/conditioningManagemen",
+      "path": "pages/healthAssessment/medical/addSymptomSelfReport",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/conditioning/dietManagemen",
+      "path": "pages/healthAssessment/conditioning/conditioningManagemen",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/conditioning/sportManagemen",
+      "path": "pages/healthAssessment/conditioning/dietManagemen",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
 
     }, {
-      "path": "pages/healthManagement/conditioning/sleepManagemen",
+      "path": "pages/healthAssessment/conditioning/sportManagemen",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/healthAssessment/conditioning/sleepManagemen",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -937,7 +928,7 @@
     },
     // 健康管理模块
     {
-      "path": "pages/healthManagement/diet/diet",
+      "path": "pages/healthAssessment/diet/diet",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -945,7 +936,7 @@
 
     },
     {
-      "path": "pages/healthManagement/beauty/beauty",
+      "path": "pages/healthAssessment/beauty/beauty",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -953,7 +944,7 @@
 
     },
     {
-      "path": "pages/healthManagement/bodyBuilding/bodyBuilding",
+      "path": "pages/healthAssessment/bodyBuilding/bodyBuilding",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -961,7 +952,7 @@
 
     },
     {
-      "path": "pages/healthManagement/conditioning/conditioning",
+      "path": "pages/healthAssessment/conditioning/conditioning",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -969,7 +960,7 @@
 
     },
     {
-      "path": "pages/healthManagement/health/health",
+      "path": "pages/healthAssessment/health/health",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -977,7 +968,7 @@
 
     },
     {
-      "path": "pages/healthManagement/medical/medical",
+      "path": "pages/healthAssessment/medical/medical",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -985,7 +976,7 @@
 
     },
     {
-      "path": "pages/healthManagement/psychology/psychology",
+      "path": "pages/healthAssessment/psychology/psychology",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -993,7 +984,7 @@
 
     },
     {
-      "path": "pages/healthManagement/sleep/sleep",
+      "path": "pages/healthAssessment/sleep/sleep",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -1001,7 +992,7 @@
 
     },
     {
-      "path": "pages/healthManagement/sports/sports",
+      "path": "pages/healthAssessment/sports/sports",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -1010,7 +1001,7 @@
     },
     // 饮食管理
     {
-      "path": "pages/healthManagement/diet/dietRecords",
+      "path": "pages/healthAssessment/diet/dietRecords",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
@@ -1018,528 +1009,48 @@
 
     },
     {
-      "path": "pages/healthManagement/diet/nutritionScale",
+      "path": "pages/healthAssessment/diet/nutritionScale",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     },
     {
-      "path": "pages/healthManagement/diet/addDietRecords",
+      "path": "pages/healthAssessment/diet/addDietRecords",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     }
-        ,{
-            "path" : "pages/healthFile/habit/habit",
-            "style" :                                                                                    
+
+
+      ,{
+            "path" : "pages/healthAdvisory/psychologicalCounseling/psychologicalCounseling",
+            "style" :
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/healthReport/healthReport",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/healthReport/physiologicalIndicators",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/outpatientArchives",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/healthAssessment/emotionalCognition/emotionalCognition",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "情绪认知",
                 "enablePullDownRefresh": false
             }
 
         }
-        ,
-      {
-            "path" : "pages/healthAssessment/chineseMedicineConstitution/chineseMedicineConstitution",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "中医体质",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         ,{
-            "path" : "pages/healthAssessment/psychologicalAssessment/psychologicalAssessment",
-            "style" :                                                                                    
+            "path" : "pages/healthAdvisory/beautyConsultation/beautyConsultation",
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
-            "path" : "pages/healthAssessment/healthAssessment/healthAssessment",
-            "style" :                                                                                    
+            "path" : "pages/healthAdvisory/fitnessConsultation/fitnessConsultation",
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
-        ,{
-            "path" : "pages/healthAssessment/infraredAssessment/infraredAssessment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/brainWaveAssessment/brainWaveAssessment",
-            "style" :                                                                                     
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/AIAssessment/AIAssessment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/assessmentRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/emotionalCognition/emotionalCognitionAssessment2",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognition",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitution",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognitionRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "情绪认知评估记录",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessmentReport",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "健康服务",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/institutionalIntroduction/institutionalIntroduction",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/serviceItems/serviceItems",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/expertIntroduction/expertIntroduction",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/productIntroduction/productIntroduction",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/therapeuticEffects/therapeuticEffects",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthServices/imageAndTextVideo/imageAndTextVideo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/seekingMedical/seekingMedical",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/health/health",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/psychologicalCounseling/psychologicalCounseling",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/beauty/beauty",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/fitness/fitness",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/physicalExamination/physicalExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/diseaseControl/diseaseControl",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthAdvisory/HumanMachineDialogue/HumanMachineDialogue",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		  "path": "pages/healthEstimate/index",
-		  "style": {
-		    "navigationBarTitleText": "健康评估"
-		  }
-		},
-		
-		{
-		  "path": "pages/healthEstimate/emotion/emotion",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/constitution/constitution",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/psychology/psychology",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/psychology/search",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/health/health",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/record/record",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},
-		{
-		  "path": "pages/healthEstimate/record/emotionRecord/emotionRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/emotionRecord/emotionManage",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/constitutionRecord/constitutionRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/constitutionRecord/constitutionManage",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/psychologyRecord/psychologyRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/psychologyRecord/psychologyTestRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/healthRecord/healthRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		},{
-		  "path": "pages/healthEstimate/record/healthRecord/healthTestRecord",
-		  "style": {
-		    "navigationBarTitleText": "",
-		    "enablePullDownRefresh": false
-		  }
-		}
-		
-		// {
-		//   "path": "pages/healthEstimate/emotion/emotion",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },
-		// {
-		//   "path": "pages/healthEstimate/constitution/constitution",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },
-		// {
-		//   "path": "pages/healthEstimate/psychology/psychology",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },
-		// {
-		//   "path": "pages/healthEstimate/record/record",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },
-		// {
-		//   "path": "pages/healthEstimate/record/emotionRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/emotionManage",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/constitutionRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/constitutionManage",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/psychologyRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/psychologyTestRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/healthRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// },{
-		//   "path": "pages/healthEstimate/record/healthTestRecord",
-		//   "style": {
-		//     "navigationBarTitleText": "",
-		//     "enablePullDownRefresh": false
-		//   }
-		// }
     ],
 
   "globalStyle": {

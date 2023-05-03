@@ -66,9 +66,9 @@
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
-			<view class="scrollAvatar">
-				<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;" />
-			</view>
+<!--			<view class="scrollAvatar">-->
+<!--				<swiper-list class="list" :list="list" :number="5" @change="switchChange" style="width: 100%;" />-->
+<!--			</view>-->
 			<u-button class="rightRoundButton shadow-lg border">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: #18b566; color: aliceblue;">提醒</view>
@@ -98,7 +98,6 @@
 			radius="5" bgColor="#ffffff">
 		</u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
-
 			<u-gap height="10"></u-gap>
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
@@ -112,8 +111,8 @@
 				</u-grid>
 				<u-toast ref="uToast" />
 			</view>
-			<z-navigation></z-navigation>
 		</view>
+		<z-navigation></z-navigation>
 
 
 	</view>
@@ -289,7 +288,7 @@
 	.appManeger {
 		&_block {
 			height: 180upx;
-			
+
 			&_icon {
 				padding-top: 20rpx;
 				padding-bottom: 15upx;
