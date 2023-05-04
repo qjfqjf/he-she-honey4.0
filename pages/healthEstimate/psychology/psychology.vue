@@ -1,7 +1,7 @@
 <template>
   <view class="contenttest">
     <z-nav-bar title="心理测评">
-      <view slot="right" class="p-2" @click="addSleepRecord">
+      <view slot="right" class="p-2">
         <image style="width: 40rpx;height: 40rpx;" src="/static/icon/healthEstimate/search.png" @click="gotoSearch"></image>
       </view>
     </z-nav-bar>
@@ -104,14 +104,19 @@
 						title: '情感',
 						data: [
 						{
-							title: '标题3',
-							description: '描述3',
-							imgUrl: 'xxx',
+							title: '综合心理健康测评',
+							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+							imgUrl: '/static/icon/healthEstimate/brain.png',
 						},
 						{
-							title: '标题4',
-							description: '描述4',
-							imgUrl: 'xxx',
+							title: '综合心理健康测评',
+							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+							imgUrl: '/static/icon/healthEstimate/brain.png',
+						},
+						{
+							title: '综合心理健康测评',
+							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+							imgUrl: '/static/icon/healthEstimate/brain.png',
 						},
 						],
 					},
@@ -119,14 +124,14 @@
 					title: '亲子',
 					data: [
 						{
-							title: '标题3',
-							description: '描述3',
-							imgUrl: 'xxx',
+							title: '综合心理健康测评',
+							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+							imgUrl: '/static/icon/healthEstimate/brain.png',
 						},
 						{
-							title: '标题4',
-							description: '描述4',
-							imgUrl: 'xxx',
+							title: '综合心理健康测评',
+							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+							imgUrl: '/static/icon/healthEstimate/brain.png',
 						},
 					],
 					},
@@ -292,8 +297,6 @@
 		background-color: #FFFFFF;
 	}
 	
-	.content {
-	}
 	
 	.content-one{
 		display: flex;
