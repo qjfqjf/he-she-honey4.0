@@ -1339,7 +1339,15 @@
         {
             "path" : "pages/applicationService/index",
             "style" : {}
-        }
+        },
+		//健康教育
+		{
+		    "path" : "pages/healthEducation/index",
+		    "style" : {
+		        "navigationBarTitleText" : "",
+		        "enablePullDownRefresh" : false
+		    }
+		}
     ],
     // {
     //   "path": "pages/healthEstimate/emotion/emotion",
