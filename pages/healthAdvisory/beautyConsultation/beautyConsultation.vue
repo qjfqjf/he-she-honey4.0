@@ -24,7 +24,10 @@ import Advisory from "../componment/advisory.vue";
 			advisory
 		},
 		methods: {
-
+			goBack(){
+			    uni.navigateBack({})
+			},
+		
 		}
 	}
 </script>

@@ -29,17 +29,17 @@ export const   appManage= [
     {
         name: "健康服务",
         icon: "/static/icon/homePage/jiankangfuwu.png",
-        path: "/pages/healthServices/index" 
-    }, 
+        path: "/pages/healthServices/index"
+    },
     {
         name: "健康咨询",
         icon: "/static/icon/homePage/HealthAdvisory.png",
         path: "/pages/healthAdvisory/index"
     },
     {
-        name: "健康教育", 
+        name: "健康教育",
         icon: "/static/icon/homePage/educate.png",
-        path: "/pages/educate/index"
+        path: "/pages/healthEducation/index"
     },
     {
         name: "监管/预警",
@@ -49,7 +49,7 @@ export const   appManage= [
     {
         name: "申请服务",
         icon: "/static/icon/homePage/applicationService.png",
-        path: "/pages/employer/index"
+        path: "/pages/applicationService/index"
     }
 
 
@@ -64,13 +64,13 @@ export const  appFeature= [
            name: "保健",
            icon: "static/icon/homePage/healthCare.png",
             path: "/pages/educate/index"
-   
+
        },
        {
            name: "体检",
            icon: "static/icon/homePage/physicalExamination.png",
             path: "/pages/educate/index"
-   
+
        },
        {
            name: "心理",
@@ -95,7 +95,7 @@ export const  appFeature= [
    	{
    	    name: "助残",
    	    icon: "static/icon/homePage/zhucan.png",
-   	    path: "/pages/educate/index" 
+   	    path: "/pages/educate/index"
    	},
    	{
    	    name: "商城",

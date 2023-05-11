@@ -1,7 +1,7 @@
 <template>
   <view class="contenttest">
     <z-nav-bar title="健康测评">
-      <view slot="right" class="p-2" @click="addSleepRecord">
+      <view slot="right" class="p-2">
         <image style="width: 40rpx;height: 40rpx;" src="/static/icon/healthEstimate/search.png" @click="gotoSearch"></image>
       </view>
     </z-nav-bar>
@@ -275,8 +275,6 @@
 		background-color: #FFFFFF;
 	}
 	
-	.content {
-	}
 	
 	.content-one{
 		display: flex;

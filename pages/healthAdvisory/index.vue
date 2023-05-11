@@ -59,7 +59,7 @@
 					{
 						img: require('./static/fitness.png'),
 						title: '健身咨询',
-						url: '/pages/healthAdvisory/fitnessConsultation/fitnessConsultation'
+						url: '/pagesx/healthAdvisory/fitnessConsultation/fitnessConsultation'
 					},
 					{
 						img: require('./static/examination.png'),
@@ -102,26 +102,26 @@
 </script>
 
 <style lang="scss">
-	.content {
-		.title {
-			span {
-				border-left: 8rpx #28be9e solid;
-				padding-left: 20rpx;
+		.content {
+			.title {
+				span {
+					border-left: 8rpx #28be9e solid;
+					padding-left: 20rpx;
+				}
 			}
-		}
 
-		.devices-warp {
-			.item {
-				padding: 20rpx;
-				margin: 10rpx;
-				width: 160rpx !important;
-				border-radius: 16rpx;
-				background-color: #fff !important;
-				box-shadow: 0px 3px 3px hsla(0, 0, 0, 0.1);
-				&:nth-child(4n){
-					margin-right: 0;
+			.devices-warp {
+				.item {
+					padding: 20rpx;
+					margin: 10rpx;
+					width: 160rpx !important;
+					border-radius: 16rpx;
+					background-color: #fff !important;
+					box-shadow: 0px 3px 3px hsla(0, 0, 0, 0.1);
+					&:nth-child(4n){
+						margin-right: 0;
+					}
 				}
 			}
 		}
-	}
 </style>
