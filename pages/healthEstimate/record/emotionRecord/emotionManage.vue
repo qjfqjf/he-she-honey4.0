@@ -3,40 +3,15 @@
 		<z-nav-bar title="情绪认知"></z-nav-bar>
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
-		<u-collapse
-		    @change="change"
-		    @close="close"
-		    @open="open"
-		  >
-		    <u-collapse-item
-		      title="情绪筛查表1"
-		      name="Docs guide"
-			  class="item"
-		    >
-				<text class="u-collapse-content">
-					<uni-card class="card" title="标题文字" thumbnail="" extra="额外信息" note="Tips">内容主体，可自定义内容及样式
-					</uni-card>
-				</text>
+		<u-collapse @change="change" @close="close" @open="open">
+		    <u-collapse-item title="情绪筛查表1" name="Docs guide" class="item">
+				<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
 		    </u-collapse-item>
-		    <u-collapse-item
-		      title="情绪筛查表2"
-		      name="Variety components"
-			  class="item"
-		    >
-		      <text class="u-collapse-content">
-		      	<uni-card class="card" title="标题文字" thumbnail="" extra="额外信息" note="Tips">内容主体，可自定义内容及样式
-		      	</uni-card>
-		      </text>
+		    <u-collapse-item title="情绪筛查表2" name="Variety components" class="item">
+		      <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
 		    </u-collapse-item>
-		    <u-collapse-item
-		      title="认知功能自评表"
-		      name="Numerous tools"
-			  class="item"
-		    >
-		      <text class="u-collapse-content">
-		      	<uni-card class="card" title="标题文字" thumbnail="" extra="额外信息" note="Tips">内容主体，可自定义内容及样式
-		      	</uni-card>
-		      </text>
+		    <u-collapse-item title="认知功能自评表" name="Numerous tools" class="item">
+		      <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
 		    </u-collapse-item>
 		  </u-collapse>
 		  <!-- <u-button class="custom-style" size="large" text="提交"></u-button> -->

@@ -41,7 +41,7 @@
           {
             img: require('@/static/icon/healthEstimate/health.png'),
             title: '健康测评',
-            url: '/pages/healthEstimate/medical/medical'
+            url: '/pages/healthEstimate/health/health'
           },
           {
             img: require('@/static/icon/healthEstimate/infrared.png'),
@@ -51,12 +51,12 @@
           {
             img: require('@/static/icon/healthEstimate/brain.png'),
             title: '脑波测评',
-            url: '/pages/healthEstimate/psychology/psychology'
+            url: '/pages/healthEstimate/conditioning/psychology'
           },
           {
             img: require('@/static/icon/healthEstimate/aiHealth.png'),
             title: 'AI智能评估',
-            url: '/pages/healthEstimate/health/health'
+            url: '/pages/healthEstimate/conditioning/health'
           },
           {
             img: require('@/static/icon/healthEstimate/record.png'),

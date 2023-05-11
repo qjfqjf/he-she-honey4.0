@@ -1,6 +1,6 @@
 <template>
   <view>
-    <z-nav-bar title="心理档案"></z-nav-bar>
+    <z-nav-bar title="测评记录"></z-nav-bar>
     <public-module></public-module>
 
     <!-- 内容 -->
@@ -19,45 +19,34 @@
     data() {
       return {
         baseList: [{
-          title: '测试你们之间有纯友谊吗？',
+          title: '动脉粥样硬化风险自测',
           createtime: '2022-08-09 23:00:00',
-          url: '/pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport'
+          url: '/pages/healthEstimate/record/healthRecord/healthTestRecord'
         },{
-          title: '测试你们之间有纯友谊吗？',
+          title: '猝死风险自测',
           createtime: '2022-08-09 23:00:00',
-          url: '/pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport',
-        },
-		{
-		  content: '测试你们之间是纯友谊吗？',
-		  date: '2022-09-24 19:33:00',
-		}, {
-		  content: '贝克抑郁测评量表（BDI）',
-		  date: '2022-09-24 19:33:00',
-		}, {
-		  content: '测试你是讨好型人格吗？',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '贝克抑郁测评量表（BDI）',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '综合心理健康测评（SCL-90）',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
-		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
-		},
-		
-		'/pages/healthEstimate/record/psychologyTestRecord'
-		]
+          url: '/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        },{
+          title: '肺炎风险自测',
+          createtime: '2022-08-09 23:00:00',
+          url: '/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        },{
+          title: '冠心病风险自测',
+          createtime: '2022-08-09 23:00:00',
+          url: '/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        },{
+          title: '动脉粥样硬化风险自测',
+          createtime: '2022-08-09 23:00:00',
+          url:'/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        },{
+          title: '高脂血症风险自测',
+          createtime: '2022-08-09 23:00:00',
+          url:'/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        },{
+          title: '肾炎风险自测',
+          createtime: '2022-08-09 23:00:00',
+          url: '/pages/healthEstimate/record/healthRecord/healthTestRecord'
+        }]
       };
     },
     methods: {

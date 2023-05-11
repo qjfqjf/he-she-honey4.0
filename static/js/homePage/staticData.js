@@ -22,25 +22,27 @@ export const   appManage= [
     {
         name: "健康评估",
         icon: "/static/icon/homePage/healthAssessment.png",
-        
         path: "/pages/healthEstimate/index"
         // path: "/pages/healthAssessment/index"
-
     },
     {
         name: "健康服务",
         icon: "/static/icon/homePage/jiankangfuwu.png",
-        path: "/pages/healthServices/index" 
-    }, 
+        path: "/pages/healthServices/index"
+    },
     {
         name: "健康咨询",
         icon: "/static/icon/homePage/HealthAdvisory.png",
         path: "/pages/healthAdvisory/index"
     },
     {
-        name: "健康教育", 
+        name: "健康教育",
         icon: "/static/icon/homePage/educate.png",
+<<<<<<< HEAD
         // path: "/pages/educate/index"
+=======
+        path: "/pages/healthEducation/index"
+>>>>>>> 5a44d55514e57de426236ce7cc6a49002f9a466c
     },
     {
         name: "监管/预警",
@@ -50,7 +52,7 @@ export const   appManage= [
     {
         name: "申请服务",
         icon: "/static/icon/homePage/applicationService.png",
-        path: "/pages/employer/index"
+        path: "/pages/applicationService/index"
     }
 
 
@@ -65,13 +67,13 @@ export const  appFeature= [
            name: "保健",
            icon: "static/icon/homePage/healthCare.png",
             path: "/pages/educate/index"
-   
+
        },
        {
            name: "体检",
            icon: "static/icon/homePage/physicalExamination.png",
             path: "/pages/educate/index"
-   
+
        },
        {
            name: "心理",
@@ -96,7 +98,7 @@ export const  appFeature= [
    	{
    	    name: "助残",
    	    icon: "static/icon/homePage/zhucan.png",
-   	    path: "/pages/educate/index" 
+   	    path: "/pages/educate/index"
    	},
    	{
    	    name: "商城",

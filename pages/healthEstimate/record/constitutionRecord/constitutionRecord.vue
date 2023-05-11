@@ -12,6 +12,7 @@
     </view>
   </view>
 </template>
+
 <script>
   export default {
     data() {
@@ -19,15 +20,15 @@
         baseList: [{
             title: '中医体质',
             createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord'
+            url: '/pages/healthEstimate/record/constitutionRecord/constitutionManage'
           },{
             title: '中医体质',
             createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord'
+            url: '/pages/healthEstimate/record/constitutionRecord/constitutionManage'
           },{
             title: '中医体质',
             createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord'
+            url: '/pages/healthEstimate/record/constitutionRecord/constitutionManage'
           },
         ]
       };

@@ -21,42 +21,40 @@
         baseList: [{
           title: '测试你们之间有纯友谊吗？',
           createtime: '2022-08-09 23:00:00',
-          url: '/pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport'
+          url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
         },{
-          title: '测试你们之间有纯友谊吗？',
+          title: '贝克抑郁测评量表（BDI）',
           createtime: '2022-08-09 23:00:00',
-          url: '/pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport',
-        },
-		{
-		  content: '测试你们之间是纯友谊吗？',
-		  date: '2022-09-24 19:33:00',
-		}, {
-		  content: '贝克抑郁测评量表（BDI）',
-		  date: '2022-09-24 19:33:00',
-		}, {
-		  content: '测试你是讨好型人格吗？',
-		  date: '2022-09-24 19:33:00',
+          url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
+        },{
+		  title: '测试你们之间有纯友谊吗？',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
+		  title: '焦虑自评量表SAS',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
+		  title: '焦虑自评量表SAS',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '贝克抑郁测评量表（BDI）',
-		  date: '2022-09-24 19:33:00',
+		  title: '贝克抑郁测评量表（BDI）',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '综合心理健康测评（SCL-90）',
-		  date: '2022-09-24 19:33:00',
+		  title: '综合心理健康测评（SCL-90）',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
+		  title: '焦虑自评量表SAS',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},{
-		  content: '焦虑自评量表SAS',
-		  date: '2022-09-24 19:33:00',
+		  title: '焦虑自评量表SAS',
+		  createtime: '2022-08-09 23:00:00',
+		  url: '/pages/healthEstimate/record/psychologyRecord/psychologyTestRecord'
 		},
-		
-		'/pages/healthEstimate/record/psychologyTestRecord'
 		]
       };
     },
