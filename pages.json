@@ -1497,6 +1497,15 @@
 		//     "enablePullDownRefresh": false
 		//   }
 		// }
+        ,{
+            "path" : "pages/healthMonitor/foreheadThermometer/frHistory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "体温历史",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 
   "globalStyle": {
