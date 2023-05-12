@@ -1,0 +1,148 @@
+<template>
+  <view class="container">
+    <z-nav-bar title="胆固醇历史">
+      <view slot="right" class="p-2" @click="handleDevelop()">
+        <text class="regular">预警规则</text>
+      </view>
+    </z-nav-bar>
+    <public-module></public-module>
+
+
+    <!-- 正文内容 -->
+    <view class="content-body">
+      <view class="item" v-for="(item, index) in historyList" :key="index">
+        <view class="date">{{item.date}}</view>
+        <view class="record" v-for="(item2, index2) in item.record">
+          <text>{{item2.time}}</text>
+          <text>{{item2.state}}</text>
+         
+          <view class="index up" v-if="item2.index > targetIndex">
+            <text class="text">{{item2.index}}</text>
+            <text class="arrow">{{arrowUp}}</text>
+          </view>
+          <view class="index down" v-else>
+            <text class="text">{{item2.index}}</text>
+            <text class="arrow">{{arrowDown}}</text>
+          </view>
+          
+          <!-- 手动录入 -->
+          <text class="write-by-hand">{{item2.writeByHand}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        targetIndex: '3.0',
+        arrowUp: '↑',
+        arrowDown: '↓',
+        historyList: [{
+          date: '2021-02-24',
+          record: [{
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '3.65',
+            writeByHand: '手动录入'
+          }, {
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '2.89',
+            writeByHand: ''
+          }, ]
+        }, {
+          date: '2021-02-24',
+          record: [{
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '3.89',
+            writeByHand: ''
+          }, {
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '2.78',
+            writeByHand: '手动录入'
+          }, ]
+        }, {
+          date: '2021-02-24',
+          record: [{
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '3.65',
+            writeByHand: '手动录入'
+          }, {
+            time: '07:23:30',
+            state: '胆固醇',
+            index: '2.89',
+            writeByHand: ''
+          }, ]
+        }, ],
+      };
+    },
+
+    methods: {
+      handleDevelop() {
+        uni.navigateTo({
+          url: '/pages/healthMonitor/bloodSugar/warningRules'
+        })
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  .container {
+    font-size: 30rpx;
+
+    .regular {
+      font-size: 26rpx;
+    }
+
+    .content-body {
+      .item {
+        .date {
+          padding: 26rpx;
+        }
+
+        .record {
+          display: flex;
+          background-color: white;
+          padding: 30rpx 20rpx;
+          border-top: 1rpx solid #ddd;
+          box-sizing: border-box;
+
+          text {
+            margin-right: 40rpx;
+          }
+
+          .index {
+            margin-left: 20rpx;
+
+            .text {
+              margin-right: 10rpx;
+            }
+
+            .arrow {
+              font-weight: 700;
+            }
+          }
+
+          .up {
+            color: #f10000;
+          }
+
+          .down {
+            color: #ffa053;
+          }
+          
+          .write-by-hand{
+            color: #01b09a;
+          }
+        }
+      }
+    }
+  }
+</style>

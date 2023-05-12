@@ -77,9 +77,7 @@
 		},
 		methods: {
 			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+				
 			},
 			handleSaveHeat() {
 

@@ -127,9 +127,9 @@
 				clearInterval(this.time)
 			},
 			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+        uni.navigateTo({
+          url: '/pages/healthMonitor/oximeter/oximeterHistory'
+        })
 			},
 			handleSave() {
 				console.log('提交')

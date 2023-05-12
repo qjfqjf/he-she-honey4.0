@@ -101,9 +101,13 @@
 				clearInterval(this.time)
 			},
 			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+				// this.$refs.uToast.show({
+				// 	message: '开发中...'
+				// })
+        
+        uni.navigateTo({
+          url: '/pages/healthMonitor/ergometer/ergometerHistory'
+        })
 			},
 			handleSave() {
 				console.log('提交')
