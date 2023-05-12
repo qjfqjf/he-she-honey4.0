@@ -38,11 +38,11 @@ export const   appManage= [
     {
         name: "健康教育",
         icon: "/static/icon/homePage/educate.png",
-<<<<<<< HEAD
+
         // path: "/pages/educate/index"
-=======
+
         path: "/pages/healthEducation/index"
->>>>>>> 5a44d55514e57de426236ce7cc6a49002f9a466c
+
     },
     {
         name: "监管/预警",
