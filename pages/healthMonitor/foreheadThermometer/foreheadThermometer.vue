@@ -11,7 +11,7 @@
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveHeat"></u-button>
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
-			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
+			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump(urlList.history)">
 		</u--text>
 		<BottomNavigation page="foreheadThermometer/frManualEntry"></BottomNavigation>
 		<u-toast ref="uToast"></u-toast>
@@ -61,6 +61,10 @@
 				deviceId: 'F0:B5:D1:88:38:15', // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
+				urlList: {
+					history: '/pages/healthMonitor/foreheadThermometer/frHistory',
+				
+				}
 
 			};
 		},
@@ -76,6 +80,15 @@
 				this.$refs.uToast.show({
 					message: '开发中...'
 				})
+			},
+			handleJump(url) {
+				console.log(url)
+				uni.navigateTo({
+					url,
+					fail: (err) => {
+						console.log(err)
+					}
+				});
 			},
 			handleSaveHeat() {
 

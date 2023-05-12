@@ -26,8 +26,8 @@
 	export default {
 		data() {
 			return {
-				startTime: '',
-				endTime: '',
+				startTime: this.getFirstDayOfMonth().format('yyyy-MM-dd'),
+				endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				showStart: false,
 				showEnd: false,
 			};
