@@ -108,9 +108,12 @@
 				}
 			},
 			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+				// this.$refs.uToast.show({
+				// 	message: '开发中...'
+				// })
+        uni.navigateTo({
+          url:'/pages/healthMonitor/bloodSugar/bloodSugarHistory'
+        })
 			},
 			// 初始化蓝牙
 			initBlue() {

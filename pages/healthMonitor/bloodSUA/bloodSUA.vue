@@ -73,9 +73,12 @@
 		},
 		methods: {
 			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+				// this.$refs.uToast.show({
+				// 	message: '开发中...'
+				// })
+        uni.navigateTo({
+          url:'/pages/healthMonitor/bloodSUA/bloodSUAHistory'
+        })
 			},
 			handleSaveHeat() {
 

@@ -23,8 +23,7 @@ export const   appManage= [
         name: "健康评估",
         icon: "/static/icon/homePage/healthAssessment.png",
         path: "/pages/healthEstimate/index"
-		// path: "/pages/healthAssessment/index"
-
+        // path: "/pages/healthAssessment/index"
     },
     {
         name: "健康服务",
@@ -39,7 +38,11 @@ export const   appManage= [
     {
         name: "健康教育",
         icon: "/static/icon/homePage/educate.png",
+
+        // path: "/pages/educate/index"
+
         path: "/pages/healthEducation/index"
+
     },
     {
         name: "监管/预警",
