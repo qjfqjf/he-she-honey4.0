@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3539ae5644e8236aa172f278ed9e2e9a5a7a8c20
 {
     "pages" : [
         {
@@ -1349,6 +1352,15 @@
 		        "navigationBarTitleText" : "",
 		        "enablePullDownRefresh" : false
 		    }
+		},
+		{
+		    "path" : "pages/healthMonitor/foreheadThermometer/frHistory",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "体温历史",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
         ,{
             "path" : "pages/healthMonitor/bloodSugar/bloodSugarHistory",
@@ -1572,6 +1584,7 @@
     //     "enablePullDownRefresh": false
     //   }
     // }
+	
     "globalStyle" : {
         "navigationBarTextStyle" : "black",
         "navigationBarTitleText" : "uni-app",
@@ -1623,3 +1636,7 @@
         ]
     }
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3539ae5644e8236aa172f278ed9e2e9a5a7a8c20
