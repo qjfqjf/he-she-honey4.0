@@ -15,11 +15,6 @@
         <view class="record" v-for="(item2, index2) in item.record">
           <text>{{item2.time}}</text>
           <text>{{item2.state}}</text>
-          <!-- <view class="index">
-            <text class="arrow">{{item2.index}}</text>
-            <text class=" up" v-if="item2.index > targetIndex">{{arrowUp}}</text>
-            <text class=" down" v-else>{{arrowDown}}</text>
-          </view> -->
           <view class="index up" v-if="item2.index > targetIndex">
             <text class="text">{{item2.index}}</text>
             <text class="arrow">{{arrowUp}}</text>
