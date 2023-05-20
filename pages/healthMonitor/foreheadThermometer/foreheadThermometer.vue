@@ -58,7 +58,7 @@
 				deviceStatus: 0,
 				heat: 0, //测量温度
 				blueDeviceList: [],
-				deviceId: 'F0:B5:D1:88:38:15', // 蓝牙设备的id
+				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				urlList: {
