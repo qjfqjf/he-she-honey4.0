@@ -25,7 +25,14 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<BottomNavigation></BottomNavigation>
+		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">{{item.title}}</text>
+			</view>
+		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -62,7 +69,26 @@
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122
 				],
-				time: null
+				time: null,
+        // 底部工具栏
+        page:'',
+        toolList: [
+        	{
+        		img: require('@/static/icon/bloodPressure/month.png'),
+        		title: '月报',
+        		url: '/pages/healthMonitor/ergometer/ergometerMonth'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/device.png'),
+        		title: '设备',
+        		url: '/pages/mine/myDevice'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/write.png'),
+        		title: '手动录入',
+        		url: '/pages/healthMonitor/'+this.page
+        	},
+        ],
 			}
 		},
 		async mounted() {
@@ -116,7 +142,14 @@
 			},
 			handleSave() {
 				console.log('提交')
-			}
+			},
+      onPageJump(url) {
+      	uni.navigateTo({
+      		url: url
+      	});
+      
+      },
+      
 		},
 	}
 </script>

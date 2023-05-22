@@ -886,85 +886,6 @@
 				"enablePullDownRefresh": false
 			}
 		},
-		// 健康管理模块
-		{
-			"path": "pages/healthManagement/diet/diet",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/bodyBuilding/bodyBuilding",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/conditioning",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/health/health",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/medical/medical",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/psychology/psychology",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sleep/sleep",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/sports",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		// 饮食管理
-		{
-			"path": "pages/healthManagement/diet/dietRecords",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/diet/nutritionScale",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/diet/addDietRecords",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
 		{
 			"path": "pages/healthFile/habit/habit",
 			"style": {
@@ -1346,6 +1267,7 @@
 			}
 		},
 		{
+
 			"path": "pages/healthMonitor/foreheadThermometer/frHistory",
 			"style": {
 				"navigationBarTitleText": "体温历史",
@@ -1388,13 +1310,6 @@
 			}
 
 		}, {
-			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/healthMonitor/ergometer/ergometerHistory",
 			"style": {
 				"navigationBarTitleText": "",
@@ -1410,6 +1325,55 @@
 
 		}, {
 			"path": "pages/healthMonitor/bodyFat/bodyFatHistory",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodSugar/bloodSugarMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodSUA/bloodSUAMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/bloodFat/bloodFatMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/ergometer/ergometerMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/cholesterol/cholesterolMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthMonitor/oximeter/oximeterMonth",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
