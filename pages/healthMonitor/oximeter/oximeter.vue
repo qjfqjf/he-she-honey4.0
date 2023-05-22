@@ -8,14 +8,14 @@
 		<view class="mt-3 mb-3" style="height: 350rpx;">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
-		<u-button type="primary" @click="resume">测试</u-button>
+	<!-- 	<u-button type="primary" @click="resume">测试</u-button>
 		<view class="mb-3">
 
 		</view>
 		<u-button type="primary" @click="pause">暂停</u-button>
 		<view class="mt-5">
 
-		</view>
+		</view> -->
 		<TipInfo title="血氧趋势"></TipInfo>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>

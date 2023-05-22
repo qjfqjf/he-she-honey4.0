@@ -147,8 +147,8 @@ $http.dataFactory = async function(res) {
     data: res.data,
     method: res.method,
   });
-  if (res.response.statusCode && res.response.statusCode == 200) {
-    let httpData = res.response.data;
+  if (res.response.result.code && res.response.result.code == 200) {
+    let httpData = res.response.result;
     if (typeof(httpData) == "string") {
       httpData = JSON.parse(httpData);
     }
@@ -157,7 +157,7 @@ $http.dataFactory = async function(res) {
     //判断数据是否请求成功
     if (httpData.success || httpData.code == 200) {
       // 返回正确的结果(then接受数据)
-      return Promise.resolve(httpData.data);
+      return Promise.resolve(httpData);
     } else if (httpData.code == "1000" || httpData.code == "1001" || httpData.code == 1100 || httpData.code ==
       402) {
 

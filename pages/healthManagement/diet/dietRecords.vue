@@ -53,29 +53,29 @@
           }
 
         }
-        uni.request({
-          url: 'http://121.37.31.233:8888/web/dataset/search_read',
-          method: 'POST',
-          data: params,
-          header: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "session_id": "48a55bbe04ac4450c016b4f064fe470bab083b0e"
-          },
-          success: (res) => {
-            console.log(res)
-          },
-          fail: (err) => {
-            console.log(err)
-          }
-        })
-        
-        // const result = await this.$http.post('/web/dataset/search_read', params)
-        // console.log(result)
-        // .then(res => {
-        //   this.dietRecordsData = res.data.result.records;
-        // }).catch(err => {
-        //   console.log(err)
+        // uni.request({
+        //   url: 'http://121.37.31.233:8888/web/dataset/search_read',
+        //   method: 'POST',
+        //   data: params,
+        //   header: {
+        //     'Content-Type': 'application/json;charset=UTF-8',
+        //     "session_id": "48a55bbe04ac4450c016b4f064fe470bab083b0e"
+        //   },
+        //   success: (res) => {
+        //     console.log(res)
+        //   },
+        //   fail: (err) => {
+        //     console.log(err)
+        //   }
         // })
+        
+        const result = await this.$http.post('/web/dataset/search_read', params)
+        console.log(result)
+        .then(res => {
+          this.dietRecordsData = res.data.result.records;
+        }).catch(err => {
+          console.log(err)
+        })
         // return result;
       }
     }

@@ -5,7 +5,7 @@
 		<view class="deviceInfo d-flex j-sb mt-1 p-2">
 			<view class="left">
 				<view class="name">
-					血压计（家康血压计）
+					{{deviceInfo.name}}
 				</view>
 				<text class="deviceId">
 					{{this.deviceId||'未绑定'}}
@@ -67,50 +67,41 @@
 		handleJKBPData
 	} from '@/pages/healthMonitor/bloodPressure/bloodpressure.js'
 	export default {
-		propos: {
-			deviceName: {
-				type: String,
-				default: ''
-			},
-			deviceID: {
-				type: String,
-				default: ''
-			},
-			serviceId: {
-				type: String,
-				default: ''
-			},
-			characteristicId: {
-				type: String,
-				default: ''
-			}
-		},
+
 		data() {
 			return {
 				timer: null,
 				blueDeviceList: [],
-				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
-				serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
-				characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
-
+				deviceId: '', // 蓝牙设备的id
+				serviceId: '', //设备的服务值
+				characteristicId: '', // 设备的特征值
+				deviceInfo: {}
 			};
 		},
-		onLoad(e) {
-			console.log(e)
-			console.log(111)
-			const eventChannel = this.getOpenerEventChannel();
-			eventChannel.emit('deviceInfo', {
-				data: 'data from test page'
-			});
-			
-			// 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-			eventChannel.on('deviceInfo', function(data) {
-				console.log(data,1)
-			})
+		async onLoad(e) {
+			const info = JSON.parse(e.info)
+			this.deviceInfo = info
+			this.deviceId = info.deviceId
+			this.serviceId = info.serviceId
+			this.characteristicId = info.characteristicId
 			this.initBlue()
 			this.discovery()
+			// const eventChannel = this.getOpenerEventChannel();
+			// eventChannel.emit('deviceInfo', {
+			// 	data: 'data from test page'
+			// });
+			
+			// // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+			// this.$nextTick(() => {
+			// 	eventChannel.on('deviceInfo', function(data) {
+			
+			// 		console.log(this.deviceInfo)
+			// 	})
+			// })
+			
 		
 		},
+
 		onUnload() {
 			this.stopDiscovery()
 		},
@@ -127,7 +118,7 @@
 					}
 				});
 				this.deviceId = ''
-				uni.removeStorageSync('jkDeviceId')
+				uni.removeStorageSync(this.deviceInfo.dName)
 			},
 			// 重新搜索设备
 			resetDevice() {
@@ -192,7 +183,7 @@
 				console.log(data)
 				const _this = this
 				this.deviceId = data.deviceId
-				uni.setStorageSync('jkDeviceId', data.deviceId);
+				uni.setStorageSync(this.deviceInfo.dName, data.deviceId);
 				uni.createBLEConnection({
 					deviceId: this.deviceId,
 					success(res) {
