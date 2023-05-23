@@ -13,7 +13,14 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<BottomNavigation page="cholesterol/cholesterolManualEntry"></BottomNavigation>
+		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">{{item.title}}</text>
+			</view>
+		</view>
 		<u-toast ref="uToast"></u-toast>
 		<!-- 	<scroll-view scroll-y class="box">
 			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
@@ -61,7 +68,25 @@
 				deviceId: '', // 蓝牙设备的id
 				serviceId: '', //设备的服务值
 				characteristicId: '', // 设备的特征值
-
+        // 底部工具栏
+        page:'',
+        toolList: [
+        	{
+        		img: require('@/static/icon/bloodPressure/month.png'),
+        		title: '月报',
+        		url: '/pages/healthMonitor/cholesterol/cholesterolMonth'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/device.png'),
+        		title: '设备',
+        		url: '/pages/mine/myDevice'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/write.png'),
+        		title: '手动录入',
+        		url: '/pages/healthMonitor/'+this.page
+        	},
+        ],
 			};
 		},
 		onLoad(e) {
@@ -279,7 +304,13 @@
 				this.btnColor = '#01b09a'
 
 
-			}
+			},
+      onPageJump(url) {
+      	uni.navigateTo({
+      		url: url
+      	});
+      
+      },
 
 		}
 	}

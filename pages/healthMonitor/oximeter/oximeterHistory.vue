@@ -6,7 +6,7 @@
 
     <!-- 正文内容 -->
     <view class="content-body">
-      <u-read-more class="p-2 mt-3" :toggle="true" closeText="查看更多">
+      <u-read-more :toggle="true" closeText="查看更多">
         <view class="item" v-for="(item, index) in historyList" :key="index">
           <view class="date">
             <text>{{item.date}}</text>
@@ -52,6 +52,18 @@
             pi: '9.8',
             pulseRate: 10,
             result: '脉搏节律未见异常'
+          }, {
+            date: '2022-03-11 23:34',
+            bloodOxygen: '97',
+            pi: '9.8',
+            pulseRate: 10,
+            result: '脉搏节律未见异常'
+          }, {
+            date: '2022-03-11 23:34',
+            bloodOxygen: '97',
+            pi: '9.8',
+            pulseRate: 10,
+            result: '脉搏节律未见异常'
           },
           {
             date: '2022-03-11 23:34',
@@ -81,7 +93,6 @@
 
   .container {
     font-size: 30rpx;
-
     .regular {
       font-size: 26rpx;
     }

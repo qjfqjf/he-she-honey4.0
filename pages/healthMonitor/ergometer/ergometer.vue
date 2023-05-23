@@ -8,14 +8,14 @@
 		<view class="mt-3 mb-3" style="height: 350rpx;">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
-		<u-button type="primary" @click="resume">测试</u-button>
+		<!-- 	<u-button type="primary" @click="resume">测试</u-button>
 		<view class="mb-3">
-			
+
 		</view>
 		<u-button type="primary" @click="pause">暂停</u-button>
 		<view class="mt-5">
 
-		</view>
+		</view> -->
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSave"></u-button>
@@ -25,7 +25,14 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<BottomNavigation></BottomNavigation>
+		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">{{item.title}}</text>
+			</view>
+		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -62,11 +69,30 @@
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122,
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122
 				],
-				time: null
+				time: null,
+        // 底部工具栏
+        page:'',
+        toolList: [
+        	{
+        		img: require('@/static/icon/bloodPressure/month.png'),
+        		title: '月报',
+        		url: '/pages/healthMonitor/ergometer/ergometerMonth'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/device.png'),
+        		title: '设备',
+        		url: '/pages/mine/myDevice'
+        	},
+        	{
+        		img: require('@/static/icon/bloodPressure/write.png'),
+        		title: '手动录入',
+        		url: '/pages/healthMonitor/'+this.page
+        	},
+        ],
 			}
 		},
-		mounted() {
-			this.$refs.ecgRef.init({
+		async mounted() {
+			await this.$refs.ecgRef.init({
 				// 小格和大格的border color
 				lineColor: ['#c7dff5', '#63b3f8'],
 				// ampTime: 'Amp: 10mm/mv  Time: 25mm/sec',
@@ -86,6 +112,11 @@
 
 			})
 
+			// this.resume()
+
+		},
+		destroyed() {
+			this.pause()
 		},
 		methods: {
 			resume() {
@@ -104,14 +135,21 @@
 				// this.$refs.uToast.show({
 				// 	message: '开发中...'
 				// })
-        
-        uni.navigateTo({
-          url: '/pages/healthMonitor/ergometer/ergometerHistory'
-        })
+
+				uni.navigateTo({
+					url: '/pages/healthMonitor/ergometer/ergometerHistory'
+				})
 			},
 			handleSave() {
 				console.log('提交')
-			}
+			},
+      onPageJump(url) {
+      	uni.navigateTo({
+      		url: url
+      	});
+      
+      },
+      
 		},
 	}
 </script>
