@@ -143,7 +143,8 @@
         range: ['2021-02-1', '2024-3-28'],
         // 设备状态
         deviceState: '未连接',
-        recordList: [{
+        recordList: [
+		{
           date: '2022-03-11 23:34',
           img: require('@/static/icon/healthManagement/egg.png'),
           name: '煎蛋',
@@ -161,7 +162,8 @@
           name: '煎蛋',
           count: 10,
           heal: 67
-        }, ],
+        }, 
+		],
         inputValue: '',
         sliderHeight: 100,
         value: 10,
@@ -180,6 +182,9 @@
         percentageValue: 70,
       };
     },
+	mounted() {
+	    this.getNutritionScaleData();
+	},
     watch: {
       range(newval) {
         console.log('范围选:', this.range);
@@ -187,6 +192,38 @@
     },
     //方法
     methods: {
+	  getNutritionScaleData(){
+		uni.request({
+		    url: 'http://106.14.140.92:8881/platform/dataset/search_read',
+		    method: 'POST',
+			data: {
+				"params":{
+					"model":"nutrition.scale",
+					"domain":[["input_type","=","hend"]],
+					"fields":[
+						"name",
+						"numbers",
+						"owner",
+						"food_name",
+						"heat",
+						"protein",
+						"fat",
+						"carbohydrate",
+						"dietary_fiber",
+						"test_time"
+					]
+				}
+			},
+		    success: (res) => {
+		      this.data = res.data;
+		    },
+		    fail: (err) => {
+		      this.loading = false;
+		      this.error = '接口请求失败';
+		      console.error(err);
+		    }
+		});
+	  },
       gotoReport() {
         console.log('跳到营养分析报告页面')
         uni.navigateTo({
@@ -221,6 +258,8 @@
       }
 
     },
+	
+	
   }
 </script>
 
