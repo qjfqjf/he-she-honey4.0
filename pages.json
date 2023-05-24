@@ -1383,7 +1383,15 @@
 
 		}
 	    ,{
-            "path" : "pages/healthFile/outpatientArchives/medicalRecord/medicalRecord",
+            "path" : "pages/healthFile/medicalRecord/medicalRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/medicalRecord/addMedicalRecord",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

@@ -24,7 +24,7 @@
 				baseList: [{
 						img: require('@/static/icon/healthFile/medicalRecord.png'),
 						title: '门诊病历',
-						url: '/pages/healthFile/medicalRecord'
+						url: '/pages/healthFile/medicalRecord/medicalRecord'
 					},
 					{
 						img: require('@/static/icon/healthFile/record.png'),
@@ -59,6 +59,7 @@
 				if(!url) {
 					this.$refs.uToast.default('开发中...')
 				}
+				console.log(url)
 				uni.navigateTo({
 					url: url
 				});
