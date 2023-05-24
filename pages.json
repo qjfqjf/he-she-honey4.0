@@ -1382,7 +1382,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/healthFile/outpatientArchives/medicalRecord/medicalRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
 	//   "style": {
