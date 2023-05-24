@@ -52,6 +52,7 @@
 	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	import MyCircle from '../components/circle/Circle.vue'
+	import { formatDateTime } from '@/utils/date.js'
 	export default {
 		components: {
 			HealthHeader,
@@ -71,6 +72,7 @@
 				urlList: {
 					history: '/pages/healthMonitor/foreheadThermometer/frHistory',
 				},
+				date:'',
         // 底部工具栏
         page:'',
         toolList: [
@@ -94,11 +96,13 @@
 			};
 		},
 		onLoad(e) {
-			this.initBlue()
+			this.initBlue();
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
 
-			}
+			};
+			const timeString = new Date();
+			this.date = formatDateTime(timeString)
 		},
 		methods: {
 			handleDevelop() {
@@ -123,14 +127,50 @@
 			// 	});
 			// },
 			handleSaveHeat() {
-
+				console.log(numbers)
+				uni.request({
+					url: 'http://106.14.140.92:8881/platform/uploadForeheadTemperature',
+					method: 'post',
+					data: {
+						params: {
+							model: "forehead.temperature.gun",
+							token: "f5164fb636982e4a43b28d09a99bb3b3",
+							uid: '2',
+							fields: [
+								this.deviceId,
+								this.serviceId,
+								this.characteristicId,
+								this.heat,
+								this.date
+							]
+						}
+					},
+					success: (res) => {
+					    this.$refs.uToast.show({
+					    	message: '保存成功',
+					    	type: 'success',
+					    })
+					    this.btnColor = '#dadada'
+					    this.heat = 0
+					},
+					fail: (res) => {
+						this.$refs.uToast.show({
+							message: '保存失败',
+							type: 'error',
+						})
+					}
+				}),
+				console.log(this.deviceStatus)
 				if (this.heat !== 0) {
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
-					})
-					this.btnColor = '#dadada'
-					this.heat = 0
+					
+					success:(res) => {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.heat = 0
+					}
 				}
 			},
 			// 初始化蓝牙
