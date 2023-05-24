@@ -1386,6 +1386,14 @@
             "path" : "pages/healthFile/outpatientArchives/medicalRecord/medicalRecord",
             "style" :                                                                                    
             {
+                "navigationBarTitleText": ""
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord",
+            "style" :                                                                                    
+            {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
