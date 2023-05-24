@@ -1,14 +1,15 @@
-
-
 {
 	"pages": [
-		//登录页面
-		
-		
 		{
-			"path": "pages/homePage/homePage",
+			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "数字健康管理"
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登录（弃用）"
 			}
 		},
 		{
@@ -210,12 +211,7 @@
 				"navigationBarTitleText": "注册"
 			}
 		},
-		{
-			"path": "pages/user/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
+		
 		{
 			"path": "pages/sdkDemo/common",
 			"style": {
