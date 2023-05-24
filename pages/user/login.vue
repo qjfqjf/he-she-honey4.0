@@ -1,20 +1,16 @@
 <template>
 	<view class="register_page">
-		<z-nav-bar :shadow="false"></z-nav-bar>
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
-		<view class="logo">
-			<image :src="logo" mode="aspectFill"></image>
-		</view>
 		<view class="login_method">
 			<view class="title" :class="{ active: type == 1000 }" @click="type = 1000">账号登录</view>
 			<view class="title" :class="{ active: type == 2000 }" @click="type = 2000">验证码登录</view>
 		</view>
 		<view class="input_box triangle" :class="[type == 1000 ? 'left_triangle': 'right_triangle']">
-			<input type="text" v-model="email" @input="onInput" placeholder="请输入您的邮箱" placeholder-class="grey" />
+			<input type="text" v-model="phonenum" @input="onInput" placeholder="请输入您的手机号" placeholder-class="grey" />
 		</view>
 		<view class="input_box" v-if="type == 2000">
-			<input type="number" v-model="code" placeholder="请输入您的邮箱验证码" placeholder-class="grey" @input="onInput" maxlength="6" @confirm="onSubmit" />
+			<input type="number" v-model="code" placeholder="请输入验证码" placeholder-class="grey" @input="onInput" maxlength="6" @confirm="onSubmit" />
 			<button class="active" @click="onSetCode">{{ codeText }}</button>
 		</view>
 		<view class="input_box" v-if="type == 1000">
@@ -63,7 +59,7 @@
 				type: 1000,
 				isSee: false,
 				code: '',
-				email: '',
+				phonenum: '',
 				password: '',
 				//验证码
 				codeText: '获取验证码',
@@ -80,7 +76,7 @@
 		},
 		//第一次加载
 		onLoad(e) {
-			this.logo = this.$base.logoUrl;
+			//this.logo = this.$base.logoUrl;
 			// #ifdef APP-PLUS
 			this.isIos = (plus.os.name == "iOS");
 			let systemInfo = uni.getSystemInfoSync();
@@ -361,19 +357,12 @@
 </script>
 <style lang="scss" scoped>
 	@import '@/style/mixin.scss';
+	
 	.register_page {
 		padding: calc(var(--status-bar-height) + 30rpx) 50rpx 50rpx 50rpx;
-		background-color: #fff;
+		//background-image: url("../../static/img/login/backgroundimg.png");
 		min-height: 100vh;
 		position: relative;
-		.logo {
-			image {
-				margin: 0 auto;
-				width: 180rpx;
-				height: 180rpx;
-				border-radius: 50%;
-			}
-		}
 		.login_method {
 			margin-top: 60rpx;
 			display: flex;
@@ -384,6 +373,7 @@
 			.title {
 				font-size: 32rpx;
 				color: #999999;
+
 
 				&.active {
 					position: relative;
