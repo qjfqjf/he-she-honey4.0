@@ -66,13 +66,13 @@
 		</view>
 		<!-- 底部操作 -->
 		<!-- <BottomNavigation page="bloodPressure/manualEntry"></BottomNavigation> -->
-    <view class="tools d-flex j-sb mt-5 p-4">
-    	<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-    		@click="onPageJump(item.url)">
-    		<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-    		<text class="mt-1">{{item.title}}</text>
-    	</view>
-    </view>
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">{{item.title}}</text>
+			</view>
+		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 
@@ -83,6 +83,7 @@
 	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
 	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
+	import baseUrl from '@/config/baseUrl.js'
 	export default {
 		components: {
 			HealthHeader,
@@ -143,27 +144,26 @@
 					history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
 
 				},
-        
-        
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/'+this.page
-        	},
-        ],
+
+
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/' + this.page
+					},
+				],
 			};
 		},
 		onLoad(e) {
@@ -380,7 +380,7 @@
 					// console.log(resHex)
 				})
 			},
-			processMeasureData(buffer,hexArr) {
+			processMeasureData(buffer, hexArr) {
 				const data = new Int8Array(buffer);
 				//处理动态血压
 				if (data.length === 6 && data[0] === -2 && data[1] === -124 && data[5] === 4) {
@@ -413,13 +413,13 @@
 					this.btnColor = '#01b09a'
 				}
 			},
-      
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
 
 		}
 	}
