@@ -66,13 +66,15 @@
 				deviceStatus: 0,
 				heat: 0, //测量温度
 				blueDeviceList: [],
+				owner:'2222',
+				input_type:'设备输入',
 				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				urlList: {
 					history: '/pages/healthMonitor/foreheadThermometer/frHistory',
 				},
-				date:'',
+				test_time:'',
         // 底部工具栏
         page:'',
         toolList: [
@@ -102,7 +104,7 @@
 
 			};
 			const timeString = new Date();
-			this.date = formatDateTime(timeString)
+			this.test_time = formatDateTime(timeString)
 		},
 		methods: {
 			handleDevelop() {
@@ -127,22 +129,23 @@
 			// 	});
 			// },
 			handleSaveHeat() {
-				console.log(numbers)
+				
 				uni.request({
-					url: 'http://106.14.140.92:8881/platform/uploadForeheadTemperature',
+					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
 					method: 'post',
 					data: {
 						params: {
 							model: "forehead.temperature.gun",
-							token: "f5164fb636982e4a43b28d09a99bb3b3",
+							token: "2d801467e65a20df2ad5dd175526c3e3",
 							uid: '2',
 							fields: [
-								this.deviceId,
-								this.serviceId,
-								this.characteristicId,
-								this.heat,
-								this.date
-							]
+								"name",
+								"numbers",
+								"owner",
+								"temperature",
+								"test_time"
+							],
+							
 						}
 					},
 					success: (res) => {
