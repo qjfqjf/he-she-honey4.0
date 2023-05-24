@@ -24,7 +24,7 @@
 				baseList: [{
 						img: require('@/static/icon/healthFile/medicalRecord.png'),
 						title: '门诊病历',
-						url: '/pages/healthFile/medicalRecord/medicalRecord'
+						url: '/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord'
 					},
 					{
 						img: require('@/static/icon/healthFile/record.png'),

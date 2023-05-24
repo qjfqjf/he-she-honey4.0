@@ -6,7 +6,7 @@
 		<view>
 			<view class="cate">
 				<text class="cate-text">{{choiceTitle}}</text>
-
+					
 			</view>
 			<view class="select-list">
 				<u-subsection :list="list" :current="curNow" @change="sectionChange"></u-subsection>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import DatePopup from '../../../components/date-popup/date-popup.vue'
+import DatePopup from '../../../../components/date-popup/date-popup.vue'
 export default {
 	components: {
 		DatePopup

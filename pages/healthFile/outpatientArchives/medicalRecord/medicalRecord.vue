@@ -9,7 +9,7 @@
 
 	  <!--  记录  -->
 		<view class="nothing" v-if="dataList.length === 0">
-			<u-image src="../../../static/icon/healthFile/listEmpty.png" width="400rpx" height="400rpx" shape="circle"></u-image>
+			<u-image src="../../../../static/icon/healthFile/listEmpty.png" width="400rpx" height="400rpx" shape="circle"></u-image>
 			<view class="first-text">
 				<text >暂无数据</text>
 			</view>
@@ -42,7 +42,7 @@
 		methods: {
 			addMedicalRecord(){
 				uni.navigateTo({
-							url:'/pages/healthFile/medicalRecord/addMedicalRecord'
+							url:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord'
 				});
 			}
 		}
