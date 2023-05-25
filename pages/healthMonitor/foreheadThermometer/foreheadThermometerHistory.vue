@@ -86,7 +86,7 @@
 					data: {
 						params: {
 							model: "forehead.temperature.gun",
-							token: "f5164fb636982e4a43b28d09a99bb3b3",
+							token: "2d801467e65a20df2ad5dd175526c3e3",
 							uid: '2',
 							fields: [
 								"name",
@@ -98,6 +98,7 @@
 						}
 					},
 					success:(res) => {
+						console.log(res)
 						this.historyList = res.data.result.records;
 						console.log(this.historyList)
 					}
