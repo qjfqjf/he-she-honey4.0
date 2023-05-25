@@ -798,7 +798,28 @@
 			}
 		},
 		{
-			"path": "pages/healthManagement/components/emptyState",
+			"path": "pages/healthFile/outpatientArchives/components/emptyState",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/notEmptyState",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/addTemplate",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/headerNav",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
