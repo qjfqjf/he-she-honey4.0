@@ -83,6 +83,8 @@
 				],
 				title:'门诊病例',
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
+				//接口
+				tourl2:'',
 				addtext:'添加病例'
 			}
 		},
@@ -96,9 +98,9 @@
 		},
 		//查询当前用户所有档案
 		getRecordsList(){
+			//接口调用
 			uni.request({
-				//接口调用
-				url:'',
+				url:this.tourl2,
 				method:'get',
 				data: {
 					params:{

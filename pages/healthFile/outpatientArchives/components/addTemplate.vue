@@ -95,34 +95,7 @@ export default {
         change(e) {
             console.log("e:", e);
         },
-        //查询血压历史记录
-        getHistoryList() {
-            uni.request({
-                url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-                method: 'post',
-                data: {
-                    params: {
-                        model: "body.fat.scale",
-                        token: "d7419ae04f248e5105ac3d0700389775",
-                        uid: '2',
-                        fields: [
-                            "name",
-                            "numbers",
-                            "owner",
-                            "height",
-                            "weight",
-                            "bmi",
-                            "state",
-                            "input_type",
-                            "test_time"
-                        ]
-                    }
-                },
-                success: (res) => {
-                    this.historyList = res.data.result.records
-                }
-            })
-        },
+
 
         //保存方法
         saveRecords(){
@@ -132,6 +105,7 @@ export default {
                 method:'post',
                 data:{
                     params:{
+                        dataObj:this.dataObj,
                         model:'',
                         token:'',
                         uid:'',

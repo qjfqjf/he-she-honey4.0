@@ -41,6 +41,8 @@ export default {
 				placeholder2:'请添加疾病诊断的备注',
 				remarksText:'疾病诊断',
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
+				//接口
+				tourl2:'',
 				// 备注
 				remarksValue: '',
 				// 选择日期
