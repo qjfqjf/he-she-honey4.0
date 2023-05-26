@@ -58,7 +58,7 @@ export default {
 	//方法
 	methods: {
 
-	},
+	}
 }
 </script>
 

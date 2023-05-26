@@ -184,6 +184,7 @@
 					url: '/pages/healthMonitor/bloodSugar/warningRules'
 				})
 			},
+
 			//查询血压历史记录
 			getHistoryList() {
 				uni.request({

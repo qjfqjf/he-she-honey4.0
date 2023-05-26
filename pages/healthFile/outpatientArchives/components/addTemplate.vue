@@ -95,26 +95,73 @@ export default {
         change(e) {
             console.log("e:", e);
         },
+        //查询血压历史记录
+        getHistoryList() {
+            uni.request({
+                url: 'http://106.14.140.92:8881/platform/dataset/search_read',
+                method: 'post',
+                data: {
+                    params: {
+                        model: "body.fat.scale",
+                        token: "d7419ae04f248e5105ac3d0700389775",
+                        uid: '2',
+                        fields: [
+                            "name",
+                            "numbers",
+                            "owner",
+                            "height",
+                            "weight",
+                            "bmi",
+                            "state",
+                            "input_type",
+                            "test_time"
+                        ]
+                    }
+                },
+                success: (res) => {
+                    this.historyList = res.data.result.records
+                }
+            })
+        },
 
-        saveRecords(recordId){
+        //保存方法
+        saveRecords(){
             console.log(this.dataObj);
-            uni.showToast({
-                title:'保存成功',
-                duration:1000,
-                success:()=>{
-                    setTimeout(() => {
-                        uni.navigateTo({
-                            url: this.addObj.tourl,
-                            success:(res)=>{
-                                console.log(res)
-                            },
-                            fail:(err)=>{
-                                console.log(err)
-                            }
-                        });
-                    }, 1000);
+            uni.request({
+                url:this.addObj.tourl2,
+                method:'post',
+                data:{
+                    params:{
+                        model:'',
+                        token:'',
+                        uid:'',
+                        fields:[
+
+                        ]
+                    }
+                },
+                success(res){
+                    console.log(res);
+                    uni.showToast({
+                        title:'保存成功',
+                        duration:1000,
+                        success:()=>{
+                            setTimeout(() => {
+                                uni.redirectTo({
+                                    url: this.addObj.tourl,
+                                    success:(res)=>{
+                                        console.log(res)
+                                    },
+                                    fail:(err)=>{
+                                        console.log(err)
+                                    }
+                                });
+                            }, 1000);
+                        }
+                    });
                 }
             });
+
         },
     },
 }

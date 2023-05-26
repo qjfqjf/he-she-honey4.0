@@ -93,6 +93,33 @@
 					url:this.tourl
 				});
 			}
+		},
+		//查询当前用户所有档案
+		getRecordsList(){
+			uni.request({
+				//接口调用
+				url:'',
+				method:'get',
+				data: {
+					params:{
+						model:'',
+						token:'',
+						uid:'',
+						//传回去的数组(存放字段)
+						fields:[
+
+						]
+					}
+				},
+				success(res){
+					//传回来的值
+					//this.dataList = res.data.result.
+				}
+			})
+		},
+
+		onload(){
+			this.getRecordsList();
 		}
 	}
 </script>

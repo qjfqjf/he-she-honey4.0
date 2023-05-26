@@ -28,7 +28,7 @@ export default {
     },
     methods:{
         addMedicalRecord(){
-            uni.navigateTo({
+            uni.redirectTo({
                 url:this.tourl
             });
         }

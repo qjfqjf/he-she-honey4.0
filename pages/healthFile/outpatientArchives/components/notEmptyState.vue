@@ -97,8 +97,13 @@ export default {
         },
         test(src){
             console.log(src);
-        }
+        },
+
+
     },
+    onload(){
+        this.getRecordsList();
+    }
 }
 </script>
 
