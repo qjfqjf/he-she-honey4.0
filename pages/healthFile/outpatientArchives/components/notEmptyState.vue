@@ -46,7 +46,7 @@
             <view style="height: 20rpx"></view>
             <text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
             <view style="height: 20rpx"></view>
-            <view class="showImage" style="display:flex" >
+            <view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
 <!--                <view>-->
 <!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
 <!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
@@ -55,11 +55,12 @@
 <!--                    ></uni-file-picker>-->
 <!--                </view>-->
 
-<!--                <view class="example-body" v-for="img in item.imgs" style="width: 150rpx;margin-left: 60rpx;background-color: #1a1a1a" >-->
-<!--                    <image style="width: 150rpx;height: 150rpx;margin: 0; " :src="img.url"></image>-->
-<!--                </view>-->
-                <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs"></tel-pic>
+               <view class="example-body" v-for="img in item.imgs" style="width: 150rpx;margin-left: 60rpx;background-color: #d8d0d0" >
+                   <image style="width: 150rpx;height: 150rpx;margin-bottom: 10px; " :src="img"></image> 
+               </view>
+                <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs" ></tel-pic>
             </view>
+            
 
 
             <!-- 6、分割线 -->
