@@ -11,11 +11,17 @@
 		<!-- 正文内容 -->
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="index">
-				<view class="date">{{item.test_time.split(" ")[0]}}</view>
+				<view class="date"
+					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
+					{{item.test_time.split(" ")[0]}}</view>
 				 <!-- v-for="(item2, index2) in item.record" -->
 				<view class="record">
 					<text>{{item.test_time.split(" ")[1]}}</text>
-					<text>{{item.category}}</text>
+					<!-- <text>{{item.category}}</text> -->
+					<text v-if="item.category=='kf'">空腹</text>
+					<text v-else-if="item.category=='wch2'">晚餐前</text>
+					<text v-else-if="item.category=='lc'">凌晨</text>
+					<text v-else="item.category=='wch1'">晚餐后</text>
 					<view class="index up" v-if="item.oml_l > targetIndex">
 						<text class="text">{{item.oml_l}}</text>
 						<text class="arrow">{{arrowUp}}</text>
@@ -26,7 +32,8 @@
 					</view>
 
 					<!-- 手动录入 -->
-					<text class="write-by-hand">{{item.input_type}}</text>
+					<text class="write-by-hand" v-if="item.input_type=='equipment'">设备输入</text>
+					<text class="write-by-hand" v-else="item.input_type=='hend'">手动输入</text>
 				</view>
 			</view>
 		</view>
@@ -100,7 +107,7 @@
 					data: {
 						params: {
 							model: "blood.glucose.meter",
-							token: "42a85a0102b0a64d8737ffd2e00a57f4",
+							token: "d7419ae04f248e5105ac3d0700389775",
 							uid: '2',
 							fields: [
 								"name",
@@ -114,10 +121,7 @@
 						}
 					},
 					success: (res) => {
-						console.log(res)
 						this.historyList = res.data.result.records
-						console.log(this.historyList)
-
 					}
 				})
 			}

@@ -10,12 +10,15 @@
 
 		<!-- 正文内容 -->
 		<view class="content-body">
-			<view class="item" v-for="(item,index) in historyList" :key="item.id">
-				<view class="date">{{item.test_time.split(" ")[0]}}</view>
+			<view class="item" v-for="(item, index) in historyList" :key="item.id">
+				<view class="date"
+					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
+					{{ item.test_time.split(' ')[0] }}
+				</view>
 				<view class="record">
-					<text>{{item.test_time.split(" ")[1]}}</text>
+					<text>{{ item.test_time.split(' ')[1] }}</text>
 					<text>体温</text>
-					<text class="text">{{item.temperature}}</text>
+					<text class="text">{{ item.temperature }}</text>
 				</view>
 			</view>
 		</view>
@@ -86,7 +89,7 @@
 					data: {
 						params: {
 							model: "forehead.temperature.gun",
-							token: "2d801467e65a20df2ad5dd175526c3e3",
+							token: "d7419ae04f248e5105ac3d0700389775",
 							uid: '2',
 							fields: [
 								"name",
@@ -97,10 +100,8 @@
 							]
 						}
 					},
-					success:(res) => {
-						console.log(res)
+					success: (res) => {
 						this.historyList = res.data.result.records;
-						console.log(this.historyList)
 					}
 				})
 			}

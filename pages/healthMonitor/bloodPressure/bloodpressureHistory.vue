@@ -15,13 +15,14 @@
 		</view> -->
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
+				<view class="time">
+					{{item.test_time}}
+				</view>
 				<view class="position">
 					监测部位：左侧
 					<!-- {{item.position}} -->
 				</view>
-				<view class="time">
-					{{item.test_time}}
-				</view>
+				
 			</view>
 			<view class="data d-flex j-sb">
 				<view class="SYS">
@@ -89,7 +90,7 @@
 					data: {
 						params: {
 							model: "sphygmomanometer.jiakang",
-							token: "2d801467e65a20df2ad5dd175526c3e3",
+							token: "d7419ae04f248e5105ac3d0700389775",
 							uid: '2',
 							fields: [
 								"name",
@@ -105,8 +106,12 @@
 					},
 					success: (res) => {
 						this.dataList = res.data.result.records
-						console.log(this.dataList)
-						
+					},
+					fail: (err) => {
+						this.$refs.uToast.show({
+							message: '查询失败',
+							type: 'error',
+						})
 					}
 				})
 			}
