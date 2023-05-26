@@ -1,48 +1,88 @@
 <template>
 	<view class="content">
-	  <z-nav-bar :title="title">
-	    <view slot="right" class="p-2" @click="addMedicalRecord">
-	      <text style="font-size: 20rpx;">添加档案</text>
-	    </view>
-	  </z-nav-bar>
+		<!-- 健康档案组件 -->
+	  <header-nav :title="title" :tourl="tourl" :addtext="addtext"></header-nav>
+		<!-- 通用组件 -->
 	  <public-module></public-module>
 
-	  <!--  记录  -->
+	  <!--  空记录  -->
 		<view class="nothing" v-if="dataList.length === 0">
-			<u-image src="../../../../static/icon/healthFile/listEmpty.png" width="400rpx" height="400rpx" shape="circle"></u-image>
-			<view class="first-text">
-				<text >暂无数据</text>
-			</view>
-			<view class="second-text">
-				<text style="font-size: 30rpx">
-					当前暂无{{title}}记录，
-				</text>
-				<text style="font-size: 30rpx;color: #5ac725" @click="addMedicalRecord">
-					点击前去添加
-				</text>
-			</view>
+			<!-- 健康管理组件 -->
+			<empty-state :title="title" :tourl="tourl"></empty-state>
 		</view>
-		<view class="medical-records" v-else>
 
+		<!--  非空记录  -->
+		<view class="medical-records" v-else>
+			<!-- 健康管理组件 -->
+			<not-empty-state :dataList="dataList" :showObj="showObj"></not-empty-state>
 		</view>
 	</view>
 	  
 </template>
 
 <script>
-
+	import emptyState from "../components/emptyState.vue";
+	import notEmptyState from "../components/notEmptyState.vue";
+	import headerNav from "../components/headerNav.vue";
 	export default {
-
+		components:{
+			headerNav,
+			emptyState,
+			notEmptyState
+		},
 		data() {
 			return {
-				dataList:[],
-				title:'门诊病例'
+				//显示的文本
+				showObj:{
+					curNow:0,
+					//这边统一写内容用
+					choiceTitle:'门诊类别',
+					type:["急诊","普通门诊"],
+					ImgText:'病例照片',
+					remarksText:'疾病诊断',
+					typeText:'门诊类型',
+					discription:'情况描述',
+
+					// 备注
+					remarksValue: '',
+					// 选择日期
+					selectedDate: new Date(),
+					imageStyles: {
+						width: 90,
+						height: 90,
+						border: {
+						}
+					},
+					value: 0,
+				},
+				//数据
+				dataList:[
+					{
+						//门诊类型
+						type:'急诊',
+						//选择的日期
+						selectedDate:'111',
+						//疾病名称
+						illName:'感冒',
+						//疾病备注
+						illDiscription:'流鼻涕，发热',
+						//图片
+						imgs:[
+								'../../../../static/icon/wechat.png',
+								'../../../../static/icon/wechat2.png'
+						],
+					}
+				],
+				title:'门诊病例',
+				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
+				addtext:'添加病例'
 			}
 		},
+
 		methods: {
 			addMedicalRecord(){
 				uni.navigateTo({
-							url:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord'
+					url:this.tourl
 				});
 			}
 		}
@@ -50,21 +90,15 @@
 </script>
 
 <style lang="scss">
-	.nothing{
-		text-align: center;
-		padding-top: 300rpx;
-		width: 400rpx;
-		height: 400rpx;
-		margin: 0 auto;
-		u-image{
-			//光晕效果未加
-			Filter: Chroma(Color = #000000) Glow(Color=#00FF00, Strength=20);
-		}
-		.first-text{
-			margin-top: 40rpx;
-		}
-		.second-text{
-			margin-top: 40rpx;
+	.content{
+		background-color: #FFFFFF;
+		height: 100%;
+		.nothing{
+			text-align: center;
+			padding-top: 300rpx;
+			width: 400rpx;
+			margin: 0 auto;
 		}
 	}
+
 </style>

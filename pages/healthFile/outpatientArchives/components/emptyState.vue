@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-        <u-image src="../../../static/icon/healthFile/listEmpty.png" width="400rpx" height="400rpx" shape="circle"></u-image>
+        <u-image src="../../../../static/icon/healthFile/listEmpty.png" width="400rpx" height="400rpx" shape="circle"></u-image>
         <view class="first-text">
             <text >暂无数据</text>
         </view>
