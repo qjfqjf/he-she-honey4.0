@@ -1,0 +1,109 @@
+.hm-photo-card {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  width: 385px;
+  height: 375px;
+}
+
+.box {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(209, 213, 223, 0.5);
+  background-color: #ffffff;
+  width: 370px;
+  height: 335px;
+}
+
+.titleClass {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 32px;
+  padding-left: 30px;
+  width: 370px;
+}
+
+.title {
+  opacity: 1;
+  width: 70px;
+  height: 24px;
+  line-height: 24px;
+  white-space: pre;
+  color: #858997;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.titleImg {
+  margin-top: 10px;
+  width: 18px;
+  height: 4px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+  width: 369px;
+}
+
+.img {
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.img1 {
+  margin-left: 16px;
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.img2 {
+  margin-left: 15px;
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.second {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+  width: 369px;
+}
+
+.img3 {
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.img4 {
+  margin-left: 16px;
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.img5 {
+  margin-left: 15px;
+  border-radius: 15px;
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}

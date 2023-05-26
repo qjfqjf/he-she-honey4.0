@@ -32,7 +32,7 @@ export default {
 			],
 			//显示的文本
 			addObj:{
-				curNow:0,
+				curNow:-1,
 				//这边统一写内容用
 				choiceTitle:'门诊类别',
 				list:["急诊","普通门诊"],
@@ -40,6 +40,7 @@ export default {
 				placeholder1:'请输入疾病诊断名称',
 				placeholder2:'请添加疾病诊断的备注',
 				remarksText:'疾病诊断',
+				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -62,5 +63,8 @@ export default {
 </script>
 
 <style lang="scss">
-
+	.out-contain{
+		background-color: #FFFFFF;
+		height: 100%;
+	}
 </style>

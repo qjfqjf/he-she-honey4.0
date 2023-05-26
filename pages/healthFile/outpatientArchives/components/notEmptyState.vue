@@ -10,7 +10,7 @@
             </view>
             <view style="height: 20rpx"></view>
             <view class="date-box">
-                <text style="margin-left:20rpx">{{item.selectedDate}}</text>
+                <text style="margin-left:20rpx;font-size: 30rpx">{{item.selectedDate}}</text>
             </view>
 
             <view style="height: 40rpx"></view>
@@ -19,30 +19,46 @@
             <view class="remarks">
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
-                <u-input style="background-color:#f5f5f5" :placeholder="item.illName" border="false" readonly="true"></u-input>
+                <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
+                    <text style="font-weight: 300">{{item.illName}}</text>
+                </view>
             </view>
 
             <!-- 3、门诊类别 -->
             <view class="" style="margin:0 20rpx">
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
-                <u-input style="width: 200rpx;background-color:#f5f5f5" :placeholder="item.type" border="false" readonly="true"></u-input>
+                <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
+                    <text style="font-weight: 300">{{item.type}}</text>
+                </view>
             </view>
 
             <!-- 4、情况描述 -->
-            <view class="" style="margin:0 20rpx">
+            <view class="" style="margin:0 20rpx;">
                 <view style="height: 20rpx"></view>
-                <u-textarea :placeholder="item.illDiscription" style="margin: 20rpx 0;background-color:#f5f5f5 ;" border="false" disabled="true"></u-textarea>
+                <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
+                    <text style="font-weight: 300">{{item.illDiscription}}</text>
+                </view>
             </view>
 
-
             <!-- 5、图片展示 -->
-            <view class="uploadImage">
-                <text class="cate-text">{{showObj.ImgText}}</text>
-                <view style="height: 20rpx"></view>
-                <view class="example-body" v-for="img in item.imgs"  flex-direction="row">
-                    <image style="width: 200rpx;height: 200rpx" :src="img"></image>
-                </view>
+
+            <view style="height: 20rpx"></view>
+            <text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
+            <view style="height: 20rpx"></view>
+            <view class="showImage" style="display:flex" >
+<!--                <view>-->
+<!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
+<!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
+<!--                                     v-model="dataList.imgs" -->
+<!--                                     del-icon="false"-->
+<!--                    ></uni-file-picker>-->
+<!--                </view>-->
+
+<!--                <view class="example-body" v-for="img in item.imgs" style="width: 150rpx;margin-left: 60rpx;background-color: #1a1a1a" >-->
+<!--                    <image style="width: 150rpx;height: 150rpx;margin: 0; " :src="img.url"></image>-->
+<!--                </view>-->
+                <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs"></tel-pic>
             </view>
 
 
@@ -56,19 +72,20 @@
 <script>
 
 
-import UImage from "../../../../uni_modules/uview-ui/components/u--image/u--image.vue";
-import UDivider from "../../../../uni_modules/uview-ui/components/u-divider/u-divider.vue";
+
+
 
 export default {
     name: "notEmptyState",
-    components: {UDivider, UImage},
+    components: {},
+
     props:["dataList","showObj"],
     data(){
         return{
             imageStyles:{
                 width:90,
                 height:90
-            }
+            },
         }
     },
     methods:{
@@ -86,9 +103,6 @@ export default {
 </script>
 
 <style lang="scss">
-input[readonly]{
-    background-color: #1a1a1a;
-}
 .in-content {
   background-color: white;
   height: 100%;
@@ -109,14 +123,9 @@ input[readonly]{
     .select-list {}
   }
 
-  .uploadImage {
+  .showImage {
     padding: 20rpx;
-    background-color: white;
 
-    .tip {
-      color: #e0584b;
-      font-size: 24rpx
-    }
   }
 
   .remarks {

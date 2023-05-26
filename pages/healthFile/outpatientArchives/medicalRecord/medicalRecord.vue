@@ -58,6 +58,10 @@
 				//数据
 				dataList:[
 					{
+						//用户id
+						uid:'',
+						//病例id
+						recordId:'',
 						//门诊类型
 						type:'急诊',
 						//选择的日期
@@ -68,8 +72,12 @@
 						illDiscription:'流鼻涕，发热',
 						//图片
 						imgs:[
-								'../../../../static/icon/wechat.png',
-								'../../../../static/icon/wechat2.png'
+							'../../../../static/icon/wechat.png',
+							'../../../../static/icon/wechat2.png',
+							'../../../../static/icon/wechat2.png',
+							'../../../../static/icon/wechat2.png',
+							'../../../../static/icon/wechat2.png',
+							'../../../../static/icon/wechat2.png',
 						],
 					}
 				],
