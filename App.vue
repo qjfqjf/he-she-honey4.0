@@ -9,7 +9,7 @@
   // #endif
   export default {
     onLaunch: function (e) {
-      //取出缓存数据
+      //取出缓存数据 
       store.commit('setCacheData')
       // #ifdef MP-WEIXIN
       if (store.state.userInfo.token) {
