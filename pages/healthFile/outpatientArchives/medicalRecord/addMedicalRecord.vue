@@ -20,19 +20,32 @@ export default {
 		return {
 			title:"门诊病例",
 			//数据
-			dataList:[
+			dataObj:[
 				{
+					//用户id
+					uid:'111',
+					//病例id
+					recordId:'',
+					//门诊类型
 					type:'',
-					remarksText:'',
-					choiceTitle:'',
-					selectedDate:'',
-					text1:'',
-					text2:'',
-				}
+					//选择的日期
+					selectedDate:new Date(),
+					//疾病名称
+					illName:'',
+					//疾病备注
+					illDiscription:'',
+					//图片
+					imgs:[
+						''
+					],
+				},
+
+
 			],
 			//显示的文本
 			addObj:{
-				curNow:-1,
+				//默认的选项
+				curNow:0,
 				//这边统一写内容用
 				choiceTitle:'门诊类别',
 				list:["急诊","普通门诊"],
@@ -54,12 +67,17 @@ export default {
 					}
 				},
 				value: 0,
+				type:'',
 			},
 		};
 	},
 	//方法
 	methods: {
 
+	},
+	onShow(){
+		this.addObj.type = this.addObj.list[this.addObj.curNow];
+		console.log(this.addObj.type)
 	}
 }
 </script>

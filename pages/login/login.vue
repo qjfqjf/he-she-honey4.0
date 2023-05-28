@@ -8,8 +8,8 @@
 				<u-icon name="arrow-left" color="rgb(60, 60, 60)" size="18" @click="back"></u-icon>
 			</view>
 			<view class="right-change" plain="true">
-				<p style="font-size: 30rpx;color: #1AB76C;" @click="type = 2000" v-if="type == 1000">密码登录</p>
-				<p style="font-size: 30rpx;color: #1AB76C;" @click="type = 1000" v-if="type == 2000">验证码登录</p>
+				<p style="font-size: 30rpx;color: #1AB76C;" @click="changeType(1000)" v-if="type == 1000">账号密码登录</p>
+				<p style="font-size: 30rpx;color: #1AB76C;" @click="changeType(2000)" v-if="type == 2000">验证码登录</p>
 			</view>
 		</view>
 		<view class="middle-box">
@@ -21,13 +21,14 @@
 			</view>
 		</view>
 		<view class="login-input">
-			<u-form class="login-form" :model="form" ref="uForm">
-				<u-form-item label="+86"><p style="color: #6a6a6a">|</p><u-input v-model="form.phonenum" border="false" placeholder="请输入手机号"/></u-form-item>
+			<u-form class="login-form" :model="params" ref="uForm">
+				<u-form-item label="+86" v-if="type == 1000"><p style="color: #6a6a6a">|</p><u-input v-if="type == 1000" v-model="form.phonenum" border="false" placeholder="请输入手机号"/></u-form-item>
+				<u-form-item v-if="type == 2000"><u-input v-if="type == 2000" v-model="params.login" border="false" placeholder="请输入账号"/></u-form-item>
 				<u-form-item>
-						<u-input v-if="type == 1000" v-model="form.code" border="false" placeholder="请输入验证码" style="width: 300rpx"/>
+						<u-input v-if="type == 1000" v-model="form.code"  border="false" placeholder="请输入验证码" style="width: 300rpx"/>
 						<button v-if="type == 1000" style="background: none;font-size: 30rpx;color: #1fc7a3" @click="getCode">{{codeText}}</button>
 					<view v-if="type == 2000" class="pass-input">
-						<u-input  v-model="form.pass" border="false" type="password" placeholder="请输入密码" password-icon="true"/>
+						<u-input  v-model="params.password" border="false" type="password" placeholder="请输入密码" password-icon="true"/>
 					</view>
 				</u-form-item>
 			</u-form>
@@ -57,6 +58,10 @@ export default {
 
 	data() {
 		return {
+			params:{
+				login:'',
+				password:''
+			},
 			value:'',
 			form:{phonenum:'',code:'',pass:'',type:''},
 			type:'1000',
@@ -68,6 +73,18 @@ export default {
 		back(){
 
 		},
+
+		//改变登录方式
+		changeType(type){
+			if(type == 1000){
+				this.type = 2000
+			}else{
+				this.type = 1000
+			}
+			this.form = {}
+			this.params = {}
+		},
+
 		//获取验证码
 		getCode(){
 			if (!this.form.phonenum) {
@@ -118,24 +135,22 @@ export default {
 
 		//登录按钮
 		onsubmit(){
-			if (!this.form.phonenum) {
-				uni.showToast({
-					title: '请输入手机号',
-					icon: 'none'
-				});
-				return;
-			}
-			if (!this.$base.phoneRegular.test(this.form.phonenum)) {
-				uni.showToast({
-					title: '手机号码格式不正确',
-					icon: 'none'
-				});
-				return;
-			}
-			let httpData = {
-				phonenum: this.form.phonenum
-			};
-			if (this.type == 1000) {
+			//登录方式为验证码登录时的非空判断和手机号格式判断(未实现)
+			if(this.type == 1000){
+				if (!this.form.phonenum) {
+					uni.showToast({
+						title: '请输入手机号',
+						icon: 'none'
+					});
+					return;
+				}
+				if (!this.$base.phoneRegular.test(this.form.phonenum)) {
+					uni.showToast({
+						title: '手机号码格式不正确',
+						icon: 'none'
+					});
+					return;
+				}
 				if (!this.form.code) {
 					uni.showToast({
 						title: '请输入验证码',
@@ -143,52 +158,120 @@ export default {
 					});
 					return;
 				}
-				httpData.code = this.code;
-			} else {
-				if (!this.form.pass) {
+
+				//模拟验证码登录成功(未实现)
+				//模拟登录成功
+				uni.showToast({
+					title: '登录成功',
+					duration: 2000,
+					success: () => {
+						setTimeout(() => {
+							uni.switchTab({
+								url: '/pages/homePage/homePage',
+								success:(res)=>{
+									console.log(res)
+								},
+								fail:(err)=>{
+									console.log(err)
+								}
+							});
+						}, 1000);
+					}
+				})
+
+			}
+			//登录方式为账号密码登录
+			else {
+				if(!this.params.login){
+					uni.showToast({
+						title: '请输入账号',
+						icon: 'none'
+					});
+					return;
+				}
+				if (!this.params.password) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none'
 					});
 					return;
 				}
-				httpData.pass = md5(this.form.pass);
+				uni.request({
+					url:'http://106.14.140.92:8881/platform/login',
+					method:'post',
+					data:{
+						params : this.params
+					},
+					success:(res)=>{
+						//登录成功
+						if (res.data.result.code == '200'){
+							// 用户的信息和token存放进localStorage里面去
+							localStorage.setItem('access-admin',JSON.stringify(res.data.result.data));
+							uni.showToast({
+								title: '登录成功',
+								duration: 2000,
+								success: () => {
+									setTimeout(() => {
+										uni.switchTab({
+											url: '/pages/homePage/homePage',
+											success:(res)=>{
+												console.log(res)
+											},
+											fail:(err)=>{
+												console.log(err)
+											}
+										});
+									}, 1000);
+								}
+							})
+						}
+						//登陆失败
+						else{
+							uni.showToast({
+								title:'登陆失败',
+								icon:'none',
+								duration: 2000
+							})
+						}
+					}
+				});
 			}
 
+
 			//模拟登录成功
-			uni.showToast({
-				title: '登录成功',
-				duration: 2000,
-				success: () => {
-					setTimeout(() => {
-						uni.switchTab({
-							url: '/pages/homePage/homePage',
-							success:(res)=>{
-								console.log(res)
-							},
-							fail:(err)=>{
-								console.log(err)
-							}
-						});
-					}, 1000);
-				}
-			});
+			// uni.showToast({
+			// 	title: '登录成功',
+			// 	duration: 2000,
+			// 	success: () => {
+			// 		setTimeout(() => {
+			// 			uni.switchTab({
+			// 				url: '/pages/homePage/homePage',
+			// 				success:(res)=>{
+			// 					console.log(res)
+			// 				},
+			// 				fail:(err)=>{
+			// 					console.log(err)
+			// 				}
+			// 			});
+			// 		}, 1000);
+			// 	}
+			// });
 			//登录接口未实现
-			this.$http
-					.post('',httpData)
-					.then(res => {
-						uni.showToast({
-							title: '登录成功',
-							duration: 2000,
-							success: () => {
-								setTimeout(() => {
-									uni.switchTab({
-										url: 'pages/homePage/homePage'
-									});
-								}, 2000);
-							}
-						});
-					})
+			// this.$http
+			// 		.post('',httpData)
+			// 		.then(res => {
+			// 			uni.showToast({
+			// 				title: '登录成功',
+			// 				duration: 2000,
+			// 				success: () => {
+			// 					setTimeout(() => {
+			// 						uni.switchTab({
+			// 							url: 'pages/homePage/homePage'
+			// 						});
+			// 					}, 2000);
+			// 				}
+			// 			});
+			// 		})
 		},
 
 

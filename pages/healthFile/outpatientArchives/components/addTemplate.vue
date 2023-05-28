@@ -20,7 +20,7 @@
                     <text class="cate-text">{{addObj.uploadImgText}}</text>
                     <view style="height: 20rpx"></view>
                     <view class="example-body">
-                        <uni-file-picker limit="9" :image-styles="addObj.imageStyles" :value="dataObj.imgs" @select=""></uni-file-picker>
+                        <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
                 </view>
 
@@ -65,32 +65,33 @@ export default {
     name: "addTemplate",
     components: {UForm},
     props:["addObj"],
-    data(){
-        return{
-            dataObj:
-                {
-                    //用户id
-                    uid:'111',
-                    //病例id
-                    recordId:'',
-                    //门诊类型
-                    type:'',
-                    //选择的日期
-                    selectedDate:new Date(),
-                    //疾病名称
-                    illName:'',
-                    //疾病备注
-                    illDiscription:'',
-                    //图片
-                    imgs:[
-                    ],
-                },
+    data() {
+        return {
+            dataObj: {
+                //用户id
+                uid: '111',
+                //病例id
+                recordId: '',
+                //门诊类型
+                type: this.addObj.type,
+                //选择的日期
+                selectedDate: new Date(),
+                //疾病名称
+                illName: '',
+                //疾病备注
+                illDiscription: '',
+                //图片
+                imgs: [
+                    ''
+                ],
+            },
         }
     },
     methods:{
         sectionChange(index) {
             this.dataObj.type = this.addObj.list[index]
             this.addObj.curNow = index;
+            console.log(index,this.dataObj.type)
         },
         change(e) {
             console.log("e:", e);
@@ -100,22 +101,21 @@ export default {
         //保存方法
         saveRecords(){
             console.log(this.dataObj);
-            uni.request({
-                url:this.addObj.tourl2,
-                method:'post',
-                data:{
-                    params:{
-                        dataObj:this.dataObj,
-                        model:'',
-                        token:'',
-                        uid:'',
-                        fields:[
-
-                        ]
-                    }
-                },
-                success(res){
-                    console.log(res);
+            //uni.request({
+                // url:this.addObj.tourl2,
+                // method:'post',
+                // data:{
+                //     params:{
+                //         dataObj:this.dataObj,
+                //         model:'',
+                //         token:'',
+                //         uid:'',
+                //         fields:[
+                //
+                //         ]
+                //     }
+                // },
+                //success(res){
                     uni.showToast({
                         title:'保存成功',
                         duration:1000,
@@ -133,11 +133,13 @@ export default {
                             }, 1000);
                         }
                     });
-                }
-            });
+                //}
+           // });
 
         },
     },
+
+
 }
 </script>
 
