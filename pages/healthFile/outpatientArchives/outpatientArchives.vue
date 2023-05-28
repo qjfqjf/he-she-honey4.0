@@ -59,7 +59,6 @@
 				if(!url) {
 					this.$refs.uToast.default('开发中...')
 				}
-				console.log(url)
 				uni.navigateTo({
 					url: url
 				});

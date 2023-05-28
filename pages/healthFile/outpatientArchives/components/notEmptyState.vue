@@ -5,27 +5,20 @@
         </view>
         <view class="in-content" v-for="item in dataList" :key>
             <!-- 1、日期 -->
-            <view class="cate">
-                <text class="cate-text">日期</text>
-            </view>
-            <view style="height: 20rpx"></view>
-            <view class="date-box">
-                <text style="margin-left:20rpx;font-size: 30rpx">{{item.selectedDate}}</text>
-            </view>
-
-            <view style="height: 40rpx"></view>
-
-            <!-- 2、疾病诊断 -->
             <view class="remarks">
-                <text class="cate-text" style="">{{showObj.remarksText}}</text>
+                <view class="cate">
+                    <text class="cate-text">日期</text>
+                </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.illName}}</text>
+                    <text style="font-size: 30rpx">{{item.selectedDate}}</text>
                 </view>
             </view>
 
-            <!-- 3、门诊类别 -->
-            <view class="" style="margin:0 20rpx">
+
+
+            <!-- 2、门诊类别 -->
+            <view class="remarks">
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
@@ -33,8 +26,17 @@
                 </view>
             </view>
 
+
+            <!-- 3、疾病诊断 -->
+            <view class="remarks">
+                <text class="cate-text" style="">{{showObj.remarksText}}</text>
+                <view style="height: 20rpx"></view>
+                <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
+                    <text style="font-weight: 300">{{item.illName}}</text>
+                </view>
+            </view>
             <!-- 4、情况描述 -->
-            <view class="" style="margin:0 20rpx;">
+            <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
                     <text style="font-weight: 300">{{item.illDiscription}}</text>
@@ -44,9 +46,20 @@
             <!-- 5、图片展示 -->
 
             <view style="height: 20rpx"></view>
-            <text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
-            <view style="height: 20rpx"></view>
-            <view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
+
+            <view class="remarks">
+                <text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
+                <view style="height: 20rpx"></view>
+                <view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
+                    <view class="example-body" v-for="img in item.imgs" style="width: 150rpx;height: 150rpx;margin-left: 50rpx;margin-bottom: 50rpx;" >
+                        <view style="">
+                            <image style="width: 150rpx;height: 150rpx; " :src="img"></image>
+                        </view>
+                    </view>
+                    <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs" ></tel-pic>
+                </view>
+            </view>
+
 <!--                <view>-->
 <!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
 <!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
@@ -55,16 +68,8 @@
 <!--                    ></uni-file-picker>-->
 <!--                </view>-->
 
-               <view class="example-body" v-for="img in item.imgs" style="width: 150rpx;margin-left: 60rpx;background-color: #d8d0d0" >
-                   <image style="width: 150rpx;height: 150rpx;margin-bottom: 10px; " :src="img"></image> 
-               </view>
-                <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs" ></tel-pic>
-            </view>
-            
-
-
             <!-- 6、分割线 -->
-            <u-divider style="margin-top: 250rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
+            <u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
 
         </view>
     </view>
@@ -125,7 +130,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     background-color: white;
-    padding: 20rpx;
     .select-list {}
   }
 
