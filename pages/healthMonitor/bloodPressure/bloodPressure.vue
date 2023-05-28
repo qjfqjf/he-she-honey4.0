@@ -161,7 +161,7 @@
 					{
 						img: require('@/static/icon/bloodPressure/write.png'),
 						title: '手动录入',
-						url: '/pages/healthMonitor/' + this.page
+						url: '/pages/healthMonitor/bloodPressure/manualEntry' 
 					},
 				],
 			};
