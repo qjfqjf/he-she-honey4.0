@@ -1,14 +1,15 @@
-
-
 {
 	"pages": [
-		//登录页面
-		
-		
 		{
-			"path": "pages/homePage/homePage",
+			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "数字健康管理"
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登录（弃用）"
 			}
 		},
 		{
@@ -210,12 +211,7 @@
 				"navigationBarTitleText": "注册"
 			}
 		},
-		{
-			"path": "pages/user/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
+		
 		{
 			"path": "pages/sdkDemo/common",
 			"style": {
@@ -802,7 +798,28 @@
 			}
 		},
 		{
-			"path": "pages/healthManagement/components/emptyState",
+			"path": "pages/healthFile/outpatientArchives/components/emptyState",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/notEmptyState",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/addTemplate",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthFile/outpatientArchives/components/headerNav",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -1386,7 +1403,24 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/healthFile/outpatientArchives/medicalRecord/medicalRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": ""
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
 	//   "style": {
@@ -1513,4 +1547,3 @@
 		}]
 	}
 }
-

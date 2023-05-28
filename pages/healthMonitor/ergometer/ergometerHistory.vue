@@ -1,94 +1,128 @@
 <template>
-  <view class="container">
-    <z-nav-bar title="心电图历史"></z-nav-bar>
-    <public-module></public-module>
+	<view class="container">
+		<z-nav-bar title="心电图历史"></z-nav-bar>
+		<public-module></public-module>
 
 
-    <!-- 正文内容 -->
-    <view class="content-body">
-     <view class="item" v-for="(item, index) in historyList" :key="index">
-       <image :src="item.img" mode="aspectFill"></image>
-       <view class="personal-info">
-         <view class="info-item">
-           <text>姓名：{{item.info.name}}</text>
-           <text>性别：{{item.info.sex}}</text>
-         </view>
-         <view class="info-item">
-           <text>出生日期：{{item.info.birth}}</text>
-         </view>
-         <view class="info-item">
-           <text>身高(cm)：{{item.info.height}}</text>
-           <text>体重(kg)：{{item.info.weight}}</text>
-         </view>
-         <view class="info-item">
-           <text>时间：{{item.info.time}}</text>
-           <text>心率：{{item.info.heartRate}}</text>
-         </view>
-         <view class="info-item">
-           <text>分析结果：{{item.info.result}}</text>
-         </view>
-       </view>
-     </view>
-    </view>
-  </view>
+		<!-- 正文内容 -->
+		<view class="content-body">
+			<view class="item" v-for="(item, index) in historyList" :key="index">
+				<image :src="'data:image/png;base64,'+item.electrocardiogram" mode="aspectFill"></image>
+				<view class="personal-info">
+					<view class="info-item">
+						<text>姓名：{{item.owner[1]}}</text>
+						<!-- <text>性别：{{item.info.sex}}</text> -->
+					</view>
+					<view class="info-item">
+						<text>出生日期：1967-08-09</text>
+					</view>
+					<view class="info-item">
+						<text>身高(cm)：1.78</text>
+						<text>体重(kg)：78.0</text>
+					</view>
+					<view class="info-item">
+						<text>时间：{{item.test_time}}</text>
+						<text>心率：{{item.wavelength}}</text>
+					</view>
+					<view class="info-item">
+						<text>分析结果：波形未见异常</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        historyList: [{
-          img: require('@/static/img/ergometer/ergometer.jpg'),
-          info: {
-            name: '鹏辉',
-            sex: '男',
-            birth: '1967-08-09',
-            height: '1.78',
-            weight: '78.0',
-            time: '2022-09-09 20:50:10',
-            heartRate: '92',
-            result: '波形未见异常'
-          }
-        }],
-      };
-    },
+	export default {
+		data() {
+			return {
+				historyList: [
+				// 	{
+				// 	img: require('@/static/img/ergometer/ergometer.jpg'),
+				// 	info: {
+				// 		name: '鹏辉',
+				// 		sex: '男',
+				// 		birth: '1967-08-09',
+				// 		height: '1.78',
+				// 		weight: '78.0',
+				// 		time: '2022-09-09 20:50:10',
+				// 		heartRate: '92',
+				// 		result: '波形未见异常'
+				// 	}
+				// },
+				],
+			};
+		},
 
-    methods: {
-      handleDevelop() {
-        uni.navigateTo({
-          url: '/pages/healthMonitor/bloodSugar/warningRules'
-        })
-      }
-    }
-  }
+		methods: {
+			handleDevelop() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSugar/warningRules'
+				})
+			},
+			//查询心电图历史记录
+			getHistoryList() {
+				uni.request({
+					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
+					method: 'post',
+					data: {
+						params: {
+							model: "electrocardiograph",
+							token: "d7419ae04f248e5105ac3d0700389775",
+							uid: '2',
+							fields: [
+								"name",
+								"numbers",
+								"owner",
+								"electrocardiogram",
+								"wavelength",
+								"input_type",
+								"test_time"
+							]
+						}
+					},
+					success: (res) => {
+						console.log(res)
+						this.historyList = res.data.result.records
+					}
+				})
+			}
+		},
+		onLoad() {
+			this.getHistoryList();
+		},
+	}
 </script>
 
 <style lang="scss">
-  .container {
-    font-size: 30rpx;
+	.container {
+		font-size: 30rpx;
 
-    .regular {
-      font-size: 26rpx;
-    }
+		.regular {
+			font-size: 26rpx;
+		}
 
-    .content-body {
-      .item {
-        image{
-          width: 100%;
-        }
-        .personal-info{
-          background-color: white;
-          border-bottom: 1rpx solid #ddd;
-          padding: 40rpx;
-          .info-item{
-            text{
-              margin-right: 30rpx;
-              line-height: 50rpx;
-            }
-          }
-        }
-        
-      }
-    }
-  }
+		.content-body {
+			.item {
+				image {
+					width: 100%;
+				}
+
+				.personal-info {
+					background-color: white;
+					border-bottom: 1rpx solid #ddd;
+					padding: 40rpx;
+
+					.info-item {
+						text {
+							margin-right: 30rpx;
+							line-height: 50rpx;
+						}
+					}
+				}
+
+			}
+		}
+	}
 </style>

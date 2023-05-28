@@ -2,7 +2,7 @@
   import store from '@/store/index.js'
   import socket from '@/config/socket'
   // #ifdef H5
-  import { h5Login } from '@/config/html5Utils'
+  //import { h5Login } from '@/config/html5Utils'
   // #endif
   // #ifdef APP-PLUS
   // import APPUpdate from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate'
