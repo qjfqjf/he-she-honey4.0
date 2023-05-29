@@ -973,13 +973,7 @@
                 "enablePullDownRefresh" : false
             }
         },
-        {
-            "path" : "pages/healthAssessment/emotionalCognition/emotionalCognitionAssessment2",
-            "style" : {
-                "navigationBarTitleText" : "",
-                "enablePullDownRefresh" : false
-            }
-        },
+
         {
             "path" : "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognition",
             "style" : {

@@ -8,7 +8,7 @@
       <view class="collapse">
         <u-collapse @change="change" @close="close" @open="open">
           <u-collapse-item class="collapse-item" title="情绪筛查表1" name="Docs guide">
-            <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+
           </u-collapse-item>
           <u-collapse-item class="collapse-item" title="情绪筛查表2" name="Variety components">
             <text class="u-collapse-content">众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让您快速集成，开箱即用</text>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import InputAndChoiceForm from "./components/inputAndChoiceForm.vue";
   export default {
     data() {
       return {
@@ -52,7 +53,10 @@
       change(e) {
         // console.log('change', e)
       }
-    }
+    },
+      components:{
+        InputAndChoiceForm
+      }
   }
 </script>
 
@@ -67,7 +71,7 @@
         }
       }
     }
-    
+
     .submit{
       position: relative;
       display: flex;
@@ -77,9 +81,9 @@
         border-radius: 50rpx;
         margin-top: 20rpx;
         position: absolute;
-        
+
       }
     }
-    
+
   }
 </style>
