@@ -92,8 +92,8 @@
 		</view>
 		<!-- <u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
 			radius="5" bgColor="#ffffff"></u-swiper> -->
-		<u-swiper class=" m-1" :list="wisperImage" indicator indicatorMode="line" circular :autoplay="false"
-			radius="5" bgColor="#ffffff">
+		<u-swiper class=" m-1" :list="wisperImage" indicator indicatorMode="line" circular :autoplay="false" radius="5"
+			bgColor="#ffffff">
 		</u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
 			<u-gap height="10"></u-gap>
@@ -101,7 +101,8 @@
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
 						<navigator :url="listItem.path">
-							<u--image class="appManeger_block_icon" :src="listItem.icon" :customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
+							<u--image class="appManeger_block_icon" :src="listItem.icon"
+								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 							</u--image>
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
@@ -126,6 +127,7 @@
 	import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
 	import home from "../template/home.vue";
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
+	import $http from '@/config/requestConfig.js';
 	export default {
 		computed: {
 			home() {
@@ -137,7 +139,8 @@
 				wisperImage,
 				appManage,
 				appFeature,
-				homePageIcons
+				homePageIcons,
+				token: uni.getStorageSync('access-token')
 
 			};
 		},
@@ -149,9 +152,18 @@
 		onLoad(e) {
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+
+			if (!this.token) {
+				uni.navigateTo({
+					url: '/pages/login/login',
+				})
+			}
+
+			console.log('onLoad', e)
 		},
 		//页面显示
 		onShow() {
+			console.log(1111)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 		},

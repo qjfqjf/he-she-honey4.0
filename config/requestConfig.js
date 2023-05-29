@@ -122,7 +122,17 @@ $http.requestStart = function(options) {
   // #endif
   //请求前加入token和uid
   const token = uni.getStorageSync('access-token')
-  const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+  let userInfo = ''
+  if (token) {
+    userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+  }
+  options.data = {
+    params: {
+      token,
+      uid: userInfo ? userInfo.uid : 1,
+      ...options.data,
+    },
+  }
   // let storeUserInfo = store.state.userInfo;
   // if (!storeUserInfo.token) { // nvue页面读取不到vuex里面数据，将取缓存
   //   storeUserInfo = uni.getStorageSync("userInfo");
@@ -151,23 +161,16 @@ $http.dataFactory = async function (res) {
     data: res.data,
     method: res.method,
   })
-  if (res.response.result.code && res.response.result.code == 200) {
-    let httpData = res.response.result
+  if (res.response.data) {
+    let httpData = res.response.data
     if (typeof httpData == 'string') {
       httpData = JSON.parse(httpData)
     }
-    /*********以下只是模板(及共参考)，需要开发者根据各自的接口返回类型修改*********/
-
     //判断数据是否请求成功
-    if (httpData.success || httpData.code == 200) {
+    if (httpData) {
       // 返回正确的结果(then接受数据)
       return Promise.resolve(httpData)
-    } else if (
-      httpData.code == '1000' ||
-      httpData.code == '1001' ||
-      httpData.code == 1100 ||
-      httpData.code == 402
-    ) {
+    } else if (httpData.result.message == 'token过期请重新登录') {
       // 失败重新请求（最多重新请求3次）
       // if(res.resend < 3){
       //     let result = await $http.request({
@@ -240,12 +243,12 @@ $http.dataFactory = async function (res) {
           title: '温馨提示',
           content: content,
           confirmText: '去登录',
-          cancelText: '再逛会',
+
           success: function (res) {
             loginPopupNum--
             if (res.confirm) {
               uni.navigateTo({
-                url: '/pages/user/login',
+                url: '/pages/login/login',
               })
             }
           },
@@ -255,7 +258,7 @@ $http.dataFactory = async function (res) {
       // 返回错误的结果(catch接受数据)
       return Promise.reject({
         statusCode: 0,
-        errMsg: '【request】' + (httpData.info || httpData.msg),
+        errMsg: '【request】' + (httpData.result || httpData.msg),
         data: res.data,
       })
     } else if (httpData.code == '1004') {
