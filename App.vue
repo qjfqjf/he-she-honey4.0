@@ -20,9 +20,9 @@
       if (store.state.userInfo.token) {
         socket.init()
       } else {
-        h5Login('force', () => {
-          socket.init()
-        })
+        // h5Login('force', () => {
+        //   socket.init()
+        // })
       }
       // #endif
       // #ifdef APP-PLUS

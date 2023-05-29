@@ -26,9 +26,9 @@
           >
           </u-tabs>
 		  <view class="d-flex a-center j-center buttonGrounp my-1">
-		      <u-button  :hairline="hairline"  color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
+		      <u-button    color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
 		                ></u-button>
-		      <u-button  :hairline="hairline"  color="#71d5a1" text="关注医生" class="rightButton" :plain="true"
+		      <u-button    color="#71d5a1" text="关注医生" class="rightButton" :plain="true"
 		                ></u-button>
 		  </view>
 		  <view class="notification d-flex flex-column shadow border rounded m-1 p-2 bg-white" v-for="index in 5">

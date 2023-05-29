@@ -211,7 +211,7 @@
 				"navigationBarTitleText": "注册"
 			}
 		},
-		
+
 		{
 			"path": "pages/sdkDemo/common",
 			"style": {
@@ -798,28 +798,7 @@
 			}
 		},
 		{
-			"path": "pages/healthFile/outpatientArchives/components/emptyState",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/outpatientArchives/components/notEmptyState",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/outpatientArchives/components/addTemplate",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/outpatientArchives/components/headerNav",
+			"path": "pages/healthManagement/components/emptyState",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -1403,132 +1382,7 @@
 			}
 
 		}
-	    ,{
-            "path" : "pages/healthFile/outpatientArchives/medicalRecord/medicalRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": ""
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/getMedicineRecord/getMedicineRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/getMedicineRecord/addGetMedicineRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/laboratoryExamination/addLaboratoryExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/imagingExamination/imagingExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/imagingExamination/addImagingExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/operation/operation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/operation/addOperation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/consultation/consultation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/outpatientArchives/consultation/addConsultation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/inpatientRecords/inpatientRecords",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/inpatientRecords/addInpatientRecords",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
 	//   "style": {
@@ -1655,3 +1509,4 @@
 		}]
 	}
 }
+
