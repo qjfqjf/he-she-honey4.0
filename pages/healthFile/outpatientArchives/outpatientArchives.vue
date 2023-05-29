@@ -39,7 +39,7 @@
 					{
 						img: require('@/static/icon/healthFile/imagingExamination.png'),
 						title: '影像检查',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/imagingExamination/imagingExamination'
 					},
 					{
 						img: require('@/static/icon/healthFile/operation.png'),

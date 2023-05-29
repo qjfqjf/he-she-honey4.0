@@ -1456,6 +1456,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/imagingExamination/imagingExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/imagingExamination/addImagingExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
