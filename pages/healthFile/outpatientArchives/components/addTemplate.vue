@@ -22,6 +22,7 @@
                     <view class="example-body">
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
+                    <text class="tip">（友情提示：最多添加9张图片）</text>
                 </view>
 
                 <!-- 3、备注和时间 -->
@@ -164,7 +165,6 @@ export default {
   .uploadImage {
     padding: 20rpx;
     background-color: white;
-
     .tip {
       color: #e0584b;
       font-size: 24rpx

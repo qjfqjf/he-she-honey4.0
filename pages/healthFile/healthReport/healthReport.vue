@@ -4,8 +4,8 @@
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
 		<u-cell-group>
-			<u-cell size="large" class="message" @click="click" url="" title="生理指标"></u-cell>
-			<u-cell size="large" class="message" @click="click" url="" title="健康状况"></u-cell>
+			<u-cell size="large" class="message"  url="/pages/healthFile/quota/index" title="生理指标"></u-cell>
+			<u-cell size="large" class="message"   url="/pages/healthFile/status/index" title="健康状况"></u-cell>
 			<u-cell size="large" class="message" url="/pages/healthFile/habit/habit" title="生活习惯"></u-cell>
 		</u-cell-group>
 		<u-toast ref="uToast"></u-toast>
@@ -16,8 +16,8 @@
 	export default {
 		data() {
 			return {
-				
-			} 
+
+			}
 		},
 		methods: {
 			click() {
@@ -30,5 +30,5 @@
 <style>
 .message{
 	background-color: #fff;
-} 
+}
 </style>

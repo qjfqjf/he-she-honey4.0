@@ -66,7 +66,7 @@
 	.demo-layout {
 			display: flex;
 			justify-content: space-between;
-	    }	
+	    }
 
 	.bg-purple-light {
 		background-color: #ffffff;
@@ -79,7 +79,7 @@
 		justify-content: center;
 	}
 	.text{
-		font-size: 34rpx; 
+		font-size: 34rpx;
 	}
 	.content {
 		.title {
