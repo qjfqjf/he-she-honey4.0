@@ -22,7 +22,7 @@
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.type}}</text>
+                    <text>{{item.type}}</text>
                 </view>
             </view>
 
@@ -32,14 +32,14 @@
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.illName}}</text>
+                    <text>{{item.illName}}</text>
                 </view>
             </view>
             <!-- 4、情况描述 -->
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.illDiscription}}</text>
+                    <text>{{item.illDiscription}}</text>
                 </view>
             </view>
 
