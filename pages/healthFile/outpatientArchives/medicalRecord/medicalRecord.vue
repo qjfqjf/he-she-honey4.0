@@ -85,7 +85,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
 				//接口
-				tourl2:'',
+				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
 				addtext:'添加病例'
 			}
 		},
@@ -95,33 +95,47 @@
 				uni.navigateTo({
 					url:this.tourl
 				});
-			}
-		},
-		//查询当前用户所有档案
-		getRecordsList(){
-			//接口调用
-			uni.request({
-				url:this.tourl2,
-				method:'post',
-				data: {
-					params:{
-						model:'',
-						token:'',
-						uid:'',
-						//传回去的数组(存放字段)
-						fields:[
-
-						]
+			},
+			//查询当前用户所有档案
+			getRecordsList(){
+				//拿到用户信息
+				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+				const uid = userInfo.uid;
+				const token = userInfo.token;
+				//接口调用
+				uni.request({
+					url:this.tourl2,
+					method:'post',
+					data: {
+						params:{
+							model:'inpatient.medical.records',
+							token:"c5ab6cebaca97f7171139e4d414ff5a6",
+							uid:uid,
+							//传回去的数组(存放字段)
+							fields:[
+								"picture_1",
+								"picture_2",
+								"picture_3",
+								"data_name",
+								"data_result",
+								"data_time",
+							]
+						}
+					},
+					success(res){
+						console.log(res.data.result)
+						//传回来的值
+						this.dataList = res.data.result
 					}
-				},
-				success(res){
-					//传回来的值
-					//this.dataList = res.data.result.
-				}
-			})
+				})
+			},
+
+
+
 		},
 
-		onload(){
+		//这里因为上面引用了组件所以无法使用uni中的钩子，onload函数，只能用vue中的钩子了
+		created(){
 			this.getRecordsList();
 		}
 	}

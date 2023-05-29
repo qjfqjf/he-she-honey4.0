@@ -65,7 +65,7 @@ import UForm from "../../../../uni_modules/uview-ui/components/u-form/u-form.vue
 export default {
     name: "addTemplate",
     components: {UForm},
-    props:["addObj"],
+    props:["addObj","params"],
     data() {
         return {
             dataObj: {
@@ -102,21 +102,21 @@ export default {
         //保存方法
         saveRecords(){
             console.log(this.dataObj);
-            //uni.request({
-                // url:this.addObj.tourl2,
-                // method:'post',
-                // data:{
-                //     params:{
-                //         dataObj:this.dataObj,
-                //         model:'',
-                //         token:'',
-                //         uid:'',
-                //         fields:[
-                //
-                //         ]
-                //     }
-                // },
-                //success(res){
+            uni.request({
+                url:this.addObj.tourl2,
+                method:'post',
+                data:{
+                    params:{
+                        dataObj:this.dataObj,
+                        model:'',
+                        token:'',
+                        uid:'',
+                        fields:[
+
+                        ]
+                    }
+                },
+                success(res){
                     uni.showToast({
                         title:'保存成功',
                         duration:1000,
@@ -134,8 +134,8 @@ export default {
                             }, 1000);
                         }
                     });
-                //}
-           // });
+                }
+           });
 
         },
     },

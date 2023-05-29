@@ -4,7 +4,7 @@
 		<!-- 上导航栏 -->
 		<header-nav :title="title"></header-nav>
 		<!-- 添加页面主体 -->
-		<add-template :addObj="addObj"></add-template>
+		<add-template :addObj="addObj" :params="params"></add-template>
 	</view>
 </template>
 
@@ -19,7 +19,23 @@ export default {
 	data() {
 		return {
 			title:"门诊病例",
-			//数据
+			//请求的参数
+			params:{
+				model:"",
+				token:"",
+				uid:2,
+				methods:"create",
+				args:[
+						[{
+							"name":"",
+						}]
+				],
+				kwargs:{}
+			},
+
+
+
+			//展示数据
 			dataObj:[
 				{
 					//用户id

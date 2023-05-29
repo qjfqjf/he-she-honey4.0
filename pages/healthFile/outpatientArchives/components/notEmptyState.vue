@@ -4,6 +4,8 @@
         <view style="height: 20rpx;background-color: #f5f5f5">
         </view>
         <view class="in-content" v-for="item in dataList" >
+
+
             <!-- 1、日期 -->
             <view class="remarks">
                 <view class="cate">
@@ -56,7 +58,6 @@
                             <image style="width: 150rpx;height: 150rpx; " :src="img"></image>
                         </view>
                     </view>
-                    <tel-pic :lineNum="3" :spacingNumber="10" :imageArr="item.imgs" ></tel-pic>
                 </view>
             </view>
 
