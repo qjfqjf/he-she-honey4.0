@@ -4,7 +4,7 @@
 		<!-- 上导航栏 -->
 		<header-nav :title="title"></header-nav>
 		<!-- 添加页面主体 -->
-		<add-template :addObj="addObj" :params="params"></add-template>
+		<add-template :addObj="addObj" :params="params" @btn-click="descclick"></add-template>
 	</view>
 </template>
 
@@ -23,12 +23,15 @@ export default {
 
 			//请求的参数
 			params:{
-				model:"res.users",
-				token:"c695c406dd17d2fc9dbfe917adaf9e33",
+				//注意！！查接口文档
+				model:"inpatient.medical.records",
+				token:"62da5a6d47be0029801ba74a17e47e1a",
 				uid:2,
-				methods:"create",
+				method:"create",
 				args:[
 						[{
+							//急诊类型
+							"data_type":"emergency",
 							"picture_1":"",
 							"picture_2":"",
 							"picture_3":"",
@@ -36,10 +39,10 @@ export default {
 							"data_name":"感冒",
 							//疾病备注
 							"data_result":"发热，流鼻涕",
+							//注意！！这个是uid
+							//用户id
+							"patient_id":2
 							//时间
-							"data_time":"2023-5-29 12:12:12",
-							//急诊类型
-							"data_type":"急诊",
 						}]
 				],
 				kwargs:{}
@@ -97,12 +100,18 @@ export default {
 				},
 				value: 0,
 				type:'',
+
+
+				//测试
+				value1:'',
 			},
 		};
 	},
 	//方法
 	methods: {
-
+		descclick(value1){
+			console.log("父组件接收到的dataObj:"+value1)
+		}
 	},
 	onShow(){
 		this.addObj.type = this.addObj.list[this.addObj.curNow];

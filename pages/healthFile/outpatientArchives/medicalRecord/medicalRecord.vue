@@ -109,7 +109,7 @@
 					data: {
 						params:{
 							model:'inpatient.medical.records',
-							token:"c695c406dd17d2fc9dbfe917adaf9e33",
+							token:"62da5a6d47be0029801ba74a17e47e1a",
 							uid:uid,
 							//传回去的数组(存放字段)
 							fields:[

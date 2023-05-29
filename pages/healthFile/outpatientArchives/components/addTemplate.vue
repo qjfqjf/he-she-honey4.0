@@ -50,7 +50,7 @@
 
                 <view class="save-box">
                     <!-- 保存按钮 -->
-                    <button class="saveBtn" @click="saveRecords()">保存</button>
+                    <button class="saveBtn" @click="saveRecords">保存</button>
                 </view>
             </u-form>
         </view>
@@ -99,13 +99,21 @@ export default {
         },
 
 
+        //测试子向父传值
+        saverecords1(){
+            console.log(this.dataObj)
+            this.$emit('btn-click',this.dataObj)
+        },
+
         //保存方法
         saveRecords(){
             //console.log(this.dataObj);
+            console.log(this.params)
             uni.request({
                 url:this.addObj.tourl2,
                 method:'post',
                 data:{
+
                     params:this.params,
 
 
