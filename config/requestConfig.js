@@ -1,21 +1,27 @@
-import request from '@/uni_modules/zhouWei-request/js_sdk/request'
-import store from '@/store'
-import base from '@/config/baseUrl'
+import request from "@/uni_modules/zhouWei-request/js_sdk/request";
+import store from '@/store';
+import base from '@/config/baseUrl';
 // #ifdef H5
-import { h5Login } from '@/config/html5Utils'
+import {
+  h5Login
+} from '@/config/html5Utils';
 // #endif
 // #ifdef MP-WEIXIN
-import { onLogin } from '@/config/login'
+import {
+  onLogin
+} from '@/config/login';
 // #endif
-let version_code = ''
+let version_code = '';
 // #ifdef APP-PLUS
-import { getCurrentNo } from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate'
+import {
+  getCurrentNo
+} from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate';
 setTimeout(() => {
-  getCurrentNo(function (res) {
-    console.log('版本号', res)
-    version_code = res.versionCode
-  })
-}, 200)
+  getCurrentNo(function(res) {
+    console.log("版本号", res);
+    version_code = res.versionCode;
+  });
+}, 200);
 // #endif
 
 //可以new多个request来支持多个域名请求
@@ -25,18 +31,18 @@ let $http = new request({
   //服务器本地上传文件地址
   fileUrl: base.baseUrl,
   // 服务器上传图片默认url
-  defaultUploadUrl: 'api/common/v1/upload_image',
+  defaultUploadUrl: "api/common/v1/upload_image",
   // 服务器上传文件名称
-  defaultFileName: 'file',
+  defaultFileName: "file",
   //设置请求头（如果使用报错跨域问题，可能是content-type请求类型和后台那边设置的不一致）
   header: {
     'Content-Type': 'application/json;charset=UTF-8',
-  },
-})
+  }
+});
 // 添加获取七牛云token的方法
-$http.getQnToken = function (callback) {
+$http.getQnToken = function(callback) {
   //该地址需要开发者自行配置（每个后台的接口风格都不一样）
-  $http.get('api/common/v1/qn_upload').then((data) => {
+  $http.get("api/common/v1/qn_upload").then(data => {
     /*
      *接口返回参数：
      *visitPrefix:访问文件的域名
@@ -47,14 +53,14 @@ $http.getQnToken = function (callback) {
     callback({
       visitPrefix: data.visitPrefix,
       token: data.token,
-      folderPath: data.folderPath,
-    })
-  })
+      folderPath: data.folderPath
+    });
+  });
 }
 // 添加获取阿里云token的方法
-$http.getAliToken = function (callback) {
+$http.getAliToken = function(callback) {
   //该地址需要开发者自行配置（每个后台的接口风格都不一样）
-  $http.get('api/open/v1/ali_oss_upload').then((data) => {
+  $http.get("api/open/v1/ali_oss_upload").then(data => {
     /*
      *接口返回参数：
      *visitPrefix:访问文件的域名
@@ -73,8 +79,9 @@ $http.getAliToken = function (callback) {
   })
 }
 //请求开始拦截器
-$http.requestStart = function (options) {
-  console.log('请求开始', options)
+$http.requestStart = function(options) {
+
+  console.log("请求开始", options);
   if (options.load) {
     //打开加载动画
     store.commit('setLoadingShow', true)
