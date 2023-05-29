@@ -27,10 +27,9 @@
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
 				<text class="tip">（友情提示：最多添加9张图片）</text>
-
                 </view>
 				<!--备注-->
-				<view>
+				<view class="remarks">
 					<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
 				</view>
                 <!-- 4、日期 -->
@@ -150,7 +149,6 @@ export default {
     		justify-content: space-between;
     		background-color: white;
     		padding: 20rpx;
-    		.select-list {}
   		}
 
   		.uploadImage {
@@ -165,11 +163,11 @@ export default {
 
   		.remarks {
     		margin-top: 14rpx;
-    		padding: 30rpx;
-    		height: 200rpx;
+    		padding: 20rpx;
+    		height: 300rpx;
     		.textarea {
-      		height: 200rpx;
-      		font-size: 28rpx;
+      		height: 100rpx;
+      		font-size: 10rpx;
     		}
   		}
 		  .tip {
@@ -182,7 +180,7 @@ export default {
     		align-items: center;
 
     		background-color: white;
-   			padding: 24rpx;
+   			padding: 35rpx;
 
 
 

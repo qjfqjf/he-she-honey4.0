@@ -57,29 +57,29 @@
 				},
 				//数据
 				dataList:[
-					{
-						//用户id
-						uid:'',
-						//病例id
-						recordId:'',
-						//门诊类型
-						type:'急诊',
-						//选择的日期
-						selectedDate:'111',
-						//疾病名称
-						illName:'感冒',
-						//疾病备注
-						illDiscription:'流鼻涕，发热',
-						//图片
-						imgs:[
-							'../../../../static/icon/wechat.png',
-							'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-						],
-					}
+					// {
+					// 	//用户id
+					// 	uid:'',
+					// 	//病例id
+					// 	recordId:'',
+					// 	//门诊类型
+					// 	type:'急诊',
+					// 	//选择的日期
+					// 	selectedDate:'111',
+					// 	//疾病名称
+					// 	illName:'感冒',
+					// 	//疾病备注
+					// 	illDiscription:'流鼻涕，发热',
+					// 	//图片
+					// 	imgs:[
+					// 		'../../../../static/icon/wechat.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 	],
+					// }
 				],
 				title:'门诊病例',
 				//点击添加跳转的路由

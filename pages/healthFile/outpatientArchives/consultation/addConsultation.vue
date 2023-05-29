@@ -124,7 +124,55 @@ export default {
 	},
 	//方法
 	methods: {
+    sectionChange(index) {
+            this.dataObj.type = this.addObj.list[index]
+            this.addObj.curNow = index;
+            console.log(index,this.dataObj.type)
+        },
+        change(e) {
+            console.log("e:", e);
+        },
 
+
+        //保存方法
+        saveRecords(){
+            console.log(this.dataObj);
+            //uni.request({
+                // url:this.addObj.tourl2,
+                // method:'post',
+                // data:{
+                //     params:{
+                //         dataObj:this.dataObj,
+                //         model:'',
+                //         token:'',
+                //         uid:'',
+                //         fields:[
+                //
+                //         ]
+                //     }
+                // },
+                //success(res){
+                    uni.showToast({
+                        title:'保存成功',
+                        duration:1000,
+                        success:()=>{
+                            setTimeout(() => {
+                                uni.redirectTo({
+                                    url: this.addObj.tourl,
+                                    success:(res)=>{
+                                        console.log(res)
+                                    },
+                                    fail:(err)=>{
+                                        console.log(err)
+                                    }
+                                });
+                            }, 1000);
+                        }
+                    });
+                //}
+           // });
+
+        },
 	},
 	onShow(){
 		this.addObj.type = this.addObj.list[this.addObj.curNow];
@@ -151,7 +199,6 @@ export default {
     justify-content: space-between;
     background-color: white;
     padding: 20rpx;
-    .select-list {}
   }
 
   .uploadImage {
