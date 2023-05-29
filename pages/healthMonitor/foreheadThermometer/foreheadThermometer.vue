@@ -137,39 +137,23 @@
 				const uid = userInfo.uid;
 				const token = uni.getStorageSync('access-token');
 				const time = formatDateTime(new Date());
-				uni.request({
-						url: 'http://106.14.140.92:8881/platform/dataset/call_kw',
-						method: 'post',
-						data: {
-							params: {
-								model: "forehead.temperature.gun",
-								token: token,
-								uid: uid,
-								method: "create",
-								args: [
-									[{
-										"name": "额温枪",
-										"numbers":this.serviceId,
-										"owner":uid,
-										"temperature":this.heat,
-										"input_type":"equipment",
-									}]
-								],
-								kwargs:{}
-							}
-						},
-						success: (res) => {
-							this.$refs.uToast.show({
-								message: '保存成功',
-								type: 'success',
-							})
-						}
-					}),
-
-					console.log(this.deviceStatus)
-				if (this.heat !== 0) {
-
-					success: (res) => {
+				this.$http.post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+					model: "forehead.temperature.gun",
+					token: token,
+					uid: uid,
+					method: "create",
+					args: [
+						[{
+							"name": "额温枪",
+							"numbers":this.serviceId,
+							"owner":uid,
+							"temperature":this.heat,
+							"input_type":"equipment",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if(this.heat != 0){
 						this.$refs.uToast.show({
 							message: '保存成功',
 							type: 'success',
@@ -177,7 +161,49 @@
 						this.btnColor = '#dadada'
 						this.heat = 0
 					}
-				}
+				})
+				// uni.request({
+				// 		url: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				// 		method: 'post',
+				// 		data: {
+				// 			params: {
+				// 				model: "forehead.temperature.gun",
+				// 				token: token,
+				// 				uid: uid,
+				// 				method: "create",
+				// 				args: [
+				// 					[{
+				// 						"name": "额温枪",
+				// 						"numbers":this.serviceId,
+				// 						"owner":uid,
+				// 						"temperature":this.heat,
+				// 						"input_type":"equipment",
+				// 						// "test_time":time,
+				// 					}]
+				// 				],
+				// 				kwargs:{}
+				// 			}
+				// 		},
+				// 		success: (res) => {
+				// 			this.$refs.uToast.show({
+				// 				message: '保存成功',
+				// 				type: 'success',
+				// 			})
+				// 		}
+				// 	}),
+				
+				// 	console.log(this.deviceStatus)
+				// if (this.heat !== 0) {
+				
+				// 	success: (res) => {
+				// 		this.$refs.uToast.show({
+				// 			message: '保存成功',
+				// 			type: 'success',
+				// 		})
+				// 		this.btnColor = '#dadada'
+				// 		this.heat = 0
+				// 	}
+				// }
 			},
 			// 初始化蓝牙
 			initBlue() {

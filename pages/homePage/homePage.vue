@@ -158,14 +158,16 @@
 					url: '/pages/login/login',
 				})
 			}
-
-			console.log('onLoad', e)
+			
+			console.log('onLoad', e);
+			
 		},
 		//页面显示
 		onShow() {
 			console.log(1111)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			this.getUserList();
 		},
 		//方法
 		methods: {
@@ -198,6 +200,33 @@
 			},
 			changeHeadImg(index) {
 				console.log('当前选中' + index)
+			},
+			
+			//查询用户信息
+			getUserList() {
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				const token = uni.getStorageSync('access-token');
+				this.$http.post('http://106.14.140.92:8881/platform/dataset/search_read',{
+					model: "res.users",
+					token: token,
+					uid: uid,
+					fields: [
+						"head_picture",
+						"name",
+						"gender",
+						"birthday",
+						"age",
+						"group_id",
+						"login",
+						"height",
+						"weight",
+					],
+					kwargs:{}
+				}).then(res => {
+					console.log(res)
+				})
 			}
 
 		},

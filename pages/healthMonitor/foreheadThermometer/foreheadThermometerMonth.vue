@@ -70,33 +70,27 @@
           message: '开发中...'
         })
       },
-	  //查询额温枪历史记录
+	  //查询额温枪月报
 	  getHistoryList() {
 	  	const userInfoStr = uni.getStorageSync('userInfo');
 	  	const userInfo = JSON.parse(userInfoStr);
 	  	const uid = userInfo.uid;
 	  	const token = uni.getStorageSync('access-token');
-	  	uni.request({
-	  		url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-	  		method: 'post',
-	  		data: {
-	  			params: {
-	  				model: "forehead.temperature.gun",
-	  				token: token,
-	  				uid: uid,
-	  				fields: [
-	  					"name",
-	  					"numbers",
-	  					"owner",
-	  					"temperature",
-						"input_type",
-	  					"test_time"
-	  				]
-	  			}
-	  		},
-	  		success: (res) => {
-	  			this.dataList = res.data.result.records;
-	  		}
+	  	this.$http.post('http://106.14.140.92:8881/platform/dataset/search_read',{
+	  		model: "forehead.temperature.gun",
+	  		token: token,
+	  		uid: uid,
+	  		fields: [
+	  			"name",
+	  			"numbers",
+	  			"owner",
+	  			"temperature",
+	  			"input_type",
+	  			"test_time"
+	  		]
+	  	}).then(res => {
+	  		console.log(res)
+	  		this.dataList = res.result.records;
 	  	})
 	  }
 

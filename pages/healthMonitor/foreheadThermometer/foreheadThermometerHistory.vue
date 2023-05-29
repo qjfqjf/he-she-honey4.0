@@ -7,16 +7,17 @@
 		</z-nav-bar>
 		<public-module></public-module>
 
-
+		<!-- v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
+		{{ item.test_time.split(' ')[0] }} -->
+		<!-- .split(' ')[1] -->
 		<!-- 正文内容 -->
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="item.id">
-				<view class="date"
-					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-					{{ item.test_time.split(' ')[0] }}
+				<view class="date">
+					{{ item.test_time}}
 				</view>
 				<view class="record">
-					<text>{{ item.test_time.split(' ')[1] }}</text>
+					<text>{{ item.test_time}}</text>
 					<text>体温</text>
 					<text class="text">{{ item.temperature }}</text>
 				</view>
@@ -87,27 +88,21 @@
 				const userInfo = JSON.parse(userInfoStr);
 				const uid = userInfo.uid;
 				const token = uni.getStorageSync('access-token');
-				uni.request({
-					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-					method: 'post',
-					data: {
-						params: {
-							model: "forehead.temperature.gun",
-							token: token,
-							uid: uid,
-							fields: [
-								"name",
-								"numbers",
-								"owner",
-								"temperature",
-								"input_type",
-								"test_time"
-							]
-						}
-					},
-					success: (res) => {
-						this.historyList = res.data.result.records;
-					}
+				this.$http.post('http://106.14.140.92:8881/platform/dataset/search_read',{
+					model: "forehead.temperature.gun",
+					token: token,
+					uid: uid,
+					fields: [
+						"name",
+						"numbers",
+						"owner",
+						"temperature",
+						"input_type",
+						"test_time"
+					]
+				}).then(res => {
+					console.log(res)
+					this.historyList = res.result.records;
 				})
 			}
 		},

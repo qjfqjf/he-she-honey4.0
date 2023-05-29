@@ -195,13 +195,42 @@
 				});
 			},
 			handleSavePressure() {
-				if (this.measureResult.DIA !== 0) {
-					this.btnColor = "#dadada"
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
-					})
-				}
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				const token = uni.getStorageSync('access-token');
+				this.$http.post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+					model: "sphygmomanometer.jiakang",
+					token: token,
+					uid: uid,
+					method: "create",
+					args: [
+						[{
+							"name": "血压计 (静态血压计)",
+							"numbers":this.serviceId,
+							"owner":uid,
+							"systolic_blood_pressure":this.measureResult.SYS,
+							"tensioning_pressure":this.measureResult.DIA,
+							"heart_rate":this.measureResult.pressure,
+							// "systolic_blood_pressure":150,
+							// "tensioning_pressure":80,
+							// "heart_rate":90,
+							"input_type":"equipment",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if(this.measureResult.pressure != 0){
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.measureResult.SYS = 0
+						this.measureResult.DIA = 0
+						this.measureResult.pressure = 0
+					}
+				})
 			},
 			// 初始化蓝牙
 			initBlue() {

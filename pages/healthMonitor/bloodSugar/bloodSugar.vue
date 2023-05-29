@@ -109,28 +109,47 @@
 		onLoad(e) {
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
-
 				this.connect()
-
 			}
 		},
 		methods: {
 			radioClick(name) {
-
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
 
 				})
 			},
 			handleSaveSugar() {
-				if (this.value.length > 0) {
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
-					})
-					this.btnColor = '#dadada'
-					this.value = 0
-				}
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				const token = uni.getStorageSync('access-token');
+				this.$http.post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+					model: "blood.glucose.meter",
+					token: token,
+					uid: uid,
+					method: "create",
+					args: [
+						[{
+							"name": "血糖仪 (静态血糖仪)",
+							"numbers":this.serviceId,
+							"owner":uid,
+							"category":"kf",
+							"oml_l":this.value,
+							"input_type":"equipment",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if (this.value.length > 0) {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.value = 0
+					}
+				})
 			},
 			handleDevelop() {
 				// this.$refs.uToast.show({
