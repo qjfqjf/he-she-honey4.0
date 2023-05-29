@@ -256,7 +256,6 @@ export default {
 <style lang="scss">
 .out-contain{
 	background-color: #FFFFFF;
-	height: 100%;
 	.in-content {
 		.in-content{
 			padding: 0 10rpx;
@@ -300,7 +299,7 @@ export default {
 
 			background-color: white;
 			padding: 24rpx;
-
+			margin-bottom: 100rpx;
 
 
 			.date {
@@ -321,7 +320,8 @@ export default {
 		}
 
 		.save-box{
-			margin-top: 100rpx;
+			height: 200rpx;
+			background-color: #FFFFFF;
 			.saveBtn {
 				background-color: #20c6a2;
 				margin: 30rpx;

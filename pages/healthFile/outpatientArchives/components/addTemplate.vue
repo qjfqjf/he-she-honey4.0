@@ -50,7 +50,7 @@
 
                 <view class="save-box">
                     <!-- 保存按钮 -->
-                    <button class="saveBtn" @click="saveRecords()">保存</button>
+                    <button class="saveBtn" @click="saveRecords">保存</button>
                 </view>
             </u-form>
         </view>
@@ -65,7 +65,7 @@ import UForm from "../../../../uni_modules/uview-ui/components/u-form/u-form.vue
 export default {
     name: "addTemplate",
     components: {UForm},
-    props:["addObj"],
+    props:["addObj","params"],
     data() {
         return {
             dataObj: {
@@ -99,24 +99,36 @@ export default {
         },
 
 
+        //测试子向父传值
+        saverecords1(){
+            console.log(this.dataObj)
+            this.$emit('btn-click',this.dataObj)
+        },
+
         //保存方法
         saveRecords(){
-            console.log(this.dataObj);
-            //uni.request({
-                // url:this.addObj.tourl2,
-                // method:'post',
-                // data:{
-                //     params:{
-                //         dataObj:this.dataObj,
-                //         model:'',
-                //         token:'',
-                //         uid:'',
-                //         fields:[
-                //
-                //         ]
-                //     }
-                // },
-                //success(res){
+            //console.log(this.dataObj);
+            console.log(this.params)
+            uni.request({
+                url:this.addObj.tourl2,
+                method:'post',
+                data:{
+
+                    params:this.params,
+
+
+                    // {
+                    //     model:this.params.model,
+                    //     token:this.params.token,
+                    //     uid:this.params.uid,
+                    //     method:"create",
+                    //     args:this.params.args,
+                    //     kwargs:{}
+                    // },
+
+                },
+                success(res){
+                    console.log(res)
                     uni.showToast({
                         title:'保存成功',
                         duration:1000,
@@ -134,8 +146,8 @@ export default {
                             }, 1000);
                         }
                     });
-                //}
-           // });
+                }
+           });
 
         },
     },

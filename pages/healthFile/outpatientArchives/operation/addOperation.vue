@@ -11,13 +11,13 @@
         <view class="in-content">
             <u-form v-model="dataObj">
                 <!-- 1、项目名称 -->
-				<view class="remarks">
+				        <view class="remarks">
                     <text class="cate-text" style="">{{addObj.remarksText}}</text>
                     <view style="height: 20rpx"></view>
                     <u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false" v-model="dataObj.illName"></u-input>
                 </view>
 
-				<view style="height: 10rpx"></view>
+                <view style="height: 10rpx"></view>
 				
                 <!-- 2、上传照片 -->
                 <view class="uploadImage">
@@ -26,12 +26,16 @@
                     <view class="example-body">
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
-				<text class="tip">（友情提示：最多添加9张图片）</text>
+				            <text class="tip">（友情提示：最多添加9张图片）</text>
                 </view>
-				<!--备注-->
-				<view class="remarks">
-					<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
-				</view>
+
+                <!--备注-->
+                <view class="remarks">
+                    <text class="cate-text" style="">{{addObj.remarksText2}}</text>
+                  <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 20rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
+                </view>
+
+
                 <!-- 4、日期 -->
                 <view class="date-body">
                     <text class="cate-text">日期</text>
@@ -96,6 +100,7 @@ export default {
 				placeholder1:'请输入手术名称',
 				placeholder2:'请添加手术的备注',
 				remarksText:'手术名称',
+        remarksText2:'手术备注',
 				//返回的路由
 				tourl:'/pages/healthFile/outpatientArchives/operation/operation',
 				//保存接口
@@ -164,7 +169,6 @@ export default {
   		.remarks {
     		margin-top: 14rpx;
     		padding: 20rpx;
-    		height: 300rpx;
     		.textarea {
       		height: 100rpx;
       		font-size: 10rpx;
