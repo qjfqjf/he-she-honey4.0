@@ -94,7 +94,7 @@
     </view>
     <view class="bottom-text">
       <text style="color: #6a6a6a">登录即代表同意</text>
-      <text style="color: #1fc7a3" @click="">《他她蜜用户协议》</text>
+      <text style="color: #1fc7a3" >《他她蜜用户协议》</text>
     </view>
   </view>
 </template>
