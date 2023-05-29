@@ -149,19 +149,20 @@
 								args: [
 									[{
 										"name": "额温枪",
-										"numbers":'001',
-										"owner":6,
-										"temperature":'36',
+										"numbers":this.serviceId,
+										"owner":uid,
+										"temperature":this.heat,
 										"input_type":"equipment",
 									}]
 								],
 								kwargs:{}
-
-
 							}
 						},
 						success: (res) => {
-							console.log(res)
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
 						}
 					}),
 
