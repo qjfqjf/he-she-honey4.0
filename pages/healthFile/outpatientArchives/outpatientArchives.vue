@@ -49,7 +49,7 @@
 					{
 						img: require('@/static/icon/healthFile/consultation.png'),
 						title: '转诊会诊', 
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/consultation/consultation'
 					}
 				],
 			}

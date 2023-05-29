@@ -18,7 +18,7 @@ export default {
 	},
 	data() {
 		return {
-			title:"化验检查",
+			title:"影像检查",
 			//数据
 			dataObj:[
 				{

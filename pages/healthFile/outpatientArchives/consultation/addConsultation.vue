@@ -10,15 +10,16 @@
         </view>
         <view class="in-content">
             <u-form v-model="dataObj">
-                <!-- 1、项目名称 -->
-				<view class="remarks">
-                    <text class="cate-text" style="">{{addObj.remarksText}}</text>
-                    <view style="height: 20rpx"></view>
-                    <u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false" v-model="dataObj.illName"></u-input>
+                <!-- 1、分类 -->
+                <view class="cate">
+                    <text class="cate-text">{{addObj.choiceTitle}}</text>
+                </view>
+                <view class="switch">
+                    <u-subsection :list="addObj.list" :current="addObj.curNow" font-size="15" @change="sectionChange" mode="subsection" inactive-color="#20c6a2" active-color="#20c6a2"></u-subsection>
                 </view>
 
-				<view style="height: 10rpx"></view>
-				
+                <view style="height: 40rpx"></view>
+
                 <!-- 2、上传照片 -->
                 <view class="uploadImage">
                     <text class="cate-text">{{addObj.uploadImgText}}</text>
@@ -26,13 +27,19 @@
                     <view class="example-body">
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
-				<text class="tip">（友情提示：最多添加9张图片）</text>
+					<text class="tip">（友情提示：最多添加9张图片）</text>
+                </view>
+
+                <!-- 3、备注和时间 -->
+                <view class="remarks">
+                    <text class="cate-text" style="">{{addObj.remarksText}}</text>
+                    <view style="height: 20rpx"></view>
+                    <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
 
                 </view>
-				<!--备注-->
-				<view>
-					<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
-				</view>
+
+                <view style="height: 40rpx"></view>
+
                 <!-- 4、日期 -->
                 <view class="date-body">
                     <text class="cate-text">日期</text>
@@ -63,7 +70,7 @@ export default {
 	},
 	data() {
 		return {
-			title:"门诊手术",
+			title:"转诊会诊",
 			//数据
 			dataObj:[
 				{
@@ -92,13 +99,12 @@ export default {
 				//默认的选项
 				curNow:0,
 				//这边统一写内容用
-				choiceTitle:'门诊手术',
-				uploadImgText:'手术资料照片',
-				placeholder1:'请输入手术名称',
-				placeholder2:'请添加手术的备注',
-				remarksText:'手术名称',
+				choiceTitle:'转诊会诊',
+				list:["转院","转科","会诊"],
+				uploadImgText:'添加照片',
+				placeholder2:'请添加检查项目的备注',
 				//返回的路由
-				tourl:'/pages/healthFile/outpatientArchives/operation/operation',
+				tourl:'/pages/healthFile/outpatientArchives/consultation/consultation.vue',
 				//保存接口
 				tourl2:'',
 				// 备注
@@ -118,11 +124,7 @@ export default {
 	},
 	//方法
 	methods: {
-		sectionChange(index) {
-            this.dataObj.type = this.addObj.list[index]
-            this.addObj.curNow = index;
-            console.log(index,this.dataObj.type)
-        },
+
 	},
 	onShow(){
 		this.addObj.type = this.addObj.list[this.addObj.curNow];
@@ -132,88 +134,83 @@ export default {
 </script>
 
 <style lang="scss">
-
 	.out-contain{
 		background-color: #FFFFFF;
-		height: 100%;	
+		height: 100%;
 		.in-content {
-  			.in-content{
-    			padding: 0 10rpx;
-  			}
-  		.switch{
-    		width: 600rpx;
-    		margin-left: 20rpx;
-  		}
-  		.cate {
-    		display: flex;
-    		align-items: center;
-    		justify-content: space-between;
-    		background-color: white;
-    		padding: 20rpx;
-    		.select-list {}
-  		}
+  .in-content{
+    padding: 0 10rpx;
+  }
+  .switch{
+    width: 600rpx;
+    margin-left: 20rpx;
+  }
+  .cate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20rpx;
+    .select-list {}
+  }
 
-  		.uploadImage {
-    		padding: 20rpx;
-    		background-color: white;
+  .uploadImage {
+    padding: 20rpx;
+    background-color: white;
 
-    		.tip {
-      		color: #e0584b;
-      		font-size: 24rpx
-    		}
-  		}
+    .tip {
+      color: #e0584b;
+      font-size: 24rpx
+    }
+  }
 
-  		.remarks {
-    		margin-top: 14rpx;
-    		padding: 30rpx;
-    		height: 200rpx;
-    		.textarea {
-      		height: 200rpx;
-      		font-size: 28rpx;
-    		}
-  		}
-		  .tip {
-        color: #e0584b;
-        font-size: 24rpx
+  .remarks {
+    margin-top: 14rpx;
+    padding: 30rpx;
+    height: 300rpx;
+    .textarea {
+      height: 0rpx;
+      font-size: 28rpx;
+    }
+  }
+
+  .date-body {
+
+    //display: flex;
+    align-items: center;
+
+    background-color: white;
+    padding: 24rpx;
+
+
+
+    .date {
+      margin-right: 25rpx;
+    }
+
+    .picker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+
+
+      .time-picker {
+        margin-right: 220rpx;
       }
-  		.date-body {
+    }
+  }
 
-    		//display: flex;
-    		align-items: center;
-
-    		background-color: white;
-   			padding: 24rpx;
-
-
-
-    		.date {
-      			margin-right: 25rpx;
-    		}
-
-    		.picker {
-      			display: flex;
-      		    align-items: center;
-      			justify-content: space-between;
-      			position: relative;
-
-
-      			.time-picker {
-       			 	margin-right: 220rpx;
-      			}
-   			}
-  		}
-
-  		.save-box{
-    		margin-top: 100rpx;
-    		.saveBtn {
-      			background-color: #20c6a2;
-     			margin: 30rpx;
-      			padding: 12rpx;
-      			color: white;
-      			font-size: 35rpx;
-    		}
-  		}
-	}
+  .save-box{
+    margin-top: 100rpx;
+    .saveBtn {
+      background-color: #20c6a2;
+      margin: 30rpx;
+      padding: 12rpx;
+      color: white;
+      font-size: 35rpx;
+    }
+  }
 }
-
+	}
 </style>

@@ -3,7 +3,7 @@
         <!-- 导航栏上下分割 -->
         <view style="height: 20rpx;background-color: #f5f5f5">
         </view>
-        <view class="in-content" v-for="item in dataList" :key>
+        <view class="in-content" v-for="item in dataList" >
             <!-- 1、日期 -->
             <view class="remarks">
                 <view class="cate">

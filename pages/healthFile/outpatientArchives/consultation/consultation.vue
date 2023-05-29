@@ -12,11 +12,13 @@
 		</view>
 
 		<!--  非空记录  -->
-		<view class="in-content">
+		<view class="medical-records" v-else>
+			<!-- 健康管理组件 -->
+			<view class="in-content">
         <!-- 导航栏上下分割 -->
         <view style="height: 20rpx;background-color: #f5f5f5">
         </view>
-        <view class="in-content" v-for="item in dataList" :key>
+        <view class="in-content" v-for="item in dataList" >
             <!-- 1、日期 -->
             <view class="remarks">
                 <view class="cate">
@@ -31,23 +33,14 @@
 
 
             <!-- 2、门诊类别 -->
-            <!-- <view class="remarks">
+            <view class="remarks">
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
                     <text style="font-weight: 300">{{item.type}}</text>
                 </view>
-            </view> -->
-
-
-            <!-- 3、疾病诊断 -->
-            <view class="remarks">
-                <text class="cate-text" style="">{{showObj.remarksText}}</text>
-                <view style="height: 20rpx"></view>
-                <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.illName}}</text>
-                </view>
             </view>
+
             <!-- 4、情况描述 -->
             <view class="remarks">
                 <view style="height: 20rpx"></view>
@@ -86,12 +79,13 @@
 
         </view>
     </view>
+		</view>
 	</view>
 	  
 </template>
 
 <script>
-	import emptyState from "../components/emptyState.vue";	
+	import emptyState from "../components/emptyState.vue";
 	import headerNav from "../components/headerNav.vue";
 	export default {
 		components:{
@@ -104,9 +98,10 @@
 				showObj:{
 					curNow:0,
 					//这边统一写内容用
-					choiceTitle:'手术名称',
-					ImgText:'手术资料照片',
-					remarksText:'手术名称',
+					choiceTitle:'影像类别',
+					type:["转院","转科","会诊"],
+					ImgText:'添加照片',
+					typeText:'项目类别',
 					discription:'影像描述',
 
 					// 备注
@@ -123,33 +118,33 @@
 				},
 				//数据
 				dataList:[
-					 {
-					//	//用户id
-					 	uid:'',
-						//病例id
-					 	recordId:'',
-					 	//化验类型
-					 	type:'急诊',
-					 	//选择的日期
-					 	selectedDate:'111',
-					 	//疾病名称
-					 	illName:'感冒',
-					 	//疾病备注
-						illDiscription:'流鼻涕，发热',
-					 	//图片
-						imgs:[
-				 		'../../../../static/icon/wechat.png',
-					 		'../../../../static/icon/wechat2.png',
-					 		'../../../../static/icon/wechat2.png',
-					 		'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-							'../../../../static/icon/wechat2.png',
-					 	],
-					 }
+					// {
+					// 	//用户id
+					// 	uid:'',
+					// 	//病例id
+					// 	recordId:'',
+					// 	//化验类型
+					// 	type:'急诊',
+					// 	//选择的日期
+					// 	selectedDate:'111',
+					// 	//疾病名称
+					// 	illName:'感冒',
+					// 	//疾病备注
+					// 	illDiscription:'流鼻涕，发热',
+					// 	//图片
+					// 	imgs:[
+					// 		'../../../../static/icon/wechat.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 		'../../../../static/icon/wechat2.png',
+					// 	],
+					// }
 				],
-				title:'门诊手术',
+				title:'转诊会诊',
 				//点击添加跳转的路由
-				tourl:'/pages/healthFile/outpatientArchives/operation/addOperation',
+				tourl:'/pages/healthFile/outpatientArchives/consultation/addConsultation',
 				//接口
 				tourl2:'',
 				addtext:'添加档案'
@@ -204,75 +199,75 @@
 			margin: 0 auto;
 		}
 		.in-content {
-  			background-color: white;
- 	 		height: 100%;
+  background-color: white;
+  height: 100%;
 
-  			.in-content{
-    			padding: 0 10rpx;
- 			}
-  			.switch{
-    			width: 400rpx;
-    			margin-left: 20rpx;
-  			}
-  			.cate {
-    			display: flex;
-    			align-items: center;
-    			justify-content: space-between;
-    			background-color: white;
-    			.select-list {}
-  			}
+  .in-content{
+    padding: 0 10rpx;
+  }
+  .switch{
+    width: 400rpx;
+    margin-left: 20rpx;
+  }
+  .cate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    .select-list {}
+  }
 
-  			.showImage {
-   				padding: 20rpx;
+  .showImage {
+    padding: 20rpx;
 
-  			}
+  }
 
-  			.remarks {
-    			margin-top: 14rpx;
-    			padding: 20rpx;
-  			}
-    		.textarea {
-        		height: 200rpx;
-        		font-size: 28rpx;
-    			}
-  			.date-body {
+  .remarks {
+    margin-top: 14rpx;
+    padding: 20rpx;
+  }
+    .textarea {
+        height: 200rpx;
+        font-size: 28rpx;
+    }
+  .date-body {
 
-    			//display: flex;
-    			align-items: center;
+    //display: flex;
+    align-items: center;
 
-    			background-color: white;
-   				padding: 24rpx;
-
-
-
-    		.date {
-      			margin-right: 25rpx;
-    		}
-
-    		.picker {
-      			display: flex;
-      			align-items: center;
-      			justify-content: space-between;
-      			position: relative;
+    background-color: white;
+    padding: 24rpx;
 
 
-      			.time-picker {
-        			margin-right: 220rpx;
-      			}
-    		}
-  		}
 
-  		.save-box{
-    		margin-top: 100rpx;
-    		.saveBtn {
-      			background-color: #20c6a2;
-      			margin: 30rpx;
-      			padding: 12rpx;
-      			color: white;
-      			font-size: 35rpx;
-    		}
-  		}
-	}
+    .date {
+      margin-right: 25rpx;
+    }
+
+    .picker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+
+
+      .time-picker {
+        margin-right: 220rpx;
+      }
+    }
+  }
+
+  .save-box{
+    margin-top: 100rpx;
+    .saveBtn {
+      background-color: #20c6a2;
+      margin: 30rpx;
+      padding: 12rpx;
+      color: white;
+      font-size: 35rpx;
+    }
+  }
 }
-	
+	}
+
 </style>
