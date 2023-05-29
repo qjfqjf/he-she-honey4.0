@@ -54,7 +54,7 @@ export default {
 				placeholder2:'请添加疾病诊断的备注',
 				remarksText:'疾病诊断',
 				//返回的路由
-				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
+				tourl:'/pages/healthFile/outpatientArchives/getMedicineRecord/getMedicineRecord',
 				//保存接口
 				tourl2:'',
 				// 备注
@@ -84,8 +84,8 @@ export default {
 </script>
 
 <style lang="scss">
-	.out-contain{
-		background-color: #FFFFFF;
-		height: 100%;
-	}
+.out-contain{
+	background-color: #FFFFFF;
+	height: 100%;
+}
 </style>

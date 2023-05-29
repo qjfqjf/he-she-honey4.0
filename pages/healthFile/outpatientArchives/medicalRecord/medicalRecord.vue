@@ -82,6 +82,7 @@
 					}
 				],
 				title:'门诊病例',
+				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
 				//接口
 				tourl2:'',
@@ -101,7 +102,7 @@
 			//接口调用
 			uni.request({
 				url:this.tourl2,
-				method:'get',
+				method:'post',
 				data: {
 					params:{
 						model:'',

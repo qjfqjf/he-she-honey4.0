@@ -1420,6 +1420,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/getMedicineRecord/getMedicineRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/getMedicineRecord/addGetMedicineRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",

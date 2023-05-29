@@ -29,7 +29,7 @@
 					{
 						img: require('@/static/icon/healthFile/record.png'),
 						title: '用药记录',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/getMedicineRecord/getMedicineRecord'
 					},
 					{
 						img: require('@/static/icon/healthFile/laboratoryExamination.png'),

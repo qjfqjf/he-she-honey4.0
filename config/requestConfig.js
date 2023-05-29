@@ -80,6 +80,7 @@ $http.getAliToken = function(callback) {
 }
 //请求开始拦截器
 $http.requestStart = function(options) {
+
   console.log("请求开始", options);
   if (options.load) {
     //打开加载动画
