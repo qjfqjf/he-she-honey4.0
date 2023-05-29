@@ -60,9 +60,10 @@
 			</view>
 		</view>
 
-
-		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100">
-			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
+		<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
+				@click="onPageJump('/pages/homePage/myUsers')">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
@@ -128,6 +129,7 @@
 	import home from "../template/home.vue";
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	import $http from '@/config/requestConfig.js';
+	import HeadImgList from "@/components/head-img/head-img.vue";
 	export default {
 		computed: {
 			home() {
@@ -140,13 +142,26 @@
 				appManage,
 				appFeature,
 				homePageIcons,
-				token: uni.getStorageSync('access-token')
+				token: uni.getStorageSync('access-token'),
+				userInfo: '',
+				defaultSelect: 0, //默认选中下标，从0开始
+				userList: [
+					// {
+					// 	images: '../../static/logo.png',
+					// 	name: '张淑芳'
+					// },
+					// {
+					// 	images: '../../static/logo.png',
+					// 	name: '王立群'
+					// },
+				]
 
 			};
 		},
 		components: {
 			UButton,
 			UImage,
+			HeadImgList
 		},
 		//第一次加载
 		onLoad(e) {
@@ -163,14 +178,19 @@
 		},
 		//页面显示
 		onShow() {
-			console.log(1111)
+			this.userList = []
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.userList.push({
+				images: '../../static/logo.png',
+				name: this.userInfo.name
+			})
 		},
 		//方法
 		methods: {
-			switchChange() {
-
+			changeHeadImg(index) {
+				console.log('当前选中' + index)
 			},
 			onPageJump(url) {
 				uni.navigateTo({
@@ -196,9 +216,7 @@
 				});
 				// #endif
 			},
-			changeHeadImg(index) {
-				console.log('当前选中' + index)
-			}
+
 
 		},
 		//页面隐藏
