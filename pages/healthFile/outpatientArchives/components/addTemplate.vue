@@ -149,7 +149,7 @@ export default {
     padding: 0 10rpx;
   }
   .switch{
-    width: 400rpx;
+    width: 600rpx;
     margin-left: 20rpx;
   }
   .cate {
