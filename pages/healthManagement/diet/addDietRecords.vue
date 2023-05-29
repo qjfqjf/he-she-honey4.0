@@ -33,12 +33,10 @@
                 <!-- 3、备注和时间 -->
                 <view class="remarks">
                     <text class="cate-text" style="">{{addObj.remarksText}}</text>
-                    <view style="height: 20rpx"></view>
-                    <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
-
+                    <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5"
+                                border="false" v-model="dataObj.illDiscription"></u-textarea>
                 </view>
 
-                <view style="height: 40rpx"></view>
 
                 <!-- 4、日期 -->
                 <view class="date-body">
@@ -214,7 +212,6 @@ export default {
   .remarks {
     margin-top: 14rpx;
     padding: 30rpx;
-    height: 300rpx;
     .textarea {
       height: 0rpx;
       font-size: 28rpx;

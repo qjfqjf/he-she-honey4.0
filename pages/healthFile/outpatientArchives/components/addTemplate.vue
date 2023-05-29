@@ -101,22 +101,26 @@ export default {
 
         //保存方法
         saveRecords(){
-            console.log(this.dataObj);
+            //console.log(this.dataObj);
             uni.request({
                 url:this.addObj.tourl2,
                 method:'post',
                 data:{
-                    params:{
-                        dataObj:this.dataObj,
-                        model:'',
-                        token:'',
-                        uid:'',
-                        fields:[
+                    params:this.params,
 
-                        ]
-                    }
+
+                    // {
+                    //     model:this.params.model,
+                    //     token:this.params.token,
+                    //     uid:this.params.uid,
+                    //     method:"create",
+                    //     args:this.params.args,
+                    //     kwargs:{}
+                    // },
+
                 },
                 success(res){
+                    console.log(res)
                     uni.showToast({
                         title:'保存成功',
                         duration:1000,

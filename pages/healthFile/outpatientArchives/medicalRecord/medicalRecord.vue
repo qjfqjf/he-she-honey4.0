@@ -109,16 +109,21 @@
 					data: {
 						params:{
 							model:'inpatient.medical.records',
-							token:"c5ab6cebaca97f7171139e4d414ff5a6",
+							token:"c695c406dd17d2fc9dbfe917adaf9e33",
 							uid:uid,
 							//传回去的数组(存放字段)
 							fields:[
 								"picture_1",
 								"picture_2",
 								"picture_3",
+									//疾病名称
 								"data_name",
+									//备注
 								"data_result",
+									//时间
 								"data_time",
+									//疾病类型
+								"data_type"
 							]
 						}
 					},

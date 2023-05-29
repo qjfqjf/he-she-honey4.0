@@ -16,18 +16,30 @@ export default {
 		headerNav,
 		addTemplate
 	},
+
 	data() {
 		return {
 			title:"门诊病例",
+
 			//请求的参数
 			params:{
-				model:"",
-				token:"",
+				model:"res.users",
+				token:"c695c406dd17d2fc9dbfe917adaf9e33",
 				uid:2,
 				methods:"create",
 				args:[
 						[{
-							"name":"",
+							"picture_1":"",
+							"picture_2":"",
+							"picture_3":"",
+							//疾病名称
+							"data_name":"感冒",
+							//疾病备注
+							"data_result":"发热，流鼻涕",
+							//时间
+							"data_time":"2023-5-29 12:12:12",
+							//急诊类型
+							"data_type":"急诊",
 						}]
 				],
 				kwargs:{}
@@ -72,7 +84,7 @@ export default {
 				//返回的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
 				//保存接口
-				tourl2:'',
+				tourl2:'http://106.14.140.92:8881/platform/dataset/call_kw',
 				// 备注
 				remarksValue: '',
 				// 选择日期
