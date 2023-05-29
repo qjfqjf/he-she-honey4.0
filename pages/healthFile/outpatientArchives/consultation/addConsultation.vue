@@ -27,14 +27,14 @@
                     <view class="example-body">
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
-					<text class="tip">（友情提示：最多添加9张图片）</text>
+					          <text class="tip">（友情提示：最多添加9张图片）</text>
                 </view>
 
                 <!-- 3、备注和时间 -->
                 <view class="remarks">
                     <text class="cate-text" style="">{{addObj.remarksText}}</text>
                     <view style="height: 20rpx"></view>
-                    <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
+                    <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 20rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
 
                 </view>
 
@@ -109,6 +109,7 @@ export default {
 				tourl2:'',
 				// 备注
 				remarksValue: '',
+        remarksText:'备注',
 				// 选择日期
 				selectedDate: new Date(),
 				imageStyles: {
@@ -212,7 +213,7 @@ export default {
   }
 
   .remarks {
-    margin-top: 14rpx;
+
     padding: 30rpx;
     height: 300rpx;
     .textarea {

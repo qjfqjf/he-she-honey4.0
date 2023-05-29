@@ -4,7 +4,7 @@
 		<!-- 上导航栏 -->
 		<header-nav :title="title"></header-nav>
 		<!-- 添加页面主体 -->
-		<add-template :addObj="addObj"></add-template>
+		<add-template :addObj="addObj" :params="params" @btn-click="descclick"></add-template>
 	</view>
 </template>
 
@@ -16,10 +16,41 @@ export default {
 		headerNav,
 		addTemplate
 	},
+
 	data() {
 		return {
 			title:"门诊病例",
-			//数据
+
+			//请求的参数
+			params:{
+				//注意！！查接口文档
+				model:"inpatient.medical.records",
+				token:"62da5a6d47be0029801ba74a17e47e1a",
+				uid:2,
+				method:"create",
+				args:[
+						[{
+							//急诊类型
+							"data_type":"emergency",
+							"picture_1":"",
+							"picture_2":"",
+							"picture_3":"",
+							//疾病名称
+							"data_name":"感冒",
+							//疾病备注
+							"data_result":"发热，流鼻涕",
+							//注意！！这个是uid
+							//用户id
+							"patient_id":2
+							//时间
+						}]
+				],
+				kwargs:{}
+			},
+
+
+
+			//展示数据
 			dataObj:[
 				{
 					//用户id
@@ -56,7 +87,7 @@ export default {
 				//返回的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
 				//保存接口
-				tourl2:'',
+				tourl2:'http://106.14.140.92:8881/platform/dataset/call_kw',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -69,12 +100,18 @@ export default {
 				},
 				value: 0,
 				type:'',
+
+
+				//测试
+				value1:'',
 			},
 		};
 	},
 	//方法
 	methods: {
-
+		descclick(value1){
+			console.log("父组件接收到的dataObj:"+value1)
+		}
 	},
 	onShow(){
 		this.addObj.type = this.addObj.list[this.addObj.curNow];
