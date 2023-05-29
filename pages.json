@@ -1,1512 +1,1520 @@
 {
-	"pages": [
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
-		{
-			"path": "pages/user/login",
-			"style": {
-				"navigationBarTitleText": "登录（弃用）"
-			}
-		},
-		{
-			"path": "pages/template/addTemplate",
-			"style": {
-				"navigationBarTitleText": "新增功能"
-			}
-		},
-		{
-			"path": "pages/healthMonitor/index",
-			"style": {
-				"navigationBarTitleText": "健康监测"
-			}
-		},
-		{
-			"path": "pages/demo/common",
-			"style": {
-				"navigationBarTitleText": "功能示例"
-			}
-		},
-		{
-			"path": "pages/demo/list",
-			"style": {
-				"navigationBarTitleText": "列表"
-			}
-		},
-		{
-			"path": "pages/demo/areaSelect",
-			"style": {
-				"navigationBarTitleText": "地区选择"
-			}
-		},
-		{
-			"path": "pages/demo/popup",
-			"style": {
-				"navigationBarTitleText": "弹窗"
-			}
-		},
-		{
-			"path": "pages/demo/prompt",
-			"style": {
-				"navigationBarTitleText": "弹窗输入框"
-			}
-		},
-		{
-			"path": "pages/demo/swipeAction",
-			"style": {
-				"navigationBarTitleText": "滑动操作"
-			}
-		},
-		{
-			"path": "pages/demo/parser",
-			"style": {
-				"navigationBarTitleText": "富文本预览"
-			}
-		},
-		{
-			"path": "pages/demo/formDemo",
-			"style": {
-				"navigationBarTitleText": "表单模板"
-			}
-		},
-		{
-			"path": "pages/demo/themeColor",
-			"style": {
-				"navigationBarTitleText": "项目主题色介绍"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/index",
-			"style": {
-				"navigationBarTitleText": "头部导航示例"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo",
-			"style": {
-				"navigationBarTitleText": "案例"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo1",
-			"style": {
-				"navigationBarTitleText": "案例1"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo2",
-			"style": {
-				"navigationBarTitleText": "案例2"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo3",
-			"style": {
-				"navigationBarTitleText": "案例3"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo4",
-			"style": {
-				"navigationBarTitleText": "案例4"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo5",
-			"style": {
-				"navigationBarTitleText": "案例5"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo6",
-			"style": {
-				"navigationBarTitleText": "案例6"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo7",
-			"style": {
-				"navigationBarTitleText": "案例7"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo8",
-			"style": {
-				"navigationBarTitleText": "案例8"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo9",
-			"style": {
-				"navigationBarTitleText": "案例9"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo10",
-			"style": {
-				"navigationBarTitleText": "案例10"
-			}
-		},
-		{
-			"path": "pages/demo/navBarMemo/demo11",
-			"style": {
-				"navigationBarTitleText": "案例11"
-			}
-		},
-		{
-			"path": "pages/demo/waterfall/common",
-			"style": {
-				"navigationBarTitleText": "瀑布流列表"
-			}
-		},
-		{
-			"path": "pages/demo/waterfall/stableWaterfall",
-			"style": {
-				"navigationBarTitleText": "稳定版瀑布流"
-			}
-		},
-		{
-			"path": "pages/demo/waterfall/completeWaterfall",
-			"style": {
-				"navigationBarTitleText": "完全版瀑布流"
-			}
-		},
-		{
-			"path": "pages/template/webView",
-			"style": {
-				"navigationBarTitleText": "",
-				"navigationStyle": "default"
-			}
-		},
-		{
-			"path": "pages/mine/common",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
-		{
-			"path": "pages/user/bindPhone",
-			"style": {
-				"navigationBarTitleText": "绑定手机号"
-			}
-		},
-		{
-			"path": "pages/user/forget",
-			"style": {
-				"navigationBarTitleText": "忘记密码"
-			}
-		},
-		{
-			"path": "pages/user/protocol",
-			"style": {
-				"navigationBarTitleText": "协议"
-			}
-		},
-		{
-			"path": "pages/user/register",
-			"style": {
-				"navigationBarTitleText": "注册"
-			}
-		},
-
-		{
-			"path": "pages/sdkDemo/common",
-			"style": {
-				"navigationBarTitleText": "API示例"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/uploadFile",
-			"style": {
-				"navigationBarTitleText": "图片上传/文件上传"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/quUploadFile",
-			"style": {
-				"navigationBarTitleText": "七牛云图片上传/文件上传"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/appletsLogin",
-			"style": {
-				"navigationBarTitleText": "小程序登录"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/appUpdate",
-			"style": {
-				"navigationBarTitleText": "APP版本更新"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/location",
-			"style": {
-				"navigationBarTitleText": "获取当前经纬度（兼容公众号、APP、微信小程序）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/pay",
-			"style": {
-				"navigationBarTitleText": "支付（兼容公众号、APP、微信小程序）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/permission",
-			"style": {
-				"navigationBarTitleText": "APP权限判断和跳转到系统设置"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/publicLogin",
-			"style": {
-				"navigationBarTitleText": "公众号登录（附带推荐人code）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/publicSdk",
-			"style": {
-				"navigationBarTitleText": "公众号SDK权限获取"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/request",
-			"style": {
-				"navigationBarTitleText": "接口请求（全端支持）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/saveImg",
-			"style": {
-				"navigationBarTitleText": "保存图片到相册（APP、小程序支持）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/share",
-			"style": {
-				"navigationBarTitleText": "分享（APP、小程序、公众号支持）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/socket",
-			"style": {
-				"navigationBarTitleText": "webSocket介绍"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/loginIntercept",
-			"style": {
-				"navigationBarTitleText": "登录拦截（公众号、APP、微信小程序）"
-			}
-		},
-		{
-			"path": "pages/sdkDemo/utils",
-			"style": {
-				"navigationBarTitleText": "常用工具"
-			}
-		},
-		{
-			"path": "pages/template/pay",
-			"style": {
-				"navigationBarTitleText": "支付"
-			}
-		},
-		{
-			"path": "pages/shortVideo",
-			"style": {
-				"navigationBarTitleText": "防抖音滑动视频",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"bounce": "none",
-					"titleNView": false,
-					"subNVues": [{
-						"id": "comment",
-						"path": "pages/subnvue/comment",
-						"type": "popup",
-						"style": {
-							"height": "80%",
-							"dock": "bottom",
-							"position": "dock",
-							"bottom": "0",
-							"background": "transparent",
-							"zindex": 10,
-							"mask": "rgba(0,0,0,0.4)"
-						}
-					}]
-				}
-			}
-		},
-		{
-			"path": "pages/mine/editInfo",
-			"style": {
-				"navigationBarTitleText": "个人信息"
-			}
-		},
-		{
-			"path": "pages/template/poster/goodsPoster",
-			"style": {
-				"navigationBarTitleText": "商品海报生成"
-			}
-		},
-		{
-			"path": "pages/template/poster/scanCode",
-			"style": {
-				"navigationBarTitleText": "推广海报生成"
-			}
-		},
-		{
-			"path": "pages/demo/datePopup",
-			"style": {
-				"navigationBarTitleText": "日期时间选择器",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodPressure/bloodPressure",
-			"style": {
-				"navigationBarTitleText": "血压",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
-			"style": {
-				"navigationBarTitleText": "额温枪",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/oximeter/oximeter",
-			"style": {
-				"navigationBarTitleText": "血氧仪",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodSugar/bloodSugar",
-			"style": {
-				"navigationBarTitleText": "血糖",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/homePage/homePage",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodSUA/bloodSUA",
-			"style": {
-				"navigationBarTitleText": "血尿酸",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/cholesterol/cholesterol",
-			"style": {
-				"navigationBarTitleText": "胆固醇",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/treat/index",
-			"style": {
-				"navigationBarTitleText": "诊辽",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/professionalCommunity/index",
-			"style": {
-				"navigationBarTitleText": "专业社区",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/educate/index",
-			"style": {
-				"navigationBarTitleText": "教育",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/message",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		//    ,{
-		//           "path" : "pages/memberRecord/memberRecord",
-		//           "style" :
-		//           {
-		//               "navigationBarTitleText": "",
-		//               "enablePullDownRefresh": false
-		//           }
-		//       },
-		// {
-		// 	"path" : "pages/memberProfile/memberProfile",
-		// 	"style" :
-		// 	{
-		// 	    "navigationBarTitleText": "",
-		// 	    "enablePullDownRefresh": false
-		// 	}
-		// }
-		{
-			"path": "pages/healthMonitor/bodyFat/bodyFat",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodPressure/bloodpressureHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodPressure/bloodPressureMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/setting",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/template/setPassword",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodPressure/manualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/messageReminder",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/aboutUs",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/help",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodSugar/sugarManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/myPoints",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/myDevice",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodSUA/suaManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bodyFat/fatManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/foreheadThermometer/frManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/cholesterol/cholesterolManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/myComment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/commentDetail",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mine/order",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodFat/bloodFat",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/addressBook",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/addFriend",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/healthyCommunity",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/bloodFat/bloodFatManualEntry",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/earlyWarning",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/systemNotification",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/serve/common",
-			"style": {
-				"navigationBarTitleText": "健康服务",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthMonitor/ergometer/ergometer",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/template/deviceConnection",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/basicFile/basicFile",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		// 健康管理模块
-		{
-			"path": "pages/healthManagement/index",
-			"style": {
-				"navigationBarTitleText": "健康管理",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/diet/diet",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/bodyBuilding/bodyBuilding",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/conditioning",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/health/health",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/medical/medical",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/psychology/psychology",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sleep/sleep",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/sports",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		// 饮食管理
-		{
-			"path": "pages/healthManagement/diet/dietRecords",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/diet/nutritionScale",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/diet/addDietRecords",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		// 营养秤
-		{
-			"path": "pages/healthManagement/diet/nutritionReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/components/healthHeader",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/sportsRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/addSportsRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/components/emptyState",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/sportsReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/skipping",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sports/demo",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sleep/sleepRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/sleep/addSleepRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/medical/doctorAdvice",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/medical/symptomSelfReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/medical/addSymptomSelfReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/conditioningManagemen",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/dietManagemen",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/sportManagemen",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthManagement/conditioning/sleepManagemen",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/habit/habit",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/healthReport/healthReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/healthReport/physiologicalIndicators",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthFile/outpatientArchives/outpatientArchives",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/emotionalCognition/emotionalCognition",
-			"style": {
-				"navigationBarTitleText": "情绪认知",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/chineseMedicineConstitution/chineseMedicineConstitution",
-			"style": {
-				"navigationBarTitleText": "中医体质",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/psychologicalAssessment/psychologicalAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/healthAssessment/healthAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/infraredAssessment/infraredAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/brainWaveAssessment/brainWaveAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/AIAssessment/AIAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/assessmentRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/emotionalCognition/emotionalCognitionAssessment2",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognition",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitution",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessment",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognitionRecord",
-			"style": {
-				"navigationBarTitleText": "情绪认知评估记录",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessmentReport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/index",
-			"style": {
-				"navigationBarTitleText": "健康服务",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/institutionalIntroduction/institutionalIntroduction",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/serviceItems/serviceItems",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/expertIntroduction/expertIntroduction",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/productIntroduction/productIntroduction",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/therapeuticEffects/therapeuticEffects",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthServices/imageAndTextVideo/imageAndTextVideo",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/seekingMedical/seekingMedical",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/health/health",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/psychologicalCounseling/psychologicalCounseling",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/fitness/fitness",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/physicalExamination/physicalExamination",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/diseaseControl/diseaseControl",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/HumanMachineDialogue/HumanMachineDialogue",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/index",
-			"style": {
-				"navigationBarTitleText": "健康评估"
-			}
-		},
-		{
-			"path": "pages/healthEstimate/emotion/emotion",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/constitution/constitution",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/psychology/psychology",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/psychology/search",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/health/health",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/record",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/emotionRecord/emotionRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/emotionRecord/emotionManage",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/constitutionRecord/constitutionRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/constitutionRecord/constitutionManage",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/psychologyRecord/psychologyRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/psychologyRecord/psychologyTestRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/healthRecord/healthRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthEstimate/record/healthRecord/healthTestRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/healthAdvisory/beautyConsultation/beautyConsultation",
-			"style": {}
-		},
-		{
-			"path": "pages/healthAdvisory/fitnessConsultation/fitnessConsultation",
-			"style": {}
-		},
-		{
-			"path": "pages/healthAdvisory/treatmentMethod/treatmentMethod",
-			"style": {}
-		},
-		{
-			"path": "pages/applicationService/index",
-			"style": {}
-		},
-		//健康教育
-		{
-			"path": "pages/healthEducation/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-
-			"path": "pages/healthMonitor/foreheadThermometer/frHistory",
-			"style": {
-				"navigationBarTitleText": "体温历史",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodSugar/bloodSugarHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodSugar/warningRules",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodSUA/bloodSUAHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/cholesterol/cholesterolHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/ergometer/ergometerHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/oximeter/oximeterHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bodyFat/bodyFatHistory",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodSugar/bloodSugarMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodSUA/bloodSUAMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/bloodFat/bloodFatMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/ergometer/ergometerMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/cholesterol/cholesterolMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthMonitor/oximeter/oximeterMonth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-	],
-	// {
-	//   "path": "pages/healthEstimate/emotion/emotion",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/constitution/constitution",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/psychology/psychology",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/record/record",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/record/emotionRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/emotionManage",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/constitutionRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/constitutionManage",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/psychologyRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/psychologyTestRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/healthRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/healthTestRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// }
-
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#FFFFFF",
-		"navigationStyle": "custom"
-	},
-	"tabBar": {
-		"color": "#444444",
-		"selectedColor": "#20c6a2",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [{
-				"pagePath": "pages/homePage/homePage",
-				"iconPath": "static/icon/tab/icon_home.png",
-				"selectedIconPath": "static/icon/tab/icon_home_c.png",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/message/message",
-				"iconPath": "static/icon/tab/icon_message.png",
-				"selectedIconPath": "static/icon/tab/icon_message_c.png",
-				"text": "消息"
-			},
-			{
-				"pagePath": "pages/serve/common",
-				"iconPath": "static/icon/tab/icon_service.png",
-				"selectedIconPath": "static/icon/tab/icon_service_c.png",
-				"text": "服务"
-			},
-			{
-				"pagePath": "pages/mine/common",
-				"iconPath": "static/icon/tab/icon_my.png",
-				"selectedIconPath": "static/icon/tab/icon_my_c.png",
-				"text": "我的"
-			}
-		]
-	},
-	"condition": {
-		//模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [{
-			"name": "", //模式名称
-			"path": "", //启动页面，必选
-			"query": "" //启动参数，在页面的onLoad函数里面得到
-		}]
-	}
+    "pages" : [
+        {
+            "path" : "pages/login/login",
+            "style" : {
+                "navigationBarTitleText" : "登录"
+            }
+        },
+        {
+            "path" : "pages/user/login",
+            "style" : {
+                "navigationBarTitleText" : "登录（弃用）"
+            }
+        },
+        {
+            "path" : "pages/template/addTemplate",
+            "style" : {
+                "navigationBarTitleText" : "新增功能"
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/index",
+            "style" : {
+                "navigationBarTitleText" : "健康监测"
+            }
+        },
+        {
+            "path" : "pages/demo/common",
+            "style" : {
+                "navigationBarTitleText" : "功能示例"
+            }
+        },
+        {
+            "path" : "pages/demo/list",
+            "style" : {
+                "navigationBarTitleText" : "列表"
+            }
+        },
+        {
+            "path" : "pages/demo/areaSelect",
+            "style" : {
+                "navigationBarTitleText" : "地区选择"
+            }
+        },
+        {
+            "path" : "pages/demo/popup",
+            "style" : {
+                "navigationBarTitleText" : "弹窗"
+            }
+        },
+        {
+            "path" : "pages/demo/prompt",
+            "style" : {
+                "navigationBarTitleText" : "弹窗输入框"
+            }
+        },
+        {
+            "path" : "pages/demo/swipeAction",
+            "style" : {
+                "navigationBarTitleText" : "滑动操作"
+            }
+        },
+        {
+            "path" : "pages/demo/parser",
+            "style" : {
+                "navigationBarTitleText" : "富文本预览"
+            }
+        },
+        {
+            "path" : "pages/demo/formDemo",
+            "style" : {
+                "navigationBarTitleText" : "表单模板"
+            }
+        },
+        {
+            "path" : "pages/demo/themeColor",
+            "style" : {
+                "navigationBarTitleText" : "项目主题色介绍"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/index",
+            "style" : {
+                "navigationBarTitleText" : "头部导航示例"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo",
+            "style" : {
+                "navigationBarTitleText" : "案例"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo1",
+            "style" : {
+                "navigationBarTitleText" : "案例1"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo2",
+            "style" : {
+                "navigationBarTitleText" : "案例2"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo3",
+            "style" : {
+                "navigationBarTitleText" : "案例3"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo4",
+            "style" : {
+                "navigationBarTitleText" : "案例4"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo5",
+            "style" : {
+                "navigationBarTitleText" : "案例5"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo6",
+            "style" : {
+                "navigationBarTitleText" : "案例6"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo7",
+            "style" : {
+                "navigationBarTitleText" : "案例7"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo8",
+            "style" : {
+                "navigationBarTitleText" : "案例8"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo9",
+            "style" : {
+                "navigationBarTitleText" : "案例9"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo10",
+            "style" : {
+                "navigationBarTitleText" : "案例10"
+            }
+        },
+        {
+            "path" : "pages/demo/navBarMemo/demo11",
+            "style" : {
+                "navigationBarTitleText" : "案例11"
+            }
+        },
+        {
+            "path" : "pages/demo/waterfall/common",
+            "style" : {
+                "navigationBarTitleText" : "瀑布流列表"
+            }
+        },
+        {
+            "path" : "pages/demo/waterfall/stableWaterfall",
+            "style" : {
+                "navigationBarTitleText" : "稳定版瀑布流"
+            }
+        },
+        {
+            "path" : "pages/demo/waterfall/completeWaterfall",
+            "style" : {
+                "navigationBarTitleText" : "完全版瀑布流"
+            }
+        },
+        {
+            "path" : "pages/template/webView",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "navigationStyle" : "default"
+            }
+        },
+        {
+            "path" : "pages/mine/common",
+            "style" : {
+                "navigationBarTitleText" : "我的"
+            }
+        },
+        {
+            "path" : "pages/user/bindPhone",
+            "style" : {
+                "navigationBarTitleText" : "绑定手机号"
+            }
+        },
+        {
+            "path" : "pages/user/forget",
+            "style" : {
+                "navigationBarTitleText" : "忘记密码"
+            }
+        },
+        {
+            "path" : "pages/user/protocol",
+            "style" : {
+                "navigationBarTitleText" : "协议"
+            }
+        },
+        {
+            "path" : "pages/user/register",
+            "style" : {
+                "navigationBarTitleText" : "注册"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/common",
+            "style" : {
+                "navigationBarTitleText" : "API示例"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/uploadFile",
+            "style" : {
+                "navigationBarTitleText" : "图片上传/文件上传"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/quUploadFile",
+            "style" : {
+                "navigationBarTitleText" : "七牛云图片上传/文件上传"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/appletsLogin",
+            "style" : {
+                "navigationBarTitleText" : "小程序登录"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/appUpdate",
+            "style" : {
+                "navigationBarTitleText" : "APP版本更新"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/location",
+            "style" : {
+                "navigationBarTitleText" : "获取当前经纬度（兼容公众号、APP、微信小程序）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/pay",
+            "style" : {
+                "navigationBarTitleText" : "支付（兼容公众号、APP、微信小程序）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/permission",
+            "style" : {
+                "navigationBarTitleText" : "APP权限判断和跳转到系统设置"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/publicLogin",
+            "style" : {
+                "navigationBarTitleText" : "公众号登录（附带推荐人code）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/publicSdk",
+            "style" : {
+                "navigationBarTitleText" : "公众号SDK权限获取"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/request",
+            "style" : {
+                "navigationBarTitleText" : "接口请求（全端支持）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/saveImg",
+            "style" : {
+                "navigationBarTitleText" : "保存图片到相册（APP、小程序支持）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/share",
+            "style" : {
+                "navigationBarTitleText" : "分享（APP、小程序、公众号支持）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/socket",
+            "style" : {
+                "navigationBarTitleText" : "webSocket介绍"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/loginIntercept",
+            "style" : {
+                "navigationBarTitleText" : "登录拦截（公众号、APP、微信小程序）"
+            }
+        },
+        {
+            "path" : "pages/sdkDemo/utils",
+            "style" : {
+                "navigationBarTitleText" : "常用工具"
+            }
+        },
+        {
+            "path" : "pages/template/pay",
+            "style" : {
+                "navigationBarTitleText" : "支付"
+            }
+        },
+        {
+            "path" : "pages/shortVideo",
+            "style" : {
+                "navigationBarTitleText" : "防抖音滑动视频",
+                "enablePullDownRefresh" : false,
+                "navigationBarTextStyle" : "white",
+                "app-plus" : {
+                    "bounce" : "none",
+                    "titleNView" : false,
+                    "subNVues" : [
+                        {
+                            "id" : "comment",
+                            "path" : "pages/subnvue/comment",
+                            "type" : "popup",
+                            "style" : {
+                                "height" : "80%",
+                                "dock" : "bottom",
+                                "position" : "dock",
+                                "bottom" : "0",
+                                "background" : "transparent",
+                                "zindex" : 10,
+                                "mask" : "rgba(0,0,0,0.4)"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "path" : "pages/mine/editInfo",
+            "style" : {
+                "navigationBarTitleText" : "个人信息"
+            }
+        },
+        {
+            "path" : "pages/template/poster/goodsPoster",
+            "style" : {
+                "navigationBarTitleText" : "商品海报生成"
+            }
+        },
+        {
+            "path" : "pages/template/poster/scanCode",
+            "style" : {
+                "navigationBarTitleText" : "推广海报生成"
+            }
+        },
+        {
+            "path" : "pages/demo/datePopup",
+            "style" : {
+                "navigationBarTitleText" : "日期时间选择器",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodPressure/bloodPressure",
+            "style" : {
+                "navigationBarTitleText" : "血压",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
+            "style" : {
+                "navigationBarTitleText" : "额温枪",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/oximeter/oximeter",
+            "style" : {
+                "navigationBarTitleText" : "血氧仪",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSugar/bloodSugar",
+            "style" : {
+                "navigationBarTitleText" : "血糖",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/homePage/homePage",
+            "style" : {
+                "navigationBarTitleText" : "首页",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSUA/bloodSUA",
+            "style" : {
+                "navigationBarTitleText" : "血尿酸",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/cholesterol/cholesterol",
+            "style" : {
+                "navigationBarTitleText" : "胆固醇",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/index",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/treat/index",
+            "style" : {
+                "navigationBarTitleText" : "诊辽",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/professionalCommunity/index",
+            "style" : {
+                "navigationBarTitleText" : "专业社区",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/educate/index",
+            "style" : {
+                "navigationBarTitleText" : "教育",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/message",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        //    ,{
+        //           "path" : "pages/memberRecord/memberRecord",
+        //           "style" :
+        //           {
+        //               "navigationBarTitleText": "",
+        //               "enablePullDownRefresh": false
+        //           }
+        //       },
+        // {
+        // 	"path" : "pages/memberProfile/memberProfile",
+        // 	"style" :
+        // 	{
+        // 	    "navigationBarTitleText": "",
+        // 	    "enablePullDownRefresh": false
+        // 	}
+        // }
+        {
+            "path" : "pages/healthMonitor/bodyFat/bodyFat",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodPressure/bloodpressureHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodPressure/bloodPressureMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/setting",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/template/setPassword",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodPressure/manualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/messageReminder",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/aboutUs",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/help",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSugar/sugarManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/myPoints",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/myDevice",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSUA/suaManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bodyFat/fatManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/foreheadThermometer/frManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/cholesterol/cholesterolManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/myComment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/commentDetail",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/mine/order",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodFat/bloodFat",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/addressBook",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/addFriend",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/healthyCommunity",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodFat/bloodFatManualEntry",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/earlyWarning",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/message/systemNotification",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/serve/common",
+            "style" : {
+                "navigationBarTitleText" : "健康服务",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/ergometer/ergometer",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/template/deviceConnection",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/index",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/basicFile/basicFile",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        // 健康管理模块
+        {
+            "path" : "pages/healthManagement/index",
+            "style" : {
+                "navigationBarTitleText" : "健康管理",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/diet/diet",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/bodyBuilding/bodyBuilding",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/conditioning/conditioning",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/health/health",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/medical/medical",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/psychology/psychology",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sleep/sleep",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/sports",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        // 饮食管理
+        {
+            "path" : "pages/healthManagement/diet/dietRecords",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/diet/nutritionScale",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/diet/addDietRecords",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        // 营养秤
+        {
+            "path" : "pages/healthManagement/diet/nutritionReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/components/healthHeader",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/sportsRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/addSportsRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/components/emptyState",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/sportsReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/skipping",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sports/demo",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sleep/sleepRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/sleep/addSleepRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/medical/doctorAdvice",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/medical/symptomSelfReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/medical/addSymptomSelfReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/conditioning/conditioningManagemen",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/conditioning/dietManagemen",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/conditioning/sportManagemen",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthManagement/conditioning/sleepManagemen",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/habit/habit",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/healthReport/healthReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/healthReport/physiologicalIndicators",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/outpatientArchives/outpatientArchives",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/emotionalCognition/emotionalCognition",
+            "style" : {
+                "navigationBarTitleText" : "情绪认知",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/chineseMedicineConstitution/chineseMedicineConstitution",
+            "style" : {
+                "navigationBarTitleText" : "中医体质",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/psychologicalAssessment/psychologicalAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/healthAssessment/healthAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/infraredAssessment/infraredAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/brainWaveAssessment/brainWaveAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/AIAssessment/AIAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/assessmentRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/emotionalCognition/emotionalCognitionAssessment2",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognition",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitution",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessment",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/emotionalCognition/emotionalCognitionRecord",
+            "style" : {
+                "navigationBarTitleText" : "情绪认知评估记录",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/chineseMedicineConstitution/chineseMedicineConstitutionRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/psychologicalAssessment/psychologicalAssessmentReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAssessment/assessmentRecord/healthAssessment/healthAssessmentReport",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/index",
+            "style" : {
+                "navigationBarTitleText" : "健康服务",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/institutionalIntroduction/institutionalIntroduction",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/serviceItems/serviceItems",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/expertIntroduction/expertIntroduction",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/productIntroduction/productIntroduction",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/therapeuticEffects/therapeuticEffects",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthServices/imageAndTextVideo/imageAndTextVideo",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/index",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/seekingMedical/seekingMedical",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/health/health",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/psychologicalCounseling/psychologicalCounseling",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/fitness/fitness",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/physicalExamination/physicalExamination",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/diseaseControl/diseaseControl",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/HumanMachineDialogue/HumanMachineDialogue",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/index",
+            "style" : {
+                "navigationBarTitleText" : "健康评估"
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/emotion/emotion",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/constitution/constitution",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/psychology/psychology",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/psychology/search",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/health/health",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/record",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/emotionRecord/emotionRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/emotionRecord/emotionManage",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/constitutionRecord/constitutionRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/constitutionRecord/constitutionManage",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/psychologyRecord/psychologyRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/psychologyRecord/psychologyTestRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/healthRecord/healthRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthEstimate/record/healthRecord/healthTestRecord",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthAdvisory/beautyConsultation/beautyConsultation",
+            "style" : {}
+        },
+        {
+            "path" : "pages/healthAdvisory/fitnessConsultation/fitnessConsultation",
+            "style" : {}
+        },
+        {
+            "path" : "pages/healthAdvisory/treatmentMethod/treatmentMethod",
+            "style" : {}
+        },
+        {
+            "path" : "pages/applicationService/index",
+            "style" : {}
+        },
+        //健康教育
+        {
+            "path" : "pages/healthEducation/index",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/foreheadThermometer/frHistory",
+            "style" : {
+                "navigationBarTitleText" : "体温历史",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSugar/bloodSugarHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSugar/warningRules",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSUA/bloodSUAHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/cholesterol/cholesterolHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/ergometer/ergometerHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/oximeter/oximeterHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bodyFat/bodyFatHistory",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSugar/bloodSugarMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodSUA/bloodSUAMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/bloodFat/bloodFatMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/ergometer/ergometerMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/cholesterol/cholesterolMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthMonitor/oximeter/oximeterMonth",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/healthFile/status/index",
+            "style" : {}
+        },
+        {
+            "path" : "pages/healthFile/quota/index",
+            "style" : {}
+        }
+    ],
+    // {
+    //   "path": "pages/healthEstimate/emotion/emotion",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },
+    // {
+    //   "path": "pages/healthEstimate/constitution/constitution",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },
+    // {
+    //   "path": "pages/healthEstimate/psychology/psychology",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },
+    // {
+    //   "path": "pages/healthEstimate/record/record",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },
+    // {
+    //   "path": "pages/healthEstimate/record/emotionRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/emotionManage",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/constitutionRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/constitutionManage",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/psychologyRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/psychologyTestRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/healthRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // },{
+    //   "path": "pages/healthEstimate/record/healthTestRecord",
+    //   "style": {
+    //     "navigationBarTitleText": "",
+    //     "enablePullDownRefresh": false
+    //   }
+    // }
+    "globalStyle" : {
+        "navigationBarTextStyle" : "black",
+        "navigationBarTitleText" : "uni-app",
+        "navigationBarBackgroundColor" : "#FFFFFF",
+        "backgroundColor" : "#FFFFFF",
+        "navigationStyle" : "custom"
+    },
+    "tabBar" : {
+        "color" : "#444444",
+        "selectedColor" : "#20c6a2",
+        "borderStyle" : "black",
+        "backgroundColor" : "#ffffff",
+        "list" : [
+            {
+                "pagePath" : "pages/homePage/homePage",
+                "iconPath" : "static/icon/tab/icon_home.png",
+                "selectedIconPath" : "static/icon/tab/icon_home_c.png",
+                "text" : "首页"
+            },
+            {
+                "pagePath" : "pages/message/message",
+                "iconPath" : "static/icon/tab/icon_message.png",
+                "selectedIconPath" : "static/icon/tab/icon_message_c.png",
+                "text" : "消息"
+            },
+            {
+                "pagePath" : "pages/serve/common",
+                "iconPath" : "static/icon/tab/icon_service.png",
+                "selectedIconPath" : "static/icon/tab/icon_service_c.png",
+                "text" : "服务"
+            },
+            {
+                "pagePath" : "pages/mine/common",
+                "iconPath" : "static/icon/tab/icon_my.png",
+                "selectedIconPath" : "static/icon/tab/icon_my_c.png",
+                "text" : "我的"
+            }
+        ]
+    },
+    "condition" : {
+        //模式配置，仅开发期间生效
+        "current" : 0, //当前激活的模式(list 的索引项)
+        "list" : [
+            {
+                "name" : "", //模式名称
+                "path" : "", //启动页面，必选
+                "query" : "" //启动参数，在页面的onLoad函数里面得到
+            }
+        ]
+    }
 }
-
