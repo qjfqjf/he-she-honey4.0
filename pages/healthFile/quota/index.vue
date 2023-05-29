@@ -21,17 +21,27 @@
               <doc-choice :cell-choice="choice"/>
           </u-collapse-item>
       </u-collapse>
-
+      <view>
+          <u-popup :round="10" mode="center" :show="show" @close="close" @open="open">
+              <view class="m-5">
+                  <text>请检查填写格式是否有误</text>
+              </view>
+              <u-button @click="close" class="rounded-20" style="overflow: hidden" type="primary"  text="关闭"></u-button>
+          </u-popup>
+      </view>
+      <u-button @click="show = true" type="primary" text="提交"></u-button>
 
   </view>
 </template>
 <script>
 import DocList from "../componments/docList.vue";
 import DocChoice from "../componments/docChoice.vue";
+import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
 
 export default {
     data() {
         return {
+            show: false,
             list: ["*身高(cm)" ,
             "*体重(kg)" ,
             "*BMK(kg/m')" ,
@@ -49,13 +59,14 @@ export default {
 	              // console.log('open', e)
       },
       close(e) {
-	              // console.log('close', e)
+	              this.show = false;
       },
       change(e) {
 	              // console.log('change', e)
       }
 	},
     components:{
+        UButton,
         DocList,
         DocChoice
     }

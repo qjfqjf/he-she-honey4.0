@@ -8,5 +8,6 @@ export function formatDateTime(timeString) {
   const minute = String(dateTime.getMinutes()).padStart(2, '0');
   const second = String(dateTime.getSeconds()).padStart(2, '0');
 
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+
+  return `${year}年${month}月${day}日 ${hour}时${minute}分${second}秒`;
 }

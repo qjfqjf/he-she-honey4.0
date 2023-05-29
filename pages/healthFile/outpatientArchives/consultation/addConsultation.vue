@@ -199,7 +199,6 @@ export default {
     justify-content: space-between;
     background-color: white;
     padding: 20rpx;
-    .select-list {}
   }
 
   .uploadImage {

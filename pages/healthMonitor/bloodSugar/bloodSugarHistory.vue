@@ -99,16 +99,20 @@
 					url: '/pages/healthMonitor/bloodSugar/warningRules'
 				})
 			},
-			//查询历史记录
+			//查询血糖历史记录
 			getHistoryList() {
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				const token = uni.getStorageSync('access-token');
 				uni.request({
 					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
 					method: 'post',
 					data: {
 						params: {
 							model: "blood.glucose.meter",
-							token: "d7419ae04f248e5105ac3d0700389775",
-							uid: '2',
+							token: token,
+							uid: uid,
 							fields: [
 								"name",
 								"numbers",

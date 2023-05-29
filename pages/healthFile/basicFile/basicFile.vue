@@ -1,61 +1,62 @@
 <template>
-	<view>
+	<view class="d-flex flex-column j-sb h-100">
 		<z-nav-bar title="基础档案"></z-nav-bar>
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
-		<view class="background">
-			<view class="per">
-				<view class="left">
-					<u-avatar
-						:src="avatar"
-						size="60"
-						class="avatar"
-					></u-avatar>
-					<view class="name">{{ name }}</view>
-				</view>
-				<view class="right">
-					<view class="center">
-						<view class="msg">
-							<view class="title">性别</view>
-							<view class="msg2">{{ gender }}</view>
-						</view>
-						<view class="msg">
-							<view class="title">身高(cm)</view>
-							<view class="msg2">{{ height }}</view>
-						</view>
-						<view class="msg">
-							<view class="title">年龄</view>
-							<view class="msg2">{{ age }}</view>
-						</view>
-						<view class="msg">
-							<view class="title">体重(kg)</view>
-							<view class="msg2">{{ weight }}</view>
+		<view class="flex-1">
+			<view class="background">
+				<view class="per">
+					<view class="left">
+						<u-avatar
+								:src="avatar"
+								size="60"
+								class="avatar"
+						></u-avatar>
+						<view class="name">{{ name }}</view>
+					</view>
+					<view class="right">
+						<view class="center">
+							<view class="msg">
+								<view class="title">性别</view>
+								<view class="msg2">{{ gender }}</view>
+							</view>
+							<view class="msg">
+								<view class="title">身高(cm)</view>
+								<view class="msg2">{{ height }}</view>
+							</view>
+							<view class="msg">
+								<view class="title">年龄</view>
+								<view class="msg2">{{ age }}</view>
+							</view>
+							<view class="msg">
+								<view class="title">体重(kg)</view>
+								<view class="msg2">{{ weight }}</view>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-		<view class="u-demo-block__content">
-			<u-subsection
-				:list="list"
-				mode="button"
-				:current="current"
-				activeColor="rgb(57,185,105)"
-				bgColor="#ffffff"
-				@change="change"
-			></u-subsection>
-		</view>
+			<view class="u-demo-block__content">
+				<u-subsection
+						:list="list"
+						mode="button"
+						:current="current"
+						activeColor="rgb(57,185,105)"
+						bgColor="#ffffff"
+						@change="change"
+				></u-subsection>
+			</view>
 
-<!--		<view class="uni-form-item uni-column d-flex a-center shadow-sm border " v-for="info in baseInfo" :key="info">-->
-<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
-<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
-<!--		</view>-->
-		<doc-list v-if="current === 0" :cell-list="signInfo"></doc-list>
-		<doc-list v-if="current === 1" :cell-list="baseInfo"></doc-list>
-		<doc-list v-if="current === 2" :cell-list="history"></doc-list>
-		<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
-		<doc-list v-if="current === 3" :cell-list="history"></doc-list>
-		<u-button @click="show = true" type="primary" text="提交"></u-button>
+			<!--		<view class="uni-form-item uni-column d-flex a-center shadow-sm border " v-for="info in baseInfo" :key="info">-->
+			<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
+			<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
+			<!--		</view>-->
+			<doc-list v-if="current === 0" :cell-list="signInfo"></doc-list>
+			<doc-list v-if="current === 1" :cell-list="baseInfo"></doc-list>
+			<doc-list v-if="current === 2" :cell-list="history"></doc-list>
+			<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
+			<doc-list v-if="current === 3" :cell-list="history"></doc-list>
+		</view>
 		<view>
 			<u-popup :round="10" mode="center" :show="show" @close="close" @open="open">
 				<view class="m-5">
@@ -64,6 +65,7 @@
 				<u-button @click="close" class="rounded-20" style="overflow: hidden" type="primary"  text="关闭"></u-button>
 			</u-popup>
 		</view>
+		<u-button @click="show = true" type="primary" text="提交"></u-button>
 	</view>
 </template>
 

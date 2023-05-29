@@ -9,26 +9,27 @@
     <view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
       <view class="top d-flex j-sb mb-2">
         <view class="time">
-          {{item.time}}
+          {{item.test_time}}
         </view>
       </view>
       <view class="data d-flex j-sb">
         <view class="name">
-          名称：{{item.name}}
+          <!-- 名称：{{item.name}} -->
+		  名称：心率
         </view>
-        <view class="ergometer" v-if="item.ergometer > targetIndexMax">
+        <view class="ergometer" v-if="item.wavelength > targetIndexMax">
           <!-- ↓ -->
-          数值：{{item.ergometer}}
+          数值：{{item.wavelength}}
           <text class="up">{{arrowUp}}</text>
         </view>
-        <view class="ergometer" v-else-if="item.ergometer < targetIndexMin">
+        <view class="ergometer" v-else-if="item.wavelength < targetIndexMin">
           <!-- ↓ -->
-          数值：{{item.ergometer}}
+          数值：{{item.wavelength}}
           <text class="down">{{arrowDown}}</text>
         </view>
         <view class="ergometer" v-else>
           <!-- ↓ -->
-          数值：{{item.ergometer}}
+          数值：{{item.wavelength}}
           <text class="down"></text>
         </view>
       </view>
@@ -50,31 +51,32 @@
         targetIndexMin: 60,
         arrowUp: '↑',
         arrowDown: '↓',
-        dataList: [{
-            time: "2023-3-29 15:30:50",
-            name: '心率',
-            ergometer: 80
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '心率',
-            ergometer: 110
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '心率',
-            ergometer: 110
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '心率',
-            ergometer: 120
-          }
+        dataList: [
+			// {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '心率',
+   //          ergometer: 80
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '心率',
+   //          ergometer: 110
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '心率',
+   //          ergometer: 110
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '心率',
+   //          ergometer: 120
+   //        }
         ]
       };
     },
     onLoad() {
-
+		this.getHistoryList();
     },
     methods: {
       handleDevelop() {
@@ -82,6 +84,36 @@
           message: '开发中...'
         })
       },
+	  //查询心电图历史记录
+	  getHistoryList() {
+	  	const userInfoStr = uni.getStorageSync('userInfo');
+	  	const userInfo = JSON.parse(userInfoStr);
+	  	const uid = userInfo.uid;
+	  	const token = uni.getStorageSync('access-token');
+	  	uni.request({
+	  		url: 'http://106.14.140.92:8881/platform/dataset/search_read',
+	  		method: 'post',
+	  		data: {
+	  			params: {
+	  				model: "electrocardiograph",
+	  				token: token,
+	  				uid: uid,
+	  				fields: [
+	  					"name",
+	  					"numbers",
+	  					"owner",
+	  					"electrocardiogram",
+	  					"wavelength",
+	  					"input_type",
+	  					"test_time"
+	  				]
+	  			}
+	  		},
+	  		success: (res) => {
+	  			this.dataList = res.data.result.records
+	  		}
+	  	})
+	  }
 
     }
   }

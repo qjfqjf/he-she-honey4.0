@@ -193,7 +193,7 @@
 					data: {
 						params: {
 							model: "body.fat.scale",
-							token: "d7419ae04f248e5105ac3d0700389775",
+							token: "8c2a647f6745ee4c96bf889427e77cf9",
 							uid: '2',
 							fields: [
 								"name",
