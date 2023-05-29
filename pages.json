@@ -1438,6 +1438,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/laboratoryExamination/addLaboratoryExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",

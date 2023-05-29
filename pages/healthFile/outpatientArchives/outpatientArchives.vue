@@ -34,7 +34,7 @@
 					{
 						img: require('@/static/icon/healthFile/laboratoryExamination.png'),
 						title: '化验验查',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination'
 					},
 					{
 						img: require('@/static/icon/healthFile/imagingExamination.png'),
