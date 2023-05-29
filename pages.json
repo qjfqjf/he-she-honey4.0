@@ -1474,6 +1474,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/operation/operation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/outpatientArchives/operation/addOperation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",

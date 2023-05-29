@@ -44,7 +44,7 @@
 					{
 						img: require('@/static/icon/healthFile/operation.png'),
 						title: '门诊手术', 
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/operation/operation'
 					},
 					{
 						img: require('@/static/icon/healthFile/consultation.png'),
