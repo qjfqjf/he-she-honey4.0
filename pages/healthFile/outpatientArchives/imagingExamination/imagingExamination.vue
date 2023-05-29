@@ -36,12 +36,12 @@
 				showObj:{
 					curNow:0,
 					//这边统一写内容用
-					choiceTitle:'门诊类别',
-					type:["急诊","普通门诊"],
-					ImgText:'病例照片',
-					remarksText:'疾病诊断',
-					typeText:'门诊类型',
-					discription:'情况描述',
+					choiceTitle:'影像类别',
+					type:["超声","X线","CT","MRI","其他"],
+					ImgText:'添加影像检查',
+					remarksText:'检查项目',
+					typeText:'影像类型',
+					discription:'影像描述',
 
 					// 备注
 					remarksValue: '',
@@ -62,7 +62,7 @@
 					// 	uid:'',
 					// 	//病例id
 					// 	recordId:'',
-					// 	//门诊类型
+					// 	//化验类型
 					// 	type:'急诊',
 					// 	//选择的日期
 					// 	selectedDate:'111',
@@ -81,12 +81,12 @@
 					// 	],
 					// }
 				],
-				title:'门诊病例',
+				title:'影像检查',
 				//点击添加跳转的路由
-				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
+				tourl:'/pages/healthFile/outpatientArchives/imagingExamination/addImagingExamination',
 				//接口
 				tourl2:'',
-				addtext:'添加病例'
+				addtext:'添加档案'
 			}
 		},
 

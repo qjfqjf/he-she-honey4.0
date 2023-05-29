@@ -36,11 +36,11 @@
 				showObj:{
 					curNow:0,
 					//这边统一写内容用
-					choiceTitle:'门诊类别',
-					type:["急诊","普通门诊"],
-					ImgText:'病例照片',
-					remarksText:'疾病诊断',
-					typeText:'门诊类型',
+					choiceTitle:'化验类别',
+					type:["血液","急诊","影像","其他"],
+					ImgText:'添加化验检查',
+					remarksText:'检查项目',
+					typeText:'化验类型',
 					discription:'情况描述',
 
 					// 备注
@@ -62,7 +62,7 @@
 					// 	uid:'',
 					// 	//病例id
 					// 	recordId:'',
-					// 	//门诊类型
+					// 	//化验类型
 					// 	type:'急诊',
 					// 	//选择的日期
 					// 	selectedDate:'111',
@@ -81,12 +81,12 @@
 					// 	],
 					// }
 				],
-				title:'门诊病例',
+				title:'化验检查',
 				//点击添加跳转的路由
-				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
+				tourl:'/pages/healthFile/outpatientArchives/laboratoryExamination/addLaboratoryExamination',
 				//接口
 				tourl2:'',
-				addtext:'添加病例'
+				addtext:'添加档案'
 			}
 		},
 

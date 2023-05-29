@@ -85,7 +85,7 @@
 					{
 						img: require('@/static/icon/healthFile/inpatientRecords.png'),
 						title: '住院档案',
-						url: ''
+						url: '/pages/healthFile/inpatientRecords/inpatientRecords'
 					},
 					{
 						img: require('@/static/icon/healthFile/publicHealth.png'),

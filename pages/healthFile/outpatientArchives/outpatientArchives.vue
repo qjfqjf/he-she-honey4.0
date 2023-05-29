@@ -34,22 +34,22 @@
 					{
 						img: require('@/static/icon/healthFile/laboratoryExamination.png'),
 						title: '化验验查',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination'
 					},
 					{
 						img: require('@/static/icon/healthFile/imagingExamination.png'),
 						title: '影像检查',
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/imagingExamination/imagingExamination'
 					},
 					{
 						img: require('@/static/icon/healthFile/operation.png'),
 						title: '门诊手术', 
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/operation/operation'
 					},
 					{
 						img: require('@/static/icon/healthFile/consultation.png'),
 						title: '转诊会诊', 
-						url: ''
+						url: '/pages/healthFile/outpatientArchives/consultation/consultation'
 					}
 				],
 			}
