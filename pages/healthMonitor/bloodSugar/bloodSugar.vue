@@ -21,14 +21,14 @@
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
 		<!-- <BottomNavigation page="bloodSugar/sugarManualEntry"></BottomNavigation> -->
-	<view class="tools d-flex j-sb mt-5 p-4">
-		<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-			@click="onPageJump(item.url)">
-			<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-			<text class="mt-1">{{item.title}}</text>
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
+				@click="onPageJump(item.url)">
+				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
+				<text class="mt-1">{{item.title}}</text>
+			</view>
 		</view>
-	</view>
-    <u-toast ref="uToast"></u-toast>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -85,25 +85,24 @@
 				deviceId: '90:E2:02:22:CD:D5', // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/bloodSugar/bloodSugarMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/'+this.page
-        	},
-        ],
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/bloodSugar/bloodSugarMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/bloodSugar/sugarManualEntry'
+					},
+				],
 
 			};
 		},
@@ -111,7 +110,7 @@
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 
-					this.connect()
+				this.connect()
 
 			}
 		},
@@ -137,9 +136,9 @@
 				// this.$refs.uToast.show({
 				// 	message: '开发中...'
 				// })
-        uni.navigateTo({
-          url:'/pages/healthMonitor/bloodSugar/bloodSugarHistory'
-        })
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSugar/bloodSugarHistory'
+				})
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -148,7 +147,7 @@
 					success(res) {
 						console.log('初始化蓝牙成功')
 						console.log(res)
-					
+
 					},
 					fail(err) {
 						console.log('初始化蓝牙失败')
@@ -352,13 +351,13 @@
 				const scaleFactor = Math.pow(10, decimalPlaces)
 				this.value = Math.floor(result * scaleFactor) / scaleFactor
 			},
-      
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
 
 
 		}
