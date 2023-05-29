@@ -27,13 +27,13 @@
                     <view class="example-body">
                         <uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
                     </view>
-					<text class="tip">（友情提示：最多添加9张图片）</text>
                 </view>
 
                 <!-- 3、备注和时间 -->
                 <view class="remarks">
                     <text class="cate-text" style="">{{addObj.remarksText}}</text>
                     <view style="height: 20rpx"></view>
+                    <u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false" v-model="dataObj.illName"></u-input>
                     <u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
 
                 </view>
@@ -42,15 +42,23 @@
 
                 <!-- 4、日期 -->
                 <view class="date-body">
-                    <text class="cate-text">日期</text>
+                    <text class="cate-text">入院时间</text>
                     <view style="height: 20rpx"></view>
                     <view class="picker">
-                        <uni-datetime-picker class="time-picker" :show-icon="true" :border="false" v-model="dataObj.selectedDate"
+                        <uni-datetime-picker class="time-picker" :show-icon="true" :border="false" v-model="dataObj.selectedDate1"
                                              :clearIcon="false"/>
                         <uni-icons type="forward" size="15"></uni-icons>
                     </view>
                 </view>
-
+				<view class="date-body">
+                    <text class="cate-text">出院时间</text>
+                    <view style="height: 20rpx"></view>
+                    <view class="picker">
+                        <uni-datetime-picker class="time-picker" :show-icon="true" :border="false" v-model="dataObj.selectedDate2"
+                                             :clearIcon="false"/>
+                        <uni-icons type="forward" size="15"></uni-icons>
+                    </view>
+                </view>
 
                 <view class="save-box">
                     <!-- 保存按钮 -->
@@ -63,14 +71,14 @@
 </template>
 
 <script>
-import headerNav from "../components/headerNav.vue";
+import headerNav from "../outpatientArchives/components/headerNav.vue";
 export default {
 	components: {
 		headerNav,
 	},
 	data() {
 		return {
-			title:"转诊会诊",
+			title:"住院病历",
 			//数据
 			dataObj:[
 				{
@@ -81,7 +89,9 @@ export default {
 					//门诊类型
 					type:'',
 					//选择的日期
-					selectedDate:new Date(),
+          selectedDate:new Date(),
+					selectedDate1:new Date(),
+					selectedDate2:new Date(),
 					//疾病名称
 					illName:'',
 					//疾病备注
@@ -99,12 +109,14 @@ export default {
 				//默认的选项
 				curNow:0,
 				//这边统一写内容用
-				choiceTitle:'转诊会诊',
-				list:["转院","转科","会诊"],
-				uploadImgText:'添加照片',
-				placeholder2:'请添加检查项目的备注',
+				choiceTitle:'门诊类别',
+				list:["急诊","普通门诊"],
+				uploadImgText:'添加病例照片',
+				placeholder1:'请输入疾病诊断名称',
+				placeholder2:'请添加疾病诊断的备注',
+				remarksText:'疾病诊断',
 				//返回的路由
-				tourl:'/pages/healthFile/outpatientArchives/consultation/consultation.vue',
+				tourl:'/pages/healthFile/inpatientRecords/inpatientRecords',
 				//保存接口
 				tourl2:'',
 				// 备注
@@ -215,9 +227,9 @@ export default {
   .remarks {
     margin-top: 14rpx;
     padding: 30rpx;
-    height: 300rpx;
+    height: 400rpx;
     .textarea {
-      height: 0rpx;
+      height: 200rpx;
       font-size: 28rpx;
     }
   }

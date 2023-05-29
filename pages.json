@@ -1510,6 +1510,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/inpatientRecords/inpatientRecords",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/inpatientRecords/addInpatientRecords",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
