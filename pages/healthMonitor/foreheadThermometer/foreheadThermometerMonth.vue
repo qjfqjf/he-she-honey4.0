@@ -9,16 +9,17 @@
     <view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
       <view class="top d-flex j-sb mb-2">
         <view class="time">
-          {{item.time}}
+          {{item.test_time}}
         </view>
       </view>
       <view class="data d-flex j-sb">
         <view class="name">
-          名称：{{item.name}}
+          <!-- 名称：{{item.name}} -->
+		  名称：额温
         </view>
         <view class="foreheadThermometer">
           <!-- ↓ -->
-          数值：{{item.foreheadThermometer}}℃
+          数值：{{item.temperature}}℃
         </view>
         
       </view>
@@ -36,31 +37,32 @@
     },
     data() {
       return {
-        dataList: [{
-            time: "2023-3-29 15:30:50",
-            name: '额温',
-            foreheadThermometer: 36.7
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '额温',
-            foreheadThermometer: 36.6
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '额温',
-            foreheadThermometer: 37.5
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '额温',
-            foreheadThermometer: 38
-          }
+        dataList: [
+			// {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '额温',
+   //          foreheadThermometer: 36.7
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '额温',
+   //          foreheadThermometer: 36.6
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '额温',
+   //          foreheadThermometer: 37.5
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '额温',
+   //          foreheadThermometer: 38
+   //        }
         ]
       };
     },
     onLoad() {
-
+		this.getHistoryList();
     },
     methods: {
       handleDevelop() {
@@ -68,6 +70,35 @@
           message: '开发中...'
         })
       },
+	  //查询额温枪历史记录
+	  getHistoryList() {
+	  	const userInfoStr = uni.getStorageSync('userInfo');
+	  	const userInfo = JSON.parse(userInfoStr);
+	  	const uid = userInfo.uid;
+	  	const token = uni.getStorageSync('access-token');
+	  	uni.request({
+	  		url: 'http://106.14.140.92:8881/platform/dataset/search_read',
+	  		method: 'post',
+	  		data: {
+	  			params: {
+	  				model: "forehead.temperature.gun",
+	  				token: token,
+	  				uid: uid,
+	  				fields: [
+	  					"name",
+	  					"numbers",
+	  					"owner",
+	  					"temperature",
+						"input_type",
+	  					"test_time"
+	  				]
+	  			}
+	  		},
+	  		success: (res) => {
+	  			this.dataList = res.data.result.records;
+	  		}
+	  	})
+	  }
 
     }
   }

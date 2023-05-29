@@ -52,7 +52,9 @@
 	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	import MyCircle from '../components/circle/Circle.vue'
-	import { formatDateTime } from '@/utils/date.js'
+	import {
+		formatDateTime
+	} from '@/utils/date.js'
 	export default {
 		components: {
 			HealthHeader,
@@ -66,34 +68,35 @@
 				deviceStatus: 0,
 				heat: 0, //测量温度
 				blueDeviceList: [],
-				owner:'2222',
-				input_type:'设备输入',
+				owner: '2222',
+				input_type: '设备输入',
+				name: '额温枪',
+				time: formatDateTime(new Date()),
 				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				urlList: {
 					history: '/pages/healthMonitor/foreheadThermometer/frHistory',
 				},
-				test_time:'',
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/foreheadThermometer/frManualEntry'
-        	},
-        ],
+				test_time: '',
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/foreheadThermometer/frManualEntry'
+					},
+				],
 
 			};
 		},
@@ -114,12 +117,12 @@
 			},
 			handleJump() {
 				uni.navigateTo({
-					url:'/pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory'
+					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory'
 				});
-        
-        
+
+
 			},
-   //    handleJump(url) {
+			//    handleJump(url) {
 			// 	console.log(url)
 			// 	uni.navigateTo({
 			// 		url,
@@ -129,44 +132,43 @@
 			// 	});
 			// },
 			handleSaveHeat() {
-				
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				const token = uni.getStorageSync('access-token');
+				const time = formatDateTime(new Date());
 				uni.request({
-					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-					method: 'post',
-					data: {
-						params: {
-							model: "forehead.temperature.gun",
-							token: "2d801467e65a20df2ad5dd175526c3e3",
-							uid: '2',
-							fields: [
-								"name",
-								"numbers",
-								"owner",
-								"temperature",
-								"test_time"
-							],
-							
+						url: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+						method: 'post',
+						data: {
+							params: {
+								model: "forehead.temperature.gun",
+								token: token,
+								uid: uid,
+								method: "create",
+								args: [
+									[{
+										"name": "额温枪",
+										"numbers":'001',
+										"owner":6,
+										"temperature":'36',
+										"input_type":"equipment",
+									}]
+								],
+								kwargs:{}
+
+
+							}
+						},
+						success: (res) => {
+							console.log(res)
 						}
-					},
-					success: (res) => {
-					    this.$refs.uToast.show({
-					    	message: '保存成功',
-					    	type: 'success',
-					    })
-					    this.btnColor = '#dadada'
-					    this.heat = 0
-					},
-					fail: (res) => {
-						this.$refs.uToast.show({
-							message: '保存失败',
-							type: 'error',
-						})
-					}
-				}),
-				console.log(this.deviceStatus)
+					}),
+
+					console.log(this.deviceStatus)
 				if (this.heat !== 0) {
-					
-					success:(res) => {
+
+					success: (res) => {
 						this.$refs.uToast.show({
 							message: '保存成功',
 							type: 'success',
@@ -363,12 +365,12 @@
 
 
 			},
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
 
 		}
 	}

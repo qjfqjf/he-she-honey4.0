@@ -59,12 +59,12 @@
 					{
 						img: require('@/static/icon/healthFile/physiologicalIndex.png'),
 						title: '生理指标',
-						url: ''
+						url: '/pages/healthFile/quota/index'
 					},
 					{
 						img: require('@/static/icon/healthFile/healthStatus.png'),
 						title: '健康状况',
-						url: ''
+						url: '/pages/healthFile/status/index'
 					},
 					{
 						img: require('@/static/icon/healthFile/habit.png'),
