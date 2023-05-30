@@ -3,12 +3,9 @@
     <z-nav-bar title="心理咨询"></z-nav-bar>
     <public-module></public-module>
 
-    <!--饮食记录  -->
+    <!--  空记录  -->
     <view class="nothing" v-if="baseList.length === 0">
-      <empty-state :description="'暂无数据'" />
-    </view>
-    <view class="sports-records" v-for="(item, index) in baseList" :key="index" v-else>
-      {{item}}
+      <EmptyState :title="title"></EmptyState>
     </view>
 
   </view>
@@ -22,22 +19,26 @@
     },
     data() {
       return {
-        baseList: []
+        baseList: [],
+        title:""
       };
     },
     //方法
     methods: {
-      addSportsRecord() {
-        uni.navigateTo({
-          url: '/pages/healthManagement/sports/addSportsRecord'
-        })
-      },
     },
   }
 </script>
 
 <style lang="scss">
-  .content {
-    .sports-records {}
+
+.content{
+  background-color: #FFFFFF;
+  height: 100%;
+  .nothing{
+    text-align: center;
+    padding-top: 300rpx;
+    width: 400rpx;
+    margin: 0 auto;
   }
+}
 </style>

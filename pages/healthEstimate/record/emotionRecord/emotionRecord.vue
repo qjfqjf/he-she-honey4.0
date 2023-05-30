@@ -2,7 +2,7 @@
   <view>
     <z-nav-bar title="评估记录"></z-nav-bar>
     <public-module></public-module>
-    
+
     <!-- 内容 -->
     <view class="content">
       <view class="item doctor-advice" v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex" @click="click(baseListItem.url, baseListItem.title)">
@@ -22,19 +22,7 @@ url:
             title: '情绪认知',
             createTime: '2022-08-09 23:23:00',
             url: '/pages/healthEstimate/record/emotionRecord/emotionManage'
-          },{
-            title: '情绪认知',
-            createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthEstimate/record/emotionRecord/emotionManage'
-          },{
-            title: '情绪认知',
-            createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthEstimate/record/emotionRecord/emotionManage'
-          },{
-            title: '情绪认知',
-            createTime: '2022-08-09 23:23:00',
-            url: '/pages/healthEstimate/record/emotionRecord/emotionManage'
-          },
+          }
         ]
       };
     },
@@ -46,7 +34,7 @@ url:
         uni.navigateTo({
           url: url
         });
-      
+
       ;}
     }
   }
@@ -61,7 +49,7 @@ url:
     display: flex;
     justify-content: space-between;
     align-items: center;
-      
+
     padding: 26rpx;
     border-bottom: 1rpx solid #ececec;
     font-size: 28rpx;
@@ -70,8 +58,8 @@ url:
     }
   }
   .doctor-advice{
-    
+
   }
-  
+
 }
 </style>

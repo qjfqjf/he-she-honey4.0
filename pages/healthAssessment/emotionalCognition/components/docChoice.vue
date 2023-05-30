@@ -1,5 +1,9 @@
 <template>
     <view>
+        <u-radio-group
+                v-model="value"
+                placement="column"
+        >
             <u-radio
                 class="mt-4 ml-2"
                 :customStyle="{marginBottom: '8px'}"
@@ -10,6 +14,7 @@
                 @change="radioChange"
             >
             </u-radio>
+        </u-radio-group>
     </view>
 </template>
 
@@ -27,7 +32,8 @@ export default{
         }
     },
     props:{
-        cellChoice: Array
+        cellChoice: Array,
+        value: ""
     }
 }
 </script>

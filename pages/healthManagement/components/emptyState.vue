@@ -37,6 +37,7 @@ export default {
 </script>
 
 <style lang="scss">
+
   u-image{
     //光晕效果未加
     //Filter: Chroma(Color = #000000) Glow(Color=#00FF00, Strength=20);
