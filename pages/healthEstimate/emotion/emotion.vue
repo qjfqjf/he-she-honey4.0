@@ -40,7 +40,7 @@
       components: {InputAndChoiceForm},
     data() {
       return {
-          show: true,
+          show: false,
           lists: [{
               question: "1.感到不安，担心及烦躁：",
               options: ["完全没有","有几天","一半以上天数","几乎每天"]

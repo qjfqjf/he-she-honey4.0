@@ -5,13 +5,13 @@
 		<public-module></public-module>
 		<u-collapse @change="change" @close="close" @open="open">
 		    <u-collapse-item title="情绪筛查表1" name="Docs guide" class="item">
-				<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+					<input-and-choice-form :cell="lists"/>
 		    </u-collapse-item>
 		    <u-collapse-item title="情绪筛查表2" name="Variety components" class="item">
-		      <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+					<input-and-choice-form :cell="lists"/>
 		    </u-collapse-item>
 		    <u-collapse-item title="认知功能自评表" name="Numerous tools" class="item">
-		      <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+					<input-and-choice-form :cell="lists"/>
 		    </u-collapse-item>
 		  </u-collapse>
 		  <!-- <u-button class="custom-style" size="large" text="提交"></u-button> -->
@@ -19,7 +19,10 @@
 </template>
 
 <script>
+	import InputAndChoiceForm from "../../../healthAssessment/emotionalCognition/components/inputAndChoiceForm.vue";
+
 	export default {
+		components: {InputAndChoiceForm},
 		data() {
 			return {
 				baseList: [
@@ -36,10 +39,33 @@
 				    name: '情绪认知',
 				    date: '2022-09-24 19:33:00'
 				  },
-				]
+				],
+				lists: [{
+					question: "1.感到不安，担心及烦躁：",
+					options: ["完全没有","有几天","一半以上天数","几乎每天"],
+					value: "完全没有"
+				},
+					{
+						question: "2.不能停止或无法控制担心：",
+						options: ["完全没有","有几天","一半以上天数","几乎每天"],
+						value: "有几天"
+					},{
+						question: "3.对各种各样的事情担忧过多：",
+						options: ["完全没有","有几天","一半以上天数","几乎每天"],
+						value: "一半以上天数"
+					},{
+						question: "4.很紧张，很难放松下来：",
+						options: ["完全没有","有几天","一半以上天数","几乎每天"],
+						value: "有几天"
+					},{
+						question: "5.非常较早，以至于无法静坐",
+						options: ["完全没有","有几天","一半以上天数","几乎每天"],
+						value: "有几天"
+					}]
+
 			}
 		},
-		methods: { 
+		methods: {
 			open(e) {
 				  // console.log('open', e)
 				},
@@ -56,7 +82,7 @@
 <style lang="scss" scoped>
 .item{
 	background-color: #ffffff;
-	
+
 }
 
 .custom-style {
