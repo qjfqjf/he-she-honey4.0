@@ -6,7 +6,7 @@
 	  <public-module></public-module>
 
 	  <!--  空记录  -->
-		<view class="nothing" v-if="dataList.length === 0">
+		<view class="nothing" v-if="records.length === 0">
 			<!-- 健康管理组件 -->
 			<empty-state :title="title" :tourl="tourl"></empty-state>
 		</view>
@@ -14,24 +14,102 @@
 		<!--  非空记录  -->
 		<view class="medical-records" v-else>
 			<!-- 健康管理组件 -->
-			<not-empty-state :dataList="dataList" :showObj="showObj"></not-empty-state>
+			<view class="in-content">
+				<!-- 导航栏上下分割 -->
+				<view style="height: 20rpx;background-color: #f5f5f5">
+				</view>
+				<view class="in-content" v-for="(item,index) in records" :key="index">
+
+
+					<!-- 1、日期 -->
+					<view class="remarks">
+						<view class="cate">
+							<text class="cate-text">日期</text>
+						</view>
+						<view style="height: 20rpx"></view>
+						<view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
+							<text style="font-size: 30rpx">{{item.data_time}}</text>
+						</view>
+					</view>
+
+
+
+					<!-- 2、门诊类别 -->
+					<view class="remarks">
+						<text class="cate-text" style="">{{showObj.typeText}}</text>
+						<view style="height: 20rpx"></view>
+						<view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
+							<text>{{item.data_type}}</text>
+						</view>
+					</view>
+
+
+					<!-- 3、疾病诊断 -->
+					<view class="remarks">
+						<text class="cate-text" style="">{{showObj.remarksText}}</text>
+						<view style="height: 20rpx"></view>
+						<view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
+							<text>{{item.data_name}}</text>
+						</view>
+					</view>
+					<!-- 4、情况描述 -->
+					<view class="remarks">
+						<view style="height: 20rpx"></view>
+						<view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
+							<text>{{item.data_result}}</text>
+						</view>
+					</view>
+
+					<!-- 5、图片展示 -->
+
+					<view style="height: 20rpx"></view>
+
+					<view class="remarks">
+						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
+						<view style="height: 20rpx"></view>
+						<view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
+							<view class="example-body" style="width: 150rpx;height: 150rpx;margin-left: 50rpx;margin-bottom: 50rpx;" >
+								<view style="">
+									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_1"></image>
+									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_2"></image>
+									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_3"></image>
+								</view>
+							</view>
+						</view>
+					</view>
+
+					<!--                <view>-->
+					<!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
+					<!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
+					<!--                                     v-model="dataList.imgs" -->
+					<!--                                     del-icon="false"-->
+					<!--                    ></uni-file-picker>-->
+					<!--                </view>-->
+
+					<!-- 6、分割线 -->
+					<u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
+				</view>
+			</view>
 		</view>
+
 	</view>
 	  
 </template>
 
 <script>
 	import emptyState from "../components/emptyState.vue";
-	import notEmptyState from "../components/notEmptyState.vue";
 	import headerNav from "../components/headerNav.vue";
 	export default {
 		components:{
 			headerNav,
 			emptyState,
-			notEmptyState
 		},
 		data() {
 			return {
+				imageStyles:{
+					width:90,
+					height:90
+				},
 				//显示的文本
 				showObj:{
 					curNow:0,
@@ -56,16 +134,17 @@
 					value: 0,
 				},
 				//数据
-				dataList:[
+				records:[
+					//测试用的数据
 					// {
 					// 	//用户id
-					// 	uid:'',
+					// 	id:'',
 					// 	//病例id
 					// 	recordId:'',
 					// 	//门诊类型
 					// 	type:'急诊',
 					// 	//选择的日期
-					// 	selectedDate:'111',
+					// 	selectedDate:'2023-5-31 10:00:00',
 					// 	//疾病名称
 					// 	illName:'感冒',
 					// 	//疾病备注
@@ -109,7 +188,7 @@
 					data: {
 						params:{
 							model:'inpatient.medical.records',
-							token:"62da5a6d47be0029801ba74a17e47e1a",
+							token:token,
 							uid:uid,
 							//传回去的数组(存放字段)
 							fields:[
@@ -127,10 +206,19 @@
 							]
 						}
 					},
-					success(res){
-						console.log(res.data.result)
-						//传回来的值
-						this.dataList = res.data.result
+					success:(res)=>{
+						//把传回来的值存入
+						this.records = res.data.result.records
+						//判断诊断类型
+						for(var record of this.records){
+							record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
+						}
+						console.log(this.records)
+					},
+					fail:(err)=>{
+						uni.showToast({
+							title:err,
+						})
 					}
 				})
 			},
@@ -139,8 +227,7 @@
 
 		},
 
-		//这里因为上面引用了组件所以无法使用uni中的钩子，onload函数，只能用vue中的钩子了
-		created(){
+		onLoad(){
 			this.getRecordsList();
 		}
 	}
@@ -155,6 +242,75 @@
 			padding-top: 300rpx;
 			width: 400rpx;
 			margin: 0 auto;
+		}
+		.in-content {
+			background-color: white;
+			height: 100%;
+
+			.in-content{
+				padding: 0 10rpx;
+			}
+			.switch{
+				width: 400rpx;
+				margin-left: 20rpx;
+			}
+			.cate {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				background-color: white;
+			}
+
+			.showImage {
+				padding: 20rpx;
+
+			}
+
+			.remarks {
+				margin-top: 14rpx;
+				padding: 20rpx;
+			}
+			.textarea {
+				height: 200rpx;
+				font-size: 28rpx;
+			}
+			.date-body {
+
+				//display: flex;
+				align-items: center;
+
+				background-color: white;
+				padding: 24rpx;
+
+
+
+				.date {
+					margin-right: 25rpx;
+				}
+
+				.picker {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					position: relative;
+
+
+					.time-picker {
+						margin-right: 220rpx;
+					}
+				}
+			}
+
+			.save-box{
+				margin-top: 100rpx;
+				.saveBtn {
+					background-color: #20c6a2;
+					margin: 30rpx;
+					padding: 12rpx;
+					color: white;
+					font-size: 35rpx;
+				}
+			}
 		}
 	}
 

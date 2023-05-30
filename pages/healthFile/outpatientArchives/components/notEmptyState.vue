@@ -96,21 +96,8 @@ export default {
         }
     },
     methods:{
-        sectionChange(index) {
-            this.showObj.curNow = index;
-        },
-        change(e) {
-            console.log("e:", e);
-        },
-        test(src){
-            console.log(src);
-        },
-
 
     },
-    onload(){
-        this.getRecordsList();
-    }
 }
 </script>
 

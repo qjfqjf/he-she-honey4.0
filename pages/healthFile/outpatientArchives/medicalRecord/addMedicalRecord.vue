@@ -11,33 +11,34 @@
 			<view style="height: 20rpx;background-color: #f5f5f5">
 			</view>
 			<view class="in-content">
-				<u-form v-model="dataObj">
+				<u-form v-model="record">
 					<!-- 1、分类 -->
 					<view class="cate">
-						<text class="cate-text">{{addObj.choiceTitle}}</text>
+						<text class="cate-text">{{addText.choiceTitle}}</text>
 					</view>
 					<view class="switch">
-						<u-subsection :list="addObj.list" :current="addObj.curNow" font-size="15" @change="sectionChange" mode="subsection" inactive-color="#20c6a2" active-color="#20c6a2"></u-subsection>
+						<u-subsection :list="addText.list" :current="addText.curNow" font-size="15" @change="sectionChange" mode="subsection" inactive-color="#20c6a2" active-color="#20c6a2"></u-subsection>
 					</view>
 
 					<view style="height: 40rpx"></view>
 
 					<!-- 2、上传照片 -->
 					<view class="uploadImage">
-						<text class="cate-text">{{addObj.uploadImgText}}</text>
+						<text class="cate-text">{{addText.uploadImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<view class="example-body">
-							<uni-file-picker limit="9" :image-styles="addObj.imageStyles"  @select=""></uni-file-picker>
+							<!-- 图片没绑定 -->
+							<uni-file-picker limit="9" :image-styles="addText.imageStyles"  @select=""></uni-file-picker>
 						</view>
 						<text class="tip">（友情提示：最多添加9张图片）</text>
 					</view>
 
-					<!-- 3、备注和时间 -->
+					<!-- 3、疾病和备注 -->
 					<view class="remarks">
-						<text class="cate-text" style="">{{addObj.remarksText}}</text>
+						<text class="cate-text" style="">{{addText.remarksText}}</text>
 						<view style="height: 20rpx"></view>
-						<u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false" v-model="dataObj.illName"></u-input>
-						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="dataObj.illDiscription"></u-textarea>
+						<u-input style="background-color: #f5f5f5" :placeholder="addText.placeholder1" border="false" v-model="record.data_name"></u-input>
+						<u-textarea :placeholder="addText.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0" border="false" v-model="record.data_result"></u-textarea>
 
 					</view>
 
@@ -48,7 +49,8 @@
 						<text class="cate-text">日期</text>
 						<view style="height: 20rpx"></view>
 						<view class="picker">
-							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false" v-model="dataObj.selectedDate"
+							<!-- 日期没绑定 -->
+							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
 																	 :clearIcon="false"/>
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
@@ -77,62 +79,27 @@ export default {
 		return {
 			title:"门诊病例",
 
-
-
-			//请求的参数
-			params:{
-				//注意！！查接口文档
-				model:"inpatient.medical.records",
-				token:"62da5a6d47be0029801ba74a17e47e1a",
-				uid:2,
-				method:"create",
-				args:[
-						[{
-							//急诊类型
-							"data_type":"emergency",
-							"picture_1":"",
-							"picture_2":"",
-							"picture_3":"",
-							//疾病名称
-							"data_name":"感冒",
-							//疾病备注
-							"data_result":"发热，流鼻涕",
-							//注意！！这个是uid
-							//用户id
-							"patient_id":2
-							//时间
-						}]
-				],
-				kwargs:{}
-			},
-
-
-
 			//添加数据
-			dataObj:[
-				{
-					//用户id
-					uid:'111',
-					//病例id
-					recordId:'',
-					//门诊类型
-					type:'',
-					//选择的日期
-					selectedDate:new Date(),
+			record: {
+					//急诊类型
+					data_type:'',
+					//照片
+					picture_1:'',
+					picture_2:'',
+					picture_3:'',
 					//疾病名称
-					illName:'',
+					data_name:'',
 					//疾病备注
-					illDiscription:'',
-					//图片
-					imgs:[
-						''
-					],
+					data_result:'',
+					//注意！！这个是uid
+					//用户id
+					patient_id:''
+					//时间()
+
 				},
 
-
-			],
 			//显示的文本
-			addObj:{
+			addText:{
 				//默认的选项
 				curNow:0,
 				//这边统一写内容用
@@ -169,21 +136,51 @@ export default {
 	methods: {
 		//选择器方法
 		sectionChange(index) {
-			this.dataObj.type = this.addObj.list[index]
-			this.addObj.curNow = index;
-			console.log(index,this.dataObj.type)
+			this.record.data_type = this.addText.list[index]
+			this.addText.curNow = index;
+			//测试
+			console.log(index,this.record.data_type)
 		},
 
 		//保存方法
 		saveRecords(){
-			//console.log(this.dataObj);
-			console.log(this.params)
-
+			//测试
+			console.log(this.record)
+			//拿到用户数据
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			const uid = userInfo.uid;
+			const token = userInfo.token;
+			//把疾病类型转化成正确字段存储
+			this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
 			uni.request({
-				url:this.addObj.tourl2,
+				url:this.addText.tourl2,
 				method:'post',
 				data:{
-					params:this.params,
+					params:{
+						//注意！！查接口文档
+						model:"inpatient.medical.records",
+						token:token,
+						uid:uid,
+						method:"create",
+						args:[
+							[{
+								//急诊类型
+								"data_type":this.record.data_type,
+								"picture_1":"",
+								"picture_2":"",
+								"picture_3":"",
+								//疾病名称
+								"data_name":this.record.data_name,
+								//疾病备注
+								"data_result":this.record.data_result,
+								//注意！！这个是uid
+								//用户id
+								"patient_id":uid
+								//时间
+							}]
+						],
+						kwargs:{}
+					}
 				},
 				success(res){
 					console.log(res)
@@ -193,7 +190,7 @@ export default {
 						success:()=>{
 							setTimeout(() => {
 								uni.redirectTo({
-									url: this.addObj.tourl,
+									url: this.addText.tourl,
 									success:(res)=>{
 										console.log(res)
 									},
