@@ -180,20 +180,36 @@
 		},
 		//页面显示
 		onShow() {
-			this.getUserList()
-			this.userList = []
+			// this.getUserList()
+		
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
-			this.getUserList();
+			// this.getUserList();
 
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.userList.push({
-				images: '../../static/logo.png',
-				name: this.userInfo.name
-			})
+	
+			this.getRelationList()
 		},
 		//方法
 		methods: {
+			   // 获取亲属关系列表
+			   getRelationList() {
+        this.$http
+          .post('/getRelatives', {
+            uid: this.userInfo.uid,
+          })
+          .then((res) => {
+            console.log(res)
+            this.userList = res.result.result.map((item) => {
+              return {
+                ...item,
+                images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+              }
+            })
+			console.log(this.userList)
+		  
+          })
+      },
 			//开发中。。。
 			dev(listIndex){
 				if(listIndex >= 7){
