@@ -183,7 +183,6 @@
 			this.userList = []
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
-			// this.addUser();
 			this.getUserList();
 
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
