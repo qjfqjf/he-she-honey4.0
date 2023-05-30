@@ -143,6 +143,7 @@
 				appFeature,
 				homePageIcons,
 				token: uni.getStorageSync('access-token'),
+				doctorId: 0,
 				userInfo: '',
 				defaultSelect: 0, //默认选中下标，从0开始
 				userList: [
@@ -193,13 +194,28 @@
 		},
 		//方法
 		methods: {
-			handleScan() {
-				uni.scanCode({
+			async handleScan() {
+				await uni.scanCode({
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
+						this.doctorId = res.result
+						// console.log(res)
+						uni.showModal({
+							title: '提示',
+							content: '确定要关注该医生吗？',
+							success: function(res) {
+								if (res.confirm) {
+									console.log('用户点击确定');
+								} else if (res.cancel) {
+									console.log('用户点击取消');
+								}
+							}
+						});
 					}
 				})
+				// console.log(this.doctorId)
+			
 			},
 			changeHeadImg(index) {
 				console.log('当前选中' + index)

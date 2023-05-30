@@ -19,6 +19,8 @@
 			</uni-list>
 
 		</view>
+		<!-- 手动添加日常程按钮 -->
+		<view class="add" @click="addPeople"></view>
 		<u-modal v-model="show" :content="content"></u-modal>
 	</view>
 </template>
@@ -44,10 +46,16 @@
 					url: '/pages/mine/editInfo'
 				})
 			},
-			handleDel(){
+			handleDel() {
 				console.log(1111)
 				this.show = true;
-			
+
+			},
+			addPeople() {
+				uni.navigateTo({
+					url: '/pages/mine/editInfo'
+				})
+				console.log('添加用户')
 			}
 		}
 	}
@@ -56,5 +64,34 @@
 <style lang="scss" scoped>
 	.container {
 		background-color: #fff;
+
+		.add {
+			height: 100rpx;
+			width: 100rpx;
+			background: #005a8a;
+			position: fixed;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: calc(10%);
+			border-radius: 50%;
+			z-index: 99;
+			box-shadow: 0 0 20rpx #005a8a60;
+		}
+
+		.add::before,
+		.add::after {
+			content: '';
+			width: 6rpx;
+			height: 50rpx;
+			left: calc(50% - 3rpx);
+			top: calc(50% - 50rpx / 2);
+			border-radius: 6rpx;
+			background: #eee;
+			position: absolute;
+		}
+
+		.add::before {
+			transform: rotate(90deg);
+		}
 	}
 </style>
