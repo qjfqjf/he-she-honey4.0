@@ -113,7 +113,7 @@ function judgeLogin(callback, type = "judge"){
                 success: (res) => {
                     if (res.confirm) {
                         uni.navigateTo({
-                            url: "/pages/user/login"
+                            url: "/pages/login/login"
                         });
                     }
                 }
