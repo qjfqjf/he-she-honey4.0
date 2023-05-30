@@ -121,11 +121,33 @@
 				this.show = false
 			},
 			// 处理保存
-			handleSaveInfo() {
-				if (this.pulValue === 0) {
-					this.$refs.uToast.warning("请填写心率")
-				}
-				console.log(111)
+			handleSaveInfo() {const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "blood.glucose.meter",
+					method: "create",
+					args: [
+						[{
+							"name": "血糖仪 (静态血糖仪)",
+							"numbers":this.serviceId,
+							"owner":uid,
+							"category":"kf",
+							"oml_l":this.scrollLeftNow,
+							"input_type":"hend",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if (this.value > 0) {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.value = 0
+					}
+				})
 			}
 		}
 	}

@@ -12,11 +12,11 @@
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="index">
 				<view class="date"
-					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-					{{item.test_time.split(" ")[0]}}</view>
+					>
+					{{item.test_time}}</view>
 				 <!-- v-for="(item2, index2) in item.record" -->
 				<view class="record">
-					<text>{{item.test_time.split(" ")[1]}}</text>
+					<text>{{item.test_time}}</text>
 					<!-- <text>{{item.category}}</text> -->
 					<text v-if="item.category=='kf'">空腹</text>
 					<text v-else-if="item.category=='wch2'">晚餐前</text>
@@ -101,32 +101,19 @@
 			},
 			//查询血糖历史记录
 			getHistoryList() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
-				const token = uni.getStorageSync('access-token');
-				uni.request({
-					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-					method: 'post',
-					data: {
-						params: {
-							model: "blood.glucose.meter",
-							token: token,
-							uid: uid,
-							fields: [
-								"name",
-								"numbers",
-								"owner",
-								"category",
-								"oml_l",
-								"input_type",
-								"test_time"
-							]
-						}
-					},
-					success: (res) => {
-						this.historyList = res.data.result.records
-					}
+				this.$http.post('/platform/dataset/search_read', {
+					model: "blood.glucose.meter",
+					fields: [
+						"name",
+						"numbers",
+						"owner",
+						"category",
+						"oml_l",
+						"input_type",
+						"test_time"
+					]
+				}).then(res => {
+					this.historyList = res.result.records
 				})
 			}
 		},

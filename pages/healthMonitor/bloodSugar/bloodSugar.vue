@@ -123,11 +123,8 @@
 				const userInfoStr = uni.getStorageSync('userInfo');
 				const userInfo = JSON.parse(userInfoStr);
 				const uid = userInfo.uid;
-				const token = uni.getStorageSync('access-token');
-				this.$http.post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+				this.$http.post('/platform/dataset/call_kw', {
 					model: "blood.glucose.meter",
-					token: token,
-					uid: uid,
 					method: "create",
 					args: [
 						[{
