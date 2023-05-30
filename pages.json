@@ -1488,7 +1488,16 @@
 			"path": "pages/healthFile/quota/index",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/homePage/myUsers",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	// {
 	//   "path": "pages/healthEstimate/emotion/emotion",
 	//   "style": {
