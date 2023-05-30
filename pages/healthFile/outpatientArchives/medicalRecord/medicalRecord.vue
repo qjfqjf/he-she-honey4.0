@@ -213,7 +213,6 @@
 						for(var record of this.records){
 							record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
 						}
-						console.log(this.records)
 					},
 					fail:(err)=>{
 						uni.showToast({
