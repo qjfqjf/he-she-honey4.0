@@ -160,7 +160,7 @@ export default {
 						model:"inpatient.medical.records",
 						token:token,
 						uid:uid,
-						method:"create",
+						method:"wreate",
 						args:[
 							[{
 								//急诊类型

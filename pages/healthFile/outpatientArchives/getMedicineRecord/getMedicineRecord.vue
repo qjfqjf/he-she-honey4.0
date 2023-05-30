@@ -134,8 +134,8 @@ export default {
 				type: ["口服", "皮下注射"],
 				ImgText: '病例照片',
 				remarksText: '药物名称',
-				dosageText:'用药剂量',
-				frequencyText:'用药频次',
+				dosageText: '用药剂量',
+				frequencyText: '用药频次',
 				typeText: '用药类型',
 				discription: '情况描述',
 
@@ -193,63 +193,63 @@ export default {
 			});
 		},
 		//查询当前用户所有档案
-	getRecordsList() {
-		//拿到用户信息
-		const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-		const uid = userInfo.uid;
-		const token = userInfo.token;
-		//接口调用
-		uni.request({
-			url: this.tourl2,
-			method: 'post',
-			data: {
-				params: {
-					model: 'inpatient.medical.record',
-					token: token,
-					uid: uid,
-					//传回去的数组(存放字段)
-					fields: [
-						"picture_1",
-						"picture_2",
-						"picture_3",
-						//药物名称
-						"data_name",
-						//用药剂量
-						"dosage",
-						//用药计量单位
-						"dose_unit",
-						//用药频次
-						"frequency",
-						//用药凭此单位
-						"frequency_unit",
-						//备注
-						"data_result",
-						//时间
-						"data_time",
-						//用药类别
-						"drug_class"
-					]
-				}
-			},
-			success: (res) => {
-				console.log(res);
-				//把传回来的值存入
-				this.dataList = res.data.result.records
-				//判断诊断类型
-				for (var record of this.dataList) {
-					record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
-				}
+		getRecordsList() {
+			//拿到用户信息
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			const uid = userInfo.uid;
+			const token = userInfo.token;
+			//接口调用
+			uni.request({
+				url: this.tourl2,
+				method: 'post',
+				data: {
+					params: {
+						model: 'inpatient.medical.record',
+						token: token,
+						uid: uid,
+						//传回去的数组(存放字段)
+						fields: [
+							"picture_1",
+							"picture_2",
+							"picture_3",
+							//药物名称
+							"data_name",
+							//用药剂量
+							"dosage",
+							//用药计量单位
+							"dose_unit",
+							//用药频次
+							"frequency",
+							//用药凭此单位
+							"frequency_unit",
+							//备注
+							"data_result",
+							//时间
+							"data_time",
+							//用药类别
+							"drug_class"
+						]
+					}
+				},
+				success: (res) => {
+					console.log(res);
+					//把传回来的值存入
+					this.dataList = res.data.result.records
+					//判断诊断类型
+					for (var record of this.dataList) {
+						record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
+					}
 
-			},
-			fail: (err) => {
-				uni.showToast({
-					title: err,
-				})
-			}
-		})
+				},
+				fail: (err) => {
+					uni.showToast({
+						title: err,
+					})
+				}
+			})
+		},
 	},
-	},
-	
+
 
 	onLoad() {
 		this.getRecordsList();
@@ -343,4 +343,5 @@ export default {
 			}
 		}
 	}
-}</style>
+}
+</style>
