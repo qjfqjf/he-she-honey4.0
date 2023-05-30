@@ -81,8 +81,8 @@ export default {
 
 			//添加数据
 			record: {
-					//急诊类型
-					data_type:'',
+					//急诊类型(需要默认值)
+					data_type:'急诊',
 					//照片
 					picture_1:'',
 					picture_2:'',
@@ -144,12 +144,11 @@ export default {
 
 		//保存方法
 		saveRecords(){
-			//测试
-			console.log(this.record)
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
 			const token = userInfo.token;
+			const _this = this;
 			//把疾病类型转化成正确字段存储
 			this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
 			uni.request({
@@ -183,6 +182,7 @@ export default {
 					}
 				},
 				success(res){
+					//测试
 					console.log(res)
 					uni.showToast({
 						title:'保存成功',
@@ -190,7 +190,7 @@ export default {
 						success:()=>{
 							setTimeout(() => {
 								uni.redirectTo({
-									url: this.addText.tourl,
+									url: _this.addText.tourl,
 									success:(res)=>{
 										console.log(res)
 									},
@@ -206,11 +206,6 @@ export default {
 		},
 
 	},
-
-	onShow(){
-		this.addObj.type = this.addObj.list[this.addObj.curNow];
-		console.log(this.addObj.type)
-	}
 }
 </script>
 
