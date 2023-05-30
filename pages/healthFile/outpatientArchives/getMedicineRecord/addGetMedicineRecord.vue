@@ -129,31 +129,31 @@ export default {
 
 
 			//数据
-			medicalRecord: 
-				{
-					//用药类别
-					drug_class: '皮下注射',
-					//病例id
-					patient_id: '',
-					//图片
-					picture_1: '',
-					picture_2: '',
-					picture_3: '',
-					//药物名称
-					data_name: '',
-					//用药剂量
-					dosage: '',
-					//用药计量单位
-					dose_unit: '',
-					//用药频次
-					frequency: '',
-					//用药凭此单位
-					frequency_unit: '',
-					//备注
-					data_result: '',
-					//时间
-					data_time: '',
-				},
+			medicalRecord:
+			{
+				//用药类别
+				drug_class: '皮下注射',
+				//病例id
+				patient_id: '',
+				//图片
+				picture_1: '',
+				picture_2: '',
+				picture_3: '',
+				//药物名称
+				data_name: '',
+				//用药剂量
+				dosage: '',
+				//用药计量单位
+				dose_unit: '',
+				//用药频次
+				frequency: '',
+				//用药凭此单位
+				frequency_unit: '',
+				//备注
+				data_result: '',
+				//时间
+				data_time: '',
+			},
 
 
 			//显示的文本
@@ -324,11 +324,11 @@ export default {
 		confirm1(e) {
 			this.addObj.placeholder3 = e.value[0] + e.value[1]
 			this.medicalRecord.frequency = e.value[0];
-			switch(this.medicalRecord.frequency_unit){
-				case '次/日' : this.medicalRecord.frequency_unit = 'day';break;
-				case '次/隔日' : this.medicalRecord.frequency_unit = 'tomorrow';break;
-				case '次/周' : this.medicalRecord.frequency_unit = 'weeks';break;
-				case '次/月' : this.medicalRecord.frequency_unit = 'month';break;
+			switch (this.medicalRecord.frequency_unit) {
+				case '次/日': this.medicalRecord.frequency_unit = 'day'; break;
+				case '次/隔日': this.medicalRecord.frequency_unit = 'tomorrow'; break;
+				case '次/周': this.medicalRecord.frequency_unit = 'weeks'; break;
+				case '次/月': this.medicalRecord.frequency_unit = 'month'; break;
 			}
 			this.show1 = false
 		},
@@ -433,4 +433,5 @@ export default {
 			}
 		}
 	}
-}</style>
+}
+</style>

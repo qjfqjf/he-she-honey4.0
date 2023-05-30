@@ -711,6 +711,13 @@
 			}
 		},
 		{
+			"path": "pages/healthManagement/beauty/beauty",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthManagement/bodyBuilding/bodyBuilding",
 			"style": {
 				"navigationBarTitleText": "",

@@ -47,12 +47,12 @@ export const   appManage= [
     {
         name: "监管/预警",
         icon: "/static/icon/homePage/fengxian.png",
-        path: "/pages/professionalCommunity/index"
+        path: ""
     },
     {
         name: "申请服务",
         icon: "/static/icon/homePage/applicationService.png",
-        path: "/pages/applicationService/index"
+        path: ""
     }
 
 

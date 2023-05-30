@@ -1,0 +1,283 @@
+[33mcommit aa080fc7cccf4fcff60291c4b95bf79adc2241b4[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 21:48:26 2023 +0800
+
+    fix
+
+[33mcommit d643db230db62649667356d9c60e38eedba7465d[m
+Merge: 7cbe60c 7f0b1d4
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Tue May 30 20:09:23 2023 +0800
+
+    Merge branch 'dev' of github.com:August-Rushme/he-she-honey into dev
+
+[33mcommit 7cbe60c9008f69f5d622d0ae796c5fc6eaff41a5[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Tue May 30 20:09:13 2023 +0800
+
+    wip:用药记录
+
+[33mcommit 7f0b1d4934f6ac27ca971c7b72cf504158f42be1[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 17:41:32 2023 +0800
+
+    fix：修改逻辑
+
+[33mcommit 3658c471156c03b08dabc67af7d2d6913126b85a[m
+Merge: 1ce27b5 96547a9
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 16:16:53 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit 1ce27b5ee0858704cafa9b5df5cd0e97ed5b1ade[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 16:16:40 2023 +0800
+
+    fix:添加功能
+
+[33mcommit 96547a9129a7c19e34d1dc3ef33ce65d912f4c90[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Tue May 30 14:29:30 2023 +0800
+
+    去除add组件0-1
+
+[33mcommit 586528945deafd123e43dd43b8bee08c2b07e262[m
+Merge: be481d2 29b939a
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 13:35:59 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit be481d2f4eb870bc4500f2782433c2fb955d5538[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Tue May 30 13:35:13 2023 +0800
+
+    fix:更改
+
+[33mcommit 29b939a69ec7a78c6d1984daac954cb5ebc66d15[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Tue May 30 10:17:38 2023 +0800
+
+    feat: 新增扫码，获取用户列表
+
+[33mcommit c2b478af4469e5fa3a788f796c348f500f0f6667[m
+Merge: f754b49 45bac26
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 23:40:23 2023 +0800
+
+    Merge branch 'dev' of github.com:August-Rushme/he-she-honey into dev
+
+[33mcommit f754b49433afef0efecfef3256d5b8ab1a7afc39[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 23:40:15 2023 +0800
+
+    feat: 新增滑动头像,我的用户
+
+[33mcommit 45bac26be9e268881ff473ee2db9e5bb7445e599[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 22:41:29 2023 +0800
+
+    fix:修改
+
+[33mcommit 39dd9425a47f2eb6708c78baf32847b044e5ac9f[m
+Merge: 5dcbb3f 1c2e9b5
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 20:53:16 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit 5dcbb3f18ac87ced4b9905234800d6ec1c444f99[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 20:53:07 2023 +0800
+
+    fix:修改
+
+[33mcommit 1c2e9b5c5b0c37eb8559d1027b08db08b6fed0fe[m
+Merge: 221643b 950cf74
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 19:35:10 2023 +0800
+
+    feat: 优化
+
+[33mcommit 1537ef1636011d578d5c78e8812b00423fc38d13[m
+Merge: 8eb9e27 950cf74
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 19:34:59 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit 8eb9e27ed9c413668cb425ea0801426bfc8a179e[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 19:34:51 2023 +0800
+
+    fix:修改
+
+[33mcommit 221643b2107f13b1ba754cb328748b808da9c1db[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 19:19:56 2023 +0800
+
+    feat: 优化
+
+[33mcommit 950cf74b91bb3bd4af5cfeeb9e00197d3bc05f2c[m
+Merge: 2a5655d 50ff402
+Author: tzyl <tzyl@qq.com>
+Date:   Mon May 29 19:16:55 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit 2a5655dc8436829ccc422a971f54a4d7b18ee355[m
+Author: tzyl <tzyl@qq.com>
+Date:   Mon May 29 19:16:46 2023 +0800
+
+    体温上传
+
+[33mcommit 50ff402a901a1535f5510574a29e54eed222b39d[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 19:04:04 2023 +0800
+
+    fix:健康档案路由问题
+
+[33mcommit c7afe1259f21ea6cd3c5d3ed7647651b502e4cff[m
+Merge: e020290 21d396c
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 18:18:28 2023 +0800
+
+    Merge branch 'dev' of github.com:August-Rushme/he-she-honey into dev
+
+[33mcommit e02029092fb84d0d6b4787ec3d8d644bd2cad37b[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 18:18:19 2023 +0800
+
+    feat:完善健康管理的记录功能界面
+
+[33mcommit 21d396cd20b9cfc735ec4b0d39ddd98358dcd41e[m
+Author: kurami <kurami.noya@gmail.com>
+Date:   Mon May 29 17:27:29 2023 +0800
+
+    feat:健康评估 fix：冲突
+
+[33mcommit 91fe176a3d8c7d515eeb132e4422c5822253912a[m
+Merge: b753b7a 2e11cfa
+Author: kurami <kurami.noya@gmail.com>
+Date:   Mon May 29 17:27:13 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+    
+    # Conflicts:
+    #       pages/healthFile/status/index.vue
+
+[33mcommit b753b7aeadf8ee176bc26d3bd669c4c773d79a55[m
+Author: kurami <kurami.noya@gmail.com>
+Date:   Mon May 29 17:17:38 2023 +0800
+
+    feat:健康评估
+
+[33mcommit 2e11cfa4f5e235bf2d66a51f38cfee3fd8f0d8d0[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 17:07:12 2023 +0800
+
+    feat: 循环添加key
+
+[33mcommit 5da012ab298e0b4b41f4ca8aa1c46205bdd568c1[m
+Author: kurami <kurami.noya@gmail.com>
+Date:   Mon May 29 14:43:57 2023 +0800
+
+    fix:合并冲突
+
+[33mcommit 9d0464c9d652941291dc8d5135c366d3fafd8515[m
+Author: kurami <kurami.noya@gmail.com>
+Date:   Mon May 29 14:30:33 2023 +0800
+
+    feat: 健康档案
+
+[33mcommit c6b5970052a27ba0991f933fe532a1dcc6f90826[m
+Merge: 4655a0d 93619ba
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 14:16:55 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit 4655a0d21a9db28b88216d68c3abe32403bc5a7c[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 14:15:39 2023 +0800
+
+    perf:增加医疗档案页面
+
+[33mcommit 93619ba263dc1a37e87f3e0cb4fbd22c58113961[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 14:12:11 2023 +0800
+
+    fix选择报错
+
+[33mcommit dfb4b7ece0b735866bebe5bd8130f7de763ed1d9[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 13:45:26 2023 +0800
+
+    perf 门诊手术
+
+[33mcommit dfe314c8b8e0bcc4a23accc97b89d9e4b6154d7f[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 12:53:29 2023 +0800
+
+    operation
+
+[33mcommit e0663ef721c0a115b0e2a613670f6d7b972f90d5[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 12:20:51 2023 +0800
+
+    imagingExamination
+
+[33mcommit e89fc6cc56f9b34b4ca2f271b2db51388cc70b09[m
+Author: Thexingmeng <1920238209@qq.com>
+Date:   Mon May 29 12:13:47 2023 +0800
+
+    laboratoryExamination
+
+[33mcommit 468967ddf29bda9cfb9052f4ab4329c40c8d9e18[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 12:06:34 2023 +0800
+
+    fix:修改
+
+[33mcommit e534e5f110b85477227e3976018f773ff519ccea[m
+Merge: d91fef0 c4dd447
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 11:36:40 2023 +0800
+
+    Merge branch 'dev' of https://github.com/August-Rushme/he-she-honey into dev
+
+[33mcommit d91fef0983599b5686ad67309715b5220d4e7cd7[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Mon May 29 11:36:07 2023 +0800
+
+    fix：修改
+
+[33mcommit c4dd447e41c3395161b849211f13cd55c9747b75[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 11:14:27 2023 +0800
+
+    feat: 登录优化
+
+[33mcommit fb079772804211ffcf6d64c8278b19c6164f7992[m
+Merge: 635d2fc 75943a4
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 00:37:04 2023 +0800
+
+    Merge branch 'dev' of github.com:August-Rushme/he-she-honey into dev
+
+[33mcommit 635d2fcad525b1e052b39a1266bd02be0e16bad9[m
+Author: August-Rushme <864011713@qq.com>
+Date:   Mon May 29 00:36:29 2023 +0800
+
+    fix: 修复手动录入无法进入问题
+
+[33mcommit 75943a4fe3af62dd6d29630d9469c789706b84a4[m
+Author: 曲骏飞 <1781123785@qq.com>
+Date:   Sun May 28 17:16:44 2023 +0800
+
+    pref:优化医疗档案ui
+
+[33mcommit a2e7930cb0699f96cdbd29ac8037f9283562852c[m
+Merge: 40c2392 3d1e234
+Author: 曲�
