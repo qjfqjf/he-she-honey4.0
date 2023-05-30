@@ -31,7 +31,8 @@
 			return {
 				show: false,
 				content: '确定要删除吗？',
-				userList: [{
+				userList: [
+					{
 					img: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 					name: JSON.parse(uni.getStorageSync('userInfo')).name,
 					relation: '本人',
@@ -40,7 +41,12 @@
 				}]
 			}
 		},
+		onShow() {
+			
+		},
 		methods: {
+			// 获取亲属关系列表
+			
 			handleEdit() {
 				uni.navigateTo({
 					url: '/pages/mine/editInfo'
@@ -53,7 +59,7 @@
 			},
 			addPeople() {
 				uni.navigateTo({
-					url: '/pages/mine/editInfo'
+					url: '/pages/mine/editInfo?type=add'
 				})
 				console.log('添加用户')
 			}

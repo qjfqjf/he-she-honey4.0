@@ -86,32 +86,19 @@
       },
 	  //查询心电图历史记录
 	  getHistoryList() {
-	  	const userInfoStr = uni.getStorageSync('userInfo');
-	  	const userInfo = JSON.parse(userInfoStr);
-	  	const uid = userInfo.uid;
-	  	const token = uni.getStorageSync('access-token');
-	  	uni.request({
-	  		url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-	  		method: 'post',
-	  		data: {
-	  			params: {
-	  				model: "electrocardiograph",
-	  				token: token,
-	  				uid: uid,
-	  				fields: [
-	  					"name",
-	  					"numbers",
-	  					"owner",
-	  					"electrocardiogram",
-	  					"wavelength",
-	  					"input_type",
-	  					"test_time"
-	  				]
-	  			}
-	  		},
-	  		success: (res) => {
-	  			this.dataList = res.data.result.records
-	  		}
+	  	this.$http.post('/platform/dataset/search_read', {
+	  		model: "electrocardiograph",
+	  		fields: [
+	  			"name",
+	  			"numbers",
+	  			"owner",
+	  			"electrocardiogram",
+	  			"wavelength",
+	  			"input_type",
+	  			"test_time"
+	  		]
+	  	}).then(res => {
+	  		this.dataList = res.result.records
 	  	})
 	  }
 

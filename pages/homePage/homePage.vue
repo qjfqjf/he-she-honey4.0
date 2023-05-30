@@ -238,24 +238,7 @@
 					console.log(res)
 				})
 			},
-			getUserList(){
-				this.$http.post('/platform/dataset/search_read', {
-					model: "res.users",
-					fields: [
-						"head_picture",
-						"name",
-						"gender",
-						"birthday",
-						"age",
-						"group_id",
-						"height",
-						"weight",
-						"login",
-					]
-				}).then(res => {
-					console.log(res)
-				})
-			},
+			
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url

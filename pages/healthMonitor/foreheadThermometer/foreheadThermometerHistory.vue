@@ -84,14 +84,8 @@
 			},
 			//查询额温枪历史记录
 			getHistoryList() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
-				const token = uni.getStorageSync('access-token');
-				this.$http.post('http://106.14.140.92:8881/platform/dataset/search_read',{
+				this.$http.post('/platform/dataset/search_read', {
 					model: "forehead.temperature.gun",
-					token: token,
-					uid: uid,
 					fields: [
 						"name",
 						"numbers",
@@ -101,8 +95,7 @@
 						"test_time"
 					]
 				}).then(res => {
-					console.log(res)
-					this.historyList = res.result.records;
+					this.historyList = res.result.records
 				})
 			}
 		},

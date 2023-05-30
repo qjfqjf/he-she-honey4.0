@@ -83,6 +83,7 @@
 					shape="circle"
 					color="rgb(10, 185, 156)"
 					style="width: 660rpx; height: 110rpx;"
+					@click="handleSubmit"
 				></u-button>
 			</view>
 		
@@ -236,6 +237,7 @@
 				tel: '请输入您的电话号码',
 				height: '请输入您的身高',
 				weight: '请输入您的体重',
+				type:'edit',
 			};
 		},
 		computed: {
@@ -243,6 +245,10 @@
 		},
 		//第一次加载
 		onLoad(e) {
+			console.log(e)
+			if(e.type){
+				this.type = e.type
+			}
 			this.avatar = this.userInfo.avatar || "";
 			this.nickname = this.userInfo.nickname || "";
 			this.phone = this.userInfo.phone || "";
@@ -251,6 +257,23 @@
 		onShow() {},
 		//方法
 		methods: {
+			handleSubmit(){
+				if(this.type ==='add'){
+					this.$http.post('/bindRelatives', {
+						uid:this.userInfo.uid,
+						info:{
+							"name":this.nameValue,
+							"login":''
+						}
+						
+					}).then(res => {
+						console.log(res)
+					})
+				}else {
+					// 编辑接口
+				}
+				
+			},
 			showNameModal() {
 				this.showName = true;
 			},
