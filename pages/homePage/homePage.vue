@@ -2,7 +2,7 @@
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
 		<z-nav-bar home title="数字健康管理" class="HomeNavBar" bg-color="#bef1d0" fontColor="black">
-			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt=""></img>
+			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"></img>
 			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
 		</z-nav-bar>
 		<view class="status-bar d-flex m-3 bg-white rounded-20">
@@ -178,6 +178,7 @@
 		},
 		//页面显示
 		onShow() {
+			this.getUserList()
 			this.userList = []
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
@@ -189,8 +190,34 @@
 		},
 		//方法
 		methods: {
+			handleScan() {
+				uni.scanCode({
+					success: function(res) {
+						console.log('条码类型：' + res.scanType);
+						console.log('条码内容：' + res.result);
+					}
+				})
+			},
 			changeHeadImg(index) {
 				console.log('当前选中' + index)
+			},
+			getUserList() {
+				this.$http.post('/platform/dataset/search_read', {
+					model: "res.users",
+					fields: [
+						"head_picture",
+						"name",
+						"gender",
+						"birthday",
+						"age",
+						"group_id",
+						"height",
+						"weight",
+						"login",
+					]
+				}).then(res => {
+					console.log(res)
+				})
 			},
 			onPageJump(url) {
 				uni.navigateTo({
