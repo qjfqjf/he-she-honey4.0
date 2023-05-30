@@ -68,6 +68,7 @@ export default {
     props:["addObj","params"],
     data() {
         return {
+            //增添的数据
             dataObj: {
                 //用户id
                 uid: '111',
@@ -99,16 +100,11 @@ export default {
         },
 
 
-        //测试子向父传值
-        saverecords1(){
-            console.log(this.dataObj)
-            this.$emit('btn-click',this.dataObj)
-        },
-
         //保存方法
         saveRecords(){
             //console.log(this.dataObj);
             console.log(this.params)
+
             uni.request({
                 url:this.addObj.tourl2,
                 method:'post',
