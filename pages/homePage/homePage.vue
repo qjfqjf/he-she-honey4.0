@@ -100,7 +100,7 @@
 			<u-gap height="10"></u-gap>
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
-					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
+					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" @click="dev(listIndex)">
 						<navigator :url="listItem.path">
 							<u--image class="appManeger_block_icon" :src="listItem.icon"
 								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
@@ -190,6 +190,15 @@
 		},
 		//方法
 		methods: {
+			//开发中。。。
+			dev(listIndex){
+				if(listIndex >= 7){
+					uni.showToast({
+						title:"开发中...",
+						icon:"none"
+					})
+				}
+			},
 			handleScan() {
 				uni.scanCode({
 					success: function(res) {

@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="content">
     <z-nav-bar title="健康自述">
 
     </z-nav-bar>
@@ -9,14 +9,13 @@
     <!-- 内容 -->
     <view class="container">
       <view class="nothing" v-if="baseList.length === 0">
-        <empty-state :description="'暂无数据'"  />
+        <empty-state :title="title"></empty-state>
       </view>
       <view class="item" v-for="(item, index) in baseList" :key="index" v-else>
         {{item}}
         </view>
       </view>
     </view>
-  </view>
 </template>
 
 <script>
@@ -27,7 +26,8 @@
     },
     data() {
       return {
-        baseList: []
+        baseList: [],
+        title:''
       };
     },
     methods: {
@@ -39,6 +39,16 @@
 </script>
 
 <style lang="scss">
+  .content{
+    background-color: #FFFFFF;
+    height: 100%;
+    .nothing{
+      text-align: center;
+      padding-top: 300rpx;
+      width: 400rpx;
+      margin: 0 auto;
+    }
+  }
   .container {
     .item {
       background-color: white;

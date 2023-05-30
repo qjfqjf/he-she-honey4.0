@@ -37,7 +37,14 @@
 </script>
 
 <style lang="scss">
-  .content {
-    .sports-records {}
+.content{
+  background-color: #FFFFFF;
+  height: 100%;
+  .nothing{
+    text-align: center;
+    padding-top: 300rpx;
+    width: 400rpx;
+    margin: 0 auto;
   }
+}
 </style>
