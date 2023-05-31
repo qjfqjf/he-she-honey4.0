@@ -20,19 +20,21 @@
                 transform: 'scale(1)'
             }"
             itemStyle="padding-left: 15px; padding-right: 15px; height: 34px; width: 50%"
+			
         >
         </u-tabs>
+		
         <view>
             <u-index-list :index-list="indexList" active-color="#71d5a1">
-                <template v-for="(item, index) in itemArr">
+                <template v-for="(item, i) in itemArr">
                     <!-- #ifdef APP-NVUE -->
-                    <!--					<u-index-anchor :text="indexList[index]"></u-index-anchor>-->
+                    					<!-- <u-index-anchor :text="indexList[index]"></u-index-anchor> -->
                     <!-- #endif -->
                     <u-index-item>
                         <!-- #ifndef APP-NVUE -->
-                        <u-index-anchor style="" :text="indexList[index]"></u-index-anchor>
+                        <u-index-anchor style="" :text="indexList[i]"></u-index-anchor>
                         <!-- #endif -->
-                        <view class="list-cell" v-for="(cell, index) in item">
+                        <view class="list-cell" v-for="(cell, index) in item" :key="index">
                             <view class="d-flex j-center a-center my-1">
                                 <u--image  shape="circle" :showLoading="true" :src="avatar" width="40px" height="40px"></u--image>
                                 <span class="list-cell">{{cell}}</span>
@@ -47,6 +49,7 @@
 
 <script>
 import IndexList from './indexList.vue'
+import {pinyin} from '@/utils/pinyin.js'
 export default {
     data() {
         return {
@@ -55,25 +58,116 @@ export default {
             indexList: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"]
             ,
             avatar: "https://cdn.uviewui.com/uview/album/1.jpg",
+			// avatar: [
+			// 	"https://cdn.uviewui.com/uview/album/1.jpg"
+			// ],
             itemArr: [
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表B1', '列表B2', '列表B3'],
-                ['列表C1', '列表C2', '列表C3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
-                ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表B1', '列表B2', '列表B3'],
+                // ['列表C1', '列表C2', '列表C3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
+                // ['列表A1', '列表A2', '列表A3'],
             ],
-            hairline: false
+            hairline: false,
+			userInfo: '',
         }
     },
+	async onShow() {
+		this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		await this.getDockerUserList()
+	},
     methods: {
+		chineseToInitials(word){
+			let SX = '';
+			for (var i = 0; i < word.length; i++) {
+			  var c = word.charAt(i);
+			  if (/^[A-Z]+$/.test(c)) {
+			     SX += c;
+			  }
+			}
+			console.log(SX)
+			return SX
+		},
+		chineseToPinYin(l1) {
+			var l2 = l1.length;
+			var I1 = '';
+			var reg = new RegExp('[a-zA-Z0-9]');
+			for (var i = 0; i < l2; i++) {
+				var val = l1.substr(i, 1);
+				var name = this.arraySearch(val, pinyin);
+				if (reg.test(val)) {
+					I1 += val;
+				} else if (name !== false) {
+					I1 += name;
+				}
+			}
+			I1 = I1.replace(/ /g, '-');
+			while (I1.indexOf('--') > 0) {
+				I1 = I1.replace('--', '-');
+			}
+			return I1;
+		},
+		arraySearch(l1, l2) {
+			for (var name in pinyin) {
+				if (pinyin[name].indexOf(l1) !== -1) {
+					return this.ucfirst(name);
+				}
+			}
+			return false;
+		},
+		ucfirst(l1) {
+			if (l1.length > 0) {
+				var first = l1.substr(0, 1).toUpperCase();
+				var spare = l1.substr(1, l1.length);
+				return first + spare;
+			}
+		},
         goBack(){
             uni.navigateBack({})
         },
+		// 获取亲属关系列表
+		async getDockerUserList() {
+			let valList=[]
+			let temArr = []
+			await this.$http.post('/getDockerUser', {
+				uid: this.userInfo.uid,
+			}).then((res) => {
+				console.log(res)
+				// res.result.result = [...res.result.result,{name: 'Ahhhh'},{name:'张三'},{name: '李四'}]
+				res.result.result.forEach((item)=>{
+					const py =  this.chineseToInitials(this.chineseToPinYin(item.name)).charAt(0)
+					valList.push({
+						name:item.name,
+						img:item.img,
+						flag: py
+					})
+					this.indexList.forEach((val,index)=>{
+						if(py === val  ){
+							temArr=[]
+							valList.forEach((tem,i)=>{
+								if(valList[i].flag==val){
+									temArr.push(tem.name)
+								}
+							})
+							this.itemArr[index] = temArr
+						}else{
+							// this.itemArr[index] = []
+						}
+					})
+				}) 
+				// this.itemArr = this.itemArr.map(item=>{
+				// 	if(item.length>0){
+				// 		return item
+				// 	}
+				// })
+				console.log(this.itemArr)
+			})
+		},
     },
     components: {
         IndexList
