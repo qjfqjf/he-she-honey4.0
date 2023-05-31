@@ -2,7 +2,7 @@
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
 		<z-nav-bar home title="数字健康管理" class="HomeNavBar" bg-color="#bef1d0" fontColor="black">
-			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt=""></img>
+			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"></img>
 			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
 		</z-nav-bar>
 		<view class="status-bar d-flex m-3 bg-white rounded-20">
@@ -60,9 +60,10 @@
 			</view>
 		</view>
 
-
-		<view class="top-bar d-flex j-sb w-100 a-center my-2 h-100">
-			<u-button class="leftRoundButton shadow h-100 shadow-lg border">
+		<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
+				@click="onPageJump('/pages/homePage/myUsers')">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
@@ -92,16 +93,17 @@
 		</view>
 		<!-- <u-swiper class="swiper mx-1" :list="wisperImage" previousMargin="30" nextMargin="30" circular :autoplay="false"
 			radius="5" bgColor="#ffffff"></u-swiper> -->
-		<u-swiper class=" m-1" :list="wisperImage" indicator indicatorMode="line" circular :autoplay="false"
-			radius="5" bgColor="#ffffff">
+		<u-swiper class=" m-1" :list="wisperImage" indicator indicatorMode="line" circular :autoplay="false" radius="5"
+			bgColor="#ffffff">
 		</u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
 			<u-gap height="10"></u-gap>
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
-					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
+					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" @click="dev(listIndex)">
 						<navigator :url="listItem.path">
-							<u--image class="appManeger_block_icon" :src="listItem.icon" :customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
+							<u--image class="appManeger_block_icon" :src="listItem.icon"
+								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 							</u--image>
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
@@ -126,6 +128,8 @@
 	import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
 	import home from "../template/home.vue";
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
+	import $http from '@/config/requestConfig.js';
+	import HeadImgList from "@/components/head-img/head-img.vue";
 	export default {
 		computed: {
 			home() {
@@ -137,29 +141,145 @@
 				wisperImage,
 				appManage,
 				appFeature,
-				homePageIcons
+				homePageIcons,
+				token: uni.getStorageSync('access-token'),
+				doctorId: 0,
+				userInfo: '',
+				defaultSelect: 0, //默认选中下标，从0开始
+				userList: [
+					// {
+					// 	images: '../../static/logo.png',
+					// 	name: '张淑芳'
+					// },
+					// {
+					// 	images: '../../static/logo.png',
+					// 	name: '王立群'
+					// },
+				]
 
 			};
 		},
 		components: {
 			UButton,
 			UImage,
+			HeadImgList
 		},
 		//第一次加载
 		onLoad(e) {
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+
+			if (!this.token) {
+				uni.navigateTo({
+					url: '/pages/login/login',
+				})
+			}
+
+			console.log('onLoad', e);
+
 		},
 		//页面显示
 		onShow() {
+			// this.getUserList()
+
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			// this.getUserList();
+
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+
+			this.getRelationList()
 		},
 		//方法
 		methods: {
-			switchChange() {
+			// 获取亲属关系列表
+			getRelationList() {
+				this.$http
+					.post('/getRelatives', {
+						uid: this.userInfo.uid,
+					})
+					.then((res) => {
+						console.log(res)
+						this.userList = res.result.result.map((item) => {
+							return {
+								...item,
+								images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+							}
+						})
+						console.log(this.userList)
+
+					})
+			},
+			bindUser(){
+				console.log()
+			},
+			//开发中。。。
+			dev(listIndex) {
+				if (listIndex >= 7) {
+					uni.showToast({
+						title: "开发中...",
+						icon: "none"
+					})
+				}
+			},
+			async handleScan() {
+				const _this = this
+				await uni.scanCode({
+					success: function(res) {
+						console.log('条码类型：' + res.scanType);
+						console.log('条码内容：' + res.result);
+						_this.doctorId = res.result
+						uni.showModal({
+							title: '提示',
+							content: '确定要关注该医生吗？',
+							success: function(res) {
+								if (res.confirm) {
+									_this.$http.post('/bindDockerUser', {
+										uid: _this.userInfo.uid,
+										did: _this.doctorId,
+									}).then((res) => {
+										console.log(res)
+										if (res.result.code == 200) {
+											uni.showToast({
+												title: '绑定成功',
+												icon: 'none',
+												duration: 2000,
+											})
+										}
+									})
+								} else if (res.cancel) {
+									console.log('用户点击取消');
+								}
+							}
+						});
+
+					}
+				})
+				// console.log(this.doctorId)
 
 			},
+			changeHeadImg(index) {
+				console.log('当前选中' + index)
+			},
+			addUser() {
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "res.users",
+					method: "create",
+					args: [
+						[{
+							"name": "赵六",
+							"gender": '0',
+							"login": "zhaoliu",
+							"user_type": '0'
+						}],
+
+					],
+					kwargs: {}
+				}).then(res => {
+					console.log(res)
+				})
+			},
+
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url
@@ -184,9 +304,10 @@
 				});
 				// #endif
 			},
+
 			changeHeadImg(index) {
 				console.log('当前选中' + index)
-			}
+			},
 
 		},
 		//页面隐藏

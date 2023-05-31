@@ -67,8 +67,8 @@
 		data() {
 			return {
 				show: false,
-				time: new Date().format('yyyy-MM-dd hh:mm'),
-				selectTime: new Date().format('yyyy-MM-dd hh:mm'),
+				time: new Date().format('yyyy年MM月dd日 hh时mm分ss秒'),
+				selectTime: new Date().format('yyyy年MM月dd日 hh时mm分ss秒'),
 				currentTab: 'tab1', //但前选项卡
 				pulValue: 0, // 心率
 				scrollDIALeftNow: 86, // 低压页面显示
@@ -99,7 +99,7 @@
 			confirm(time) {
 				console.log(time)
 				this.show = false
-				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm')
+				this.selectTime = new Date(time.value).format('yyyy年MM月dd日 hh时mm分ss秒')
 
 			},
 			cancel() {
@@ -108,12 +108,39 @@
 			close() {
 				this.show = false
 			},
+			
 			// 处理保存
 			handleSaveInfo(){
-				if(this.pulValue===0){
-					this.$refs.uToast.warning("请填写心率")
-				}
-				console.log(111)
+				const userInfoStr = uni.getStorageSync('userInfo');
+				const userInfo = JSON.parse(userInfoStr);
+				const uid = userInfo.uid;
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "sphygmomanometer.jiakang",
+					method: "create",
+					args: [
+						[{
+							"name": "血压计 (静态血压计)",
+							"numbers":"001",
+							"owner":uid,
+							"systolic_blood_pressure":this.scrollSYSLeft,
+							"tensioning_pressure":this.scrollDIALeft,
+							"heart_rate":this.pulValue,
+							"input_type":"hend",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if(this.pulValue != 0){
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.scrollSYSLeft = 0
+						this.scrollDIALeft = 0
+						this.pulValue = 0
+					}
+				})
 			}
 		}
 	}

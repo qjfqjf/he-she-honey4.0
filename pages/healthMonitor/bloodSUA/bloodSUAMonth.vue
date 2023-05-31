@@ -9,21 +9,22 @@
     <view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
       <view class="top d-flex j-sb mb-2">
         <view class="time">
-          {{item.time}}
+          {{item.test_time}}
         </view>
       </view>
       <view class="data d-flex j-sb">
         <view class="name">
-          名称：{{item.name}}
+          名称：血尿酸
+		  <!-- 名称：{{item.name}} -->
         </view>
-        <view class="bloodSUA" v-if="item.bloodSUA > targetIndex">
+        <view class="bloodSUA" v-if="item.oml_l > targetIndex">
           <!-- ↓ -->
-          数值：{{item.bloodSUA}}mol/L
+          数值：{{item.oml_l}}mol/L
           <text class="up">{{arrowUp}}</text>
         </view>
         <view class="bloodSUA" v-else>
           <!-- ↓ -->
-          数值：{{item.bloodSUA}}mol/L
+          数值：{{item.oml_l}}mol/L
           <text class="down">{{arrowDown}}</text>
         </view>
       </view>
@@ -44,31 +45,32 @@
         targetIndex: 360,
         arrowUp: '↑',
         arrowDown: '↓',
-        dataList: [{
-            time: "2023-3-29 15:30:50",
-            name: '血尿酸',
-            bloodSUA: 300
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '血尿酸',
-            bloodSUA: 370
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '血尿酸',
-            bloodSUA: 320
-          },
-          {
-            time: "2023-3-29 15:30:50",
-            name: '血尿酸',
-            bloodSUA: 320
-          }
+        dataList: [
+			// {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '血尿酸',
+   //          bloodSUA: 300
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '血尿酸',
+   //          bloodSUA: 370
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '血尿酸',
+   //          bloodSUA: 320
+   //        },
+   //        {
+   //          time: "2023-3-29 15:30:50",
+   //          name: '血尿酸',
+   //          bloodSUA: 320
+   //        }
         ]
       };
     },
     onLoad() {
-
+		this.getHistoryList();
     },
     methods: {
       handleDevelop() {
@@ -76,6 +78,23 @@
           message: '开发中...'
         })
       },
+	  //查询血尿酸历史记录
+	  getHistoryList() {
+	  	this.$http.post('/platform/dataset/search_read', {
+	  		model: "blood.glucose.uric.acid.cholesterol",
+	  		fields: [
+	  			"name",
+	  			"numbers",
+	  			"owner",
+	  			"category",
+	  			"oml_l",
+	  			"input_type",
+	  			"test_time"
+	  		]
+	  	}).then(res => {
+	  		this.dataList = res.result.records
+	  	})
+	  }
 
     }
   }

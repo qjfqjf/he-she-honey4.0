@@ -10,8 +10,7 @@
         <view class="d-flex a-center j-center buttonGrounp my-1">
             <u-button  :hairline="hairline"  color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
                       ></u-button>
-            <u-button  :hairline="hairline"  color="#71d5a1" text="关注医生" class="rightButton" :plain="true"
-                      ></u-button>
+            <u-button  :hairline="hairline"  color="#71d5a1" text="关注医生" class="rightButton" :plain="true" ></u-button>
         </view>
         <view>
             <u-index-list :index-list="indexList" active-color="#71d5a1">
@@ -64,6 +63,7 @@ export default {
         goBack(){
             uni.navigateBack({})
         },
+		
     },
     components: {
         IndexList

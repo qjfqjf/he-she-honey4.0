@@ -9,19 +9,19 @@
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
-					{{item.time}}
+					{{item.test_time}}
 				</view>
 			</view>
 			<view class="data d-flex j-sb">
 				<view class="bloodOxygen">
-					血氧：{{item.bloodOxygen}}
+					血氧：{{item.blood_oxygen}}
 				</view>
 				<view class="PI">
-					PI：{{item.PI}} 
+					PI：{{item.pi}} 
 				</view>
 				<view class="rate">
 					<!-- ↓ -->
-					脉率：{{item.rate}}
+					脉率：{{item.pulse_rate}}
 				</view>
 			</view>
 		</view>
@@ -39,7 +39,8 @@
 		data() {
 			return {
 
-				dataList: [{
+				dataList: [
+					{
 						time: "2023-3-29 15:30",
 						bloodOxygen: 168,
 						PI: 98,
@@ -67,7 +68,7 @@
 			};
 		},
 		onLoad() {
-
+			this.getHistoryList();
 		},
 		methods: {
 			handleDevelop() {
@@ -75,6 +76,24 @@
 					message: '开发中...'
 				})
 			},
+			//查询血氧历史记录
+			getHistoryList() {
+				this.$http.post('/platform/dataset/search_read', {
+					model: "oximeter",
+					fields: [
+						"name",
+						"numbers",
+						"owner",
+						"blood_oxygen",
+						"pi",
+						"pulse_rate",
+						"input_type",
+						"test_time"
+					]
+				}).then(res => {
+					this.dataList = res.result.records
+				})
+			}
 
 		}
 	}

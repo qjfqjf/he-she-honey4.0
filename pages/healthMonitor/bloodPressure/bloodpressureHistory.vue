@@ -15,23 +15,25 @@
 		</view> -->
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
-				<view class="position">
-					监测部位：{{item.position}}
-				</view>
 				<view class="time">
-					{{item.time}}
+					{{item.test_time}}
 				</view>
+				<view class="position">
+					监测部位：左侧
+					<!-- {{item.position}} -->
+				</view>
+				
 			</view>
 			<view class="data d-flex j-sb">
 				<view class="SYS">
-					收缩压：{{item.SYS}}↑
+					收缩压：{{item.systolic_blood_pressure}}↑
 				</view>
 				<view class="DIA">
-					舒张压：{{item.DIA}} ↑
+					舒张压：{{item.tensioning_pressure}} ↑
 				</view>
 				<view class="PUL">
 					<!-- ↓ -->
-					心率：{{item.PUL}}
+					心率：{{item.heart_rate}}
 				</view>
 			</view>
 		</view>
@@ -42,34 +44,35 @@
 	export default {
 		data() {
 			return {
-				dataList: [{
-						position: "左侧",
-						time: "2023-3-29 15:30",
-						SYS: 168,
-						DIA: 98,
-						PUL: 81
-					},
-					{
-						position: "左侧",
-						time: "2023-3-29 15:30",
-						SYS: 168,
-						DIA: 98,
-						PUL: 81
-					},
-					{
-						position: "左侧",
-						time: "2023-3-29 15:30",
-						SYS: 168,
-						DIA: 98,
-						PUL: 81
-					},
-					{
-						position: "左侧",
-						time: "2023-3-29 15:30",
-						SYS: 168,
-						DIA: 98,
-						PUL: 81
-					}
+				dataList: [
+					// {
+					// 	position: "左侧",
+					// 	time: "2023-3-29 15:30",
+					// 	SYS: 168,
+					// 	DIA: 98,
+					// 	PUL: 81
+					// },
+					// {
+					// 	position: "左侧",
+					// 	time: "2023-3-29 15:30",
+					// 	SYS: 168,
+					// 	DIA: 98,
+					// 	PUL: 81
+					// },
+					// {
+					// 	position: "左侧",
+					// 	time: "2023-3-29 15:30",
+					// 	SYS: 168,
+					// 	DIA: 98,
+					// 	PUL: 81
+					// },
+					// {
+					// 	position: "左侧",
+					// 	time: "2023-3-29 15:30",
+					// 	SYS: 168,
+					// 	DIA: 98,
+					// 	PUL: 81
+					// }
 				]
 			};
 		},
@@ -79,7 +82,28 @@
 					message: '开发中...'
 				})
 			},
-		}
+			//查询血压历史记录
+			getHistoryList() {
+				this.$http.post('/platform/dataset/search_read', {
+					model: "sphygmomanometer.jiakang",
+					fields: [
+						"name",
+						"numbers",
+						"owner",
+						"systolic_blood_pressure",
+						"tensioning_pressure",
+						"heart_rate",
+						"input_type",
+						"test_time"
+					]
+				}).then(res => {
+					this.dataList = res.result.records
+				})
+			}
+		},
+		onLoad() {
+			this.getHistoryList();
+		},
 	}
 </script>
 

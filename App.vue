@@ -2,14 +2,14 @@
   import store from '@/store/index.js'
   import socket from '@/config/socket'
   // #ifdef H5
-  import { h5Login } from '@/config/html5Utils'
+  //import { h5Login } from '@/config/html5Utils'
   // #endif
   // #ifdef APP-PLUS
   // import APPUpdate from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate'
   // #endif
   export default {
     onLaunch: function (e) {
-      //取出缓存数据
+      //取出缓存数据 
       store.commit('setCacheData')
       // #ifdef MP-WEIXIN
       if (store.state.userInfo.token) {
@@ -20,9 +20,9 @@
       if (store.state.userInfo.token) {
         socket.init()
       } else {
-        h5Login('force', () => {
-          socket.init()
-        })
+        // h5Login('force', () => {
+        //   socket.init()
+        // })
       }
       // #endif
       // #ifdef APP-PLUS

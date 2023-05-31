@@ -32,9 +32,9 @@ import { wxShare } from '@/config/utils'
 Vue.prototype.wxShare = wxShare
 // #endif
 //判断是否登录
-import { judgeLogin } from '@/config/login'
-Vue.prototype.judgeLogin = judgeLogin
-Vue.config.productionTip = false
+// import { judgeLogin } from '@/config/login'
+// Vue.prototype.judgeLogin = judgeLogin
+// Vue.config.productionTip = false
 // #ifdef H5
 //微信SDK
 import '@/plugins/wxJsSDK.js'

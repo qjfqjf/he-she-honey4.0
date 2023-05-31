@@ -13,39 +13,59 @@
 		      name="Docs guide"
 			  class="item"
 		    >
-		      <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+		      <input-and-choice-form :cell ="lists"></input-and-choice-form>
 		    </u-collapse-item>
 		    <u-collapse-item
 		      title="运动习惯"
 		      name="Variety components"
 			  class="item"
 		    >
-		      <text class="u-collapse-content">众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让您快速集成，开箱即用</text>
+					<input-and-choice-form :cell ="lists"></input-and-choice-form>
 		    </u-collapse-item>
 		    <u-collapse-item
 		      title="个人嗜好"
 		      name="Numerous tools"
 			  class="item"
 		    >
-		      <text class="u-collapse-content">众多的贴心小工具，是您开发过程中召之即来的利器，让您飞镖在手，百步穿杨</text>
+					<input-and-choice-form :cell ="lists"></input-and-choice-form>
 		    </u-collapse-item>
 		  </u-collapse>
+		<view>
+			<u-popup :round="10" mode="center" :show="show" @close="close" @open="open">
+				<view class="m-5">
+					<text>请检查填写格式是否有误</text>
+				</view>
+				<u-button @click="close" class="rounded-20" style="overflow: hidden" type="primary"  text="关闭"></u-button>
+			</u-popup>
+		</view>
+		<u-button @click="show = true" type="primary" text="提交"></u-button>
 	</view>
 </template>
 
 <script>
+import inputAndChoiceForm from "../componments/inputAndChoiceForm.vue";
+import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	export default {
 		data() {
 			return {
-				
+				show: false,
+				lists:[{
+					question:"最近7天，您是否做了剧烈体育活动？（提重物，挖掘，有氧运动，快速骑车）",
+					subTitle:"每周运动天数 (天)",
+					choice: ["无相关体育活动"]
+				}]
 			}
 		},
-		methods: { 
+		components:{
+			UButton,
+			inputAndChoiceForm
+		},
+		methods: {
 			open(e) {
 				  // console.log('open', e)
 				},
 				close(e) {
-				  // console.log('close', e)
+				  this.show = false
 				},
 				change(e) {
 				  // console.log('change', e)

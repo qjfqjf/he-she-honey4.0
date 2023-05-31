@@ -7,7 +7,7 @@
     <view class="show-time">
       <view class="select-time">
         <text @click="changeDate('subtract')">
-          < </text>
+           </text>
             <text class="date" @click="()=> show=true">{{selectTime}}</text>
             <text @click="changeDate('add')">></text>
       </view>
