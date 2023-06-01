@@ -89,11 +89,16 @@
 						checked: false
 					}
 				],
+				userInfo: '',
 
 			};
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
-			
+
 			/**
 			 * 滑动时触发
 			 */
@@ -101,7 +106,7 @@
 				this.scrollLeftNow = val;
 			},
 
-	radioClick(name) {
+			radioClick(name) {
 
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
@@ -121,23 +126,21 @@
 				this.show = false
 			},
 			// 处理保存
-			handleSaveInfo() {const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
+			handleSaveInfo() {
 				this.$http.post('/platform/dataset/call_kw', {
 					model: "blood.glucose.meter",
 					method: "create",
 					args: [
 						[{
 							"name": "血糖仪 (静态血糖仪)",
-							"numbers":this.serviceId,
-							"owner":uid,
-							"category":"kf",
-							"oml_l":this.scrollLeftNow,
-							"input_type":"hend",
+							"numbers": this.serviceId,
+							"owner": this.userInfo.uid,
+							"category": "kf",
+							"oml_l": this.scrollLeftNow,
+							"input_type": "hend",
 						}]
 					],
-					kwargs:{}
+					kwargs: {}
 				}).then(res => {
 					if (this.value > 0) {
 						this.$refs.uToast.show({
