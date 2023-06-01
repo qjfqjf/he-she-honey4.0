@@ -130,7 +130,6 @@
     },
     methods: {
       tabChange(e) {
-        console.log(e)
         if (e.index == 1) {
           this.newArr = this.itemArr
         } else {
