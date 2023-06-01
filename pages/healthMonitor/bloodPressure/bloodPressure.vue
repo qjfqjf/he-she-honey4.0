@@ -75,8 +75,6 @@
 		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
-
-	</view>
 </template>
 
 <script>
