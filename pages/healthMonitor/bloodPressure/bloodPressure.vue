@@ -60,7 +60,6 @@
 						</view>
 					</view>
 				</view>
-
 			</view>
 
 		</view>
@@ -144,6 +143,7 @@
 					history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
 
 				},
+				userInfo: '',
 
 
 				// 底部工具栏
@@ -174,6 +174,10 @@
 			}
 
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			// 数据发生变化时
 			changeOption(value) {
@@ -195,9 +199,6 @@
 				});
 			},
 			handleSavePressure() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
 				this.$http.post('/platform/dataset/call_kw', {
 					model: "sphygmomanometer.jiakang",
 					method: "create",
@@ -205,10 +206,10 @@
 						[{
 							"name": "血压计 (静态血压计)",
 							"numbers":this.serviceId,
-							"owner":uid,
+							"owner":this.userInfo.uid,
 							"systolic_blood_pressure":this.measureResult.SYS,
 							"tensioning_pressure":this.measureResult.DIA,
-							"heart_rate":this.measureResult.pressure,
+							"heart_rate":this.measureResult.PUL,
 							"input_type":"equipment",
 						}]
 					],
@@ -222,7 +223,9 @@
 						this.btnColor = '#dadada'
 						this.measureResult.SYS = 0
 						this.measureResult.DIA = 0
+						this.measureResult.PUL = 0
 						this.measureResult.pressure = 0
+						this.option.series.data.value = 0
 					}
 				})
 			},

@@ -87,6 +87,7 @@
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				// 底部工具栏
 				page: '',
+				userInfo: '',
 				toolList: [{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
@@ -112,6 +113,10 @@
 				this.connect()
 			}
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			radioClick(name) {
 				this.radios.map((item, index) => {
@@ -120,9 +125,6 @@
 				})
 			},
 			handleSaveSugar() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
 				this.$http.post('/platform/dataset/call_kw', {
 					model: "blood.glucose.meter",
 					method: "create",
@@ -130,7 +132,7 @@
 						[{
 							"name": "血糖仪 (静态血糖仪)",
 							"numbers":this.serviceId,
-							"owner":uid,
+							"owner":this.userInfo.uid,
 							"category":"kf",
 							"oml_l":this.value,
 							"input_type":"equipment",
