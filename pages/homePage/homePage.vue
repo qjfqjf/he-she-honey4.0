@@ -174,73 +174,89 @@
 					url: '/pages/login/login',
 				})
 			}
-			
+
 			console.log('onLoad', e);
-			
+
 		},
 		//页面显示
 		onShow() {
 			// this.getUserList()
-		
+
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			// this.getUserList();
 
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-	
+
 			this.getRelationList()
 		},
 		//方法
 		methods: {
-			   // 获取亲属关系列表
-			   getRelationList() {
-        this.$http
-          .post('/getRelatives', {
-            uid: this.userInfo.uid,
-          })
-          .then((res) => {
-            console.log(res)
-            this.userList = res.result.result.map((item) => {
-              return {
-                ...item,
-                images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-              }
-            })
-			console.log(this.userList)
-		  
-          })
-      },
+			// 获取亲属关系列表
+			getRelationList() {
+				this.$http
+					.post('/getRelatives', {
+						uid: this.userInfo.uid,
+					})
+					.then((res) => {
+						console.log(res)
+						this.userList = res.result.result.map((item) => {
+							return {
+								...item,
+								images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+							}
+						})
+						console.log(this.userList)
+
+					})
+			},
+			bindUser(){
+				console.log()
+			},
 			//开发中。。。
-			dev(listIndex){
-				if(listIndex >= 7){
+			dev(listIndex) {
+				if (listIndex >= 7) {
 					uni.showToast({
-						title:"开发中...",
-						icon:"none"
+						title: "开发中...",
+						icon: "none"
 					})
 				}
 			},
 			async handleScan() {
+				const _this = this
 				await uni.scanCode({
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
-						this.doctorId = res.result
-						// console.log(res)
+						_this.doctorId = res.result
 						uni.showModal({
 							title: '提示',
 							content: '确定要关注该医生吗？',
 							success: function(res) {
 								if (res.confirm) {
-									console.log('用户点击确定');
+									_this.$http.post('/bindDockerUser', {
+										uid: _this.userInfo.uid,
+										did: _this.doctorId,
+									}).then((res) => {
+										console.log(res)
+										if (res.result.code == 200) {
+											uni.showToast({
+												title: '绑定成功',
+												icon: 'none',
+												duration: 2000,
+											})
+										}
+									})
 								} else if (res.cancel) {
 									console.log('用户点击取消');
 								}
 							}
 						});
+
 					}
 				})
 				// console.log(this.doctorId)
-			
+
 			},
 			changeHeadImg(index) {
 				console.log('当前选中' + index)
@@ -252,18 +268,18 @@
 					args: [
 						[{
 							"name": "赵六",
-							"gender":'0',
-							"login":"zhaoliu",
-							"user_type":'0'
+							"gender": '0',
+							"login": "zhaoliu",
+							"user_type": '0'
 						}],
-						
+
 					],
-					kwargs:{}
+					kwargs: {}
 				}).then(res => {
 					console.log(res)
 				})
 			},
-			
+
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url

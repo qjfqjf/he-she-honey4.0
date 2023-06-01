@@ -78,8 +78,12 @@
 				scrollStart: 50, //滚动区域起始值
 				scrollEnd: 250, //滚动区域终止值
 				maginL: 15, //线间距
-
+				userInfo: '',
 			};
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
 			/**
@@ -121,7 +125,7 @@
 						[{
 							"name": "血压计 (静态血压计)",
 							"numbers":"001",
-							"owner":uid,
+							"owner":this.userInfo.uid,
 							"systolic_blood_pressure":this.scrollSYSLeft,
 							"tensioning_pressure":this.scrollDIALeft,
 							"heart_rate":this.pulValue,

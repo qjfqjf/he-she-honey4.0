@@ -81,6 +81,7 @@
 				test_time: '',
 				// 底部工具栏
 				page: '',
+				userInfo: '',
 				toolList: [{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
@@ -109,6 +110,10 @@
 			const timeString = new Date();
 			this.test_time = formatDateTime(timeString)
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			handleDevelop() {
 				this.$refs.uToast.show({
@@ -132,21 +137,14 @@
 			// 	});
 			// },
 			handleSaveHeat() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
-				const token = uni.getStorageSync('access-token');
-				const time = formatDateTime(new Date());
-				this.$http.post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+				this.$http.post('/platform/dataset/call_kw',{
 					model: "forehead.temperature.gun",
-					token: token,
-					uid: uid,
 					method: "create",
 					args: [
 						[{
 							"name": "额温枪",
 							"numbers":this.serviceId,
-							"owner":uid,
+							"owner":this.userInfo.uid,
 							"temperature":this.heat,
 							"input_type":"equipment",
 						}]
@@ -162,48 +160,6 @@
 						this.heat = 0
 					}
 				})
-				// uni.request({
-				// 		url: 'http://106.14.140.92:8881/platform/dataset/call_kw',
-				// 		method: 'post',
-				// 		data: {
-				// 			params: {
-				// 				model: "forehead.temperature.gun",
-				// 				token: token,
-				// 				uid: uid,
-				// 				method: "create",
-				// 				args: [
-				// 					[{
-				// 						"name": "额温枪",
-				// 						"numbers":this.serviceId,
-				// 						"owner":uid,
-				// 						"temperature":this.heat,
-				// 						"input_type":"equipment",
-				// 						// "test_time":time,
-				// 					}]
-				// 				],
-				// 				kwargs:{}
-				// 			}
-				// 		},
-				// 		success: (res) => {
-				// 			this.$refs.uToast.show({
-				// 				message: '保存成功',
-				// 				type: 'success',
-				// 			})
-				// 		}
-				// 	}),
-				
-				// 	console.log(this.deviceStatus)
-				// if (this.heat !== 0) {
-				
-				// 	success: (res) => {
-				// 		this.$refs.uToast.show({
-				// 			message: '保存成功',
-				// 			type: 'success',
-				// 		})
-				// 		this.btnColor = '#dadada'
-				// 		this.heat = 0
-				// 	}
-				// }
 			},
 			// 初始化蓝牙
 			initBlue() {
