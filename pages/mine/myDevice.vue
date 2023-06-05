@@ -38,17 +38,7 @@
 					img: require('@/static/icon/device/BTBP.png'),
 					title: '血压计',
 					detail: '(倍泰静态/动态血压计)',
-<<<<<<< HEAD
-          url: '/pages/healthMonitor/bloodPressure/device/bloodPressureDevice1',
-=======
-					url: '/pages/template/deviceConnection',
-					deviceInfo: {
-						deviceId: uni.getStorageSync('btDeviceId'),
-						dName: 'btDeviceId',
-						serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
-						characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
-					}
->>>>>>> aa7b9800e0f318aff0db17a868f56408b08d4ad8
+
 				},
 				{
 					img: require('@/static/icon/device/JKBP.png'),

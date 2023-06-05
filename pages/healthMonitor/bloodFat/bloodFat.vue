@@ -1,3 +1,4 @@
+\
 <template>
 	<view class="content p-2">
 		<z-nav-bar title="血脂">
