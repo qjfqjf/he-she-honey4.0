@@ -71,8 +71,8 @@
 
 <script>
 	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
-	import DocList from "../componments/docList.vue";
-	import DocChoice from "../componments/docChoice.vue";
+	import DocList from "../components/docList.vue";
+	import DocChoice from "../components/docChoice.vue";
 	export default {
 		components: {DocList, UButton, DocChoice},
 		data() {

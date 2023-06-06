@@ -193,7 +193,7 @@
 		methods: {
 			//开发中。。。
 			dev(listIndex){
-				if(listIndex >= 7){
+				if(listIndex >= 9){
 					uni.showToast({
 						title:"开发中...",
 						icon:"none"

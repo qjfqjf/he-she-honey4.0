@@ -196,12 +196,10 @@ export default {
 		sectionChange(index) {
 			this.medicalRecord.type = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.medicalRecord.type)
 		},
 		//保存方法
 		saveRecords() {
-			//测试
-			console.log(this.addObj.tourl2)
+
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
@@ -291,9 +289,14 @@ export default {
 		},
 		// 回调参数为包含columnIndex、value、values
 		confirm0(e) {
-			this.addObj.placeholder2 = e.value[0] + e.value[1]
+			this.addObj.placeholder2 = e.value[0] + e.value[1];
 			this.medicalRecord.dosage = e.value[0];
 			this.medicalRecord.dose_unit = e.value[1];
+			switch (this.medicalRecord.dose_unit) {
+				case '毫克': this.medicalRecord.dose_unit = 'mg'; break;
+				case '克': this.medicalRecord.dose_unit = 'g'; break;
+			}
+
 			this.show0 = false
 		},
 		close0() {
@@ -324,6 +327,7 @@ export default {
 		confirm1(e) {
 			this.addObj.placeholder3 = e.value[0] + e.value[1]
 			this.medicalRecord.frequency = e.value[0];
+			this.medicalRecord.frequency_unit = e.value[1]
 			switch (this.medicalRecord.frequency_unit) {
 				case '次/日': this.medicalRecord.frequency_unit = 'day'; break;
 				case '次/隔日': this.medicalRecord.frequency_unit = 'tomorrow'; break;
