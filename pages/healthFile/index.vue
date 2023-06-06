@@ -97,7 +97,7 @@
 				healthCheckList: [{
 						img: require('@/static/icon/healthFile/medicalExam.png'),
 						title: '体检档案',
-						url: ''
+						url: '/pages/healthFile/examination/examinationIndex'
 					},
 				],
 			}
