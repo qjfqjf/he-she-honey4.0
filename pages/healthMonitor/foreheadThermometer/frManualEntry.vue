@@ -52,9 +52,12 @@
 				scrollStart: 20, //滚动区域起始值
 				scrollEnd: 45, //滚动区域终止值
 				maginL: 50, //线间距
-
-
+				userInfo: '',
 			};
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
 
@@ -80,8 +83,29 @@
 			},
 			// 处理保存
 			handleSaveInfo() {
-
-				console.log(111)
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "forehead.temperature.gun",
+					method: "create",
+					args: [
+						[{
+							"name": "额温枪",
+							"numbers":"001",
+							"owner":this.userInfo.uid,
+							"temperature":this.scrollLeftNow,
+							"input_type":"hend",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if(this.scrollLeft != 0){
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.scrollLeft = 0
+					}
+				})
 			}
 		}
 	}

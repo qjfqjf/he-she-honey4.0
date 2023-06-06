@@ -9,7 +9,7 @@
 			<view style="height: 20rpx;background-color: #f5f5f5">
 			</view>
 			<view class="in-content">
-				<u-form v-model="dataObj">
+				<u-form v-model="laboratoryExamination">
 					<!-- 1、分类 -->
 					<view class="cate">
 						<text class="cate-text">{{ addObj.choiceTitle }}</text>
@@ -36,9 +36,9 @@
 						<text class="cate-text" style="">{{ addObj.remarksText }}</text>
 						<view style="height: 20rpx"></view>
 						<u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false"
-							v-model="dataObj.illName"></u-input>
+							v-model="laboratoryExamination.data_name"></u-input>
 						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0"
-							border="false" v-model="dataObj.illDiscription"></u-textarea>
+							border="false" v-model="laboratoryExamination.data_result"></u-textarea>
 
 					</view>
 
@@ -50,7 +50,7 @@
 						<view style="height: 20rpx"></view>
 						<view class="picker">
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
-								v-model="dataObj.selectedDate" :clearIcon="false" />
+								v-model="laboratoryExamination.data_time" :clearIcon="false" />
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
 					</view>
@@ -78,35 +78,32 @@ export default {
 		return {
 			title: "化验检查",
 			//数据
-			dataObj: [
+			laboratoryExamination: 
 				{
 					//用户id
-					uid: '111',
+					patient_id: '',
 					//病例id
 					recordId: '',
-					//门诊类型
-					type: '',
+					//化验类别
+					drug_class: '急诊',
 					//选择的日期
-					selectedDate: new Date(),
+					data_time: new Date(),
 					//疾病名称
-					illName: '',
+					data_name: '',
 					//疾病备注
-					illDiscription: '',
+					data_result: '',
 					//图片
-					imgs: [
-						''
-					],
+					picture_1:'',
+					picture_2:'',
+					picture_3:'',
 				},
-
-
-			],
 			//显示的文本
 			addObj: {
 				//默认的选项
 				curNow: 0,
 				//这边统一写内容用
 				choiceTitle: '化验类别',
-				list: ["血液", "急诊", "影像", "其他"],
+				list: ["血液", "尿液", "影像", "其他"],
 				uploadImgText: '添加化验检查',
 				placeholder1: '请输入检查项目名称',
 				placeholder2: '请添加检查项目的备注',
@@ -114,7 +111,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination',
 				//保存接口
-				tourl2: '',
+				tourl2: 'inpatient.laboratory.tests',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -132,10 +129,25 @@ export default {
 	},
 	//方法
 	methods: {
+		//时间格式转换
+		formatDate(date) {
+			var y = date.getFullYear();  
+                var m = date.getMonth() + 1;  
+                m = m < 10 ? ('0' + m) : m;  
+                var d = date.getDate();  
+                d = d < 10 ? ('0' + d) : d;  
+                var h = date.getHours();  
+                h=h < 10 ? ('0' + h) : h;  
+                var minute = date.getMinutes();  
+                minute = minute < 10 ? ('0' + minute) : minute;  
+                var second=date.getSeconds();  
+                second=second < 10 ? ('0' + second) : second;  
+                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+		},
 		sectionChange(index) {
-			this.dataObj.type = this.addObj.list[index]
+			this.laboratoryExamination.type = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.dataObj.type)
+			console.log(index, this.laboratoryExamination.type)
 		},
 		change(e) {
 			console.log("e:", e);
@@ -143,41 +155,65 @@ export default {
 
 
 		//保存方法
-		saveRecords() {
-			//console.log(this.dataObj);
-			console.log(this.params)
-
+		saveRecords(){
+			//拿到用户数据
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			const uid = userInfo.uid;
+			const token = userInfo.token;
+			const _this = this;
+			//把疾病类型转化成正确字段存储
+			// this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
+			switch(this.laboratoryExamination.drug_class){
+				case'血液': this.laboratoryExamination.drug_class='blood';break;
+				case'尿液': this.laboratoryExamination.drug_class='urine';break;
+				case'影像': this.laboratoryExamination.drug_class='image';break;
+				case'其他': this.laboratoryExamination.drug_class='other';break;
+			}
+			
 			uni.request({
-				url: this.addObj.tourl2,
-				method: 'post',
-				data: {
-
-					params: this.params,
-
-
-					// {
-					//     model:this.params.model,
-					//     token:this.params.token,
-					//     uid:this.params.uid,
-					//     method:"create",
-					//     args:this.params.args,
-					//     kwargs:{}
-					// },
-
+				url:this.addObj.tourl2,
+				method:'post',
+				data:{
+					params:{
+						//注意！！查接口文档
+						model:"inpatient.laboratory.tests",
+						token:token,
+						uid:uid,
+						method:"create",
+						args:[
+							[{
+								//急诊类型
+								"drug_class":this.laboratoryExamination.drug_class,
+								"picture_1":"",
+								"picture_2":"",
+								"picture_3":"",
+								//疾病名称
+								"data_name":this.laboratoryExamination.data_name,
+								//疾病备注
+								"data_result":this.laboratoryExamination.data_result,
+								//注意！！这个是uid
+								//用户id
+								"patient_id":uid
+								//时间
+							}]
+						],
+						kwargs:{}
+					}
 				},
-				success(res) {
+				success(res){
+					//测试
 					console.log(res)
 					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
+						title:'保存成功',
+						duration:1000,
+						success:()=>{
 							setTimeout(() => {
 								uni.redirectTo({
-									url: this.addObj.tourl,
-									success: (res) => {
+									url: _this.addObj.tourl,
+									success:(res)=>{
 										console.log(res)
 									},
-									fail: (err) => {
+									fail:(err)=>{
 										console.log(err)
 									}
 								});
@@ -186,7 +222,6 @@ export default {
 					});
 				}
 			});
-
 		},
 	},
 	onShow() {

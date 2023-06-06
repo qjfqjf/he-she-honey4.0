@@ -87,6 +87,7 @@
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				// 底部工具栏
 				page: '',
+				userInfo: '',
 				toolList: [{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
@@ -109,28 +110,45 @@
 		onLoad(e) {
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
-
 				this.connect()
-
 			}
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
 			radioClick(name) {
-
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
 
 				})
 			},
 			handleSaveSugar() {
-				if (this.value.length > 0) {
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
-					})
-					this.btnColor = '#dadada'
-					this.value = 0
-				}
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "blood.glucose.meter",
+					method: "create",
+					args: [
+						[{
+							"name": "血糖仪 (静态血糖仪)",
+							"numbers":this.serviceId,
+							"owner":this.userInfo.uid,
+							"category":"kf",
+							"oml_l":this.value,
+							"input_type":"equipment",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if (this.value.length > 0) {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.value = 0
+					}
+				})
 			},
 			handleDevelop() {
 				// this.$refs.uToast.show({

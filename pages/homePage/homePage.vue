@@ -80,7 +80,7 @@
 					<swiper-item v-for="(page,index) in appFeature" :key="index">
 						<view class="d-flex">
 							<view class="d-flex f-grow-1 flex-column a-center j-center p-1" v-for="(item,index) in page"
-								:key="index">
+ZX								:key="index">
 								<view><img :src="item.icon" class="big-icon" alt=""></view>
 								<view>
 									{{ item.name }}
@@ -155,7 +155,9 @@
 					// 	images: '../../static/logo.png',
 					// 	name: '王立群'
 					// },
-				]
+				],
+				// 当前用户
+				currentUser: {},
 
 			};
 		},
@@ -175,75 +177,115 @@
 				})
 			}
 
-			console.log('onLoad', e)
+			console.log('onLoad', e);
+
 		},
 		//页面显示
 		onShow() {
-			this.getUserList()
-			this.userList = []
+			// this.getUserList()
+
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			// this.getUserList();
+
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.userList.push({
-				images: '../../static/logo.png',
-				name: this.userInfo.name
-			})
+
+			this.getRelationList()
 		},
 		//方法
 		methods: {
-			//开发中。。。
-			dev(listIndex){
-				if(listIndex >= 9){
-					uni.showToast({
-						title:"开发中...",
-						icon:"none"
+			// 获取亲属关系列表
+			getRelationList() {
+				this.$http
+					.post('/getRelatives', {
+						uid: this.userInfo.uid,
 					})
-				}
+					.then((res) => {
+						this.userList = res.result.result.map((item) => {
+							return {
+								...item,
+								uid: item.id,
+								images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+							}
+						})
+						this.currentUser = this.userList[0]
+						console.log(this.userList)
+					})
 			},
+			bindUser() {
+				console.log()
+			},
+			//开发中。。。
+			// dev(listIndex){
+			// 	if (listIndex >= 7) {
+			// 		uni.showToast({
+			// 			title: "开发中...",
+			// 			icon: "none"
+			// 		})
+			// 	}
+			// },
 			async handleScan() {
+				const _this = this
 				await uni.scanCode({
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
-						this.doctorId = res.result
-						// console.log(res)
+						_this.doctorId = res.result
 						uni.showModal({
 							title: '提示',
 							content: '确定要关注该医生吗？',
 							success: function(res) {
 								if (res.confirm) {
-									console.log('用户点击确定');
+									_this.$http.post('/bindDockerUser', {
+										uid: _this.userInfo.uid,
+										did: _this.doctorId,
+									}).then((res) => {
+										console.log(res)
+										if (res.result.code == 200) {
+											uni.showToast({
+												title: '绑定成功',
+												icon: 'none',
+												duration: 2000,
+											})
+										}
+									})
 								} else if (res.cancel) {
 									console.log('用户点击取消');
 								}
 							}
 						});
+
 					}
 				})
 				// console.log(this.doctorId)
-			
+
 			},
 			changeHeadImg(index) {
-				console.log('当前选中' + index)
+				// console.log(this.currentUser)
+				// console.log('当前选中' + index)
+				this.currentUser = this.userList[index]
+				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
+				console.log(this.currentUser)
 			},
-			getUserList() {
-				this.$http.post('/platform/dataset/search_read', {
+			addUser() {
+				this.$http.post('/platform/dataset/call_kw', {
 					model: "res.users",
-					fields: [
-						"head_picture",
-						"name",
-						"gender",
-						"birthday",
-						"age",
-						"group_id",
-						"height",
-						"weight",
-						"login",
-					]
+					method: "create",
+					args: [
+						[{
+							"name": "赵六",
+							"gender": '0',
+							"login": "zhaoliu",
+							"user_type": '0'
+						}],
+
+					],
+					kwargs: {}
 				}).then(res => {
 					console.log(res)
 				})
 			},
+
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url
@@ -268,8 +310,6 @@
 				});
 				// #endif
 			},
-
-
 		},
 		//页面隐藏
 		onHide() {},

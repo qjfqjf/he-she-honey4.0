@@ -60,7 +60,6 @@
 						</view>
 					</view>
 				</view>
-
 			</view>
 
 		</view>
@@ -74,8 +73,6 @@
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
-	</view>
-
 	</view>
 </template>
 
@@ -144,6 +141,7 @@
 					history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
 
 				},
+				userInfo: '',
 
 
 				// 底部工具栏
@@ -174,6 +172,10 @@
 			}
 
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			// 数据发生变化时
 			changeOption(value) {
@@ -195,13 +197,35 @@
 				});
 			},
 			handleSavePressure() {
-				if (this.measureResult.DIA !== 0) {
-					this.btnColor = "#dadada"
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
-					})
-				}
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "sphygmomanometer.jiakang",
+					method: "create",
+					args: [
+						[{
+							"name": "血压计 (静态血压计)",
+							"numbers":this.serviceId,
+							"owner":this.userInfo.uid,
+							"systolic_blood_pressure":this.measureResult.SYS,
+							"tensioning_pressure":this.measureResult.DIA,
+							"heart_rate":this.measureResult.PUL,
+							"input_type":"equipment",
+						}]
+					],
+					kwargs:{}
+				}).then(res => {
+					if(this.measureResult.pressure != 0){
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.measureResult.SYS = 0
+						this.measureResult.DIA = 0
+						this.measureResult.PUL = 0
+						this.measureResult.pressure = 0
+						this.option.series.data.value = 0
+					}
+				})
 			},
 			// 初始化蓝牙
 			initBlue() {

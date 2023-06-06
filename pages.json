@@ -1,8 +1,9 @@
 {
+
 	"pages": [{
 			"path": "pages/homePage/homePage",
 			"style": {
-				"navigationBarTitleText": "首页",
+				"navigationBarTitleText": "数字健康管理",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -1494,94 +1495,15 @@
 		{
 			"path": "pages/healthFile/quota/index",
 			"style": {}
+		}, {
+			"path": "pages/homePage/myUsers",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/homePage/myUsers",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
-	// {
-	//   "path": "pages/healthEstimate/emotion/emotion",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/constitution/constitution",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/psychology/psychology",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/record/record",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },
-	// {
-	//   "path": "pages/healthEstimate/record/emotionRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/emotionManage",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/constitutionRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/constitutionManage",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/psychologyRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/psychologyTestRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/healthRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// },{
-	//   "path": "pages/healthEstimate/record/healthTestRecord",
-	//   "style": {
-	//     "navigationBarTitleText": "",
-	//     "enablePullDownRefresh": false
-	//   }
-	// }
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

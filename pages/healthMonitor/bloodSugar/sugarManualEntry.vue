@@ -89,11 +89,16 @@
 						checked: false
 					}
 				],
+				userInfo: '',
 
 			};
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
-			
+
 			/**
 			 * 滑动时触发
 			 */
@@ -101,7 +106,7 @@
 				this.scrollLeftNow = val;
 			},
 
-	radioClick(name) {
+			radioClick(name) {
 
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
@@ -122,10 +127,30 @@
 			},
 			// 处理保存
 			handleSaveInfo() {
-				if (this.pulValue === 0) {
-					this.$refs.uToast.warning("请填写心率")
-				}
-				console.log(111)
+				this.$http.post('/platform/dataset/call_kw', {
+					model: "blood.glucose.meter",
+					method: "create",
+					args: [
+						[{
+							"name": "血糖仪 (静态血糖仪)",
+							"numbers": this.serviceId,
+							"owner": this.userInfo.uid,
+							"category": "kf",
+							"oml_l": this.scrollLeftNow,
+							"input_type": "hend",
+						}]
+					],
+					kwargs: {}
+				}).then(res => {
+					if (this.value > 0) {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.value = 0
+					}
+				})
 			}
 		}
 	}

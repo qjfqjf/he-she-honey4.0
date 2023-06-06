@@ -6,17 +6,18 @@
 	  <public-module></public-module>
 
 	  <!--  空记录  -->
-		<view class="nothing" v-if="dataList.length === 0">
+		<view class="nothing" v-if="records.length === 0">
 			<!-- 健康管理组件 -->
 			<empty-state :title="title" :tourl="tourl"></empty-state>
 		</view>
 
 		<!--  非空记录  -->
+		<view class="medical-records" v-else>
 		<view class="in-content">
         <!-- 导航栏上下分割 -->
         <view style="height: 20rpx;background-color: #f5f5f5">
         </view>
-        <view class="in-content" v-for="item in dataList" >
+        <view class="in-content" v-for="item in records" :key="index">
             <!-- 1、日期 -->
             <view class="remarks">
                 <view class="cate">
@@ -24,7 +25,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.selectedDate}}</text>
+                    <text style="font-size: 30rpx">{{item.data_time}}</text>
                 </view>
             </view>
 
@@ -45,14 +46,14 @@
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.illName}}</text>
+                    <text style="font-weight: 300">{{item.data_name}}</text>
                 </view>
             </view>
             <!-- 4、情况描述 -->
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.illDiscription}}</text>
+                    <text style="font-weight: 300">{{item.data_result}}</text>
                 </view>
             </view>
 
@@ -87,7 +88,7 @@
         </view>
     </view>
 	</view>
-	  
+</view>
 </template>
 
 <script>
@@ -100,6 +101,10 @@
 		},
 		data() {
 			return {
+				imageStyles:{
+					width:90,
+					height:90
+				},
 				//显示的文本
 				showObj:{
 					curNow:0,
@@ -122,7 +127,7 @@
 					value: 0,
 				},
 				//数据
-				dataList:[
+				records:[
 					//  {
 					// //	//用户id
 					//  	uid:'',
@@ -151,7 +156,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/operation/addOperation',
 				//接口
-				tourl2:'',
+				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
 				addtext:'添加档案'
 			}
 		},
@@ -161,33 +166,50 @@
 				uni.navigateTo({
 					url:this.tourl
 				});
-			}
-		},
-		//查询当前用户所有档案
-		getRecordsList(){
-			//接口调用
-			uni.request({
-				url:this.tourl2,
-				method:'post',
-				data: {
-					params:{
-						model:'',
-						token:'',
-						uid:'',
-						//传回去的数组(存放字段)
-						fields:[
-
-						]
+			},
+			//查询当前用户所有档案
+			getRecordsList(){
+				//拿到用户信息
+				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+				const uid = userInfo.uid;
+				const token = userInfo.token;
+				//接口调用
+				uni.request({
+					url:this.tourl2,
+					method:'post',
+					data: {
+						params:{
+							model:'inpatient.surgery',
+							token:token,
+							uid:uid,
+							//传回去的数组(存放字段)
+							fields:[
+								"picture_1",
+								"picture_2",
+								"picture_3",
+									//疾病名称
+								"data_name",
+									//备注
+								"data_result",
+									//时间
+								"data_time",
+							]
+						}
+					},
+					success:(res)=>{
+						console.log(res);
+						//把传回来的值存入
+						this.records = res.data.result.records
+					},
+					fail:(err)=>{
+						uni.showToast({
+							title:err,
+						})
 					}
-				},
-				success(res){
-					//传回来的值
-					//this.dataList = res.data.result.
-				}
-			})
+				})
+			},
 		},
-
-		onload(){
+		onLoad(){
 			this.getRecordsList();
 		}
 	}
@@ -219,7 +241,6 @@
     			align-items: center;
     			justify-content: space-between;
     			background-color: white;
-    			.select-list {}
   			}
 
   			.showImage {

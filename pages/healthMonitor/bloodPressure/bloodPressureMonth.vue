@@ -85,39 +85,20 @@
 			},
 			//查询血压月报记录
 			getHistoryList() {
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
-				const token = uni.getStorageSync('access-token');
-				uni.request({
-					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-					method: 'post',
-					data: {
-						params: {
-							model: "sphygmomanometer.jiakang",
-							token: token,
-							uid: uid,
-							fields: [
-								"name",
-								"numbers",
-								"owner",
-								"systolic_blood_pressure",
-								"tensioning_pressure",
-								"heart_rate",
-								"input_type",
-								"test_time"
-							]
-						}
-					},
-					success: (res) => {
-						this.dataList = res.data.result.records
-					},
-					fail: (err) => {
-						this.$refs.uToast.show({
-							message: '查询失败',
-							type: 'error',
-						})
-					}
+				this.$http.post('/platform/dataset/search_read', {
+					model: "sphygmomanometer.jiakang",
+					fields: [
+						"name",
+						"numbers",
+						"owner",
+						"systolic_blood_pressure",
+						"tensioning_pressure",
+						"heart_rate",
+						"input_type",
+						"test_time"
+					]
+				}).then(res => {
+					this.dataList = res.result.records
 				})
 			}
 		},
