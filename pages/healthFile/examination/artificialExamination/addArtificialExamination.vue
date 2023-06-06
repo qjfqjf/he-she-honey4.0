@@ -9,7 +9,7 @@
 			<view style="height: 20rpx;background-color: #f5f5f5">
 			</view>
 			<view class="in-content">
-				<u-form v-model="laboratoryExamination">
+				<u-form v-model="examination">
 					<!-- 1、分类 -->
 					<view class="cate">
 						<text class="cate-text">{{ addObj.choiceTitle }}</text>
@@ -31,26 +31,27 @@
 						<text class="tip">（友情提示：最多添加9张图片）</text>
 					</view>
 
-					<!-- 3、备注和时间 -->
+					<!-- 3、体检项目 -->
 					<view class="remarks">
-						<text class="cate-text" style="">{{ addObj.remarksText }}</text>
+						<text class="cate-text" style="">{{ addObj.remarksText1 }}</text>
 						<view style="height: 20rpx"></view>
 						<u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false"
-							v-model="laboratoryExamination.data_name"></u-input>
-						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0"
-							border="false" v-model="laboratoryExamination.data_result"></u-textarea>
-
+							v-model="examination.medical_examination_item"></u-input>
 					</view>
 
-					<view style="height: 40rpx"></view>
+					<!-- 4、体检备注 -->
+					<view class="remarks">
+						<u-textarea :placeholder="addObj.placeholder4" style="background-color: #f5f5f5;margin: 0rpx 0"
+							border="false" v-model="examination.remarks"></u-textarea>
+					</view>
 
-					<!-- 4、日期 -->
+					<!-- 6、日期 -->
 					<view class="date-body">
 						<text class="cate-text">日期</text>
 						<view style="height: 20rpx"></view>
-						<view class="picker">
+						<view class="picker" @click="showdate = true">
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
-								v-model="laboratoryExamination.data_time" :clearIcon="false" />
+								v-model="examination.medical_examination_date" :clearIcon="false" />
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
 					</view>
@@ -58,7 +59,7 @@
 
 					<view class="save-box">
 						<!-- 保存按钮 -->
-						<button class="saveBtn" @click="saveRecords">保存</button>
+						<button class="saveBtn" @click="saveRecords()">保存</button>
 					</view>
 				</u-form>
 			</view>
@@ -67,51 +68,50 @@
 </template>
 
 <script>
-import headerNav from "../components/headerNav.vue";
-import addTemplate from "../components/addTemplate.vue";
+import headerNav from "pages/healthFile/outpatientArchives/components/headerNav.vue";
+import UForm from "../../../../uni_modules/uview-ui/components/u-form/u-form.vue";
+import UPicker from "../../../../uni_modules/uview-ui/components/u-picker/u-picker.vue";
 export default {
 	components: {
+		UPicker,
+		UForm,
 		headerNav,
-		addTemplate
 	},
 	data() {
 		return {
-			title: "化验检查",
+			title: "体检报告",
 			//数据
-			laboratoryExamination: 
-				{
-					//用户id
-					patient_id: '',
-					//病例id
-					recordId: '',
-					//化验类别
-					drug_class: '急诊',
-					//选择的日期
-					data_time: new Date(),
-					//疾病名称
-					data_name: '',
-					//疾病备注
-					data_result: '',
-					//图片
-					picture_1:'',
-					picture_2:'',
-					picture_3:'',
-				},
+			examination:
+			{
+				uid:'',
+				//体检类别
+				medical_examination_type: '健康体检',
+				//体检报告img
+				medical_examination_file_image: '',
+				//体检项目
+				medical_examination_item:'',
+				//体检备注
+				remarks: '',
+				//体检时间
+				medical_examination_date:this.formatDate(new Date()),
+			},
+
+
 			//显示的文本
 			addObj: {
 				//默认的选项
 				curNow: 0,
 				//这边统一写内容用
-				choiceTitle: '化验类别',
-				list: ["血液", "尿液", "影像", "其他"],
-				uploadImgText: '添加化验检查',
-				placeholder1: '请输入检查项目名称',
-				placeholder2: '请添加检查项目的备注',
-				remarksText: '检查项目',
+				choiceTitle: '体检类别',
+				list: ["健康体检", "入职体检","专项体检","其他"],
+				uploadImgText: '添加体检照片',
+				remarksText1: '体检项目',
+				placeholder1: '请输入药物名称',
+				placeholder4: '请添加疾病诊断的备注',
 				//返回的路由
-				tourl: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination',
+				tourl: '/pages/healthFile/examination/artificialExamination/artificialExamination',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: 'http://106.14.140.92:8881/uploadmedicalExaminationFileData',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -144,76 +144,73 @@ export default {
                 second=second < 10 ? ('0' + second) : second;  
                 return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
 		},
+		//上方选择器函数
 		sectionChange(index) {
-			this.laboratoryExamination.type = this.addObj.list[index]
+			this.examination.type = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.laboratoryExamination.type)
+			console.log(index, this.examination.type)
 		},
-		change(e) {
-			console.log("e:", e);
-		},
-
-
 		//保存方法
-		saveRecords(){
+		saveRecords() {
+			//测试
+			console.log(this.addObj.tourl2)
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
 			const token = userInfo.token;
 			const _this = this;
+
 			//把疾病类型转化成正确字段存储
-			// this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
-			switch(this.laboratoryExamination.drug_class){
-				case'血液': this.laboratoryExamination.drug_class='blood';break;
-				case'尿液': this.laboratoryExamination.drug_class='urine';break;
-				case'影像': this.laboratoryExamination.drug_class='image';break;
-				case'其他': this.laboratoryExamination.drug_class='other';break;
-			}
-			
+			// this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? 'Oral administration' : 'Subcutaneous injection';
+			switch (this.examination.medical_examination_type) {
+								case '健康体检': this.examination.medical_examination_type = 1; break;
+								case '入职体检': this.examination.medical_examination_type = 2; break;
+								case '专项体检': this.examination.medical_examination_type = 3; break;
+								case '其他': this.examination.medical_examination_type = 4; break;
+							}
 			uni.request({
-				url:this.addObj.tourl2,
-				method:'post',
-				data:{
-					params:{
+				url: this.addObj.tourl2,
+				method: 'post',
+				data: {
+					params: {
 						//注意！！查接口文档
-						model:"inpatient.laboratory.tests",
-						token:token,
-						uid:uid,
-						method:"create",
-						args:[
+						model: "medical.examination.file",
+						token: token,
+						uid: uid,
+						method: "create",
+						args: [
 							[{
-								//急诊类型
-								"drug_class":this.laboratoryExamination.drug_class,
-								"picture_1":"",
-								"picture_2":"",
-								"picture_3":"",
-								//疾病名称
-								"data_name":this.laboratoryExamination.data_name,
-								//疾病备注
-								"data_result":this.laboratoryExamination.data_result,
-								//注意！！这个是uid
+								//用药类型
+								"medical_examination_type": this.examination.medical_examination_type,
+								//药物名称
+								"medical_examination_item": this.examination.medical_examination_item,
+								//备注
+								"remarks": this.examination.remarks,
+								//日期
+								"medical_examination_date": this.examination.medical_examination_date,
+								//注意:这个是uid
 								//用户id
-								"patient_id":uid
+								"uid": uid
 								//时间
 							}]
 						],
-						kwargs:{}
+						kwargs: {}
 					}
 				},
-				success(res){
-					//测试
-					console.log(res)
+				success(res) {
+
+
 					uni.showToast({
-						title:'保存成功',
-						duration:1000,
-						success:()=>{
+						title: '保存成功',
+						duration: 1000,
+						success: () => {
 							setTimeout(() => {
 								uni.redirectTo({
 									url: _this.addObj.tourl,
-									success:(res)=>{
+									success: (res) => {
 										console.log(res)
 									},
-									fail:(err)=>{
+									fail: (err) => {
 										console.log(err)
 									}
 								});
@@ -224,17 +221,12 @@ export default {
 			});
 		},
 	},
-	onShow() {
-		this.addObj.type = this.addObj.list[this.addObj.curNow];
-		console.log(this.addObj.type)
-	}
 }
 </script>
 
 <style lang="scss">
 .out-contain {
 	background-color: #FFFFFF;
-	height: 100%;
 
 	.in-content {
 		.in-content {
@@ -267,12 +259,11 @@ export default {
 		}
 
 		.remarks {
-			margin-top: 14rpx;
+			margin-top: 0rpx;
 			padding: 30rpx;
-			height: 400rpx;
 
 			.textarea {
-				height: 200rpx;
+				height: 100rpx;
 				font-size: 28rpx;
 			}
 		}
@@ -284,7 +275,7 @@ export default {
 
 			background-color: white;
 			padding: 24rpx;
-
+			margin-bottom: 100rpx;
 
 
 			.date {
@@ -305,7 +296,8 @@ export default {
 		}
 
 		.save-box {
-			margin-top: 100rpx;
+			height: 200rpx;
+			background-color: #FFFFFF;
 
 			.saveBtn {
 				background-color: #20c6a2;
@@ -316,4 +308,5 @@ export default {
 			}
 		}
 	}
-}</style>
+}
+</style>
