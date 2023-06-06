@@ -9,7 +9,7 @@
 			<view style="height: 20rpx;background-color: #f5f5f5">
 			</view>
 			<view class="in-content">
-				<u-form v-model="consultation">
+				<u-form v-model="examination">
 					<!-- 1、分类 -->
 					<view class="cate">
 						<text class="cate-text">{{ addObj.choiceTitle }}</text>
@@ -31,24 +31,27 @@
 						<text class="tip">（友情提示：最多添加9张图片）</text>
 					</view>
 
-					<!-- 3、备注和时间 -->
+					<!-- 3、体检项目 -->
 					<view class="remarks">
-						<text class="cate-text" style="">{{ addObj.remarksText }}</text>
+						<text class="cate-text" style="">{{ addObj.remarksText1 }}</text>
 						<view style="height: 20rpx"></view>
-						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f2 5f5;margin: 20rpx 0"
-							border="false" v-model="consultation.data_result"></u-textarea>
-
+						<u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false"
+							v-model="examination.medical_examination_item"></u-input>
 					</view>
 
-					<view style="height: 40rpx"></view>
+					<!-- 4、体检备注 -->
+					<view class="remarks">
+						<u-textarea :placeholder="addObj.placeholder4" style="background-color: #f5f5f5;margin: 0rpx 0"
+							border="false" v-model="examination.remarks"></u-textarea>
+					</view>
 
-					<!-- 4、日期 -->
+					<!-- 6、日期 -->
 					<view class="date-body">
 						<text class="cate-text">日期</text>
 						<view style="height: 20rpx"></view>
-						<view class="picker">
+						<view class="picker" @click="showdate = true">
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
-								v-model="consultation.data_time" :clearIcon="false" />
+								v-model="examination.medical_examination_date" :clearIcon="false" />
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
 					</view>
@@ -65,46 +68,52 @@
 </template>
 
 <script>
-import headerNav from "../components/headerNav.vue";
+import headerNav from "pages/healthFile/outpatientArchives/components/headerNav.vue";
+import UForm from "../../../../uni_modules/uview-ui/components/u-form/u-form.vue";
+import UPicker from "../../../../uni_modules/uview-ui/components/u-picker/u-picker.vue";
 export default {
 	components: {
+		UPicker,
+		UForm,
 		headerNav,
 	},
 	data() {
 		return {
-			title: "转诊会诊",
+			title: "体检报告",
 			//数据
-			consultation:
+			examination:
 			{
-				//用户id
-				patient_id: '111',
-				//门诊类型
-				data_name: '',
-				//选择的日期
-				data_time:this.formatDate(new Date()),
-				//疾病备注
-				data_result: '',
-				//照片
-				picture_1: '',
-				picture_2: '',
-				picture_3: '',
+				uid:'',
+				//体检类别
+				medical_examination_type: '健康体检',
+				//体检报告img
+				medical_examination_file_image: '',
+				//体检项目
+				medical_examination_item:'',
+				//体检备注
+				remarks: '',
+				//体检时间
+				medical_examination_date:this.formatDate(new Date()),
 			},
+
+
 			//显示的文本
 			addObj: {
 				//默认的选项
 				curNow: 0,
 				//这边统一写内容用
-				choiceTitle: '转诊会诊',
-				list: ["转院", "转科", "会诊"],
-				uploadImgText: '添加照片',
-				placeholder2: '请添加检查项目的备注',
+				choiceTitle: '体检类别',
+				list: ["健康体检", "入职体检","专项体检","其他"],
+				uploadImgText: '添加体检照片',
+				remarksText1: '体检项目',
+				placeholder1: '请输入药物名称',
+				placeholder4: '请添加疾病诊断的备注',
 				//返回的路由
-				tourl: '/pages/healthFile/outpatientArchives/consultation/consultation',
+				tourl: '/pages/healthFile/examination/artificialExamination/artificialExamination',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: 'http://106.14.140.92:8881/uploadmedicalExaminationFileData',
 				// 备注
 				remarksValue: '',
-				remarksText: '备注',
 				// 选择日期
 				selectedDate: new Date(),
 				imageStyles: {
@@ -135,49 +144,53 @@ export default {
                 second=second < 10 ? ('0' + second) : second;  
                 return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
 		},
+		//上方选择器函数
 		sectionChange(index) {
-			this.consultation.type = this.addObj.list[index]
+			this.examination.type = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.consultation.type)
+			console.log(index, this.examination.type)
 		},
 		//保存方法
 		saveRecords() {
+			//测试
+			console.log(this.addObj.tourl2)
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
 			const token = userInfo.token;
 			const _this = this;
+
 			//把疾病类型转化成正确字段存储
-			//this.consultation.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
-			switch (this.consultation.data_name) {
-				case '转院': this.consultation.data_name = 'Transfer hospital'; break;
-				case ' 转科': this.consultation.data_name = 'X-turn department'; break;
-				case '会诊': this.consultation.data_name = 'consultation'; break;
-			}
+			// this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? 'Oral administration' : 'Subcutaneous injection';
+			switch (this.examination.medical_examination_type) {
+								case '健康体检': this.examination.medical_examination_type = 1; break;
+								case '入职体检': this.examination.medical_examination_type = 2; break;
+								case '专项体检': this.examination.medical_examination_type = 3; break;
+								case '其他': this.examination.medical_examination_type = 4; break;
+							}
 			uni.request({
 				url: this.addObj.tourl2,
 				method: 'post',
 				data: {
 					params: {
 						//注意！！查接口文档
-						model: "inpatient.referral.consultation",
+						model: "medical.examination.file",
 						token: token,
 						uid: uid,
 						method: "create",
 						args: [
 							[{
-								//检查类别
-								"data_name": this.consultation.data_name,
-								"picture_1": "",
-								"picture_2": "",
-								"picture_3": "",
-								//疾病名称
-								"data_time": this.consultation.data_time,
-								//疾病备注
-								"data_result": this.consultation.data_result,
-								//注意！！这个是uid
+								//用药类型
+								"medical_examination_type": this.examination.medical_examination_type,
+								//药物名称
+								"medical_examination_item": this.examination.medical_examination_item,
+								//备注
+								"remarks": this.examination.remarks,
+								//日期
+								"medical_examination_date": this.examination.medical_examination_date,
+								//注意:这个是uid
 								//用户id
-								"patient_id": uid
+								"uid": uid
 								//时间
 							}]
 						],
@@ -185,8 +198,8 @@ export default {
 					}
 				},
 				success(res) {
-					//测试
-					console.log(res)
+
+
 					uni.showToast({
 						title: '保存成功',
 						duration: 1000,
@@ -208,17 +221,12 @@ export default {
 			});
 		},
 	},
-	onShow() {
-		this.addObj.type = this.addObj.list[this.addObj.curNow];
-		console.log(this.addObj.type)
-	}
 }
 </script>
 
 <style lang="scss">
 .out-contain {
 	background-color: #FFFFFF;
-	height: 100%;
 
 	.in-content {
 		.in-content {
@@ -236,6 +244,8 @@ export default {
 			justify-content: space-between;
 			background-color: white;
 			padding: 20rpx;
+
+			.select-list {}
 		}
 
 		.uploadImage {
@@ -249,12 +259,11 @@ export default {
 		}
 
 		.remarks {
-
+			margin-top: 0rpx;
 			padding: 30rpx;
-			height: 300rpx;
 
 			.textarea {
-				height: 0rpx;
+				height: 100rpx;
 				font-size: 28rpx;
 			}
 		}
@@ -266,7 +275,7 @@ export default {
 
 			background-color: white;
 			padding: 24rpx;
-
+			margin-bottom: 100rpx;
 
 
 			.date {
@@ -287,7 +296,8 @@ export default {
 		}
 
 		.save-box {
-			margin-top: 100rpx;
+			height: 200rpx;
+			background-color: #FFFFFF;
 
 			.saveBtn {
 				background-color: #20c6a2;
@@ -298,4 +308,5 @@ export default {
 			}
 		}
 	}
-}</style>
+}
+</style>

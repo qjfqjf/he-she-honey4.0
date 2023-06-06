@@ -152,7 +152,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/laboratoryExamination/addLaboratoryExamination',
 				//接口
-				tourl2:'inpatient.laboratory.tests',
+				tourl2:'http://106.14.140.92:8881/platform/dataset/serch_read',
 				addtext:'添加档案'
 			}
 		},

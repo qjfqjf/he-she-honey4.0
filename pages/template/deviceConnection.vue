@@ -191,6 +191,9 @@
 						console.log(res)
 						// 停止搜索
 						_this.stopDiscovery()
+						setTimeout(()=>{
+							_this.notify();
+						},1000)
 						uni.showToast({
 							title: '绑定成功'
 						})

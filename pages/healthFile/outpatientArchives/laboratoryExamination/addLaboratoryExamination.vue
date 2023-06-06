@@ -111,7 +111,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination',
 				//保存接口
-				tourl2: 'inpatient.laboratory.tests',
+				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
 				// 备注
 				remarksValue: '',
 				// 选择日期

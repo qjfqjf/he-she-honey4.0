@@ -80,7 +80,7 @@
 					<swiper-item v-for="(page,index) in appFeature" :key="index">
 						<view class="d-flex">
 							<view class="d-flex f-grow-1 flex-column a-center j-center p-1" v-for="(item,index) in page"
-								:key="index">
+ZX								:key="index">
 								<view><img :src="item.icon" class="big-icon" alt=""></view>
 								<view>
 									{{ item.name }}
@@ -216,14 +216,14 @@
 				console.log()
 			},
 			//开发中。。。
-			dev(listIndex) {
-				if (listIndex >= 7) {
-					uni.showToast({
-						title: "开发中...",
-						icon: "none"
-					})
-				}
-			},
+			// dev(listIndex){
+			// 	if (listIndex >= 7) {
+			// 		uni.showToast({
+			// 			title: "开发中...",
+			// 			icon: "none"
+			// 		})
+			// 	}
+			// },
 			async handleScan() {
 				const _this = this
 				await uni.scanCode({
