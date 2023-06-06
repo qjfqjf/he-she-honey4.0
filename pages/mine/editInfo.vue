@@ -25,10 +25,10 @@
         @click="showGenderModal"
         size="large"
         titleStyle="font-size: 14px"
-        title="姓别"
+        title="性别"
         :isLink="true"
       >
-        <text slot="value" class="u-slot-value">{{ gender }}</text>
+        <text slot="value" class="u-slot-value">{{ gendertext }}</text>
       </u-cell>
       <u-cell
         @click="showBirthModal"
@@ -65,6 +65,7 @@
         titleStyle="font-size: 14px"
         :isLink="true"
         @click="showRelation = true"
+        v-if="this.type === 'add'"
       >
         <text slot="value" class="u-slot-value">{{ relationShip }}</text>
       </u-cell>
@@ -222,6 +223,7 @@
         heightValue: '',
         weightValue: '',
         relationShip: '',
+        gendertext:'',
         chooseDate: Number(new Date()),
         showName: false,
         showGender: false,
@@ -293,6 +295,7 @@
       this.nickname = this.userInfo.nickname || ''
       this.phone = this.userInfo.phone || ''
       this.type = e.type
+      console.log("type="+this.type)
     },
     //页面显示
     onShow() {},
@@ -329,7 +332,33 @@
               }
             })
         } else {
+            const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+            const uid = userInfo.uid;
+            const token = userInfo.token
+            console.log(userInfo)
           // 编辑接口
+          this.$http
+              .post('http://106.14.140.92:8881/platform/dataset/call_kw',{
+                params:{
+                    model:"",
+                    token:"",
+                    uid:"",
+                    method:"write",
+                    args:[
+                        [],
+                        {
+                            name:'',
+                            gender:'',
+                            birthday:'',
+                            height:'',
+                            weight:''
+                        }
+                    ],
+                    kwargs:{}
+                }
+              }).then((res)=>{
+              console.log("保存res:"+res)
+          })
         }
       },
       showNameModal() {
@@ -380,6 +409,7 @@
       },
       genderSelect(e) {
         this.gender = e.value
+        this.gendertext = e.name
       },
       confirmIdCardNumber() {
         console.log(this.idCardNumberValue, 11111)
@@ -401,8 +431,8 @@
           return
         }
         // 校验身份证号码出生日期是否合法
-        var birthday = getBirthdayFromIdCardNumber(this.idCardNumberValue)
-        if (!isValidBirthday(birthday)) {
+        var birthday = this.getBirthdayFromIdCardNumber(this.idCardNumberValue)
+        if (!this.isValidBirthday(birthday)) {
           uni.showToast({
             title: '请输入正确的身份证号',
             icon: 'none',

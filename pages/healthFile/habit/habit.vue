@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import inputAndChoiceForm from "../componments/inputAndChoiceForm.vue";
+import inputAndChoiceForm from "../components/inputAndChoiceForm.vue";
 import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	export default {
 		data() {

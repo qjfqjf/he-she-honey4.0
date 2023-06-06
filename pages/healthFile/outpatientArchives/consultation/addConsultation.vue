@@ -35,7 +35,7 @@
 					<view class="remarks">
 						<text class="cate-text" style="">{{ addObj.remarksText }}</text>
 						<view style="height: 20rpx"></view>
-						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 20rpx 0"
+						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f2 5f5;margin: 20rpx 0"
 							border="false" v-model="consultation.data_result"></u-textarea>
 
 					</view>
