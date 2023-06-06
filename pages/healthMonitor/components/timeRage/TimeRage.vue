@@ -61,7 +61,6 @@
 			},
 
 			handleConfirm(time) {
-
 				this.showStart = false
 				this.showEnd = false
 				// console.log(time)
@@ -70,7 +69,6 @@
 				const today = new Date();
 				const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 				console.log(firstDayOfMonth.format('yyyy-MM-dd'))
-
 			},
 			cancelTime() {
 				this.showStart = false

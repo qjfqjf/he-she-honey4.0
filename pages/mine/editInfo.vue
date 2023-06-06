@@ -301,8 +301,7 @@
       bindUser() {
         console.log(this.type)
         if (this.type === 'add') {
-          this.$http
-            .post('/bindRelatives', {
+          this.$http.post('/bindRelatives', {
               uid: this.userInfo.uid,
               info: {
                 name: this.nameValue,
