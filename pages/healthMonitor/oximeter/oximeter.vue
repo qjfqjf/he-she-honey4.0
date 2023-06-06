@@ -8,7 +8,7 @@
 		<view class="mt-3 mb-3" style="height: 350rpx;">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
-	<!-- 	<u-button type="primary" @click="resume">测试</u-button>
+		<!-- 	<u-button type="primary" @click="resume">测试</u-button>
 		<view class="mb-3">
 
 		</view>
@@ -16,7 +16,8 @@
 		<view class="mt-5">
 
 		</view> -->
-		<TipInfo title="血氧趋势"></TipInfo>
+		<TipInfo title="血氧趋势"  @trend="handleOximeterTrend">
+		</TipInfo>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSave"></u-button>
@@ -96,25 +97,24 @@
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122
 				],
 				time: null,
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/oximeter/oximeterMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/'+this.page
-        	},
-        ],
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/oximeter/oximeterMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/' + this.page
+					},
+				],
 			}
 		},
 		mounted() {
@@ -153,19 +153,25 @@
 				clearInterval(this.time)
 			},
 			handleDevelop() {
-        uni.navigateTo({
-          url: '/pages/healthMonitor/oximeter/oximeterHistory'
-        })
+				uni.navigateTo({
+					url: '/pages/healthMonitor/oximeter/oximeterHistory'
+				})
 			},
 			handleSave() {
 				console.log('提交')
 			},
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
+			handleOximeterTrend() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/oximeter/oximeterTrend' // 跳转到指定的目标页面
+				});
+			}
+
 		},
 	}
 </script>
@@ -174,10 +180,12 @@
 	.content {
 		.data {
 			padding: 60rpx 80rpx 0 80rpx;
+
 			.item {
 				.value {
 					color: #55b880;
 				}
+
 				.name {
 					font-size: 16px;
 				}

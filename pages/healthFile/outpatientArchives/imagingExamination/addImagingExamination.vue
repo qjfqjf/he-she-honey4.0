@@ -9,7 +9,7 @@
 			<view style="height: 20rpx;background-color: #f5f5f5">
 			</view>
 			<view class="in-content">
-				<u-form v-model="dataObj">
+				<u-form v-model="ImagingExamination">
 					<!-- 1、分类 -->
 					<view class="cate">
 						<text class="cate-text">{{ addObj.choiceTitle }}</text>
@@ -36,9 +36,9 @@
 						<text class="cate-text" style="">{{ addObj.remarksText }}</text>
 						<view style="height: 20rpx"></view>
 						<u-input style="background-color: #f5f5f5" :placeholder="addObj.placeholder1" border="false"
-							v-model="dataObj.illName"></u-input>
+							v-model="ImagingExamination.data_name"></u-input>
 						<u-textarea :placeholder="addObj.placeholder2" style="background-color: #f5f5f5;margin: 50rpx 0"
-							border="false" v-model="dataObj.illDiscription"></u-textarea>
+							border="false" v-model="ImagingExamination.data_result"></u-textarea>
 
 					</view>
 
@@ -50,7 +50,7 @@
 						<view style="height: 20rpx"></view>
 						<view class="picker">
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
-								v-model="dataObj.selectedDate" :clearIcon="false" />
+								v-model="ImagingExamination.data_time" :clearIcon="false" />
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
 					</view>
@@ -68,38 +68,31 @@
 
 <script>
 import headerNav from "../components/headerNav.vue";
-import addTemplate from "../components/addTemplate.vue";
 export default {
 	components: {
 		headerNav,
-		addTemplate
 	},
 	data() {
 		return {
 			title: "影像检查",
 			//数据
-			dataObj: [
+			ImagingExamination: 
 				{
 					//用户id
-					uid: '111',
-					//病例id
-					recordId: '',
+					patient_id: '',
+					//照片
+					picture_1:'',
+					picture_2:'',
+					picture_3:'',
 					//门诊类型
-					type: '',
+					check_category: '超声',
 					//选择的日期
-					selectedDate: new Date(),
+					data_time: '',
 					//疾病名称
-					illName: '',
+					data_name: '',
 					//疾病备注
-					illDiscription: '',
-					//图片
-					imgs: [
-						''
-					],
+					data_result: '',
 				},
-
-
-			],
 			//显示的文本
 			addObj: {
 				//默认的选项
@@ -114,7 +107,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/imagingExamination/imagingExamination',
 				//保存接口
-				tourl2: '',
+				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -132,10 +125,25 @@ export default {
 	},
 	//方法
 	methods: {
+		//时间格式转换
+		formatDate(date) {
+			var y = date.getFullYear();  
+                var m = date.getMonth() + 1;  
+                m = m < 10 ? ('0' + m) : m;  
+                var d = date.getDate();  
+                d = d < 10 ? ('0' + d) : d;  
+                var h = date.getHours();  
+                h=h < 10 ? ('0' + h) : h;  
+                var minute = date.getMinutes();  
+                minute = minute < 10 ? ('0' + minute) : minute;  
+                var second=date.getSeconds();  
+                second=second < 10 ? ('0' + second) : second;  
+                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+		},
 		sectionChange(index) {
-			this.dataObj.type = this.addObj.list[index]
+			this.ImagingExamination.check_category = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.dataObj.type)
+			console.log(index, this.ImagingExamination.check_category)
 		},
 		change(e) {
 			console.log("e:", e);
@@ -143,41 +151,65 @@ export default {
 
 
 		//保存方法
-		saveRecords() {
-			//console.log(this.dataObj);
-			console.log(this.params)
-
+		saveRecords(){
+			//拿到用户数据
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			const uid = userInfo.uid;
+			const token = userInfo.token;
+			const _this = this;
+			//把疾病类型转化成正确字段存储
+			// this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
+			switch(this.ImagingExamination.check_category){
+				case '超声': this.ImagingExamination.check_category='ultrasonic';break;
+				case' X线': this.ImagingExamination.check_category='X-ray';break;
+				case 'CT': this.ImagingExamination.check_category='CT';break;
+				case 'MRI': this.ImagingExamination.check_category='MRI';break;
+				case '其他': this.ImagingExamination.check_category='other';break;
+			}
 			uni.request({
-				url: this.addObj.tourl2,
-				method: 'post',
-				data: {
-
-					params: this.params,
-
-
-					// {
-					//     model:this.params.model,
-					//     token:this.params.token,
-					//     uid:this.params.uid,
-					//     method:"create",
-					//     args:this.params.args,
-					//     kwargs:{}
-					// },
-
+				url:this.addObj.tourl2,
+				method:'post',
+				data:{
+					params:{
+						//注意！！查接口文档
+						model:"inpatient.image.examination",
+						token:token,
+						uid:uid,
+						method:"create",
+						args:[
+							[{
+								//检查类别
+								"check_category":this.ImagingExamination.check_category,
+								"picture_1":"",
+								"picture_2":"",
+								"picture_3":"",
+								//检查项目
+								"data_name":this.ImagingExamination.data_name,
+								//疾病备注
+								"data_result":this.ImagingExamination.data_result,
+								//注意！！这个是uid
+								//用户id
+								"patient_id":uid
+								//时间
+							}]
+						],
+						kwargs:{}
+					}
 				},
-				success(res) {
+				success(res){
+					//测试
 					console.log(res)
 					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
+						title:'保存成功',
+						duration:1000,
+						success:()=>{
 							setTimeout(() => {
 								uni.redirectTo({
-									url: this.addObj.tourl,
-									success: (res) => {
+									url: _this.addObj.tourl,
+									success:(res)=>{
 										console.log(res)
 									},
-									fail: (err) => {
+									fail:(err)=>{
 										console.log(err)
 									}
 								});
@@ -186,7 +218,6 @@ export default {
 					});
 				}
 			});
-
 		},
 	},
 	onShow() {

@@ -20,7 +20,7 @@
 			<view>非 APP、H5 环境不支持</view>
 			<!-- #endif -->
 		</view>
-		<TipInfo title="血压趋势"></TipInfo>
+		<TipInfo title="血压趋势" @trend="handleBloodPressureTrend"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSavePressure"></u-button>
@@ -73,8 +73,6 @@
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
-	</view>
-
 	</view>
 </template>
 
@@ -161,7 +159,7 @@
 					{
 						img: require('@/static/icon/bloodPressure/write.png'),
 						title: '手动录入',
-						url: '/pages/healthMonitor/bloodPressure/manualEntry' 
+						url: '/pages/healthMonitor/bloodPressure/manualEntry'
 					},
 				],
 			};
@@ -193,6 +191,11 @@
 					message: '开发中...'
 				})
 			},
+			handleBloodPressureTrend() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodPressure/bloodPressureTrend' // 跳转到指定的目标页面
+				});
+			},
 			handleJump(url) {
 				uni.navigateTo({
 					url
@@ -205,17 +208,17 @@
 					args: [
 						[{
 							"name": "血压计 (静态血压计)",
-							"numbers":this.serviceId,
-							"owner":this.userInfo.uid,
-							"systolic_blood_pressure":this.measureResult.SYS,
-							"tensioning_pressure":this.measureResult.DIA,
-							"heart_rate":this.measureResult.PUL,
-							"input_type":"equipment",
+							"numbers": this.serviceId,
+							"owner": this.userInfo.uid,
+							"systolic_blood_pressure": this.measureResult.SYS,
+							"tensioning_pressure": this.measureResult.DIA,
+							"heart_rate": this.measureResult.PUL,
+							"input_type": "equipment",
 						}]
 					],
-					kwargs:{}
+					kwargs: {}
 				}).then(res => {
-					if(this.measureResult.pressure != 0){
+					if (this.measureResult.pressure != 0) {
 						this.$refs.uToast.show({
 							message: '保存成功',
 							type: 'success',

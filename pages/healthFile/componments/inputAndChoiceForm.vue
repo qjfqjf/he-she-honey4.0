@@ -2,8 +2,7 @@
     <view>
         <view class="uni-form-item uni-column" v-for="info in cell">
             <view class="m-2 font-md font-weight">{{info.question}}</view>
-            <input class="uni-input font-md" maxlength="10" :placeholder="info.subTitle"/>
-            <doc-choice class="mt-4" :cell-choice="info.choice"></doc-choice>
+            <doc-choice class="mt-4" :value="info.value" :cell-choice="info.options"></doc-choice>
         </view>
     </view>
 </template>
@@ -20,7 +19,7 @@ export default{
 
     },
     components:{
-      docChoice
+        docChoice
     },
     props:{
         cell: Array

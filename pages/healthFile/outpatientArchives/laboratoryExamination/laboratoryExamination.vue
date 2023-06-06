@@ -193,7 +193,7 @@
 							//时间
 							"data_time",
 							//检查类别
-							"check_category"
+							"drug_class"
 						]
 					}
 				},
@@ -203,11 +203,11 @@
 					this.dataList = res.data.result.records
 					//判断诊断类型
 					for (var record of this.dataList) {
-						switch(this.record.check_category){
-							case'blood': this.record.check_category='血液';break;
-							case'urine': this.record.check_category='尿液';break;
-							case'image': this.record.check_category='影像';break;
-							case'other': this.record.check_category='其他';break;
+						switch(this.record.drug_class){
+							case'blood': this.record.drug_class='血液';break;
+							case'urine': this.record.drug_class='尿液';break;
+							case'image': this.record.drug_class='影像';break;
+							case'other': this.record.drug_class='其他';break;
 					}
 					}
 
@@ -220,9 +220,9 @@
 			})
 		},
 
-		onLoad(){
-			this.getRecordsList();
-		}
+		onLoad() {
+		this.getRecordsList();
+	}
 	}
 </script>
 

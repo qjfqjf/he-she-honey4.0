@@ -85,7 +85,7 @@ export default {
 					//病例id
 					recordId: '',
 					//化验类别
-					check_category: '急诊',
+					drug_class: '急诊',
 					//选择的日期
 					data_time: new Date(),
 					//疾病名称
@@ -129,6 +129,21 @@ export default {
 	},
 	//方法
 	methods: {
+		//时间格式转换
+		formatDate(date) {
+			var y = date.getFullYear();  
+                var m = date.getMonth() + 1;  
+                m = m < 10 ? ('0' + m) : m;  
+                var d = date.getDate();  
+                d = d < 10 ? ('0' + d) : d;  
+                var h = date.getHours();  
+                h=h < 10 ? ('0' + h) : h;  
+                var minute = date.getMinutes();  
+                minute = minute < 10 ? ('0' + minute) : minute;  
+                var second=date.getSeconds();  
+                second=second < 10 ? ('0' + second) : second;  
+                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+		},
 		sectionChange(index) {
 			this.laboratoryExamination.type = this.addObj.list[index]
 			this.addObj.curNow = index;
@@ -148,11 +163,11 @@ export default {
 			const _this = this;
 			//把疾病类型转化成正确字段存储
 			// this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
-			switch(this.laboratoryExamination.check_category){
-				case'血液': this.laboratoryExamination.check_category='blood';break;
-				case'尿液': this.laboratoryExamination.check_category='urine';break;
-				case'影像': this.laboratoryExamination.check_category='image';break;
-				case'其他': this.laboratoryExamination.check_category='other';break;
+			switch(this.laboratoryExamination.drug_class){
+				case'血液': this.laboratoryExamination.drug_class='blood';break;
+				case'尿液': this.laboratoryExamination.drug_class='urine';break;
+				case'影像': this.laboratoryExamination.drug_class='image';break;
+				case'其他': this.laboratoryExamination.drug_class='other';break;
 			}
 			
 			uni.request({
@@ -168,7 +183,7 @@ export default {
 						args:[
 							[{
 								//急诊类型
-								"check_category":this.laboratoryExamination.check_category,
+								"drug_class":this.laboratoryExamination.drug_class,
 								"picture_1":"",
 								"picture_2":"",
 								"picture_3":"",

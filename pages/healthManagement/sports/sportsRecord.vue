@@ -182,7 +182,7 @@
 			})
 		},
 
-		onload(){
+		onLoad(){
 			this.getRecordsList();
 		}
 	}

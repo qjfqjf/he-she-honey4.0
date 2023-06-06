@@ -155,7 +155,9 @@
 					// 	images: '../../static/logo.png',
 					// 	name: '王立群'
 					// },
-				]
+				],
+				// 当前用户
+				currentUser: {},
 
 			};
 		},
@@ -199,18 +201,18 @@
 						uid: this.userInfo.uid,
 					})
 					.then((res) => {
-						console.log(res)
 						this.userList = res.result.result.map((item) => {
 							return {
 								...item,
+								uid: item.id,
 								images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 							}
 						})
+						this.currentUser = this.userList[0]
 						console.log(this.userList)
-
 					})
 			},
-			bindUser(){
+			bindUser() {
 				console.log()
 			},
 			//开发中。。。
@@ -259,7 +261,11 @@
 
 			},
 			changeHeadImg(index) {
-				console.log('当前选中' + index)
+				// console.log(this.currentUser)
+				// console.log('当前选中' + index)
+				this.currentUser = this.userList[index]
+				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
+				console.log(this.currentUser)
 			},
 			addUser() {
 				this.$http.post('/platform/dataset/call_kw', {
@@ -304,11 +310,6 @@
 				});
 				// #endif
 			},
-
-			changeHeadImg(index) {
-				console.log('当前选中' + index)
-			},
-
 		},
 		//页面隐藏
 		onHide() {},
