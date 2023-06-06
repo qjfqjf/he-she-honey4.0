@@ -1,0 +1,23 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+	  { 
+	  	"path": "pages/index/index",
+	  	"style": {
+	  		"navigationBarTitleText": "心电图"
+	  	}
+	  }
+	  ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "心电图",
+		"navigationBarBackgroundColor": "#0d69b2",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	      "color": "#333",
+	      "selectedColor":"#0d69b2",
+	      "borderStyle": "black",
+	      "backgroundColor": "#ffffff" 
+	  }
+}
