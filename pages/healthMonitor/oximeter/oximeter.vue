@@ -142,14 +142,14 @@
         wave: {
           // ecg
           // 1秒多少个点
-          frameSize: 250,
+          frameSize: 200,
           yMax: 100,
           waveHeight: 100,
           yOffset: 50,
           // 每次画几个点
           step: 10,
           // 扫纸速度，1 默认 表示 25mm/s (1秒25个小格子 每个小格子0.04s)。 0.5表示扫纸速度为 12.5mm/s。2表示扫纸速度为 50mm/s。
-          speedRatio: 1,
+          speedRatio: 0.5,
           lineColor: 'red',
         },
       })
@@ -383,9 +383,9 @@
         } else if (
           resHex.slice(6, 8) == '06' &&
           resHex.slice(8, 10) == '21' &&
-          resHex.slice(12, 14) == '05'
+          resHex.slice(12, 14) == '04'
         ) {
-          this.pause()
+          this.$refs.ecgRef.pause()
           // aa550f062101050000f8,
           //  包头：AA 55
           // - 令牌：0F
@@ -459,7 +459,7 @@
           if (!res.connected) {
             this.deviceStatus = 0
             this.deviceCode = 0
-            // this.pause()
+            this.pause()
             uni.showToast({
               title: '连接已断开',
               icon: 'error',
