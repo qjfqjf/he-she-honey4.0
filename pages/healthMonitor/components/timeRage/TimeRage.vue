@@ -12,24 +12,32 @@
 				<u-button style="width: 160rpx;" :text="new Date(endTime).format('yyyy-MM-dd')" color="#abe5c0">
 				</u-button>
 			</view>
+
 		</view>
 		<!-- 时间选择器 -->
-		<u-datetime-picker :show="showStart" v-model="startTime" mode="date" @confirm="handleConfirm"
-			@cancel="cancelTime">
+		<u-datetime-picker :show="showStart" v-model="startTime" mode="date" @confirm="handleConfirm" @cancel="cancelTime">
 		</u-datetime-picker>
-		<u-datetime-picker :show="showEnd" v-model="endTime" mode="date" @confirm="handleConfirm" @cancel="cancelTime">
+		<u-datetime-picker :show="showEnd" v-model="endTime" mode="date" @confirm="handleConfirm" @cancel="cancelTime" :data-range-start="new Date(startTime).format('yyyy-MM-dd')">
 		</u-datetime-picker>
 	</view>
 </template>
 
 <script>
+	import UButton from "../../../../uni_modules/uview-ui/components/u-button/u-button.vue";
+
 	export default {
+		components: {UButton},
 		data() {
 			return {
-				startTime: this.getFirstDayOfMonth().format('yyyy-MM-dd'),
+				date:{
+					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
+					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd')
+				},
+				startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 				endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				showStart: false,
 				showEnd: false,
+				value:'',
 			};
 		},
 		mounted() {
@@ -54,8 +62,10 @@
 			},
 			showTimePicker(value) {
 				if (value === 'start') {
+					this.value = 'start'
 					this.showStart = true
 				} else {
+					this.value = 'end'
 					this.showEnd = true
 				}
 			},
@@ -66,15 +76,31 @@
 				// console.log(time)
 				// console.log(this.startTime)
 				// this.startTime = new Date(time.value).format('yyyy-MM-dd')
-				const today = new Date();
-				const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-				console.log(firstDayOfMonth.format('yyyy-MM-dd'))
+				// const today = new Date();
+				// const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+				if(this.value === 'start'){
+					this.startTime = new Date(time.value).format('yyyy-MM-dd')
+					this.endTime = new Date(this.endTime).format('yyyy-MM-dd')
+				}else{
+					this.startTime = new Date(this.startTime).format('yyyy-MM-dd')
+					this.endTime = new Date(time.value).format('yyyy-MM-dd')
+				}
+
+				this.date.startTime = this.startTime
+				this.date.endTime = this.endTime
+
+				//console.log("time.value:"+time.value)
+				this.$emit('getDate',this.date)
 			},
+
 			cancelTime() {
 				this.showStart = false
 				this.showEnd = false
-			}
-		}
+			},
+
+
+
+		},
 	}
 </script>
 
