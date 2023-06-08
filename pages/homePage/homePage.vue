@@ -80,7 +80,7 @@
 					<swiper-item v-for="(page,index) in appFeature" :key="index">
 						<view class="d-flex">
 							<view class="d-flex f-grow-1 flex-column a-center j-center p-1" v-for="(item,index) in page"
-ZX								:key="index">
+								:key="index">
 								<view><img :src="item.icon" class="big-icon" alt=""></view>
 								<view>
 									{{ item.name }}
@@ -177,32 +177,7 @@ ZX								:key="index">
 				})
 			}
 
-			uni.getBluetoothAdapterState({
-				success: function(res) {
-					console.log("res:"+res)
-					if (!res.available) {
-						uni.showModal({
-							title: '提示',
-							content: '请打开蓝牙以继续操作',
-							success: function(res) {
-								if (res.confirm) {
-									// 用户点击确定按钮
-									uni.openBluetoothAdapter({
-										success: function(res) {
-											// 蓝牙适配器已成功打开
-										},
-										fail: function(err) {
-											// 蓝牙适配器打开失败
-										}
-									});
-								} else if (res.cancel) {
-									// 用户点击取消按钮
-								}
-							}
-						});
-					}
-				}
-			});
+
 
 
 			console.log('onLoad', e);
@@ -216,12 +191,95 @@ ZX								:key="index">
 			uni.hideTabBar();
 			// this.getUserList();
 
+			//判断蓝牙是否开启
+			this.openBlue();
+
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 
 			this.getRelationList()
 		},
 		//方法
 		methods: {
+			openBlue() {
+				console.log('--------------------检查蓝牙是否开启--------------------');
+				if(plus.os.name == 'Android'){
+					//引入java蓝牙类
+					let BluetoothAdapter = plus.android.importClass("android.bluetooth.BluetoothAdapter");
+
+					const blueadapter = BluetoothAdapter.getDefaultAdapter(); //拿到默认蓝牙适配器方法
+
+					if (blueadapter) {
+						// 判断蓝牙是否开启
+						if (blueadapter.isEnabled()) {
+							// 已开启
+							uni.showToast({
+								title: '蓝牙已打开',
+							})
+						} else {
+							// 未开启弹出提示框
+							uni.showModal({
+								title: '提示',
+								content: '蓝牙尚未打开，是否打开蓝牙',
+								showCancel: true,
+								cancelText: '取消',
+								confirmText: '确定',
+								success(res) {
+									// 点击确定后通过系统打开蓝牙
+									if (res.confirm) {
+										const blueadapter = BluetoothAdapter.getDefaultAdapter();
+										if (blueadapter != null) {
+											return blueadapter.enable();
+										}
+									} else {
+										// 点击取消
+										uni.showToast({
+											title:"请尽快打开蓝牙！",
+											icon:'none'
+										})
+									}
+								}
+							})
+						}
+					}
+				}
+				// uni.openBluetoothAdapter({
+				// 	success: (res) => { //已打开
+				// 		uni.getBluetoothAdapterState({ //蓝牙的匹配状态
+				// 			success: (row) => {
+				// 				console.log(row)
+				// 				// 开始搜索蓝牙设备
+				// 				// uni.startBluetoothDevicesDiscovery()
+				// 			},
+				// 			fail(error) {
+				// 				uni.showToast({
+				// 					icon: 'none',
+				// 					title: '查看手机蓝牙是否打开'
+				// 				});
+				// 			}
+				// 		});
+				//
+				// 	},
+				// 	fail: (err) => { //未打开
+				// 		uni.showModal({
+				// 			title: '提示',
+				// 			content: '请打开蓝牙以继续操作',
+				// 			success: function(res) {
+				// 				if (res.confirm) {
+				// 					uni.openSetting({
+				// 						success: function(res) {
+				// 							// 用户跳转到系统设置页面
+				// 						}
+				// 					})
+				// 				} else if (res.cancel) {
+				// 					console.log("用户点击取消！")
+				// 				}
+				// 			}
+				// 		});
+				//
+				// 	}
+				// })
+			},
+
 			// 获取亲属关系列表
 			getRelationList() {
 				this.$http
