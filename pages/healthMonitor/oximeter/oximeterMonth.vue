@@ -26,9 +26,10 @@
 			</view>
 		</view>
 
-		<view>
-			<u-button @click="test">aaa</u-button>
-		</view>
+<!--		测试日期数据是否正确-->
+<!--		<view>-->
+<!--			<u-button @click="test">aaa</u-button>-->
+<!--		</view>-->
 
 
 	</view>
@@ -52,30 +53,30 @@
 				},
 				allDataList:[],
 				dataList: [
-					{
-						test_time: "2023-3-20 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-4-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2021-3-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-3-27 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					}
+					// {
+					// 	test_time: "2023-3-20 15:30",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-4-29 15:30",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2021-3-29 15:30",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-3-27 15:30",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// }
 				]
 			};
 		},
@@ -119,12 +120,7 @@
 				//清空数组内数据
 				this.allDataList = [];
 				//筛选出符合条件的数据
-				for(var i in this.allDataList){
-					//判断数据是否在所选日期范围内
-					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
-						this.dataList.push(this.allDataList[i])
-					}
-				}
+				this.getDataList();
 			},
 
 			handleDevelop() {
@@ -148,8 +144,19 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
+					this.getDataList()
 				})
 			},
+
+			//筛选数据
+			getDataList(){
+				for(var i in this.allDataList){
+					//判断数据是否在所选日期范围内
+					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
+						this.dataList.push(this.allDataList[i])
+					}
+				}
+			}
 
 		}
 	}
