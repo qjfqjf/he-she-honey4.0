@@ -15,7 +15,7 @@
 	  </view>
 	</view>
 	<view class="container">
-	    <scroll-view class="nav" scroll-y>
+	    <scroll-view class="nav" scroll-y="true">
 	        <view
 	           v-for="(item, index) in navList"
 	           :key="index"
@@ -25,7 +25,7 @@
 	        <view>{{ item.title }}</view>
 	        </view>
 	    </scroll-view>
-	    <scroll-view class="bigcontent"  scroll-y>
+	    <scroll-view class="bigcontent"  scroll-y="true">
 	        <view class="content" v-for="(item, index) in dataList" :key="index">
 				<view class="content-one">
 					<view class="content-top">
@@ -64,6 +64,76 @@
 		          title: '心血管疾病',
 		          data: [
 		            {
+		              title: '动脉粥样硬化风险自测',
+		              description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+		              imgUrl: '/static/icon/healthEstimate/brain.png',
+		            },
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+		              title: '动脉粥样硬化风险自测',
+		              description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+		              imgUrl: '/static/icon/healthEstimate/brain.png',
+		            },
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
+					  title: '动脉粥样硬化风险自测',
+					  description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
+					  imgUrl: '/static/icon/healthEstimate/brain.png',
+					},
+					{
 		              title: '动脉粥样硬化风险自测',
 		              description: '动脉粥样硬化(Atherosclerosis，AS) 是冠...',
 		              imgUrl: '/static/icon/healthEstimate/brain.png',
@@ -160,6 +230,126 @@
 				    },
 				  ],
 				},
+				{
+		          title: '皮肤疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '五官科疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '外科疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '内分泌疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '慢性疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '妇科疾病',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '神经内科',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        },
+				{
+		          title: '其他',
+		          data: [
+		            {
+		              title: '标题3',
+		              description: '描述3',
+		              imgUrl: 'xxx',
+		            },
+		            {
+		              title: '标题4',
+		              description: '描述4',
+		              imgUrl: 'xxx',
+		            },
+		          ],
+		        }
 		      ],
 		      dataList: [],
 		      currentIndex: 0,
@@ -238,6 +428,7 @@
 	  display: flex;
 	  align-items: center;
 	  text-align: center;
+	  height: 600px;
 	}
 	.nav view {
 	  display: flex;
@@ -273,6 +464,8 @@
 	}
 	.bigcontent{
 		background-color: #FFFFFF;
+		width: 100%;
+		height: 600px;
 	}
 	
 	
