@@ -136,7 +136,7 @@ export default {
                 return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
 		},
 		sectionChange(index) {
-			this.consultation.data_name = this.addObj.list[index]
+			this.consultation.type = this.addObj.list[index]
 			this.addObj.curNow = index;
 			console.log(index, this.consultation.type)
 		},

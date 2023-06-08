@@ -211,6 +211,7 @@ export default {
 		sectionChange(index) {
 			this.medicalRecord.type = this.addObj.list[index]
 			this.addObj.curNow = index;
+			console.log(this.medicalRecord.type)
 		},
 		//保存方法
 		saveRecords() {
