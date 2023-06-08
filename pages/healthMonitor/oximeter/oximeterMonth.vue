@@ -38,7 +38,7 @@
 	import TimeRage from '../components/timeRage/TimeRage.vue'
 	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	import dayjs from "../utils/dayjs"
-	import isBetween from 'dayjs/plugin/isBetween'
+	import isBetween from "../utils/isBetween"
 	export default {
 		components: {
 			UButton,
