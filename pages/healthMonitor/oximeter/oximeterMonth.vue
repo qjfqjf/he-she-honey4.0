@@ -1,4 +1,5 @@
 <template>
+
 	<view class="b-content p-2">
 		<z-nav-bar title="血氧月报">
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
@@ -25,9 +26,10 @@
 			</view>
 		</view>
 
-		<view>
-			<u-button @click="test">aaa</u-button>
-		</view>
+<!--		测试日期数据是否正确-->
+<!--		<view>-->
+<!--			<u-button @click="test">aaa</u-button>-->
+<!--		</view>-->
 
 
 	</view>
@@ -35,9 +37,9 @@
 
 <script>
 	import TimeRage from '../components/timeRage/TimeRage.vue'
-	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue"
-	import dayjs from '../utils/dayjs.js'
-	// import isBetween from 'dayjs/plugin/isBetween'
+	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
+	import dayjs from "../utils/dayjs"
+	import isBetween from "../utils/isBetween"
 	export default {
 		components: {
 			UButton,
@@ -49,32 +51,57 @@
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
-				allDataList:[],
-				dataList: [
+				allDataList:[
 					{
-						test_time: "2023-3-20 15:30",
+						test_time: "2023-3-20 15:30:10",
 						blood_oxygen: 168,
 						pi: 98,
 						pulse_rate: 81
 					},
 					{
-						test_time: "2023-4-29 15:30",
+						test_time: "2023-4-29 15:30:10",
 						blood_oxygen: 168,
 						pi: 98,
 						pulse_rate: 81
 					},
 					{
-						test_time: "2021-3-29 15:30",
+						test_time: "2021-3-29 15:30:10",
 						blood_oxygen: 168,
 						pi: 98,
 						pulse_rate: 81
 					},
 					{
-						test_time: "2023-3-27 15:30",
+						test_time: "2023-3-27 15:30:10",
 						blood_oxygen: 168,
 						pi: 98,
 						pulse_rate: 81
 					}
+				],
+				dataList: [
+					// {
+					// 	test_time: "2023-3-20 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-4-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2021-3-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-3-27 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// }
 				]
 			};
 		},
@@ -84,6 +111,7 @@
 		onLoad() {
 			dayjs.extend(isBetween)
 			//this.getHistoryList();
+			this.getDataList()
 			//测试
 			// console.log(dayjs())
 			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))
@@ -118,12 +146,7 @@
 				//清空数组内数据
 				this.allDataList = [];
 				//筛选出符合条件的数据
-				for(var i in this.allDataList){
-					//判断数据是否在所选日期范围内
-					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
-						this.dataList.push(this.allDataList[i])
-					}
-				}
+				this.getDataList();
 			},
 
 			handleDevelop() {
@@ -147,8 +170,19 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
+					this.getDataList()
 				})
 			},
+
+			//筛选数据
+			getDataList(){
+				for(var i in this.allDataList){
+					//判断数据是否在所选日期范围内
+					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
+						this.dataList.push(this.allDataList[i])
+					}
+				}
+			}
 
 		}
 	}
