@@ -1,5 +1,4 @@
 <template>
-
 	<view class="b-content p-2">
 		<z-nav-bar title="血氧月报">
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
@@ -38,7 +37,7 @@
 	import TimeRage from '../components/timeRage/TimeRage.vue'
 	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue"
 	import dayjs from '../utils/dayjs.js'
-	import isBetween from 'dayjs/plugin/isBetween'
+	// import isBetween from 'dayjs/plugin/isBetween'
 	export default {
 		components: {
 			UButton,

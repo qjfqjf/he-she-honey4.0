@@ -10,7 +10,7 @@
     <view class="mb-3"> </view>
     <u-button type="primary" @click="pause">暂停</u-button> -->
     <view class="mt-5"> </view>
-    <TipInfo title="血氧趋势"></TipInfo>
+    <TipInfo title="血氧趋势" @trend="handleOximeterTrend"></TipInfo>
     <u--text
       class="d-flex j-center mb-3"
       color="#01b09a"
@@ -90,6 +90,7 @@
         deviceStatus: 0,
         deviceCode: 0,
         ecgRef: null,
+		userInfo: '',
         // 51, 51, 51, 51, 50, 50, 50, 49, 49, 49, 49, 50, 51, 52, 54, 55, 56, 56, 56, 56, 56, 183,
         //   55, 54, 54, 53, 53, 53, 52, 52, 52, 51, 51, 51, 50, 50, 50, 50, 49, 49, 49, 49, 49, 49,
         //   48, 48, 48, 48, 48, 48, 48, 49, 50, 51, 53, 55, 56, 57, 57, 57, 61, 68, 73, 79, 84, 85,
@@ -157,6 +158,10 @@
     onDestory() {
       clearInterval(this.connectTime)
     },
+	//页面显示
+	onShow() {
+		this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+	},
     methods: {
       // 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
       createInterval() {
@@ -485,7 +490,50 @@
           url: '/pages/healthMonitor/oximeter/oximeterHistory',
         })
       },
+	  handleOximeterTrend() {
+	  	uni.navigateTo({
+	  		url: '/pages/healthMonitor/oximeter/oximeterTrend' // 跳转到指定的目标页面
+	  	});
+	  },
       handleSave() {
+		  this.$http.post('/platform/dataset/call_kw',{
+		  	model: "oximeter",
+		  	method: "create",
+		  	args: [
+		  		[{
+		  			"name": "血氧仪",
+		  			"numbers":this.serviceId,
+		  			"owner":this.userInfo.uid,
+					"blood_oxygen":this.oxData[0].value,
+					"pi":this.oxData[1].value,
+					"pulse_rate":this.oxData[2].value,
+					"input_type":"equipment",
+		  		}]
+		  	],
+		  	kwargs:{}
+		  }).then(res => {
+		  	if(this.this.oxData[0].value != 0){
+		  		this.$refs.uToast.show({
+		  			message: '保存成功',
+		  			type: 'success',
+		  
+		  		})
+		  		this.btnColor = '#dadada'
+		  		this.oxData[0].value = 0
+				this.oxData[1].value = 0
+				this.oxData[2].value = 0
+		  	}else{
+				this.$refs.uToast.show({
+					message: '保存失败',
+					type: 'error',
+						  
+				})
+				this.btnColor = '#dadada'
+				this.oxData[0].value = 0
+				this.oxData[1].value = 0
+				this.oxData[2].value = 0
+			}
+		  })
         console.log('提交')
       },
       onPageJump(url) {
