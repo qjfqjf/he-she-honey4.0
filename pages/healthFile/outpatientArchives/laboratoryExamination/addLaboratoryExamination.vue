@@ -87,7 +87,7 @@ export default {
 					//化验类别
 					drug_class: '急诊',
 					//选择的日期
-					data_time: new Date(),
+					data_time:this.formatDate(new Date()),
 					//疾病名称
 					data_name: '',
 					//疾病备注

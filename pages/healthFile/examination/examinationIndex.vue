@@ -7,7 +7,7 @@
 		</view>
 		<view class="devices-warp mt-2">
 			<u-grid :border="false" col="4">
-				<u-grid-item class="item" v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
+				<u-grid-item class="item"  v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
 					@click="click(baseListItem.url,baseListItem.title)">
 					<image style="width: 60rpx;height: 60rpx;" :src="baseListItem.img" mode="aspectFit"></image>
 					<text class="grid-text mt-2 font-md">{{baseListItem.title}}</text>
@@ -29,16 +29,18 @@
 					{
 						img: require('@/static/icon/healthFile/physiologicalIndex.png'),
 						title: '自动录入',
-						url: ''
+						url: ' '
 					},
 				],
 			}
 		},
 		methods: {
-			
 			click(url, name) {
-				if(!url) {
-					this.$refs.uToast.default('开发中...')
+				if(url==" ") {
+					uni.showToast({
+						title:'开发中',
+						icon:"none"
+					})
 				}
 				uni.navigateTo({
 					url: url

@@ -162,56 +162,55 @@
 				uni.navigateTo({
 					url:this.tourl
 				});
-			}
-		},
-		//查询当前用户所有档案
-		getRecordsList() {
-			//拿到用户信息
-			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-			const uid = userInfo.uid;
-			const token = userInfo.token;
-			//接口调用
-			uni.request({
-				url: this.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						model: 'inpatient.laboratory.tests',
-						token: token,
-						uid: uid,
-						//传回去的数组(存放字段)
-						fields: [
-							"picture_1",
-							"picture_2",
-							"picture_3",
-							//检查项目
-							"data_name",
-							//检查
-							"dosage",
-							//备注
-							"data_result",
-							//时间
-							"data_time",
-							//检查类别
-							"drug_class"
-						]
-					}
-				},
-				success: (res) => {
-					console.log(res);
-					//把传回来的值存入
-					this.dataList = res.data.result.records
-					//判断诊断类型
-					for (var record of this.dataList) {
-						switch(this.record.drug_class){
-							case'blood': this.record.drug_class='血液';break;
-							case'urine': this.record.drug_class='尿液';break;
-							case'image': this.record.drug_class='影像';break;
-							case'other': this.record.drug_class='其他';break;
-					}
-					}
+			},
+			//查询当前用户所有档案
+			getRecordsList() {
+				//拿到用户信息
+				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+				const uid = userInfo.uid;
+				const token = userInfo.token;
+				//接口调用
+				uni.request({
+					url: this.tourl2,
+					method: 'post',
+					data: {
+						params: {
+							model: 'inpatient.laboratory.tests',
+							token: token,
+							uid: uid,
+							//传回去的数组(存放字段)
+							fields: [
+								"picture_1",
+								"picture_2",
+								"picture_3",
+								//检查项目
+								"data_name",
+								//检查
+								"dosage",
+								//备注
+								"data_result",
+								//时间
+								"data_time",
+								//检查类别
+								"drug_class"
+							]
+						}
+					},
+					success: (res) => {
+						console.log(res);
+						//把传回来的值存入
+						this.dataList = res.data.result.records
+						//判断诊断类型
+						for (var record of this.dataList) {
+							switch(this.record.drug_class){
+								case'blood': this.record.drug_class='血液';break;
+								case'urine': this.record.drug_class='尿液';break;
+								case'image': this.record.drug_class='影像';break;
+								case'other': this.record.drug_class='其他';break;
+						}
+						}
 
-				},
+					},
 				fail: (err) => {
 					uni.showToast({
 						title: err,
@@ -220,10 +219,11 @@
 			})
 		},
 
-		onLoad() {
-		this.getRecordsList();
-	}
-	}
+				onLoad() {
+				this.getRecordsList();
+			}
+		}
+}
 </script>
 
 <style lang="scss">

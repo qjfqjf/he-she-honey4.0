@@ -6,7 +6,7 @@
 		<public-module></public-module>
 
 		<!--  空记录  -->
-		<view class="nothing" v-if="dataList != undefined && dataList != null && dataList.length > 0">
+		<view class="nothing" v-if="dataList.length == 0">
 			<!-- 健康管理组件 -->
 			<empty-state :title="title" :tourl="tourl"></empty-state>
 		</view>
@@ -202,10 +202,10 @@ export default {
 					// //判断诊断类型
 					for (var record of this.records) {
 							switch (record.medical_examination_type) {
-								case 1: record.medical_examination_type = '健康体检'; break;
-								case 2: record.medical_examination_type = '入职体检'; break;
-								case 3: record.medical_examination_type = '专项体检'; break;
-								case 4: record.medical_examination_type = '其他'; break;
+								case '1': record.medical_examination_type = '健康体检'; break;
+								case '2': record.medical_examination_type = '入职体检'; break;
+								case '3': record.medical_examination_type = '专项体检'; break;
+								case '4': record.medical_examination_type = '其他'; break;
 							}
 					}
 				},
