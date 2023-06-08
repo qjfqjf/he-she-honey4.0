@@ -177,6 +177,34 @@ ZX								:key="index">
 				})
 			}
 
+			uni.getBluetoothAdapterState({
+				success: function(res) {
+					console.log("res:"+res)
+					if (!res.available) {
+						uni.showModal({
+							title: '提示',
+							content: '请打开蓝牙以继续操作',
+							success: function(res) {
+								if (res.confirm) {
+									// 用户点击确定按钮
+									uni.openBluetoothAdapter({
+										success: function(res) {
+											// 蓝牙适配器已成功打开
+										},
+										fail: function(err) {
+											// 蓝牙适配器打开失败
+										}
+									});
+								} else if (res.cancel) {
+									// 用户点击取消按钮
+								}
+							}
+						});
+					}
+				}
+			});
+
+
 			console.log('onLoad', e);
 
 		},
