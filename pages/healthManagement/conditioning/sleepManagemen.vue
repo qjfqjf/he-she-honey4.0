@@ -9,23 +9,18 @@
     <!-- 内容 -->
     <view class="container">
       <view class="nothing" v-if="baseList.length === 0">
-        <empty-state :description="'暂无数据'"  />
-      </view>
-      <view class="item" v-for="(item, index) in baseList" :key="index" v-else>
-        <text class="date">{{item.date}}</text>
-        <view class="delete">
-          <button plain="true" type="default" @click="deleteReport">删除</button>
-        </view>
-      </view>
+			<!-- 健康管理组件 -->
+			<empty-state :title="title" :tourl="tourl"></empty-state>
+		  </view>
     </view>
   </view>
 </template>
 
 <script>
-  import EmptyState from '../components/emptyState.vue'
+  import emptyState from '../../healthFile/outpatientArchives/components/emptyState.vue'
   export default {
     components: {
-      EmptyState
+      emptyState
     },
     data() {
       return {
@@ -42,34 +37,13 @@
 
 <style lang="scss">
   .container {
-    .item {
-      background-color: white;
-      border-top: 1rpx solid #ececec;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin: 10rpx 0;
-      padding-left: 20rpx;
-
-      font-size: 30rpx;
-
-      .date {}
-
-      .delete {
-        padding: 10rpx;
-
-        button {
-          width: 150rpx;
-          font-size: 20rpx;
-          border-radius: 50rpx;
-          margin: 0 10rpx;
-          border: #01b09a 1rpx solid;
-
-          color: #01b09a;
-          font-weight: 600;
-        }
-      }
-    }
+    background-color: #FFFFFF;
+		height: 100%;
+		.nothing{
+			text-align: center;
+			padding-top: 300rpx;
+			width: 400rpx;
+			margin: 0 auto;
+		}
   }
 </style>
