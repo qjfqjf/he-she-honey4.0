@@ -163,11 +163,12 @@ export default {
 			//把疾病类型转化成正确字段存储
 			// this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? 'Oral administration' : 'Subcutaneous injection';
 			switch (this.examination.medical_examination_type) {
-								case '健康体检': this.examination.medical_examination_type = 1; break;
-								case '入职体检': this.examination.medical_examination_type = 2; break;
-								case '专项体检': this.examination.medical_examination_type = 3; break;
-								case '其他': this.examination.medical_examination_type = 4; break;
+								case '健康体检': this.examination.medical_examination_type = '1'; break;
+								case '入职体检': this.examination.medical_examination_type = '2'; break;
+								case '专项体检': this.examination.medical_examination_type = '3'; break;
+								case '其他': this.examination.medical_examination_type = '4'; break;
 							}
+			console.log(this.examination.medical_examination_item);
 			uni.request({
 				url: this.addObj.tourl2,
 				method: 'post',
@@ -178,7 +179,7 @@ export default {
 						token: token,
 						uid: uid,
 						method: "create",
-						args: [
+						args: 
 							[{
 								//用药类型
 								"medical_examination_type": this.examination.medical_examination_type,
@@ -192,14 +193,11 @@ export default {
 								//用户id
 								"uid": uid
 								//时间
-							}]
-						],
+							}],
 						kwargs: {}
 					}
 				},
 				success(res) {
-
-
 					uni.showToast({
 						title: '保存成功',
 						duration: 1000,

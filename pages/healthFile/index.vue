@@ -90,7 +90,7 @@
 					{
 						img: require('@/static/icon/healthFile/publicHealth.png'),
 						title: '基本公卫',
-						url: ''
+						url: ' '
 					},
 				],
 				
@@ -103,10 +103,12 @@
 			}
 		},
 		methods: {
-			
 			click(url, name) {
-				if(!url) {
-					this.$refs.uToast.default('开发中...')
+				if(url==" ") {
+					uni.showToast({
+						title:'开发中',
+						icon:'none'
+					})
 				}
 				uni.navigateTo({
 					url: url
