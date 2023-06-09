@@ -3,6 +3,7 @@
     <z-nav-bar title="个人信息" bgColor="#ffffff"></z-nav-bar>
     <!-- 公共组件-每个页面必须引入 -->
     <public-module></public-module>
+    <!-- 添加用户 -->
     <view class="create" v-if="this.type === 'add'">
         <u-cell-group :border="false" class="message" display="flex">
             <u-cell
@@ -121,6 +122,7 @@
             </u-cell>
         </u-cell-group>
     </view>
+    <!-- 修改资料 -->
     <view v-else>
         <u-cell-group :border="false" class="message" display="flex">
             <u-cell
@@ -345,6 +347,9 @@
         userInfo:{
 
         },
+        showInfo:{
+            
+        },
         nameValue: '',
         idCardNumberValue: '',
         telValue: '',
@@ -354,6 +359,7 @@
         gender:'',
         relationShipText:'',
         chooseDate: Number(new Date()),
+
         showName: false,
         showGender: false,
         showBirth: false,
@@ -424,57 +430,77 @@
       // this.nickname = this.userInfo.nickname || ''
       // this.phone = this.userInfo.phone || ''
       this.type = e.type
-      console.log(this.type)
-      const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-      this.selectUser()
-
+      //判断是否为添加页面，如果不是，则查询当前用户数据并回显
+      if(this.type !== 'add'){
+        this.selectUser()
+      }
     },
     //页面显示
     onShow() {},
     //方法
     methods: {
       selectUser(){
+          const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+          const uid = userInfo.uid
+          const token = userInfo.token
           this.$http
               .post('http://106.14.140.92:8881/platform/dataset/search_read',{
                   model:"res.users",
-                  domain:[["id","=","13"]],
-                  // token:userInfo.token,
-                  // uid:userInfo.uid,
+                  domain:[["id","=",uid]],
                   fields:[
-                      "id",
                       "gender",
                       "head_picture",
                       "name",
-                      "age",
                       "height",
                       "weight",
                       "birthday",
                       "phone_number",
-                      "login"
+                      "ownership_relationship"
                   ]
               })
               .then(res => {
-                  if(this.type !== 'add'){
-                      //拿到此用户数据并且显示在页面上
-                      this.userInfo = res.result.records[0]
-                      console.log(this.userInfo)
-                      this.name = this.userInfo.name
+                console.log(res)
+                    //拿到此用户数据并且显示在页面上
+                    this.userInfo = res.result.records[0]
+                    console.log(this.userInfo)
+                    if(userInfo){
+                      if(this.userInfo.name){
+                        this.name = this.userInfo.name
+                      }
                       if(this.userInfo.gender == 0){
                           this.genderText = '男'
                       }
                       if(this.userInfo.gender == 1){
                           this.genderText = '女'
                       }
-                      this.birth = this.userInfo.birthday
-                      this.tel = this.userInfo.phone_number
-                      this.height = this.userInfo.height
-                      this.weight = this.userInfo.weight
-                  }
+                      if(this.userInfo.birthday){
+                        this.birth = this.userInfo.birthday
+                      }
+                      if(this.userInfo.phone_number){
+                        this.tel = this.userInfo.phone_number
+                      }
+                      if(this.userInfo.height){
+                        this.height = this.userInfo.height
+                      }
+                      if(this.userInfo.weight){
+                        this.weight = this.userInfo.weight
+                      }
+                      if(this.userInfo.ownership_relationship){
+                        switch(this.userInfo.ownership_relationship){
+                          case 'myself': this.relationShipText = '本人';break;
+                          case 'children': this.relationShipText = '子女';break;
+                          case 'parents': this.relationShipText = '父母';break;
+                          case 'other_relatives': this.relationShipText = '其他亲戚';break;
+                        }
+                      
+                      }
+                    }
               })
       },
       bindUser() {
         //增添接口
-        if (this.type === 'add') {
+        if (this.type == 'add') {
+          console.log("增添")
           this.$http
             .post('/bindRelatives', {
               uid: this.userInfo.uid,
@@ -503,30 +529,34 @@
               }
             })
         } else {
+          console.log("修改")
             const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
             const uid = userInfo.uid;
             const token = userInfo.token
-            console.log(userInfo)
           // 编辑接口
           this.$http
               .post('http://106.14.140.92:8881/platform/dataset/call_kw',{
-                params:{
-                    model:"",
-                    method:"write",
-                    args:[
-                        [],
-                        {
-                            name:'',
-                            gender:'',
-                            birthday:'',
-                            height:'',
-                            weight:''
-                        }
-                    ],
-                    kwargs:{}
-                }
+                  model:"res.users",
+                  method:"write",
+                  args:[
+                      [uid],
+                      this.userInfo,
+                      // {
+                      //     name:this.nameValue,
+                      //     gender:this.gender,
+                      //     birthday:this.birth,
+                      //     height:this.heightValue,
+                      //     weight:this.weightValue,
+                      //     phone_number:this.tel,
+                      // }
+                  ],
+                  kwargs:{}
               }).then((res)=>{
-              console.log("保存res:"+res)
+              console.log(res)
+              this.selectUser()
+              uni.showToast({
+                  title:"保存成功"
+              })           
           })
         }
       },
@@ -553,6 +583,7 @@
       },
       relationSelect(e) {
         this.relationShip = e.value
+        this.userInfo.ownership_relationship = this.relationShip
         this.relationShipText = e.name
       },
       confirmName() {
@@ -566,6 +597,7 @@
           return
         }
         this.name = this.nameValue
+        this.userInfo.name = this.nameValue
         this.showName = false
       },
       confirmBirth() {
@@ -575,10 +607,12 @@
         const month = String(date.getMonth() + 1).padStart(2, '0') // 注意月份从 0 开始计数，需要加 1，并且需要补齐位数
         const day = String(date.getDate()).padStart(2, '0') // 注意日期需要补齐位数
         this.birth = `${year}-${month}-${day}`
+        this.userInfo.birthday = this.birth
         this.showBirth = false
       },
       genderSelect(e) {
         this.gender = e.value
+        this.userInfo.gender = this.gender
         this.genderText = e.name
       },
       confirmIdCardNumber() {
@@ -623,6 +657,7 @@
           return
         }
         this.tel = this.telValue
+        this.userInfo.phone_number = this.tel
         this.showTel = false
       },
       confirmHeight() {
@@ -653,6 +688,7 @@
           return
         }
         this.height = this.heightValue
+        this.userInfo.height = this.height
         this.showHeight = false
       },
       confirmWeight() {
@@ -667,6 +703,7 @@
           return
         }
         this.weight = this.weightValue
+        this.userInfo.weight = this.weight
         this.showWeight = false
       },
       // 校验身份证号码的前两位是否为有效的省份代码
