@@ -1391,6 +1391,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/warningRule/warningRule",
+			"style": {
+				"navigationBarTitleText": "预警规则",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthMonitor/bloodSugar/bloodSugarHistory",
 			"style": {
 				"navigationBarTitleText": "",

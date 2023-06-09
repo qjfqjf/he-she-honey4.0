@@ -1,7 +1,7 @@
 <template>
 	<view class="b-content p-2">
 		<z-nav-bar title="血压">
-			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
+			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader></HealthHeader>
@@ -146,7 +146,13 @@
 
 				// 底部工具栏
 				page: '',
-				toolList: [{
+				toolList: [
+					{
+						img: require('@/static/icon/select_docter.png'),
+						title: '找医生',
+						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					},
+					{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
 						url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth'
@@ -186,10 +192,15 @@
 			onViewClick(options) {
 				console.log(options)
 			},
-			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+			// handleDevelop() {
+			// 	this.$refs.uToast.show({
+			// 		message: '开发中...'
+			// 	})
+			// },
+			handleWarningRule(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
+				});
 			},
 			handleBloodPressureTrend() {
 				uni.navigateTo({
@@ -222,6 +233,17 @@
 						this.$refs.uToast.show({
 							message: '保存成功',
 							type: 'success',
+						})
+						this.btnColor = '#dadada'
+						this.measureResult.SYS = 0
+						this.measureResult.DIA = 0
+						this.measureResult.PUL = 0
+						this.measureResult.pressure = 0
+						this.option.series.data.value = 0
+					}else{
+						this.$refs.uToast.show({
+							message: '保存失败',
+							type: 'error',
 						})
 						this.btnColor = '#dadada'
 						this.measureResult.SYS = 0
