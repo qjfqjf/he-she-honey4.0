@@ -18,11 +18,13 @@
 					<uni-table class="table" border stripe>
 						<!-- 表头行 -->
 						<uni-tr class="table-header" align="center">
-							<uni-th class="table-body" width="40" height="200" align="center">代谢分类</uni-th>
-							<uni-th class="table-body" width="40" height="200" align="center">空腹血糖</uni-th>
+							<uni-th rowspan="2" class="table-body" width="40" height="150" align="center">代谢分类</uni-th>
+							<uni-th colspan="2" class="table-body" width="40" height="100" align="center">世界卫生组织标准（mmol/L）</uni-th>
+							<uni-th rowspan="2" class="table-body" width="40" height="150" align="center">预警规则</uni-th>
+						</uni-tr>
+						<uni-tr class="table-header" align="center">
+							<uni-th class="table-body" width="40" height="0" align="center">空腹血糖</uni-th>
 							<uni-th class="table-body" width="40" height="200" align="center">餐后2小时血糖</uni-th>
-							<uni-th class="table-body" width="40" height="200" align="center">预警规则
-						</uni-th>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
 							<uni-td class="table-body" align="center">正常血糖（NGR)</uni-td>

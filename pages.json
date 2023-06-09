@@ -1442,6 +1442,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/oximeter/oximeterTrend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthMonitor/bodyFat/bodyFatHistory",
 			"style": {
 				"navigationBarTitleText": "",
