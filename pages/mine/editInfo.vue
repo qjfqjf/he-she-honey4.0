@@ -3,109 +3,231 @@
     <z-nav-bar title="个人信息" bgColor="#ffffff"></z-nav-bar>
     <!-- 公共组件-每个页面必须引入 -->
     <public-module></public-module>
-    <u-cell-group :border="false" class="message">
-      <u-cell
-        title="基本信息"
-        titleStyle="font-weight: bold; font-size: 16px"
-        :border="false"
-      ></u-cell>
-      <u-cell size="large" title="头像" titleStyle="font-size: 14px">
-        <u-avatar slot="value" :src="avatar"></u-avatar>
-      </u-cell>
-      <u-cell
-        @click="showNameModal"
-        titleStyle="font-size: 14px"
-        size="large"
-        title="姓名"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ name }}</text>
-      </u-cell>
-      <u-cell
-        @click="showGenderModal"
-        size="large"
-        titleStyle="font-size: 14px"
-        title="性别"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ gendertext }}</text>
-      </u-cell>
-      <u-cell
-        @click="showBirthModal"
-        class="message"
-        titleStyle="font-size: 14px"
-        size="large"
-        title="出生日期"
-        :value="birth"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ birth }}</text>
-      </u-cell>
-    </u-cell-group>
-    <u-gap height="10"></u-gap>
-    <u-cell-group :border="false" class="message">
-      <u-cell
-        size="large"
-        title="身份信息"
-        titleStyle="font-weight: bold;"
-        :border="false"
-      ></u-cell>
-      <u-cell
-        @click="showIdCardNumberModel"
-        size="large"
-        title="身份证号"
-        titleStyle="font-size: 14px"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ idCardNumber }}</text>
-      </u-cell>
-      <u-cell
-        size="large"
-        title="亲属关系"
-        titleStyle="font-size: 14px"
-        :isLink="true"
-        @click="showRelation = true"
-        v-if="this.type === 'add'"
-      >
-        <text slot="value" class="u-slot-value">{{ relationShip }}</text>
-      </u-cell>
-      <u-cell
-        @click="showTelModel"
-        size="large"
-        title="手机号"
-        titleStyle="font-size: 14px"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ tel }}</text>
-      </u-cell>
-    </u-cell-group>
-    <u-gap height="10"></u-gap>
-    <u-cell-group :border="false" class="message">
-      <u-cell
-        size="large"
-        title="身体信息"
-        titleStyle="font-weight: bold;"
-        :border="false"
-      ></u-cell>
-      <u-cell
-        @click="showHeightModel"
-        size="large"
-        title="身高(cm)"
-        titleStyle="font-size: 14px"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ height }}</text>
-      </u-cell>
-      <u-cell
-        @click="showWeightModel"
-        size="large"
-        title="体重(kg)"
-        titleStyle="font-size: 14px"
-        :isLink="true"
-      >
-        <text slot="value" class="u-slot-value">{{ weight }}</text>
-      </u-cell>
-    </u-cell-group>
+    <!-- 添加用户 -->
+    <view class="create" v-if="this.type === 'add'">
+        <u-cell-group :border="false" class="message" display="flex">
+            <u-cell
+                    title="基本信息"
+                    titleStyle="font-weight: bold; font-size: 16px"
+                    :border="false"
+            ></u-cell>
+            <u-cell size="large" title="头像" titleStyle="font-size: 14px">
+                <u-avatar slot="value" :src="avatar"></u-avatar>
+            </u-cell>
+            <u-cell
+                    @click="showNameModal"
+                    titleStyle="font-size: 14px"
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="姓名"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ name }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showGenderModal"
+                    size="large"
+                    titleStyle="font-size: 14px"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="性别"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ genderText }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showBirthModal"
+                    class="message"
+                    titleStyle="font-size: 14px"
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="出生日期"
+                    :value="birth"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ birth }}</text>
+            </u-cell>
+        </u-cell-group>
+        <u-gap height="10"></u-gap>
+        <u-cell-group :border="false" class="message">
+            <u-cell
+                    size="large"
+                    title="身份信息"
+                    titleStyle="font-weight: bold;"
+                    :border="false"
+            ></u-cell>
+            <u-cell
+                    @click="showIdCardNumberModel"
+                    size="large"
+                    title="身份证号"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ idCardNumber }}</text>
+            </u-cell>
+            <u-cell
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="亲属关系"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+                    @click="showRelation = true"
+            >
+                <text slot="value" class="u-slot-value">{{ relationShipText }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showTelModel"
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="手机号"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ tel }}</text>
+            </u-cell>
+        </u-cell-group>
+        <u-gap height="10"></u-gap>
+        <u-cell-group :border="false" class="message">
+            <u-cell
+                    size="large"
+                    title="身体信息"
+                    titleStyle="font-weight: bold;"
+                    :border="false"
+            ></u-cell>
+            <u-cell
+                    @click="showHeightModel"
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="身高(cm)"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ height }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showWeightModel"
+                    size="large"
+                    icon="star-fill"
+                    :icon-style="iconStyle"
+                    title="体重(kg)"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ weight }}</text>
+            </u-cell>
+        </u-cell-group>
+    </view>
+    <!-- 修改资料 -->
+    <view v-else>
+        <u-cell-group :border="false" class="message" display="flex">
+            <u-cell
+                    title="基本信息"
+                    titleStyle="font-weight: bold; font-size: 16px"
+                    :border="false"
+            ></u-cell>
+            <u-cell size="large" title="头像" titleStyle="font-size: 14px">
+                <u-avatar slot="value" :src="avatar"></u-avatar>
+            </u-cell>
+            <u-cell
+                    @click="showNameModal"
+                    titleStyle="font-size: 14px"
+                    size="large"
+                    title="姓名"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ name }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showGenderModal"
+                    size="large"
+                    titleStyle="font-size: 14px"
+                    title="性别"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ genderText }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showBirthModal"
+                    class="message"
+                    titleStyle="font-size: 14px"
+                    size="large"
+                    title="出生日期"
+                    :value="birth"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ birth }}</text>
+            </u-cell>
+        </u-cell-group>
+        <u-gap height="10"></u-gap>
+        <u-cell-group :border="false" class="message">
+            <u-cell
+                    size="large"
+                    title="身份信息"
+                    titleStyle="font-weight: bold;"
+                    :border="false"
+            ></u-cell>
+            <u-cell
+                    @click="showIdCardNumberModel"
+                    size="large"
+                    title="身份证号"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ idCardNumber }}</text>
+            </u-cell>
+            <u-cell
+                    size="large"
+                    title="亲属关系"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+                    @click="showRelation = true"
+            >
+                <text slot="value" class="u-slot-value">{{ relationShipText }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showTelModel"
+                    size="large"
+                    title="手机号"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ tel }}</text>
+            </u-cell>
+        </u-cell-group>
+        <u-gap height="10"></u-gap>
+        <u-cell-group :border="false" class="message">
+            <u-cell
+                    size="large"
+                    title="身体信息"
+                    titleStyle="font-weight: bold;"
+                    :border="false"
+            ></u-cell>
+            <u-cell
+                    @click="showHeightModel"
+                    size="large"
+                    title="身高(cm)"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ height }}</text>
+            </u-cell>
+            <u-cell
+                    @click="showWeightModel"
+                    size="large"
+                    title="体重(kg)"
+                    titleStyle="font-size: 14px"
+                    :isLink="true"
+            >
+                <text slot="value" class="u-slot-value">{{ weight }}</text>
+            </u-cell>
+        </u-cell-group>
+    </view>
+
     <u-gap height="40"></u-gap>
     <view class="d-flex j-center">
       <u-button
@@ -214,17 +336,30 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex'
+  import {use} from "../../static/js/echarts";
   export default {
     data() {
       return {
+        iconStyle:{
+          "font-size":'10px',
+          "color":'red'
+        },
+        userInfo:{
+
+        },
+        showInfo:{
+            
+        },
         nameValue: '',
         idCardNumberValue: '',
         telValue: '',
         heightValue: '',
         weightValue: '',
         relationShip: '',
-        gendertext:'',
+        gender:'',
+        relationShipText:'',
         chooseDate: Number(new Date()),
+
         showName: false,
         showGender: false,
         showBirth: false,
@@ -274,7 +409,7 @@
           },
         },
         avatar: 'https://cdn.uviewui.com/uview/album/3.jpg',
-        gender: '请选择您的性别',
+        genderText: '请选择您的性别',
         name: '请输入您的真实姓名',
         phone: '请输入您的电话号码',
         birth: '请选择您的出生日期',
@@ -291,19 +426,81 @@
     },
     //第一次加载
     onLoad(e) {
-      this.avatar = this.userInfo.avatar || ''
-      this.nickname = this.userInfo.nickname || ''
-      this.phone = this.userInfo.phone || ''
+      // this.avatar = this.userInfo.avatar || ''
+      // this.nickname = this.userInfo.nickname || ''
+      // this.phone = this.userInfo.phone || ''
       this.type = e.type
-      console.log("type="+this.type)
+      //判断是否为添加页面，如果不是，则查询当前用户数据并回显
+      if(this.type !== 'add'){
+        this.selectUser()
+      }
     },
     //页面显示
     onShow() {},
     //方法
     methods: {
+      selectUser(){
+          const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+          const uid = userInfo.uid
+          const token = userInfo.token
+          this.$http
+              .post('http://106.14.140.92:8881/platform/dataset/search_read',{
+                  model:"res.users",
+                  domain:[["id","=",uid]],
+                  fields:[
+                      "gender",
+                      "head_picture",
+                      "name",
+                      "height",
+                      "weight",
+                      "birthday",
+                      "phone_number",
+                      "ownership_relationship"
+                  ]
+              })
+              .then(res => {
+                console.log(res)
+                    //拿到此用户数据并且显示在页面上
+                    this.userInfo = res.result.records[0]
+                    console.log(this.userInfo)
+                    if(userInfo){
+                      if(this.userInfo.name){
+                        this.name = this.userInfo.name
+                      }
+                      if(this.userInfo.gender == 0){
+                          this.genderText = '男'
+                      }
+                      if(this.userInfo.gender == 1){
+                          this.genderText = '女'
+                      }
+                      if(this.userInfo.birthday){
+                        this.birth = this.userInfo.birthday
+                      }
+                      if(this.userInfo.phone_number){
+                        this.tel = this.userInfo.phone_number
+                      }
+                      if(this.userInfo.height){
+                        this.height = this.userInfo.height
+                      }
+                      if(this.userInfo.weight){
+                        this.weight = this.userInfo.weight
+                      }
+                      if(this.userInfo.ownership_relationship){
+                        switch(this.userInfo.ownership_relationship){
+                          case 'myself': this.relationShipText = '本人';break;
+                          case 'children': this.relationShipText = '子女';break;
+                          case 'parents': this.relationShipText = '父母';break;
+                          case 'other_relatives': this.relationShipText = '其他亲戚';break;
+                        }
+                      
+                      }
+                    }
+              })
+      },
       bindUser() {
-        console.log(this.type)
-        if (this.type === 'add') {
+        //增添接口
+        if (this.type == 'add') {
+          console.log("增添")
           this.$http
             .post('/bindRelatives', {
               uid: this.userInfo.uid,
@@ -332,32 +529,34 @@
               }
             })
         } else {
+          console.log("修改")
             const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
             const uid = userInfo.uid;
             const token = userInfo.token
-            console.log(userInfo)
           // 编辑接口
           this.$http
               .post('http://106.14.140.92:8881/platform/dataset/call_kw',{
-                params:{
-                    model:"",
-                    token:"",
-                    uid:"",
-                    method:"write",
-                    args:[
-                        [],
-                        {
-                            name:'',
-                            gender:'',
-                            birthday:'',
-                            height:'',
-                            weight:''
-                        }
-                    ],
-                    kwargs:{}
-                }
+                  model:"res.users",
+                  method:"write",
+                  args:[
+                      [uid],
+                      this.userInfo,
+                      // {
+                      //     name:this.nameValue,
+                      //     gender:this.gender,
+                      //     birthday:this.birth,
+                      //     height:this.heightValue,
+                      //     weight:this.weightValue,
+                      //     phone_number:this.tel,
+                      // }
+                  ],
+                  kwargs:{}
               }).then((res)=>{
-              console.log("保存res:"+res)
+              console.log(res)
+              this.selectUser()
+              uni.showToast({
+                  title:"保存成功"
+              })           
           })
         }
       },
@@ -384,6 +583,8 @@
       },
       relationSelect(e) {
         this.relationShip = e.value
+        this.userInfo.ownership_relationship = this.relationShip
+        this.relationShipText = e.name
       },
       confirmName() {
         const reg = /^[\u4E00-\u9FA5]{2,5}$/
@@ -396,6 +597,7 @@
           return
         }
         this.name = this.nameValue
+        this.userInfo.name = this.nameValue
         this.showName = false
       },
       confirmBirth() {
@@ -405,11 +607,13 @@
         const month = String(date.getMonth() + 1).padStart(2, '0') // 注意月份从 0 开始计数，需要加 1，并且需要补齐位数
         const day = String(date.getDate()).padStart(2, '0') // 注意日期需要补齐位数
         this.birth = `${year}-${month}-${day}`
+        this.userInfo.birthday = this.birth
         this.showBirth = false
       },
       genderSelect(e) {
         this.gender = e.value
-        this.gendertext = e.name
+        this.userInfo.gender = this.gender
+        this.genderText = e.name
       },
       confirmIdCardNumber() {
         console.log(this.idCardNumberValue, 11111)
@@ -453,6 +657,7 @@
           return
         }
         this.tel = this.telValue
+        this.userInfo.phone_number = this.tel
         this.showTel = false
       },
       confirmHeight() {
@@ -483,6 +688,7 @@
           return
         }
         this.height = this.heightValue
+        this.userInfo.height = this.height
         this.showHeight = false
       },
       confirmWeight() {
@@ -497,6 +703,7 @@
           return
         }
         this.weight = this.weightValue
+        this.userInfo.weight = this.weight
         this.showWeight = false
       },
       // 校验身份证号码的前两位是否为有效的省份代码
