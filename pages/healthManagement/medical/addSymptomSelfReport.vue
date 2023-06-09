@@ -23,6 +23,7 @@
     methods: {
       saveReport(selfReportId) {
         console.log('save self report')
+        console.log(selfReportId)
         uni.navigateTo({
           url:'/pages/healthManagement/medical/symptomSelfReport?selfReportId=' + JSON.stringify(selfReportId)
         })
