@@ -1530,6 +1530,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/healthFile/basicFile/modifyBasicFile",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

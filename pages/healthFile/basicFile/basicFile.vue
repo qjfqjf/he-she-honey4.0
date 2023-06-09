@@ -1,6 +1,10 @@
 <template>
 	<view class="d-flex flex-column j-sb h-100">
-		<z-nav-bar title="基础档案"></z-nav-bar>
+		<z-nav-bar title="基础档案">
+			<view class="preview" slot="right" @click="addMedicalRecord">
+				<text style="font-size: 20rpx;" v-if="addtext">{{ addtext }}</text>
+			</view> 
+		</z-nav-bar>
 		<!-- 公共组件-每个页面必须引入 -->
 		<public-module></public-module>
 		<view class="flex-1">
@@ -51,32 +55,25 @@
 			<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
 			<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
 			<!--		</view>-->
-			<doc-list v-if="current === 0" :cell-list="signInfo"></doc-list>
-			<doc-list v-if="current === 1" :cell-list="baseInfo"></doc-list>
-			<doc-list v-if="current === 2" :cell-list="history"></doc-list>
+			<read-list v-if="current === 0" :cell-list="signInfo"></read-list>
+			<read-list v-if="current === 1" :cell-list="baseInfo"></read-list>
+			<read-list v-if="current === 2" :cell-list="history"></read-list>
 			<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
-			<doc-list v-if="current === 3" :cell-list="history"></doc-list>
+			<read-list v-if="current === 3" :cell-list="history"></read-list>
 		</view>
-		<view>
-			<u-popup :round="10" mode="center" :show="show" @close="close" @open="open">
-				<view class="m-5">
-					<text>请检查填写格式是否有误</text>
-				</view>
-				<u-button @click="close" class="rounded-20" style="overflow: hidden" type="primary"  text="关闭"></u-button>
-			</u-popup>
-		</view>
-		<u-button @click="show = true" type="primary" text="提交"></u-button>
 	</view>
 </template>
 
 <script>
 	import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
-	import DocList from "../components/docList.vue";
+	import ReadList from "../components/List.vue";
 	import DocChoice from "../components/docChoice.vue";
 	export default {
-		components: {DocList, UButton, DocChoice},
+		components: {ReadList, UButton, DocChoice},
 		data() {
 			return {
+				//传回数据
+				data:[],
 				show: false,
 				current: 0,
 				avatar: 'https://cdn.uviewui.com/uview/album/1.jpg',
@@ -95,12 +92,117 @@
 				],
 				choices:[
 						"是否有手术","是否有外伤"
-				]
+				],
+				toUrl:'/pages/healthFile/basicFile/modifyBasicFile',
+				addtext:'修改',
+				toUrl2:'http://106.14.140.92:8881/platform/dataset/search_read',
 			}
 		},
 		methods: {
+			
 			change(index) {
 				this.current = index
+			},
+			addMedicalRecord(){
+				uni.navigateTo({
+					url:this.toUrl
+				});
+			},
+			//拿去用户信息
+			getRecordsList(){
+				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+				const uid = userInfo.uid;
+				const token = userInfo.token;
+				uni.request({
+					url:this.toUrl2,
+					methods:'post',
+					data:{
+						params1:{
+							model:'',
+							token:token,
+							uid:uid,
+							contract:[
+								//签约日期
+								"sign_contract_time",
+								//签约类型
+								"sign_contract_type",
+								//签约医生
+								"patient_id",
+							]
+						},
+						params2:{
+							model:'',
+							token:token,
+							uid:uid,
+							user:[
+								//身份证号
+								"login",
+								//手机号
+								"phone_number",
+								//生日
+								"birthday",
+								//联系人姓名
+								"contact_name",
+								//联系人电话
+								"contact_number",
+								//地址
+								"address",
+								//名族
+								"nationality",
+								//家庭住址
+								"home_address",
+								//工作单位
+								"work_unit",
+								//血型
+								"blood_type",
+								//RH阴性
+								"rh_negative",
+								//文化程度
+								"degree_education",
+								//职业
+								"occupation",
+								//婚宴状况
+								"marital_status",
+								//药物过敏史
+								"history_allergy",
+								//暴露史
+								"exposure_history",
+								//其他药物过敏史
+								"other_history_allergy",
+							]
+							
+						},
+						params3:{
+							model:'',
+							token:token,
+							uid:uid,
+							past:[
+								//检查类别
+								"data_name",
+								//疾病备注
+								"data_result",
+							]
+							
+						},
+						params4:{
+							model:'',
+							token:token,
+							uid:uid,
+							family:[
+								//检查类别
+								"data_name",
+								//疾病备注
+								"data_result",
+							]
+							
+						},
+					},
+					success:(res)=>{
+						console.log(res);
+						this.data = res.data.result.records
+
+					}
+				})
 			},
 			open() {
 				// console.log('open');
