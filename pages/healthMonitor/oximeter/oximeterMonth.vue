@@ -52,56 +52,10 @@
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
 				allDataList:[
-					{
-						test_time: "2023-3-20 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-4-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2021-3-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-3-27 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					}
+
 				],
 				dataList: [
-					// {
-					// 	test_time: "2023-3-20 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2023-4-29 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2021-3-29 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2023-3-27 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// }
+					
 				]
 			};
 		},
@@ -110,7 +64,7 @@
 		},
 		onLoad() {
 			dayjs.extend(isBetween)
-			//this.getHistoryList();
+			this.getHistoryList();
 			//测试
 			// console.log(dayjs())
 			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))
@@ -169,7 +123,6 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
-
 				})
 			},
 

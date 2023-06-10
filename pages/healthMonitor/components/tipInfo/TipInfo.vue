@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="tip d-flex j-sb">
-			<view class="trend d-flex a-center" @click="handleDevelop">
+			<view class="trend d-flex a-center" @click="handleTrend">
 				<image style="width: 100rpx; height: 100rpx;margin-top: 20rpx;"
 					src="@/static/icon/bloodPressure/trend.png" mode="aspectFit"></image>
 				<text>{{title}}</text>
@@ -35,6 +35,9 @@
 					message: '开发中...'
 				})
 			},
+			handleTrend() {
+				this.$emit('trend');
+			}
 		}
 	}
 </script>

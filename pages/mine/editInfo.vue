@@ -503,6 +503,7 @@
           console.log("增添")
           this.$http
             .post('/bindRelatives', {
+
               uid: this.userInfo.uid,
               info: {
                 name: this.nameValue,
