@@ -1,6 +1,6 @@
 export const messageIcons =[
     {
-        name: "检测预警",
+        name: "监测预警",
         icon: "/static/icon/message/earlyWarning.png",
         path: "/pages/message/earlyWarning"
     },

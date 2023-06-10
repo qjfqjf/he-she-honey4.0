@@ -12,8 +12,8 @@
 				height="10"
 			></u-gap>
 			<u-cell size="large" class="message" icon="order" url="/pages/user/protocol" title="用户协议与隐私政策" isLink></u-cell>
-			<u-cell size="large" class="message" icon="chat" url="/pages/template/messageReminder" title="消息提醒" isLink></u-cell>	
-			<u-cell size="large" class="message" icon="account-fill" url="/pages/template/aboutUs" title="关于我们" isLink></u-cell>
+			<u-cell size="large" class="message" icon="chat" url="/pages/mine/messageReminder" title="消息提醒" isLink></u-cell>	
+			<u-cell size="large" class="message" icon="account-fill" url="/pages/mine/aboutUs" title="关于我们" isLink></u-cell>
 		</u-cell-group>
 	</view>
 </template>

@@ -74,7 +74,10 @@
 				this.uid = uid
 			}
 			dayjs.extend(isBetween)
+			//拿到所有历史记录
 			this.getHistoryList();
+			//筛选
+			this.getDataList();
 			//测试
 			// console.log(dayjs())
 			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))
@@ -117,11 +120,11 @@
 					message: '开发中...'
 				})
 			},
-			//查询血氧历史记录
+			//查询血氧历史记录,并筛选数据
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "oximeter",
-					domain:[["owner.id","=",this.uid]],
+					domain:[["owner.id","=",this.uid]],		
 					fields: [
 						"name",
 						"numbers",
@@ -141,7 +144,7 @@
 			//筛选数据
 			getDataList(){
 				for(var i in this.allDataList){
-					console.log()
+					console.log(110)
 					//判断数据是否在所选日期范围内
 					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
 						this.dataList.push(this.allDataList[i])
