@@ -51,7 +51,7 @@
 						<view class="picker">
 							<!-- 日期没绑定 -->
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
-																	 :clearIcon="false"/>
+																	 :clearIcon="false" v-model="record.data_time"/>
 							<uni-icons type="forward" size="15"></uni-icons>
 						</view>
 					</view>
@@ -93,9 +93,9 @@ export default {
 					data_result:'',
 					//注意！！这个是uid
 					//用户id
-					patient_id:''
+					patient_id:'',
 					//时间()
-
+					data_time:''
 				},
 
 			//显示的文本
@@ -116,7 +116,7 @@ export default {
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -187,6 +187,7 @@ export default {
 								"data_name":this.record.data_name,
 								//疾病备注
 								"data_result":this.record.data_result,
+								"data_time":this.record.data_time,
 								//注意！！这个是uid
 								//用户id
 								"patient_id":uid

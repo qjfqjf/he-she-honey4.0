@@ -66,8 +66,6 @@
 			dayjs.extend(isBetween)
 			//拿到所有历史记录
 			this.getHistoryList();
-			//筛选
-			this.getDataList();
 			//测试
 			// console.log(dayjs())
 			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))

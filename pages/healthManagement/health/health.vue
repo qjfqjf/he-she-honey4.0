@@ -1,8 +1,6 @@
 <template>
   <view class="content">
-    <z-nav-bar title="健康自述">
-
-    </z-nav-bar>
+    <header-nav :title="title" :tourl="tourl" :addtext="addtext"></header-nav>
     <public-module></public-module>
 
 
@@ -20,14 +18,18 @@
 
 <script>
   import EmptyState from '../components/emptyState.vue'
+  import headerNav from '../components/headerNav.vue';
   export default {
     components: {
-      EmptyState
+      EmptyState,
+      headerNav
     },
     data() {
       return {
         baseList: [],
-        title:''
+        title:'健康自述',
+        tourl:'pages/healthManagement/health/addHealth',
+        addtext:'添加自述',
       };
     },
     methods: {
