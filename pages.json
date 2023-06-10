@@ -1,8 +1,7 @@
 
 {
 
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/homePage/homePage",
 			"style": {
 				"navigationBarTitleText": "数字健康管理",
@@ -1442,13 +1441,6 @@
 			}
 		},
 		{
-			"path": "pages/healthMonitor/oximeter/oximeterTrend",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
 			"path": "pages/healthMonitor/bodyFat/bodyFatHistory",
 			"style": {
 				"navigationBarTitleText": "",
@@ -1505,6 +1497,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/oximeter/oximeterTrend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthFile/status/index",
 			"style": {}
 		},
@@ -1518,44 +1517,36 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/healthFile/examination/artificialExamination/artificialExamination",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthFile/examination/artificialExamination/addArtificialExamination",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthFile/examination/examinationIndex",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/healthFile/basicFile/modifyBasicFile",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/healthFile/examination/artificialExamination/artificialExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/examination/artificialExamination/addArtificialExamination",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/examination/examinationIndex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/healthFile/basicFile/modifyBasicFile",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -1604,4 +1595,3 @@
 		}]
 	}
 }
-

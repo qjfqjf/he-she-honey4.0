@@ -2,7 +2,7 @@
 	<view class="content p-2">
 		<z-nav-bar title="血氧"> </z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :name="name" :username="username" @myUser="handleMyUser"></HealthHeader>
 		<view class="mt-3 mb-3" style="height: 350rpx">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
@@ -31,13 +31,37 @@
 			</view>
 		</view>
 		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
-		<view class="tools d-flex j-sb mt-5 p-4">
+		<!-- <view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
 				@click="onPageJump(item.url)">
 				<image :src="item.img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ item.title }}</text>
 			</view>
+		</view> -->
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center"
+				@click="onPageSelectDocter">
+				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[0].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageMonth">
+				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[1].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageDevice">
+				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[2].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageWrite">
+				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[3].title }}</text>
+			</view>
 		</view>
+		
+		
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -86,7 +110,9 @@
 				waveData: [],
 				// 测量结果
 				result: '',
-
+				uid:0,//用户id
+				name:'',//选择之后的名字
+				username:'',//登录开始的名字
 				time: null,
 				connectTime: null,
 				// 底部工具栏
@@ -120,10 +146,11 @@
 		},
 		onLoad() {
 			this.initBlue()
-			console.log(this.deviceId, this.deviceStatus)
+			// console.log(this.deviceId, this.deviceStatus)
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
 			}
+			
 		},
 		mounted() {
 			this.$refs.ecgRef.init({
@@ -151,8 +178,16 @@
 		},
 		//页面显示
 		onShow() {
+			this.initBlue()
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.username = this.userInfo.name;
+			 
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.name = data.name;
+			});
 		},
+
 		methods: {
 			// 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
 			createInterval() {
@@ -479,12 +514,17 @@
 			},
 			handleDevelop() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/oximeter/oximeterHistory',
+					url: '/pages/healthMonitor/oximeter/oximeterHistory?uid='+this.uid,
 				})
 			},
 			handleOximeterTrend() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/oximeter/oximeterTrend' // 跳转到指定的目标页面
+					url: '/pages/healthMonitor/oximeter/oximeterTrend?uid='+this.uid, // 跳转到指定的目标页面
+				});
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
 				});
 			},
 			handleSave() {
@@ -531,6 +571,26 @@
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url,
+				})
+			},
+			onPageSelectDocter(){
+				uni.navigateTo({
+					url:'/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+				})
+			},
+			onPageMonth(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/oximeter/oximeterMonth?uid='+this.uid,
+				})
+			},
+			onPageDevice(){
+				uni.navigateTo({
+					url: '/pages/mine/myDevice',
+				})
+			},
+			onPageWrite(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/' + this.page,
 				})
 			},
 		},

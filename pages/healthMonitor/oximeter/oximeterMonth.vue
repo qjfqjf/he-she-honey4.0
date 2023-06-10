@@ -47,6 +47,8 @@
 		},
 		data() {
 			return {
+				uid:0,
+				userInfo:'',
 				date:{
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
@@ -62,7 +64,15 @@
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad() {
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 			dayjs.extend(isBetween)
 			this.getHistoryList();
 			//测试
@@ -111,6 +121,7 @@
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "oximeter",
+					domain:[["owner.id","=",this.uid]],
 					fields: [
 						"name",
 						"numbers",
@@ -123,6 +134,7 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
+					this.getDataList();
 				})
 			},
 

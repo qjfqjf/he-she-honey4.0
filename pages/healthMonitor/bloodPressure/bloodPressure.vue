@@ -4,7 +4,7 @@
 			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :name="name" :username="username"></HealthHeader>
 		<!-- tab切换 -->
 		<view class="tab-container d-flex j-center my-3">
 			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="()=>currentTab = 'tab1'">左侧</view>
@@ -142,7 +142,9 @@
 
 				},
 				userInfo: '',
-
+				uid:0,//用户id
+				name:'',//选择之后的名字
+				username:'',//登录开始的名字
 
 				// 底部工具栏
 				page: '',
