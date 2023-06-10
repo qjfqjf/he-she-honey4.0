@@ -61,7 +61,8 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text>{{ item.dosage }}{{ item.dose_unit }}</text>
+							<text style="margin-right: 20rpx;">{{ item.dosage }}</text>
+							<text>{{ item.dose_unit }}</text>
 						</view>
 					</view>
 					<!-- 5、用药频次 -->
@@ -70,7 +71,8 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text>{{ item.frequency }}{{ item.frequency_unit }}</text>
+							<text style="margin-right: 20rpx;">{{ item.frequency }}</text>
+							<text>{{ item.frequency_unit }}</text>
 						</view>
 					</view>
 					<!-- 6、备注 -->
@@ -82,7 +84,7 @@
 						</view>
 					</view>
 
-					<!-- 5、图片展示 -->
+					<!-- 7、图片展示 -->
 
 					<view style="height: 20rpx"></view>
 
@@ -107,7 +109,7 @@
 					<!--                    ></uni-file-picker>-->
 					<!--                </view>-->
 
-					<!-- 6、分割线 -->
+					<!-- 8、分割线 -->
 					<u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
 
 				</view>
@@ -142,7 +144,7 @@ export default {
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -207,6 +209,7 @@ export default {
 						model: 'inpatient.medical.record',
 						token: token,
 						uid: uid,
+						domain:[["patient_id","=",uid]],
 						//传回去的数组(存放字段)
 						fields: [
 							"picture_1",
@@ -220,7 +223,7 @@ export default {
 							"dose_unit",
 							//用药频次
 							"frequency",
-							//用药凭此单位
+							//用药频次单位
 							"frequency_unit",
 							//备注
 							"data_result",
@@ -237,7 +240,20 @@ export default {
 					this.dataList = res.data.result.records
 					//判断诊断类型
 					for (var record of this.dataList) {
+						//用药类型
 						record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
+						//用药剂量单位
+						switch(record.dose_unit){
+							case 'mg': record.dose_unit = '毫克'; break;
+							case 'g': record.dose_unit = '克'; break;
+						}
+						//用药频次单位
+						switch(record.frequency_unit){
+							case 'day': record.frequency_unit = '次/日'; break;
+							case 'tomorrow': record.frequency_unit = '次/隔日'; break;
+							case 'weeks': record.frequency_unit = '次/周'; break;
+							case 'month': record.frequency_unit = '次/月'; break;
+						}
 					}
 
 				},
