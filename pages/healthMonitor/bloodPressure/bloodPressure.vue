@@ -16,6 +16,7 @@
 				class="echarts">
 			</view>
 			<!-- #endif -->
+			
 			<!-- #ifndef APP-PLUS || H5 -->
 			<view>非 APP、H5 环境不支持</view>
 			<!-- #endif -->
