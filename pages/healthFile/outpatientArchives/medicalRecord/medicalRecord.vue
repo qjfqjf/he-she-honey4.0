@@ -72,24 +72,7 @@
 							@albumWidth="width => albumWidth = width"
 							multipleSize="100"
 						></u-album>
-						<!-- <view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
-							<view class="example-body" style="width: 150rpx;height: 150rpx;margin-left: 50rpx;margin-bottom: 50rpx;" >
-								<view style="">
-									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_1"></image>
-									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_2"></image>
-									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_3"></image>
-								</view>
-							</view>
-						</view> -->
 					</view>
-
-					<!--                <view>-->
-					<!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
-					<!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
-					<!--                                     v-model="dataList.imgs" -->
-					<!--                                     del-icon="false"-->
-					<!--                    ></uni-file-picker>-->
-					<!--                </view>-->
 
 					<!-- 6、分割线 -->
 					<u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>

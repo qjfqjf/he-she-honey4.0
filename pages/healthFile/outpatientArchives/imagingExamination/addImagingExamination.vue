@@ -87,7 +87,7 @@ export default {
 					//门诊类型
 					check_category: '超声',
 					//选择的日期
-					data_time: '',
+					data_time: this.formatDate(new Date()),
 					//疾病名称
 					data_name: '',
 					//疾病备注
@@ -111,7 +111,7 @@ export default {
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -179,18 +179,19 @@ export default {
 						args:[
 							[{
 								//检查类别
-								"check_category":this.ImagingExamination.check_category,
-								"picture_1":"",
-								"picture_2":"",
-								"picture_3":"",
+								check_category:this.ImagingExamination.check_category,
+								picture_1:"",
+								picture_2:"",
+								picture_3:"",
 								//检查项目
-								"data_name":this.ImagingExamination.data_name,
+								data_name:this.ImagingExamination.data_name,
 								//疾病备注
-								"data_result":this.ImagingExamination.data_result,
+								data_result:this.ImagingExamination.data_result,
 								//注意！！这个是uid
 								//用户id
-								"patient_id":uid
+								patient_id:uid,
 								//时间
+								data_time:this.ImagingExamination.data_time
 							}]
 						],
 						kwargs:{}

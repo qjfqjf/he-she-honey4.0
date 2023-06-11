@@ -94,7 +94,7 @@ export default {
 				//默认的选项
 				curNow: 0,
 				//这边统一写内容用
-				choiceTitle: '转诊会诊',
+				choiceTitle: '会诊类别',
 				list: ["转院", "转科", "会诊"],
 				uploadImgText: '添加照片',
 				placeholder2: '请添加检查项目的备注',
@@ -106,7 +106,7 @@ export default {
 				remarksValue: '',
 				remarksText: '备注',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -167,18 +167,17 @@ export default {
 						args: [
 							[{
 								//检查类别
-								"data_name": this.consultation.data_name,
-								"picture_1": "",
-								"picture_2": "",
-								"picture_3": "",
-								//疾病名称
-								"data_time": this.consultation.data_time,
+								data_name: this.consultation.data_name,
+								picture_1: "",
+								picture_2: "",
+								picture_3: "",
 								//疾病备注
-								"data_result": this.consultation.data_result,
+								data_result: this.consultation.data_result,
 								//注意！！这个是uid
 								//用户id
-								"patient_id": uid
+								patient_id: uid,
 								//时间
+								data_time:this.consultation.data_time
 							}]
 						],
 						kwargs: {}
