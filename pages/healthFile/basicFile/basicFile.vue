@@ -45,11 +45,11 @@
 			<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
 			<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
 			<!--		</view>-->
-			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="1111"></read-list>
-			<read-list v-if="current === 1" :cell-list="baseInfo"></read-list>
-			<read-list v-if="current === 2" :cell-list="history"></read-list>
+			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="data1"></read-list>
+			<read-list v-if="current === 1" :cell-list="baseInfo" :dataListText="data"></read-list>
+			<read-list v-if="current === 2" :cell-list="history" :dataListText="data"></read-list>
 			<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
-			<read-list v-if="current === 3" :cell-list="history"></read-list>
+			<read-list v-if="current === 3" :cell-list="history" :dataListText="data"></read-list>
 		</view>
 	</view>
 </template>
@@ -62,12 +62,11 @@ export default {
 	components: { ReadList, UButton, DocChoice },
 	data() {
 		return {
+			data1:[1,2,3],
 			Records: [
 				{
-					model: '',
-					token: token,
-					uid: uid,
-					domain: ["id", "=", this.uid],
+					model: 'contract.information',
+					domain: [["id", "=", this.uid]],
 					fields: [
 						//签约日期
 						"sign_contract_time",
@@ -78,10 +77,8 @@ export default {
 					]
 				},
 				{
-					model: '',
-					token: token,
-					uid: uid,
-					domain: ["id", "=", this.uid],
+					model: 'res.users',
+					domain: [["id", "=", this.uid]],
 					fields: [
 						//身份证号
 						"login",
@@ -121,10 +118,8 @@ export default {
 
 				},
 				{
-					model: '',
-					token: token,
-					uid: uid,
-					domain: ["id", "=", this.uid],
+					model: 'past.history',
+					domain: [["id", "=", this.uid]],
 					fields: [
 						//检查类别
 						"data_name",
@@ -134,10 +129,8 @@ export default {
 
 				},
 				{
-					model: '',
-					token: token,
-					uid: uid,
-					domain: ["id", "=", this.uid],
+					model: 'family.history',
+					domain: [["id", "=", this.uid]],
 					fields: [
 						//检查类别
 						"data_name",
@@ -178,6 +171,7 @@ export default {
 
 		change(index) {
 			this.current = index
+			this.getRecordsList();
 		},
 		addMedicalRecord() {
 			uni.navigateTo({
@@ -189,17 +183,15 @@ export default {
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
 			const token = userInfo.token;
-			uni.request({
-				url: this.toUrl2,
-				methods: 'post',
-				data: {
-					parm:Records[current]
-				},
-				success: (res) => {
-					console.log(res);
-					this.data = res.data.result.records
-
-				}
+			this.$http
+					.post(this.toUrl2,{
+						model:this.Records[this.current].model,
+						domain:this.Records[this.current].domain,
+						fields:this.Records[this.current].fields
+					}).then(res=>{
+						this.data = res.result.records
+						//测试
+						console.log(res.result.records)
 			})
 		},
 		open() {
