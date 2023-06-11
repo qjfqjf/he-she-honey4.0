@@ -11,7 +11,7 @@
 				class="echarts">
 			</view>
 			<!-- #endif -->
-
+		
 			<!-- #ifndef APP-PLUS || H5 -->
 			<view>非 APP、H5 环境不支持</view>
 			<!-- #endif -->
@@ -37,30 +37,30 @@
 					endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
 				allDataList: [
-					{
-						test_time: "2023-3-20 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-4-29 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2021-3-29 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-3-27 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					}
+					// {
+					// 	test_time: "2023-3-20 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-4-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2021-3-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-3-27 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// }
 				],
 				dataList: [
 
@@ -94,59 +94,53 @@
 						reverse: false,
 						// type:'value'
 					},
-					series: [{
-							name: '血氧',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'red' // 设置血氧线条的颜色为红色
-							},
-							label: {
-								show: true, // 显示标签
-								position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
-								formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
-								textStyle: {
-									color: 'red' // 标签文本颜色
-								}
-							}
-						},
-						{
-							name: '脉率',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'orange' // 设置血氧线条的颜色为红色
-							},
-							label: {
-								show: true, // 显示标签
-								position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
-								formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
-								textStyle: {
-									color: 'orange' // 标签文本颜色
-								}
-							}
-						},
-						{
-							name: 'PI',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'green' // 设置血氧线条的颜色为红色
-							},
-							label: {
-								show: true, // 显示标签
-								position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
-								formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
-								textStyle: {
-									color: 'green' // 标签文本颜色
-								}
-							}
-						}
+					series: [
+					  {
+					    name: '血氧',
+					    type: 'line',
+					    stack: 'Total',
+					    data: [],
+					    lineStyle: {
+					      color: 'red' // 设置血氧线条的颜色为红色
+					    },
+					    label: {
+					      show: true, // 显示标签
+					      position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
+					      formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
+					      color: 'red' // 标签文本颜色
+					    }
+					  },
+					  {
+					    name: '脉率',
+					    type: 'line',
+					    stack: 'Total',
+					    data: [],
+					    lineStyle: {
+					      color: 'orange' // 设置脉率线条的颜色为橙色
+					    },
+					    label: {
+					      show: true,
+					      position: 'top',
+					      formatter: '{c}',
+					      color: 'orange'
+					    }
+					  },
+					  {
+					    name: 'PI',
+					    type: 'line',
+					    stack: 'Total',
+					    data: [],
+					    lineStyle: {
+					      color: 'green' // 设置PI线条的颜色为绿色
+					    },
+					    label: {
+					      show: true,
+					      position: 'top',
+					      formatter: '{c}',
+					      color: 'green'
+					    }
+					  }
 					]
-
 				},
 			}
 		},
@@ -193,7 +187,9 @@
 			},
 			// 数据发生变化时
 			changeOption(value) {
-				this.option.series[0].data[0] = value;
+				const data = this.option.series[0].data
+				data[0].value = value
+				
 			},
 			onViewClick(options) {
 				
@@ -236,6 +232,11 @@
 						this.option.series[0].data = this.dataList.slice(-5).map(item => item.blood_oxygen).reverse();
 						this.option.series[1].data = this.dataList.slice(-5).map(item => item.pulse_rate).reverse();
 						this.option.series[2].data = this.dataList.slice(-5).map(item => item.pi).reverse();
+					}else{
+						this.option.xAxis.data = [];
+						this.option.series[0].data = [];
+						this.option.series[1].data = [];
+						this.option.series[2].data = [];
 					}
 				}
 			}
@@ -279,7 +280,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.b-content {
 		background-color: #fff;
 

@@ -83,7 +83,6 @@ export default {
 			//数据
 			examination:
 			{
-				uid:'',
 				//体检类别
 				medical_examination_type: '健康体检',
 				//体检报告img
@@ -182,16 +181,15 @@ export default {
 						args: 
 							[{
 								//用药类型
-								"medical_examination_type": this.examination.medical_examination_type,
+								medical_examination_type: this.examination.medical_examination_type,
 								//药物名称
-								"medical_examination_item": this.examination.medical_examination_item,
+								medical_examination_item: this.examination.medical_examination_item,
 								//备注
-								"remarks": this.examination.remarks,
+								remarks: this.examination.remarks,
 								//日期
-								"medical_examination_date": this.examination.medical_examination_date,
+								medical_examination_date: this.examination.medical_examination_date,
 								//注意:这个是uid
 								//用户id
-								"uid": uid
 								//时间
 							}],
 						kwargs: {}

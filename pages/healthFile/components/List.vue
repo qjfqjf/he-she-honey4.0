@@ -20,7 +20,7 @@ export default{
     },
     props:{
         cellList: Array,
-        dataListText:Array
+        dataListText:Array,
     }
 }
 </script>
