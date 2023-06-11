@@ -124,7 +124,7 @@
 					// 备注
 					remarksValue: '',
 					// 选择日期
-					selectedDate: new Date(),
+					selectedDate: '',
 					imageStyles: {
 						width: 90,
 						height: 90,
@@ -190,6 +190,7 @@
 							model:'inpatient.medical.records',
 							token:token,
 							uid:uid,
+							domain:[["patient_id","=",uid]],
 							//传回去的数组(存放字段)
 							fields:[
 								"picture_1",
@@ -202,11 +203,13 @@
 									//时间
 								"data_time",
 									//疾病类型
-								"data_type"
+								"data_type",
+								"patient_id"
 							]
 						}
 					},
 					success:(res)=>{
+						console.log(res)
 						//把传回来的值存入
 						this.records = res.data.result.records
 						//判断诊断类型

@@ -26,10 +26,13 @@
           >
           </u-tabs>
 		  <view class="d-flex a-center j-center buttonGrounp my-1">
-		      <u-button    color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
+     
+            <u-subsection :list="list" :current="curNow" font-size="15" @change="sectionChange" mode="subsection" inactive-color="#20c6a2" active-color="#20c6a2" style="height: 80rpx;padding: 0 50rpx;"></u-subsection>
+               
+		      <!-- <u-button    color="#71d5a1" text="签约医生" class="leftButton" :plain="true"
 		                ></u-button>
 		      <u-button    color="#71d5a1" text="关注医生" class="rightButton" :plain="true"
-		                ></u-button>
+		                ></u-button> -->
 		  </view>
 		  <view class="notification d-flex flex-column shadow border rounded m-1 p-2 bg-white" v-for="index in 5">
 		      <view class="notification_title my-1">
@@ -48,11 +51,20 @@ export default {
     methods: {
         goBack(){
             uni.navigateBack({})
-        }
+        },
+        sectionChange(index) {
+            this.type = this.list[index]
+            this.curNow = index;
+            console.log(index,this.type)
+        },
     },
     data() {
         return{
-            tabList: [{name:'我的'}, {name:'家庭组'}]
+            tabList: [{name:'我的'}, {name:'家庭组'}],
+            list:["红色预警","橙色预警"],
+            curNow:0,
+            type:'红色预警',
+
         }
     }
 }

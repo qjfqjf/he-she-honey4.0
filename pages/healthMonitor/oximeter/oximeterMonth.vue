@@ -47,70 +47,35 @@
 		},
 		data() {
 			return {
+				uid:0,
+				userInfo:'',
 				date:{
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
 				allDataList:[
-					{
-						test_time: "2023-3-20 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-4-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2021-3-29 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-3-27 15:30",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					}
+
 				],
 				dataList: [
-					// {
-					// 	test_time: "2023-3-20 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2023-4-29 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2021-3-29 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// },
-					// {
-					// 	test_time: "2023-3-27 15:30",
-					// 	blood_oxygen: 168,
-					// 	pi: 98,
-					// 	pulse_rate: 81
-					// }
+					
 				]
 			};
 		},
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad() {
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 			dayjs.extend(isBetween)
-			//this.getHistoryList();
+			//拿到所有历史记录
+			this.getHistoryList();
 			//测试
 			// console.log(dayjs())
 			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))
@@ -153,10 +118,11 @@
 					message: '开发中...'
 				})
 			},
-			//查询血氧历史记录
+			//查询血氧历史记录,并筛选数据
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "oximeter",
+					domain:[["owner.id","=",this.uid]],		
 					fields: [
 						"name",
 						"numbers",
@@ -169,14 +135,14 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
-
+					this.getDataList();
 				})
 			},
 
 			//筛选数据
 			getDataList(){
 				for(var i in this.allDataList){
-					console.log()
+					console.log(110)
 					//判断数据是否在所选日期范围内
 					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
 						this.dataList.push(this.allDataList[i])

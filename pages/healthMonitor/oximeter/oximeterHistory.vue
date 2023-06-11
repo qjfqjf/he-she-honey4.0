@@ -46,6 +46,8 @@
 	export default {
 		data() {
 			return {
+				uid:0,
+				userInfo:'',
 				historyList: [
 					// {
 					// 	date: '2022-03-11 23:34',
@@ -83,7 +85,10 @@
 				],
 			};
 		},
-
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			handleDevelop() {
 				uni.navigateTo({
@@ -94,6 +99,7 @@
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "oximeter",
+					domain:[["owner.id","=",this.uid]],
 					fields: [
 						"name",
 						"numbers",
@@ -109,7 +115,15 @@
 				})
 			}
 		},
-		onLoad() {
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 			this.getHistoryList();
 		},
 	}

@@ -1,10 +1,16 @@
 <template>
 	<view>
 		<view class="header d-flex j-sb">
-			<view class="left">
-				当前会员：<span>{{user}}</span>
+			<view class="left" v-if="!isNameEmpty">
+				当前会员：<span>{{name}}</span>
 			</view>
-			<view class="member pr-2" @click="handleDevelop">
+			<view class="left" v-else-if="!isUsername">
+				当前会员：<span>{{username}}</span>
+			</view>
+			<view class="left" v-else>
+				当前会员：<span>{{this.DefaultName}}</span>
+			</view>
+			<view class="member pr-2" @click="handleMyUser">
 				切换会员
 			</view>
 		</view>
@@ -16,8 +22,20 @@
 	export default {
 		data() {
 			return {
-				user: '王大大'
+				DefaultName:''
 			};
+		},
+		props: ['name','username'],
+		computed: {
+		  isNameEmpty() {
+			return !this.name || this.name.trim() === '';
+		  },
+		  isUsername() {
+		  	return !this.username || this.username.trim() === '';
+		  },
+		},
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
 			handleDevelop() {
@@ -25,7 +43,14 @@
 					message: '开发中...'
 				})
 			},
+			handleMyUser() {
+				this.$emit('myUser');
+			},
+			select(){
+				
+			}
 		}
+
 	}
 </script>
 
