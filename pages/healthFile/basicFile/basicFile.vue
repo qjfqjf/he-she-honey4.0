@@ -193,7 +193,7 @@ export default {
 				url: this.toUrl2,
 				methods: 'post',
 				data: {
-					this.Records[this.current]
+					parm:Records[current]
 				},
 				success: (res) => {
 					console.log(res);
