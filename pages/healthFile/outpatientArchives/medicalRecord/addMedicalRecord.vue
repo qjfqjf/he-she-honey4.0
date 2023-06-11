@@ -28,9 +28,11 @@
 						<view style="height: 20rpx"></view>
 						<view class="example-body">
 							<!-- 图片没绑定 -->
-							<uni-file-picker limit="9" :image-styles="addText.imageStyles"  @select=""></uni-file-picker>
+							<uni-file-picker ref="imgs" limit="3" :image-styles="addText.imageStyles"
+							v-model="imageValue" @upload="upload" file-extname="jpg,png"
+							></uni-file-picker>
 						</view>
-						<text class="tip">（友情提示：最多添加9张图片）</text>
+						<text class="tip">（友情提示：最多添加3张图片）</text>
 					</view>
 
 					<!-- 3、疾病和备注 -->
@@ -49,7 +51,6 @@
 						<text class="cate-text">日期</text>
 						<view style="height: 20rpx"></view>
 						<view class="picker">
-							<!-- 日期没绑定 -->
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
 																	 :clearIcon="false" v-model="record.data_time"/>
 							<uni-icons type="forward" size="15"></uni-icons>
@@ -78,7 +79,9 @@ export default {
 	data() {
 		return {
 			title:"门诊病例",
-
+			imgURL:'',
+			//图片
+			imageValue:[],
 			//添加数据
 			record: {
 					//急诊类型(需要默认值)
@@ -134,6 +137,37 @@ export default {
 	},
 	//方法
 	methods: {
+		//图片上传
+		select(e){
+			const tempFilePaths = e.tempFilePaths;
+			const imgUrl=tempFilePaths[0]
+			uni.uploadFile({
+			url: 'https://xxx.xxx.com/api/uploadpic2/', 
+			filePath: imgUrl,
+			name: 'imgUrl',
+			header:{"Content-Type": "multipart/form-data"},
+			success: (uploadFileRes) => {
+				console.log('uploadFileRes',JSON.parse(uploadFileRes.data));
+				let path=JSON.parse(uploadFileRes.data)
+				//后端返回的地址，存入图片地址
+				this.imageValue.push({
+				url:this.imgURL+path.imgUrl,
+				name:''
+				})
+				console.log('imageValue',this.imageValue)
+			}
+			});
+		},
+		//图片删除
+		delIMG(e){
+			console.log('456',e)
+			const num = this.imageValue.findIndex(v => v.url === e.tempFilePath);
+			this.imageValue.splice(num, 1);
+		},
+		upload(e){
+			console.log(e)
+			console.log(11111111111111111111111111111)
+		},
 		//时间格式转换
 		formatDate(date) {
 			var y = date.getFullYear();  
@@ -159,6 +193,8 @@ export default {
 
 		//保存方法
 		saveRecords(){
+			//测试
+			this.$refs.imgs.upload()
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
@@ -166,59 +202,59 @@ export default {
 			const _this = this;
 			//把疾病类型转化成正确字段存储
 			this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
-			uni.request({
-				url:this.addText.tourl2,
-				method:'post',
-				data:{
-					params:{
-						//注意！！查接口文档
-						model:"inpatient.medical.records",
-						token:token,
-						uid:uid,
-						method:"create",
-						args:[
-							[{
-								//急诊类型
-								"data_type":this.record.data_type,
-								"picture_1":"",
-								"picture_2":"",
-								"picture_3":"",
-								//疾病名称
-								"data_name":this.record.data_name,
-								//疾病备注
-								"data_result":this.record.data_result,
-								"data_time":this.record.data_time,
-								//注意！！这个是uid
-								//用户id
-								"patient_id":uid
-								//时间
-							}]
-						],
-						kwargs:{}
-					}
-				},
-				success(res){
-					//测试
-					console.log(res)
-					uni.showToast({
-						title:'保存成功',
-						duration:1000,
-						success:()=>{
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addText.tourl,
-									success:(res)=>{
-										console.log(res)
-									},
-									fail:(err)=>{
-										console.log(err)
-									}
-								});
-							}, 1000);
-						}
-					});
-				}
-			});
+			// uni.request({
+			// 	url:this.addText.tourl2,
+			// 	method:'post',
+			// 	data:{
+			// 		params:{
+			// 			//注意！！查接口文档
+			// 			model:"inpatient.medical.records",
+			// 			token:token,
+			// 			uid:uid,
+			// 			method:"create",
+			// 			args:[
+			// 				[{
+			// 					//急诊类型
+			// 					"data_type":this.record.data_type,
+			// 					"picture_1":"",
+			// 					"picture_2":"",
+			// 					"picture_3":"",
+			// 					//疾病名称
+			// 					"data_name":this.record.data_name,
+			// 					//疾病备注
+			// 					"data_result":this.record.data_result,
+			// 					"data_time":this.record.data_time,
+			// 					//注意！！这个是uid
+			// 					//用户id
+			// 					"patient_id":uid
+			// 					//时间
+			// 				}]
+			// 			],
+			// 			kwargs:{}
+			// 		}
+			// 	},
+			// 	success(res){
+			// 		//测试
+			// 		console.log(res)
+			// 		uni.showToast({
+			// 			title:'保存成功',
+			// 			duration:1000,
+			// 			success:()=>{
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addText.tourl,
+			// 						success:(res)=>{
+			// 							console.log(res)
+			// 						},
+			// 						fail:(err)=>{
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 
 	},

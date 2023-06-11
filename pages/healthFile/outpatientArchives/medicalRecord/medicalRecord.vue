@@ -67,7 +67,12 @@
 					<view class="remarks">
 						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
 						<view style="height: 20rpx"></view>
-						<view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
+						<u-album
+							:urls="urls2"
+							@albumWidth="width => albumWidth = width"
+							multipleSize="100"
+						></u-album>
+						<!-- <view class="showImage" style="display:flex; align-items: center; flex-wrap: wrap-reverse;">
 							<view class="example-body" style="width: 150rpx;height: 150rpx;margin-left: 50rpx;margin-bottom: 50rpx;" >
 								<view style="">
 									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_1"></image>
@@ -75,7 +80,7 @@
 									<image style="width: 150rpx;height: 150rpx; " :src="item.picture_3"></image>
 								</view>
 							</view>
-						</view>
+						</view> -->
 					</view>
 
 					<!--                <view>-->
@@ -106,10 +111,18 @@
 		},
 		data() {
 			return {
-				imageStyles:{
-					width:90,
-					height:90
-				},
+				urls2: [
+					'https://cdn.uviewui.com/uview/album/1.jpg',
+					'https://cdn.uviewui.com/uview/album/2.jpg',
+					'https://cdn.uviewui.com/uview/album/3.jpg',
+					'https://cdn.uviewui.com/uview/album/4.jpg',
+					'https://cdn.uviewui.com/uview/album/5.jpg',
+					'https://cdn.uviewui.com/uview/album/6.jpg',
+					'https://cdn.uviewui.com/uview/album/7.jpg',
+					'https://cdn.uviewui.com/uview/album/8.jpg',
+					'https://cdn.uviewui.com/uview/album/9.jpg',
+					'https://cdn.uviewui.com/uview/album/10.jpg',
+				],
 				//显示的文本
 				showObj:{
 					curNow:0,
