@@ -212,9 +212,7 @@
 						// 判断蓝牙是否开启
 						if (blueadapter.isEnabled()) {
 							// 已开启
-							uni.showToast({
-								title: '蓝牙已打开',
-							})
+							console.log("蓝牙已开启")
 						} else {
 							// 未开启弹出提示框
 							uni.showModal({
