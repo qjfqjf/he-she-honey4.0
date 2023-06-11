@@ -37,30 +37,30 @@
 					endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
 				allDataList: [
-					{
-						test_time: "2023-3-20 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-4-29 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2021-3-29 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					},
-					{
-						test_time: "2023-3-27 15:30:10",
-						blood_oxygen: 168,
-						pi: 98,
-						pulse_rate: 81
-					}
+					// {
+					// 	test_time: "2023-3-20 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-4-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2021-3-29 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// },
+					// {
+					// 	test_time: "2023-3-27 15:30:10",
+					// 	blood_oxygen: 168,
+					// 	pi: 98,
+					// 	pulse_rate: 81
+					// }
 				],
 				dataList: [
 
@@ -232,6 +232,11 @@
 						this.option.series[0].data = this.dataList.slice(-5).map(item => item.blood_oxygen).reverse();
 						this.option.series[1].data = this.dataList.slice(-5).map(item => item.pulse_rate).reverse();
 						this.option.series[2].data = this.dataList.slice(-5).map(item => item.pi).reverse();
+					}else{
+						this.option.xAxis.data = [];
+						this.option.series[0].data = [];
+						this.option.series[1].data = [];
+						this.option.series[2].data = [];
 					}
 				}
 			}
