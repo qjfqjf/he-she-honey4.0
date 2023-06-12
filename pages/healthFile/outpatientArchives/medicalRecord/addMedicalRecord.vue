@@ -28,11 +28,13 @@
 					<view class="uploadImage">
 						<text class="cate-text">{{addText.uploadImgText}}</text>
 						<view style="height: 20rpx"></view>
-						<view class="example-body">
-							<view class="img" v-for="(item,index) in imgList" :key="index">
+						<view class="example-body" style="display: flex;">
+							<view class="img" v-for="(item,index) in imgList" :key="index" >
 								<image :src="item.url" mode="aspectFill"></image>
+								<view class="deleteBtn" @click="removeImg(index)">x</view>
 							</view>
-							<view class="addImg" @click="addImg"> + </view>
+							<view class="addImg" @click="addImg" v-if="number <= 3"> + </view>
+
 							<!-- 图片没绑定 -->
 
 							<!-- <uni-file-picker ref="imgs" limit="3" :image-styles="addText.imageStyles"
@@ -88,6 +90,7 @@
 
 		data() {
 			return {
+				number:0,
 				title: "门诊病例",
 				imgList: [],
 
@@ -151,9 +154,10 @@
 			addImg() {
 				let that = this;
 				uni.chooseImage({
-					count: 5,
+					count: 3,
 					sourceType: ['album', 'camera'],
 					success(res) {
+						that.number++;
 						console.log('1111', res);
 						that.createBlobUrl(res.tempFiles, (convertedFiles) => {
 							that.imgList = that.imgList.concat(convertedFiles);
@@ -161,6 +165,10 @@
 						});
 					}
 				});
+			},
+			removeImg(index){
+				this.imgList.splice(index,1)
+				this.number--;
 			},
 			createBlobUrl(files, callback) {
 				const convertedFiles = [];
@@ -306,13 +314,15 @@
 				}
 
 				.img image {
-					width: 100%;
+					width: 200rpx;
 					height: 100%;
+					display: flex;
+					flex-direction: row;
 				}
 
 				.img {
+					position: relative;
 					font-size: 70rpx;
-					font-weight: 600;
 					margin-bottom: 10px;
 					width: 200rpx;
 					/* 设置合适的宽度 */
@@ -321,10 +331,30 @@
 					display: flex;
 					/* 设置为 flex 布局 */
 					align-items: center;
+					flex-direction: row;
 					justify-content: space-between;
+					margin-right: 40rpx;
+				}
+				.deleteBtn {
+					font-size: 20rpx;
+					position: absolute;
+					top: 10rpx;
+					right: 10rpx;
+					width: 40rpx;
+					height: 40rpx;
+					background-color: gray;
+					color: white;
+					border-radius: 50%;
+					text-align: center;
+					line-height: 20px;
+					cursor: pointer;
+					z-index: 1;
 				}
 
+
 				.addImg {
+					display: flex;
+					flex-direction: row;
 					font-size: 70rpx;
 					font-weight: 600;
 					color: #ccc;
@@ -333,7 +363,6 @@
 					width: 200rpx;
 					background: #eee;
 					border-radius: 15px;
-					display: flex;
 					align-items: center;
 					justify-content: center;
 				}
