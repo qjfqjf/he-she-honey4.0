@@ -29,20 +29,41 @@
 						<text class="cate-text">{{addText.uploadImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<view class="example-body" style="display: flex;">
-							<view class="img" v-for="(item,index) in imgList" :key="index" >
-								<image :src="item.url" mode="aspectFill"></image>
-								<view class="deleteBtn" @click="removeImg(index)">x</view>
-							</view>
-							<view class="addImg" @click="addImg" v-if="number <= 3"> + </view>
-
-							<!-- 图片没绑定 -->
-
-							<!-- <uni-file-picker ref="imgs" limit="3" :image-styles="addText.imageStyles"
-								v-model="imageValue" @upload="upload" file-extname="jpg,png"></uni-file-picker> -->
-
+							<u-album
+									:urls="imgList1"
+									@albumWidth="width => albumWidth = width"
+									multipleSize="100"
+							></u-album>
+<!--							<view class="img" v-for="(item, index) in imgList" :key="index" >-->
+<!--								<image :src="item.url" mode="aspectFill" @click="showImage(index)"></image>-->
+<!--								<view class="deleteBtn" @click="removeImg(index)">x</view>-->
+<!--							</view>-->
+							<view class="addImg" @click="addImg" v-if="number < 3"> + </view>
 						</view>
 						<text class="tip">（友情提示：最多添加3张图片）</text>
+
+						<!--图片点击放大-->
+						<view class="imageOverlay" v-show="isOverlayVisible" @click="hideImage"></view>
+						<view class="enlargedImageView" v-show="isOverlayVisible">
+							<image :src="getEnlargedImageUrl" mode="aspectFit"></image>
+						</view>
 					</view>
+
+
+
+					<!-- 2、上传照片 -->
+<!--					<view class="uploadImage">-->
+<!--						<text class="cate-text">{{addText.uploadImgText}}</text>-->
+<!--						<view style="height: 20rpx"></view>-->
+<!--						<view class="example-body" style="display: flex;">-->
+<!--							<view class="img" v-for="(item,index) in imgList" :key="index" >-->
+<!--								<image :src="item.url" mode="aspectFill"></image>-->
+<!--								<view class="deleteBtn" @click="removeImg(index)">x</view>-->
+<!--							</view>-->
+<!--							<view class="addImg" @click="addImg" v-if="number <= 3"> + </view>-->
+<!--						</view>-->
+<!--						<text class="tip">（友情提示：最多添加3张图片）</text>-->
+<!--					</view>-->
 
 					<!-- 3、疾病和备注 -->
 					<view class="remarks">
@@ -90,9 +111,24 @@
 
 		data() {
 			return {
-				number:0,
+				urls2: [
+					'https://cdn.uviewui.com/uview/album/1.jpg',
+					'https://cdn.uviewui.com/uview/album/2.jpg',
+					'https://cdn.uviewui.com/uview/album/3.jpg',
+					'https://cdn.uviewui.com/uview/album/4.jpg',
+					'https://cdn.uviewui.com/uview/album/5.jpg',
+					'https://cdn.uviewui.com/uview/album/6.jpg',
+					'https://cdn.uviewui.com/uview/album/7.jpg',
+					'https://cdn.uviewui.com/uview/album/8.jpg',
+					'https://cdn.uviewui.com/uview/album/9.jpg',
+					'https://cdn.uviewui.com/uview/album/10.jpg',
+				],
+				number:0,//图片数量
 				title: "门诊病例",
-				imgList: [],
+				imgList: [], // 图片列表数据
+				imgList1:[],
+				currentImageIndex: -1, // 当前被放大查看的图片索引
+				isOverlayVisible: false ,// 控制遮罩层和放大图片容器的显示与隐藏
 
 				//添加数据
 				record: {
@@ -149,8 +185,24 @@
 		},
 
 
+
+		computed: {
+			getEnlargedImageUrl() {
+				if (this.currentImageIndex >= 0 && this.currentImageIndex < this.imgList.length) {
+					return this.imgList[this.currentImageIndex].url;
+				}
+				return '';
+			}
+		},
 		//方法
 		methods: {
+			showImage(index) {
+				this.currentImageIndex = index;
+				this.isOverlayVisible = true;
+			},
+			hideImage() {
+				this.isOverlayVisible = false;
+			},
 			addImg() {
 				let that = this;
 				uni.chooseImage({
@@ -161,7 +213,11 @@
 						console.log('1111', res);
 						that.createBlobUrl(res.tempFiles, (convertedFiles) => {
 							that.imgList = that.imgList.concat(convertedFiles);
-							console.log(that.imgList);
+							that.imgList1 = [];
+							for(let i = 0; i <= that.imgList.length; i++){
+								that.imgList1.push(that.imgList[i].url)
+							}
+							console.log(that.imgList1);
 						});
 					}
 				});
@@ -280,6 +336,26 @@
 </script>
 
 <style lang="scss">
+.imageOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 100;
+}
+
+.enlargedImageView {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 80%;
+	max-height: 80%;
+	z-index: 101;
+}
+
 	.out-contain {
 		background-color: #FFFFFF;
 		height: 100%;
