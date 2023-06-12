@@ -77,7 +77,7 @@ export default {
 					//门诊类型
 					type:'',
 					//选择的日期
-					data_time:'',
+					data_time:this.formatDate(new Date()),
 					//手术名称
 					data_name:'',
 					//疾病备注
@@ -122,21 +122,21 @@ export default {
 	},
 	//方法
 	methods: {
-		//时间格式转换
-		formatDate(date) {
-			var y = date.getFullYear();  
-                var m = date.getMonth() + 1;  
-                m = m < 10 ? ('0' + m) : m;  
-                var d = date.getDate();  
-                d = d < 10 ? ('0' + d) : d;  
-                var h = date.getHours();  
-                h=h < 10 ? ('0' + h) : h;  
-                var minute = date.getMinutes();  
-                minute = minute < 10 ? ('0' + minute) : minute;  
-                var second=date.getSeconds();  
-                second=second < 10 ? ('0' + second) : second;  
-                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
-		},
+      //时间格式转换
+      formatDate(date) {
+          var y = date.getFullYear();
+          var m = date.getMonth() + 1;
+          m = m < 10 ? ('0' + m) : m;
+          var d = date.getDate();
+          d = d < 10 ? ('0' + d) : d;
+          var h = date.getHours();
+          h=h < 10 ? ('0' + h) : h;
+          var minute = date.getMinutes();
+          minute = minute < 10 ? ('0' + minute) : minute;
+          var second=date.getSeconds();
+          second=second < 10 ? ('0' + second) : second;
+          return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+      },
 		sectionChange(index) {
             this.operation.type = this.addObj.list[index]
             this.addObj.curNow = index;
@@ -161,17 +161,18 @@ export default {
 						method:"create",
 						args:[
 							[{
-								"picture_1":"",
-								"picture_2":"",
-								"picture_3":"",
+								picture_1:"",
+								picture_2:"",
+								picture_3:"",
 								//疾病名称
-								"data_name":this.operation.data_name,
+								data_name:this.operation.data_name,
 								//疾病备注
-								"data_result":this.operation.data_result,
+								data_result:this.operation.data_result,
 								//注意！！这个是uid
 								//用户id
-								"patient_id":uid
+								patient_id:uid,
 								//时间
+                date_time:this.operation.data_time
 							}]
 						],
 						kwargs:{}

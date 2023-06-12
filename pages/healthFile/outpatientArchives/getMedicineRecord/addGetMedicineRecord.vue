@@ -152,7 +152,7 @@ export default {
 				//备注
 				data_result: '',
 				//时间
-				data_time: '',
+				data_time: this.formatDate(new Date()),
 			},
 
 
@@ -178,7 +178,7 @@ export default {
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -237,28 +237,28 @@ export default {
 						args: [
 							[{
 								//用药类型
-								"drug_class": this.medicalRecord.drug_class,
-								"picture_1": "",
-								"picture_2": "",
-								"picture_3": "",
+								drug_class: this.medicalRecord.drug_class,
+								picture_1: "",
+								picture_2: "",
+								picture_3: "",
 								//药物名称
-								"data_name": this.medicalRecord.data_name,
+								data_name: this.medicalRecord.data_name,
 								//用药剂量
-								"dosage": this.medicalRecord.dosage,
+								dosage: this.medicalRecord.dosage,
 								//用药剂量单位
-								"dose_unit": this.medicalRecord.dose_unit,
+								dose_unit: this.medicalRecord.dose_unit,
 								//用药频次
-								"frequency": this.medicalRecord.frequency,
+								frequency: this.medicalRecord.frequency,
 								//用药频次单位
-								"frequency_unit": this.medicalRecord.frequency_unit,
+								frequency_unit: this.medicalRecord.frequency_unit,
 								//备注
-								"data_result": this.medicalRecord.data_result,
+								data_result: this.medicalRecord.data_result,
 								//日期
-								"data_time": this.medicalRecord.data_time,
+								data_time: this.medicalRecord.data_time,
 								//注意:这个是uid
 								//用户id
-								"patient_id": uid
-								//时间
+								patient_id: uid,
+
 							}]
 						],
 						kwargs: {}

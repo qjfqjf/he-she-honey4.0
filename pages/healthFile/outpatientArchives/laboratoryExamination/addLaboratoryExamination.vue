@@ -115,7 +115,7 @@ export default {
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -183,18 +183,19 @@ export default {
 						args:[
 							[{
 								//急诊类型
-								"drug_class":this.laboratoryExamination.drug_class,
-								"picture_1":"",
-								"picture_2":"",
-								"picture_3":"",
+								drug_class:this.laboratoryExamination.drug_class,
+								picture_1:"",
+								picture_2:"",
+								picture_3:"",
 								//疾病名称
-								"data_name":this.laboratoryExamination.data_name,
+								data_name:this.laboratoryExamination.data_name,
 								//疾病备注
-								"data_result":this.laboratoryExamination.data_result,
+								data_result:this.laboratoryExamination.data_result,
 								//注意！！这个是uid
 								//用户id
-								"patient_id":uid
+								patient_id:uid,
 								//时间
+								data_time:this.laboratoryExamination.data_time
 							}]
 						],
 						kwargs:{}

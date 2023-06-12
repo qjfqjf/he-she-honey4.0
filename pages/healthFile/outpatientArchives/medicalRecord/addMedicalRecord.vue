@@ -34,10 +34,12 @@
 							</view>
 							<view class="addImg" @click="addImg"> + </view>
 							<!-- 图片没绑定 -->
-							<!-- <uni-file-picker limit="9" :image-styles="addText.imageStyles"
-								@select="handleImageSelect"></uni-file-picker> -->
+
+							<!-- <uni-file-picker ref="imgs" limit="3" :image-styles="addText.imageStyles"
+								v-model="imageValue" @upload="upload" file-extname="jpg,png"></uni-file-picker> -->
+
 						</view>
-						<text class="tip">（友情提示：最多添加9张图片）</text>
+						<text class="tip">（友情提示：最多添加3张图片）</text>
 					</view>
 
 					<!-- 3、疾病和备注 -->
@@ -59,7 +61,6 @@
 						<text class="cate-text">日期</text>
 						<view style="height: 20rpx"></view>
 						<view class="picker">
-							<!-- 日期没绑定 -->
 							<uni-datetime-picker class="time-picker" :show-icon="true" :border="false"
 								:clearIcon="false" v-model="record.data_time" />
 							<uni-icons type="forward" size="15"></uni-icons>
@@ -92,6 +93,7 @@
 
 				//添加数据
 				record: {
+
 					//急诊类型(需要默认值)
 					data_type: '急诊',
 					//照片
@@ -106,7 +108,7 @@
 					//用户id
 					patient_id: '',
 					//时间()
-					data_time: ''
+					data_time: this.formatDate(new Date())
 				},
 
 				//显示的文本
@@ -142,6 +144,8 @@
 				},
 			};
 		},
+
+
 		//方法
 		methods: {
 			addImg() {

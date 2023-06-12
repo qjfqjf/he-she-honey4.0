@@ -27,7 +27,7 @@
 	    </scroll-view>
 	    <scroll-view class="bigcontent"  scroll-y="true">
 	        <view class="content" v-for="(item, index) in dataList" :key="index">
-				<view class="content-one">
+				<view class="content-one" @click="gotoExam">
 					<view class="content-top">
 						<view class="left">
 							<view class="top">{{ item.title }}</view>
@@ -379,6 +379,11 @@
 				},
 				selectItem(index) {
 				  this.selectedItem = index;
+				},
+				gotoExam(){
+					uni.navigateTo({
+					    url:'/pages/healthEstimate/psychology/Exam/index'
+					})
 				},
 				gotoSearch(){
 					uni.navigateTo({

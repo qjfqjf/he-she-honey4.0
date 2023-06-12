@@ -1391,13 +1391,6 @@
 			}
 		},
 		{
-			"path": "pages/healthMonitor/warningRule/warningRule",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
 			"path": "pages/healthMonitor/bloodSugar/warningRules",
 			"style": {
 				"navigationBarTitleText": "",
@@ -1496,13 +1489,6 @@
 			}
 		},
 		{
-			"path": "pages/healthMonitor/oximeter/oximeterTrend",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
 			"path": "pages/healthFile/status/index",
 			"style": {}
 		},
@@ -1516,37 +1502,54 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
-			"path": "pages/healthFile/examination/artificialExamination/artificialExamination",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthFile/examination/artificialExamination/addArtificialExamination",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthFile/examination/examinationIndex",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/healthFile/basicFile/modifyBasicFile",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
 		}
 	    ,{
-            "path" : "pages/healthManagement/health/addHealth",
+            "path" : "pages/healthFile/examination/artificialExamination/artificialExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/examination/artificialExamination/addArtificialExamination",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/examination/examinationIndex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthFile/basicFile/modifyBasicFile",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthEstimate/psychology/Exam/Exam",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthEstimate/psychology/Exam/index",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
