@@ -754,13 +754,6 @@
 			}
 		},
 		{
-			"path": "pages/healthManagement/sleep/sleep",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
 			"path": "pages/healthManagement/sports/sports",
 			"style": {
 				"navigationBarTitleText": "",
