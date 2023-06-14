@@ -93,13 +93,6 @@
                 </view>
             </view>
 
-<!--                <view>-->
-<!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
-<!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
-<!--                                     v-model="dataList.imgs" -->
-<!--                                     del-icon="false"-->
-<!--                    ></uni-file-picker>-->
-<!--                </view>-->
 
             <!-- 6、分割线 -->
             <u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
@@ -123,6 +116,18 @@
 		},
 		data() {
 			return {
+      urls2: [
+          'https://cdn.uviewui.com/uview/album/1.jpg',
+          'https://cdn.uviewui.com/uview/album/2.jpg',
+          'https://cdn.uviewui.com/uview/album/3.jpg',
+          'https://cdn.uviewui.com/uview/album/4.jpg',
+          'https://cdn.uviewui.com/uview/album/5.jpg',
+          'https://cdn.uviewui.com/uview/album/6.jpg',
+          'https://cdn.uviewui.com/uview/album/7.jpg',
+          'https://cdn.uviewui.com/uview/album/8.jpg',
+          'https://cdn.uviewui.com/uview/album/9.jpg',
+          'https://cdn.uviewui.com/uview/album/10.jpg',
+      ],
 				//显示的文本
 				showObj:{
 					curNow:0,

@@ -66,14 +66,6 @@
                 </view>
             </view>
 
-<!--                <view>-->
-<!--                    <uni-file-picker limit="9" :autoUpload="false" mode="grid"-->
-<!--                                     file-mediatype="image" :image-styles="showObj.imageStyles"-->
-<!--                                     v-model="dataList.imgs" -->
-<!--                                     del-icon="false"-->
-<!--                    ></uni-file-picker>-->
-<!--                </view>-->
-
             <!-- 6、分割线 -->
             <u-divider style="margin-top: 50rpx" text="分割线" text-size="10" textColor="#1fc7a3"></u-divider>
 
