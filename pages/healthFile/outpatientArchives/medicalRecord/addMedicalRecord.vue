@@ -32,7 +32,7 @@
 							<view class="img" v-for="(item,index) in imgList" :key="index">
 								<image :src="item.url" mode="aspectFill"></image>
 							</view>
-							<view class="addImg" @click="addImg"> + </view>
+							<view class="addImg" @click="addImg"> + </view> 
 							<!-- 图片没绑定 -->
 
 							<!-- <uni-file-picker ref="imgs" limit="3" :image-styles="addText.imageStyles"
