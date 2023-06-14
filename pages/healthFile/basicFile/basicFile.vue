@@ -45,7 +45,7 @@
 			<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
 			<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
 			<!--		</view>-->
-			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="data1"></read-list>
+			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="data"></read-list>
 			<read-list v-if="current === 1" :cell-list="baseInfo" :dataListText="data"></read-list>
 			<read-list v-if="current === 2" :cell-list="history" :dataListText="data"></read-list>
 			<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
@@ -56,7 +56,7 @@
 
 <script>
 import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
-import ReadList from "../components/List.vue";
+import ReadList from "../components/List";
 import DocChoice from "../components/docChoice.vue";
 export default {
 	components: { ReadList, UButton, DocChoice },
@@ -165,6 +165,7 @@ export default {
 			toUrl: '/pages/healthFile/basicFile/modifyBasicFile',
 			addtext: '修改',
 			toUrl2: 'http://106.14.140.92:8881/platform/dataset/search_read',
+			uid:''
 		}
 	},
 	methods: {
@@ -181,12 +182,14 @@ export default {
 		//拿去用户信息
 		getRecordsList() {
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-			const uid = userInfo.uid;
+			console.log(userInfo);
+			this.uid = userInfo.uid;
+			console.log(this.uid);
 			const token = userInfo.token;
 			this.$http
 					.post(this.toUrl2,{
 						model:this.Records[this.current].model,
-						domain:this.Records[this.current].domain,
+						domain:[["id", "=", this.uid]],
 						fields:this.Records[this.current].fields
 					}).then(res=>{
 						this.data = res.result.records
@@ -203,6 +206,7 @@ export default {
 		},
 		onLoad() {
 			this.getRecordsList();
+			
 		}
 	}
 }

@@ -18,9 +18,94 @@
                   title="2.血压测量频率"
                   name="Variety components"
           >
-              <doc-choice :cell-choice="choice"/>
+              <choice :cell-choice="choiceBloodPressure1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="3.血压最近一次测量指标是否正常"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodPressure2"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="4.血糖测量频率"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodSugar1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="5.血糖最近一次测量指标是否正常"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodSugar2"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="6.血脂测量频率"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodFat1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="7.血脂最近一次测量指标是否正常"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodFat2"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="8.尿酸测量频率"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodSUA1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="9.尿酸最近一次测量指标是否正常"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceBloodSUA2"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="10.血氧饱和度测量频率"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceOxygen1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="11.血氧最近一次测量指标是否正常"
+                  name="Variety components"
+          >
+              <choice :cell-choice="choiceOxygen1"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="12.请填写最近一次测量血压相关指标的情况"
+                  name="Docs guide"
+          >
+              <clist :cell-list="listBloodPressure"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="13.请填写一次测量血糖相关指标的情况"
+                  name="Docs guide"
+          >
+              <clist :cell-list="listBloodSugar"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="14.请填写一次测量血脂相关指标的情况"
+                  name="Docs guide"
+          >
+              <clist :cell-list="listBloodFat"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="15.请填写一次测量尿酸相关指标的情况"
+                  name="Docs guide"
+          >
+              <clist :cell-list="listBloodSUA"/>
+          </u-collapse-item>
+          <u-collapse-item
+                  title="16.请填写一次测量血氧相关指标的情况"
+                  name="Docs guide"
+          >
+              <clist :cell-list="listOxygen" :disableInput="disableInput"/>
           </u-collapse-item>
       </u-collapse>
+      
       <view>
           <u-popup :round="10" mode="center" :show="show" @close="close" @open="open">
               <view class="m-5">
@@ -34,24 +119,69 @@
   </view>
 </template>
 <script>
-import DocList from "../components/docList.vue";
-import DocChoice from "../components/docChoice.vue";
+import clist from "../components/listWithChoice.vue";
+import choice from "../components/Choice.vue";
 import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
-
+import DocList from "../components/docList";
 export default {
+    components:{UButton,DocList,choice,clist},
     data() {
         return {
             show: false,
-            list: ["*身高(cm)" ,
-            "*体重(kg)" ,
-            "*BMK(kg/m')" ,
-            "*腰围(cm)" ,
-            "*腰围(尺)" ,
-            "臀围(cm)" ,
-            "心率(次/分)" ,
-            "呼吸(次/分)" ,
-            "体温(℃)"],
-            choice: ["从未错过","曾经错过","经常检测"]
+            list: [
+                {
+                    name:"*身高(cm)",
+                    value:'',
+                }, 
+                {
+                    name:"*体重(kg)" ,
+                    value:'',
+                }, 
+                {
+                    name:"*BMK(kg/m')" ,
+                    value:'',
+                }, 
+                {
+                    name:"*腰围(cm)" ,
+                    value:'',
+                }, 
+                {
+                    name:"*腰围(尺)" ,
+                    value:'',
+                }, 
+                {
+                    name:"臀围(cm)" ,
+                    value:'',
+                }, 
+                {
+                    name:"心率(次/分)" ,
+                    value:'',
+                }, 
+                {
+                    name:"呼吸(次/分)" ,
+                    value:'',
+                }, 
+                {
+                    name:"体温(℃)",
+                    value:'',
+                }, 
+            ],
+            choiceBloodPressure1: [{name:"从未测过",value:false,}, {name:"曾经测过",value:false,}, {name:"经常检测",value:false,}, ],
+            choiceBloodPressure2: [{name:"正常",value:false,}, {name:"过高",value:false,}, {name:"过低",value:false,}, {name:"不清楚",value:false,}, ],
+            choiceBloodSugar1: [{name:"从未测过",value:false,}, {name:"曾经测过",value:false,}, {name:"经常检测",value:false,}, ],
+            choiceBloodSugar2: [{name:"正常",value:false,}, {name:"过高",value:false,}, {name:"过低",value:false,}, {name:"不清楚",value:false,}, ],
+            choiceBloodFat1: [{name:"从未测过",value:false,}, {name:"曾经测过",value:false,}, {name:"经常检测",value:false,}, ],
+            choiceBloodFat2: [{name:"正常",value:false,}, {name:"过高",value:false,}, {name:"过低",value:false,}, {name:"不清楚",value:false,}, ],
+            choiceBloodSUA1: [{name:"从未测过",value:false,}, {name:"曾经测过",value:false,}, {name:"经常检测",value:false,}, ],
+            choiceBloodSUA2: [{name:"正常",value:false,}, {name:"过高",value:false,}, {name:"过低",value:false,}, {name:"不清楚",value:false,}, ],
+            choiceOxygen1: [{name:"从未测过",value:false,}, {name:"曾经测过",value:false,}, {name:"经常检测",value:false,}, ],
+            choiceOxygen2: [{name:"正常",value:false,}, {name:"过高",value:false,}, {name:"过低",value:false,}, {name:"不清楚",value:false,}, ],
+            listBloodPressure:[{name:'收缩压(高压)一般在[mmHg]',value:''},{name:'舒长压(高压)一般在[mmHg]',value:''},{name:'最近一次血压高压[mmHg]',value:''},{name:'最近一次血压低压[mmHg]',value:''},],
+            listBloodSugar:[{name:'空腹血糖[mmol/L]',value:''},{name:'糖化血红蛋白[%]',value:''},],
+            listBloodFat:[{name:'收缩压(高压)一般在[mmHg]',value:''},{name:'舒长压(高压)一般在[mmHg]',value:''},{name:'最近一次血压高压[mmHg]',value:''},{name:'最近一次血压低压[mmHg]',value:''},],
+            listBloodSUA:[{name:'收缩压(高压)一般在[mmHg]',value:''},{name:'舒长压(高压)一般在[mmHg]',value:''},{name:'最近一次血压高压[mmHg]',value:''},{name:'最近一次血压低压[mmHg]',value:''},],
+            listOxygen:[{name:'收缩压(高压)一般在[mmHg]',value:''},{name:'舒长压(高压)一般在[mmHg]',value:''},{name:'最近一次血压高压[mmHg]',value:''},{name:'最近一次血压低压[mmHg]',value:''},],
+            disableInput:false,
         }
     },
 	methods: {
@@ -65,10 +195,6 @@ export default {
 	              // console.log('change', e)
       }
 	},
-    components:{
-        UButton,
-        DocList,
-        DocChoice
-    }
+    
 }
 </script>
