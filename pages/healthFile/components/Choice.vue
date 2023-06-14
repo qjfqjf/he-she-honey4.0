@@ -1,17 +1,16 @@
 <template>
     <view>
-        <u-checkbox-group @change="checkboxGroupChange" class="checkbox-wrapper">
-			<u-checkbox 
-                class="mt-4 ml-2 checkbox-item"
+        <u-radio-group max="1">
+			<u-radio 
+                class="mt-4 ml-2"
                 :customStyle="{marginBottom: '8px'}"
                 v-for="(item, index) in cellChoice"
                 :key="index"
-                :label="item"
                 :name="item.name"
                 @change="radioChange"
                 shape="square"
-			>{{item.name}}</u-checkbox>
-		</u-checkbox-group>   
+			>{{item.name}}</u-radio>
+		</u-radio-group>   
     </view>
 </template>
 
@@ -33,13 +32,3 @@ export default{
     }
 }
 </script>
-<style>
-    .checkbox-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-}
-
-    .checkbox-item {
-        flex-basis: calc(100% / 1); /* 每行显示 4 个选项 */
-}
-</style>

@@ -50,7 +50,7 @@
                         <uni-icons type="forward" size="15"></uni-icons>
                     </view>
                 </view>
-				<view class="date-body">
+				        <view class="date-body">
                     <text class="cate-text">出院时间</text>
                     <view style="height: 20rpx"></view>
                     <view class="picker">
@@ -89,7 +89,6 @@ export default {
 					//门诊类型
 					type:'',
 					//选择的日期
-          selectedDate:new Date(),
 					selectedDate1:new Date(),
 					selectedDate2:new Date(),
 					//疾病名称
@@ -117,12 +116,12 @@ export default {
 				remarksText:'疾病诊断',
 				//返回的路由
 				tourl:'/pages/healthFile/inpatientRecords/inpatientRecords',
-				//保存接口
+				//保存接口(没有这个接口现在)
 				tourl2:'',
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: '',
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -136,6 +135,21 @@ export default {
 	},
 	//方法
 	methods: {
+  //时间格式转换
+  formatDate(date) {
+      var y = date.getFullYear();
+      var m = date.getMonth() + 1;
+      m = m < 10 ? ('0' + m) : m;
+      var d = date.getDate();
+      d = d < 10 ? ('0' + d) : d;
+      var h = date.getHours();
+      h=h < 10 ? ('0' + h) : h;
+      var minute = date.getMinutes();
+      minute = minute < 10 ? ('0' + minute) : minute;
+      var second=date.getSeconds();
+      second=second < 10 ? ('0' + second) : second;
+      return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+  },
     sectionChange(index) {
             this.dataObj.type = this.addObj.list[index]
             this.addObj.curNow = index;
@@ -146,45 +160,65 @@ export default {
         },
 
 
-        //保存方法
-        saveRecords(){
-            console.log(this.dataObj);
-            //uni.request({
-                // url:this.addObj.tourl2,
-                // method:'post',
-                // data:{
-                //     params:{
-                //         dataObj:this.dataObj,
-                //         model:'',
-                //         token:'',
-                //         uid:'',
-                //         fields:[
-                //
-                //         ]
-                //     }
-                // },
-                //success(res){
-                    uni.showToast({
-                        title:'保存成功',
-                        duration:1000,
-                        success:()=>{
-                            setTimeout(() => {
-                                uni.redirectTo({
-                                    url: this.addObj.tourl,
-                                    success:(res)=>{
-                                        console.log(res)
-                                    },
-                                    fail:(err)=>{
-                                        console.log(err)
-                                    }
-                                });
-                            }, 1000);
-                        }
-                    });
-                //}
-           // });
-
-        },
+      //保存方法
+      saveRecords() {
+          //拿到用户数据
+          const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+          const uid = userInfo.uid;
+          const token = userInfo.token;
+          const _this = this;
+          uni.request({
+              url: this.addObj.tourl2,
+              method: 'post',
+              data: {
+                  params: {
+                      //注意！！查接口文档
+                      model: "inpatient.referral.consultation",
+                      token: token,
+                      uid: uid,
+                      method: "create",
+                      args: [
+                          [{
+                              //检查类别
+                              data_name: this.consultation.data_name,
+                              picture_1: "",
+                              picture_2: "",
+                              picture_3: "",
+                              //疾病备注
+                              data_result: this.consultation.data_result,
+                              //注意！！这个是uid
+                              //用户id
+                              patient_id: uid,
+                              //时间
+                              data_time:this.consultation.data_time
+                          }]
+                      ],
+                      kwargs: {}
+                  }
+              },
+              success(res) {
+                  //测试
+                  console.log(res)
+                  uni.showToast({
+                      title: '保存成功',
+                      duration: 1000,
+                      success: () => {
+                          setTimeout(() => {
+                              uni.redirectTo({
+                                  url: _this.addObj.tourl,
+                                  success: (res) => {
+                                      console.log(res)
+                                  },
+                                  fail: (err) => {
+                                      console.log(err)
+                                  }
+                              });
+                          }, 1000);
+                      }
+                  });
+              }
+          });
+      },
 	},
 	onShow(){
 		this.addObj.type = this.addObj.list[this.addObj.curNow];

@@ -17,6 +17,34 @@
                         <view class="">{{ list.questions }}</view>
                         <doc-choice :cell-choice="list.options"/>
                     </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
+                    <view v-for="list in lists">
+                        <view class="">{{ list.questions }}</view>
+                        <doc-choice :cell-choice="list.options"/>
+                    </view>
                 </u-collapse-item>
             </u-collapse>
         </view>
@@ -32,7 +60,7 @@
     </view>
 </template>
 <script>
-import DocList from "../components/docList.vue";
+import DocList from "../components/docList";
 import DocChoice from "../components/docChoice.vue";
 import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.vue";
 
@@ -68,3 +96,6 @@ export default {
     }
 }
 </script>
+<style>
+    
+</style>
