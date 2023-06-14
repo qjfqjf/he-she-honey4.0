@@ -127,15 +127,6 @@
 
 
 			},
-			//    handleJump(url) {
-			// 	console.log(url)
-			// 	uni.navigateTo({
-			// 		url,
-			// 		fail: (err) => {
-			// 			console.log(err)
-			// 		}
-			// 	});
-			// },
 			handleSaveHeat() {
 				this.$http.post('/platform/dataset/call_kw',{
 					model: "forehead.temperature.gun",
@@ -147,6 +138,7 @@
 							"owner":this.userInfo.uid,
 							"temperature":this.heat,
 							"input_type":"equipment",
+							"test_time":this.formatDate(new Date())
 						}]
 					],
 					kwargs:{}
@@ -347,6 +339,21 @@
 				this.btnColor = '#01b09a'
 
 
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 			onPageJump(url) {
 				uni.navigateTo({
