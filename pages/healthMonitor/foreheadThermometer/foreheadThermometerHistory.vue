@@ -13,13 +13,14 @@
 		<!-- 正文内容 -->
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="item.id">
-				<view class="date">
-					{{ item.test_time}}
+				<view class="date"
+				v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
+					{{ item.test_time.split(' ')[0]}}
 				</view>
 				<view class="record">
-					<text>{{ item.test_time}}</text>
+					<text>{{ item.test_time.split(' ')[1]}}</text>
 					<text>体温</text>
-					<text class="text">{{ item.temperature }}</text>
+					<text class="text">{{ item.temperature}}C</text>
 				</view>
 			</view>
 		</view>
