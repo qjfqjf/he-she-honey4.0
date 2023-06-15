@@ -245,9 +245,6 @@
 				});
 			},
 
-
-
-
 			//时间格式转换
 			formatDate(date) {
 				var y = date.getFullYear();
