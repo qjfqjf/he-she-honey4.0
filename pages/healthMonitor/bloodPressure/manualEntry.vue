@@ -79,7 +79,18 @@
 				scrollEnd: 250, //滚动区域终止值
 				maginL: 15, //线间距
 				userInfo: '',
+				uid:0,
 			};
+		},
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 		},
 		//页面显示
 		onShow() {
@@ -98,7 +109,6 @@
 			// 输入框值变化
 			change(val) {
 				this.pulValue = val
-				console.log(val)
 			},
 			confirm(time) {
 				console.log(time)
@@ -112,40 +122,55 @@
 			close() {
 				this.show = false
 			},
-			
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
 			// 处理保存
 			handleSaveInfo(){
-				const userInfoStr = uni.getStorageSync('userInfo');
-				const userInfo = JSON.parse(userInfoStr);
-				const uid = userInfo.uid;
-				this.$http.post('/platform/dataset/call_kw', {
-					model: "sphygmomanometer.jiakang",
-					method: "create",
-					args: [
-						[{
-							"name": "血压计 (静态血压计)",
-							"numbers":"001",
-							"owner":this.userInfo.uid,
-							"systolic_blood_pressure":this.scrollSYSLeft,
-							"tensioning_pressure":this.scrollDIALeft,
-							"heart_rate":this.pulValue,
-							"input_type":"hend",
-						}]
-					],
-					kwargs:{}
-				}).then(res => {
-					if(this.pulValue != 0){
-						this.$refs.uToast.show({
-							message: '保存成功',
-							type: 'success',
-						})
-						this.btnColor = '#dadada'
-						this.scrollSYSLeft = 0
-						this.scrollDIALeft = 0
-						this.pulValue = 0
-					}
-				})
-			}
+				if(this.scrollSYSLeft != 0 && this.scrollDIALeft != 0){
+					this.$http.post('/platform/dataset/call_kw', {
+						model: "sphygmomanometer.jiakang",
+						method: "create",
+						args: [
+							[{
+								"name": "血压计 (静态血压计)",
+								"numbers":"001",
+								"owner":this.uid,
+								"systolic_blood_pressure":this.scrollSYSLeft,
+								"tensioning_pressure":this.scrollDIALeft,
+								"heart_rate":this.pulValue,
+								"input_type":"hend",
+								"test_time":this.formatDate(new Date())
+							}]
+						],
+						kwargs:{}
+					}).then(res => {
+						if(this.pulValue != 0){
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+						}
+					})
+				}else{
+					this.$refs.uToast.show({
+						message: '保存失败',
+						type: 'error',
+					})
+				}
+			},
 		}
 	}
 </script>

@@ -69,8 +69,6 @@
 				heat: 0, //测量温度
 				blueDeviceList: [],
 				owner: '2222',
-				input_type: '设备输入',
-				name: '额温枪',
 				time: formatDateTime(new Date()),
 				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值

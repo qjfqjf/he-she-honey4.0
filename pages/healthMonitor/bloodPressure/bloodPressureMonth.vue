@@ -2,7 +2,7 @@
 
 	<view class="b-content p-2">
 		<z-nav-bar title="血压月报">
-			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
+			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module @getDate="getDate"></public-module>
 		<TimeRage @getDate="getDate"></TimeRage>
@@ -44,6 +44,8 @@
 		},
 		data() {
 			return {
+				uid:0,
+				userInfo:'',
 				date:{
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
@@ -86,7 +88,15 @@
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad() {
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 			dayjs.extend(isBetween)
 			this.getHistoryList();
 		},
@@ -120,16 +130,21 @@
 				//筛选出符合条件的数据
 				this.getDataList();
 			},
-			
-			handleDevelop() {
-				this.$refs.uToast.show({
-					message: '开发中...'
-				})
+			handleWarningRule(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
+				});
 			},
+			// handleWarningRule() {
+			// 	this.$refs.uToast.show({
+			// 		message: '开发中...'
+			// 	})
+			// },
 			//查询血压月报记录
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "sphygmomanometer.jiakang",
+					domain:[["owner.id","=",this.uid]],
 					fields: [
 						"name",
 						"numbers",
@@ -142,12 +157,13 @@
 					]
 				}).then(res => {
 					this.allDataList = res.result.records
+					this.getDataList();
 				})
+				
 			},
 			//筛选数据
 			getDataList(){
 				for(var i in this.allDataList){
-					console.log()
 					//判断数据是否在所选日期范围内
 					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
 						this.dataList.push(this.allDataList[i])
