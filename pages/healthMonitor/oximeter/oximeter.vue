@@ -54,11 +54,11 @@
 				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[2].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
+			<!-- <view class="d-flex flex-column a-center"
 				@click="onPageWrite">
 				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[3].title }}</text>
-			</view>
+			</view> -->
 		</view>
 		
 		
@@ -145,6 +145,9 @@
 			}
 		},
 		onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.username = this.userInfo.name;
+			this.uid = this.userInfo.uid
 			this.initBlue()
 			// console.log(this.deviceId, this.deviceStatus)
 			if (this.deviceId && this.deviceStatus === 0) {
@@ -179,9 +182,6 @@
 		//页面显示
 		onShow() {
 			this.initBlue()
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.username = this.userInfo.name;
-			 
 			uni.$on('backWithData', (data) => {
 			    this.uid = data.uid;
 			    this.name = data.name;
@@ -359,6 +359,7 @@
 				})
 
 				return hexArr.join('')
+				
 			},
 			// 解析血氧数据
 			processMeasureData(resHex) {
@@ -471,6 +472,9 @@
 							break
 					}
 					console.log(this.result)
+					if(this.result != ''){
+						this.btnColor = '#01b09a'
+					}
 				}
 			},
 			// 【9】监听消息变化
@@ -527,46 +531,85 @@
 					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
 				});
 			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
 			handleSave() {
-				this.$http.post('/platform/dataset/call_kw', {
-					model: "oximeter",
-					method: "create",
-					args: [
-						[{
-							"name": "血氧仪",
-							"numbers": this.serviceId,
-							"owner": this.userInfo.uid,
-							"blood_oxygen": this.oxData[0].value,
-							"pi": this.oxData[1].value,
-							"pulse_rate": this.oxData[2].value,
-							"input_type": "equipment",
-						}]
-					],
-					kwargs: {}
-				}).then(res => {
-					if (this.this.oxData[0].value != 0) {
-						this.$refs.uToast.show({
-							message: '保存成功',
-							type: 'success',
-
-						})
-						this.btnColor = '#dadada'
-						this.oxData[0].value = 0
-						this.oxData[1].value = 0
-						this.oxData[2].value = 0
-					} else {
-						this.$refs.uToast.show({
-							message: '保存失败',
-							type: 'error',
-
-						})
-						this.btnColor = '#dadada'
-						this.oxData[0].value = 0
-						this.oxData[1].value = 0
-						this.oxData[2].value = 0
-					}
-				})
-				console.log('提交')
+				console.log(this.uid)
+				if(this.result != '' && this.result != '信号质量差请重新测量'){
+					this.$http.post('/platform/dataset/call_kw', {
+						model: "oximeter",
+						method: "create",
+						args: [
+							[{
+								"name": "血氧仪",
+								"numbers": this.serviceId,
+								"owner": this.uid,
+								"blood_oxygen": this.oxData[0].value,
+								"pi": this.oxData[1].value,
+								"pulse_rate": this.oxData[2].value,
+								"input_type": "equipment",
+								"test_time":this.formatDate(new Date())
+							}]
+						],
+						kwargs: {}
+					}).then(res => {
+						if (this.oxData[0].value != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+					
+							})
+							this.btnColor = '#dadada'
+							this.oxData[0].value = 0
+							this.oxData[1].value = 0
+							this.oxData[2].value = 0
+							this.value = []
+							this.waveData = []
+							this.result = ''
+							this.ecgRef = null
+							
+						} else {
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							this.oxData[0].value = 0
+							this.oxData[1].value = 0
+							this.oxData[2].value = 0
+							this.value = []
+							this.waveData = []
+							this.result = ''
+							this.ecgRef = null
+						}
+					})
+				}else{
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					this.oxData[0].value = 0
+					this.oxData[1].value = 0
+					this.oxData[2].value = 0
+					this.value = []
+					this.waveData = []
+					this.result = ''
+					this.ecgRef = null
+				}
 			},
 			onPageJump(url) {
 				uni.navigateTo({

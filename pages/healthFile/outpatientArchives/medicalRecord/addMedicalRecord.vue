@@ -39,6 +39,7 @@
 <!--								<view class="deleteBtn" @click="removeImg(index)">x</view>-->
 <!--							</view>-->
 							<view class="addImg" @click="addImg" v-if="number < 3"> + </view>
+
 						</view>
 						<text class="tip">（友情提示：最多添加3张图片）</text>
 
