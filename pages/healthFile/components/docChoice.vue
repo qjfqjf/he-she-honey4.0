@@ -1,6 +1,6 @@
 <template>
     <view>
-        <u-checkbox-group @change="checkboxGroupChange" class="checkbox-wrapper">
+        <u-checkbox-group class="checkbox-wrapper" max="isMax" :disabled="isDisabled">
 			<u-checkbox 
                 class="mt-4 ml-2 checkbox-item"
                 :customStyle="{marginBottom: '8px'}"
@@ -10,6 +10,7 @@
                 :name="item.name"
                 @change="radioChange"
                 shape="square"
+                
 			>{{item.name}}</u-checkbox>
 		</u-checkbox-group>   
     </view>
@@ -20,7 +21,7 @@
 export default{
     data(){
         return{
-
+            isMax:1
         }
     },
     methods:{
@@ -30,6 +31,7 @@ export default{
     },
     props:{
         cellChoice: Array,
+        isDisabled:Boolean,
     }
 }
 </script>

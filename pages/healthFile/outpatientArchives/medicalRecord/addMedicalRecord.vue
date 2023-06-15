@@ -227,6 +227,7 @@
 				this.imgList.splice(index,1)
 				this.number--;
 			},
+			//这个方法里面的FileReader类在安卓和小程序里面是没有的
 			createBlobUrl(files, callback) {
 				const convertedFiles = [];
 				let convertedCount = 0;
