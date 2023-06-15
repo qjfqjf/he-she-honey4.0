@@ -143,6 +143,7 @@ export default {
 
 			//传回数据
 			data: [],
+			list:[],
 			show: false,
 			current: 0,
 			avatar: 'https://cdn.uviewui.com/uview/album/1.jpg',
@@ -192,10 +193,11 @@ export default {
 						domain:[["id", "=", this.uid]],
 						fields:this.Records[this.current].fields
 					}).then(res=>{
-						this.data = res.result.records
+						this.data = Object.values(res.result.records[0]);
 						//测试
-						console.log(res.result.records)
+						console.log(this.data)
 			})
+			
 		},
 		open() {
 			// console.log('open');
