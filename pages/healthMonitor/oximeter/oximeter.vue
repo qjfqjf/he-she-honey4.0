@@ -1,6 +1,8 @@
 <template>
 	<view class="content p-2">
-		<z-nav-bar title="血氧"> </z-nav-bar>
+		<z-nav-bar title="血氧"> 
+			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
+		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader :name="name" :username="username" @myUser="handleMyUser"></HealthHeader>
 		<view class="mt-3 mb-3" style="height: 350rpx">
@@ -189,6 +191,11 @@
 		},
 
 		methods: {
+			handleWarningRule(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
+				});
+			},
 			// 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
 			createInterval() {
 				this.listenConnectState()
@@ -547,7 +554,6 @@
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 			handleSave() {
-				console.log(this.uid)
 				if(this.result != '' && this.result != '信号质量差请重新测量'){
 					this.$http.post('/platform/dataset/call_kw', {
 						model: "oximeter",

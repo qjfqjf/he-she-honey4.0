@@ -4,7 +4,7 @@
 			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader :name="name" :username="username"></HealthHeader>
+		<HealthHeader :name="name" :username="username" @myUser="handleMyUser"></HealthHeader>
 		<!-- tab切换 -->
 		<view class="tab-container d-flex j-center my-3">
 			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="()=>currentTab = 'tab1'">左侧</view>
@@ -26,7 +26,7 @@
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSavePressure"></u-button>
 		<u--text class="d-flex j-center mt-2" color="#20baa6" suffixIcon="arrow-right"
-			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump(urlList.history)">
+			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump()">
 		</u--text>
 		<view class="measureData">
 			<u--text class="pb-2" text="血压数值"></u--text>
@@ -66,11 +66,33 @@
 		</view>
 		<!-- 底部操作 -->
 		<!-- <BottomNavigation page="bloodPressure/manualEntry"></BottomNavigation> -->
-		<view class="tools d-flex j-sb mt-5 p-4">
+		<!-- <view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
 				@click="onPageJump(item.url)">
 				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
 				<text class="mt-1">{{item.title}}</text>
+			</view>
+		</view> -->
+		<view class="tools d-flex j-sb mt-5 p-4">
+			<view class="d-flex flex-column a-center"
+				@click="onPageSelectDocter">
+				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[0].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageMonth">
+				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[1].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageDevice">
+				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[2].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center"
+				@click="onPageWrite">
+				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
@@ -138,15 +160,13 @@
 				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
-				urlList: {
-					history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
-
-				},
+				// urlList: {
+				// 	history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
+				// },
 				userInfo: '',
 				uid:0,//用户id
 				name:'',//选择之后的名字
 				username:'',//登录开始的名字
-
 				// 底部工具栏
 				page: '',
 				toolList: [
@@ -174,18 +194,28 @@
 			};
 		},
 		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.username = this.userInfo.name;
+			this.uid = this.userInfo.uid
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
-
 			}
-
 		},
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.name = data.name;
+			});
 		},
 		methods: {
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			// 数据发生变化时
 			changeOption(value) {
 				const data = this.option.series[0].data
@@ -195,11 +225,7 @@
 			onViewClick(options) {
 				console.log(options)
 			},
-			// handleDevelop() {
-			// 	this.$refs.uToast.show({
-			// 		message: '开发中...'
-			// 	})
-			// },
+			
 			handleWarningRule(){
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
@@ -207,55 +233,69 @@
 			},
 			handleBloodPressureTrend() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodPressure/bloodPressureTrend' // 跳转到指定的目标页面
+					url: '/pages/healthMonitor/bloodPressure/bloodPressureTrend?uid='+this.uid, // 跳转到指定的目标页面
 				});
 			},
-			handleJump(url) {
+			handleJump() {
 				uni.navigateTo({
-					url
+					url: '/pages/healthMonitor/bloodPressure/bloodpressureHistory?uid='+this.uid,
 				});
 			},
 			handleSavePressure() {
-				this.$http.post('/platform/dataset/call_kw', {
-					model: "sphygmomanometer.jiakang",
-					method: "create",
-					args: [
-						[{
-							"name": "血压计 (静态血压计)",
-							"numbers": this.serviceId,
-							"owner": this.userInfo.uid,
-							"systolic_blood_pressure": this.measureResult.SYS,
-							"tensioning_pressure": this.measureResult.DIA,
-							"heart_rate": this.measureResult.PUL,
-							"input_type": "equipment",
-						}]
-					],
-					kwargs: {}
-				}).then(res => {
-					if (this.measureResult.pressure != 0) {
-						this.$refs.uToast.show({
-							message: '保存成功',
-							type: 'success',
-						})
-						this.btnColor = '#dadada'
-						this.measureResult.SYS = 0
-						this.measureResult.DIA = 0
-						this.measureResult.PUL = 0
-						this.measureResult.pressure = 0
-						this.option.series.data.value = 0
-					}else{
-						this.$refs.uToast.show({
-							message: '保存失败',
-							type: 'error',
-						})
-						this.btnColor = '#dadada'
-						this.measureResult.SYS = 0
-						this.measureResult.DIA = 0
-						this.measureResult.PUL = 0
-						this.measureResult.pressure = 0
-						this.option.series.data.value = 0
-					}
-				})
+				if(this.measureResult.pressure != 0 && this.measureResult.SYS != 0){
+					this.$http.post('/platform/dataset/call_kw', {
+						model: "sphygmomanometer.jiakang",
+						method: "create",
+						args: [
+							[{
+								"name": "血压计 (静态血压计)",
+								"numbers": this.serviceId,
+								"owner": this.uid,
+								"systolic_blood_pressure": this.measureResult.SYS,
+								"tensioning_pressure": this.measureResult.DIA,
+								"heart_rate": this.measureResult.PUL,
+								"input_type": "equipment",
+								"test_time":this.formatDate(new Date())
+							}]
+						],
+						kwargs: {}
+					}).then(res => {
+						if (this.measureResult.pressure != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							this.measureResult.SYS = 0
+							this.measureResult.DIA = 0
+							this.measureResult.PUL = 0
+							this.measureResult.pressure = 0
+							this.option.series.data.value = 0
+						}else{
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							this.measureResult.SYS = 0
+							this.measureResult.DIA = 0
+							this.measureResult.PUL = 0
+							this.measureResult.pressure = 0
+							this.option.series.data.value = 0
+						}
+					})
+				}else{
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					this.measureResult.SYS = 0
+					this.measureResult.DIA = 0
+					this.measureResult.PUL = 0
+					this.measureResult.pressure = 0
+					this.option.series.data.value = 0
+				}
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -473,6 +513,42 @@
 					url: url
 				});
 
+			},
+
+			onPageSelectDocter(){
+				uni.navigateTo({
+					url:'/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+				})
+			},
+			onPageMonth(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth?uid='+this.uid,
+				})
+			},
+			onPageDevice(){
+				uni.navigateTo({
+					url: '/pages/mine/myDevice',
+				})
+			},
+			onPageWrite(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodPressure/manualEntry?uid='+this.uid,
+				})
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 
 		}
