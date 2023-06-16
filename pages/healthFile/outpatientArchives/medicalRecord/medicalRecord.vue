@@ -68,10 +68,12 @@
 						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<u-album
-							:urls="urls2"
+							:urls="[item.picture_1,item.picture_2,item.picture_3]"
 							@albumWidth="width => albumWidth = width"
 							multipleSize="100"
 						></u-album>
+
+
 					</view>
 
 					<!-- 6、分割线 -->
@@ -94,18 +96,18 @@
 		},
 		data() {
 			return {
-				urls2: [
-					'https://cdn.uviewui.com/uview/album/1.jpg',
-					'https://cdn.uviewui.com/uview/album/2.jpg',
-					'https://cdn.uviewui.com/uview/album/3.jpg',
-					'https://cdn.uviewui.com/uview/album/4.jpg',
-					'https://cdn.uviewui.com/uview/album/5.jpg',
-					'https://cdn.uviewui.com/uview/album/6.jpg',
-					'https://cdn.uviewui.com/uview/album/7.jpg',
-					'https://cdn.uviewui.com/uview/album/8.jpg',
-					'https://cdn.uviewui.com/uview/album/9.jpg',
-					'https://cdn.uviewui.com/uview/album/10.jpg',
-				],
+				// urls2: [
+				// 	'https://cdn.uviewui.com/uview/album/1.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/2.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/3.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/4.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/5.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/6.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/7.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/8.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/9.jpg',
+				// 	'https://cdn.uviewui.com/uview/album/10.jpg',
+				// ],
 				//显示的文本
 				showObj:{
 					curNow:0,
@@ -131,30 +133,6 @@
 				},
 				//数据
 				records:[
-					//测试用的数据
-					// {
-					// 	//用户id
-					// 	id:'',
-					// 	//病例id
-					// 	recordId:'',
-					// 	//门诊类型
-					// 	type:'急诊',
-					// 	//选择的日期
-					// 	selectedDate:'2023-5-31 10:00:00',
-					// 	//疾病名称
-					// 	illName:'感冒',
-					// 	//疾病备注
-					// 	illDiscription:'流鼻涕，发热',
-					// 	//图片
-					// 	imgs:[
-					// 		'../../../../static/icon/wechat.png',
-					// 		'../../../../static/icon/wechat2.png',
-					// 		'../../../../static/icon/wechat2.png',
-					// 		'../../../../static/icon/wechat2.png',
-					// 		'../../../../static/icon/wechat2.png',
-					// 		'../../../../static/icon/wechat2.png',
-					// 	],
-					// }
 				],
 				title:'门诊病例',
 				//点击添加跳转的路由
@@ -166,10 +144,22 @@
 		},
 
 		methods: {
+			previewImg(src,urls){
+				if(src){
+					uni.previewImage({
+						current:src,
+						urls
+					})
+				}
+			},
 			addMedicalRecord(){
 				uni.navigateTo({
 					url:this.tourl
 				});
+			},
+			//添加图片前缀
+			base64AddPrefix(base64img){
+				return 'data:image/png;base64,'+base64img;
 			},
 			//查询当前用户所有档案
 			getRecordsList(){
@@ -208,10 +198,22 @@
 						console.log(res)
 						//把传回来的值存入
 						this.records = res.data.result.records
-						//判断诊断类型
-						for(var record of this.records){
+						this.records.forEach(record=>{
+
+							//判断诊断类型
 							record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
-						}
+							//把图片前缀加上
+							if(record.picture_1){
+								record.picture_1 = this.base64AddPrefix(record.picture_1)
+							}
+							if(record.picture_2){
+								record.picture_2 = this.base64AddPrefix(record.picture_2)
+							}
+							if(record.picture_3){
+								record.picture_3 = this.base64AddPrefix(record.picture_3)
+							}
+							console.log(record)
+						})
 					},
 					fail:(err)=>{
 						uni.showToast({
@@ -232,6 +234,7 @@
 </script>
 
 <style lang="scss">
+
 	.content{
 		background-color: #FFFFFF;
 		height: 100%;

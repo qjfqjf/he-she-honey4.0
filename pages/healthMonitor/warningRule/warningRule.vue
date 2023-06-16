@@ -26,12 +26,12 @@
 							<uni-th class="table-body" width="200" height="100" align="center">红色预警（高级别预警）</uni-th>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td rowspan="2" class="table-body" height="80" align="center">血糖 </uni-td>
+							<uni-td class="table-body" height="80" align="center">血糖</uni-td>
 							<uni-td class="table-body" align="center" height="80">7.0<空腹血糖<16.7 </uni-td>
 							<uni-td class="table-body" align="center" height="80">空腹血糖<3.9或空腹血糖>16.7(空腹血糖>16.7应禁忌运动) </uni-td>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td class="table-body" align="center"></uni-td>
+							<uni-td class="table-body" height="80" align="center">血糖</uni-td>
 							<uni-td class="table-body" align="center" height="80">11.0<非空腹<16.7 </uni-td>
 							<uni-td class="table-body" align="center" height="80">非空腹血糖<3.9或非空腹>16.7(>16.7出现酮症的风险增加) </uni-td>
 						</uni-tr>
@@ -52,17 +52,17 @@
 						</uni-tr>
 
 						<uni-tr class="table-header" align="center">
-							<uni-td rowspan="3" width="40" class="table-body" align="center">随机</uni-td>
+							<uni-td width="40" class="table-body" align="center">随机</uni-td>
 							<uni-td class="table-body" height="50" align="center">测试时不选择血糖类型，默认为随机血糖</uni-td>
 							<uni-th class="table-body" width="40" height="50" align="center"></uni-th>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td rowspan="3" width="40" class="table-body" align="center"></uni-td>
+							<uni-td width="40" class="table-body" align="center">随机</uni-td>
 							<uni-td class="table-body" height="50" align="center">选择空腹，但上传时间在早上9:00之后</uni-td>
 							<uni-td width="40" class="table-body" align="center"></uni-td>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td rowspan="3" width="40" class="table-body" align="center"></uni-td>
+							<uni-td width="40" class="table-body" align="center">随机</uni-td>
 							<uni-td class="table-body" height="50" align="center">选择餐后2h，上传时间在0:00 - 9:00</uni-td>
 							<uni-td width="40" class="table-body" align="center"></uni-td>
 						</uni-tr>
@@ -72,17 +72,17 @@
 							<uni-td width="40" class="table-body" align="center"></uni-td>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td rowspan="3" width="40" class="table-body" align="center">餐后2小时</uni-td>
+							<uni-td width="40" class="table-body" align="center">餐后2小时</uni-td>
 							<uni-td class="table-body" height="50" align="center">选择餐后2h，且上传时间在中午12:00之前</uni-td>
 							<uni-td width="40" class="table-body" align="center">早餐后2小时</uni-td>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td width="40" class="table-body" align="center"></uni-td>
+							<uni-td width="40" class="table-body" align="center">餐后2小时</uni-td>
 							<uni-td class="table-body" height="50" align="center">还择餐后2h，且上传时问在12:00-18:00之问</uni-td>
 							<uni-td width="40" class="table-body" align="center">午餐后2小时</uni-td>
 						</uni-tr>
 						<uni-tr class="table-header" align="center">
-							<uni-td  width="40" class="table-body" align="center"></uni-td>
+							<uni-td width="40" class="table-body" align="center">餐后2小时</uni-td>
 							<uni-td class="table-body" height="50" align="center">选择餐后2h，且上传时间在18:00-24:00之间</uni-td>
 							<uni-td width="40" class="table-body" align="center">晚餐后2小时</uni-td>
 						</uni-tr>

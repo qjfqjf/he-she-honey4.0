@@ -2,7 +2,7 @@
 
 	<view class="b-content p-2">
 		<z-nav-bar title="血压历史">
-			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
+			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
 		<!-- 	<view class="time d-flex j-sb">
@@ -44,6 +44,8 @@
 	export default {
 		data() {
 			return {
+				uid:0,
+				userInfo:'',
 				dataList: [
 					// {
 					// 	position: "左侧",
@@ -76,6 +78,10 @@
 				]
 			};
 		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			handleDevelop() {
 				this.$refs.uToast.show({
@@ -86,6 +92,7 @@
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "sphygmomanometer.jiakang",
+					domain:[["owner.id","=",this.uid]],
 					fields: [
 						"name",
 						"numbers",
@@ -99,9 +106,22 @@
 				}).then(res => {
 					this.dataList = res.result.records
 				})
-			}
+			},
+			handleWarningRule(){
+				uni.navigateTo({
+					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
+				});
+			},
 		},
-		onLoad() {
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
 			this.getHistoryList();
 		},
 	}
