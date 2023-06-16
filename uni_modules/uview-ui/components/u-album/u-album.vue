@@ -89,7 +89,7 @@ export default {
             // 单图的高度
             singleHeight: 0,
             // 单图时，如果无法获取图片的尺寸信息，让图片宽度默认为容器的一定百分比
-            singlePercent: 0.6
+            singlePercent: 0.3
         }
     },
     watch: {
@@ -170,6 +170,7 @@ export default {
     methods: {
         // 预览图片
         onPreviewTap(url) {
+            console.log(url)
             const urls = this.urls.map((item) => {
                 return this.getSrc(item)
             })

@@ -29,44 +29,22 @@
 						<text class="cate-text">{{addText.uploadImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<view class="example-body" style="display: flex;">
-<!--							<u-album-->
-<!--									:urls="imgList1"-->
-<!--									@albumWidth="width => albumWidth = width"-->
-<!--									multipleSize="100"-->
-<!--                  previewFullImagepreviewFullImage="true"-->
-<!--							></u-album>-->
-														<view class="img" v-for="(item, index) in imgList1" :key="index" >
-															<image :src="item" mode="aspectFill" @click="showImage(index)"></image>
-															<view class="deleteBtn" @click="removeImg(index)">x</view>
-														</view>
+						<view class="img" v-for="(item, index) in imgList1" :key="index" >
+							<image :src="item" mode="aspectFill" @click="showImage(index)"></image>
+							<view class="deleteBtn" @click="removeImg(index)">x</view>
+						</view>
 <!--							添加按钮-->
 							<view class="addImg" @click="addImg" v-if="number < 3"> + </view>
 
 						</view>
 						<text class="tip">（友情提示：最多添加3张图片）</text>
 
-						<!--图片点击放大-->
+						<!--图片放大-->
 						<view class="imageOverlay" v-show="isOverlayVisible" @click="hideImage"></view>
 						<view class="enlargedImageView" v-show="isOverlayVisible">
 							<image :src="getEnlargedImageUrl" mode="aspectFit"></image>
 						</view>
 					</view>
-
-
-
-					<!-- 2、上传照片 -->
-					<!--					<view class="uploadImage">-->
-					<!--						<text class="cate-text">{{addText.uploadImgText}}</text>-->
-					<!--						<view style="height: 20rpx"></view>-->
-					<!--						<view class="example-body" style="display: flex;">-->
-					<!--							<view class="img" v-for="(item,index) in imgList" :key="index" >-->
-					<!--								<image :src="item.url" mode="aspectFill"></image>-->
-					<!--								<view class="deleteBtn" @click="removeImg(index)">x</view>-->
-					<!--							</view>-->
-					<!--							<view class="addImg" @click="addImg" v-if="number <= 3"> + </view>-->
-					<!--						</view>-->
-					<!--						<text class="tip">（友情提示：最多添加3张图片）</text>-->
-					<!--					</view>-->
 
 					<!-- 3、疾病和备注 -->
 					<view class="remarks">
@@ -115,17 +93,6 @@ export default {
 
 	data() {
 		return {
-			urls2: [
-				'https://cdn.uviewui.com/uview/album/2.jpg',
-				'https://cdn.uviewui.com/uview/album/3.jpg',
-				'https://cdn.uviewui.com/uview/album/4.jpg',
-				'https://cdn.uviewui.com/uview/album/5.jpg',
-				'https://cdn.uviewui.com/uview/album/6.jpg',
-				'https://cdn.uviewui.com/uview/album/7.jpg',
-				'https://cdn.uviewui.com/uview/album/8.jpg',
-				'https://cdn.uviewui.com/uview/album/9.jpg',
-				'https://cdn.uviewui.com/uview/album/10.jpg',
-			],
 			number:0,//图片数量
 			title: "门诊病例",
 			imgList: [], // 图片列表数据
@@ -343,8 +310,6 @@ export default {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	max-width: 80%;
-	max-height: 80%;
 	z-index: 101;
 }
 

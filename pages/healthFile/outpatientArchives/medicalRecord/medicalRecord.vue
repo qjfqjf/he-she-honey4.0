@@ -67,9 +67,10 @@
 					<view class="remarks">
 						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
 						<view style="height: 20rpx"></view>
+
 						<u-album
 							:previewFullImage="true"
-							:urls="[item.picture_1,item.picture_2,item.picture_3]"
+							:urls="imgs[index]"
 							:multipleSize="100"
 						></u-album>
 
@@ -89,6 +90,7 @@
 <script>
 	import emptyState from "../components/emptyState.vue";
 	import headerNav from "../components/headerNav.vue";
+	import {base64ToPath} from "../../../../uni_modules/mmmm-image-tools_1.4.0";
 	export default {
 		components:{
 			headerNav,
@@ -133,6 +135,10 @@
 				},
 				//数据
 				records:[
+				],
+				//图片列表
+				imgs:[
+					[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],
 				],
 				title:'门诊病例',
 				//点击添加跳转的路由
@@ -190,26 +196,30 @@
 						console.log(res)
 						//把传回来的值存入
 						this.records = res.data.result.records
-						this.records.forEach(record=>{
+						this.records.forEach((record,index)=>{
 
 							//判断诊断类型
 							record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
-							//把图片前缀加上
+							//把图片前缀加上并且转化为正常路径
 							if(record.picture_1){
 								record.picture_1 = this.base64AddPrefix(record.picture_1)
+								this.imgs[index].push(record.picture_1)
 							}else{
 								record.picture_1 = ''
 							}
 							if(record.picture_2){
 								record.picture_2 = this.base64AddPrefix(record.picture_2)
+								this.imgs[index].push(record.picture_2)
 							}else{
 								record.picture_2 = ''
 							}
 							if(record.picture_3){
 								record.picture_3 = this.base64AddPrefix(record.picture_3)
+								this.imgs[index].push(record.picture_3)
 							}else{
 								record.picture_3 = ''
 							}
+
 							console.log(record)
 						})
 					},
@@ -220,9 +230,6 @@
 					}
 				})
 			},
-
-
-
 		},
 
 		onLoad(){
