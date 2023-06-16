@@ -68,12 +68,12 @@
 						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
 						<view style="height: 20rpx"></view>
 
-						<u-album
-							:previewFullImage="true"
-							:urls="imgs[index]"
-							:multipleSize="100"
-						></u-album>
 
+						<view style="display: flex">
+							<view class="img" v-for="(img, indexin) in imgs[index]" :key="index" style="display: flex;">
+								<image :src="img" @click="showImage(indexin,imgs[index])" style="flex: 1; object-fit: contain;" mode="aspectFill"></image>
+							</view>
+						</view>
 
 					</view>
 
@@ -90,7 +90,6 @@
 <script>
 	import emptyState from "../components/emptyState.vue";
 	import headerNav from "../components/headerNav.vue";
-	import {base64ToPath} from "../../../../uni_modules/mmmm-image-tools_1.4.0";
 	export default {
 		components:{
 			headerNav,
@@ -98,18 +97,6 @@
 		},
 		data() {
 			return {
-				// urls2: [
-				// 	'https://cdn.uviewui.com/uview/album/1.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/2.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/3.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/4.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/5.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/6.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/7.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/8.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/9.jpg',
-				// 	'https://cdn.uviewui.com/uview/album/10.jpg',
-				// ],
 				//显示的文本
 				showObj:{
 					curNow:0,
@@ -150,6 +137,12 @@
 		},
 
 		methods: {
+			showImage(indexin,imgs){
+				uni.previewImage({
+					urls:imgs,
+					current:indexin
+				})
+			},
 			addMedicalRecord(){
 				uni.navigateTo({
 					url:this.tourl
@@ -239,10 +232,31 @@
 </script>
 
 <style lang="scss">
-
 	.content{
 		background-color: #FFFFFF;
 		height: 100%;
+		.img image {
+			width: 200rpx;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.img {
+			position: relative;
+			font-size: 70rpx;
+			margin-bottom: 10px;
+			width: 200rpx;
+			/* 设置合适的宽度 */
+			height: 200rpx;
+			/* 设置合适的高度 */
+			display: flex;
+			/* 设置为 flex 布局 */
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-right: 40rpx;
+		}
 		.nothing{
 			text-align: center;
 			padding-top: 300rpx;
@@ -271,7 +285,6 @@
 				padding: 20rpx;
 
 			}
-
 			.remarks {
 				margin-top: 14rpx;
 				padding: 20rpx;
