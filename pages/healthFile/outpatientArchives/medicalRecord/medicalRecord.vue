@@ -68,9 +68,9 @@
 						<text class="cate-text" style="margin-left: 20rpx">{{showObj.ImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<u-album
+							:previewFullImage="true"
 							:urls="[item.picture_1,item.picture_2,item.picture_3]"
-							@albumWidth="width => albumWidth = width"
-							multipleSize="100"
+							:multipleSize="100"
 						></u-album>
 
 
@@ -144,14 +144,6 @@
 		},
 
 		methods: {
-			previewImg(src,urls){
-				if(src){
-					uni.previewImage({
-						current:src,
-						urls
-					})
-				}
-			},
 			addMedicalRecord(){
 				uni.navigateTo({
 					url:this.tourl
@@ -159,7 +151,7 @@
 			},
 			//添加图片前缀
 			base64AddPrefix(base64img){
-				return 'data:image/png;base64,'+base64img;
+				return 'data:image/jpg;base64,'+base64img;
 			},
 			//查询当前用户所有档案
 			getRecordsList(){
@@ -173,7 +165,7 @@
 					method:'post',
 					data: {
 						params:{
-							model:'inpatient.medical.records',
+							model:'outpatient.medical.records',
 							token:token,
 							uid:uid,
 							domain:[["patient_id","=",uid]],
@@ -205,12 +197,18 @@
 							//把图片前缀加上
 							if(record.picture_1){
 								record.picture_1 = this.base64AddPrefix(record.picture_1)
+							}else{
+								record.picture_1 = ''
 							}
 							if(record.picture_2){
 								record.picture_2 = this.base64AddPrefix(record.picture_2)
+							}else{
+								record.picture_2 = ''
 							}
 							if(record.picture_3){
 								record.picture_3 = this.base64AddPrefix(record.picture_3)
+							}else{
+								record.picture_3 = ''
 							}
 							console.log(record)
 						})

@@ -276,7 +276,7 @@ export default {
 				data: {
 					params: {
 						//注意！！查接口文档
-						model: "inpatient.medical.records",
+						model: "outpatient.medical.records",
 						token: token,
 						uid: uid,
 						method: "create",
