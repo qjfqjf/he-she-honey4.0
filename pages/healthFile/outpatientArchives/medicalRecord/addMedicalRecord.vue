@@ -29,16 +29,16 @@
 						<text class="cate-text">{{addText.uploadImgText}}</text>
 						<view style="height: 20rpx"></view>
 						<view class="example-body" style="display: flex;">
-							<u-album
-									:urls="imgList1"
-									@albumWidth="width => albumWidth = width"
-									multipleSize="100"
-                  previewFullImagepreviewFullImage="true"
-							></u-album>
-							<!--							<view class="img" v-for="(item, index) in imgList" :key="index" >-->
-							<!--								<image :src="item.url" mode="aspectFill" @click="showImage(index)"></image>-->
-							<!--								<view class="deleteBtn" @click="removeImg(index)">x</view>-->
-							<!--							</view>-->
+<!--							<u-album-->
+<!--									:urls="imgList1"-->
+<!--									@albumWidth="width => albumWidth = width"-->
+<!--									multipleSize="100"-->
+<!--                  previewFullImagepreviewFullImage="true"-->
+<!--							></u-album>-->
+														<view class="img" v-for="(item, index) in imgList1" :key="index" >
+															<image :src="item" mode="aspectFill" @click="showImage(index)"></image>
+															<view class="deleteBtn" @click="removeImg(index)">x</view>
+														</view>
 							<view class="addImg" @click="addImg" v-if="number < 3"> + </view>
 
 						</view>
@@ -190,8 +190,8 @@ export default {
 
 	computed: {
 		getEnlargedImageUrl() {
-			if (this.currentImageIndex >= 0 && this.currentImageIndex < this.imgList.length) {
-				return this.imgList[this.currentImageIndex].url;
+			if (this.currentImageIndex >= 0 && this.currentImageIndex < this.imgList1.length) {
+				return this.imgList1[this.currentImageIndex];
 			}
 			return '';
 		}
@@ -212,40 +212,20 @@ export default {
 				sourceType: ['album', 'camera'],
 				success(res) {
 					that.number++;
-					that.createBlobUrl(res.tempFiles, (convertedFiles) => {
-						// that.imgList = that.imgList.concat(convertedFiles);
-						// that.imgList1 = [];
-						// for(let i = 0; i <= that.imgList.length; i++){
-						// 	that.imgList1.push(that.imgList[i].url)
-						// }
+					res.tempFiles.forEach((file, index) => {
+						pathToBase64(file.path).then(base64 => {
+							that.imgList1.push(base64)
+							console.log(that.imgList1)
+						})
 					});
 				}
 			});
 		},
 		removeImg(index){
-			this.imgList.splice(index,1)
+			this.imgList1.splice(index,1)
 			this.number--;
 		},
-		//这个方法里面的FileReader类在安卓和小程序里面是没有的
-		createBlobUrl(files, callback) {
-			// const convertedFiles = [];
-			// let convertedCount = 0;
-			files.forEach((file, index) => {
-				pathToBase64(file.path).then(base64 => {
-					this.imgList1.push(base64)
-				})
-				// const reader = new FileReader();
-				// reader.onload = (e) => {
-				// 	file.url = e.target.result;
-				// 	convertedCount++;
-				//
-				// 	if (convertedCount === files.length) {
-				// 		callback(convertedFiles);
-				// 	}
-				// };
-				// reader.readAsDataURL(file);
-			});
-		},
+
 
 		//时间格式转换
 		formatDate(date) {
