@@ -24,21 +24,22 @@
 			</u-collapse-item>
 			<u-collapse-item title="运动习惯" name="Variety components" class="item">
 				<view>
-					<view class="uni-form-item uni-column" v-for="(info,index) in sportLists">
+					<view class="uni-form-item uni-column" v-for="(info, index) in sportLists">
 						<view class="m-2 font-md font-weight">{{ info.question }}</view>
 
 						<view class="mt-4 ml-2">
 							<view class="input-wrapper">
 								<label>{{ info.subTitle }}</label>
 								<input type="text" class="uni-input input" maxlength="10" placeholder="请输入"
-									database="database" :disabled="disableInput[index]" />
+									database="database" :disabled="sportDisableInput[index]" @input="handInput" />
 							</view>
 							<view>
 								<u-checkbox-group :v-model="radioGroupValue">
 									<view>
 										<view>
 											<u-checkbox v-for="item in info.choice" :customStyle="{ marginBottom: '8px' }"
-												:name="item" :label="item" @change="updateInputStatus"></u-checkbox>
+												:name="item" :label="item"
+												@change="updateSportInputStatus(index)"></u-checkbox>
 										</view>
 									</view>
 								</u-checkbox-group>
@@ -59,14 +60,15 @@
 								<view v-for="dex in info.subTitle" class="input-wrapper">
 									<label>{{ dex }}</label>
 									<input type="text" class="uni-input input" maxlength="10" placeholder="请输入"
-										database="database" :disabled="disableInput[9]" />
+										database="database" :disabled="disableInput" />
 								</view>
 								<view>
 									<u-checkbox-group :v-model="radioGroupValue">
 										<view>
 											<view>
-												<u-checkbox v-for="item in info.choice" :customStyle="{ marginBottom: '8px' }"
-													:name="item" :label="item" @change="updateInputStatus(9)"></u-checkbox>
+												<u-checkbox v-for="item in info.choice"
+													:customStyle="{ marginBottom: '8px' }" :name="item" :label="item"
+													@change="updateInputStatus"></u-checkbox>
 											</view>
 										</view>
 									</u-checkbox-group>
@@ -107,9 +109,15 @@ import UButton from "../../../uni_modules/uview-ui/components/u-button/u-button.
 export default {
 	data() {
 		return {
-			disableInput: Array(10).fill(false),
+			dex: false,
+			sportDisableInput: Array(8).fill(false),
+			inputValue: '',
+			disableInput: false,
 			radioGroupValue: true,
 			show: false,
+			habitAnswer: [],
+			sportAnswer: [],
+			hobbyAnswer: [],
 			habitList: [
 				{
 					question: "每日进餐情况是否规律",
@@ -237,9 +245,26 @@ export default {
 		inputAndChoiceForm
 	},
 	methods: {
-		updateInputStatus(e) {
+		handInput(event) {
+			this.inputValue = event.target.value;
+		},
+		updateSportInputStatus(e) {
+			this.sportDisableInput.splice(e, 1, !this.sportDisableInput[e]);
+
+
+			console.log(this.sportDisableInput);
+		},
+		updateInputStatus() {
+			this.disableInput = !this.disableInput;
 			console.log(this.disableInput);
-			this.disableInput[e] = !this.disableInput[e];
+
+		},
+		updateAnswer(e) {
+			if (this.disableInput == true) {
+				this.sportAnswer[e] = 'false';
+			} else {
+				this.sportAnswer[e] = this.inputValue;
+			}
 		},
 		open(e) {
 			// console.log('open', e)
@@ -249,6 +274,14 @@ export default {
 		},
 		change(e) {
 			// console.log('change', e)
+		}
+	},
+	watch: {
+		'sportLists.length': function (newValue, oldVal) {
+			if (newValue > oldVal) {
+				this.updateAnswer(oldValue,);
+				console.log(this.sportAnswer);
+			}
 		}
 	}
 }

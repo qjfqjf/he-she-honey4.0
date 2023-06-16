@@ -17,18 +17,18 @@
                         <view class="">{{ list.questions }}</view>
                         <doc-choice :cell-choice="list.options" :isDisabled="disabled[index]"/>
                         <u-checkbox-group @change="changeDisabled(index)">
-                            <u-checkbox v-if="index==0 || index==2 || index==3" 
+                            <u-checkbox v-show="index==0 || index==2 || index==3" 
                                     @change="show=true" 
                                     class="mt-4 ml-2 checkbox-item"
                                     :customStyle="{marginBottom: '8px'}"
                                     label="其他"
                                     ></u-checkbox>
-                        <u-checkbox v-else
-                                    class="mt-4 ml-2 checkbox-item"
-                                    :customStyle="{marginBottom: '8px'}"
-                                    label="无"></u-checkbox>
-                        </u-checkbox-group>
-                        
+                            <u-checkbox v-show="index!=0 && index!=2 && index!=3"
+                                        class="mt-4 ml-2 checkbox-item"
+                                        :customStyle="{marginBottom: '8px'}"
+                                        label="无"
+                                        ></u-checkbox>
+                            </u-checkbox-group>   
                     </view>
                 </u-collapse-item>
             </u-collapse>
@@ -103,7 +103,8 @@ export default {
     },
     methods: {
         changeDisabled(index){
-            this.disabled[index]=!this.disabled[index];
+            this.disabled.splice(index, 1, !this.disabled[index]);
+            console.log(this.disabled);
         },
         open(e) {
             // console.log('open', e)
