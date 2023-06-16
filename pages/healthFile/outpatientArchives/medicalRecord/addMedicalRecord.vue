@@ -39,6 +39,7 @@
 															<image :src="item" mode="aspectFill" @click="showImage(index)"></image>
 															<view class="deleteBtn" @click="removeImg(index)">x</view>
 														</view>
+<!--							添加按钮-->
 							<view class="addImg" @click="addImg" v-if="number < 3"> + </view>
 
 						</view>
@@ -198,6 +199,15 @@ export default {
 	},
 	//方法
 	methods: {
+		//移除前缀
+		base64RemovePrefix(base64List){
+			let list = []
+			base64List.forEach((url)=>{
+				list.push(url.substring(23))
+			})
+			return list;
+		},
+
 		showImage(index) {
 			this.currentImageIndex = index;
 			this.isOverlayVisible = true;
@@ -215,7 +225,6 @@ export default {
 					res.tempFiles.forEach((file, index) => {
 						pathToBase64(file.path).then(base64 => {
 							that.imgList1.push(base64)
-							console.log(that.imgList1)
 						})
 					});
 				}
@@ -257,6 +266,8 @@ export default {
 			const uid = userInfo.uid;
 			const token = userInfo.token;
 			const _this = this;
+			//把图片的前缀删除
+			this.imgList = this.base64RemovePrefix(this.imgList1)
 			//把疾病类型转化成正确字段存储
 			this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
 			uni.request({
@@ -291,8 +302,6 @@ export default {
 					}
 				},
 				success(res) {
-					//测试
-					console.log(res)
 					uni.showToast({
 						title: '保存成功',
 						duration: 1000,
@@ -395,7 +404,7 @@ export default {
 				margin-right: 40rpx;
 			}
 			.deleteBtn {
-				font-size: 20rpx;
+				font-size: 28rpx;
 				position: absolute;
 				top: 10rpx;
 				right: 10rpx;
