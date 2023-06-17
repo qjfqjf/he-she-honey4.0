@@ -103,8 +103,9 @@
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" >
 						<navigator :url="listItem.path">
-							<img class="appManeger_block_icon" :src="listItem.icon"
-								 style="height:100rpx; width:100rpx" />
+							<u--image class="appManeger_block_icon" :src="listItem.icon"
+										:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
+									</u--image>
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
 					</u-grid-item>
