@@ -265,7 +265,7 @@
 		methods: {
 			selectImg(e){
 				console.log("绑定上",e);
-				this.appManage[4].icon=e.icon;
+				this.appManage[4].icon="/"+e.icon;
 				this.appManage[4].name=e.name;
 				this.appManage[4].path=e.path;
 				// this.appManage.splice(4,1,e)
