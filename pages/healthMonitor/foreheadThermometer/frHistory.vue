@@ -99,7 +99,7 @@
 				}
 
 				.value {
-					color: $font-color;
+					color: #2bc1a2
 				}
 			}
 
