@@ -90,6 +90,7 @@
 <script>
 	import emptyState from "../components/emptyState.vue";
 	import headerNav from "../components/headerNav.vue";
+	import {base64ToPath} from "../../../../uni_modules/mmmm-image-tools_1.4.0";
 	export default {
 		components:{
 			headerNav,

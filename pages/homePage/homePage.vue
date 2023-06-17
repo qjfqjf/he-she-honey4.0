@@ -98,6 +98,7 @@
 		</u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
 			<u-gap height="10"></u-gap>
+
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" >
@@ -109,6 +110,66 @@
 						</navigator>
 					</u-grid-item>
 				</u-grid>
+
+				<u-gap height="20"></u-gap>
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem,listIndex) in otherFunction" :key="listIndex" >-->
+<!--						<navigator :url="listItem.path">-->
+<!--							<u&#45;&#45;image class="appManeger_block_icon" :src="listItem.icon"-->
+<!--												 height="130upx" width="300upx">-->
+<!--							</u&#45;&#45;image>-->
+<!--							<u&#45;&#45;text :text="listItem.name" align="center"></u&#45;&#45;text>-->
+<!--						</navigator>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">-->
+<!--						<navigator :url="listItem.path">-->
+<!--							<div style="position: relative;">-->
+<!--								<u-image class="appManeger_block_icon" :src="listItem.icon" height="130upx" width="300upx" style="border-radius: 20px;"></u-image>-->
+<!--								<u-text :text="listItem.name" align="center" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; color: #fff;"></u-text>-->
+<!--							</div>-->
+<!--						</navigator>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">-->
+<!--						<div style="position: relative; display: inline-block;" @click="dev">-->
+<!--							<u-image class="appManeger_block_icon" :src="listItem.icon" height="130upx" width="300upx" style="border-radius: 10px;"></u-image>-->
+<!--							<text align="left" style="position: absolute; top: 44rpx; left: 20rpx; font-weight: bold; font-size: 16px; color: black;">{{listItem.name}}</text>-->
+<!--							<text align="left" style="position: absolute; top: 100rpx; left: 20rpx; font-weight: bold; font-size: 16px; color: black;">{{listItem.name}}</text>-->
+<!--						</div>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+				<u-grid :border="false" col="2">
+					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">
+						<div style="position: relative; display: inline-block;" @click="dev">
+							<u-image class="appManeger_block_icon" :src="listItem.icon" height="150upx"
+											 width="330upx" style="border-radius: 10px;">
+
+							</u-image>
+							<text align="left" style="position: absolute; top: 44rpx;
+							left: 20rpx; font-weight: bold; font-size: 30rpx; color: black;">{{ listItem.name }}
+							</text>
+							<button style="position: absolute; border-radius: 10px;
+							height:60rpx ;width: 120rpx ;top: 110rpx; left: 20rpx; font-weight: bold;
+							font-size: 10rpx; color: white; background-color:rgb(130, 220, 100);  border: none;">{{ listItem.discription }}
+							</button>
+						</div>
+					</u-grid-item>
+				</u-grid>
+
+
+
+
+
+
 				<u-toast ref="uToast" />
 			</view>
 		</view>
@@ -123,7 +184,8 @@
 		wisperImage,
 		appManage,
 		appFeature,
-		homePageIcons
+		homePageIcons,
+		otherFunction,
 	} from "../../static/js/homePage/staticData";
 	import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
 	import home from "../template/home.vue";
@@ -142,6 +204,7 @@
 				appManage,
 				appFeature,
 				homePageIcons,
+				otherFunction,
 				token: uni.getStorageSync('access-token'),
 				doctorId: 0,
 				userInfo: '',
@@ -300,14 +363,12 @@
 				console.log()
 			},
 			//开发中。。。
-			// dev(listIndex){
-			// 	if (listIndex >= 7) {
-			// 		uni.showToast({
-			// 			title: "开发中...",
-			// 			icon: "none"
-			// 		})
-			// 	}
-			// },
+			dev(){
+				uni.showToast({
+					title: "开发中...",
+					icon: "none"
+				})
+			},
 			async handleScan() {
 				const _this = this
 				await uni.scanCode({
