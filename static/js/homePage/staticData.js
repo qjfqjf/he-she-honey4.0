@@ -56,6 +56,23 @@ export const appManage = [{
 
 
 ]
+
+
+export const otherFunction = [
+	{
+	name: "商城",
+	discription:"好礼不断>",
+	icon: "/static/icon/homePage/shop.png",
+	path: "/pages/healthMonitor/index"
+	},
+	{
+		name: "直播",
+		discription:"排忧解难>",
+		icon: "/static/icon/homePage/live.png",
+		path: "/pages/healthFile/index"
+	},
+
+]
 export const appFeature = [
 	[{
 			name: "医疗",
