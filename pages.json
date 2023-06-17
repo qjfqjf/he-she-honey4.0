@@ -1571,6 +1571,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/calendar/calendar",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

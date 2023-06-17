@@ -68,7 +68,7 @@
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<u-button class="rightRoundButton shadow-lg border">
+			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
 					style="background-color: #18b566; color: aliceblue;">提醒</view>
 			</u-button>
@@ -273,6 +273,11 @@
 				this.appManage[4].name = this.appManage[4].name+"服务"
 				console.log(e);
 				console.log(this.appManage[4]);
+			},
+			toCalendar(){
+				uni.navigateTo({
+					url:"/pages/calendar/calendar",
+				})
 			},
 			openBlue() {
 				console.log('--------------------检查蓝牙是否开启--------------------');
