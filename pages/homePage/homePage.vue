@@ -234,6 +234,7 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			//拿到用户列表
 			this.getRelationList()
 			console.log(this.userList)
 			if (!this.token) {
@@ -270,9 +271,6 @@
 				this.appManage[4].icon=e.icon;
 				this.appManage[4].name=e.name;
 				this.appManage[4].path=e.path;
-				// this.appManage.splice(4,1,e)
-				// Vue.set(this.appManage[4],"name",this.appManage[4].name+"服务")
-				// this.$set(this.appManage[4],'name',this.appManage[4].name+"服务")
 				this.appManage[4].name = this.appManage[4].name+"服务"
 				console.log(e);
 				console.log(this.appManage[4]);
