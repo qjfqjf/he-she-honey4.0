@@ -206,6 +206,7 @@
 				homePageIcons,
 				otherFunction,
 				token: uni.getStorageSync('access-token'),
+				uid:'',
 				doctorId: 0,
 				userInfo: '',
 				defaultSelect: 0, //默认选中下标，从0开始
@@ -231,9 +232,11 @@
 		},
 		//第一次加载
 		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
-
+			this.getRelationList()
+			console.log(this.userList)
 			if (!this.token) {
 				uni.navigateTo({
 					url: '/pages/login/login',
@@ -259,7 +262,7 @@
 
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 
-			this.getRelationList()
+
 		},
 		//方法
 		methods: {
@@ -348,11 +351,13 @@
 
 			// 获取亲属关系列表
 			getRelationList() {
+				console.log('执行getRelationList')
 				this.$http
 					.post('/getRelatives', {
 						uid: this.userInfo.uid,
 					})
 					.then((res) => {
+						console.log('res:',res)
 						this.userList = res.result.result.map((item) => {
 							return {
 								...item,
@@ -361,7 +366,6 @@
 							}
 						})
 						this.currentUser = this.userList[0]
-						console.log(this.userList)
 					})
 			},
 			bindUser() {
@@ -410,13 +414,32 @@
 				// console.log(this.doctorId)
 
 			},
+
+
 			changeHeadImg(index) {
 				// console.log(this.currentUser)
 				// console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
+				//登录一下获取一下token
+				uni.request({
+							url: 'http://106.14.140.92:8881/platform/login',
+							method: 'post',
+							data: {
+								params: {
+									login:this.currentUser.login,
+									password:'123456'
+								},
+							},
+							success: (res) => {
+								uni.setStorageSync('access-token', res.data.result.data.token)
+							}
+				})
+
 				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
 				console.log(this.currentUser)
 			},
+
+
 			addUser() {
 				this.$http.post('/platform/dataset/call_kw', {
 					model: "res.users",

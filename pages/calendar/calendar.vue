@@ -1,5 +1,7 @@
 <template>
 	<view class="container">
+		<z-nav-bar title="提醒"></z-nav-bar>
+		<public-module></public-module>
 		<uni-calendar 
 		:insert="true"
 		:lunar="true"
