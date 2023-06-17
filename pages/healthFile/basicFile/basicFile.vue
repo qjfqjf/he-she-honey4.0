@@ -62,11 +62,10 @@ export default {
 	components: { ReadList, UButton, DocChoice },
 	data() {
 		return {
-			data1:[1,2,3],
 			Records: [
 				{
 					model: 'contract.information',
-					domain: [["id", "=", this.uid]],
+					// domain: [["user_id", "=", this.uid]],
 					fields: [
 						//签约日期
 						"sign_contract_time",
@@ -78,7 +77,7 @@ export default {
 				},
 				{
 					model: 'res.users',
-					domain: [["id", "=", this.uid]],
+					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//身份证号
 						"login",
@@ -119,7 +118,7 @@ export default {
 				},
 				{
 					model: 'past.history',
-					domain: [["id", "=", this.uid]],
+					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//检查类别
 						"data_name",
@@ -130,7 +129,7 @@ export default {
 				},
 				{
 					model: 'family.history',
-					domain: [["id", "=", this.uid]],
+					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//检查类别
 						"data_name",
@@ -186,13 +185,15 @@ export default {
 			console.log(userInfo);
 			this.uid = userInfo.uid;
 			console.log(this.uid);
-			const token = userInfo.token;
-			this.$http
+				const token = userInfo.token;
+				this.$http
 					.post(this.toUrl2,{
 						model:this.Records[this.current].model,
-						domain:[["id", "=", this.uid]],
+						domain:[["user_id", "=", this.uid]],
 						fields:this.Records[this.current].fields
 					}).then(res=>{
+						console.log(res);
+						console.log(res.result.records[0]);
 						this.data = Object.values(res.result.records[0]);
 						//测试
 						console.log(this.data)

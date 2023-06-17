@@ -12,7 +12,7 @@
 							<view>
 								<view>
 									<u-radio v-for="item in info.choice" class="mt-4 ml-2"
-										:customStyle="{ marginBottom: '8px' }" :name="item" :checked="false">{{ item
+										:customStyle="{ marginBottom: '8px' }" :name="item" :checked="false" @change="updateHabitAnswer(item)">{{ item
 										}}</u-radio>
 								</view>
 							</view>
@@ -259,8 +259,11 @@ export default {
 			console.log(this.disableInput);
 
 		},
-		updateAnswer(e) {
-			if (this.disableInput == true) {
+		updateHabitAnswer(e){
+			console.log(e);
+		},
+		updateSportAnswer(e) {
+			if (this.sportDisableInput[e] == true) {
 				this.sportAnswer[e] = 'false';
 			} else {
 				this.sportAnswer[e] = this.inputValue;
@@ -277,12 +280,7 @@ export default {
 		}
 	},
 	watch: {
-		'sportLists.length': function (newValue, oldVal) {
-			if (newValue > oldVal) {
-				this.updateAnswer(oldValue,);
-				console.log(this.sportAnswer);
-			}
-		}
+		
 	}
 }
 </script>
