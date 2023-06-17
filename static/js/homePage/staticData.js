@@ -77,29 +77,29 @@ export const appFeature = [
 	[{
 			name: "医疗",
 			icon: "static/icon/homePage/medical.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/medical"
 		},
 		{
 			name: "保健",
 			icon: "static/icon/homePage/healthCare.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/healthCare"
 
 		},
 		{
 			name: "体检",
 			icon: "static/icon/homePage/physicalExamination.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/physicalExamination"
 
 		},
 		{
 			name: "心理",
 			icon: "static/icon/homePage/psychology.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/psychology"
 		},
 		{
 			name: "美容",
 			icon: "static/icon/homePage/cosmetic.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/cosmetic"
 		}
 	],
 	[{
@@ -115,7 +115,7 @@ export const appFeature = [
 		{
 			name: "助残",
 			icon: "static/icon/homePage/zhucan.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/zhucan"
 		},
 		{
 			name: "商城",
