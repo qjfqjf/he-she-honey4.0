@@ -11,7 +11,7 @@
 					<div class="d-flex j-center a-center ">
 						<img :src="homePageIcons.Bp.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h4 style="font-size: 30upx">高压</h4>
+							<!-- <h4 style="font-size: 30upx">高压</h4> -->
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">
@@ -29,7 +29,7 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.Glu.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h4 style="font-size: 30upx">低压</h4>
+							<!-- <h4 style="font-size: 30upx">低压</h4> -->
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
@@ -47,7 +47,7 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.UricAcid.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h4 style="font-size: 30upx">血尿酸</h4>
+							<!-- <h4 style="font-size: 30upx">血尿酸</h4> -->
 						</span>
 					</div>
 				</view>
@@ -100,7 +100,7 @@
 			<u-gap height="10"></u-gap>
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
-					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" >
+					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
 						<navigator :url="listItem.path">
 							<u--image class="appManeger_block_icon" :src="listItem.icon"
 								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
@@ -130,7 +130,9 @@
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	import $http from '@/config/requestConfig.js';
 	import HeadImgList from "@/components/head-img/head-img.vue";
+	
 	export default {
+		
 		computed: {
 			home() {
 				return home
@@ -164,7 +166,8 @@
 		components: {
 			UButton,
 			UImage,
-			HeadImgList
+			HeadImgList,
+			
 		},
 		//第一次加载
 		onLoad(e) {
@@ -202,7 +205,7 @@
 		methods: {
 			openBlue() {
 				console.log('--------------------检查蓝牙是否开启--------------------');
-				if(plus.os.name == 'Android'){
+				if (plus.os.name == 'Android') {
 					//引入java蓝牙类
 					let BluetoothAdapter = plus.android.importClass("android.bluetooth.BluetoothAdapter");
 
@@ -231,8 +234,8 @@
 									} else {
 										// 点击取消
 										uni.showToast({
-											title:"请尽快打开蓝牙！",
-											icon:'none'
+											title: "请尽快打开蓝牙！",
+											icon: 'none'
 										})
 									}
 								}

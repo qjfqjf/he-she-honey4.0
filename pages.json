@@ -508,6 +508,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/healthMonitorData",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/mine/setting",
 			"style": {
 				"navigationBarTitleText": "",

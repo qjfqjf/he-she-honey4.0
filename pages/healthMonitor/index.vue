@@ -15,6 +15,15 @@
 				</u-grid-item>
 			</u-grid>
 		</view>
+		<view class="container">
+			<view class="submit">
+				<u-button type="primary" class="submit-btn" text="手动录入"></u-button>
+			</view>
+			<view class="select">
+				<u-button  @click="handleData" type="primary" class="select-btn" text="检测数据一览"></u-button>
+			</view>
+		</view>
+
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -46,12 +55,12 @@
 					{
 						img: require('@/static/icon/health/heart.png'),
 						title: '心电图',
-						url:'/pages/healthMonitor/ergometer/ergometer'
+						url: '/pages/healthMonitor/ergometer/ergometer'
 					},
 					{
 						img: require('@/static/icon/health/bodyFat.png'),
 						title: '体脂率',
-						url:'/pages/healthMonitor/bodyFat/bodyFat'
+						url: '/pages/healthMonitor/bodyFat/bodyFat'
 					},
 					{
 						img: require('@/static/icon/health/cholesterol.png'),
@@ -72,7 +81,7 @@
 						title: '血氧',
 						url: '/pages/healthMonitor/oximeter/oximeter'
 					},
-					
+
 				]
 			};
 		},
@@ -80,14 +89,19 @@
 		methods: {
 
 			click(url, name) {
-				if(!url) {
+				if (!url) {
 					this.$refs.uToast.default('开发中...')
 				}
 				uni.navigateTo({
 					url: url
 				});
-				
-			}
+
+			},
+			handleData() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/healthMonitorData',
+				});
+			},
 
 		},
 		onLoad(e) {
@@ -115,10 +129,36 @@
 				border-radius: 16rpx;
 				background-color: #fff !important;
 				box-shadow: 0px 3px 3px hsla(0, 0, 0, 0.1);
-				&:nth-child(4n){
+
+				&:nth-child(4n) {
 					margin-right: 0;
 				}
 			}
+		}
+
+		.container {
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  margin-top: 650rpx;
+		
+		  .submit, .select {
+		    margin-bottom: 10px;
+		    .submit-btn {
+		      min-width: 250px; // 设置按钮的最小宽度，根据需要进行调整
+		      border-radius: 50rpx;
+		      background-color: #28be9e;
+			  border-color: #28be9e;
+		    }
+		    
+		    .select-btn {
+			  color: #28be9e;
+		      min-width: 250px; // 设置按钮的最小宽度，根据需要进行调整
+		      border-radius: 50rpx;
+		      background-color: white;
+			  border-color: #28be9e;
+		    }
+		  }
 		}
 	}
 </style>
