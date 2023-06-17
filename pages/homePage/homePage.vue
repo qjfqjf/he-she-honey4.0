@@ -2,8 +2,8 @@
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
 		<z-nav-bar home title="数字健康管理" class="HomeNavBar" bg-color="#bef1d0" fontColor="black">
-			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"></img>
-			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
+			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"/>
+			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""/>
 		</z-nav-bar>
 		<view class="status-bar d-flex m-3 bg-white rounded-20">
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
@@ -81,8 +81,8 @@
 						<view class="d-flex">
 							<view class="d-flex f-grow-1 flex-column a-center j-center p-1" v-for="(item,index) in page"
 								:key="index">
-								<view><img :src="item.icon" class="big-icon" alt=""></view>
-								<view>
+								<view @click="selectImg(page[index])"><img :src="item.icon" class="big-icon" alt=""/></view>
+								<view >
 									{{ item.name }}
 								</view>
 							</view>
@@ -103,9 +103,8 @@
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex" >
 						<navigator :url="listItem.path">
-							<u--image class="appManeger_block_icon" :src="listItem.icon"
-								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
-							</u--image>
+							<img class="appManeger_block_icon" :src="listItem.icon"
+								 style="height:100rpx; width:100rpx" />
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
 					</u-grid-item>
@@ -263,6 +262,18 @@
 		},
 		//方法
 		methods: {
+			selectImg(e){
+				console.log("绑定上",e);
+				this.appManage[4].icon=e.icon;
+				this.appManage[4].name=e.name;
+				this.appManage[4].path=e.path;
+				// this.appManage.splice(4,1,e)
+				// Vue.set(this.appManage[4],"name",this.appManage[4].name+"服务")
+				// this.$set(this.appManage[4],'name',this.appManage[4].name+"服务")
+				this.appManage[4].name = this.appManage[4].name+"服务"
+				console.log(e);
+				console.log(this.appManage[4]);
+			},
 			openBlue() {
 				console.log('--------------------检查蓝牙是否开启--------------------');
 				if(plus.os.name == 'Android'){
