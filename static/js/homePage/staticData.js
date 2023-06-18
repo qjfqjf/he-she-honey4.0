@@ -105,12 +105,12 @@ export const appFeature = [
 	[{
 			name: "健身",
 			icon: "static/icon/homePage/jianshen.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/jianshen"
 		},
 		{
 			name: "养老",
 			icon: "static/icon/homePage/yanglao.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/yanglao"
 		},
 		{
 			name: "助残",
@@ -120,12 +120,12 @@ export const appFeature = [
 		{
 			name: "商城",
 			icon: "static/icon/homePage/shangcheng.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/shangcheng"
 		},
 		{
 			name: "直播",
 			icon: "static/icon/homePage/zhibo.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/zhibo"
 		}
 	]
 ]
