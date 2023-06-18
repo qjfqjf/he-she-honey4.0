@@ -166,8 +166,8 @@
 							left: 20rpx; font-weight: bold; font-size: 30rpx; color: black;">{{ listItem.name }}
 							</text>
 							<button style="position: absolute; border-radius: 10px;
-							height:60rpx ;width: 120rpx ;top: 110rpx; left: 20rpx; font-weight: bold;
-							font-size: 10rpx; color: white; background-color:rgb(130, 220, 100);  border: none;">{{ listItem.discription }}
+							height:40rpx ;width: 120rpx ;top: 110rpx; left: 20rpx;
+							font-size: 10rpx; color: rgb(0, 234, 141); background-color:rgb(189, 240, 207);  border: none;">{{ listItem.discription }}
 							</button>
 						</div>
 					</u-grid-item>

@@ -379,6 +379,20 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/bloodPressure/device/bloodPressureDevice1",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/bloodPressure/device/bloodPressureDevice2",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
 			"style": {
 				"navigationBarTitleText": "额温枪",
