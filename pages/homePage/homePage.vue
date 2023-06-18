@@ -60,19 +60,27 @@
 			</view>
 		</view>
 
-		<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+
+
 		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
-			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
-				@click="onPageJump('/pages/homePage/myUsers')">
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border" @click="onPageJump('/pages/homePage/myUsers')"
+								style="z-index: 1">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
+							style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar">
+			<view class="scroll-container">
+				<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+			</view>
+
+			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar" style="z-index: 1">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: #18b566; color: aliceblue;">提醒</view>
+							style="background-color: #18b566; color: aliceblue;">提醒</view>
 			</u-button>
 		</view>
+
+
+
 
 		<view class=" p-1">
 			<view class="w-100 rounded-20 " style="background-color: white">
@@ -506,6 +514,22 @@
 	};
 </script>
 <style lang="scss" scoped>
+.top-bar {
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 999;
+}
+
+.scroll-container {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	overflow: hidden;
+}
+
+
+
 	.HomeNavBar {
 		background-color: rgba(255, 255, 255, 0);
 	}
