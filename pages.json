@@ -379,6 +379,20 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/bloodPressure/device/bloodPressureDevice1",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/bloodPressure/device/bloodPressureDevice2",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometer",
 			"style": {
 				"navigationBarTitleText": "额温枪",
@@ -450,9 +464,51 @@
 			}
 		},
 		{
-			"path": "pages/educate/index",
+			"path": "pages/educate/yanglao",
 			"style": {
-				"navigationBarTitleText": "教育",
+				"navigationBarTitleText": "养老服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/zhucan",
+			"style": {
+				"navigationBarTitleText": "助残服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/cosmetic",
+			"style": {
+				"navigationBarTitleText": "美容服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/psychology",
+			"style": {
+				"navigationBarTitleText": "心理服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/physicalExamination",
+			"style": {
+				"navigationBarTitleText": "体检服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/healthCare",
+			"style": {
+				"navigationBarTitleText": "保健服务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/educate/medical",
+			"style": {
+				"navigationBarTitleText": "医疗服务",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -593,6 +649,13 @@
 		},
 		{
 			"path": "pages/healthMonitor/foreheadThermometer/frManualEntry",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/foreheadThermometer/foreheadThermometerTrend",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -1571,6 +1634,15 @@
         }
         ,{
             "path" : "pages/healthEstimate/psychology/Exam/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/calendar/calendar",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

@@ -190,6 +190,7 @@ export default {
             listBloodSUA: [{ name: '收缩压(高压)一般在[mmHg]', value: '' }, { name: '舒长压(高压)一般在[mmHg]', value: '' }, { name: '最近一次血压高压[mmHg]', value: '' }, { name: '最近一次血压低压[mmHg]', value: '' },],
             listOxygen: [{ name: '收缩压(高压)一般在[mmHg]', value: '' }, { name: '舒长压(高压)一般在[mmHg]', value: '' }, { name: '最近一次血压高压[mmHg]', value: '' }, { name: '最近一次血压低压[mmHg]', value: '' },],
             disableInput: Array(5).fill(false),
+            
         }
     },
     methods: {

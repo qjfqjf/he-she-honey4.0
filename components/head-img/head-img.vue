@@ -18,7 +18,6 @@
 			</scroll-view>
 			<view class="icon-top" @click="scrollX(1)">
 				<image class="icon1" src="@/static/into-img.png"></image>
-
 			</view>
 		</view>
 	</view>

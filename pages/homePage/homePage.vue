@@ -2,8 +2,8 @@
 	<view class="container h-100 w-100 flex-column d-flex">
 		<public-module></public-module>
 		<z-nav-bar home title="数字健康管理" class="HomeNavBar" bg-color="#bef1d0" fontColor="black">
-			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"></img>
-			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""></img>
+			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan"/>
+			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt=""/>
 		</z-nav-bar>
 		<view class="status-bar d-flex m-3 bg-white rounded-20">
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
@@ -35,12 +35,12 @@
 					</div>
 					<img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
 				</view>
-				<view class="d-flex j-sb a-center">
+				<!-- <view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
-						<!-- <h6 style="color: green">{{this.savedData.value}}</h6> -->
+						<h6 style="color: green">{{this.savedData.value}}</h6>
 					</view>
-					<!-- <h4 class="unit">mmHg</h4> -->
-				</view>
+					<h4 class="unit">mmHg</h4>
+				</view> -->
 			</view>
 
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
@@ -52,28 +52,36 @@
 						</span>
 					</div>
 				</view>
-				<view class="d-flex j-sb a-center">
-					<!-- <view class="d-flex j-center a-center">
+				<!-- <view class="d-flex j-sb a-center">
+					<view class="d-flex j-center a-center">
 						<h3>279</h3>
 					</view>
-					<h4 class="unit">μmol/L</h4> -->
-				</view>
+					<h4 class="unit">μmol/L</h4>
+				</view> -->
 			</view>
 		</view>
 
-		<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+
+
 		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
-			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
-				@click="onPageJump('/pages/homePage/myUsers')">
+			<u-button class="leftRoundButton shadow h-100 shadow-lg border" @click="onPageJump('/pages/homePage/myUsers')"
+								style="z-index: 1">
 				<view class="rounded-circle bg-primary-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
+							style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<u-button class="rightRoundButton shadow-lg border">
+			<view class="scroll-container">
+				<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
+			</view>
+
+			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar" style="z-index: 1">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
-					style="background-color: #18b566; color: aliceblue;">提醒</view>
+							style="background-color: #18b566; color: aliceblue;">提醒</view>
 			</u-button>
 		</view>
+
+
+
 
 		<view class=" p-1">
 			<view class="w-100 rounded-20 " style="background-color: white">
@@ -82,8 +90,8 @@
 						<view class="d-flex">
 							<view class="d-flex f-grow-1 flex-column a-center j-center p-1" v-for="(item,index) in page"
 								:key="index">
-								<view><img :src="item.icon" class="big-icon" alt=""></view>
-								<view>
+								<view @click="selectImg(page[index])"><img :src="item.icon" class="big-icon" alt=""/></view>
+								<view >
 									{{ item.name }}
 								</view>
 							</view>
@@ -99,17 +107,78 @@
 		</u-swiper>
 		<view class="m-1 rounded-20 bg-white pb-3">
 			<u-gap height="10"></u-gap>
+
 			<view class="m-1 rounded-20 bg-white">
 				<u-grid :border="false" col="3">
 					<u-grid-item v-for="(listItem,listIndex) in appManage" :key="listIndex">
 						<navigator :url="listItem.path">
 							<u--image class="appManeger_block_icon" :src="listItem.icon"
-								:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
-							</u--image>
+										:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
+									</u--image>
 							<u--text :text="listItem.name" align="center"></u--text>
 						</navigator>
 					</u-grid-item>
 				</u-grid>
+
+				<u-gap height="20"></u-gap>
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem,listIndex) in otherFunction" :key="listIndex" >-->
+<!--						<navigator :url="listItem.path">-->
+<!--							<u&#45;&#45;image class="appManeger_block_icon" :src="listItem.icon"-->
+<!--												 height="130upx" width="300upx">-->
+<!--							</u&#45;&#45;image>-->
+<!--							<u&#45;&#45;text :text="listItem.name" align="center"></u&#45;&#45;text>-->
+<!--						</navigator>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">-->
+<!--						<navigator :url="listItem.path">-->
+<!--							<div style="position: relative;">-->
+<!--								<u-image class="appManeger_block_icon" :src="listItem.icon" height="130upx" width="300upx" style="border-radius: 20px;"></u-image>-->
+<!--								<u-text :text="listItem.name" align="center" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; color: #fff;"></u-text>-->
+<!--							</div>-->
+<!--						</navigator>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+
+<!--				<u-grid :border="false" col="2">-->
+<!--					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">-->
+<!--						<div style="position: relative; display: inline-block;" @click="dev">-->
+<!--							<u-image class="appManeger_block_icon" :src="listItem.icon" height="130upx" width="300upx" style="border-radius: 10px;"></u-image>-->
+<!--							<text align="left" style="position: absolute; top: 44rpx; left: 20rpx; font-weight: bold; font-size: 16px; color: black;">{{listItem.name}}</text>-->
+<!--							<text align="left" style="position: absolute; top: 100rpx; left: 20rpx; font-weight: bold; font-size: 16px; color: black;">{{listItem.name}}</text>-->
+<!--						</div>-->
+<!--					</u-grid-item>-->
+<!--				</u-grid>-->
+
+				<u-grid :border="false" col="2">
+					<u-grid-item v-for="(listItem, listIndex) in otherFunction" :key="listIndex">
+						<div style="position: relative; display: inline-block;" @click="dev">
+							<u-image class="appManeger_block_icon" :src="listItem.icon" height="150upx"
+											 width="330upx" style="border-radius: 10px;">
+
+							</u-image>
+							<text align="left" style="position: absolute; top: 44rpx;
+							left: 20rpx; font-weight: bold; font-size: 30rpx; color: black;">{{ listItem.name }}
+							</text>
+							<button style="position: absolute; border-radius: 10px;
+							height:40rpx ;width: 120rpx ;top: 110rpx; left: 20rpx;
+							font-size: 10rpx; color: rgb(0, 234, 141); background-color:rgb(189, 240, 207);  border: none;">{{ listItem.discription }}
+							</button>
+						</div>
+					</u-grid-item>
+				</u-grid>
+
+
+
+
+
+
 				<u-toast ref="uToast" />
 			</view>
 		</view>
@@ -124,7 +193,8 @@
 		wisperImage,
 		appManage,
 		appFeature,
-		homePageIcons
+		homePageIcons,
+		otherFunction,
 	} from "../../static/js/homePage/staticData";
 	import UImage from "../../uni_modules/uview-ui/components/u--image/u--image.vue";
 	import home from "../template/home.vue";
@@ -146,7 +216,9 @@
 				appManage,
 				appFeature,
 				homePageIcons,
+				otherFunction,
 				token: uni.getStorageSync('access-token'),
+				uid:'',
 				doctorId: 0,
 				userInfo: '',
 				defaultSelect: 0, //默认选中下标，从0开始
@@ -173,6 +245,7 @@
 		},
 		//第一次加载
 		onLoad(e) {
+
 			uni.$emit('callTargetMethod');
 			// 监听事件，在事件触发时接收数据参数并处理
 			uni.$on('callTargetMethod', () => {
@@ -181,7 +254,9 @@
 			});
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
-
+			//拿到用户列表
+			this.getRelationList()
+			console.log(this.userList)
 			if (!this.token) {
 				uni.navigateTo({
 					url: '/pages/login/login',
@@ -206,15 +281,23 @@
 
 			//判断蓝牙是否开启
 			this.openBlue();
-
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-
 			this.getRelationList()
-
 
 		},
 		//方法
 		methods: {
+			selectImg(e){
+				this.appManage[4].icon="/"+e.icon
+				this.appManage[4].name=e.name;
+				this.appManage[4].path=e.path;
+				this.appManage[4].name = this.appManage[4].name+"服务"
+			},
+			toCalendar(){
+				uni.navigateTo({
+					url:"/pages/calendar/calendar",
+				})
+			},
 			openBlue() {
 				console.log('--------------------检查蓝牙是否开启--------------------');
 				if (plus.os.name == 'Android') {
@@ -295,11 +378,13 @@
 
 			// 获取亲属关系列表
 			getRelationList() {
+				console.log('执行getRelationList')
 				this.$http
 					.post('/getRelatives', {
 						uid: this.userInfo.uid,
 					})
 					.then((res) => {
+						console.log('res:',res)
 						this.userList = res.result.result.map((item) => {
 							return {
 								...item,
@@ -308,21 +393,18 @@
 							}
 						})
 						this.currentUser = this.userList[0]
-						console.log(this.userList)
 					})
 			},
 			bindUser() {
 				console.log()
 			},
 			//开发中。。。
-			// dev(listIndex){
-			// 	if (listIndex >= 7) {
-			// 		uni.showToast({
-			// 			title: "开发中...",
-			// 			icon: "none"
-			// 		})
-			// 	}
-			// },
+			dev(){
+				uni.showToast({
+					title: "开发中...",
+					icon: "none"
+				})
+			},
 			async handleScan() {
 				const _this = this
 				await uni.scanCode({
@@ -359,13 +441,32 @@
 				// console.log(this.doctorId)
 
 			},
+
+
 			changeHeadImg(index) {
 				// console.log(this.currentUser)
 				// console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
+				//登录一下获取一下token
+				uni.request({
+							url: 'http://106.14.140.92:8881/platform/login',
+							method: 'post',
+							data: {
+								params: {
+									login:this.currentUser.login,
+									password:'123456'
+								},
+							},
+							success: (res) => {
+								uni.setStorageSync('access-token', res.data.result.data.token)
+							}
+				})
+
 				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
 				console.log(this.currentUser)
 			},
+
+
 			addUser() {
 				this.$http.post('/platform/dataset/call_kw', {
 					model: "res.users",
@@ -425,6 +526,22 @@
 	};
 </script>
 <style lang="scss" scoped>
+.top-bar {
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 999;
+}
+
+.scroll-container {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	overflow: hidden;
+}
+
+
+
 	.HomeNavBar {
 		background-color: rgba(255, 255, 255, 0);
 	}

@@ -10,6 +10,7 @@
 			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="()=>currentTab = 'tab1'">左侧</view>
 			<view class="tab" :class="{ active: currentTab === 'tab2' }" @click="()=>currentTab = 'tab2'">右侧</view>
 		</view>
+
 		<view class="echarts-content">
 			<!-- #ifdef APP-PLUS || H5 -->
 			<view @click="echarts.onClick" :prop="option" :change:prop="echarts.updateEcharts" id="echarts"
@@ -270,7 +271,7 @@
 							this.measureResult.DIA = 0
 							this.measureResult.PUL = 0
 							this.measureResult.pressure = 0
-							this.option.series.data.value = 0
+							this.option.series[0].data[0].value = 0
 						}else{
 							this.$refs.uToast.show({
 								message: '保存失败',
@@ -281,7 +282,7 @@
 							this.measureResult.DIA = 0
 							this.measureResult.PUL = 0
 							this.measureResult.pressure = 0
-							this.option.series.data.value = 0
+							this.option.series[0].data[0].value = 0
 						}
 					})
 				}else{
@@ -294,7 +295,7 @@
 					this.measureResult.DIA = 0
 					this.measureResult.PUL = 0
 					this.measureResult.pressure = 0
-					this.option.series.data.value = 0
+					this.option.series[0].data[0].value = 0
 				}
 			},
 			// 初始化蓝牙

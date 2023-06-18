@@ -67,8 +67,8 @@
 		data() {
 			return {
 				show: false,
-				time: new Date().format('yyyy年MM月dd日 hh时mm分ss秒'),
-				selectTime: new Date().format('yyyy年MM月dd日 hh时mm分ss秒'),
+				time: new Date().format('yyyy-MM-dd hh:mm:ss'),
+				selectTime: new Date().format('yyyy-MM-dd hh:mm:ss'),
 				currentTab: 'tab1', //但前选项卡
 				pulValue: 0, // 心率
 				scrollDIALeftNow: 86, // 低压页面显示
@@ -111,9 +111,8 @@
 				this.pulValue = val
 			},
 			confirm(time) {
-				console.log(time)
 				this.show = false
-				this.selectTime = new Date(time.value).format('yyyy年MM月dd日 hh时mm分ss秒')
+				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm:ss')
 
 			},
 			cancel() {
@@ -152,7 +151,7 @@
 								"tensioning_pressure":this.scrollDIALeft,
 								"heart_rate":this.pulValue,
 								"input_type":"hend",
-								"test_time":this.formatDate(new Date())
+								"test_time":this.time
 							}]
 						],
 						kwargs:{}

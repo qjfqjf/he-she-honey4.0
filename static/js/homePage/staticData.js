@@ -56,59 +56,76 @@ export const appManage = [{
 
 
 ]
+
+
+export const otherFunction = [
+	{
+	name: "商城",
+	discription:"好礼不断>",
+	icon: "/static/icon/homePage/shop.png",
+	path: "/pages/healthMonitor/index"
+	},
+	{
+		name: "直播",
+		discription:"排忧解难>",
+		icon: "/static/icon/homePage/live.png",
+		path: "/pages/healthFile/index"
+	},
+
+]
 export const appFeature = [
 	[{
 			name: "医疗",
 			icon: "static/icon/homePage/medical.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/medical"
 		},
 		{
 			name: "保健",
 			icon: "static/icon/homePage/healthCare.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/healthCare"
 
 		},
 		{
 			name: "体检",
 			icon: "static/icon/homePage/physicalExamination.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/physicalExamination"
 
 		},
 		{
 			name: "心理",
 			icon: "static/icon/homePage/psychology.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/psychology"
 		},
 		{
 			name: "美容",
 			icon: "static/icon/homePage/cosmetic.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/cosmetic"
 		}
 	],
 	[{
 			name: "健身",
 			icon: "static/icon/homePage/jianshen.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/jianshen"
 		},
 		{
 			name: "养老",
 			icon: "static/icon/homePage/yanglao.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/yanglao"
 		},
 		{
 			name: "助残",
 			icon: "static/icon/homePage/zhucan.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/zhucan"
 		},
 		{
 			name: "商城",
 			icon: "static/icon/homePage/shangcheng.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/shangcheng"
 		},
 		{
 			name: "直播",
 			icon: "static/icon/homePage/zhibo.png",
-			path: "/pages/educate/index"
+			path: "/pages/educate/zhibo"
 		}
 	]
 ]
