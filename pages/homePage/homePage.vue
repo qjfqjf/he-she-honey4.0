@@ -11,17 +11,17 @@
 					<div class="d-flex j-center a-center ">
 						<img :src="homePageIcons.Bp.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<!-- <h4 style="font-size: 30upx">高压</h4> -->
+							<h4 style="font-size: 30upx">{{this.savedData.name}}</h4>
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">
 				</view>
-				<view class="d-flex j-sb a-center">
+				<!-- <view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
 						<h3 style="color: red; ">123</h3>
 					</view>
 					<h4 class="unit" style="color: red">mmHg</h4>
-				</view>
+				</view> -->
 			</view>
 
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
@@ -29,16 +29,17 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.Glu.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<!-- <h4 style="font-size: 30upx">低压</h4> -->
+							<h6 style="color: green">{{this.savedData.value}}</h6>
+							<!-- <h4 style="font-size: 30upx">收缩压/舒张压</h4> -->
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
 				</view>
 				<view class="d-flex j-sb a-center">
 					<view class="d-flex j-center a-center">
-						<h3 style="color: green">72</h3>
+						<!-- <h6 style="color: green">{{this.savedData.value}}</h6> -->
 					</view>
-					<h4 class="unit">mmHg</h4>
+					<!-- <h4 class="unit">mmHg</h4> -->
 				</view>
 			</view>
 
@@ -47,15 +48,15 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.UricAcid.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<!-- <h4 style="font-size: 30upx">血尿酸</h4> -->
+							<h4 style="font-size: 30upx">{{this.savedData.alert}}</h4>
 						</span>
 					</div>
 				</view>
 				<view class="d-flex j-sb a-center">
-					<view class="d-flex j-center a-center">
+					<!-- <view class="d-flex j-center a-center">
 						<h3>279</h3>
 					</view>
-					<h4 class="unit">μmol/L</h4>
+					<h4 class="unit">μmol/L</h4> -->
 				</view>
 			</view>
 		</view>
@@ -130,9 +131,9 @@
 	import UButton from "../../uni_modules/uview-ui/components/u-button/u-button.vue";
 	import $http from '@/config/requestConfig.js';
 	import HeadImgList from "@/components/head-img/head-img.vue";
-	
+
 	export default {
-		
+
 		computed: {
 			home() {
 				return home
@@ -140,6 +141,7 @@
 		},
 		data() {
 			return {
+				savedData: null,
 				wisperImage,
 				appManage,
 				appFeature,
@@ -167,10 +169,16 @@
 			UButton,
 			UImage,
 			HeadImgList,
-			
+
 		},
 		//第一次加载
 		onLoad(e) {
+			uni.$emit('callTargetMethod');
+			// 监听事件，在事件触发时接收数据参数并处理
+			uni.$on('callTargetMethod', () => {
+				this.savedData = uni.getStorageSync('firstData');
+				console.log(this.savedData);
+			});
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 
@@ -180,16 +188,18 @@
 				})
 			}
 
-
-
-
 			console.log('onLoad', e);
-
 		},
 		//页面显示
 		onShow() {
-			// this.getUserList()
+			uni.$emit('callTargetMethod');
+			// 监听事件，在事件触发时接收数据参数并处理
+			uni.$on('callTargetMethod', () => {
+				this.savedData = uni.getStorageSync('firstData');
+				console.log(this.savedData);
+			});
 
+			// this.getUserList()
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			// this.getUserList();
@@ -200,6 +210,8 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 
 			this.getRelationList()
+
+
 		},
 		//方法
 		methods: {

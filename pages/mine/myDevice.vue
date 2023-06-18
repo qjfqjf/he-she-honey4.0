@@ -41,9 +41,7 @@
 					img: require('@/static/icon/device/BTBP.png'),
 					title: '血压计',
 					detail: '(倍泰静态/动态血压计)',
-
-          url: '/pages/healthMonitor/bloodPressure/device/bloodPressureDevice1',
-
+					url: '/pages/healthMonitor/bloodPressure/device/bloodPressureDevice1',
 					deviceInfo: {
 						deviceId: uni.getStorageSync('btDeviceId'),
 						dName: 'btDeviceId',

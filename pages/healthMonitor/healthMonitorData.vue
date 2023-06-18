@@ -36,6 +36,9 @@
 </template>
 
 <script>
+	import {
+		data
+	} from '../../uni_modules/uview-ui/libs/mixin/mixin';
 	export default {
 		data() {
 			return {
@@ -44,24 +47,37 @@
 				dataList: [
 
 				],
-
 			};
 		},
-		async onLoad() {
+		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			await this.getOximeterHistoryList()
-			await this.getForeheadThermometerHistoryList()
-			await this.getBloodPressureHistoryList()
-			await this.getBloodSugarHistoryList()
-			this.sortDataListByTestTime()
-			
+			// await this.getOximeterHistoryList()
+			// await this.getForeheadThermometerHistoryList()
+			// await this.getBloodPressureHistoryList()
+			// await this.getBloodSugarHistoryList()
+			// this.sortDataListByTestTime()
+			uni.$on('callTargetMethod', () => {
+				this.allQuery();
+			});
+			this.allQuery();
+
 		},
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
-
+			allQuery() {
+				this.getOximeterHistoryList()
+				this.getForeheadThermometerHistoryList()
+				this.getBloodPressureHistoryList()
+				this.getBloodSugarHistoryList()
+				// uni.setStorageSync('firstData', this.dataList[0]);
+				setTimeout(() => {
+					console.log(this.dataList[0])
+					uni.setStorageSync('firstData', this.dataList[0]);
+				}, 4000)
+			},
 
 			// 查询血氧历史记录
 			getOximeterHistoryList() {
@@ -88,7 +104,7 @@
 							alert: '正常',
 						};
 						this.dataList.push(dataItem);
-						// this.sortDataListByTestTime();
+						this.sortDataListByTestTime();
 					}
 				});
 			},
@@ -115,7 +131,7 @@
 							alert: '正常',
 						};
 						this.dataList.push(dataItem);
-						// this.sortDataListByTestTime();
+						this.sortDataListByTestTime();
 					}
 				})
 			},
@@ -145,7 +161,7 @@
 						};
 						this.dataList.push(dataItem);
 						// 执行时间差计算和查找最接近时间的代码
-						// this.sortDataListByTestTime();
+						this.sortDataListByTestTime();
 					}
 				});
 			},
@@ -172,7 +188,9 @@
 							alert: '正常',
 						};
 						this.dataList.push(dataItem);
-						
+						this.sortDataListByTestTime();
+						// console.log(this.dataList[0])
+
 					}
 				})
 			},
@@ -180,6 +198,7 @@
 				this.dataList.sort((a, b) => {
 					return new Date(b.test_time) - new Date(a.test_time);
 				});
+
 			}
 		},
 
