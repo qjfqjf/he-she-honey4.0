@@ -127,7 +127,7 @@
 						const dataItem = {
 							name: latestRecord.name,
 							test_time: latestRecord.test_time,
-							value: latestRecord.temperature,
+							value: `${latestRecord.temperature}°C`,
 							alert: '正常',
 						};
 						this.dataList.push(dataItem);

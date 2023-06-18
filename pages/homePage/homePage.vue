@@ -173,12 +173,6 @@
 						</div>
 					</u-grid-item>
 				</u-grid>
-
-
-
-
-
-
 				<u-toast ref="uToast" />
 			</view>
 		</view>
@@ -262,7 +256,6 @@
 					url: '/pages/login/login',
 				})
 			}
-
 			console.log('onLoad', e);
 		},
 		//页面显示

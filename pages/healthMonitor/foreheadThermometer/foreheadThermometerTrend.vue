@@ -91,9 +91,9 @@
 						data: []
 					},
 					yAxis: {
-						type: 'category',
-						reverse: false,
-						// type:'value'
+						// type: 'category',
+						// reverse: false,
+						type:'value'
 					},
 					series: [
 						
