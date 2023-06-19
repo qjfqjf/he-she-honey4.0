@@ -95,8 +95,7 @@
 						reverse: false,
 						// type:'value'
 					},
-					series: [
-						{
+					series: [{
 							name: '收缩压',
 							type: 'line',
 							stack: 'Total',
@@ -199,7 +198,9 @@
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "sphygmomanometer.jiakang",
-					domain:[["owner.id","=",this.uid]],
+					domain: [
+						["owner.id", "=", this.uid]
+					],
 					fields: [
 						"name",
 						"numbers",
@@ -216,32 +217,33 @@
 				})
 			},
 			getDataList() {
+				this.option.xAxis.data = [];
 				for (var i in this.allDataList) {
 					//判断数据是否在所选日期范围内
 					if (dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,
 							this.date.endTime, 'day', '[]')) {
 						this.dataList.push(this.allDataList[i])
-						this.option.xAxis.data = this.dataList.map(item => {
-							const dateTime = new Date(item.test_time);
-							const month = dateTime.getMonth() + 1;
-							const day = dateTime.getDate();
-							const hour = dateTime.getHours();
-							const minute = dateTime.getMinutes();
-							return `${month}-${day} ${hour}:${minute}`;
-						});
-						this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_blood_pressure).reverse();
-						this.option.series[1].data = this.dataList.slice(-5).map(item => item.tensioning_pressure).reverse();
-						this.option.series[2].data = this.dataList.slice(-5).map(item => item.heart_rate).reverse();	
-					} else {
-						this.option.xAxis.data = [];
-						this.option.series[0].data = [];
-						this.option.series[1].data = [];
-						this.option.series[2].data = [];
+						const item = this.allDataList[i];
+						const dateTime = new Date(item.test_time);
+						const month = dateTime.getMonth() + 1;
+						const day = dateTime.getDate();
+						const hour = dateTime.getHours();
+						const minute = dateTime.getMinutes();
+						this.option.xAxis.data.push(`${month}-${day} ${hour}:${minute}`);
 					}
 				}
-			}
+				if (this.dataList.length > 0) {
+					this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_blood_pressure);
+					this.option.series[1].data = this.dataList.slice(-5).map(item => item.tensioning_pressure);
+					this.option.series[2].data = this.dataList.slice(-5).map(item => item.heart_rate);
+				} else {
+					this.option.xAxis.data = [];
+					this.option.series[0].data = [];
+					this.option.series[1].data = [];
+					this.option.series[2].data = [];
+				}
+			},
 		},
-
 	}
 </script>
 

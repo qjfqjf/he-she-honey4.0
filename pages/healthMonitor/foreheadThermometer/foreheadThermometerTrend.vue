@@ -93,10 +93,10 @@
 					yAxis: {
 						// type: 'category',
 						// reverse: false,
-						type:'value'
+						type: 'value'
 					},
 					series: [
-						
+
 						{
 							name: '体温',
 							type: 'line',
@@ -112,7 +112,7 @@
 								color: 'green'
 							}
 						},
-						
+
 					]
 				},
 			}
@@ -171,7 +171,9 @@
 			getHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "forehead.temperature.gun",
-					domain:[["owner.id","=",this.uid]],
+					domain: [
+						["owner.id", "=", this.uid]
+					],
 					fields: [
 						"name",
 						"numbers",
@@ -186,26 +188,25 @@
 				})
 			},
 			getDataList() {
+				this.option.xAxis.data = [];
 				for (var i in this.allDataList) {
 					//判断数据是否在所选日期范围内
-					if (dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,
-							this.date.endTime, 'day', '[]')) {
-						this.dataList.push(this.allDataList[i])
-						this.option.xAxis.data = this.dataList.map(item => {
-							const dateTime = new Date(item.test_time);
-							const month = dateTime.getMonth() + 1;
-							const day = dateTime.getDate();
-							const hour = dateTime.getHours();
-							const minute = dateTime.getMinutes();
-							return `${month}-${day} ${hour}:${minute}`;
-						});
-						this.option.series[0].data = this.dataList.slice(-5).map(item => item.temperature).reverse();
-						
-					} else {
-						this.option.xAxis.data = [];
-						this.option.series[0].data = [];
-						
+					if (dayjs(new Date(this.allDataList[i].test_time).format("yyyy-MM-dd")).isBetween(this.date.startTime,
+							this.date.endTime, "day", "[]")) {
+						this.dataList.push(this.allDataList[i]);
+						const item = this.allDataList[i];
+						const dateTime = new Date(item.test_time);
+						const month = dateTime.getMonth() + 1;
+						const day = dateTime.getDate();
+						const hour = dateTime.getHours();
+						const minute = dateTime.getMinutes();
+						this.option.xAxis.data.push(`${month}-${day} ${hour}:${minute}`);
 					}
+				}
+				if (this.dataList.length > 0) {
+					this.option.series[0].data = this.dataList.slice(-5).map(item => item.temperature);
+				} else {
+					this.option.series[0].data = [];
 				}
 			}
 		},
