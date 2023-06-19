@@ -26,7 +26,7 @@
       }
       // #endif
       // #ifdef APP-PLUS
-      if (store.state.userInfo.token) {7
+      if (store.state.userInfo.token) {
         socket.init()
       }
       APPUpdate()
