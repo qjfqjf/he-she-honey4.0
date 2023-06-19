@@ -191,6 +191,7 @@
 					if (dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,
 							this.date.endTime, 'day', '[]')) {
 						this.dataList.push(this.allDataList[i])
+						this.option.xAxis.data = [];
 						this.option.xAxis.data = this.dataList.map(item => {
 							const dateTime = new Date(item.test_time);
 							const month = dateTime.getMonth() + 1;
@@ -199,12 +200,11 @@
 							const minute = dateTime.getMinutes();
 							return `${month}-${day} ${hour}:${minute}`;
 						});
-						this.option.series[0].data = this.dataList.slice(-5).map(item => item.temperature).reverse();
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.temperature);
 						
 					} else {
 						this.option.xAxis.data = [];
 						this.option.series[0].data = [];
-						
 					}
 				}
 			}

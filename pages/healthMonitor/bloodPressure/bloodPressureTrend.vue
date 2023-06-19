@@ -229,9 +229,9 @@
 							const minute = dateTime.getMinutes();
 							return `${month}-${day} ${hour}:${minute}`;
 						});
-						this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_blood_pressure).reverse();
-						this.option.series[1].data = this.dataList.slice(-5).map(item => item.tensioning_pressure).reverse();
-						this.option.series[2].data = this.dataList.slice(-5).map(item => item.heart_rate).reverse();	
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_blood_pressure);
+						this.option.series[1].data = this.dataList.slice(-5).map(item => item.tensioning_pressure);
+						this.option.series[2].data = this.dataList.slice(-5).map(item => item.heart_rate);	
 					} else {
 						this.option.xAxis.data = [];
 						this.option.series[0].data = [];

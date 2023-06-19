@@ -95,8 +95,7 @@
 						reverse: false,
 						// type:'value'
 					},
-					series: [
-						{
+					series: [{
 							name: '脉率',
 							type: 'line',
 							stack: 'Total',
@@ -232,9 +231,9 @@
 							const minute = dateTime.getMinutes();
 							return `${month}-${day} ${hour}:${minute}`;
 						});
-						this.option.series[0].data = this.dataList.slice(-5).map(item => item.pulse_rate).reverse();
-						this.option.series[1].data = this.dataList.slice(-5).map(item => item.pi).reverse();
-						this.option.series[2].data = this.dataList.slice(-5).map(item => item.blood_oxygen).reverse();	
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.pulse_rate);
+						this.option.series[1].data = this.dataList.slice(-5).map(item => item.pi);
+						this.option.series[2].data = this.dataList.slice(-5).map(item => item.blood_oxygen);
 					} else {
 						this.option.xAxis.data = [];
 						this.option.series[0].data = [];
