@@ -108,7 +108,6 @@
 					}
 				});
 			},
-			//查询额温枪历史记录
 			getForeheadThermometerHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
 					model: "forehead.temperature.gun",
@@ -123,11 +122,24 @@
 				}).then(res => {
 					const records = res.result.records;
 					if (records.length > 0) {
-						const latestRecord = records[records.length - 1]; // 获取最后一条数据
+						const currentTime = new Date(); // 获取当前时间
+						let closestRecord = records[0]; // 假设第一条记录是最接近的记录
+						let closestTimeDifference = Math.abs(currentTime - new Date(closestRecord
+						.test_time)); // 当前时间与第一条记录的时间差
+
+						// 遍历记录，找到与当前时间更接近的记录
+						for (let i = 1; i < records.length; i++) {
+							const recordTimeDifference = Math.abs(currentTime - new Date(records[i].test_time));
+							if (recordTimeDifference < closestTimeDifference) {
+								closestRecord = records[i];
+								closestTimeDifference = recordTimeDifference;
+							}
+						}
+
 						const dataItem = {
-							name: latestRecord.name,
-							test_time: latestRecord.test_time,
-							value: `${latestRecord.temperature}°C`,
+							name: closestRecord.name,
+							test_time: closestRecord.test_time,
+							value: `${closestRecord.temperature}°C`,
 							alert: '正常',
 						};
 						this.dataList.push(dataItem);
@@ -135,6 +147,7 @@
 					}
 				})
 			},
+
 			// 查询血压历史记录
 			getBloodPressureHistoryList() {
 				this.$http.post('/platform/dataset/search_read', {
@@ -189,8 +202,6 @@
 						};
 						this.dataList.push(dataItem);
 						this.sortDataListByTestTime();
-						// console.log(this.dataList[0])
-
 					}
 				})
 			},

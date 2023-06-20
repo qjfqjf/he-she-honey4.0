@@ -103,11 +103,17 @@
 					]
 				}).then(res => {
 					this.historyList = res.result.records
+					this.sortDataListByTestTime();
 				})
 			},
 			handleWarningRule(){
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
+				});
+			},
+			sortDataListByTestTime() {
+				this.historyList.sort((a, b) => {
+					return new Date(b.test_time) - new Date(a.test_time);
 				});
 			},
 		},

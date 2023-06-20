@@ -138,18 +138,24 @@
 				}).then(res => {
 					this.allDataList = res.result.records
 					this.getDataList();
-
 				})
 			},
+			
 			//筛选数据
 			getDataList(){
 				for(var i in this.allDataList){
 					//判断数据是否在所选日期范围内
 					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
 						this.dataList.push(this.allDataList[i])
+						this.sortDataListByTestTime();
 					}
 				}
-			}
+			},
+			sortDataListByTestTime() {
+				this.dataList.sort((a, b) => {
+					return new Date(a.test_time) - new Date(b.test_time);
+				});
+			},
 
 		}
 	}

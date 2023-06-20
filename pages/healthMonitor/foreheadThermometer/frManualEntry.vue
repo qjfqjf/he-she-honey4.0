@@ -79,9 +79,7 @@
 				this.scrollLeftNow = val;
 			},
 
-
 			confirm(time) {
-				console.log(time)
 				this.show = false
 				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm:ss')
 			},
@@ -119,7 +117,7 @@
 								"owner":this.uid,
 								"temperature": this.scrollLeftNow,
 								"input_type": "hend",
-								"test_time":this.time
+								"test_time":this.selectTime
 							}]
 						],
 						kwargs: {}
