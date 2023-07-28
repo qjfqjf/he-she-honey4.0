@@ -154,7 +154,7 @@ export default {
 			list: ['签约信息', '基本信息', '既往史', '家族史'],
 			signInfo: ['签约日期', '签约医生', '签约类型'],
 			baseInfo: ['身份证号码:', '手机号码:', '出生日期:', '联系人姓名:', '联系人电话:', '常驻户籍:', '民族;', '家庭住址:', '家庭住址:', '血型:'
-				, 'RH阴性:', '文化程度:', '职业:', '婚姻状况:', '药物过敏史:', '暴露史:', '暴露史:'
+				, 'RH阴性:', '文化程度:', '职业:', '婚姻状况:', '药物过敏史:', '暴露史:', '过敏史:'
 			],
 			history: [
 				'疾病一', '疾病二'
@@ -164,7 +164,7 @@ export default {
 			],
 			toUrl: '/pages/healthFile/basicFile/modifyBasicFile',
 			addtext: '修改',
-			toUrl2: 'http://106.14.140.92:8881/platform/dataset/search_read',
+			toUrl2: 'http://127.0.0.1:8000/api/archival/index',
 			uid:''
 		}
 	},
