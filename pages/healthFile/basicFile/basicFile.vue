@@ -164,7 +164,7 @@ export default {
 			],
 			toUrl: '/pages/healthFile/basicFile/modifyBasicFile',
 			addtext: '修改',
-			toUrl2: 'http://127.0.0.1:8000/api/archival/index',
+			toUrl2: '/archival/index',
 			uid:''
 		}
 	},
@@ -188,9 +188,10 @@ export default {
 				const token = userInfo.token;
 				this.$http
 					.post(this.toUrl2,{
-						model:this.Records[this.current].model,
-						domain:[["user_id", "=", this.uid]],
-						fields:this.Records[this.current].fields
+						uid : 3
+						// model:this.Records[this.current].model,
+						// domain:[["user_id", "=", this.uid]],
+						// fields:this.Records[this.current].fields
 					}).then(res=>{
 						console.log(res);
 						console.log(res.result.records[0]);
