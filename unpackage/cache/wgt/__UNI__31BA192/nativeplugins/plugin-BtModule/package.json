@@ -1,0 +1,36 @@
+{
+	"name": "plugin-BtModule",
+	"id": "plugin-BtModule",
+	"version": "1.0.0",
+	"description": "蓝牙API原生插件",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"hooksClass": "com.yunagile.bluetooth.HdAppProxy",
+			"plugins": [{
+				"type": "module",
+				"name": "plugin-BtModule",
+				"class": "com.yunagile.bluetooth.BluetoothModule"
+			}],
+			"integrateType": "aar",
+			"minSdkVersion": 21,
+			"permissions": [
+				"android.permission.BLUETOOTH",
+				"android.permission.BLUETOOTH_ADMIN",
+				"android.permission.ACCESS_FINE_LOCATION",
+				"android.permission.ACCESS_COARSE_LOCATION",
+				"android.permission.BLUETOOTH_CONNECT",
+				"android.permission.READ_EXTERNAL_STORAGE",
+				"android.permission.ACCESS_NETWORK_STATE"
+			],
+			"dependencies": [
+				"com.alibaba:fastjson:1.1.46.android",
+				"me.jessyan:autosize:1.2.1",
+				"com.github.getActivity:XXPermissions:13.5",
+				"com.facebook.fresco:fresco:1.13.0",
+				"androidx.appcompat:appcompat:1.4.1"
+			]
+
+		}
+	}
+}
