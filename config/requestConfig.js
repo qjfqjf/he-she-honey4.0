@@ -27,6 +27,7 @@ setTimeout(() => {
 //可以new多个request来支持多个域名请求
 let $http = new request({
   //接口请求地址
+  // baseUrl: process.env.VUE_APP_BASE_API,
   baseUrl: base.baseUrl,
   //服务器本地上传文件地址
   fileUrl: base.baseUrl,
@@ -127,11 +128,11 @@ $http.requestStart = function(options) {
     userInfo = JSON.parse(uni.getStorageSync('userInfo'))
   }
   options.data = {
-    params: {
+    //params: {
       token,
       uid: userInfo ? userInfo.uid : 1,
       ...options.data,
-    },
+    //},
   }
   // let storeUserInfo = store.state.userInfo;
   // if (!storeUserInfo.token) { // nvue页面读取不到vuex里面数据，将取缓存
