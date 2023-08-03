@@ -29,7 +29,7 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text style="font-size: 30rpx">{{ item.data_time }}</text>
+							<text style="font-size: 30rpx">{{ item.createtime }}</text>
 						</view>
 					</view>
 
@@ -52,7 +52,7 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text>{{ item.data_name }}</text>
+							<text>{{ item.name }}</text>
 						</view>
 					</view>
 					<!-- 4、用药剂量 -->
@@ -62,7 +62,7 @@
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
 							<text style="margin-right: 20rpx;">{{ item.dosage }}</text>
-							<text>{{ item.dose_unit }}</text>
+							<text>{{ item.doseage }}</text>
 						</view>
 					</view>
 					<!-- 5、用药频次 -->
@@ -80,7 +80,7 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-							<text>{{ item.data_result }}</text>
+							<text>{{ item.remarks }}</text>
 						</view>
 					</view>
 
@@ -187,7 +187,7 @@ export default {
 			//点击添加跳转的路由
 			tourl: '/pages/healthFile/outpatientArchives/getMedicineRecord/addGetMedicineRecord',
 			//接口
-			tourl2: 'http://106.14.140.92:8881/platform/dataset/search_read',
+			tourl2: '/med/index',
 			addtext: '添加记录'
 		}
 	},
@@ -202,71 +202,98 @@ export default {
 		getRecordsList() {
 			//拿到用户信息
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-			const uid = userInfo.uid;
+			let uid = userInfo.uid;
+			uid =  279
 			const token = userInfo.token;
 			//接口调用
-			uni.request({
-				url: this.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						model: 'inpatient.medical.record',
-						token: token,
-						uid: uid,
-						domain:[["patient_id","=",uid]],
-						//传回去的数组(存放字段)
-						fields: [
-							"picture_1",
-							"picture_2",
-							"picture_3",
-							//药物名称
-							"data_name",
-							//用药剂量
-							"dosage",
-							//用药计量单位
-							"dose_unit",
-							//用药频次
-							"frequency",
-							//用药频次单位
-							"frequency_unit",
-							//备注
-							"data_result",
-							//时间
-							"data_time",
-							//用药类别
-							"drug_class"
-						]
-					}
-				},
-				success: (res) => {
+				this.$http.post(this.tourl2, {
+					uid: uid,
+					type : 1
+				})
+				.then((res) => {
 					console.log(res);
-					//把传回来的值存入
-					this.dataList = res.data.result.records
-					//判断诊断类型
+					this.dataList = res.data.data;
 					for (var record of this.dataList) {
-						//用药类型
-						record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
-						//用药剂量单位
-						switch(record.dose_unit){
-							case 'mg': record.dose_unit = '毫克'; break;
-							case 'g': record.dose_unit = '克'; break;
-						}
-						//用药频次单位
-						switch(record.frequency_unit){
-							case 'day': record.frequency_unit = '次/日'; break;
-							case 'tomorrow': record.frequency_unit = '次/隔日'; break;
-							case 'weeks': record.frequency_unit = '次/周'; break;
-							case 'month': record.frequency_unit = '次/月'; break;
-						}
+					record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
+					switch(record.dose_unit){
+						case 'mg': record.dose_unit = '毫克'; break;
+						case 'g': record.dose_unit = '克'; break;
 					}
-
-				},
-				fail: (err) => {
+					switch(record.frequency_unit){
+						case 'day': record.frequency_unit = '次/日'; break;
+						case 'tomorrow': record.frequency_unit = '次/隔日'; break;
+						case 'weeks': record.frequency_unit = '次/周'; break;
+						case 'month': record.frequency_unit = '次/月'; break;
+					}
+					}
+				})
+				.catch((err) => {
 					uni.showToast({
-						title: err,
-					})
-				}
-			})
+					title: err,
+					});
+				});
+							// uni.request({
+			// 	url: this.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			model: 'inpatient.medical.record',
+			// 			token: token,
+			// 			uid: uid,
+			// 			domain:[["patient_id","=",uid]],
+			// 			//传回去的数组(存放字段)
+			// 			fields: [
+			// 				"picture_1",
+			// 				"picture_2",
+			// 				"picture_3",
+			// 				//药物名称
+			// 				"data_name",
+			// 				//用药剂量
+			// 				"dosage",
+			// 				//用药计量单位
+			// 				"dose_unit",
+			// 				//用药频次
+			// 				"frequency",
+			// 				//用药频次单位
+			// 				"frequency_unit",
+			// 				//备注
+			// 				"data_result",
+			// 				//时间
+			// 				"data_time",
+			// 				//用药类别
+			// 				"drug_class"
+			// 			]
+			// 		}
+			// 	},
+			// 	success: (res) => {
+			// 		console.log(res);
+			// 		//把传回来的值存入
+			// 		this.dataList = res.data.result.records
+			// 		//判断诊断类型
+			// 		for (var record of this.dataList) {
+			// 			//用药类型
+			// 			record.drug_class = record.drug_class === 'Oral administration' ? '口服' : '皮下注射';
+			// 			//用药剂量单位
+			// 			switch(record.dose_unit){
+			// 				case 'mg': record.dose_unit = '毫克'; break;
+			// 				case 'g': record.dose_unit = '克'; break;
+			// 			}
+			// 			//用药频次单位
+			// 			switch(record.frequency_unit){
+			// 				case 'day': record.frequency_unit = '次/日'; break;
+			// 				case 'tomorrow': record.frequency_unit = '次/隔日'; break;
+			// 				case 'weeks': record.frequency_unit = '次/周'; break;
+			// 				case 'month': record.frequency_unit = '次/月'; break;
+			// 			}
+			// 		}
+
+			// 	},
+			// 	fail: (err) => {
+			// 		uni.showToast({
+			// 			title: err,
+			// 		})
+			// 	}
+			// })
 		},
 	},
 

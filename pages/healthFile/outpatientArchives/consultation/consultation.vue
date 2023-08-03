@@ -26,7 +26,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.data_time}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
 
@@ -37,7 +37,7 @@
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.data_name}}</text>
+                    <text style="font-weight: 300">{{item.name}}</text>
                 </view>
             </view>
 
@@ -45,7 +45,7 @@
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.data_result}}</text>
+                    <text style="font-weight: 300">{{item.remarks}}</text>
                 </view>
             </view>
 
@@ -150,7 +150,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/consultation/addConsultation',
 				//接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
+				tourl2:'/diagnose/index',
 				addtext:'添加档案'
 			}
 		},
@@ -163,50 +163,70 @@
 			},getRecordsList(){
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-				const uid = userInfo.uid;
+				let uid = userInfo.uid;
+				uid = 172
 				const token = userInfo.token;
 				//接口调用
-				uni.request({
-					url:this.tourl2,
-					method:'post',
-					data: {
-						params:{
-							model:'inpatient.referral.consultation',
-							token:token,
-							uid:uid,
-							//传回去的数组(存放字段)
-							fields:[
-								"picture_1",
-								"picture_2",
-								"picture_3",
-									//疾病名称
-								"data_name",
-									//备注
-								"data_result",
-									//时间
-								"data_time",
-							]
-						}
-					},
-					success:(res)=>{
-						console.log(res);
-						//把传回来的值存入
-						this.records = res.data.result.records
-						//判断诊断类型
-						for (var record of this.records) {
-							switch (record.data_name) {
-								case 'Transfer hospital': record.data_name = '转院'; break;
-								case 'X-turn department': record.data_name = '转科'; break;
-								case 'consultation': record.data_name = '会诊'; break;
-							}
-					}
-					},
-					fail:(err)=>{
-						uni.showToast({
-							title:err,
-						})
-					}
-				})
+
+
+				this.$http.post(this.tourl2, {
+						type: 1,
+						uid: uid,
+					})
+					.then((response) => {
+					console.log(response);
+					//把传回来的值存入
+					this.records = response.data.data;
+					//判断诊断类型
+					})
+					.catch((error) => {
+					uni.showToast({
+						title: error,
+					});
+					});
+
+
+				// uni.request({
+				// 	url:this.tourl2,
+				// 	method:'post',
+				// 	data: {
+				// 		params:{
+				// 			model:'inpatient.referral.consultation',
+				// 			token:token,
+				// 			uid:uid,
+				// 			//传回去的数组(存放字段)
+				// 			fields:[
+				// 				"picture_1",
+				// 				"picture_2",
+				// 				"picture_3",
+				// 					//疾病名称
+				// 				"data_name",
+				// 					//备注
+				// 				"data_result",
+				// 					//时间
+				// 				"data_time",
+				// 			]
+				// 		}
+				// 	},
+				// 	success:(res)=>{
+				// 		console.log(res);
+				// 		//把传回来的值存入
+				// 		this.records = res.data.result.records
+				// 		//判断诊断类型
+				// 		for (var record of this.records) {
+				// 			switch (record.data_name) {
+				// 				case 'Transfer hospital': record.data_name = '转院'; break;
+				// 				case 'X-turn department': record.data_name = '转科'; break;
+				// 				case 'consultation': record.data_name = '会诊'; break;
+				// 			}
+				// 	}
+				// 	},
+				// 	fail:(err)=>{
+				// 		uni.showToast({
+				// 			title:err,
+				// 		})
+				// 	}
+				// })
 			},
 		},
 
