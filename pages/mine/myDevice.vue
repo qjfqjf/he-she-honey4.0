@@ -92,7 +92,7 @@
 					img: require('@/static/icon/device/tizhi.png'),
 					title: '体脂秤',
 					detail: '',
-					url: '/pages/template/deviceConnection',
+					url: '/pages/template/BodyFatConnection',
 					deviceInfo: {
 						deviceId: uni.getStorageSync('tzDeviceId'),
 						dName: 'tzDeviceId',
@@ -162,7 +162,7 @@
 				{
 					img: require('@/static/icon/device/tiaosheng.png'),
 					title: '跳绳',
-					url: '/pages/template/deviceConnection',
+					url: '/pages/template/JumpRopeConnection',
 					detail: '',
 					deviceInfo: {
 						deviceId: uni.getStorageSync('tsDeviceId'),
@@ -174,7 +174,7 @@
 				{
 					img: require('@/static/icon/device/nutritionScale.png'),
 					title: '营养秤',
-					url: '/pages/template/deviceConnection',
+					url: '/pages/template/KitchenDeviceConnection',
 					detail: '',
 					deviceInfo: {
 						deviceId: uni.getStorageSync('yycDeviceId'),

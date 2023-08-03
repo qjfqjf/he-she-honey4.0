@@ -98,8 +98,6 @@
 			// 		console.log(this.deviceInfo)
 			// 	})
 			// })
-			
-		
 		},
 
 		onUnload() {
