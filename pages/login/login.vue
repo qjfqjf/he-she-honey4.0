@@ -247,6 +247,7 @@
                 // 用户的信息和token存放进localStorage里面去
                 // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
                 uni.setStorageSync('userInfo', JSON.stringify(res.data.result.data))
+                // console.log(res.data.result.data);
                 uni.setStorageSync('access-token', res.data.result.data.token)
                 uni.showToast({
                   title: '登录成功',

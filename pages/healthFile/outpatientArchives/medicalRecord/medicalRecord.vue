@@ -132,7 +132,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
 				//接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
+				tourl2:'',
 				addtext:'添加病例'
 			}
 		},
@@ -157,7 +157,8 @@
 			getRecordsList(){
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-				const uid = userInfo.uid;
+				let uid = userInfo.uid;
+				uid = 3
 				const token = userInfo.token;
 				//接口调用
 				uni.request({
@@ -165,25 +166,26 @@
 					method:'post',
 					data: {
 						params:{
-							model:'outpatient.medical.records',
-							token:token,
+							// model:'outpatient.medical.records',
+							// token:token,
 							uid:uid,
 							domain:[["patient_id","=",uid]],
+							type : '1'
 							//传回去的数组(存放字段)
-							fields:[
-								"picture_1",
-								"picture_2",
-								"picture_3",
-									//疾病名称
-								"data_name",
-									//备注
-								"data_result",
-									//时间
-								"data_time",
-									//疾病类型
-								"data_type",
-								"patient_id"
-							]
+							// fields:[
+							// 	"picture_1",
+							// 	"picture_2",
+							// 	"picture_3",
+							// 		//疾病名称
+							// 	"data_name",
+							// 		//备注
+							// 	"data_result",
+							// 		//时间
+							// 	"data_time",
+							// 		//疾病类型
+							// 	"data_type",
+							// 	"patient_id"
+							// ]
 						}
 					},
 					success:(res)=>{
