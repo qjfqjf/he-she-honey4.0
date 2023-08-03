@@ -9,6 +9,7 @@
 		<TipInfo title="体温趋势" @trend="foreheadThermometerTrend"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
+		
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveHeat"></u-button>
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump()">
@@ -36,36 +37,7 @@
 				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
 		</view>
-		<!-- <view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-				@click="onPageJump(item.url)">
-				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-				<text class="mt-1">{{item.title}}</text>
-			</view>
-		</view> -->
 		<u-toast ref="uToast"></u-toast>
-		<!-- 	<scroll-view scroll-y class="box">
-			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
-				<view>
-					<text>id: {{ item.deviceId }}</text>
-				</view>
-				<view>
-					<text>name: {{ item.name }}</text>
-				</view>
-			</view>
-		</scroll-view>
-
-		<button @click="discovery">2 搜索附近蓝牙设备</button>
-
-		<button @click="getServices">3 获取蓝牙服务</button>
-
-		<button @click="getCharacteristics">4 获取特征值</button>
-		<button @click="notify">5 开启消息监听</button>
-		<view class="heat">
-			<view class="">
-				温度：{{heat}}
-			</view>
-		</view> -->
 	</view>
 </template>
 

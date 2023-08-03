@@ -760,6 +760,27 @@
 			}
 		},
 		{
+			"path": "pages/template/KitchenDeviceConnection",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/template/JumpRopeConnection",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/template/BodyFatConnection",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthFile/index",
 			"style": {
 				"navigationBarTitleText": "",
@@ -930,6 +951,7 @@
 				"enablePullDownRefresh": false
 			}
 		},
+
 		{
 			"path": "pages/healthManagement/sleep/sleepRecord",
 			"style": {
