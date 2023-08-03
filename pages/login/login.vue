@@ -236,19 +236,21 @@
             return
           }
           uni.request({
-            url: 'http://106.14.140.92:8881/platform/login',
+            url: 'http://127.0.0.1:8000/api/login/accountLogin',
             method: 'post',
             data: {
-              params: this.params,
+              //params: this.params,
+              mobile:this.params.login,
+              pwd:this.params.password
             },
             success: (res) => {
+              console.log(res)
               //登录成功
-              if (res.data.result.code == '200') {
+              if (res.data.code == 20000) {
                 // 用户的信息和token存放进localStorage里面去
                 // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-                uni.setStorageSync('userInfo', JSON.stringify(res.data.result.data))
-                // console.log(res.data.result.data);
-                uni.setStorageSync('access-token', res.data.result.data.token)
+                uni.setStorageSync('userInfo', JSON.stringify(res.data.data))
+                uni.setStorageSync('access-token', res.data.data.token)
                 uni.showToast({
                   title: '登录成功',
                   duration: 2000,
