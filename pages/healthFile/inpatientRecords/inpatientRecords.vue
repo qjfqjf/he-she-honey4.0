@@ -196,25 +196,43 @@
 		//查询当前用户所有档案
 		getRecordsList(){
 			//接口调用
-			uni.request({
-				url:this.tourl2,
-				method:'post',
-				data: {
-					params:{
-						model:'',
-						token:'',
-						uid:'',
-						//传回去的数组(存放字段)
-						fields:[
 
-						]
-					}
-				},
-				success(res){
-					//传回来的值
-					//this.dataList = res.data.result.
-				}
-			})
+      this.$http.post(this.tourl2, {
+          model: '',
+          token: '',
+          uid: '',
+          fields: []
+      })
+      .then((response) => {
+        //传回来的值
+        //this.dataList = response.data.result.
+      })
+      .catch((error) => {
+        uni.showToast({
+          title: error,
+        });
+      });
+
+
+			// uni.request({
+			// 	url:this.tourl2,
+			// 	method:'post',
+			// 	data: {
+			// 		params:{
+			// 			model:'',
+			// 			token:'',
+			// 			uid:'',
+			// 			//传回去的数组(存放字段)
+			// 			fields:[
+
+			// 			]
+			// 		}
+			// 	},
+			// 	success(res){
+			// 		//传回来的值
+			// 		//this.dataList = res.data.result.
+			// 	}
+			// })
 		},
 
 		onLoad(){
