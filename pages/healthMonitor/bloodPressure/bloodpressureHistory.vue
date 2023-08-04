@@ -13,14 +13,13 @@
 				结束时间：
 			</view>
 		</view> -->
-		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
+<!-- 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
 					{{item.test_time}}
 				</view>
 				<view class="position">
 					监测部位：左侧
-					<!-- {{item.position}} -->
 				</view>
 				
 			</view>
@@ -32,8 +31,54 @@
 					舒张压：{{item.tensioning_pressure}} ↑
 				</view>
 				<view class="PUL">
-					<!-- ↓ -->
 					心率：{{item.heart_rate}}
+				</view>
+			</view>
+		</view> -->
+		<view class="history" v-for="(item,index) in dataList" :key="index">
+			<view class="date">
+				<view class="time">
+					{{item.createtime}} 
+				</view>
+				<view class="input-type">
+					{{item.type_cn}}
+				</view>
+			</view>
+			<view class="item">
+				<view class="SYS">
+					<view class="name">
+						收缩压 (mmHg)
+					</view>
+					<view class="value">
+						{{item.systolic_pressure}}
+					</view>
+				</view>
+				<view class="DIA">
+					<view class="name">
+						舒张压 (mmHg)
+					</view>
+					<view class="value">
+						{{item.diastolic_pressure}}
+					</view>
+				</view>
+				<view class="PUL">
+					<view class="name">
+						心率(次/分)
+					</view>
+					<view class="value">
+						{{item.pulse}}
+					</view>
+				</view>
+				<view class="position">
+					<view class="name">
+						检测部位
+					</view>
+					<view class="value" v-if="item.tag === 'left'">
+						左侧
+					</view>
+					<view class="value" v-else>
+						右侧
+					</view>
 				</view>
 			</view>
 		</view>
@@ -88,25 +133,34 @@
 					message: '开发中...'
 				})
 			},
-			//查询血压历史记录
+			
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "sphygmomanometer.jiakang",
-					domain:[["owner.id","=",this.uid]],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"systolic_blood_pressure",
-						"tensioning_pressure",
-						"heart_rate",
-						"input_type",
-						"test_time"
-					]
+				
+				this.$http.post('http://127.0.0.1:8000/api/blood_pressure/index', {
+					uid: "5",
 				}).then(res => {
-					this.dataList = res.result.records
+					this.dataList = res.data
 				})
 			},
+			//查询血压历史记录
+			// getHistoryList() {
+			// 	this.$http.post('/platform/dataset/search_read', {
+			// 		model: "sphygmomanometer.jiakang",
+			// 		domain:[["owner.id","=",this.uid]],
+			// 		fields: [
+			// 			"name",
+			// 			"numbers",
+			// 			"owner",
+			// 			"systolic_blood_pressure",
+			// 			"tensioning_pressure",
+			// 			"heart_rate",
+			// 			"input_type",
+			// 			"test_time"
+			// 		]
+			// 	}).then(res => {
+			// 		this.dataList = res.result.records
+			// 	})
+			// },
 			handleWarningRule(){
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
@@ -128,30 +182,59 @@
 </script>
 
 <style lang="scss">
-	.historyCard {
-		padding: 40rpx;
-		border-radius: 16rpx;
-		background-color: #fff;
-		box-shadow: inset 0 3px 0 hsla(0, 0, 0, 0), 0 3px 3px hsla(0, 0, 0, .2);
-
-		.top {
-			.position {
-				font-size: 36rpx;
-				font-weight: 700;
-			}
-
-			.time {
-				color: #666;
-			}
+	.history{
+		.date{
+			margin-top: 15rpx;
+			background-color: rgb(255, 255, 255);
+			display: flex;
+			justify-content: space-between;
+			padding-left: 15rpx;
+			padding-right: 15rpx;
+			height: 70rpx;
+			align-items: center;
+			font-size: 35rpx;
 		}
-
-		.data {
-
-			.SYS,
-			.DIA {
-
-				color: #ffd661;
-
+		.item{
+			margin-top: 5rpx;
+			background-color: rgb(255, 255, 255);
+			padding-left: 15rpx;
+			padding-right: 15rpx;
+			.SYS{
+				display: flex;
+				justify-content: space-between;
+				// padding-left: 15rpx;
+				padding-right: 15rpx;
+				height: 65rpx;
+				align-items: center;
+				font-size: 30rpx;
+			}
+			.DIA{
+				display: flex;
+				justify-content: space-between;
+				// padding-left: 15rpx;
+				padding-right: 15rpx;
+				height: 65rpx;
+				align-items: center;
+				font-size: 30rpx;
+			}
+			.PUL{
+				display: flex;
+				justify-content: space-between;
+				// padding-left: 15rpx;
+				padding-right: 15rpx;
+				height: 65rpx;
+				align-items: center;
+				font-size: 30rpx;
+			}
+				
+			.position{
+				display: flex;
+				justify-content: space-between;
+				// padding-left: 15rpx;
+				padding-right: 15rpx;
+				height: 65rpx;
+				align-items: center;
+				font-size: 30rpx;
 			}
 		}
 	}
