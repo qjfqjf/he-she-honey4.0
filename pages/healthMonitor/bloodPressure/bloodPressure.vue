@@ -63,17 +63,7 @@
 					</view>
 				</view>
 			</view>
-
 		</view>
-		<!-- 底部操作 -->
-		<!-- <BottomNavigation page="bloodPressure/manualEntry"></BottomNavigation> -->
-		<!-- <view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-				@click="onPageJump(item.url)">
-				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-				<text class="mt-1">{{item.title}}</text>
-			</view>
-		</view> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center"
 				@click="onPageSelectDocter">
@@ -243,23 +233,12 @@
 				});
 			},
 			handleSavePressure() {
+				const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+				this.uid = userInfo.uid
+				console.log(11111111111,this.uid)
 				if(this.measureResult.pressure != 0 && this.measureResult.SYS != 0){
 					this.$http.post('/platform/dataset/call_kw', {
-						model: "sphygmomanometer.jiakang",
-						method: "create",
-						args: [
-							[{
-								"name": "血压计 (静态血压计)",
-								"numbers": this.serviceId,
-								"owner": this.uid,
-								"systolic_blood_pressure": this.measureResult.SYS,
-								"tensioning_pressure": this.measureResult.DIA,
-								"heart_rate": this.measureResult.PUL,
-								"input_type": "equipment",
-								"test_time":this.formatDate(new Date())
-							}]
-						],
-						kwargs: {}
+						
 					}).then(res => {
 						if (this.measureResult.pressure != 0) {
 							this.$refs.uToast.show({
@@ -298,6 +277,62 @@
 					this.option.series[0].data[0].value = 0
 				}
 			},
+			// handleSavePressure() {
+			// 	if(this.measureResult.pressure != 0 && this.measureResult.SYS != 0){
+			// 		this.$http.post('/platform/dataset/call_kw', {
+			// 			model: "sphygmomanometer.jiakang",
+			// 			method: "create",
+			// 			args: [
+			// 				[{
+			// 					"name": "血压计 (静态血压计)",
+			// 					"numbers": this.serviceId,
+			// 					"owner": this.uid,
+			// 					"systolic_blood_pressure": this.measureResult.SYS,
+			// 					"tensioning_pressure": this.measureResult.DIA,
+			// 					"heart_rate": this.measureResult.PUL,
+			// 					"input_type": "equipment",
+			// 					"test_time":this.formatDate(new Date())
+			// 				}]
+			// 			],
+			// 			kwargs: {}
+			// 		}).then(res => {
+			// 			if (this.measureResult.pressure != 0) {
+			// 				this.$refs.uToast.show({
+			// 					message: '保存成功',
+			// 					type: 'success',
+			// 				})
+			// 				this.btnColor = '#dadada'
+			// 				this.measureResult.SYS = 0
+			// 				this.measureResult.DIA = 0
+			// 				this.measureResult.PUL = 0
+			// 				this.measureResult.pressure = 0
+			// 				this.option.series[0].data[0].value = 0
+			// 			}else{
+			// 				this.$refs.uToast.show({
+			// 					message: '保存失败',
+			// 					type: 'error',
+			// 				})
+			// 				this.btnColor = '#dadada'
+			// 				this.measureResult.SYS = 0
+			// 				this.measureResult.DIA = 0
+			// 				this.measureResult.PUL = 0
+			// 				this.measureResult.pressure = 0
+			// 				this.option.series[0].data[0].value = 0
+			// 			}
+			// 		})
+			// 	}else{
+			// 		this.$refs.uToast.show({
+			// 			message: '保存失败，请检查网络',
+			// 			type: 'error',
+			// 		})
+			// 		this.btnColor = '#dadada'
+			// 		this.measureResult.SYS = 0
+			// 		this.measureResult.DIA = 0
+			// 		this.measureResult.PUL = 0
+			// 		this.measureResult.pressure = 0
+			// 		this.option.series[0].data[0].value = 0
+			// 	}
+			// },
 			// 初始化蓝牙
 			initBlue() {
 				uni.openBluetoothAdapter({

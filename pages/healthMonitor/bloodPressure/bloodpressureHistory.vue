@@ -13,7 +13,7 @@
 				结束时间：
 			</view>
 		</view> -->
-<!-- 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
+		<!-- 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
 					{{item.test_time}}
@@ -38,7 +38,7 @@
 		<view class="history" v-for="(item,index) in dataList" :key="index">
 			<view class="date">
 				<view class="time">
-					{{item.createtime}} 
+					{{item.createtime}}
 				</view>
 				<view class="input-type">
 					{{item.type_cn}}
@@ -49,15 +49,16 @@
 					<view class="name">
 						收缩压 (mmHg)
 					</view>
-					<view class="value">
-						{{item.systolic_pressure}}
+					<view class="value" :style="getSystolicColor(item.systolic_level)">
+						{{ item.systolic_pressure }}
 					</view>
+
 				</view>
 				<view class="DIA">
 					<view class="name">
 						舒张压 (mmHg)
 					</view>
-					<view class="value">
+					<view class="value" :style="getDiastolicColor(item.diastolic_level)">
 						{{item.diastolic_pressure}}
 					</view>
 				</view>
@@ -65,7 +66,7 @@
 					<view class="name">
 						心率(次/分)
 					</view>
-					<view class="value">
+					<view class="value" :style="getPulseColor(item.pulse_level)">
 						{{item.pulse}}
 					</view>
 				</view>
@@ -89,38 +90,11 @@
 	export default {
 		data() {
 			return {
-				uid:0,
-				userInfo:'',
+				uid: 0,
+				userInfo: '',
 				dataList: [
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// }
-				]
+
+				],
 			};
 		},
 		//页面显示
@@ -133,35 +107,64 @@
 					message: '开发中...'
 				})
 			},
-			
+
 			getHistoryList() {
-				
-				this.$http.post('http://127.0.0.1:8000/api/blood_pressure/index', {
+				this.$http.post('/blood_pressure/index', {
 					uid: "5",
 				}).then(res => {
 					this.dataList = res.data
 				})
 			},
-			//查询血压历史记录
-			// getHistoryList() {
-			// 	this.$http.post('/platform/dataset/search_read', {
-			// 		model: "sphygmomanometer.jiakang",
-			// 		domain:[["owner.id","=",this.uid]],
-			// 		fields: [
-			// 			"name",
-			// 			"numbers",
-			// 			"owner",
-			// 			"systolic_blood_pressure",
-			// 			"tensioning_pressure",
-			// 			"heart_rate",
-			// 			"input_type",
-			// 			"test_time"
-			// 		]
-			// 	}).then(res => {
-			// 		this.dataList = res.result.records
-			// 	})
-			// },
-			handleWarningRule(){
+
+			getSystolicColor(systolicLevel) {
+				switch (systolicLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
+			getDiastolicColor(diastolicLevel) {
+				switch (diastolicLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
+			getPulseColor(pulseLevel) {
+				switch (pulseLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
+			handleWarningRule() {
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
 				});
@@ -171,9 +174,9 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
 			const uid = options.uid;
-			if(uid == 0){
+			if (uid == 0) {
 				this.uid = this.userInfo.uid
-			}else{
+			} else {
 				this.uid = uid
 			}
 			this.getHistoryList();
@@ -182,8 +185,8 @@
 </script>
 
 <style lang="scss">
-	.history{
-		.date{
+	.history {
+		.date {
 			margin-top: 15rpx;
 			background-color: rgb(255, 255, 255);
 			display: flex;
@@ -194,12 +197,14 @@
 			align-items: center;
 			font-size: 35rpx;
 		}
-		.item{
+
+		.item {
 			margin-top: 5rpx;
 			background-color: rgb(255, 255, 255);
 			padding-left: 15rpx;
 			padding-right: 15rpx;
-			.SYS{
+
+			.SYS {
 				display: flex;
 				justify-content: space-between;
 				// padding-left: 15rpx;
@@ -208,7 +213,8 @@
 				align-items: center;
 				font-size: 30rpx;
 			}
-			.DIA{
+
+			.DIA {
 				display: flex;
 				justify-content: space-between;
 				// padding-left: 15rpx;
@@ -217,7 +223,8 @@
 				align-items: center;
 				font-size: 30rpx;
 			}
-			.PUL{
+
+			.PUL {
 				display: flex;
 				justify-content: space-between;
 				// padding-left: 15rpx;
@@ -226,8 +233,8 @@
 				align-items: center;
 				font-size: 30rpx;
 			}
-				
-			.position{
+
+			.position {
 				display: flex;
 				justify-content: space-between;
 				// padding-left: 15rpx;

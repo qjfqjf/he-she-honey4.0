@@ -183,65 +183,45 @@
 				//清空数组内数据
 				this.dataList = [];
 				//筛选出符合条件的数据
-				this.getDataList();
+				this.getHistoryList();
 			},
 			// 数据发生变化时
 			changeOption(value) {
 				const data = this.option.series[0].data
 				data[0].value = value
-
 			},
 			onViewClick(options) {
 				console.log(options)
 			},
-			//查询血氧历史记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "sphygmomanometer.jiakang",
-					domain: [
-						["owner.id", "=", this.uid]
-					],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"systolic_blood_pressure",
-						"tensioning_pressure",
-						"heart_rate",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/blood_pressure/index', {
+					uid: "5",
+					start_date: this.date.startTime,
+					end_date: this.date.endTime
 				}).then(res => {
-					this.allDataList = res.result.records
-					this.getDataList();
-				})
-			},
-			getDataList() {
-				this.option.xAxis.data = [];
-				for (var i in this.allDataList) {
-					//判断数据是否在所选日期范围内
-					if (dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,
-							this.date.endTime, 'day', '[]')) {
-						this.dataList.push(this.allDataList[i])
-						const item = this.allDataList[i];
-						const dateTime = new Date(item.test_time);
+					this.dataList = res.data
+					this.option.xAxis.data = [];
+					for (var i in this.dataList) {
+						//判断数据是否在所选日期范围内
+						const item = this.dataList[i];
+						const dateTime = new Date(item.createtime);
 						const month = dateTime.getMonth() + 1;
 						const day = dateTime.getDate();
 						const hour = dateTime.getHours();
 						const minute = dateTime.getMinutes();
 						this.option.xAxis.data.push(`${month}-${day} ${hour}:${minute}`);
+					}		
+					if (this.dataList.length > 0) {
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_pressure);
+						this.option.series[1].data = this.dataList.slice(-5).map(item => item.diastolic_pressure);
+						this.option.series[2].data = this.dataList.slice(-5).map(item => item.pulse);
+					} else {
+						this.option.xAxis.data = [];
+						this.option.series[0].data = [];
+						this.option.series[1].data = [];
+						this.option.series[2].data = [];
 					}
-				}
-				if (this.dataList.length > 0) {
-					this.option.series[0].data = this.dataList.slice(-5).map(item => item.systolic_blood_pressure);
-					this.option.series[1].data = this.dataList.slice(-5).map(item => item.tensioning_pressure);
-					this.option.series[2].data = this.dataList.slice(-5).map(item => item.heart_rate);
-				} else {
-					this.option.xAxis.data = [];
-					this.option.series[0].data = [];
-					this.option.series[1].data = [];
-					this.option.series[2].data = [];
-				}
+				})
 			},
 		},
 	}
