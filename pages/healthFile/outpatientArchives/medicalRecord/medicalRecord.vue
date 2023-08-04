@@ -28,7 +28,7 @@
 						</view>
 						<view style="height: 20rpx"></view>
 						<view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text style="font-size: 30rpx">{{item.data_time}}</text>
+							<text style="font-size: 30rpx">{{item.createtime}}</text>
 						</view>
 					</view>
 
@@ -49,14 +49,14 @@
 						<text class="cate-text" style="">{{showObj.remarksText}}</text>
 						<view style="height: 20rpx"></view>
 						<view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text>{{item.data_name}}</text>
+							<text>{{item.name}}</text>
 						</view>
 					</view>
 					<!-- 4、情况描述 -->
 					<view class="remarks">
 						<view style="height: 20rpx"></view>
 						<view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-							<text>{{item.data_result}}</text>
+							<text>{{item.remarks}}</text>
 						</view>
 					</view>
 
@@ -70,8 +70,8 @@
 
 
 						<view style="display: flex">
-							<view class="img" v-for="(img, indexin) in imgs[index]" :key="index" style="display: flex;">
-								<image :src="img" @click="showImage(indexin,imgs[index])" style="flex: 1; object-fit: contain;" mode="aspectFill"></image>
+							<view class="img" v-for="(img, index) in imgs[index]" :key="index" style="display: flex;">
+								<image :src="img" @click="showImage(index,imgs[index])" style="flex: 1; object-fit: contain;" mode="aspectFill"></image>
 							</view>
 						</view>
 
@@ -132,7 +132,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/medicalRecord/addMedicalRecord',
 				//接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
+				tourl2:'/medical/index',
 				addtext:'添加病例'
 			}
 		},
@@ -157,72 +157,81 @@
 			getRecordsList(){
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-				const uid = userInfo.uid;
+				let uid = userInfo.uid;
+				uid = 172
 				const token = userInfo.token;
 				//接口调用
-				uni.request({
-					url:this.tourl2,
-					method:'post',
-					data: {
-						params:{
-							model:'outpatient.medical.records',
-							token:token,
-							uid:uid,
-							domain:[["patient_id","=",uid]],
-							//传回去的数组(存放字段)
-							fields:[
-								"picture_1",
-								"picture_2",
-								"picture_3",
-									//疾病名称
-								"data_name",
-									//备注
-								"data_result",
-									//时间
-								"data_time",
-									//疾病类型
-								"data_type",
-								"patient_id"
-							]
-						}
-					},
-					success:(res)=>{
-						console.log(res)
-						//把传回来的值存入
-						this.records = res.data.result.records
-						this.records.forEach((record,index)=>{
 
-							//判断诊断类型
-							record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
-							//把图片前缀加上并且转化为正常路径
-							if(record.picture_1){
-								record.picture_1 = this.base64AddPrefix(record.picture_1)
-								this.imgs[index].push(record.picture_1)
-							}else{
-								record.picture_1 = ''
-							}
-							if(record.picture_2){
-								record.picture_2 = this.base64AddPrefix(record.picture_2)
-								this.imgs[index].push(record.picture_2)
-							}else{
-								record.picture_2 = ''
-							}
-							if(record.picture_3){
-								record.picture_3 = this.base64AddPrefix(record.picture_3)
-								this.imgs[index].push(record.picture_3)
-							}else{
-								record.picture_3 = ''
-							}
+				this.$http.post(this.tourl2, {
+					uid: uid,
+					type: '1'
+					}).then((res) => {
+					
+					// 把传回来的值存入
+					this.records = res.data.data
+					console.log(this.records)
+					this.records.forEach((record, index) => {
 
-							console.log(record)
+						// 判断诊断类型
+						record.data_type = record.category_cn === '普通门诊' ? '普通门诊' : '急诊';
+						const imgArray = record.imgurl.split(',');
+						console.log(imgArray);
+						imgArray.forEach((img,index)=>{
+							imgs[index] = imgArray[index];
 						})
-					},
-					fail:(err)=>{
-						uni.showToast({
-							title:err,
-						})
-					}
+						console.log(record)
+					})
+					}).catch((err) => {
+					uni.showToast({
+						title: err,
+					})
 				})
+
+
+				// uni.request({
+				// 	url:this.tourl2,
+				// 	method:'post',
+				// 	data: {
+				// 			uid:uid,
+				// 			type : '1'
+				// 	},
+				// 	success:(res)=>{
+				// 		console.log(res)
+				// 		//把传回来的值存入
+				// 		this.records = res.data.result.records
+				// 		this.records.forEach((record,index)=>{
+
+				// 			//判断诊断类型
+				// 			record.data_type = record.data_type === 'emergency' ? '急诊' : '普通门诊';
+				// 			//把图片前缀加上并且转化为正常路径
+				// 			if(record.picture_1){
+				// 				record.picture_1 = this.base64AddPrefix(record.picture_1)
+				// 				this.imgs[index].push(record.picture_1)
+				// 			}else{
+				// 				record.picture_1 = ''
+				// 			}
+				// 			if(record.picture_2){
+				// 				record.picture_2 = this.base64AddPrefix(record.picture_2)
+				// 				this.imgs[index].push(record.picture_2)
+				// 			}else{
+				// 				record.picture_2 = ''
+				// 			}
+				// 			if(record.picture_3){
+				// 				record.picture_3 = this.base64AddPrefix(record.picture_3)
+				// 				this.imgs[index].push(record.picture_3)
+				// 			}else{
+				// 				record.picture_3 = ''
+				// 			}
+
+				// 			console.log(record)
+				// 		})
+				// 	},
+				// 	fail:(err)=>{
+				// 		uni.showToast({
+				// 			title:err,
+				// 		})
+				// 	}
+				// })
 			},
 		},
 

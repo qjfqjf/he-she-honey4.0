@@ -210,7 +210,7 @@ export default {
 			//跳转
 			toUrl: '/pages/healthFile/basicFile/basicFile',
 			//接口
-			toUrl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+			toUrl2: '/archival/save',
 			uid:''
 		}
 	},
@@ -264,16 +264,18 @@ export default {
 			console.log(this.dataListText[this.current]);
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			this.uid = userInfo.uid;
+			console.log(this.uid);
 			const _this = this;
 			this.$http
 				.post(this.toUrl2, {
-					model: this.dataList[this.current].model,
-					method: "write",
-					domain: [["id", "=", this.uid]],
-					args: [
+					uid : this.uid
+					
+					// model: this.dataList[this.current].model,
+					// method: "write",
+					// domain: [["id", "=", this.uid]],
+					// args: [
 						
-					],
-					kwargs: {}
+					// ],
 				}).then((res => {
 					console.log(res);
 					uni.showToast({

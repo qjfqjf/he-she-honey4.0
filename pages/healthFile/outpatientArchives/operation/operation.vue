@@ -25,7 +25,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.data_time}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
 
@@ -46,14 +46,14 @@
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.data_name}}</text>
+                    <text style="font-weight: 300">{{item.name}}</text>
                 </view>
             </view>
             <!-- 4、情况描述 -->
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.data_result}}</text>
+                    <text style="font-weight: 300">{{item.remarks}}</text>
                 </view>
             </view>
 
@@ -157,7 +157,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/operation/addOperation',
 				//接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/search_read',
+				tourl2:'/operation/index',
 				addtext:'添加档案'
 			}
 		},
@@ -172,42 +172,60 @@
 			getRecordsList(){
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-				const uid = userInfo.uid;
+				let uid = userInfo.uid;
+				uid = 172
 				const token = userInfo.token;
 				//接口调用
-				uni.request({
-					url:this.tourl2,
-					method:'post',
-					data: {
-						params:{
-							model:'inpatient.surgery',
-							token:token,
-							uid:uid,
-							//传回去的数组(存放字段)
-							fields:[
-								"picture_1",
-								"picture_2",
-								"picture_3",
-									//疾病名称
-								"data_name",
-									//备注
-								"data_result",
-									//时间
-								"data_time",
-							]
-						}
-					},
-					success:(res)=>{
+
+				this.$http.post(this.tourl2, {
+						uid : uid,
+						type : 1,
+						//传回去的数组(存放字段)
+					})
+					.then((res) => {
 						console.log(res);
 						//把传回来的值存入
-						this.records = res.data.result.records
-					},
-					fail:(err)=>{
+						this.records = res.data.data;
+					})
+					.catch((err) => {
 						uni.showToast({
-							title:err,
-						})
-					}
-				})
+						title: err,
+						});
+					});
+					
+				// uni.request({
+				// 	url:this.tourl2,
+				// 	method:'post',
+				// 	data: {
+				// 		params:{
+				// 			model:'inpatient.surgery',
+				// 			token:token,
+				// 			uid:uid,
+				// 			//传回去的数组(存放字段)
+				// 			fields:[
+				// 				"picture_1",
+				// 				"picture_2",
+				// 				"picture_3",
+				// 					//疾病名称
+				// 				"data_name",
+				// 					//备注
+				// 				"data_result",
+				// 					//时间
+				// 				"data_time",
+				// 			]
+				// 		}
+				// 	},
+				// 	success:(res)=>{
+				// 		console.log(res);
+				// 		//把传回来的值存入
+				// 		this.records = res.data.result.records
+				// 	},
+				// 	fail:(err)=>{
+				// 		uni.showToast({
+				// 			title:err,
+				// 		})
+				// 	}
+				// })
 			},
 		},
 		onLoad(){

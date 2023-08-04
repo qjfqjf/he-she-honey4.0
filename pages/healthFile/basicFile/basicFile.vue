@@ -45,11 +45,11 @@
 			<!--			<view class="m-2 font-md" style="width: 30%">{{info}}</view>-->
 			<!--			<input class="uni-input font-md" maxlength="10" placeholder="请输入" />-->
 			<!--		</view>-->
-			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="data"></read-list>
-			<read-list v-if="current === 1" :cell-list="baseInfo" :dataListText="data"></read-list>
-			<read-list v-if="current === 2" :cell-list="history" :dataListText="data"></read-list>
+			<read-list v-if="current === 0" :cell-list="signInfo" :dataListText="data1"></read-list>
+			<read-list v-if="current === 1" :cell-list="baseInfo" :dataListText="data2"></read-list>
+			<read-list v-if="current === 2" :cell-list="history" :dataListText="data3"></read-list>
 			<doc-choice v-if="current === 2" :cell-choice="choices"></doc-choice>
-			<read-list v-if="current === 3" :cell-list="history" :dataListText="data"></read-list>
+			<read-list v-if="current === 3" :cell-list="history" :dataListText="data4"></read-list>
 		</view>
 	</view>
 </template>
@@ -68,7 +68,7 @@ export default {
 					// domain: [["user_id", "=", this.uid]],
 					fields: [
 						//签约日期
-						"sign_contract_time",
+						"createtime",
 						//签约类型
 						"sign_contract_type",
 						//签约医生
@@ -80,39 +80,39 @@ export default {
 					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//身份证号
-						"login",
+						"id_card",
 						//手机号
-						"phone_number",
+						"mobile",
 						//生日
 						"birthday",
 						//联系人姓名
-						"contact_name",
+						"contact",
 						//联系人电话
-						"contact_number",
+						"contact_phone",
 						//地址
-						"address",
+						"register",
 						//名族
-						"nationality",
+						"nation",
 						//家庭住址
-						"home_address",
+						"address",
 						//工作单位
-						"work_unit",
+						"company",
 						//血型
 						"blood_type",
 						//RH阴性
-						"rh_negative",
+						"rh",
 						//文化程度
-						"degree_education",
+						"education",
 						//职业
 						"occupation",
 						//婚宴状况
-						"marital_status",
+						"marriage",
 						//药物过敏史
-						"history_allergy",
+						"drug_allergy",
 						//暴露史
-						"exposure_history",
+						"expose",
 						//其他药物过敏史
-						"other_history_allergy",
+						"other_allergy",
 					]
 
 				},
@@ -121,7 +121,7 @@ export default {
 					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//检查类别
-						"data_name",
+						"disease",
 						//疾病备注
 						"data_result",
 					]
@@ -132,17 +132,21 @@ export default {
 					domain: [["user_id", "=", this.uid]],
 					fields: [
 						//检查类别
-						"data_name",
-						//疾病备注
-						"data_result",
+						"family_disease",
 					]
 
 				},
 			],
 
 			//传回数据
-			data: [],
-			list:[],
+			data1: [],
+			data2: [],
+			data3: [],
+			data4: [],
+			list1:{},
+			list2:{},
+			list3:{},
+			list4:{},
 			show: false,
 			current: 0,
 			avatar: 'https://cdn.uviewui.com/uview/album/1.jpg',
@@ -157,7 +161,7 @@ export default {
 				, 'RH阴性:', '文化程度:', '职业:', '婚姻状况:', '药物过敏史:', '暴露史:', '过敏史:'
 			],
 			history: [
-				'疾病一', '疾病二'
+				'疾病'
 			],
 			choices: [
 				"是否有手术", "是否有外伤"
@@ -167,6 +171,10 @@ export default {
 			toUrl2: '/archival/index',
 			uid:''
 		}
+	},
+	created(){
+		this.getRecordsList();
+		this.$forceUpdate();
 	},
 	methods: {
 
@@ -184,6 +192,7 @@ export default {
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			console.log(userInfo);
 			this.uid = userInfo.uid;
+			this.uid = 3
 			console.log(this.uid);
 				const token = userInfo.token;
 				this.$http
@@ -194,12 +203,42 @@ export default {
 						// fields:this.Records[this.current].fields
 					}).then(res=>{
 						console.log(res);
-						console.log(res.result.records[0]);
-						this.data = Object.values(res.result.records[0]);
+						this.data1[1] = res.data.createtime 
+						this.data1[2] = res.data.sign_contract_type 
+						this.data1[3] = res.data.patient_id 
+						// console.log(res.result.records[0]);
+						// this.data2 = Object.values(res.data);
 						//测试
-						console.log(this.data)
+						this.data2[1] = res.data.id_card
+						this.data2[2] = res.data.mobile
+						this.data2[3] = res.data.birthday
+						this.data2[4] = res.data.contact
+						this.data2[5] = res.data.contact_phone
+						this.data2[6] = res.data.register
+						this.data2[7] = res.data.nation
+						this.data2[8] = res.data.address
+						this.data2[9] = res.data.company
+						this.data2[10] = res.data.blood_type
+						this.data2[11]= res.data.rh
+						this.data2[12]= res.data.education
+						this.data2[13] = res.data.occupation
+						this.data2[14] = res.data.marriage
+						this.data2[15] = res.data.drug_allergy
+						this.data2[16] = res.data.expose
+						this.data2[17]= res.data.other_allergy
+						
+						this.data3[1] = res.data.disease
+						this.data3[2] = res.data.drug_allergy
+
+						this.data4[1] = res.data.family_disease
+						this.data4[2]= res.data.other_allergy
+						console.log('data1',this.data1)
+						console.log('data2',this.data2)
+						console.log('data3',this.data3)
+						console.log('data4',this.data4)
+						this.name = res.data.fullname
 			})
-			
+			// this.change(this.current);
 		},
 		open() {
 			// console.log('open');

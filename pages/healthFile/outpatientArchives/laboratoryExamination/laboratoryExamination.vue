@@ -28,7 +28,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.data_time}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
             <!-- 2、化验诊断 -->
@@ -36,7 +36,7 @@
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text>{{item.data_name}}</text>
+                    <text>{{item.name}}</text>
                 </view>
             </view>
 			<!-- 3、门诊类别 -->
@@ -44,14 +44,14 @@
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text>{{item.check_category}}</text>
+                    <text>{{item.category}}</text>
                 </view>
             </view>
             <!-- 4、情况描述 -->
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text>{{item.data_result}}</text>
+                    <text>{{item.remarks}}</text>
                 </view>
             </view>
 
@@ -154,7 +154,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/outpatientArchives/laboratoryExamination/addLaboratoryExamination',
 				//接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/serch_read',
+				tourl2:'/assay/index',
 				addtext:'添加档案'
 			}
 		},
@@ -169,56 +169,84 @@
 			getRecordsList() {
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-				const uid = userInfo.uid;
+				let uid = userInfo.uid;
+				uid = 172
 				const token = userInfo.token;
 				//接口调用
-				uni.request({
-					url: this.tourl2,
-					method: 'post',
-					data: {
-						params: {
-							model: 'inpatient.laboratory.tests',
-							token: token,
-							uid: uid,
-							//传回去的数组(存放字段)
-							fields: [
-								"picture_1",
-								"picture_2",
-								"picture_3",
-								//检查项目
-								"data_name",
-								//检查
-								"dosage",
-								//备注
-								"data_result",
-								//时间
-								"data_time",
-								//检查类别
-								"drug_class"
-							]
-						}
-					},
-					success: (res) => {
-						console.log(res);
-						//把传回来的值存入
-						this.dataList = res.data.result.records
-						//判断诊断类型
-						for (var record of this.dataList) {
-							switch(this.record.drug_class){
-								case'blood': this.record.drug_class='血液';break;
-								case'urine': this.record.drug_class='尿液';break;
-								case'image': this.record.drug_class='影像';break;
-								case'other': this.record.drug_class='其他';break;
-						}
-						}
 
-					},
-				fail: (err) => {
+				this.$http.post(this.tourl2, {
+					uid: uid,
+					type: 1
+				})
+					.then((res) => {
+					console.log(res);
+					//把传回来的值存入
+					this.dataList = res.data.data;
+					//根据诊断类型进行处理
+					for (var record of this.dataList) {
+						switch(record.category){
+						case 0: record.category = '血液'; break;
+						case 1: record.category = '尿液'; break;
+						case 2: record.category = '影像'; break;
+						case 3: record.category = '其他'; break;
+						}
+						console.log(record.category);
+					}
+					})
+					.catch((err) => {
 					uni.showToast({
 						title: err,
-					})
-				}
-			})
+					});
+					});
+
+
+			// 	uni.request({
+			// 		url: this.tourl2,
+			// 		method: 'post',
+			// 		data: {
+			// 			params: {
+			// 				model: 'inpatient.laboratory.tests',
+			// 				token: token,
+			// 				uid: uid,
+			// 				//传回去的数组(存放字段)
+			// 				fields: [
+			// 					"picture_1",
+			// 					"picture_2",
+			// 					"picture_3",
+			// 					//检查项目
+			// 					"data_name",
+			// 					//检查
+			// 					"dosage",
+			// 					//备注
+			// 					"data_result",
+			// 					//时间
+			// 					"data_time",
+			// 					//检查类别
+			// 					"drug_class"
+			// 				]
+			// 			}
+			// 		},
+			// 		success: (res) => {
+			// 			console.log(res);
+			// 			//把传回来的值存入
+			// 			this.dataList = res.data.result.records
+			// 			//判断诊断类型
+			// 			for (var record of this.dataList) {
+			// 				switch(this.record.drug_class){
+			// 					case'blood': this.record.drug_class='血液';break;
+			// 					case'urine': this.record.drug_class='尿液';break;
+			// 					case'image': this.record.drug_class='影像';break;
+			// 					case'other': this.record.drug_class='其他';break;
+			// 			}
+			// 			}
+
+			// 		},
+			// 	fail: (err) => {
+			// 		uni.showToast({
+			// 			title: err,
+			// 		})
+			// 	}
+			// })
 		},
 
 				onLoad() {
