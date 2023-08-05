@@ -245,6 +245,9 @@
             },
             success: (res) => {
               console.log(res)
+              uni.setStorageSync('userInfo',res.data.data.uid)
+              const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+              console.log(userInfo);
               //登录成功
               if (res.data.code == 20000) {
                 // 用户的信息和token存放进localStorage里面去
