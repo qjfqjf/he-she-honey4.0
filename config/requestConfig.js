@@ -125,6 +125,7 @@ $http.requestStart = function(options) {
   const token = uni.getStorageSync('access-token')
   let userInfo = ''
   if (token) {
+    options.header['authorization'] = token
     userInfo = JSON.parse(uni.getStorageSync('userInfo'))
   }
   options.data = {
