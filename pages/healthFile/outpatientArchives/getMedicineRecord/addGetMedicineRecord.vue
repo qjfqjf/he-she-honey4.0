@@ -174,7 +174,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/getMedicineRecord/getMedicineRecord',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: '/med/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -223,69 +223,106 @@ export default {
 			const _this = this;
 
 			//把疾病类型转化成正确字段存储
-			this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? 'Oral administration' : 'Subcutaneous injection';
-			uni.request({
-				url: this.addObj.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						//注意！！查接口文档
-						model: "inpatient.medical.record",
-						token: token,
-						uid: uid,
-						method: "create",
-						args: [
-							[{
-								//用药类型
-								drug_class: this.medicalRecord.drug_class,
-								picture_1: "",
-								picture_2: "",
-								picture_3: "",
-								//药物名称
-								data_name: this.medicalRecord.data_name,
-								//用药剂量
-								dosage: this.medicalRecord.dosage,
-								//用药剂量单位
-								dose_unit: this.medicalRecord.dose_unit,
-								//用药频次
-								frequency: this.medicalRecord.frequency,
-								//用药频次单位
-								frequency_unit: this.medicalRecord.frequency_unit,
-								//备注
-								data_result: this.medicalRecord.data_result,
-								//日期
-								data_time: this.medicalRecord.data_time,
-								//注意:这个是uid
-								//用户id
-								patient_id: uid,
-
-							}]
-						],
-						kwargs: {}
-					}
-				},
-				success(res) {
+			this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? '1' : '0';
+			console.log('drug_class',this.medicalRecord.drug_class);
 
 
-					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addObj.tourl,
-									success: (res) => {
-										console.log(res)
-									},
-									fail: (err) => {
-										console.log(err)
-									}
-								});
-							}, 1000);
+			this.
+			$http.post(this.addObj.tourl2, {
+					uid: uid,
+					category: this.medicalRecord.drug_class,
+					name: this.medicalRecord.data_name,
+					dosage: this.medicalRecord.dosage,
+					dosage_unit: this.medicalRecord.dose_unit,
+					frequency: this.medicalRecord.frequency,
+					frequency_unit: this.medicalRecord.frequency_unit,
+					remarks: this.medicalRecord.data_result,
+					time: this.medicalRecord.data_time,
+				}).then(res => {
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: _this.addObj.tourl,
+						success: (res) => {
+							console.log(res)
+						},
+						fail: (err) => {
+							console.log(err)
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				}).catch(err => {
+				console.log(err);
+				});
+
+
+			// uni.request({
+			// 	url: this.addObj.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			//注意！！查接口文档
+			// 			model: "inpatient.medical.record",
+			// 			token: token,
+			// 			uid: uid,
+			// 			method: "create",
+			// 			args: [
+			// 				[{
+			// 					//用药类型
+			// 					drug_class: this.medicalRecord.drug_class,
+			// 					picture_1: "",
+			// 					picture_2: "",
+			// 					picture_3: "",
+			// 					//药物名称
+			// 					data_name: this.medicalRecord.data_name,
+			// 					//用药剂量
+			// 					dosage: this.medicalRecord.dosage,
+			// 					//用药剂量单位
+			// 					dose_unit: this.medicalRecord.dose_unit,
+			// 					//用药频次
+			// 					frequency: this.medicalRecord.frequency,
+			// 					//用药频次单位
+			// 					frequency_unit: this.medicalRecord.frequency_unit,
+			// 					//备注
+			// 					data_result: this.medicalRecord.data_result,
+			// 					//日期
+			// 					data_time: this.medicalRecord.data_time,
+			// 					//注意:这个是uid
+			// 					//用户id
+			// 					patient_id: uid,
+
+			// 				}]
+			// 			],
+			// 			kwargs: {}
+			// 		}
+			// 	},
+			// 	success(res) {
+
+
+			// 		uni.showToast({
+			// 			title: '保存成功',
+			// 			duration: 1000,
+			// 			success: () => {
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addObj.tourl,
+			// 						success: (res) => {
+			// 							console.log(res)
+			// 						},
+			// 						fail: (err) => {
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 		//用药剂量函数
 		changeHandler0(e) {

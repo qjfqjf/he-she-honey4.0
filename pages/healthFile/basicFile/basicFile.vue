@@ -189,12 +189,11 @@ export default {
 		},
 		//拿去用户信息
 		getRecordsList() {
-			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-			console.log(userInfo);
-			this.uid = userInfo.uid;
-			this.uid = 3
-			console.log(this.uid);
-				const token = userInfo.token;
+			console.log(uni.getStorageSync('userInfo'));
+			this.uid = uni.getStorageSync('userInfo').uid;
+			// this.uid = 3
+			// console.log(this.uid);
+				const token = uni.getStorageSync('userInfo').token;
 				this.$http
 					.post(this.toUrl2,{
 						uid : 3
@@ -202,7 +201,7 @@ export default {
 						// domain:[["user_id", "=", this.uid]],
 						// fields:this.Records[this.current].fields
 					}).then(res=>{
-						console.log(res);
+						console.log('res',res);
 						this.data1[1] = res.data.createtime 
 						this.data1[2] = res.data.sign_contract_type 
 						this.data1[3] = res.data.patient_id 
@@ -237,7 +236,9 @@ export default {
 						console.log('data3',this.data3)
 						console.log('data4',this.data4)
 						this.name = res.data.fullname
-			})
+			}).catch(error => {
+				console.error('请求发生错误', error);
+			});
 			// this.change(this.current);
 		},
 		open() {

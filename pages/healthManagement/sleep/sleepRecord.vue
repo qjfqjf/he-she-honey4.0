@@ -166,8 +166,8 @@
 		//查询当前用户所有档案
 		getRecordsList(){
 			//接口调用
-
-			const uid = JSON.parse(uni.getstorageSync("userInfo"))
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+            const uid = userInfo.uid;
 			this.$http.post(this.tourl2, {  
 					uid: 6,
 				})
@@ -183,25 +183,14 @@
 				});
 
 
-			// uni.request({
-			// 	url:this.tourl2,
-			// 	method:'post',
-			// 	data: {
-			// 		params:{
-			// 			model:'',
-			// 			token:'',
-			// 			uid:'',
-			// 			//传回去的数组(存放字段)
-			// 			fields:[
-
-			// 			]
-			// 		}
-			// 	},
-			// 	success(res){
-			// 		//传回来的值
-			// 		//this.dataList = res.data.result.
-			// 	}
-			// })
+				this.$http.post(this.tourl2, {
+						uid: 6,
+					}).then(res => {
+					// 传回来的值
+					this.dataList = res.data.data;
+					}).catch(err => {
+					console.log(err);
+					});
 		},
 	},
 		onLoad(){

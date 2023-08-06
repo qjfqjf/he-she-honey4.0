@@ -101,7 +101,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/consultation/consultation',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: '/diagnose/create',
 				// 备注
 				remarksValue: '',
 				remarksText: '备注',
@@ -136,9 +136,9 @@ export default {
                 return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
 		},
 		sectionChange(index) {
-			this.consultation.type = this.addObj.list[index]
+			this.consultation.data_name = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.consultation.type)
+			console.log(index, this.consultation.data_name)
 		},
 		//保存方法
 		saveRecords() {
@@ -150,61 +150,93 @@ export default {
 			//把疾病类型转化成正确字段存储
 			//this.consultation.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
 			switch (this.consultation.data_name) {
-				case '转院': this.consultation.data_name = 'Transfer hospital'; break;
-				case ' 转科': this.consultation.data_name = 'X-turn department'; break;
-				case '会诊': this.consultation.data_name = 'consultation'; break;
+				case '转院': this.consultation.data_name = 0; break;
+				case ' 转科': this.consultation.data_name = 1; break;
+				case '会诊': this.consultation.data_name = 2; break;
 			}
-			uni.request({
-				url: this.addObj.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						//注意！！查接口文档
-						model: "inpatient.referral.consultation",
-						token: token,
-						uid: uid,
-						method: "create",
-						args: [
-							[{
-								//检查类别
-								data_name: this.consultation.data_name,
-								picture_1: "",
-								picture_2: "",
-								picture_3: "",
-								//疾病备注
-								data_result: this.consultation.data_result,
-								//注意！！这个是uid
-								//用户id
-								patient_id: uid,
-								//时间
-								data_time:this.consultation.data_time
-							}]
-						],
-						kwargs: {}
-					}
-				},
-				success(res) {
-					//测试
-					console.log(res)
-					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addObj.tourl,
-									success: (res) => {
-										console.log(res)
-									},
-									fail: (err) => {
-										console.log(err)
-									}
-								});
-							}, 1000);
+
+
+			this.$http.post(this.addObj.tourl2, {
+				category: this.consultation.data_name,
+				name: '没用的字段',
+				remarks: this.consultation.data_result,
+				uid: uid,
+				time: this.consultation.data_time
+				}).then(res => {
+				console.log(res);
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: this.addObj.tourl,
+						success: (res) => {
+							console.log(res)
+						},
+						fail: (err) => {
+							console.log(err)
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				}).catch(err => {
+				console.log(err);
+				});
+
+
+			// uni.request({
+			// 	url: this.addObj.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			//注意！！查接口文档
+			// 			model: "inpatient.referral.consultation",
+			// 			token: token,
+			// 			uid: uid,
+			// 			method: "create",
+			// 			args: [
+			// 				[{
+			// 					//检查类别
+			// 					data_name: this.consultation.data_name,
+			// 					picture_1: "",
+			// 					picture_2: "",
+			// 					picture_3: "",
+			// 					//疾病备注
+			// 					data_result: this.consultation.data_result,
+			// 					//注意！！这个是uid
+			// 					//用户id
+			// 					patient_id: uid,
+			// 					//时间
+			// 					data_time:this.consultation.data_time
+			// 				}]
+			// 			],
+			// 			kwargs: {}
+			// 		}
+			// 	},
+			// 	success(res) {
+			// 		//测试
+			// 		console.log(res)
+			// 		uni.showToast({
+			// 			title: '保存成功',
+			// 			duration: 1000,
+			// 			success: () => {
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addObj.tourl,
+			// 						success: (res) => {
+			// 							console.log(res)
+			// 						},
+			// 						fail: (err) => {
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 	},
 	onShow() {

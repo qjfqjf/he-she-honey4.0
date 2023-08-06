@@ -73,7 +73,7 @@ export default {
 			dataObj:[
 				{
 					//用户id
-					uid:'111',
+					uid:'',
 					//病例id
 					recordId:'',
 					//门诊类型
@@ -104,7 +104,7 @@ export default {
 				//返回的路由
 				tourl:'/pages/healthManagement/diet/dietRecords',
 				//保存接口
-				tourl2:'',
+				tourl2:'/diet/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -135,40 +135,73 @@ export default {
         //保存方法
         saveRecords(){
             console.log(this.dataObj);
-            //uni.request({
-                // url:this.addObj.tourl2,
-                // method:'post',
-                // data:{
-                //     params:{
-                //         dataObj:this.dataObj,
-                //         model:'',
-                //         token:'',
-                //         uid:'',
-                //         fields:[
-                //
-                //         ]
-                //     }
-                // },
-                //success(res){
-                    uni.showToast({
-                        title:'保存成功',
-                        duration:1000,
-                        success:()=>{
-                            setTimeout(() => {
-                                uni.redirectTo({
-                                    url: this.addObj.tourl,
-                                    success:(res)=>{
-                                        console.log(res)
-                                    },
-                                    fail:(err)=>{
-                                        console.log(err)
-                                    }
-                                });
-                            }, 1000);
-                        }
+            console.log('type',this.dataObj.type);
+            switch (this.dataObj.type){
+              case '早餐': this.dataObj.type = 0;break;
+              case '午餐': this.dataObj.type = 1;break;
+              case '晚餐': this.dataObj.type = 2;break;
+              case '加餐': this.dataObj.type = 3;break;
+            }
+            const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+            const uid = userInfo.uid;
+
+
+            this.$http.post(this.addObj.tourl2, {
+              type: this.dataObj.type,
+              remarks: this.dataObj.illDiscription,
+              time: this.dataObj.selectedDate,
+              uid: uid
+            }).then(res => {
+              uni.showToast({
+                title: '保存成功',
+                duration: 1000,
+                success: () => {
+                  setTimeout(() => {
+                    uni.redirectTo({
+                      url: this.addObj.tourl,
+                      success: (res) => {
+                        console.log(res);
+                      },
+                      fail: (err) => {
+                        console.log(err);
+                      }
                     });
-                //}
-           // });
+                  }, 1000);
+                }
+              });
+            }).catch(err => {
+              console.log(err);
+            });
+
+
+          //   uni.request({
+          //       url:this.addObj.tourl2,
+          //       data:{
+          //               type: this.dataObj.type,
+          //               remarks: this.dataObj.illDiscription,
+          //               time:this.dataObj.selectedDate,
+          //               uid:uid,
+          //       },
+          //       success(res){
+          //           uni.showToast({
+          //               title:'保存成功',
+          //               duration:1000,
+          //               success:()=>{
+          //                   setTimeout(() => {
+          //                       uni.redirectTo({
+          //                           url: this.addObj.tourl,
+          //                           success:(res)=>{
+          //                               console.log(res)
+          //                           },
+          //                           fail:(err)=>{
+          //                               console.log(err)
+          //                           }
+          //                       });
+          //                   }, 1000);
+          //               }
+          //           });
+          //       }
+          //  });
 
         },
 	},
