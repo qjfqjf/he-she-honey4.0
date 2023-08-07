@@ -39,7 +39,7 @@
 						<text class="cate-text" style="">{{showObj.typeText}}</text>
 						<view style="height: 20rpx"></view>
 						<view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-							<text>{{item.data_type}}</text>
+							<text>{{item.category_cn}}</text>
 						</view>
 					</view>
 

@@ -72,16 +72,16 @@ export default {
 		return {
 			title:"运动记录",
 			//数据
-			dataObj:[
+			dataObj:
 				{
 					//用户id
-					uid:'111',
+					uid:'',
 					//病例id
 					recordId:'',
 					//门诊类型
-					type:'',
+					type:'室内',
 					//选择的日期
-					selectedDate:new Date(),
+					selectedDate:this.formatDate(new Date()),
 					//疾病名称
 					illName:'',
 					//疾病备注
@@ -91,9 +91,6 @@ export default {
 						''
 					],
 				},
-
-
-			],
 			//显示的文本
 			addObj:{
 				//默认的选项
@@ -106,11 +103,11 @@ export default {
 				//返回的路由
 				tourl:'/pages/healthManagement/sports/sportsRecord',
 				//保存接口
-				tourl2:'',
+				tourl2:'/sport/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
-				selectedDate: new Date(),
+				selectedDate: this.formatDate(new Date()),
 				imageStyles: {
 					width: 90,
 					height: 90,
@@ -124,10 +121,27 @@ export default {
 	},
 	//方法
 	methods: {
+    //时间格式转换
+		formatDate(date) {
+			var y = date.getFullYear();  
+                var m = date.getMonth() + 1;  
+                m = m < 10 ? ('0' + m) : m;  
+                var d = date.getDate();  
+                d = d < 10 ? ('0' + d) : d;  
+                var h = date.getHours();  
+                h=h < 10 ? ('0' + h) : h;  
+                var minute = date.getMinutes();  
+                minute = minute < 10 ? ('0' + minute) : minute;  
+                var second=date.getSeconds();  
+                second=second < 10 ? ('0' + second) : second;  
+                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+		},
+
     sectionChange(index) {
             this.dataObj.type = this.addObj.list[index]
             this.addObj.curNow = index;
             console.log(index,this.dataObj.type)
+            console.log('dataObj',this.dataObj);
         },
         change(e) {
             console.log("e:", e);
@@ -136,41 +150,72 @@ export default {
 
         //保存方法
         saveRecords(){
-            console.log(this.dataObj);
-            //uni.request({
-                // url:this.addObj.tourl2,
-                // method:'post',
-                // data:{
-                //     params:{
-                //         dataObj:this.dataObj,
-                //         model:'',
-                //         token:'',
-                //         uid:'',
-                //         fields:[
-                //
-                //         ]
-                //     }
-                // },
-                //success(res){
-                    uni.showToast({
-                        title:'保存成功',
-                        duration:1000,
-                        success:()=>{
-                            setTimeout(() => {
-                                uni.redirectTo({
-                                    url: this.addObj.tourl,
-                                    success:(res)=>{
-                                        console.log(res)
-                                    },
-                                    fail:(err)=>{
-                                        console.log(err)
-                                    }
-                                });
-                            }, 1000);
-                        }
+            console.log('dataObj',this.dataObj);
+            switch (this.dataObj.type){
+              case '室内': this.dataObj.type = 0;break;
+              case '室外': this.dataObj.type = 1;break;
+            }
+            const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+            const uid = userInfo.uid;
+
+
+            this.$http.post(this.addObj.tourl2, {
+              type: this.dataObj.type,
+              remarks: this.dataObj.illDiscription,
+              time: this.dataObj.selectedDate,
+              uid: uid
+            }).then(res => {
+              uni.showToast({
+                title: '保存成功',
+                duration: 1000,
+                success: () => {
+                  setTimeout(() => {
+                    uni.redirectTo({
+                      url: this.addObj.tourl,
+                      success: (res) => {
+                        console.log(res)
+                      },
+                      fail: (err) => {
+                        console.log(err)
+                      }
                     });
-                //}
-           // });
+                  }, 1000);
+                }
+              });
+            }).catch(err => {
+              console.log(err);
+            });
+
+
+          //   uni.request({
+          //       url:this.addObj.tourl2,
+          //       method:'post',
+          //       data:{
+          //               type:this.dataObj.type,
+          //               remarks:this.dataObj.illDiscription,
+          //               time:this.dataObj.selectedDate,
+          //               uid:uid,
+          //       },
+          //       success(res){
+          //           uni.showToast({
+          //               title:'保存成功',
+          //               duration:1000,
+          //               success:()=>{
+          //                   setTimeout(() => {
+          //                       uni.redirectTo({
+          //                           url: this.addObj.tourl,
+          //                           success:(res)=>{
+          //                               console.log(res)
+          //                           },
+          //                           fail:(err)=>{
+          //                               console.log(err)
+          //                           }
+          //                       });
+          //                   }, 1000);
+          //               }
+          //           });
+          //       }
+          //  });
 
         },
 	},

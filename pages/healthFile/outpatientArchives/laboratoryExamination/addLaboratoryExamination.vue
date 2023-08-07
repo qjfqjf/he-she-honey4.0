@@ -85,7 +85,7 @@ export default {
 					//病例id
 					recordId: '',
 					//化验类别
-					drug_class: '急诊',
+					drug_class: '',
 					//选择的日期
 					data_time:this.formatDate(new Date()),
 					//疾病名称
@@ -111,7 +111,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/laboratoryExamination/laboratoryExamination',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: '/assay/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -145,9 +145,9 @@ export default {
                 return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
 		},
 		sectionChange(index) {
-			this.laboratoryExamination.type = this.addObj.list[index]
+			this.laboratoryExamination.drug_class = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.laboratoryExamination.type)
+			console.log(index, this.laboratoryExamination.drug_class)
 		},
 		change(e) {
 			console.log("e:", e);
@@ -164,65 +164,98 @@ export default {
 			//把疾病类型转化成正确字段存储
 			// this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
 			switch(this.laboratoryExamination.drug_class){
-				case'血液': this.laboratoryExamination.drug_class='blood';break;
-				case'尿液': this.laboratoryExamination.drug_class='urine';break;
-				case'影像': this.laboratoryExamination.drug_class='image';break;
-				case'其他': this.laboratoryExamination.drug_class='other';break;
+				case'血液': this.laboratoryExamination.drug_class=0;break;
+				case'尿液': this.laboratoryExamination.drug_class=1;break;
+				case'影像': this.laboratoryExamination.drug_class=2;break;
+				case'其他': this.laboratoryExamination.drug_class=3;break;
 			}
-			
-			uni.request({
-				url:this.addObj.tourl2,
-				method:'post',
-				data:{
-					params:{
-						//注意！！查接口文档
-						model:"inpatient.laboratory.tests",
-						token:token,
-						uid:uid,
-						method:"create",
-						args:[
-							[{
-								//急诊类型
-								drug_class:this.laboratoryExamination.drug_class,
-								picture_1:"",
-								picture_2:"",
-								picture_3:"",
-								//疾病名称
-								data_name:this.laboratoryExamination.data_name,
-								//疾病备注
-								data_result:this.laboratoryExamination.data_result,
-								//注意！！这个是uid
-								//用户id
-								patient_id:uid,
-								//时间
-								data_time:this.laboratoryExamination.data_time
-							}]
-						],
-						kwargs:{}
-					}
-				},
-				success(res){
-					//测试
-					console.log(res)
-					uni.showToast({
-						title:'保存成功',
-						duration:1000,
-						success:()=>{
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addObj.tourl,
-									success:(res)=>{
-										console.log(res)
-									},
-									fail:(err)=>{
-										console.log(err)
-									}
-								});
-							}, 1000);
+			console.log('drug_class',this.laboratoryExamination.drug_class);
+
+			this.
+			$http.post(this.addObj.tourl2, {
+					uid: uid,
+					category: this.laboratoryExamination.drug_class,
+					name: this.laboratoryExamination.data_name,
+					remarks: this.laboratoryExamination.data_result,
+					time: this.laboratoryExamination.data_time,
+					type :1
+				}).then(res => {
+				console.log(res);
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: _this.addObj.tourl,
+						success: (res) => {
+							console.log(res)
+						},
+						fail: (err) => {
+							console.log(err)
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				}).catch(err => {
+				console.log(err);
+				});
+
+
+			// uni.request({
+			// 	url:this.addObj.tourl2,
+			// 	method:'post',
+			// 	data:{
+			// 		params:{
+			// 			//注意！！查接口文档
+			// 			model:"inpatient.laboratory.tests",
+			// 			token:token,
+			// 			uid:uid,
+			// 			method:"create",
+			// 			args:[
+			// 				[{
+			// 					//急诊类型
+			// 					drug_class:this.laboratoryExamination.drug_class,
+			// 					picture_1:"",
+			// 					picture_2:"",
+			// 					picture_3:"",
+			// 					//疾病名称
+			// 					data_name:this.laboratoryExamination.data_name,
+			// 					//疾病备注
+			// 					data_result:this.laboratoryExamination.data_result,
+			// 					//注意！！这个是uid
+			// 					//用户id
+			// 					patient_id:uid,
+			// 					//时间
+			// 					data_time:this.laboratoryExamination.data_time
+			// 				}]
+			// 			],
+			// 			kwargs:{}
+			// 		}
+			// 	},
+			// 	success(res){
+			// 		//测试
+			// 		console.log(res)
+			// 		uni.showToast({
+			// 			title:'保存成功',
+			// 			duration:1000,
+			// 			success:()=>{
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addObj.tourl,
+			// 						success:(res)=>{
+			// 							console.log(res)
+			// 						},
+			// 						fail:(err)=>{
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 	},
 	onShow() {

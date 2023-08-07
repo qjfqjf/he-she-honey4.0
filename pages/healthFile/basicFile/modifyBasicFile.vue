@@ -204,9 +204,25 @@ export default {
 					name: '有过外伤',
 					value: false,
 				}],
-			ListText:[
-				[],[],[],[],
-			],
+			dataText:{
+				contact : '',
+				contact_phone : '',
+				register : '',
+				company : '',
+				blood_type : '',
+				rh : '',
+				education : '',
+				occupation : '',
+				marriage : '',
+				drug_allergy : '',
+				expose : '',
+				other_allergy : '',
+				disease : '',
+				operation : '',
+				trauma : '',
+				family_disease : '',
+			},
+			saveText:{},
 			//跳转
 			toUrl: '/pages/healthFile/basicFile/basicFile',
 			//接口
@@ -217,8 +233,8 @@ export default {
 	methods: {
 		//checkbox复选框转换数据
 		radioChange(index) {
-			this.choices[index].value = !this.choices[index].value
-			console.log(this.choices[index].value);
+			this.choices[index] = !this.choices[index]
+			console.log(this.choices[index]);
 		},
 		//时间格式转换
 		formatDate(date) {
@@ -247,41 +263,93 @@ export default {
 			// console.log('close');
 		},
 		saveRecords() {
-			for(let i=0;i<this.dataListText[0].length;i++){
-				this.ListText[0][i]=this.dataListText[0][i].value;
+			console.log('dataListText',this.dataListText);
+			console.log(this.dataListText[1][5]);
+			if(this.dataListText[1][3]){
+				this.dataText.contact = this.dataListText[1][3].value
 			}
-			for(let i=0;i<this.dataListText[1].length;i++){
-				this.ListText[1][i]=this.dataListText[1][i].value;
+			if(this.dataListText[1][4]){
+				this.dataText.contact_phone = this.dataListText[1][4].value
 			}
-			for(let i=0;i<this.dataListText[2].length;i++){
-				this.ListText[2][i]=this.dataListText[2][i].value;
+			if(this.dataListText[1][5]){
+				this.dataText.register = this.dataListText[1][5].value
 			}
-			for(let i=0;i<this.dataListText[3].length;i++){
-				this.ListText[3][i]=this.dataListText[3][i].value;
+			if(this.dataListText[1][9]){
+				this.dataText.blood_type = this.dataListText[1][9].value
 			}
-			console.log(this.ListText);
-			console.log(this.dataListText);
-			console.log(this.dataListText[this.current]);
+			if(this.dataListText[1][10]){
+				this.dataText.rh = this.dataListText[1][10].value
+			}
+			if(this.dataListText[1][11]){
+				this.dataText.education = this.dataListText[1][11].value
+			}
+			if(this.dataListText[1][12]){
+				this.dataText.occupation = this.dataListText[1][12].value
+			}
+			if(this.dataListText[1][13]){
+				this.dataText.marriage = this.dataListText[1][13].value
+			}
+			if(this.dataListText[2][1]){
+				this.dataText.drug_allergy = this.dataListText[2][1].value
+			}
+			if(this.dataListText[1][15]){
+				this.dataText.expose = this.dataListText[1][15].value
+			}
+			if(this.dataListText[1][16]){
+				this.dataText.other_allergy = this.dataListText[1][16].value
+			}
+			if(this.dataListText[2][0]){
+				this.dataText.disease = this.dataListText[2][0].value
+			}
+			if(this.dataListText[3][0]){
+				this.dataText.family_disease = this.dataListText[3][0].value
+			}
+			// this.dataText.operation = 
+			// this.dataText.trauma = 
+			
+			console.log('this.dataText',this.dataText);
+			for (let key in this.dataText) {
+				if (this.dataText.hasOwnProperty(key)) {
+					if (this.dataText[key] !== null && this.dataText[key] !== undefined && this.dataText[key] !== '') {
+						this.saveText[key] = this.dataText[key];
+					}
+				}
+			}
+			console.log('this.saveText',this.saveText);
+			// for(let i=0;i<this.dataListText[0].length;i++){
+			// 	this.dataText[0][i]=this.dataListText[0][i];
+			// }
+			// for(let i=0;i<this.dataListText[1].length;i++){
+			// 	this.dataText[1][i]=this.dataListText[1][4];
+			// }
+			// for(let i=0;i<this.dataListText[2].length;i++){
+			// 	this.ListText[2][i]=this.dataListText[2][i];
+			// }
+			// for(let i=0;i<this.dataListText[3].length;i++){
+			// 	this.ListText[3][i]=this.dataListText[3][i];
+			// }
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			this.uid = userInfo.uid;
 			console.log(this.uid);
 			const _this = this;
+			const requestData = {
+				...this.saveText  // 将 saveText 对象的所有属性展开到 requestData 中
+			};
+			console.log('requestData',requestData);
 			this.$http
-				.post(this.toUrl2, {
-					uid : this.uid
-					
-					// model: this.dataList[this.current].model,
-					// method: "write",
-					// domain: [["id", "=", this.uid]],
-					// args: [
-						
-					// ],
-				}).then((res => {
-					console.log(res);
-					uni.showToast({
+					.post(this.toUrl2,
+						requestData
+						// model:this.Records[this.current].model,
+						// domain:[["user_id", "=", this.uid]],
+						// fields:this.Records[this.current].fields
+					).then(res=>{
+						console.log(res);
+						uni.showToast({
 						title: "保存成功"
 					})
-				}))
+			}).catch(error => {
+				console.error('请求发生错误', error);
+			});
 		},
 
 	}

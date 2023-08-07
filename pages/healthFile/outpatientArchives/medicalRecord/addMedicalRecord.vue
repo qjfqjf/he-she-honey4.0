@@ -134,7 +134,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/outpatientArchives/medicalRecord/medicalRecord',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2: '/medical/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -236,58 +236,93 @@ export default {
 			//把图片的前缀删除
 			this.imgList = this.base64RemovePrefix(this.imgList1)
 			//把疾病类型转化成正确字段存储
-			this.record.data_type = this.record.data_type == '急诊' ? 'emergency' : 'General clinic';
-			uni.request({
-				url: this.addText.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						//注意！！查接口文档
-						model: "outpatient.medical.records",
-						token: token,
-						uid: uid,
-						method: "create",
-						args: [
-							[{
-								//急诊类型
-								"data_type": this.record.data_type,
-								"picture_1": this.imgList[0],
-								"picture_2": this.imgList[1],
-								"picture_3": this.imgList[2],
-								//疾病名称
-								"data_name": this.record.data_name,
-								//疾病备注
-								"data_result": this.record.data_result,
-								"data_time": this.record.data_time,
-								//注意！！这个是uid
-								//用户id
-								"patient_id": uid
-								//时间
-							}]
-						],
-						kwargs: {}
-					}
-				},
-				success(res) {
-					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addText.tourl,
-									success: (res) => {
-										console.log(res)
-									},
-									fail: (err) => {
-										console.log(err)
-									}
-								});
-							}, 1000);
+			this.record.data_type = this.record.data_type == '急诊' ? '1' : '0';
+			console.log('data_type',this.record.data_type);
+
+
+			this.
+			$http.
+			post(this.addText.tourl2, {
+						category: this.record.data_type,
+						name: this.record.data_name,
+						remarks: this.record.data_result,
+						time: this.record.data_time,
+						type: 1,
+						uid: uid
+			}).then(res => {
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: _this.addText.tourl,
+						success: (res) => {
+							console.log(res)
+						},
+						fail: (err) => {
+							console.log(err)
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				}).catch(err => {
+				console.log(err);
+				});
+
+
+			// uni.request({
+			// 	url: this.addText.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			//注意！！查接口文档
+			// 			model: "outpatient.medical.records",
+			// 			token: token,
+			// 			uid: uid,
+			// 			method: "create",
+			// 			args: [
+			// 				[{
+			// 					//急诊类型
+			// 					"data_type": this.record.data_type,
+			// 					"picture_1": this.imgList[0],
+			// 					"picture_2": this.imgList[1],
+			// 					"picture_3": this.imgList[2],
+			// 					//疾病名称
+			// 					"data_name": this.record.data_name,
+			// 					//疾病备注
+			// 					"data_result": this.record.data_result,
+			// 					"data_time": this.record.data_time,
+			// 					//注意！！这个是uid
+			// 					//用户id
+			// 					"patient_id": uid
+			// 					//时间
+			// 				}]
+			// 			],
+			// 			kwargs: {}
+			// 		}
+			// 	},
+			// 	success(res) {
+			// 		uni.showToast({
+			// 			title: '保存成功',
+			// 			duration: 1000,
+			// 			success: () => {
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addText.tourl,
+			// 						success: (res) => {
+			// 							console.log(res)
+			// 						},
+			// 						fail: (err) => {
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 
 	},

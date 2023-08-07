@@ -26,7 +26,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.selectedDate}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
 
@@ -37,7 +37,7 @@
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.type}}</text>
+                    <text style="font-weight: 300">{{item.type_cn}}</text>
                 </view>
             </view>
 
@@ -45,7 +45,7 @@
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.illDiscription}}</text>
+                    <text style="font-weight: 300">{{item.remarks}}</text>
                 </view>
             </view>
 
@@ -151,7 +151,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthManagement/sleep/addSleepRecord',
 				//接口
-				tourl2:'',
+				tourl2:'/sleep/index',
 				addtext:'添加记录'
 			}
 		},
@@ -161,32 +161,38 @@
 				uni.navigateTo({
 					url:this.tourl
 				});
-			}
-		},
+			},
+		
 		//查询当前用户所有档案
 		getRecordsList(){
 			//接口调用
-			uni.request({
-				url:this.tourl2,
-				method:'post',
-				data: {
-					params:{
-						model:'',
-						token:'',
-						uid:'',
-						//传回去的数组(存放字段)
-						fields:[
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+            const uid = userInfo.uid;
+			this.$http.post(this.tourl2, {  
+					uid: 6,
+				})
+				.then((response) => {
+					console.log(response);
+				// 传回来的值
+				this.dataList = response.data.data
+				})
+				.catch((error) => {
+				uni.showToast({
+					title: error,
+				});
+				});
 
-						]
-					}
-				},
-				success(res){
-					//传回来的值
-					//this.dataList = res.data.result.
-				}
-			})
+
+				this.$http.post(this.tourl2, {
+						uid: 6,
+					}).then(res => {
+					// 传回来的值
+					this.dataList = res.data.data;
+					}).catch(err => {
+					console.log(err);
+					});
 		},
-
+	},
 		onLoad(){
 			this.getRecordsList();
 		}

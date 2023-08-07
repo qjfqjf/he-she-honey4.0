@@ -104,7 +104,7 @@ export default {
 				//返回的路由
 				tourl:'/pages/healthFile/outpatientArchives/operation/operation',
 				//保存接口
-				tourl2:'http://106.14.140.92:8881/platform/dataset/call_kw',
+				tourl2:'/operation/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -149,57 +149,88 @@ export default {
 			const uid = userInfo.uid;
 			const token = userInfo.token;
 			const _this = this;
-			uni.request({
-				url:this.addObj.tourl2,
-				method:'post',
-				data:{
-					params:{
-						//注意！！查接口文档
-						model:"inpatient.surgery",
-						token:token,
-						uid:uid,
-						method:"create",
-						args:[
-							[{
-								picture_1:"",
-								picture_2:"",
-								picture_3:"",
-								//疾病名称
-								data_name:this.operation.data_name,
-								//疾病备注
-								data_result:this.operation.data_result,
-								//注意！！这个是uid
-								//用户id
-								patient_id:uid,
-								//时间
-                date_time:this.operation.data_time
-							}]
-						],
-						kwargs:{}
-					}
-				},
-				success(res){
-					//测试
-					console.log(res)
-					uni.showToast({
-						title:'保存成功',
-						duration:1000,
-						success:()=>{
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addObj.tourl,
-									success:(res)=>{
-										console.log(res)
-									},
-									fail:(err)=>{
-										console.log(err)
-									}
-								});
-							}, 1000);
+
+
+			this.$http.post(this.addObj.tourl2, {
+				name: this.operation.data_name,
+				remarks: this.operation.data_result,
+				uid: uid,
+				time: this.operation.data_time
+				}).then(res => {
+				console.log(res);
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: this.addObj.tourl,
+						success: (res) => {
+							console.log(res)
+						},
+						fail: (err) => {
+							console.log(err)
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				}).catch(err => {
+				console.log(err);
+				});
+
+
+			// uni.request({
+			// 	url:this.addObj.tourl2,
+			// 	method:'post',
+			// 	data:{
+			// 		params:{
+			// 			//注意！！查接口文档
+			// 			model:"inpatient.surgery",
+			// 			token:token,
+			// 			uid:uid,
+			// 			method:"create",
+			// 			args:[
+			// 				[{
+			// 					picture_1:"",
+			// 					picture_2:"",
+			// 					picture_3:"",
+			// 					//疾病名称
+			// 					data_name:this.operation.data_name,
+			// 					//疾病备注
+			// 					data_result:this.operation.data_result,
+			// 					//注意！！这个是uid
+			// 					//用户id
+			// 					patient_id:uid,
+			// 					//时间
+            //     date_time:this.operation.data_time
+			// 				}]
+			// 			],
+			// 			kwargs:{}
+			// 		}
+			// 	},
+			// 	success(res){
+			// 		//测试
+			// 		console.log(res)
+			// 		uni.showToast({
+			// 			title:'保存成功',
+			// 			duration:1000,
+			// 			success:()=>{
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addObj.tourl,
+			// 						success:(res)=>{
+			// 							console.log(res)
+			// 						},
+			// 						fail:(err)=>{
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 	},
 }

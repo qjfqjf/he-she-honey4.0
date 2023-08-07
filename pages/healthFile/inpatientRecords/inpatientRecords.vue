@@ -26,7 +26,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.selectedDate}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
 			<!-- 2、疾病诊断 -->
@@ -34,7 +34,7 @@
                 <text class="cate-text" style="">{{showObj.remarksText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-weight: 300">{{item.illName}}</text>
+                    <text style="font-weight: 300">{{item.name}}</text>
                 </view>
             </view>
 
@@ -44,7 +44,7 @@
                 <text class="cate-text" style="">{{showObj.typeText}}</text>
                 <view style="height: 20rpx"></view>
                 <view style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.type}}</text>
+                    <text style="font-weight: 300">{{item.category_cn}}</text>
                 </view>
             </view>
 
@@ -54,7 +54,7 @@
             <view class="remarks">
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 200rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-                    <text style="font-weight: 300">{{item.illDiscription}}</text>
+                    <text style="font-weight: 300">{{item.symptom}}</text>
                 </view>
             </view>
 
@@ -64,7 +64,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.selectedDate1}}</text>
+                    <text style="font-size: 30rpx">{{item.createtime}}</text>
                 </view>
             </view>
 			<view class="remarks">
@@ -73,7 +73,7 @@
                 </view>
                 <view style="height: 20rpx"></view>
                 <view style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-                    <text style="font-size: 30rpx">{{item.selectedDate2}}</text>
+                    <text style="font-size: 30rpx">{{item.time}}</text>
                 </view>
             </view>
             <!-- 5、图片展示 -->
@@ -181,7 +181,7 @@
 				//点击添加跳转的路由
 				tourl:'/pages/healthFile/inpatientRecords/addInpatientRecords',
 				//接口
-				tourl2:'',
+				tourl2:'/medical/index',
 				addtext:'添加病例'
 			}
 		},
@@ -192,20 +192,18 @@
 					url:this.tourl
 				});
 			}
-		},
+		,
 		//查询当前用户所有档案
 		getRecordsList(){
 			//接口调用
-
       this.$http.post(this.tourl2, {
-          model: '',
-          token: '',
-          uid: '',
-          fields: []
+          uid: '172',
+          type: 2
       })
       .then((response) => {
+        console.log(response);
         //传回来的值
-        //this.dataList = response.data.result.
+        this.dataList = response.data.data
       })
       .catch((error) => {
         uni.showToast({
@@ -213,7 +211,7 @@
         });
       });
 
-
+    }
 			// uni.request({
 			// 	url:this.tourl2,
 			// 	method:'post',
@@ -236,6 +234,8 @@
 		},
 
 		onLoad(){
+      const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+      console.log(userInfo);
 			this.getRecordsList();
 		}
 	}

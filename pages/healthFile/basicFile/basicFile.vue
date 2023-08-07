@@ -157,7 +157,7 @@ export default {
 			weight: 73,
 			list: ['签约信息', '基本信息', '既往史', '家族史'],
 			signInfo: ['签约日期', '签约医生', '签约类型'],
-			baseInfo: ['身份证号码:', '手机号码:', '出生日期:', '联系人姓名:', '联系人电话:', '常驻户籍:', '民族;', '家庭住址:', '家庭住址:', '血型:'
+			baseInfo: ['身份证号码:', '手机号码:', '出生日期:', '联系人姓名:', '联系人电话:', '常驻户籍:', '民族;', '家庭住址:', '所属机构:', '血型:'
 				, 'RH阴性:', '文化程度:', '职业:', '婚姻状况:', '药物过敏史:', '暴露史:', '过敏史:'
 			],
 			history: [
@@ -189,12 +189,11 @@ export default {
 		},
 		//拿去用户信息
 		getRecordsList() {
-			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-			console.log(userInfo);
-			this.uid = userInfo.uid;
-			this.uid = 3
-			console.log(this.uid);
-				const token = userInfo.token;
+			console.log(uni.getStorageSync('userInfo'));
+			this.uid = uni.getStorageSync('userInfo').uid;
+			// this.uid = 3
+			// console.log(this.uid);
+				const token = uni.getStorageSync('userInfo').token;
 				this.$http
 					.post(this.toUrl2,{
 						uid : 3
@@ -202,7 +201,7 @@ export default {
 						// domain:[["user_id", "=", this.uid]],
 						// fields:this.Records[this.current].fields
 					}).then(res=>{
-						console.log(res);
+						console.log('res',res);
 						this.data1[1] = res.data.createtime 
 						this.data1[2] = res.data.sign_contract_type 
 						this.data1[3] = res.data.patient_id 
@@ -237,7 +236,9 @@ export default {
 						console.log('data3',this.data3)
 						console.log('data4',this.data4)
 						this.name = res.data.fullname
-			})
+			}).catch(error => {
+				console.error('请求发生错误', error);
+			});
 			// this.change(this.current);
 		},
 		open() {
