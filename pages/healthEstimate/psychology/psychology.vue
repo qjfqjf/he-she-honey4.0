@@ -17,24 +17,24 @@
 	<view class="container">
 	    <scroll-view class="nav" scroll-y="true">
 	        <view
-	           v-for="(item, index) in navList"
+	           v-for="(item, index) in area"
 	           :key="index"
 	           :class="{ active: currentIndex === index }"
-	           @tap="handleNavClick(index)"
+	           @tap="handleNavClick(index,item.id)"
 	        >
-	        <view>{{ item.title }}</view>
+	        <view>{{ item.name }}</view>
 	        </view>
 	    </scroll-view>
 	    <scroll-view class="bigcontent"  scroll-y="true">
-	        <view class="content" v-for="(item, index) in dataList" :key="index">
+	        <view class="content" v-for="(item, index) in dataTextList" :key="index">
 				<view class="content-one" @click="gotoIndex">
 					<view class="content-top">
 						<view class="left">
-							<view class="top">{{ item.title }}</view>
-							<view class="buttom">{{ item.description }}</view>
+							<view class="top">{{ item.name }}</view>
+							<view class="buttom">{{ item.desc }}</view>
 						</view>
 						<view class="right">
-							<image class="imgtest" :src="item.imgUrl" mode="aspectFit" />
+							<image class="imgtest" :src="item.imgurl1" mode="aspectFit" />
 						</view>
 					</view>
 					<view class="content-buttom"></view>
@@ -628,13 +628,44 @@
 		      ],
 
 				dataList: [],
+				dataTextList:[],
+				QuestionList:[],
+				area:[],
 				currentIndex: 0,
+				getUrl:'/mmpt_question/area',
+				questionUrl:'/mmpt_question/index'
 		    };
 		},
 		mounted() {
 		    this.dataList = this.navList[this.currentIndex].data;
 		},
+		onLoad() {
+			this.getQuestion();
+	},
 		methods: {
+			getQuestion(){
+				this.$http.get(this.getUrl,{
+					area_type:1
+				}).then(res=>{
+					console.log('res',res);
+					this.area = res.data.area
+					// this.area.forEach((record, index) => {
+					// 	this.change(record.id);
+					// 	this.QuestionList[index] = this.dataTextList;
+					// 	console.log('dataTextList', this.dataTextList);
+					// });
+					this.dataTextList = res.data.data
+					for (var record of this.dataTextList){
+						if(record.name.length > 7) record.name = record.name.slice(0,7)
+						if(record.desc.length > 30) record.desc = record.desc.slice(0,30)
+					}
+					console.log('QuestionList',this.QuestionList);
+				}).catch(err => {
+				uni.showToast({
+					title: err
+				});
+				});
+			},
 	        open(e) {
 				// console.log('open', e)
 	        },
@@ -642,13 +673,29 @@
 	          // console.log('close', e)
 	        },
 	        change(e) {
+				
 	          // console.log('change', e)
 	        },
-			handleNavClick(index) {
+			handleNavClick(index,e) {
 			    if (this.currentIndex !== index) {
 			        this.currentIndex = index;
 			        this.dataList = this.navList[this.currentIndex].data;
 			    }
+				this.$http.get(this.questionUrl,{
+					question_area_id:e
+				}).then(res=>{
+					console.log('res',res);
+					this.dataTextList = res.data.data
+					for (var record of this.dataTextList){
+						if(record.name.length > 7) record.name = record.name.slice(0,7)
+						if(record.desc.length > 30) record.desc = record.desc.slice(0,30)
+					}
+				}).catch(err => {
+				uni.showToast({
+					title: err
+				});
+				});
+				console.log('Current index: ' + this.currentIndex);
 			},
 			changeState(e) {
 			  console.log("e:", e);

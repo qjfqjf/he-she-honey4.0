@@ -110,7 +110,7 @@ export default {
 				//返回的路由
 				tourl: '/pages/healthFile/examination/artificialExamination/artificialExamination',
 				//保存接口
-				tourl2: 'http://106.14.140.92:8881/uploadmedicalExaminationFileData',
+				tourl2: '/physica/create',
 				// 备注
 				remarksValue: '',
 				// 选择日期
@@ -145,14 +145,15 @@ export default {
 		},
 		//上方选择器函数
 		sectionChange(index) {
-			this.examination.type = this.addObj.list[index]
+			this.examination.medical_examination_type = this.addObj.list[index]
 			this.addObj.curNow = index;
-			console.log(index, this.examination.type)
+			console.log(index, this.examination.medical_examination_type)
 		},
 		//保存方法
 		saveRecords() {
 			//测试
 			console.log(this.addObj.tourl2)
+			console.log('examination',this.examination);
 			//拿到用户数据
 			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 			const uid = userInfo.uid;
@@ -162,59 +163,89 @@ export default {
 			//把疾病类型转化成正确字段存储
 			// this.medicalRecord.drug_class = this.medicalRecord.drug_class == '口服' ? 'Oral administration' : 'Subcutaneous injection';
 			switch (this.examination.medical_examination_type) {
-								case '健康体检': this.examination.medical_examination_type = '1'; break;
-								case '入职体检': this.examination.medical_examination_type = '2'; break;
-								case '专项体检': this.examination.medical_examination_type = '3'; break;
-								case '其他': this.examination.medical_examination_type = '4'; break;
+								case '健康体检': this.examination.medical_examination_type = 0; break;
+								case '入职体检': this.examination.medical_examination_type = 1; break;
+								case '专项体检': this.examination.medical_examination_type =2; break;
+								case '其他': this.examination.medical_examination_type = 3; break;
 							}
 			console.log(this.examination.medical_examination_item);
-			uni.request({
-				url: this.addObj.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						//注意！！查接口文档
-						model: "medical.examination.file",
-						token: token,
-						uid: uid,
-						method: "create",
-						args: 
-							[{
-								//用药类型
-								medical_examination_type: this.examination.medical_examination_type,
-								//药物名称
-								medical_examination_item: this.examination.medical_examination_item,
-								//备注
-								remarks: this.examination.remarks,
-								//日期
-								medical_examination_date: this.examination.medical_examination_date,
-								//注意:这个是uid
-								//用户id
-								//时间
-							}],
-						kwargs: {}
-					}
-				},
-				success(res) {
-					uni.showToast({
-						title: '保存成功',
-						duration: 1000,
-						success: () => {
-							setTimeout(() => {
-								uni.redirectTo({
-									url: _this.addObj.tourl,
-									success: (res) => {
-										console.log(res)
-									},
-									fail: (err) => {
-										console.log(err)
-									}
-								});
-							}, 1000);
+
+
+			this.$http.post(this.addObj.tourl2, {
+					uid: uid,
+					category: this.examination.medical_examination_type,
+					name: this.examination.medical_examination_item,
+					remarks: this.examination.remarks,
+					time: this.examination.medical_examination_date,
+					type:1
+				}).then(res => {
+				uni.showToast({
+					title: '保存成功',
+					duration: 1000,
+					success: () => {
+					setTimeout(() => {
+						uni.redirectTo({
+						url: _this.addObj.tourl,
+						success: (res) => {
+							console.log(res);
+						},
+						fail: (err) => {
+							console.log(err);
 						}
-					});
-				}
-			});
+						});
+					}, 1000);
+					}
+				});
+				});
+
+
+			// uni.request({
+			// 	url: this.addObj.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			//注意！！查接口文档
+			// 			model: "medical.examination.file",
+			// 			token: token,
+			// 			uid: uid,
+			// 			method: "create",
+			// 			args: 
+			// 				[{
+			// 					//用药类型
+			// 					medical_examination_type: this.examination.medical_examination_type,
+			// 					//药物名称
+			// 					medical_examination_item: this.examination.medical_examination_item,
+			// 					//备注
+			// 					remarks: this.examination.remarks,
+			// 					//日期
+			// 					medical_examination_date: this.examination.medical_examination_date,
+			// 					//注意:这个是uid
+			// 					//用户id
+			// 					//时间
+			// 				}],
+			// 			kwargs: {}
+			// 		}
+			// 	},
+			// 	success(res) {
+			// 		uni.showToast({
+			// 			title: '保存成功',
+			// 			duration: 1000,
+			// 			success: () => {
+			// 				setTimeout(() => {
+			// 					uni.redirectTo({
+			// 						url: _this.addObj.tourl,
+			// 						success: (res) => {
+			// 							console.log(res)
+			// 						},
+			// 						fail: (err) => {
+			// 							console.log(err)
+			// 						}
+			// 					});
+			// 				}, 1000);
+			// 			}
+			// 		});
+			// 	}
+			// });
 		},
 	},
 }
