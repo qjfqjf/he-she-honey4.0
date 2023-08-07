@@ -9,7 +9,7 @@
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
-					{{item.test_time}}
+					{{item.createtime}}
 				</view>
 			</view>
 			<view class="data d-flex j-sb">
@@ -19,7 +19,7 @@
 				</view>
 				<view class="foreheadThermometer">
 					<!-- ↓ -->
-					数值：{{item.temperature}}℃
+					数值：{{item.value}}℃
 				</view>
 
 			</view>
@@ -45,30 +45,7 @@
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
-				allDataList:[
-				
-				],
 				dataList: [
-					// {
-					//          time: "2023-3-29 15:30:50",
-					//          name: '额温',
-					//          foreheadThermometer: 36.7
-					//        },
-					//        {
-					//          time: "2023-3-29 15:30:50",
-					//          name: '额温',
-					//          foreheadThermometer: 36.6
-					//        },
-					//        {
-					//          time: "2023-3-29 15:30:50",
-					//          name: '额温',
-					//          foreheadThermometer: 37.5
-					//        },
-					//        {
-					//          time: "2023-3-29 15:30:50",
-					//          name: '额温',
-					//          foreheadThermometer: 38
-					//        }
 				]
 			};
 		},
@@ -115,7 +92,7 @@
 				//清空数组内数据
 				this.dataList = [];
 				//筛选出符合条件的数据
-				this.getDataList();
+				this.getHistoryList();
 			},
 			handleWarningRule(){
 				uni.navigateTo({
@@ -124,39 +101,14 @@
 			},
 			//查询额温枪月报
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "forehead.temperature.gun",
-					domain:[["owner.id","=",this.uid]],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"temperature",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/tem/index', {
+					uid: this.uid,
+					start_date: this.date.startTime,
+					end_date: this.date.endTime
 				}).then(res => {
-					this.allDataList = res.result.records
-					this.getDataList();
+					this.dataList = res.data
 				})
 			},
-			
-			//筛选数据
-			getDataList(){
-				for(var i in this.allDataList){
-					//判断数据是否在所选日期范围内
-					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
-						this.dataList.push(this.allDataList[i])
-						this.sortDataListByTestTime();
-					}
-				}
-			},
-			sortDataListByTestTime() {
-				this.dataList.sort((a, b) => {
-					return new Date(a.test_time) - new Date(b.test_time);
-				});
-			},
-
 		}
 	}
 </script>

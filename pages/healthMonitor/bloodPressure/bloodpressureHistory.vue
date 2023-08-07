@@ -5,36 +5,6 @@
 			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<!-- 	<view class="time d-flex j-sb">
-			<view class="startTime">
-				开始时间：
-			</view>
-			<view class="endTime">
-				结束时间：
-			</view>
-		</view> -->
-		<!-- 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
-			<view class="top d-flex j-sb mb-2">
-				<view class="time">
-					{{item.test_time}}
-				</view>
-				<view class="position">
-					监测部位：左侧
-				</view>
-				
-			</view>
-			<view class="data d-flex j-sb">
-				<view class="SYS">
-					收缩压：{{item.systolic_blood_pressure}}↑
-				</view>
-				<view class="DIA">
-					舒张压：{{item.tensioning_pressure}} ↑
-				</view>
-				<view class="PUL">
-					心率：{{item.heart_rate}}
-				</view>
-			</view>
-		</view> -->
 		<view class="history" v-for="(item,index) in dataList" :key="index">
 			<view class="date">
 				<view class="time">
@@ -97,6 +67,17 @@
 				],
 			};
 		},
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if (uid == 0) {
+				this.uid = this.userInfo.uid
+			} else {
+				this.uid = uid
+			}
+			this.getHistoryList();
+		},
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
@@ -110,7 +91,7 @@
 
 			getHistoryList() {
 				this.$http.post('/blood_pressure/index', {
-					uid: "5",
+					uid: this.uid,
 				}).then(res => {
 					this.dataList = res.data
 				})
@@ -170,17 +151,7 @@
 				});
 			},
 		},
-		onLoad(options) {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// 获取URL参数
-			const uid = options.uid;
-			if (uid == 0) {
-				this.uid = this.userInfo.uid
-			} else {
-				this.uid = uid
-			}
-			this.getHistoryList();
-		},
+		
 	}
 </script>
 

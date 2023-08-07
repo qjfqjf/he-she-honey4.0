@@ -6,21 +6,16 @@
 			</view>
 		</z-nav-bar>
 		<public-module></public-module>
-
-		<!-- v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-		{{ item.test_time.split(' ')[0] }} -->
-		<!-- .split(' ')[1] -->
-		<!-- 正文内容 -->
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="item.id">
 				<view class="date"
-				v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-					{{ item.test_time.split(' ')[0]}}
+				v-if="index === 0 || item.createtime.split(' ')[0] !== historyList[index - 1].createtime.split(' ')[0]">
+					{{ item.createtime.split(' ')[0]}}
 				</view>
 				<view class="record">
-					<text>{{ item.test_time.split(' ')[1]}}</text>
+					<text>{{ item.createtime.split(' ')[1]}}</text>
 					<text>体温</text>
-					<text class="text">{{ item.temperature}}C</text>
+					<text class="text">{{ item.value}}℃</text>
 				</view>
 			</view>
 		</view>
@@ -34,48 +29,7 @@
 				uid:0,
 				userInfo:'',
 				historyList: [],
-				// historyList: [
-				// {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: ''
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: '手动录入'
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '体温',
-				// 		index: '36.5℃',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, 
-				// ],
+				
 			};
 		},
 		//页面显示
@@ -90,20 +44,10 @@
 			},
 			//查询额温枪历史记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "forehead.temperature.gun",
-					domain:[["owner.id","=",this.uid]],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"temperature",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/tem/index', {
+					uid: this.uid,
 				}).then(res => {
-					this.historyList = res.result.records
-					this.sortDataListByTestTime();
+					this.historyList = res.data
 				})
 			},
 			handleWarningRule(){

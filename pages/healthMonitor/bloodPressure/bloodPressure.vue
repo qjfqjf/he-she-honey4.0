@@ -17,7 +17,7 @@
 				class="echarts">
 			</view>
 			<!-- #endif -->
-			
+
 			<!-- #ifndef APP-PLUS || H5 -->
 			<view>非 APP、H5 环境不支持</view>
 			<!-- #endif -->
@@ -30,7 +30,7 @@
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump()">
 		</u--text>
 		<view class="measureData">
-			<u--text class="pb-2" text="血压数值"></u--text>
+			<!-- <u--text class="pb-2" text="血压数值"></u--text> -->
 			<view class="d-flex j-sb">
 				<view class="data-box-SYS">
 					<view class="text-content">
@@ -65,23 +65,19 @@
 			</view>
 		</view>
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center"
-				@click="onPageSelectDocter">
+			<view class="d-flex flex-column a-center" @click="onPageSelectDocter">
 				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[0].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageMonth">
+			<view class="d-flex flex-column a-center" @click="onPageMonth">
 				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[1].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageDevice">
+			<view class="d-flex flex-column a-center" @click="onPageDevice">
 				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[2].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageWrite">
+			<view class="d-flex flex-column a-center" @click="onPageWrite">
 				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
@@ -151,17 +147,13 @@
 				deviceId: uni.getStorageSync('jkDeviceId'), // 蓝牙设备的id
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
-				// urlList: {
-				// 	history: '/pages/healthMonitor/bloodPressure/bloodpressureHistory',
-				// },
 				userInfo: '',
-				uid:0,//用户id
-				name:'',//选择之后的名字
-				username:'',//登录开始的名字
+				uid: 0, //用户id
+				name: '', //选择之后的名字
+				username: '', //登录开始的名字
 				// 底部工具栏
 				page: '',
-				toolList: [
-					{
+				toolList: [{
 						img: require('@/static/icon/select_docter.png'),
 						title: '找医生',
 						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
@@ -182,6 +174,7 @@
 						url: '/pages/healthMonitor/bloodPressure/manualEntry'
 					},
 				],
+				tag:'left'
 			};
 		},
 		onLoad(e) {
@@ -197,8 +190,8 @@
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			uni.$on('backWithData', (data) => {
-			    this.uid = data.uid;
-			    this.name = data.name;
+				this.uid = data.uid;
+				this.name = data.name;
 			});
 		},
 		methods: {
@@ -216,29 +209,37 @@
 			onViewClick(options) {
 				console.log(options)
 			},
-			
-			handleWarningRule(){
+
+			handleWarningRule() {
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
 				});
 			},
 			handleBloodPressureTrend() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodPressure/bloodPressureTrend?uid='+this.uid, // 跳转到指定的目标页面
+					url: '/pages/healthMonitor/bloodPressure/bloodPressureTrend?uid=' + this.uid, // 跳转到指定的目标页面
 				});
 			},
 			handleJump() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodPressure/bloodpressureHistory?uid='+this.uid,
+					url: '/pages/healthMonitor/bloodPressure/bloodpressureHistory?uid=' + this.uid,
 				});
 			},
 			handleSavePressure() {
-				const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-				this.uid = userInfo.uid
-				console.log(11111111111,this.uid)
 				if(this.measureResult.pressure != 0 && this.measureResult.SYS != 0){
-					this.$http.post('/platform/dataset/call_kw', {
-						
+					if(this.currentTab === 'tab1'){
+						this.tag = 'left'
+					}else{
+						this.tag = 'right'
+					}
+					this.$http.post('/blood_pressure/create', {
+						uid: this.uid,
+						systolic_pressure: this.measureResult.SYS,
+						diastolic_pressure: this.measureResult.DIA,
+						pulse: this.measureResult.PUL,
+						tag: this.tag,
+						time: this.formatDate(new Date()),
+						type: 1
 					}).then(res => {
 						if (this.measureResult.pressure != 0) {
 							this.$refs.uToast.show({
@@ -277,6 +278,33 @@
 					this.option.series[0].data[0].value = 0
 				}
 			},
+			// handleSavePressure() {
+			// 	if(this.currentTab === 'tab1'){
+			// 		this.tag = 'left'
+			// 	}else{
+			// 		this.tag = 'right'
+			// 	}
+			// 	this.$http.post('/blood_pressure/create', {
+			// 		uid: this.uid,
+			// 		systolic_pressure: this.measureResult.SYS,
+			// 		diastolic_pressure: this.measureResult.DIA,
+			// 		pulse: this.measureResult.PUL,
+			// 		tag: this.tag,
+			// 		time: this.formatDate(new Date()),
+			// 		type: 1
+			// 	}).then(res => {
+			// 		this.$refs.uToast.show({
+			// 			message: '保存成功',
+			// 			type: 'success',
+			// 		})
+			// 		this.btnColor = '#dadada'
+			// 		this.measureResult.SYS = 0
+			// 		this.measureResult.DIA = 0
+			// 		this.measureResult.PUL = 0
+			// 		this.measureResult.pressure = 0
+			// 		this.option.series[0].data[0].value = 0
+			// 	})
+			// },
 			// handleSavePressure() {
 			// 	if(this.measureResult.pressure != 0 && this.measureResult.SYS != 0){
 			// 		this.$http.post('/platform/dataset/call_kw', {
@@ -551,24 +579,24 @@
 
 			},
 
-			onPageSelectDocter(){
+			onPageSelectDocter() {
 				uni.navigateTo({
-					url:'/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
 				})
 			},
-			onPageMonth(){
+			onPageMonth() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth?uid='+this.uid,
+					url: '/pages/healthMonitor/bloodPressure/bloodPressureMonth?uid=' + this.uid,
 				})
 			},
-			onPageDevice(){
+			onPageDevice() {
 				uni.navigateTo({
 					url: '/pages/mine/myDevice',
 				})
 			},
-			onPageWrite(){
+			onPageWrite() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodPressure/manualEntry?uid='+this.uid,
+					url: '/pages/healthMonitor/bloodPressure/manualEntry?uid=' + this.uid,
 				})
 			},
 			//时间格式转换

@@ -564,7 +564,14 @@
 			}
 		},
 		{
-			"path": "pages/healthMonitor/healthMonitorData",
+			"path": "pages/healthMonitor/bloodPressure/bloodPressureTrend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/bloodSugar/bloodSugarTrend",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false

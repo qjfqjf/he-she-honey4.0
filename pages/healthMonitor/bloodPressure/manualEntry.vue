@@ -80,6 +80,7 @@
 				maginL: 15, //线间距
 				userInfo: '',
 				uid:0,
+				tag:'left'
 			};
 		},
 		onLoad(options) {
@@ -113,7 +114,6 @@
 			confirm(time) {
 				this.show = false
 				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm:ss')
-
 			},
 			cancel() {
 				this.show = false
@@ -136,38 +136,34 @@
 				second = second < 10 ? ('0' + second) : second;
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
-			// 处理保存
-			handleSaveInfo(){
-				if(this.scrollSYSLeft != 0 && this.scrollDIALeft != 0){
-					this.$http.post('/platform/dataset/call_kw', {
-						model: "sphygmomanometer.jiakang",
-						method: "create",
-						args: [
-							[{
-								"name": "血压计 (静态血压计)",
-								"numbers":"001",
-								"owner":this.uid,
-								"systolic_blood_pressure":this.scrollSYSLeft,
-								"tensioning_pressure":this.scrollDIALeft,
-								"heart_rate":this.pulValue,
-								"input_type":"hend",
-								"test_time":this.time
-							}]
-						],
-						kwargs:{}
+			handleSaveInfo() {
+				if(this.currentTab === 'tab1'){
+					this.tag = 'left'
+				}else{
+					this.tag = 'right'
+				}
+				if(this.pulValue != '' && this.pulValue != 0){
+					this.$http.post('/blood_pressure/create', {
+						uid: this.uid,
+						systolic_pressure: this.scrollSYSLeftNow,
+						diastolic_pressure: this.scrollDIALeftNow,
+						pulse: this.pulValue,
+						tag: this.tag,
+						time: this.selectTime,
+						type: 2
 					}).then(res => {
-						if(this.pulValue != 0){
-							this.$refs.uToast.show({
-								message: '保存成功',
-								type: 'success',
-							})
-						}
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
+						this.btnColor = '#dadada'
 					})
 				}else{
 					this.$refs.uToast.show({
-						message: '保存失败',
+						message: '请填写心率',
 						type: 'error',
 					})
+					this.btnColor = '#dadada'
 				}
 			},
 		}

@@ -107,7 +107,7 @@
 			},
 			getHistoryList() {
 				this.$http.post('/blood_pressure/index', {
-					uid: "5",
+					uid: this.uid,
 					start_date: this.date.startTime,
 					end_date: this.date.endTime
 				}).then(res => {

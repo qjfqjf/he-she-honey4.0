@@ -49,7 +49,7 @@
 						trigger: 'axis'
 					},
 					legend: {
-						data: ['收缩压', '舒张压', '心率']
+						data: ['血糖']
 					},
 					grid: {
 						left: '3%',
@@ -68,61 +68,30 @@
 						// type:'value'
 					},
 					series: [{
-							name: '收缩压',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'orange' // 设置脉率线条的颜色为橙色
-							},
-							label: {
-								show: true,
-								position: 'top',
-								formatter: '{c}',
-								color: 'orange'
-							}
+						name: '血糖',
+						type: 'line',
+						stack: 'Total',
+						data: [],
+						lineStyle: {
+							color: 'orange' // 设置脉率线条的颜色为橙色
 						},
-						{
-							name: '舒张压',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'green' // 设置PI线条的颜色为绿色
-							},
-							label: {
-								show: true,
-								position: 'top',
-								formatter: '{c}',
-								color: 'green'
-							}
-						},
-						{
-							name: '心率',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'red' // 设置血氧线条的颜色为红色
-							},
-							label: {
-								show: true, // 显示标签
-								position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
-								formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
-								color: 'red' // 标签文本颜色
-							}
-						},
-					]
+						label: {
+							show: true,
+							position: 'top',
+							formatter: '{c}',
+							color: 'orange'
+						}
+					}, ]
 				},
 			}
 		},
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad(options) {
+		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
-			const uid = options.uid;
+			const uid = this.userInfo.uid;
 			if (uid == 0) {
 				this.uid = this.userInfo.uid
 			} else {
@@ -130,7 +99,6 @@
 			}
 			dayjs.extend(isBetween);
 			this.getHistoryList();
-
 		},
 		methods: {
 			// 获取当前月的最后一天
@@ -166,7 +134,7 @@
 				console.log(options)
 			},
 			getHistoryList() {
-				this.$http.post('/blood_pressure/index', {
+				this.$http.post('/blood_sugar/index', {
 					uid: this.uid,
 					start_date: this.date.startTime,
 					end_date: this.date.endTime
@@ -187,16 +155,12 @@
 						const minute = dateTime.getMinutes();
 						this.option.xAxis.data.push(`${month}-${day} ${hour}:${minute}`);
 						count++;
-					}		
+					}
 					if (this.dataList.length > 0) {
-						this.option.series[0].data = this.dataList.slice(-4).map(item => item.systolic_pressure);
-						this.option.series[1].data = this.dataList.slice(-4).map(item => item.diastolic_pressure);
-						this.option.series[2].data = this.dataList.slice(-4).map(item => item.pulse);
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.value);
 					} else {
 						this.option.xAxis.data = [];
 						this.option.series[0].data = [];
-						this.option.series[1].data = [];
-						this.option.series[2].data = [];
 					}
 				})
 			},
