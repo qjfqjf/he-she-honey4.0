@@ -27,16 +27,16 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text style="font-size: 30rpx">{{ item.medical_examination_date }}</text>
+							<text style="font-size: 30rpx">{{ item.time }}</text>
 						</view>
 					</view>
 					<!-- 2、体检类别 -->
 					<view class="remarks">
-						<text class="cate-text" style="">{{ showObj.typeText }}</text>
+						<text class="cate-text" style="">{{ showObj.choiceTitle }}</text>
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 200rpx;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding-top: 20rpx;padding-left: 30rpx">
-							<text>{{ item.medical_examination_type }}</text>
+							<text>{{ item.category_cn }}</text>
 						</view>
 					</view>
 
@@ -47,7 +47,7 @@
 						<view style="height: 20rpx"></view>
 						<view
 							style="width: 100%;height: 80rpx;background-color: #f5f5f5;font-size: 30rpx;padding: 20rpx 30rpx">
-							<text>{{ item.medical_examination_item }}</text>
+							<text>{{ item.name }}</text>
 						</view>
 					</view>
 					<!-- 6、备注 -->
@@ -155,7 +155,7 @@ export default {
 			//点击添加跳转的路由
 			tourl: '/pages/healthFile/examination/artificialExamination/addArtificialExamination',
 			//接口
-			tourl2: 'http://106.14.140.92:8881/platform/dataset/search_read',
+			tourl2: '/physica/index',
 			addtext: '添加记录'
 		}
 	},
@@ -173,48 +173,81 @@ export default {
 			const uid = userInfo.uid;
 			const token = userInfo.token;
 			//接口调用
-			uni.request({
-				url: this.tourl2,
-				method: 'post',
-				data: {
-					params: {
-						model: 'medical.examination.file',
-						token: token,
-						uid: uid,
-						//传回去的数组(存放字段)
-						fields: [
-							"medical_examination_file_image",
-							//体检类型
-							"medical_examination_type",
-							//体检名称
-							"medical_examination_item",
-							//备注
-							"remarks",
-							//时间
-							"medical_examination_date",
-						]
+
+
+			this.$http.post(this.tourl2, {
+					type: 1,
+					uid: uid,
+
+				}).then(res => {
+				console.log(res);
+				this.dataList = res.data.data;
+				console.log('dataList', this.dataList);
+				for (var record of this.records) {
+					switch (record.category) {
+					case 0:
+						record.category = '健康体检';
+						break;
+					case 1:
+						record.category = '入职体检';
+						break;
+					case 2:
+						record.category = '专项体检';
+						break;
+					case 3:
+						record.category = '其他';
+						break;
 					}
-				},
-				success: (res) => {
-					console.log(res);
-					//把传回来的值存入
-					this.dataList = res.data.result.records
-					// //判断诊断类型
-					for (var record of this.records) {
-							switch (record.medical_examination_type) {
-								case '1': record.medical_examination_type = '健康体检'; break;
-								case '2': record.medical_examination_type = '入职体检'; break;
-								case '3': record.medical_examination_type = '专项体检'; break;
-								case '4': record.medical_examination_type = '其他'; break;
-							}
-					}
-				},
-				fail: (err) => {
-					uni.showToast({
-						title: err,
-					})
 				}
-			})
+				}).catch(err => {
+				uni.showToast({
+					title: err
+				});
+				});
+
+
+			// uni.request({
+			// 	url: this.tourl2,
+			// 	method: 'post',
+			// 	data: {
+			// 		params: {
+			// 			model: 'medical.examination.file',
+			// 			token: token,
+			// 			uid: uid,
+			// 			//传回去的数组(存放字段)
+			// 			fields: [
+			// 				"medical_examination_file_image",
+			// 				//体检类型
+			// 				"medical_examination_type",
+			// 				//体检名称
+			// 				"medical_examination_item",
+			// 				//备注
+			// 				"remarks",
+			// 				//时间
+			// 				"medical_examination_date",
+			// 			]
+			// 		}
+			// 	},
+			// 	success: (res) => {
+			// 		console.log(res);
+			// 		//把传回来的值存入
+			// 		this.dataList = res.data.result.records
+			// 		// //判断诊断类型
+			// 		for (var record of this.records) {
+			// 				switch (record.medical_examination_type) {
+			// 					case '1': record.medical_examination_type = '健康体检'; break;
+			// 					case '2': record.medical_examination_type = '入职体检'; break;
+			// 					case '3': record.medical_examination_type = '专项体检'; break;
+			// 					case '4': record.medical_examination_type = '其他'; break;
+			// 				}
+			// 		}
+			// 	},
+			// 	fail: (err) => {
+			// 		uni.showToast({
+			// 			title: err,
+			// 		})
+			// 	}
+			// })
 		},
 	},
 
