@@ -221,7 +221,6 @@
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-
 		},
 		methods: {
 			handleDevelop() {
@@ -230,7 +229,83 @@
 				})
 			},
 			handleSave() {
-				console.log('提交')
+				this.$http.post('/bmi/create', {
+					uid: 355,
+					weight: 50.7,
+					bmi: 20.3,
+					body_fat_percent: 0,
+					subcutaneous_fat_percent: 0,
+					visceral_fat: 0,
+					muscle_percent: 0,
+					bmr: 0,
+					bone_mass: 0,
+					moisture_percent: 0,
+					physical_age: 0,
+					protein_percent: 0,
+					sm_percent: 0,
+					electrode:8,
+					imp:0,
+					imp2:0,
+					imp3:0,
+					imp4:0,
+					imp5:0,
+					impendences:'0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0',
+					ext_data:'{"left_arm":0.0, "right_arm":0.0, "left_leg":0.0, "right_leg":0.0, "all_body":0.0, "left_arm_kg":0.0, "right_arm_kg":0.0, "left_leg_kg":0.0, "right_leg_kg":0.0, "all_body_kg":0.0, "left_arm_muscle":0.0, "right_arm_muscle":0.0, "left_leg_muscle":0.0, "right_leg_muscle":0.0, "all_body_muscle":0.0, "left_arm_muscle_kg":0.0, "right_arm_muscle_kg":0.0, "left_leg_muscle_kg":0.0, "right_leg_muscle_kg":0.0, "all_body_muscle_kg":0.0}',
+					body_score:0,
+					body_type:0,
+					target_weight:0,
+					standard:'{"water_mass_max":0.0, "water_mass_min":0.0, "bone_max":0.0, "bone_min":0.0, "protein_mass_max":0.0, "protein_mass_min":0.0, "muscle_mass_max":0.0, "muscle_mass_min":0.0, "weight_standard":0.0, "smm_standard":0.0, "bfm_standard":0.0, "bmr_standard":0}',
+					time: this.formatDate(new Date()),
+					// uid: this.uid,
+					// weight: this.weight_kg,
+					// bmi: this.bmi,
+					// body_fat_percent: this.bodyFatPercent,
+					// muscle_percent: this.musclePercent,
+					// subcutaneous_fat_percent: this.subcutaneousFatPercent,
+					// visceral_fat: this.visceralFat,
+					// bmr: this.bmr,
+					// bone_mass: this.boneMass,
+					// moisture_percent: this.moisturePercent,
+					// physical_age: this.physicalAge,
+					// protein_percent: this.proteinPercent,
+					// sm_percent: this.boneMass,
+					// time: this.formatDate(new Date()),
+					// type: 1
+				}).then(res => {
+					this.$refs.uToast.show({
+						message: '保存成功',
+						type: 'success',
+					})
+					this.btnColor = '#dadada'
+					// this.measureResult.SYS = 0
+					// this.measureResult.DIA = 0
+					// this.measureResult.PUL = 0
+					// this.measureResult.pressure = 0
+					// this.option.series[0].data[0].value = 0
+					// if (this.measureResult.pressure != 0) {
+					// 	this.$refs.uToast.show({
+					// 		message: '保存成功',
+					// 		type: 'success',
+					// 	})
+					// 	this.btnColor = '#dadada'
+					// 	this.measureResult.SYS = 0
+					// 	this.measureResult.DIA = 0
+					// 	this.measureResult.PUL = 0
+					// 	this.measureResult.pressure = 0
+					// 	this.option.series[0].data[0].value = 0
+					// } else {
+					// 	this.$refs.uToast.show({
+					// 		message: '保存失败',
+					// 		type: 'error',
+					// 	})
+					// 	this.btnColor = '#dadada'
+					// 	this.measureResult.SYS = 0
+					// 	this.measureResult.DIA = 0
+					// 	this.measureResult.PUL = 0
+					// 	this.measureResult.pressure = 0
+					// 	this.option.series[0].data[0].value = 0
+					// }
+				})
 			},
 			/* 初始化 */
 			initPrinter() {
@@ -268,137 +343,140 @@
 				const start = this.dataResult.indexOf('ICWeightInfo'); // 查找 value_g 字段的起始位置
 				const endIndex = this.dataResult.indexOf('{', start); // 查找 value_g 字段的结束位置
 				const type = this.dataResult.substring(start, endIndex); // 提取 value_g 的值
-				console.log("type",type)
-				if(type === 'ICWeightInfo'){
+				if (type === 'ICWeightInfo') {
 					switch (name) {
 						case '体重':
 							const startIndexKg = this.dataResult.indexOf('weight_kg='); // 查找 value_g 字段的起始位置
 							const endIndexKg = this.dataResult.indexOf(',', startIndexKg); // 查找 value_g 字段的结束位置
 							const weightKg = this.dataResult.substring(startIndexKg + 10, endIndexKg); // 提取 value_g 的值
-							const wergihtKgValue = weightKg.substring(0,3);
+							const wergihtKgValue = weightKg.substring(0, 3);
 							return this.icWeightInfo.weight_kg = wergihtKgValue + " kg";
 						case 'BMI':
 							const startIndexBmi = this.dataResult.indexOf('bmi='); // 查找 value_g 字段的起始位置
 							const endIndexBmi = this.dataResult.indexOf(',', startIndexBmi); // 查找 value_g 字段的结束位置
 							const bmi = this.dataResult.substring(startIndexBmi + 4, endIndexBmi); // 提取 value_g 的值
-							const bmiValue = bmi.substring(0,3);
+							const bmiValue = bmi.substring(0, 3);
 							return this.icWeightInfo.bmi = bmiValue;
 						case '体脂率':
 							const startIndexBFP = this.dataResult.indexOf('bodyFatPercent='); // 查找 value_g 字段的起始位置
 							const endIndexBFP = this.dataResult.indexOf(',', startIndexBFP); // 查找 value_g 字段的结束位置
 							const BFP = this.dataResult.substring(startIndexBFP + 15, endIndexBFP); // 提取 value_g 的值
-							const BFPValue = BFP.substring(0,3);
+							const BFPValue = BFP.substring(0, 3);
 							return this.icWeightInfo.bodyFatPercent = BFPValue + ' %';
 						case '肌肉率':
 							const startIndexMP = this.dataResult.indexOf('musclePercent='); // 查找 value_g 字段的起始位置
 							const endIndexMP = this.dataResult.indexOf(',', startIndexMP); // 查找 value_g 字段的结束位置
 							const MP = this.dataResult.substring(startIndexMP + 14, endIndexMP); // 提取 value_g 的值
-							const MPValue = MP.substring(0,3);
+							const MPValue = MP.substring(0, 3);
 							return this.icWeightInfo.musclePercent = MPValue + ' %';
 						case '去脂体重':
 							const startIndexWL = this.dataResult.indexOf('weight_kg='); // 查找 value_g 字段的起始位置
 							const endIndexWL = this.dataResult.indexOf(',', startIndexWL); // 查找 value_g 字段的结束位置
 							const WL = this.dataResult.substring(startIndexWL + 10, endIndexWL); // 提取 value_g 的值
-							const WLValue = WL.substring(0,3);
+							const WLValue = WL.substring(0, 3);
 							return this.icWeightInfo.weight_lb = WLValue + ' kg';
 						case '皮下脂肪':
 							const startIndexSFP = this.dataResult.indexOf('subcutaneousFatPercent='); // 查找 value_g 字段的起始位置
 							const endIndexSFP = this.dataResult.indexOf(',', startIndexSFP); // 查找 value_g 字段的结束位置
 							const SFP = this.dataResult.substring(startIndexSFP + 23, endIndexSFP); // 提取 value_g 的值
-							const SFPValue = SFP.substring(0,3);
+							const SFPValue = SFP.substring(0, 3);
 							return this.icWeightInfo.subcutaneousFatPercent = SFPValue + ' %';
 						case '内脏脂肪':
 							const startIndexVF = this.dataResult.indexOf('visceralFat='); // 查找 value_g 字段的起始位置
 							const endIndexVF = this.dataResult.indexOf(',', startIndexVF); // 查找 value_g 字段的结束位置
 							const VF = this.dataResult.substring(startIndexVF + 12, endIndexVF); // 提取 value_g 的值
-							const VFValue = VF.substring(0,3);
+							const VFValue = VF.substring(0, 3);
 							return this.icWeightInfo.visceralFat = VFValue;
 						case '体水分':
 							const startIndexMoi = this.dataResult.indexOf('moisturePercent='); // 查找 value_g 字段的起始位置
 							const endIndexMoi = this.dataResult.indexOf(',', startIndexMoi); // 查找 value_g 字段的结束位置
 							const Moi = this.dataResult.substring(startIndexMoi + 16, endIndexMoi); // 提取 value_g 的值
-							const MoiValue = Moi.substring(0,3);
+							const MoiValue = Moi.substring(0, 3);
 							return this.icWeightInfo.moisturePercent = MoiValue + ' %';
 						case '骨骼肌率':
 							const startIndexBone = this.dataResult.indexOf('boneMass='); // 查找 value_g 字段的起始位置
 							const endIndexBone = this.dataResult.indexOf(',', startIndexBone); // 查找 value_g 字段的结束位置
 							const bone = this.dataResult.substring(startIndexBone + 9, endIndexBone); // 提取 value_g 的值
-							const boneValue = bone.substring(0,3);
+							const boneValue = bone.substring(0, 3);
 							return this.icWeightInfo.boneMass = boneValue + ' %';
 						case '肌肉量':
 							const startIndexMus = this.dataResult.indexOf('musclePercent='); // 查找 value_g 字段的起始位置
 							const endIndexMus = this.dataResult.indexOf(',', startIndexMus); // 查找 value_g 字段的结束位置
 							const Mus = this.dataResult.substring(startIndexMus + 14, endIndexMus); // 提取 value_g 的值
-							const MusValue = Mus.substring(0,3);
+							const MusValue = Mus.substring(0, 3);
 							return this.icWeightInfo.musclePercent = MusValue + ' kg';
 						case '骨量':
 							const startIndexBoneMass = this.dataResult.indexOf('boneMass='); // 查找 value_g 字段的起始位置
-							const endIndexBoneMass = this.dataResult.indexOf(',', startIndexBoneMass); // 查找 value_g 字段的结束位置
-							const boneMass = this.dataResult.substring(startIndexBoneMass + 9, endIndexBoneMass); // 提取 value_g 的值
-							const boneMassValue = boneMass.substring(0,3);
+							const endIndexBoneMass = this.dataResult.indexOf(',',
+							startIndexBoneMass); // 查找 value_g 字段的结束位置
+							const boneMass = this.dataResult.substring(startIndexBoneMass + 9,
+							endIndexBoneMass); // 提取 value_g 的值
+							const boneMassValue = boneMass.substring(0, 3);
 							return this.icWeightInfo.boneMass = boneMassValue + ' kg';
 						case '蛋白质':
 							const startIndexPP = this.dataResult.indexOf('proteinPercent='); // 查找 value_g 字段的起始位置
 							const endIndexPP = this.dataResult.indexOf(',', startIndexPP); // 查找 value_g 字段的结束位置
 							const PP = this.dataResult.substring(startIndexPP + 15, endIndexPP); // 提取 value_g 的值
-							const PPValue = PP.substring(0,3);
+							const PPValue = PP.substring(0, 3);
 							return this.icWeightInfo.proteinPercent = PPValue + ' %';
 						case '基础代谢':
 							const startIndexBmr = this.dataResult.indexOf('bmr='); // 查找 value_g 字段的起始位置
 							const endIndexBmr = this.dataResult.indexOf(',', startIndexBmr); // 查找 value_g 字段的结束位置
 							const Bmr = this.dataResult.substring(startIndexBmr + 4, endIndexBmr); // 提取 value_g 的值
-							const BmrValue = Bmr.substring(0,3);
+							const BmrValue = Bmr.substring(0, 3);
 							return this.icWeightInfo.bmr = BmrValue + ' kacl';
 						case '身体年龄':
 							const startIndexAge = this.dataResult.indexOf('physicalAge='); // 查找 value_g 字段的起始位置
 							const endIndexAge = this.dataResult.indexOf(',', startIndexAge); // 查找 value_g 字段的结束位置
 							const Age = this.dataResult.substring(startIndexAge + 12, endIndexAge); // 提取 value_g 的值
-							const AgeValue = Age.substring(0,3);
+							const AgeValue = Age.substring(0, 3);
 							return this.icWeightInfo.physicalAge = AgeValue;
 						case '脂肪量':
 							const startIndexSub = this.dataResult.indexOf('subcutaneousFatPercent='); // 查找 value_g 字段的起始位置
 							const endIndexSub = this.dataResult.indexOf(',', startIndexSub); // 查找 value_g 字段的结束位置
 							const Sub = this.dataResult.substring(startIndexSub + 23, endIndexSub); // 提取 value_g 的值
-							const SubValue = Sub.substring(0,3);
+							const SubValue = Sub.substring(0, 3);
 							return this.icWeightInfo.subcutaneousFatPercent = SubValue + ' kg';
 						case '含水量':
 							const startIndexMoisture = this.dataResult.indexOf('moisturePercent='); // 查找 value_g 字段的起始位置
-							const endIndexMoisture = this.dataResult.indexOf(',', startIndexMoisture); // 查找 value_g 字段的结束位置
-							const Moisture = this.dataResult.substring(startIndexMoisture + 16, endIndexMoisture); // 提取 value_g 的值
-							const MoistureValue = Moisture.substring(0,3);
+							const endIndexMoisture = this.dataResult.indexOf(',',
+							startIndexMoisture); // 查找 value_g 字段的结束位置
+							const Moisture = this.dataResult.substring(startIndexMoisture + 16,
+							endIndexMoisture); // 提取 value_g 的值
+							const MoistureValue = Moisture.substring(0, 3);
 							return this.icWeightInfo.moisturePercent = MoistureValue + ' kg';
 						case '蛋白量':
 							const startIndexPro = this.dataResult.indexOf('proteinPercent='); // 查找 value_g 字段的起始位置
 							const endIndexPro = this.dataResult.indexOf(',', startIndexPro); // 查找 value_g 字段的结束位置
 							const Pro = this.dataResult.substring(startIndexPro + 15, endIndexPro); // 提取 value_g 的值
-							const ProValue = Pro.substring(0,3);
+							const ProValue = Pro.substring(0, 3);
 							return this.icWeightInfo.proteinPercent = ProValue + ' kg';
 						case '标准体重':
 							const startIndexWKg = this.dataResult.indexOf('weight_kg='); // 查找 value_g 字段的起始位置
 							const endIndexWKg = this.dataResult.indexOf(',', startIndexWKg); // 查找 value_g 字段的结束位置
 							const WKg = this.dataResult.substring(startIndexWKg + 10, endIndexWKg); // 提取 value_g 的值
-							const WKgValue = WKg.substring(0,3);
+							const WKgValue = WKg.substring(0, 3);
 							return this.icWeightInfo.weight_kg = WKgValue + " kg"
 						case '肥胖等级':
 							const startIndexScore = this.dataResult.indexOf('bodyScore='); // 查找 value_g 字段的起始位置
 							const endIndexScore = this.dataResult.indexOf(',', startIndexScore); // 查找 value_g 字段的结束位置
 							const Score = this.dataResult.substring(startIndexScore + 10, endIndexScore); // 提取 value_g 的值
-							const ScoreValue = Score.substring(0,3);
+							const ScoreValue = Score.substring(0, 3);
 							return this.icWeightInfo.bodyScore = ScoreValue;
 						case '体型':
 							const startIndexBody = this.dataResult.indexOf('bodyType='); // 查找 value_g 字段的起始位置
 							const endIndexBody = this.dataResult.indexOf(',', startIndexBody); // 查找 value_g 字段的结束位置
 							const Body = this.dataResult.substring(startIndexBody + 9, endIndexBody); // 提取 value_g 的值
-							const BodyValue = Body.substring(0,3);
+							const BodyValue = Body.substring(0, 3);
 							return this.icWeightInfo.bodyType = BodyValue;
 						default:
 							return '0.0'; // 没有匹配的情况下返回空字符串
 					}
-				}else{
+				} else {
 					switch (name) {
 						case '体重':
 							return this.icWeightInfo.weight_kg = '连接错误设备';
-						case 'BMI':						
+						case 'BMI':
 							return this.icWeightInfo.bmi = '0';
 						case '体脂率':
 							return this.icWeightInfo.bodyFatPercent = '0.0 %';
@@ -438,10 +516,25 @@
 							return this.icWeightInfo.bodyType = '0';
 						default:
 							return '0.0'; // 没有匹配的情况下返回空字符串
+					}
+
 				}
-				
-				}
-			}
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
 		}
 	}
 </script>

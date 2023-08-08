@@ -9,29 +9,22 @@
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
-					{{item.test_time}}
+					{{item.time}}
 				</view>
 			</view>
 			<view class="data d-flex j-sb">
 				<view class="bloodOxygen">
-					血氧：{{item.blood_oxygen}}
+					血氧：{{item.spo}}
 				</view>
 				<view class="PI">
 					PI：{{item.pi}} 
 				</view>
 				<view class="rate">
 					<!-- ↓ -->
-					脉率：{{item.pulse_rate}}
+					脉率：{{item.pr}}
 				</view>
 			</view>
 		</view>
-
-<!--		测试日期数据是否正确-->
-<!--		<view>-->
-<!--			<u-button @click="test">aaa</u-button>-->
-<!--		</view>-->
-
-
 	</view>
 </template>
 
@@ -53,9 +46,6 @@
 					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
 					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
-				allDataList:[
-
-				],
 				dataList: [
 					
 				]
@@ -76,11 +66,6 @@
 			dayjs.extend(isBetween)
 			//拿到所有历史记录
 			this.getHistoryList();
-			//测试
-			// console.log(dayjs())
-			// console.log(dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', 'day', '[]'))
-			// console.log(new Date(this.dataList[0].test_time).format('yyyy-MM-dd'))
-			// console.log(dayjs(new Date(this.dataList[0].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime,'day','[]'))
 		},
 		methods: {
 			//测试子组件传来的值是否是正确的
@@ -110,7 +95,7 @@
 				//清空数组内数据
 				this.dataList = [];
 				//筛选出符合条件的数据
-				this.getDataList();
+				this.getHistoryList();
 			},
 
 			handleDevelop() {
@@ -120,35 +105,14 @@
 			},
 			//查询血氧历史记录,并筛选数据
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "oximeter",
-					domain:[["owner.id","=",this.uid]],		
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"blood_oxygen",
-						"pi",
-						"pulse_rate",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/pod/index', {
+					uid: this.uid,
+					start_date: this.date.startTime,
+					end_date: this.date.endTime
 				}).then(res => {
-					this.allDataList = res.result.records
-					this.getDataList();
+					this.dataList = res.data
 				})
 			},
-
-			//筛选数据
-			getDataList(){
-				for(var i in this.allDataList){
-					//判断数据是否在所选日期范围内
-					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
-						this.dataList.push(this.allDataList[i])
-					}
-				}
-			}
-
 		}
 	}
 </script>

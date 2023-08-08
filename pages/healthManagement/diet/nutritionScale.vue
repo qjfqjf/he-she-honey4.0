@@ -28,8 +28,9 @@
 				<view class="record-item">
 					<view class="record-content" v-for="(item, index) in recordList" :key="index">
 						<view class="date">
-							<text>{{item.date}}</text>
-							<image :src="item.img" style="width:50rpx;height:50rpx" mode="aspectFill"></image>
+							<text>{{item.createtime}}</text>
+							<!-- <img :src="item.icon" style="width:50rpx;height:50rpx" mode="aspectFill"> -->
+							<image :src="item.icon" style="width:50rpx;height:50rpx" mode="aspectFill"></image>
 						</view>
 						<view class="line">
 							<text class="title">名称</text>
@@ -37,11 +38,11 @@
 						</view>
 						<view class="line">
 							<text class="title">数量</text>
-							<text class="result">{{item.count}} g</text>
+							<text class="result">{{item.quantity}} g</text>
 						</view>
 						<view class="line">
 							<text class="title">热量</text>
-							<text class="result">{{item.heal}} kcal</text>
+							<text class="result">{{item.kcal}} kcal</text>
 						</view>
 					</view>
 				</view>
@@ -65,9 +66,9 @@
 							<uni-icons class="icon" type="refreshempty" size="16" @click="reset"></uni-icons>
 						</view>
 						<view class="input">
-							
+
 							<view class="hd-dataResult">
-								{{ KitchenScaleDataValue }} 
+								{{ KitchenScaleDataValue }}
 							</view>
 						</view>
 						<button @click="selectFood">选择食物</button>
@@ -184,14 +185,21 @@
 				dataResult: '',
 				showRenderValue: true, // 添加一个标志位，默认为true，表示显示renderValue(dataResult)
 				KitchenScaleDataValue: "正在获取数据",
+				userInfo: '',
+				uid: 0, //用户id
+				foodId:'01790eeeb4421008',
+				unit:0
 			};
 		},
 		async onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			
+			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-
+			// this.getHistoryList()
 		},
 
 		mounted() {
@@ -213,20 +221,28 @@
 					const endIndexUnit = dataString.indexOf('}', startIndexUnit); // 使用 startIndexUnit
 					const unit = dataString.substring(startIndexUnit + 5, endIndexUnit);
 					if (unit === 'ICKitchenScaleUnitG') {
+						this.unit = 0;
 						return `g`;
 					} else if (unit === 'ICKitchenScaleUnitMl') {
+						this.unit = 1;
 						return `ml`;
 					} else if (unit === 'ICKitchenScaleUnitMlMilk') {
+						this.unit = 2;
 						return `ml(milk)`;
 					} else if (unit === 'ICKitchenScaleUnitOz') {
+						this.unit = 3;
 						return `oz`;
 					} else if (unit === 'ICKitchenScaleUnitLb') {
+						this.unit = 4;
 						return `lb:oz`;
 					} else if (unit === 'ICKitchenScaleUnitFlOzWater') {
+						this.unit = 5;
 						return `fl、oz`;
 					} else if (unit === 'ICKitchenScaleUnitFlOzMilk') {
+						this.unit = 6;
 						return `fl、oz(milk)`;
 					} else {
+						this.unit = 0;
 						return `g`;
 					}
 				};
@@ -248,20 +264,20 @@
 			},
 			/* 连接设备 */
 			connectedDevice() {
-				console.log("设备状态",this.deviceId)
+				console.log("设备状态", this.deviceId)
 				const _this = this
 				const params = {
 					macAddr: this.macAddr,
 					name: this.name,
 					communicationType: this.communicationType,
 				};
-				if(this.deviceId != ''){
+				if (this.deviceId != '') {
 					_this.deviceStatus = 1
 					bluethModule.connectedDevice(params, (result) => {
 						if (result && result.code === 200) {
 							if (result.message === 'device-result') {
 								this.dataResult = result.data; // 设备结果
-								console.log("返回的数据",this.dataResult)
+								console.log("返回的数据", this.dataResult)
 								this.getValue(this.dataResult)
 							}
 						}
@@ -306,44 +322,17 @@
 					const startIndex = dataResult.indexOf('value_fl_oz_milk=');
 					const endIndex = dataResult.indexOf(',', startIndex);
 					const valueGString = dataResult.substring(startIndex + 17, endIndex); // 提取 value_g 的值			
-				    this.KitchenScaleDataValue = valueGString + " fl、oz(milk)"
+					this.KitchenScaleDataValue = valueGString + " fl、oz(milk)"
 				} else {
 					this.KitchenScaleDataValue = "未查找到设备"
 				}
 			},
 			getNutritionScaleData() {
-				uni.request({
-					url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-					method: 'POST',
-					data: {
-						"params": {
-							"model": "nutrition.scale",
-							"domain": [
-								["input_type", "=", "hend"]
-							],
-							"fields": [
-								"name",
-								"numbers",
-								"owner",
-								"food_name",
-								"heat",
-								"protein",
-								"fat",
-								"carbohydrate",
-								"dietary_fiber",
-								"test_time"
-							]
-						}
-					},
-					success: (res) => {
-						this.data = res.data;
-					},
-					fail: (err) => {
-						this.loading = false;
-						this.error = '接口请求失败';
-						console.error(err);
-					}
-				});
+				this.$http.post('/nutrition/index', {
+					uid: 3,
+				}).then(res => {
+					this.recordList = res.data;
+				})
 			},
 			gotoReport() {
 				console.log('跳到营养分析报告页面')
@@ -368,11 +357,44 @@
 				console.log('value 发生变化：' + e.detail.value)
 			},
 			save() {
-				console.log('save====')
+				this.$http.post('/nutrition/create', {
+					// uid: 355,
+					// food_id:this.foodId,
+					// unit:this.unit,
+					// quantity:3.00,
+					// value:0.00,
+					// createtime:this.formatDate(new Date()),
+					uid: this.uid,
+					food_id:this.foodId,
+					unit:this.unit,
+					quantity:this.KitchenScaleDataValue,
+					value:this.KitchenScaleDataValue,
+					createtime:this.formatDate(new Date()),
+				}).then(res => {
+					this.$refs.uToast.show({
+						message: '保存成功',
+						type: 'success',
+					})
+				})
 			},
 
 			selectFood() {
 				console.log('选择食物')
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 
 		},

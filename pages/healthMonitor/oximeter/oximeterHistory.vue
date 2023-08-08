@@ -9,18 +9,18 @@
 			<u-read-more :toggle="true" :closeText="'查看更多'" :text="item"></u-read-more>
 			<view class="item">
 				<view class="date"
-					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-					<!-- <text>{{item.test_time.split(" ")[0]}}</text> -->
-					<text>{{item.test_time}}</text>
+					>
+					
+					<text>{{item.time}}</text>
 				</view>
 				<view class="flex">
 					<view class="line">
 						<text class="title">血氧</text>
-						<text class="result right">{{item.blood_oxygen}}</text>
+						<text class="result right">{{item.spo}}</text>
 					</view>
 					<view class="line">
 						<text class="title">脉率</text>
-						<text class="result">{{item.pulse_rate}}</text>
+						<text class="result">{{item.pr}}</text>
 					</view>
 					<view class="line">
 						<text class="title">PI</text>
@@ -29,8 +29,8 @@
 					<view class="line">
 						<text class="title">分析结果</text>
 						<text class="result">
-							<!-- {{item.result}} -->
-							脉搏节律未见异常
+							{{item.result_cn}}
+							
 						</text>
 					</view>
 				</view>
@@ -49,41 +49,20 @@
 				uid:0,
 				userInfo:'',
 				historyList: [
-					// {
-					// 	date: '2022-03-11 23:34',
-					// 	bloodOxygen: '97',
-					// 	pi: '9.8',
-					// 	pulseRate: 10,
-					// 	result: '脉搏节律未见异常'
-					// },
-					// {
-					// 	date: '2022-03-11 23:34',
-					// 	bloodOxygen: '97',
-					// 	pi: '9.8',
-					// 	pulseRate: 10,
-					// 	result: '脉搏节律未见异常'
-					// }, {
-					// 	date: '2022-03-11 23:34',
-					// 	bloodOxygen: '97',
-					// 	pi: '9.8',
-					// 	pulseRate: 10,
-					// 	result: '脉搏节律未见异常'
-					// }, {
-					// 	date: '2022-03-11 23:34',
-					// 	bloodOxygen: '97',
-					// 	pi: '9.8',
-					// 	pulseRate: 10,
-					// 	result: '脉搏节律未见异常'
-					// },
-					// {
-					// 	date: '2022-03-11 23:34',
-					// 	bloodOxygen: '97',
-					// 	pi: '9.8',
-					// 	pulseRate: 10,
-					// 	result: '脉搏节律未见异常'
-					// }
+					
 				],
 			};
+		},
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo.uid
+			}else{
+				this.uid = uid
+			}
+			this.getHistoryList();
 		},
 		//页面显示
 		onShow() {
@@ -97,35 +76,15 @@
 			},
 			//查询血氧历史记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "oximeter",
-					domain:[["owner.id","=",this.uid]],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"blood_oxygen",
-						"pi",
-						"pulse_rate",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/pod/index', {
+					uid: this.uid,
 				}).then(res => {
-					this.historyList = res.result.records
+					this.historyList = res.data
 				})
+
 			}
 		},
-		onLoad(options) {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// 获取URL参数
-			const uid = options.uid;
-			if(uid == 0){
-				this.uid = this.userInfo.uid
-			}else{
-				this.uid = uid
-			}
-			this.getHistoryList();
-		},
+		
 	}
 </script>
 

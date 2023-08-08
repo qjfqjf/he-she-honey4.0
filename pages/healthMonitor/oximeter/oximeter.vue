@@ -8,9 +8,6 @@
 		<view class="mt-3 mb-3" style="height: 350rpx">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
-		<!-- <u-button type="primary" @click="resume">测试</u-button>
-    <view class="mb-3"> </view>
-    <u-button type="primary" @click="pause">暂停</u-button> -->
 		<view class="mt-5"> </view>
 		<TipInfo title="血氧趋势" @trend="handleOximeterTrend"></TipInfo>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
@@ -32,14 +29,6 @@
 				</view>
 			</view>
 		</view>
-		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
-		<!-- <view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-				@click="onPageJump(item.url)">
-				<image :src="item.img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
-				<text class="mt-1">{{ item.title }}</text>
-			</view>
-		</view> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center"
 				@click="onPageSelectDocter">
@@ -56,11 +45,6 @@
 				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[2].title }}</text>
 			</view>
-			<!-- <view class="d-flex flex-column a-center"
-				@click="onPageWrite">
-				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
-				<text class="mt-1">{{ this.toolList[3].title }}</text>
-			</view> -->
 		</view>
 		
 		
@@ -69,11 +53,6 @@
 </template>
 
 <script>
-	// import {
-	// 	defineComponent,
-	// 	ref,
-	// 	onMounted
-	// } from '@vue/composition-api'
 	import HealthHeader from '../components/healthHeader/HealthHeader.vue'
 	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
@@ -85,16 +64,17 @@
 		},
 		data() {
 			return {
-				oxData: [{
-						value: 0,
+				oxData: [
+					{
+						value: 97,
 						name: '血氧',
 					},
 					{
-						value: 0,
+						value: 12.2,
 						name: 'PI',
 					},
 					{
-						value: 0,
+						value: 95,
 						name: '脉率',
 					},
 				],
@@ -144,6 +124,7 @@
 				deviceId: uni.getStorageSync('xyDeviceId'), // 蓝牙设备的id
 				serviceId: '6E400001-B5A3-F393-E0A9-E50E24DCCA9E', //设备的服务值
 				characteristicId: '6E400003-B5A3-F393-E0A9-E50E24DCCA9E', // 设备的特征值
+				res:0,
 			}
 		},
 		onLoad() {
@@ -151,7 +132,7 @@
 			this.username = this.userInfo.name;
 			this.uid = this.userInfo.uid
 			this.initBlue()
-			// console.log(this.deviceId, this.deviceStatus)
+			
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
 			}
@@ -437,6 +418,7 @@
 					// 0x 9 疑似脉率稍缓伴有偶发脉搏间期缩短 // 0x 0a 疑似脉率稍缓伴有脉搏间期不规则 // 0xFF 信号质量差请重新测量
 					// 脉率分析结果
 					const res = resHex.slice(14, 16)
+					this.res = res
 					switch (res) {
 						case '00':
 							this.result = '脉搏节律未见异常'
@@ -468,10 +450,10 @@
 						case '09':
 							this.result = '疑似脉率稍缓伴有偶发脉搏间期缩短'
 							break
-						case '0a':
+						case '10':
 							this.result = '疑似脉率稍缓伴有脉搏间期不规则'
 							break
-						case 'ff':
+						case '11':
 							this.result = '信号质量差请重新测量'
 							break
 						default:
@@ -554,29 +536,20 @@
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 			handleSave() {
-				if(this.result != '' && this.result != '信号质量差请重新测量'){
-					this.$http.post('/platform/dataset/call_kw', {
-						model: "oximeter",
-						method: "create",
-						args: [
-							[{
-								"name": "血氧仪",
-								"numbers": this.serviceId,
-								"owner": this.uid,
-								"blood_oxygen": this.oxData[0].value,
-								"pi": this.oxData[1].value,
-								"pulse_rate": this.oxData[2].value,
-								"input_type": "equipment",
-								"test_time":this.formatDate(new Date())
-							}]
-						],
-						kwargs: {}
+				if(this.res >=0 && this.res <= 11){
+					this.$http.post('/pod/create', {
+						uid: this.uid,
+						spo: this.oxData[0].value,
+						pi: this.oxData[1].value,
+						pr: this.oxData[2].value,
+						result: this.res,
+						time: this.formatDate(new Date()),
+						type: 1,
 					}).then(res => {
-						if (this.oxData[0].value != 0) {
+						if (this.res >=0 && this.res <= 11) {
 							this.$refs.uToast.show({
 								message: '保存成功',
 								type: 'success',
-					
 							})
 							this.btnColor = '#dadada'
 							this.oxData[0].value = 0
@@ -586,8 +559,7 @@
 							this.waveData = []
 							this.result = ''
 							this.ecgRef = null
-							
-						} else {
+						}else{
 							this.$refs.uToast.show({
 								message: '保存失败',
 								type: 'error',
