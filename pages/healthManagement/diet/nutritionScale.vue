@@ -140,7 +140,7 @@
 			return {
 				currentTab: 'tab1', //但前选项卡
 				// 日期范围
-				range: ['2021-02-1', '2024-3-28'],
+				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
 				// 设备状态
 				deviceStatus: 0,
 				deviceId: uni.getStorageSync('yycDeviceId'), // 蓝牙设备的id
@@ -187,23 +187,25 @@
 				KitchenScaleDataValue: "正在获取数据",
 				userInfo: '',
 				uid: 0, //用户id
-				foodId:'01790eeeb4421008',
-				unit:0
+				foodId: '01790eeeb4421008',
+				unit: 0,
+				
 			};
 		},
 		async onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			
+
 			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-			// this.getHistoryList()
+			this.getNutritionScaleData();
 		},
 
 		mounted() {
 			this.getNutritionScaleData();
+			
 		},
 		watch: {
 			dataResult(newValue) {
@@ -211,6 +213,7 @@
 				this.showRenderValue = true;
 			},
 			range(newval) {
+				this.getNutritionScaleData();
 				console.log('范围选:', this.range);
 			},
 		},
@@ -329,7 +332,9 @@
 			},
 			getNutritionScaleData() {
 				this.$http.post('/nutrition/index', {
-					uid: 3,
+					uid: this.uid,
+					start_date: this.range[0],
+					end_date: this.range[1]
 				}).then(res => {
 					this.recordList = res.data;
 				})
@@ -358,18 +363,18 @@
 			},
 			save() {
 				this.$http.post('/nutrition/create', {
-					// uid: 355,
+					uid: 355,
+					food_id: this.foodId,
+					unit: this.unit,
+					quantity: 3.00,
+					value: 0.00,
+					createtime: this.formatDate(new Date()),
+					// uid: this.uid,
 					// food_id:this.foodId,
 					// unit:this.unit,
-					// quantity:3.00,
-					// value:0.00,
+					// quantity:this.KitchenScaleDataValue,
+					// value:this.KitchenScaleDataValue,
 					// createtime:this.formatDate(new Date()),
-					uid: this.uid,
-					food_id:this.foodId,
-					unit:this.unit,
-					quantity:this.KitchenScaleDataValue,
-					value:this.KitchenScaleDataValue,
-					createtime:this.formatDate(new Date()),
 				}).then(res => {
 					this.$refs.uToast.show({
 						message: '保存成功',
@@ -395,6 +400,21 @@
 				var second = date.getSeconds();
 				second = second < 10 ? ('0' + second) : second;
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
+			// 获取当前月的最后一天
+			getLastDayOfMonth() {
+				const now = new Date();
+				const year = now.getFullYear();
+				const month = now.getMonth() + 1; // 月份从0开始，需要加1
+				const lastDay = new Date(year, month, 0).getDate(); // 0表示上一个月的最后一天，即当前月的最后一天
+				const lastDayOfMonth = new Date(year, month - 1, lastDay);
+				return lastDayOfMonth;
+			},
+			// 获取当前月的第一天
+			getFirstDayOfMonth() {
+				const today = new Date();
+				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+				return firstDayOfMonth
 			},
 
 		},

@@ -31,7 +31,7 @@
 			</u-text>
 		</view>
 
-		<button class="button">结束</button>
+		<button class="button" @click="save">结束</button>
 	</view>
 </template>
 
@@ -51,7 +51,17 @@
 				JumpRoleTimeMinute: "00",
 				JumpRoleTimeSecond: "00",
 				Calories: "0",
-				FatBurn: "0"
+				FatBurn: "0",
+				type:0,
+				setting:0,
+				time:0,
+				avg_freq:90,
+				fastest_freq:90,
+				freqs:'[{"duration":8, "skip_count":12}]',
+				freq_count:0,
+				most_jump:12,
+				burned:1.0,
+				efficiency:450.0,
 			}
 		},
 		mounted() {
@@ -62,6 +72,42 @@
 		},
 		//方法
 		methods: {
+			save(){
+				this.$http.post('/skip/create', {
+					uid: 355,
+					type:this.type,
+					setting:0,
+					elapsed_time:30,
+					value:30,
+					avg_freq:this.avg_freq,
+					fastest_freq:this.fastest_freq,
+					freqs:this.freqs,
+					freq_count:this.freq_count,
+					most_jump:this.most_jump,
+					burned:this.burned,
+					efficiency:this.efficiency,
+					time:this.formatDate(new Date()),
+
+					// uid: this.uid,
+					// type:this.type,
+					// setting:this.setting,
+					// elapsed_time:this.time,
+					// value:this.JumpRoleDataValue,
+					// avgFreq:this.avg_freq,
+					// fastest_freq:this.fastest_freq,
+					// freqs:this.freqs,
+					// freq_count:this.freq_count,
+					// most_jump:this.most_jump,
+					// burned:this.burned,
+					// efficiency:this.efficiency,
+					// time:this.formatDate(new Date()),
+				}).then(res => {
+					this.$refs.uToast.show({
+						message: '保存成功',
+						type: 'success',
+					})
+				})
+			},
 			test() {
 				console.log("方法被调用");
 			},
@@ -108,6 +154,7 @@
 					const startTimeIndex = dataResult.indexOf('actual_time=');
 					const endTimeIndex = dataResult.indexOf(',', startTimeIndex);
 					const Time = dataResult.substring(startTimeIndex + 12, endTimeIndex);
+					this.time = Time;
 					this.formatStringNumberToTime(Time)
 					const startCaloriesIndex = dataResult.indexOf('calories_burned=');
 					const endCaloriesIndex = dataResult.indexOf(',', startCaloriesIndex);
@@ -130,7 +177,22 @@
 				const formattedSeconds = String(seconds).padStart(2, '0');
 				this.JumpRoleTimeMinute = formattedMinutes
 				this.JumpRoleTimeSecond = formattedSeconds
-			}
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
 		},
 	}
 </script>

@@ -26,20 +26,23 @@
 				<view class="record-item">
 					<view class="record-content" v-for="(item, index) in recordList" :key="index">
 						<view class="date">
-							<text>{{item.date}}</text>
-							<text>{{item.skippingType}}</text>
+							<text>{{item.time}}</text>
+							
+							<text v-if="item.type === 0">自由跳</text>
+							<text v-else-if="item.type === 1">倒计时</text>
+							<text v-else>倒计数</text>
 						</view>
 						<view class="line">
 							<text class="title">跳绳次数</text>
-							<text class="result">{{item.skippingCount}}</text>
+							<text class="result">{{item.value}}</text>
 						</view>
 						<view class="line">
 							<text class="title">消耗热量（kcal）</text>
-							<text class="result">{{item.skippingKcal}}</text>
+							<text class="result">{{item.burned}}</text>
 						</view>
 						<view class="line">
 							<text class="title">跳绳时长</text>
-							<text class="result">{{item.takeTime}}</text>
+							<text class="result">{{item.elapsed_time}}</text>
 						</view>
 					</view>
 				</view>
@@ -106,6 +109,7 @@
 		},
 		data() {
 			return {
+				
 				showFreeJump: false,
 				showCountdown: false,
 				showCountdownNumber: false,
@@ -147,8 +151,9 @@
 				deviceStatus: 0,
 				deviceId: uni.getStorageSync('tsDeviceId'), // 蓝牙设备的id
 				// 日期范围
-				range: ['2021-02-1', '2021-3-28'],
-				recordList: [{
+				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
+				recordList: [
+				{
 					date: '2022-03-11 23:34',
 					skippingType: '自由跳',
 					skippingCount: 103,
@@ -193,14 +198,21 @@
 		watch: {
 			range(newval) {
 				console.log('范围选:', this.range);
+				this.getSkipData();
 			},
 		},
 		async onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			
+			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-
+			
+		},
+		mounted() {
+			this.getSkipData();
 		},
 		//方法
 		methods: {
@@ -259,6 +271,30 @@
 				this.showCountdown = true;
 				this.showCountdownNumber = false;
 				this.show0 = false;
+			},
+			getSkipData(){
+				this.$http.post('/skip/index', {
+					uid: this.uid,
+					start_date: this.range[0],
+					end_date: this.range[1]
+				}).then(res => {
+					this.recordList = res.data;
+				})
+			},
+			// 获取当前月的最后一天
+			getLastDayOfMonth() {
+				const now = new Date();
+				const year = now.getFullYear();
+				const month = now.getMonth() + 1; // 月份从0开始，需要加1
+				const lastDay = new Date(year, month, 0).getDate(); // 0表示上一个月的最后一天，即当前月的最后一天
+				const lastDayOfMonth = new Date(year, month - 1, lastDay);
+				return lastDayOfMonth;
+			},
+			// 获取当前月的第一天
+			getFirstDayOfMonth() {
+				const today = new Date();
+				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+				return firstDayOfMonth
 			},
 		},
 	}
