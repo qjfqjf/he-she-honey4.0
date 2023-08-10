@@ -122,8 +122,6 @@
 						this.showCountdownNumber = false;
 					} else if (item.title === '倒计时') {
 						this.show0 = true;
-
-
 					} else if (item.title === '倒计数') {
 						this.showFreeJump = false;
 						this.showCountdown = false;
@@ -153,37 +151,8 @@
 				// 日期范围
 				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
 				recordList: [
-				{
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, ],
+				
+				],
 				macAddr: uni.getStorageSync('macAddr'),
 				name: uni.getStorageSync('name'),
 				communicationType: uni.getStorageSync('communicationType'),
@@ -203,13 +172,12 @@
 		},
 		async onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			
 			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-			
+			this.getSkipData();
 		},
 		mounted() {
 			this.getSkipData();
