@@ -578,6 +578,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/healthMonitorData",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/mine/setting",
 			"style": {
 				"navigationBarTitleText": "",
@@ -830,6 +837,28 @@
 				"enablePullDownRefresh": false
 			}
 		},
+		{
+			"path": "pages/healthManagement/diet/selectFood",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/diet/foodList",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/diet/foodInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		
 		{
 			"path": "pages/healthManagement/beauty/beauty",
 			"style": {

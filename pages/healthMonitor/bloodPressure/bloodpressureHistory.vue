@@ -69,6 +69,8 @@
 		},
 		onLoad(options) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo.uid
+			console.log(this.uid)
 			// 获取URL参数
 			const uid = options.uid;
 			if (uid == 0) {

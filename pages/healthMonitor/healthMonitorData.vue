@@ -20,13 +20,13 @@
 						<text class="title">{{item.name}}</text>
 					</view>
 					<view class="line">
-						<text class="title">{{item.test_time}}</text>
+						<text class="title">{{item.updatetime}}</text>
 					</view>
 					<view class="line">
 						<text class="title">{{item.value }}</text>
 					</view>
 					<view class="line">
-						<text class="title">{{item.alert}}</text>
+						<text class="title">{{item.eval}}</text>
 					</view>
 				</view>
 			</view>
@@ -51,167 +51,26 @@
 		},
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// await this.getOximeterHistoryList()
-			// await this.getForeheadThermometerHistoryList()
-			// await this.getBloodPressureHistoryList()
-			// await this.getBloodSugarHistoryList()
-			// this.sortDataListByTestTime()
-			uni.$on('callTargetMethod', () => {
-				this.allQuery();
-			});
-			this.allQuery();
-
+			this.uid = this.userInfo.uid;	
+			this.getAllHistoryList();
 		},
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
-			allQuery() {
-				this.getOximeterHistoryList()
-				this.getForeheadThermometerHistoryList()
-				this.getBloodPressureHistoryList()
-				this.getBloodSugarHistoryList()
-				// uni.setStorageSync('firstData', this.dataList[0]);
-				setTimeout(() => {
-					console.log(this.dataList[0])
-					uni.setStorageSync('firstData', this.dataList[0]);
-				}, 4000)
-			},
 
-			// 查询血氧历史记录
-			getOximeterHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "oximeter",
-					domain: [
-						["owner.id", "=", this.userInfo.uid]
-					],
-					fields: [
-						"name",
-						"blood_oxygen",
-						"pi",
-						"pulse_rate",
-						"test_time"
-					]
+			// 查询最新所有历史记录
+			getAllHistoryList() {
+				this.$http.post('/monitor/index', {
+					uid: this.uid,
 				}).then(res => {
-					const records = res.result.records;
-					if (records.length > 0) {
-						const latestRecord = records[records.length - 1]; // 获取最后一条数据
-						const dataItem = {
-							name: latestRecord.name,
-							test_time: latestRecord.test_time,
-							value: latestRecord.blood_oxygen,
-							alert: '正常',
-						};
-						this.dataList.push(dataItem);
-						this.sortDataListByTestTime();
-					}
-				});
-			},
-			getForeheadThermometerHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "forehead.temperature.gun",
-					domain: [
-						["owner.id", "=", this.userInfo.uid]
-					],
-					fields: [
-						"name",
-						"temperature",
-						"test_time"
-					]
-				}).then(res => {
-					const records = res.result.records;
-					if (records.length > 0) {
-						const currentTime = new Date(); // 获取当前时间
-						let closestRecord = records[0]; // 假设第一条记录是最接近的记录
-						let closestTimeDifference = Math.abs(currentTime - new Date(closestRecord
-						.test_time)); // 当前时间与第一条记录的时间差
-
-						// 遍历记录，找到与当前时间更接近的记录
-						for (let i = 1; i < records.length; i++) {
-							const recordTimeDifference = Math.abs(currentTime - new Date(records[i].test_time));
-							if (recordTimeDifference < closestTimeDifference) {
-								closestRecord = records[i];
-								closestTimeDifference = recordTimeDifference;
-							}
-						}
-
-						const dataItem = {
-							name: closestRecord.name,
-							test_time: closestRecord.test_time,
-							value: `${closestRecord.temperature}°C`,
-							alert: '正常',
-						};
-						this.dataList.push(dataItem);
-						this.sortDataListByTestTime();
-					}
+					this.dataList = res.data.data
 				})
-			},
-
-			// 查询血压历史记录
-			getBloodPressureHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "sphygmomanometer.jiakang",
-					domain: [
-						["owner.id", "=", this.userInfo.uid]
-					],
-					fields: [
-						"name",
-						"systolic_blood_pressure",
-						"tensioning_pressure",
-						"heart_rate",
-						"test_time"
-					]
-				}).then(res => {
-					const records = res.result.records;
-					if (records.length > 0) {
-						const latestRecord = records[records.length - 1]; // 获取最后一条数据
-						const dataItem = {
-							name: latestRecord.name,
-							test_time: latestRecord.test_time,
-							value: `收缩压${latestRecord.systolic_blood_pressure}H 舒张压${latestRecord.tensioning_pressure}Hg`,
-							alert: '正常',
-						};
-						this.dataList.push(dataItem);
-						// 执行时间差计算和查找最接近时间的代码
-						this.sortDataListByTestTime();
-					}
-				});
-			},
-			//查询血糖历史记录
-			getBloodSugarHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "blood.glucose.meter",
-					domain: [
-						["owner.id", "=", this.userInfo.uid]
-					],
-					fields: [
-						"name",
-						"oml_l",
-						"test_time"
-					]
-				}).then(res => {
-					const records = res.result.records;
-					if (records.length > 0) {
-						const latestRecord = records[records.length - 1]; // 获取最后一条数据
-						const dataItem = {
-							name: latestRecord.name,
-							test_time: latestRecord.test_time,
-							value: `${latestRecord.oml_l}mmol/L`,
-							alert: '正常',
-						};
-						this.dataList.push(dataItem);
-						this.sortDataListByTestTime();
-					}
-				})
-			},
-			sortDataListByTestTime() {
-				this.dataList.sort((a, b) => {
-					return new Date(b.test_time) - new Date(a.test_time);
-				});
-
 			}
-		},
+
+		}
+
 
 	}
 </script>
@@ -227,9 +86,12 @@
 			.date {
 				display: flex;
 				justify-content: space-between;
+				flex-direction: row;
 				color: #28be9e;
 				border-bottom: 1rpx solid #ececec;
-				padding: 16rpx;
+				// padding: 16rpx;
+				align-items: center;
+				font-size: 26px;
 
 				text {
 					flex: 1;
@@ -242,18 +104,21 @@
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
-				margin-top: 10px;
+				height: 100rpx;
 
 				.line {
 					flex: 1;
 					display: flex;
 					flex-direction: column;
 					align-items: center;
-					padding: 10rpx 20rpx;
 					justify-content: space-between;
 
 					.title {
-						/* 添加需要的样式属性 */
+						font-size: 16px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						text-align: center;
 					}
 
 					.result {

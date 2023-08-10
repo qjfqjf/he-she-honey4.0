@@ -1,10 +1,18 @@
 <template>
 	<view class="contaner">
-		<z-nav-bar title="营养秤">
-			<view slot="right" class="p-2" @click="gotoReport()">
-				<text class="analysis-report">分析报告</text>
+
+		<view class="bar">
+			<view class="bar-left">
+				<image class="img" src="/static/demo/back2.png" style="width: 16px;height: 16px;" shape="circle"
+					mode="aspectFill" @click="goDiet"></image>
 			</view>
-		</z-nav-bar>
+			<view class="bar-center">
+				营养秤
+			</view>
+			<view class="bar-right">
+				分析报告
+			</view>
+		</view>
 		<public-module></public-module>
 
 		<!-- 内容区域 -->
@@ -38,7 +46,7 @@
 						</view>
 						<view class="line">
 							<text class="title">数量</text>
-							<text class="result">{{item.quantity}} g</text>
+							<text class="result">{{item.quantity}} <text>{{getUnit(item.unit) }}</text></text>
 						</view>
 						<view class="line">
 							<text class="title">热量</text>
@@ -71,7 +79,8 @@
 								{{ KitchenScaleDataValue }}
 							</view>
 						</view>
-						<button @click="selectFood">选择食物</button>
+						<button @click="selectFood" v-if="this.selectFoodTag">选择食物</button>
+						<button @click="selectFood" v-if="this.foodNameTag">{{this.foodName}}</button>
 					</view>
 					<!-- 单位、保存 -->
 					<view class="btns">
@@ -138,7 +147,7 @@
 		},
 		data() {
 			return {
-				currentTab: 'tab1', //但前选项卡
+				currentTab: 'tab2', //但前选项卡
 				// 日期范围
 				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
 				// 设备状态
@@ -187,14 +196,23 @@
 				KitchenScaleDataValue: "正在获取数据",
 				userInfo: '',
 				uid: 0, //用户id
-				foodId: '01790eeeb4421008',
 				unit: 0,
-				
+				foodName: '',
+				foodId: '',
+				selectFoodTag: '',
+				foodNameTag: '',
+				KitchenScaleDataValueFloat: 0,
+
 			};
 		},
 		async onLoad() {
+			this.foodName = uni.getStorageSync('foodName')
+			this.foodId = uni.getStorageSync('foodId')
+			const selectFoodTag = uni.getStorageSync('selectFoodTag')
+			const foodNameTag = uni.getStorageSync('foodNameTag')
+			this.selectFoodTag = selectFoodTag
+			this.foodNameTag = foodNameTag
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-
 			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
@@ -205,7 +223,7 @@
 
 		mounted() {
 			this.getNutritionScaleData();
-			
+
 		},
 		watch: {
 			dataResult(newValue) {
@@ -253,6 +271,27 @@
 		},
 		//方法
 		methods: {
+			getUnit(unitCode) {
+				// 假设1表示kg，2表示g等，你可以根据实际情况添加更多的单位判断
+				switch (unitCode) {
+					case 0:
+						return ' g';
+					case 1:
+						return ' ml';
+					case 2:
+						return ' ml(milk)';
+					case 3:
+						return ' oz';
+					case 4:
+						return ' lb:oz';
+					case 5:
+						return ' fl、oz';
+					case 6:
+						return ' fl、oz(milk)';
+					default:
+						return ' g';
+				}
+			},
 			reset() {
 				this.KitchenScaleDataValue = "0"
 			},
@@ -363,28 +402,26 @@
 			},
 			save() {
 				this.$http.post('/nutrition/create', {
-					uid: 355,
+					uid: this.uid,
 					food_id: this.foodId,
 					unit: this.unit,
-					quantity: 3.00,
-					value: 0.00,
+					quantity: parseFloat(this.KitchenScaleDataValue).toFixed(2),
+					value: parseFloat(this.KitchenScaleDataValue).toFixed(2),
 					createtime: this.formatDate(new Date()),
-					// uid: this.uid,
-					// food_id:this.foodId,
-					// unit:this.unit,
-					// quantity:this.KitchenScaleDataValue,
-					// value:this.KitchenScaleDataValue,
-					// createtime:this.formatDate(new Date()),
 				}).then(res => {
 					this.$refs.uToast.show({
 						message: '保存成功',
 						type: 'success',
 					})
 				})
+				this.getNutritionScaleData()
 			},
 
 			selectFood() {
 				console.log('选择食物')
+				uni.navigateTo({
+					url: '/pages/healthManagement/diet/selectFood'
+				})
 			},
 			//时间格式转换
 			formatDate(date) {
@@ -416,7 +453,11 @@
 				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 				return firstDayOfMonth
 			},
-
+			goDiet() {
+				uni.navigateTo({
+					url: '/pages/healthManagement/diet/diet'
+				})
+			}
 		},
 	}
 </script>
@@ -430,6 +471,44 @@
 		.analysis-report {
 			font-size: 28rpx;
 		}
+
+		.bar {
+			display: flex;
+			justify-content: space-between;
+			/* 将子元素平分空间 */
+			align-items: center;
+			height: 70px;
+
+			background-color: white;
+
+			.bar-left {
+				text-align: center;
+				margin-left: 20px;
+				width: 50px;
+				margin-top: 20px;
+			}
+
+			.bar-center {
+				display: flex;
+				/* 使用 Flex 布局 */
+				justify-content: center;
+				/* 水平居中 */
+				align-items: center;
+				text-align: center;
+				font-size: 17px;
+				font-weight: bold;
+				margin-top: 20px;
+			}
+
+			.bar-right {
+				text-align: center;
+				font-size: 15px;
+				width: 60px;
+				margin-top: 20px;
+			}
+		}
+
+
 
 		.content {
 			border-top: 1rpx solid #ececec;

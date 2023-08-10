@@ -60,9 +60,7 @@
 			// 获取亲属关系列表
 			getRelationList() {
 				this.$http
-					.post('/getRelatives', {
-						uid: this.userInfo.uid,
-					})
+					.post('/user/index')
 					.then((res) => {
 						console.log(res)
 						this.userList = res.result.result.map((item) => {
