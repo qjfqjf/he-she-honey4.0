@@ -27,13 +27,19 @@
 			{{ text }}
 		</view>
 		<view style="margin: 30px;">
-			<u-button type="success" size="normal"  align="center" text="开始测试" @click="gotoExam"></u-button>
+			<u-button type="success" size="normal"  align="center" text="开始测试" @click="gotoExam(id)"></u-button>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		onLoad: function (option) {
+			console.log(option.e); 
+			this.id = option.e;
+			console.log('id',this.id);
+			this.searchData();
+		},
 		data() {
 			return {
 				//测试介绍图片
@@ -44,21 +50,48 @@
 				ExamPeople:'',
 				//测试介绍文本
 				text:'',
+				toUrl:'/mmpt_question/index',
+				QuestionUrl:'/mmpt_question/info',
+				id:'',
 			};
-		},
-		methods:{
-		searchData(){
 			
+		},
+	methods:{
+		searchData(){
+			this.$http.post(this.toUrl,{
+				id:this.id,
+			}).then(res=>{
+				console.log('res',res);
+				// this.avatar = imgUrl;
+				// this.examNum = res.data.data[0]
+				this.ExamPeople = res.data.data[0].sum
+				this.text = res.data.data[0].desc
+			}).catch(error => {
+				console.error('请求发生错误', error);
+			});
+			this.$http.post(this.QuestionUrl,{
+				id:this.id,
+				type:"no"
+			}).then(res=>{
+				console.log('res',res);
+				// this.avatar = imgUrl;
+				// this.examNum = res.data.data[0]
+				this.examNum = res.data.total
+			}).catch(error => {
+				console.error('请求发生错误', error);
+			});
 		},
         rightClick() {
             console.log('rightClick');
         },
-		gotoExam(){
+		gotoExam(e){
+			console.log('e',e);
 			uni.navigateTo({
-				url:'/pages/healthEstimate/psychology/Exam/Exam'
+				url:'/pages/healthEstimate/psychology/Exam/Exam?e=' + e
 			})
-		}
-    }
+		},
+    },
+	
 	}
 </script>
 

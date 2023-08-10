@@ -42,10 +42,15 @@
 				index: 0,
 				numBoxType:0,
 				QuestionList: [],
+				id:'',
+				QuestionUrl:'/mmpt_question/info',
 			}
 		},
-		onLoad(opt) {
-			console.log(111)
+		onLoad: function (opt) {
+			console.log(opt.e); 
+			this.id = opt.e;
+			console.log('id',this.id);
+			// console.log(111)
 			_this = this;
 			setTimeout(function(){
 				_this.getTestPaper();
@@ -88,7 +93,17 @@
 			},
 			getTestPaper() {
 				// let data = require('../../static/data.json')  ;
-				
+				this.$http.post(this.QuestionUrl,{
+					id:this.id,
+				}).then(res=>{
+					console.log('res',res);
+					this.fldTestPaperID = res.data.data.length;
+					// this.avatar = imgUrl;
+					// this.examNum = res.data.data[0]
+					// this.examNum = res.data.total
+				}).catch(error => {
+					console.error('请求发生错误', error);
+				});
 				console.log(data.QuestionList)
 				_this.QuestionList = data.QuestionList;
 				if (_this.QuestionList.length > 0) {

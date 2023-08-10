@@ -27,7 +27,7 @@
 	    </scroll-view>
 	    <scroll-view class="bigcontent"  scroll-y="true">
 	        <view class="content" v-for="(item, index) in dataTextList" :key="index">
-				<view class="content-one" @click="gotoIndex">
+				<view class="content-one" @click="gotoIndex(item.id)">
 					<view class="content-top">
 						<view class="left">
 							<view class="top">{{ item.name }}</view>
@@ -703,9 +703,11 @@
 			selectItem(index) {
 			  this.selectedItem = index;
 			},
-			gotoIndex(){
+			gotoIndex(e){
+				console.log('e',e);
+				// uni.setStorageSync('Question', e)
 				uni.navigateTo({
-					url:'/pages/healthEstimate/psychology/Exam/index'
+					url:'/pages/healthEstimate/psychology/Exam/index?e=' + e
 				})
 			},
 			gotoSearch(){
