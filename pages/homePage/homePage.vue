@@ -46,9 +46,9 @@
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<!-- <view class="scroll-container">
+			<view class="scroll-container">
 				<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
-			</view> -->
+			</view>
 
 			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar" style="z-index: 1">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
@@ -164,9 +164,11 @@
 				],
 				// 当前用户
 				currentUser: {},
+				dataList: [], // Your list of data items
+				currentIndex: 0,
+				currentData: '',
 				loginUrl:'',
-				creatUrl:'',
-
+				createUrl:'',
 			};
 		},
 		components: {
@@ -205,8 +207,7 @@
 			this.getRelationList()
 		},
 		created() {
-			// Start the timer to display data every 3 seconds
-			this.startDataDisplayTimer();
+
 		},
 		mounted() {
 			this.startTimer();
@@ -231,10 +232,13 @@
 				})
 			},
 			selectImg(e) {
+				console.log('e',e);
+				console.log('appManage',this.appManage[4]);
 				this.appManage[4].icon = "/" + e.icon
 				this.appManage[4].name = e.name;
 				this.appManage[4].path = e.path;
 				this.appManage[4].name = this.appManage[4].name + "服务"
+				console.log('appManage',this.appManage[4]);
 			},
 			toCalendar() {
 				uni.navigateTo({
@@ -289,6 +293,7 @@
 				console.log('执行getRelationList')
 				console.log(uni.getStorageSync('userInfo'));
 				this.currentUser.id  = uni.getStorageSync('userInfo');
+				console.log('id', this.currentUser.id);
 				// this.userList = res.result.result.map((item) => {
 				// 	return {
 				// 				...item,
@@ -296,14 +301,15 @@
 				// 				images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 				// 	}
 				// })
-				// this.$http
-				// 	.post('/user/info', {
-				// 		id: this.currentUser.uid,
-				// 	})
-				// 	.then((res) => {
-				// 		console.log('res:',res)
-				// 		this.userList[0] = res.data.headurl;
-				// 	})
+				this.$http
+					.post('/user/info', {
+						id: this.currentUser.id
+					})
+					.then((res) => {
+						console.log('res:',res)
+						this.userList[0].images = res.data.headurl;
+						this.userList[0].name = res.data.fullname;
+					})
 			},
 			bindUser() {
 				console.log()
