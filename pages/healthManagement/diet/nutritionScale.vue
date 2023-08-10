@@ -1,10 +1,18 @@
 <template>
 	<view class="contaner">
-		<z-nav-bar title="营养秤">
-			<view slot="right" class="p-2" @click="gotoReport()">
-				<text class="analysis-report">分析报告</text>
+
+		<view class="bar">
+			<view class="bar-left">
+				<image class="img" src="/static/demo/back2.png" style="width: 16px;height: 16px;" shape="circle"
+					mode="aspectFill" @click="goDiet"></image>
 			</view>
-		</z-nav-bar>
+			<view class="bar-center">
+				营养秤
+			</view>
+			<view class="bar-right">
+				分析报告
+			</view>
+		</view>
 		<public-module></public-module>
 
 		<!-- 内容区域 -->
@@ -71,7 +79,8 @@
 								{{ KitchenScaleDataValue }}
 							</view>
 						</view>
-						<button @click="selectFood">选择食物</button>
+						<button @click="selectFood" v-if="this.selectFoodTag">选择食物</button>
+						<button @click="selectFood" v-if="this.foodNameTag">{{this.foodName}}</button>
 					</view>
 					<!-- 单位、保存 -->
 					<view class="btns">
@@ -138,7 +147,7 @@
 		},
 		data() {
 			return {
-				currentTab: 'tab1', //但前选项卡
+				currentTab: 'tab2', //但前选项卡
 				// 日期范围
 				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
 				// 设备状态
@@ -187,14 +196,17 @@
 				KitchenScaleDataValue: "正在获取数据",
 				userInfo: '',
 				uid: 0, //用户id
-				foodId: '01790eeeb4421008',
 				unit: 0,
-				
+				foodName: '',
+				foodId: '',
+				selectFoodTag:uni.getStorageSync('selectFoodTag'),
+				foodNameTag:uni.getStorageSync('foodNameTag')
 			};
 		},
 		async onLoad() {
+			this.foodName = uni.getStorageSync('foodName')
+			this.foodId = uni.getStorageSync('foodId')
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-
 			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
@@ -205,7 +217,7 @@
 
 		mounted() {
 			this.getNutritionScaleData();
-			
+
 		},
 		watch: {
 			dataResult(newValue) {
@@ -385,6 +397,9 @@
 
 			selectFood() {
 				console.log('选择食物')
+				uni.navigateTo({
+					url: '/pages/healthManagement/diet/selectFood'
+				})
 			},
 			//时间格式转换
 			formatDate(date) {
@@ -416,7 +431,11 @@
 				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 				return firstDayOfMonth
 			},
-
+			goDiet(){
+				uni.navigateTo({
+					url: '/pages/healthManagement/diet/diet'
+				})
+			}
 		},
 	}
 </script>
@@ -430,6 +449,41 @@
 		.analysis-report {
 			font-size: 28rpx;
 		}
+
+		.bar {
+			display: flex;
+			justify-content: space-between;
+			/* 将子元素平分空间 */
+			align-items: center;
+			height: 50px;
+
+			background-color: white;
+
+			.bar-left {
+				text-align: center;
+				margin-left: 20px;
+				width: 50px;
+			}
+
+			.bar-center {
+				display: flex;
+				/* 使用 Flex 布局 */
+				justify-content: center;
+				/* 水平居中 */
+				align-items: center;
+				text-align: center;
+				font-size: 17px;
+				font-weight: bold;
+			}
+
+			.bar-right {
+				text-align: center;
+				font-size: 15px;
+				width: 60px;
+			}
+		}
+
+
 
 		.content {
 			border-top: 1rpx solid #ececec;

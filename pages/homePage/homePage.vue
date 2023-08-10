@@ -5,7 +5,7 @@
 			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan" />
 			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt="" />
 		</z-nav-bar>
-		<view class="status-bar d-flex m-3 bg-white rounded-20" v-if="currentItem !== null">
+		<!-- <view class="status-bar d-flex m-3 bg-white rounded-20" v-if="currentItem !== null">
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center ">
@@ -39,7 +39,7 @@
 					</div>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
 			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
 				@click="onPageJump('/pages/homePage/myUsers')" style="z-index: 1">
@@ -171,12 +171,12 @@
 		//第一次加载
 		onLoad(e) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid;
+			this.uid = this.userInfo.uid
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			//拿到用户列表
 			this.getRelationList()
-			console.log(this.userList)
+			// console.log(this.userList)
 			if (!this.token) {
 				uni.navigateTo({
 					url: '/pages/login/login',
@@ -186,6 +186,7 @@
 		},
 		//页面显示
 		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// this.getUserList()
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
@@ -194,7 +195,7 @@
 
 			//判断蓝牙是否开启
 			this.openBlue();
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			
 			this.getRelationList()
 		},
 		created() {
@@ -216,8 +217,9 @@
 			// 查询最新所有历史记录
 			getAllHistoryList() {
 				this.$http.post('/monitor/index', {
-					uid: 355,
+					uid: this.uid,
 				}).then(res => {
+					console.log(11111111111,res.data)
 					this.dataList = res.data.data
 				})
 			},
@@ -340,10 +342,7 @@
 				// console.log(this.doctorId)
 
 			},
-
-
 			changeHeadImg(index) {
-
 				this.currentUser = this.userList[index]
 				//登录一下获取一下token
 				uni.request({

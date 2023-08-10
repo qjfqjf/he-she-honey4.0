@@ -838,6 +838,28 @@
 			}
 		},
 		{
+			"path": "pages/healthManagement/diet/selectFood",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/diet/foodList",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/diet/foodInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		
+		{
 			"path": "pages/healthManagement/beauty/beauty",
 			"style": {
 				"navigationBarTitleText": "",
