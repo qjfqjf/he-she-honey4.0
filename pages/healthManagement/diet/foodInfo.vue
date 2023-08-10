@@ -22,6 +22,7 @@
 					</view>
 					<view class="right">
 						<view class="value">
+							
 							{{ getFoodInfoValue(item.name) }}
 						</view>
 					</view>
@@ -154,10 +155,10 @@
 		created() {
 
 		},
-		onLoad() {
-			const cid = this.$route.query.cid;
-			const value = this.$route.query.value;
-			const icon = this.$route.query.icon;
+		onLoad(options) {
+			const cid = options.cid;
+			const value = options.value;
+			const icon = options.icon;
 			this.cid = cid
 			this.name = value
 			this.icon = icon
@@ -169,7 +170,7 @@
 					id: this.cid
 				}).then(res => {
 					this.indexList = res.data;
-
+					console.log(11111111,this.indexList.kcal)
 				})
 			},
 			scrolltolower() {
@@ -296,7 +297,7 @@
 	}
 
 	.value {
-		margin-left: 130px;
+		/* margin-left: 130px; */
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

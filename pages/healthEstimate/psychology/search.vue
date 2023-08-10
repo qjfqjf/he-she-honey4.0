@@ -15,12 +15,12 @@
 		</view>
 		
 		
-		<view class="content" v-for="(item, index) in List" :key="index">
+		<view class="content" v-for="(item, index) in searchResult" :key="index">
 			<view class="content-one">
 				<view class="content-top">
 					<view class="left">
-						<view class="top">{{ item.title }}</view>
-						<view class="buttom">{{ item.description }}</view>
+						<view class="top">{{ item.name }}</view>
+						<view class="buttom">{{ item.desc }}</view>
 					</view>
 					<view class="right">
 						<image class="imgtest" :src="item.imgUrl" mode="aspectFit" />
@@ -42,81 +42,107 @@
 				searchText: '',
 				searchResult: [],
 				List: [
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
-					{
-						title: '综合心理健康测评',
-						description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-						imgUrl: '/static/icon/healthEstimate/brain.png',
-					},
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
+					// {
+					// 	title: '综合心理健康测评',
+					// 	description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+					// 	imgUrl: '/static/icon/healthEstimate/brain.png',
+					// },
 				],
 			}
 		},
 		methods: {
 		    search() {
 				// 调用搜索接口，传入搜索关键字
-				uni.request({
-		        url: 'https://example.com/search',
-		        method: 'GET',
-		        data: {
-					keyword: this.searchText,
-		        },
-		        success: res => {
-					if (res.data && res.data.length) {
-		            // 如果有搜索结果，更新数据
-		            this.searchResult = res.data
-		        }else{
-		            uni.showToast({
-						title: '没有搜索到结果',
-						icon: 'none',
-		            })
-		        }
-		        },
-		        fail: () => {
-		          uni.showToast({
-		            title: '搜索失败，请稍后再试',
-		            icon: 'none',
-		          })
-		        },
-		      })
+
+
+				this.$http.get('/mmpt_question/index', {
+						name: this.searchText
+					})
+					.then(res => {
+						console.log('res',res);
+						if (res.data.data && res.data.data.length) {
+						// 如果有搜索结果，更新数据
+						this.searchResult = res.data.data;
+						for (var record of this.searchResult){
+						if(record.name.length > 7) record.name = record.name.slice(0,7)
+						if(record.desc.length > 30) record.desc = record.desc.slice(0,30)
+					}
+						console.log('searchResult',this.searchResult);
+						} else {
+							uni.showToast({
+								title: "保存成功"
+							})
+						}
+					})
+					.catch(error=> {
+						console.error('请求发生错误', error);
+					});
+
+
+			// 	uni.request({
+		    //     url: 'https://example.com/search',
+		    //     method: 'GET',
+		    //     data: {
+			// 		keyword: this.searchText,
+		    //     },
+		    //     success: res => {
+			// 		if (res.data && res.data.length) {
+		    //         // 如果有搜索结果，更新数据
+		    //         this.searchResult = res.data
+		    //     }else{
+		    //         uni.showToast({
+			// 			title: '没有搜索到结果',
+			// 			icon: 'none',
+		    //         })
+		    //     }
+		    //     },
+		    //     fail: () => {
+		    //       uni.showToast({
+		    //         title: '搜索失败，请稍后再试',
+		    //         icon: 'none',
+		    //       })
+		    //     },
+		    //   })
 		    },
 		  },
 	}

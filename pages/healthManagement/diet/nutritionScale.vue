@@ -46,7 +46,7 @@
 						</view>
 						<view class="line">
 							<text class="title">数量</text>
-							<text class="result">{{item.quantity}} g</text>
+							<text class="result">{{item.quantity}} <text>{{getUnit(item.unit) }}</text></text>
 						</view>
 						<view class="line">
 							<text class="title">热量</text>
@@ -199,13 +199,19 @@
 				unit: 0,
 				foodName: '',
 				foodId: '',
-				selectFoodTag:uni.getStorageSync('selectFoodTag'),
-				foodNameTag:uni.getStorageSync('foodNameTag')
+				selectFoodTag: '',
+				foodNameTag: '',
+				KitchenScaleDataValueFloat: 0,
+
 			};
 		},
 		async onLoad() {
 			this.foodName = uni.getStorageSync('foodName')
 			this.foodId = uni.getStorageSync('foodId')
+			const selectFoodTag = uni.getStorageSync('selectFoodTag')
+			const foodNameTag = uni.getStorageSync('foodNameTag')
+			this.selectFoodTag = selectFoodTag
+			this.foodNameTag = foodNameTag
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo.uid
 			this.initPrinter()
@@ -265,6 +271,27 @@
 		},
 		//方法
 		methods: {
+			getUnit(unitCode) {
+				// 假设1表示kg，2表示g等，你可以根据实际情况添加更多的单位判断
+				switch (unitCode) {
+					case 0:
+						return ' g';
+					case 1:
+						return ' ml';
+					case 2:
+						return ' ml(milk)';
+					case 3:
+						return ' oz';
+					case 4:
+						return ' lb:oz';
+					case 5:
+						return ' fl、oz';
+					case 6:
+						return ' fl、oz(milk)';
+					default:
+						return ' g';
+				}
+			},
 			reset() {
 				this.KitchenScaleDataValue = "0"
 			},
@@ -375,24 +402,19 @@
 			},
 			save() {
 				this.$http.post('/nutrition/create', {
-					uid: 355,
+					uid: this.uid,
 					food_id: this.foodId,
 					unit: this.unit,
-					quantity: 3.00,
-					value: 0.00,
+					quantity: parseFloat(this.KitchenScaleDataValue).toFixed(2),
+					value: parseFloat(this.KitchenScaleDataValue).toFixed(2),
 					createtime: this.formatDate(new Date()),
-					// uid: this.uid,
-					// food_id:this.foodId,
-					// unit:this.unit,
-					// quantity:this.KitchenScaleDataValue,
-					// value:this.KitchenScaleDataValue,
-					// createtime:this.formatDate(new Date()),
 				}).then(res => {
 					this.$refs.uToast.show({
 						message: '保存成功',
 						type: 'success',
 					})
 				})
+				this.getNutritionScaleData()
 			},
 
 			selectFood() {
@@ -431,7 +453,7 @@
 				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 				return firstDayOfMonth
 			},
-			goDiet(){
+			goDiet() {
 				uni.navigateTo({
 					url: '/pages/healthManagement/diet/diet'
 				})
@@ -455,7 +477,7 @@
 			justify-content: space-between;
 			/* 将子元素平分空间 */
 			align-items: center;
-			height: 50px;
+			height: 70px;
 
 			background-color: white;
 
@@ -463,6 +485,7 @@
 				text-align: center;
 				margin-left: 20px;
 				width: 50px;
+				margin-top: 20px;
 			}
 
 			.bar-center {
@@ -474,12 +497,14 @@
 				text-align: center;
 				font-size: 17px;
 				font-weight: bold;
+				margin-top: 20px;
 			}
 
 			.bar-right {
 				text-align: center;
 				font-size: 15px;
 				width: 60px;
+				margin-top: 20px;
 			}
 		}
 

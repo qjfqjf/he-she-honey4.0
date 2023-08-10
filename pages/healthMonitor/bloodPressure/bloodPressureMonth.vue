@@ -203,7 +203,7 @@
 				.DIA {
 					font-size: 32rpx;
 					// color: #ffd661;
-					width: 30%;
+					width: 40%;
 					display: inline-block;
 
 					.line {

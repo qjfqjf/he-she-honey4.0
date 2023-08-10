@@ -25,10 +25,10 @@
 		created() {
 
 		},
-		onLoad() {
-			const cid = this.$route.query.cid;
-			const name = this.$route.query.name;
-			const icon = this.$route.query.icon;
+		onLoad(options) {
+			const cid = options.cid;
+			const name = options.name;
+			const icon = options.icon;
 			this.cid = cid
 			this.name = name
 			this.icon = icon
@@ -47,7 +47,7 @@
 			},
 			foodInfo(cid){
 				uni.navigateTo({
-					url: '/pages/healthManagement/diet/foodInfo?cid=' + cid + '&value=' + this.name + '&icon=' + this.icon
+					url: `/pages/healthManagement/diet/foodInfo?cid=${cid}&value=${this.name}&icon=${this.icon}`,
 				})
 			}
 		}

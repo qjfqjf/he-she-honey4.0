@@ -22,7 +22,6 @@
 				<view class="row" v-for="(rowItems, rowIndex) in groupedData" :key="rowIndex">
 					<view class="text" v-for="(item, columnIndex) in rowItems" :key="columnIndex" @click="foodList(item.cid, item.name,item.icon)">
 						<view class="icon">
-
 							<image :src="item.icon" style="width:50rpx;height:50rpx" mode="aspectFill"></image>
 						</view>
 						<view class="name">
@@ -68,7 +67,8 @@
 			},
 			foodList(cid,name,icon){
 				uni.navigateTo({
-					url: '/pages/healthManagement/diet/foodList?cid=' + cid + '&name=' + name + '&icon=' + icon
+					url: `/pages/healthManagement/diet/foodList?cid=${cid}&name=${name}&icon=${icon}`,
+					// url: '/pages/healthManagement/diet/foodList?cid=' + cid + '&name=' + name + '&icon=' + icon
 				})
 			}
 			

@@ -204,23 +204,22 @@
 						})
 						return
 					}
-					uni.request({
-						url: 'http://127.0.0.1:8000/api/login/accountLogin',
-						method: 'post',
-						data: {
-							//params: this.params,
+
+
+					this.$http.post('/login/accountLogin', {
 							mobile: this.params.login,
 							pwd: this.params.password
-						},
-						success: (res) => {
-							uni.setStorageSync('userInfo', res.data.data.uid)
+						})
+						.then((res) => {
+							console.log(res)
+							uni.setStorageSync('userInfo', res.data.uid)
 
 							//登录成功
-							if (res.data.code == 20000) {
+							if (res.code == 20000) {
 								// 用户的信息和token存放进localStorage里面去
 								// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-								uni.setStorageSync('userInfo', JSON.stringify(res.data.data))
-								uni.setStorageSync('access-token', res.data.data.token)
+								uni.setStorageSync('userInfo', JSON.stringify(res.data))
+								uni.setStorageSync('access-token', res.data.token)
 								uni.showToast({
 									title: '登录成功',
 									duration: 2000,
@@ -247,8 +246,58 @@
 									duration: 2000,
 								})
 							}
-						},
-					})
+						})
+						.catch((error) => {
+							console.log(error)
+						})
+
+
+					// uni.request({
+					//   url: 'http://127.0.0.1:8000/api/login/accountLogin',
+					//   method: 'post',
+					//   data: {
+					//     //params: this.params,
+					//     mobile:this.params.login,
+					//     pwd:this.params.password
+					//   },
+					//   success: (res) => {
+					//     console.log(res)
+					//     uni.setStorageSync('userInfo',res.data.data.uid)
+
+					//     //登录成功
+					//     if (res.data.code == 20000) {
+					//       // 用户的信息和token存放进localStorage里面去
+					//       // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
+					//       uni.setStorageSync('userInfo', JSON.stringify(res.data.data))
+					//       uni.setStorageSync('access-token', res.data.data.token)
+					//       uni.showToast({
+					//         title: '登录成功',
+					//         duration: 2000,
+					//         success: () => {
+					//           setTimeout(() => {
+					//             uni.switchTab({
+					//               url: '/pages/homePage/homePage',
+					//               success: (res) => {
+					//                 console.log(res)
+					//               },
+					//               fail: (err) => {
+					//                 console.log(err)
+					//               },
+					//             })
+					//           }, 1000)
+					//         },
+					//       })
+					//     }
+					//     //登陆失败
+					//     else {
+					//       uni.showToast({
+					//         title: '登陆失败',
+					//         icon: 'none',
+					//         duration: 2000,
+					//       })
+					//     }
+					//   },
+					// })
 				}
 
 				//模拟登录成功

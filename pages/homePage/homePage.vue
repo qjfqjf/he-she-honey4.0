@@ -5,13 +5,13 @@
 			<img slot="left" :src="homePageIcons.Scanning.icon" class="small-icon p-2" alt="" @click="handleScan" />
 			<img slot="right" :src="homePageIcons.Location.icon" class="small-icon p-2" alt="" />
 		</z-nav-bar>
-		<!-- <view class="status-bar d-flex m-3 bg-white rounded-20" v-if="currentItem !== null">
+		<view class="status-bar d-flex m-3 bg-white rounded-20">
 			<view class="f-grow-1 flex-column h-50 px-2 py-1">
 				<view class="d-flex j-sb a-center">
 					<div class="d-flex j-center a-center ">
 						<img :src="homePageIcons.Bp.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h4 style="font-size: 30upx">{{currentItem.name}}</h4>
+							<h4 style="font-size: 30upx">{{ this.currentData.name }}</h4>
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowUp.icon" style="width: 20upx" height="10upx" alt="">
@@ -22,8 +22,7 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.Glu.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h6 style="color: green">{{currentItem.value}}</h6>
-
+							<h6 style="color: green">{{ this.currentData.value }}</h6>
 						</span>
 					</div>
 					<img :src="homePageIcons.ArrowDown.icon" style="width: 20upx" height="10upx" alt="">
@@ -34,12 +33,12 @@
 					<div class="d-flex j-center a-center">
 						<img :src="homePageIcons.UricAcid.icon" class="medium-icon" alt="">
 						<span class="mx-1">
-							<h4 style="font-size: 30upx">{{currentItem.eval}}</h4>
+							<h4 style="font-size: 30upx">{{ this.currentData.eval }}</h4>
 						</span>
 					</div>
 				</view>
 			</view>
-		</view> -->
+		</view>
 		<view class="top-bar d-flex j-sb w-100 a-center mb-2 h-100">
 			<u-button class="leftRoundButton shadow h-100 shadow-lg border"
 				@click="onPageJump('/pages/homePage/myUsers')" style="z-index: 1">
@@ -47,9 +46,9 @@
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<view class="scroll-container">
+			<!-- <view class="scroll-container">
 				<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
-			</view>
+			</view> -->
 
 			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar" style="z-index: 1">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
@@ -112,7 +111,7 @@
 						</div>
 					</u-grid-item>
 				</u-grid>
-				<u-toast ref="uToast"/>
+				<u-toast ref="uToast" />
 			</view>
 		</view>
 		<z-navigation></z-navigation>
@@ -159,8 +158,8 @@
 				// 当前用户
 				currentUser: {},
 				dataList: [], // Your list of data items
-				currentItemIndex: 0,
-				currentItem: null,
+				currentIndex: 0,
+				currentData: ''
 			};
 		},
 		components: {
@@ -195,31 +194,32 @@
 
 			//判断蓝牙是否开启
 			this.openBlue();
-			
+
 			this.getRelationList()
 		},
 		created() {
 			// Start the timer to display data every 3 seconds
 			this.startDataDisplayTimer();
 		},
-
+		mounted() {
+			this.startTimer();
+		},
 
 		//方法
 		methods: {
-			startDataDisplayTimer() {
-				this.currentItem = this.dataList[this.currentItemIndex];
-				setInterval(this.changeDataItem, 5000);
+			startTimer() {
+				this.updateData();
+				this.timer = setInterval(this.updateData, 5000); // 每隔五秒更新数据
 			},
-			changeDataItem() {
-				this.currentItemIndex = (this.currentItemIndex + 1) % this.dataList.length;
-				this.currentItem = this.dataList[this.currentItemIndex];
+			updateData() {
+				this.currentData = this.dataList[this.currentIndex];
+				this.currentIndex = (this.currentIndex + 1) % this.dataList.length; // 循环切换数据
 			},
 			// 查询最新所有历史记录
 			getAllHistoryList() {
 				this.$http.post('/monitor/index', {
 					uid: this.uid,
 				}).then(res => {
-					console.log(11111111111,res.data)
 					this.dataList = res.data.data
 				})
 			},

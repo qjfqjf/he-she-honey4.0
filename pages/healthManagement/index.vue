@@ -126,7 +126,7 @@
 			justify-content: space-between;
 			/* 将子元素平分空间 */
 			align-items: center;
-			height: 50px;
+			height: 70px;
 
 			background-color: white;
 
@@ -134,6 +134,7 @@
 				text-align: center;
 				margin-left: 20px;
 				width: 50px;
+				margin-top: 20px;
 			}
 
 			.bar-center {
@@ -145,6 +146,7 @@
 				text-align: center;
 				font-size: 17px;
 				font-weight: bold;
+				margin-top: 20px;
 			}
 
 			.bar-right {
