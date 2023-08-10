@@ -9,28 +9,28 @@
 		<view class="historyCard mb-3" v-for="(item,index) in dataList" :key="index">
 			<view class="top d-flex j-sb mb-2">
 				<view class="time">
-					{{item.test_time}}
+					{{item.createtime}}
 				</view>
 				<view class="position">
 					监测部位：左侧
-					<!-- 监测部位：{{item.position}} -->
 				</view>
 			</view>
 			<view class="data d-flex j-sb">
 				<view class="SYS">
-					收缩压：{{item.systolic_blood_pressure}}↑
+					收缩压：{{item.systolic_pressure}}
+					<view class="line" v-if="item.systolic_level > 0" :style="getSystolicColor(item.systolic_level)">↑</view>
 				</view>
 				<view class="DIA">
-					舒张压：{{item.tensioning_pressure}} ↑
+					舒张压：{{item.diastolic_pressure}}
+					<view class="line" v-if="item.diastolic_level > 0" :style="getDiastolicColor(item.diastolic_level)">↑</view>
 				</view>
 				<view class="PUL">
-					<!-- ↓ -->
-					心率：{{item.heart_rate}}
+					心率：{{item.pulse}}
+					<view class="line" v-if="item.pulse_level > 0" :style="getPulseColor(item.pulse_level)">↑</view>
 				</view>
 			</view>
+
 		</view>
-
-
 	</view>
 </template>
 
@@ -44,44 +44,14 @@
 		},
 		data() {
 			return {
-				uid:0,
-				userInfo:'',
-				date:{
-					startTime:this.getFirstDayOfMonth().format('yyyy-MM-dd'),
-					endTime:this.getLastDayOfMonth().format('yyyy-MM-dd'),
+				uid: 0,
+				userInfo: '',
+				date: {
+					startTime: this.getFirstDayOfMonth().format('yyyy-MM-dd'),
+					endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
-				allDataList:[
-				
-				],
 				dataList: [
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// },
-					// {
-					// 	position: "左侧",
-					// 	time: "2023-3-29 15:30",
-					// 	SYS: 168,
-					// 	DIA: 98,
-					// 	PUL: 81
-					// }
+
 				]
 			};
 		},
@@ -92,9 +62,9 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
 			const uid = options.uid;
-			if(uid == 0){
+			if (uid == 0) {
 				this.uid = this.userInfo.uid
-			}else{
+			} else {
 				this.uid = uid
 			}
 			dayjs.extend(isBetween)
@@ -102,9 +72,9 @@
 		},
 		methods: {
 			//测试子组件传来的值是否是正确的
-			test(){
-				console.log("start"+this.date.startTime)
-				console.log("end"+this.date.endTime)
+			test() {
+				console.log("start" + this.date.startTime)
+				console.log("end" + this.date.endTime)
 			},
 			// 获取当前月的最后一天
 			getLastDayOfMonth() {
@@ -121,55 +91,77 @@
 				const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 				return firstDayOfMonth
 			},
-			
+
 			//从子组件获取开始和结束时间，并且更新数据
-			getDate(date){
+			getDate(date) {
 				this.date = date;
 				//清空数组内数据
 				this.dataList = [];
 				//筛选出符合条件的数据
-				this.getDataList();
+				this.getHistoryList();
 			},
-			handleWarningRule(){
+			handleWarningRule() {
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
 				});
 			},
-			// handleWarningRule() {
-			// 	this.$refs.uToast.show({
-			// 		message: '开发中...'
-			// 	})
-			// },
-			//查询血压月报记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "sphygmomanometer.jiakang",
-					domain:[["owner.id","=",this.uid]],
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"systolic_blood_pressure",
-						"tensioning_pressure",
-						"heart_rate",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/blood_pressure/index', {
+					uid: this.uid,
+					start_date: this.date.startTime,
+					end_date: this.date.endTime
 				}).then(res => {
-					this.allDataList = res.result.records
-					this.getDataList();
+					this.dataList = res.data
 				})
-				
 			},
-			//筛选数据
-			getDataList(){
-				for(var i in this.allDataList){
-					//判断数据是否在所选日期范围内
-					if(dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,this.date.endTime, 'day', '[]')){
-						this.dataList.push(this.allDataList[i])
-					}
+			getSystolicColor(systolicLevel) {
+				switch (systolicLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
 				}
-			}
+			},
+			getDiastolicColor(diastolicLevel) {
+				switch (diastolicLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
+			getPulseColor(pulseLevel) {
+				switch (pulseLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
 		},
 
 	}
@@ -201,18 +193,28 @@
 
 				.time {
 					color: #666;
-
-
 				}
 			}
 
 			.data {
 
+				.PUL,
 				.SYS,
 				.DIA {
+					font-size: 32rpx;
+					// color: #ffd661;
+					width: 30%;
+					display: inline-block;
 
-					color: #ffd661;
-
+					.line {
+						display: inline-block;
+						vertical-align: middle;
+						/* 将箭头垂直居中对齐 */
+						margin-left: 5px;
+						/* 调整箭头与数值之间的距离 */
+						// color: green;
+						/* 设置箭头的颜色 */
+					}
 				}
 			}
 		}

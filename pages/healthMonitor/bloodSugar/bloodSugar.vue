@@ -5,7 +5,7 @@
 		<HealthHeader></HealthHeader>
 		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="value.length===0?0:value" unit="mmol/L" color="#ff8575">
 		</MyCircle>
-		<TipInfo title="血糖趋势"></TipInfo>
+		<TipInfo title="血糖趋势" @trend="handleBloodSugarTrend"></TipInfo>
 		<view class="d-flex j-sb flex-wrap mb-3 py-2 tags">
 			<view class="m-1 tag-item" v-for="(item, index) in radios" :key="index">
 				<u-tag :text="item.text" shape="circle" :color="!item.checked?'#02b19b':'#fff'" border-color="#01b09a"
@@ -46,36 +46,46 @@
 		},
 		data() {
 			return {
-				radios: [{
+				radios: [
+					{
 						text: '空腹',
-						checked: false
+						checked: false,
+						category:1
 					},
 					{
 						text: '早餐后',
-						checked: false
+						checked: false,
+						category:2
 					},
 					{
 						text: '午餐前',
-						checked: false
+						checked: false,
+						category:3
 					},
 					{
 						text: '午餐后',
-						checked: false
+						checked: false,
+						category:4
 					},
 					{
 						text: '晚餐前',
-						checked: false
+						checked: false,
+						category:5
 					},
 					{
 						text: '晚餐后',
-						checked: false
+						checked: false,
+						category:6
 					},
 					{
 						text: '睡前',
-						checked: false
-					}, {
+						checked: false,
+						category:7
+					}, 
+					{
 						text: '睡后',
-						checked: false
+						checked: false,
+						category:8
 					}
 				],
 				deviceStatus: 0,
@@ -104,10 +114,13 @@
 						url: '/pages/healthMonitor/bloodSugar/sugarManualEntry'
 					},
 				],
-
+				selectedCategory:0,
 			};
 		},
 		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.username = this.userInfo.name;
+			this.uid = this.userInfo.uid
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
@@ -121,39 +134,53 @@
 			radioClick(name) {
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
-
 				})
+				this.selectedCategory = name+1
 			},
 			handleSaveSugar() {
-				this.$http.post('/platform/dataset/call_kw', {
-					model: "blood.glucose.meter",
-					method: "create",
-					args: [
-						[{
-							"name": "血糖仪 (静态血糖仪)",
-							"numbers":this.serviceId,
-							"owner":this.userInfo.uid,
-							"category":"kf",
-							"oml_l":this.value,
-							"input_type":"equipment",
-						}]
-					],
-					kwargs:{}
-				}).then(res => {
-					if (this.value.length > 0) {
-						this.$refs.uToast.show({
-							message: '保存成功',
-							type: 'success',
-						})
-						this.btnColor = '#dadada'
-						this.value = 0
-					}
-				})
+				this.value = 250
+				if(this.value != '0' && this.value != '' && this.selectedCategory != 0){                   
+					this.$http.post('/blood_sugar/create', {
+						uid: this.uid,
+						category: this.selectedCategory,						
+						value: this.value,
+						time: this.formatDate(new Date()),
+						type: 1
+					}).then(res => {
+						if (this.value != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							this.value = 0
+						}else{
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							this.value = 0
+						}
+					})
+				}else if(this.selectedCategory === 0){
+					this.$refs.uToast.show({
+						message: '请选择类型',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					this.value = 0
+				}
+				else{
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					this.value = 0
+				}
 			},
 			handleDevelop() {
-				// this.$refs.uToast.show({
-				// 	message: '开发中...'
-				// })
 				uni.navigateTo({
 					url: '/pages/healthMonitor/bloodSugar/bloodSugarHistory'
 				})
@@ -375,6 +402,26 @@
 					url: url
 				});
 
+			},
+			handleBloodSugarTrend() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSugar/bloodSugarTrend?uid=' + this.uid, // 跳转到指定的目标页面
+				});
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 
 

@@ -50,48 +50,67 @@
 		data() {
 			return {
 				show: false,
-				time: new Date().format('yyyy-MM-dd hh:mm'),
-				selectTime: new Date().format('yyyy-MM-dd hh:mm'),
+				time: new Date().format('yyyy-MM-dd hh:mm:ss'),
+				selectTime: new Date().format('yyyy-MM-dd hh:mm:ss'),
 				scrollLeftNow: 5.6, // 页面显示
 				scrollLeft: 5.6, //初始值
 				scrollStart: 2, //滚动区域起始值
 				scrollEnd: 28, //滚动区域终止值
 				maginL: 50, //线间距
-				radios: [{
+				radios: [
+					{
 						text: '空腹',
-						checked: false
+						checked: false,
+						category:1
 					},
 					{
 						text: '早餐后',
-						checked: false
+						checked: false,
+						category:2
 					},
 					{
 						text: '午餐前',
-						checked: false
+						checked: false,
+						category:3
 					},
 					{
 						text: '午餐后',
-						checked: false
+						checked: false,
+						category:4
 					},
 					{
 						text: '晚餐前',
-						checked: false
+						checked: false,
+						category:5
 					},
 					{
 						text: '晚餐后',
-						checked: false
+						checked: false,
+						category:6
 					},
 					{
 						text: '睡前',
-						checked: false
-					}, {
+						checked: false,
+						category:7
+					}, 
+					{
 						text: '睡后',
-						checked: false
+						checked: false,
+						category:8
 					}
 				],
 				userInfo: '',
-
+				selectedCategory:0,
 			};
+		},
+		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.username = this.userInfo.name;
+			this.uid = this.userInfo.uid
+			this.initBlue()
+			if (this.deviceId && this.deviceStatus === 0) {
+				this.connect()
+			}
 		},
 		//页面显示
 		onShow() {
@@ -107,17 +126,15 @@
 			},
 
 			radioClick(name) {
-
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
-
 				})
+				this.selectedCategory = name+1
 			},
 			confirm(time) {
 				console.log(time)
 				this.show = false
-				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm')
-
+				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm:ss')
 			},
 			cancel() {
 				this.show = false
@@ -127,31 +144,61 @@
 			},
 			// 处理保存
 			handleSaveInfo() {
-				this.$http.post('/platform/dataset/call_kw', {
-					model: "blood.glucose.meter",
-					method: "create",
-					args: [
-						[{
-							"name": "血糖仪 (静态血糖仪)",
-							"numbers": this.serviceId,
-							"owner": this.userInfo.uid,
-							"category": "kf",
-							"oml_l": this.scrollLeftNow,
-							"input_type": "hend",
-						}]
-					],
-					kwargs: {}
-				}).then(res => {
-					if (this.value > 0) {
-						this.$refs.uToast.show({
-							message: '保存成功',
-							type: 'success',
-						})
-						this.btnColor = '#dadada'
-						this.value = 0
-					}
-				})
-			}
+				if (this.scrollLeftNow != '0' && this.scrollLeftNow != '' && this.selectedCategory != 0) {
+					this.$http.post('/blood_sugar/create', {
+						uid: this.uid,
+						category: this.selectedCategory,
+						value: this.scrollLeftNow,
+						time: this.selectTime,
+						type: 2
+					}).then(res => {
+						if (this.scrollLeftNow != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							
+						} else {
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							
+						}
+					})
+				} else if (this.selectedCategory === 0) {
+					this.$refs.uToast.show({
+						message: '请选择类型',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					
+				} else {
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+				
+				}
+			},
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
 		}
 	}
 </script>

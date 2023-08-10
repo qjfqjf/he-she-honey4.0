@@ -144,25 +144,23 @@
 			
 			handleSaveHeat() {
 				if(this.heat != 0){
-					this.$http.post('/platform/dataset/call_kw',{
-						model: "forehead.temperature.gun",
-						method: "create",
-						args: [
-							[{
-								"name": "额温枪",
-								"numbers":this.serviceId,
-								"owner": this.uid,
-								"temperature":this.heat,
-								"input_type":"equipment",
-								"test_time":this.formatDate(new Date())
-							}]
-						],
-						kwargs:{}
+					this.$http.post('/tem/create', {
+						uid: this.uid,					
+						value: this.heat,
+						time: this.formatDate(new Date()),
+						type: 1
 					}).then(res => {
-						if(this.heat != 0){
+						if (this.heat != 0) {
 							this.$refs.uToast.show({
 								message: '保存成功',
 								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							this.heat = 0
+						}else{
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
 							})
 							this.btnColor = '#dadada'
 							this.heat = 0

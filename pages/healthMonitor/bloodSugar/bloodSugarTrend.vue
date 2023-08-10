@@ -1,6 +1,6 @@
 <template>
 	<view class="b-content p-2">
-		<z-nav-bar title="血氧趋势">
+		<z-nav-bar title="血压趋势">
 
 		</z-nav-bar>
 		<public-module @getDate="getDate"></public-module>
@@ -38,7 +38,7 @@
 					endTime: this.getLastDayOfMonth().format('yyyy-MM-dd'),
 				},
 				allDataList: [
-
+					
 				],
 				dataList: [
 
@@ -49,7 +49,7 @@
 						trigger: 'axis'
 					},
 					legend: {
-						data: ['血氧', '脉率', 'PI']
+						data: ['血糖']
 					},
 					grid: {
 						left: '3%',
@@ -57,7 +57,6 @@
 						bottom: '3%',
 						containLabel: true
 					},
-
 					xAxis: {
 						type: 'category',
 						boundaryGap: false,
@@ -69,61 +68,30 @@
 						// type:'value'
 					},
 					series: [{
-							name: '脉率',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'orange' // 设置脉率线条的颜色为橙色
-							},
-							label: {
-								show: true,
-								position: 'top',
-								formatter: '{c}',
-								color: 'orange'
-							}
+						name: '血糖',
+						type: 'line',
+						stack: 'Total',
+						data: [],
+						lineStyle: {
+							color: 'orange' // 设置脉率线条的颜色为橙色
 						},
-						{
-							name: 'PI',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'green' // 设置PI线条的颜色为绿色
-							},
-							label: {
-								show: true,
-								position: 'top',
-								formatter: '{c}',
-								color: 'green'
-							}
-						},
-						{
-							name: '血氧',
-							type: 'line',
-							stack: 'Total',
-							data: [],
-							lineStyle: {
-								color: 'red' // 设置血氧线条的颜色为红色
-							},
-							label: {
-								show: true, // 显示标签
-								position: 'top', // 标签位置，可以设置为 'top', 'bottom', 'left', 'right'
-								formatter: '{c}', // 标签内容格式化，这里使用 {c} 表示显示数据值
-								color: 'red' // 标签文本颜色
-							}
-						},
-					]
+						label: {
+							show: true,
+							position: 'top',
+							formatter: '{c}',
+							color: 'orange'
+						}
+					}, ]
 				},
 			}
 		},
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad(options) {
+		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
-			const uid = options.uid;
+			const uid = this.userInfo.uid;
 			if (uid == 0) {
 				this.uid = this.userInfo.uid
 			} else {
@@ -131,7 +99,6 @@
 			}
 			dayjs.extend(isBetween);
 			this.getHistoryList();
-
 		},
 		methods: {
 			// 获取当前月的最后一天
@@ -162,15 +129,12 @@
 			changeOption(value) {
 				const data = this.option.series[0].data
 				data[0].value = value
-
 			},
 			onViewClick(options) {
-
 				console.log(options)
 			},
-			//查询血氧历史记录
 			getHistoryList() {
-				this.$http.post('/pod/index', {
+				this.$http.post('/blood_sugar/index', {
 					uid: this.uid,
 					start_date: this.date.startTime,
 					end_date: this.date.endTime
@@ -184,7 +148,7 @@
 						}
 						//判断数据是否在所选日期范围内
 						const item = this.dataList[i];
-						const dateTime = new Date(item.time);
+						const dateTime = new Date(item.createtime);
 						const month = dateTime.getMonth() + 1;
 						const day = dateTime.getDate();
 						const hour = dateTime.getHours();
@@ -193,44 +157,13 @@
 						count++;
 					}
 					if (this.dataList.length > 0) {
-						this.option.series[0].data = this.dataList.slice(-4).map(item => item.spo);
-						this.option.series[1].data = this.dataList.slice(-4).map(item => item.pi);
-						this.option.series[2].data = this.dataList.slice(-4).map(item => item.pr);
+						this.option.series[0].data = this.dataList.slice(-5).map(item => item.value);
 					} else {
 						this.option.xAxis.data = [];
 						this.option.series[0].data = [];
-						this.option.series[1].data = [];
-						this.option.series[2].data = [];
 					}
 				})
 			},
-			// getDataList() {
-			// 	this.option.xAxis.data = [];
-			// 	for (var i in this.allDataList) {
-			// 		//判断数据是否在所选日期范围内
-			// 		if (dayjs(new Date(this.allDataList[i].test_time).format('yyyy-MM-dd')).isBetween(this.date.startTime,
-			// 				this.date.endTime, 'day', '[]')) {
-			// 			this.dataList.push(this.allDataList[i])
-			// 			const item = this.allDataList[i];
-			// 			const dateTime = new Date(item.test_time);
-			// 			const month = dateTime.getMonth() + 1;
-			// 			const day = dateTime.getDate();
-			// 			const hour = dateTime.getHours();
-			// 			const minute = dateTime.getMinutes();
-			// 			this.option.xAxis.data.push(`${month}-${day} ${hour}:${minute}`);
-			// 		}
-			// 	}
-			// 	if (this.dataList.length > 0) {
-			// 		this.option.series[0].data = this.dataList.slice(-5).map(item => item.pulse_rate);
-			// 		this.option.series[1].data = this.dataList.slice(-5).map(item => item.pi);
-			// 		this.option.series[2].data = this.dataList.slice(-5).map(item => item.blood_oxygen);
-			// 	} else {
-			// 		this.option.xAxis.data = [];
-			// 		this.option.series[0].data = [];
-			// 		this.option.series[1].data = [];
-			// 		this.option.series[2].data = [];
-			// 	}
-			// },
 		},
 	}
 </script>
