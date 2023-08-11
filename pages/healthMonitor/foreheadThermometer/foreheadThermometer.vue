@@ -61,7 +61,7 @@
 				username: '', //登录开始的名字
 				btnColor: '#dadada',
 				deviceStatus: 0,
-				heat: 36, //测量温度
+				heat: 0, //测量温度
 				blueDeviceList: [],
 				owner: '2222',
 				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
@@ -102,7 +102,6 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.username = this.userInfo.name;
 			this.uid = this.userInfo.uid
-			console.log(111,this.uid)
 			this.initBlue();
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()

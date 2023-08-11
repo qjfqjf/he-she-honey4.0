@@ -85,9 +85,13 @@
 					<!-- 单位、保存 -->
 					<view class="btns">
 						<button class="units">单位：{{ renderUnit(dataResult) }}</button>
-						<button class="save" @click="save">保存</button>
+						<button class="save" :color="btnColor" @click="save">保存</button>
 					</view>
 				</view>
+				<view class="nutrient-content">
+					<view class="title">营养素含量</view>
+				</view>
+				
 				<u-list @scrolltolower="scrolltolower" class="list">
 					<u-list-item v-for="(item, index) in data" :key="index">
 						<view class="data-item">
@@ -97,7 +101,10 @@
 								</view>
 							</view>
 							<view class="right">
-								<view class="value">
+								<view class="value" v-if='this.this.selectFoodTag'>
+									0
+								</view>
+								<view class="value" v-else>
 									{{ getFoodInfoValue(item.name) }}
 								</view>
 							</view>
@@ -105,50 +112,6 @@
 						<u-line></u-line>
 					</u-list-item>
 				</u-list>
-
-				<!-- 营养素含量 -->
-				<view class="nutrientContent">
-					<!-- 当前，当天 -->
-					<view class="nutrient-content">
-						<view class="title">营养素含量</view>
-					</view>
-					<!-- 含量 -->
-					<view class="content">
-						<view class="item">
-							<view class="title">热量(345.8kcal)</view>
-							<view class="slide">
-								<text> 890</text>
-								<view class="slider">
-									<u-line-progress :percentage="percentageValue" height="14" :showText="false"
-										activeColor="#1ec4a1">
-									</u-line-progress>
-								</view>
-								<text class="right">22</text>
-							</view>
-						</view>
-
-					</view>
-
-				</view>
-				<!-- 维生素 -->
-				<view class="vitamin">
-					<view class="item">
-						<text>维生素A(800微克)</text>
-						<text class="right">0</text>
-					</view>
-					<view class="item">
-						<text>胡萝卜素(60微克)</text>
-						<text class="right">0</text>
-					</view>
-					<view class="item">
-						<text>维生素A(800微克)</text>
-						<text class="right">0</text>
-					</view>
-					<view class="item">
-						<text>维生素A(800微克)</text>
-						<text class="right">0</text>
-					</view>
-				</view>
 			</view>
 		</view>
 	</view>
@@ -164,6 +127,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 		},
 		data() {
 			return {
+				btnColor: '#dadada',
 				currentTab: 'tab2', //但前选项卡
 				// 日期范围
 				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
@@ -509,6 +473,11 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				}
 			},
 			getValue(dataResult) {
+				if(dataResult != ''){
+					this.btnColor = '#01b09a'
+				}else{
+					this.btnColor = '#dadada'
+				}
 				const startIndexUnit = dataResult.indexOf('unit=');
 				const endIndexUnit = dataResult.indexOf('}', startIndexUnit); // 使用 startIndexUnit
 				const unit = dataResult.substring(startIndexUnit + 5, endIndexUnit);
@@ -899,19 +868,36 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 					}
 				}
 			}
+			
+			.nutrient-content {
+				padding: 14rpx;
+				background-color:#20c49f;
+				.title {
+					text-align: center;
+					font-size: 32rpx;
+				}
+			
+				.checkbox {
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+			
 			.list {
 				background-color: white;
 				.data-item {
 					display: flex;
 					/* height: 50px; */
 					background-color: white;
+					padding: 10px;
 					.left {
 						flex: 1;
+						margin-left: 10px;
 					}
 					
 					.right {
 						flex: 1;
-					
+						margin-right: 10px;
 					}
 				}
 			}

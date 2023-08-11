@@ -90,6 +90,17 @@
 						<div>倒计时 - 确定</div>
 					</template></u-picker>
 			</view>
+			<view>
+				<u-picker :columns="counts" :show="show1" close-on-click-overlay @cancel="cancel1" @close="close1"
+					@confirm="confirm1">
+					<!-- 在确定和取消事件中间添加文本 -->
+					<template #cancel>
+						<div>倒计数 - 取消</div>
+					</template>
+					<template #confirm>
+						<div>倒计数 - 确定</div>
+					</template></u-picker>
+			</view>
 		</view>
 	</view>
 </template>
@@ -123,9 +134,10 @@
 					} else if (item.title === '倒计时') {
 						this.show0 = true;
 					} else if (item.title === '倒计数') {
-						this.showFreeJump = false;
-						this.showCountdown = false;
-						this.showCountdownNumber = true;
+						this.show1 = true;
+						// this.showFreeJump = false;
+						// this.showCountdown = false;
+						// this.showCountdownNumber = true;
 					}
 				},
 				currentTab: 'tab1', //但前选项卡
@@ -158,9 +170,18 @@
 				communicationType: uni.getStorageSync('communicationType'),
 				dataResult: '',
 				show0: false,
-
+				show1: false,
 				citys: [
-					["东城"]
+					["半分钟"],
+					["一分钟"],
+					["五分钟"],
+					["十分钟"],
+				],
+				counts: [
+					["30"],
+					["60"],
+					["120"],
+					["自定义"],
 				],
 			};
 		},
@@ -239,6 +260,19 @@
 				this.showCountdown = true;
 				this.showCountdownNumber = false;
 				this.show0 = false;
+			},
+			cancel1() {
+				this.show1 = false
+			},
+			close1() {
+				this.show1 = false
+			},
+			confirm1(e) {
+				// this.city = e.value[0]
+				this.showFreeJump = false;
+				this.showCountdown = false;
+				this.showCountdownNumber = true;
+				this.show1 = false;
 			},
 			getSkipData(){
 				this.$http.post('/skip/index', {
