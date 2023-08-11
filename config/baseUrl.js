@@ -2,7 +2,7 @@
  * @Author: August-Rushme
  * @Date: 2023-05-04 10:19:24
  * @LastEditors: Thexingmeng 1920238209@qq.com
- * @LastEditTime: 2023-07-28 17:47:58
+ * @LastEditTime: 2023-08-11 02:14:51
  * @FilePath: \he-she-honey\config\baseUrl.js
  * @Description:
  *
@@ -15,12 +15,12 @@ if (process.env.NODE_ENV === 'development') {
   // baseUrl = "http://localhost:7001/";
   //   socketUrl = 'ws://localhost:6001/'
   // baseUrl = "http://121.37.31.233:8888/";
-  baseUrl = 'https://new-hn.ttmjk.com/api'
+  baseUrl = 'http://127.0.0.1:8000/api'
   // baseUrl = "https://twin-ui.com/demo/";
   // socketUrl = "ws://8.129.186.35:6001/";
 } else if (process.env.NODE_ENV === 'production') {
   // 生产环境
-  baseUrl = 'https://new-hn.ttmjk.com/api'
+  baseUrl = 'http://127.0.0.1:8000/api'
   // baseUrl = "https://twin-ui.com/demo/";
   // socketUrl = "ws://twin-ui.com:6001/";
 }
