@@ -44,7 +44,8 @@
 				cid: 0,
 				name: '',
 				indexList: [],
-				data: [{
+				data: [
+					{
 						name: '热量(kcal)',
 					},
 					{
@@ -234,6 +235,7 @@
 				// 处理按钮点击事件
 				uni.setStorageSync('foodName',this.indexList.name)
 				uni.setStorageSync('foodId',this.indexList.food_id)
+				uni.setStorageSync('indexList',this.indexList)
 				uni.setStorageSync('selectFoodTag',false)
 				uni.setStorageSync('foodNameTag',true)
 				uni.navigateTo({

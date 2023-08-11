@@ -88,7 +88,23 @@
 						<button class="save" @click="save">保存</button>
 					</view>
 				</view>
-
+				<u-list @scrolltolower="scrolltolower" class="list">
+					<u-list-item v-for="(item, index) in data" :key="index">
+						<view class="data-item">
+							<view class="left">
+								<view class="list-name">
+									{{ item.name }}
+								</view>
+							</view>
+							<view class="right">
+								<view class="value">
+									{{ getFoodInfoValue(item.name) }}
+								</view>
+							</view>
+						</view>
+						<u-line></u-line>
+					</u-list-item>
+				</u-list>
 
 				<!-- 营养素含量 -->
 				<view class="nutrientContent">
@@ -140,6 +156,7 @@
 
 <script>
 	const bluethModule = uni.requireNativePlugin('plugin-BtModule');
+import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList';
 	import HealthHeader from '../components/healthHeader.vue'
 	export default {
 		components: {
@@ -202,12 +219,120 @@
 				selectFoodTag: '',
 				foodNameTag: '',
 				KitchenScaleDataValueFloat: 0,
-
+				indexList:[],
+				data: [
+					{
+						name: '热量(kcal)',
+					},
+					{
+						name: '蛋白质(克)',
+					},
+					{
+						name: '脂肪(克)',
+					},
+					{
+						name: '碳水化合物(克)',
+					},
+					{
+						name: '膳食纤维(克)',
+					},
+					{
+						name: '维生素A(微克)',
+					},
+					{
+						name: '胡萝卜素(微克)',
+					},
+					{
+						name: '视黄醇单量(微克)',
+					},
+					{
+						name: '维生素B1(毫克)',
+					},
+					{
+						name: '维生素B2(毫克)',
+					},
+					{
+						name: '烟酸(毫克)',
+					},
+					{
+						name: '维生素C(毫克)',
+					},
+					{
+						name: '维生素E(毫克)',
+					},
+					{
+						name: '胆固醇(毫克)',
+					},
+					{
+						name: '钾(毫克)',
+					},
+					{
+						name: '钠(毫克)',
+					},
+					{
+						name: '钙(毫克)',
+					},
+					{
+						name: '镁(毫克)',
+					},
+					{
+						name: '铁(毫克)',
+					},
+					{
+						name: '锰(毫克)',
+					},
+					{
+						name: '锌(毫克)',
+					},
+					{
+						name: '铜(毫克)',
+					},
+					{
+						name: '磷(毫克)',
+					},
+					{
+						name: '硒(微克)',
+					},
+				],
+				foodInfo: {
+					Ca: 0,
+					Cu: 0,
+					Fe: 0,
+					K: 0,
+					Mg: 0,
+					Mn: 0,
+					Na: 0,
+					P: 0,
+					Se: 0,
+					VA: 0,
+					VB1: 0,
+					VB2: 0,
+					VC: 0,
+					VE: 0,
+					Zn: 0,
+					carbohydrates: 0,
+					carbon_water: 0,
+					carotene: 0,
+					cholesterol: 0,
+					cid: "",
+					dietary_fiber: 0,
+					fat: 0,
+					food_id: "",
+					kcal: 0,
+					language: "",
+					name: "",
+					niacin: 0,
+					protein: 0,
+					quantity: 0,
+					retinol: 0,
+					unit: 0
+				},
 			};
 		},
 		async onLoad() {
 			this.foodName = uni.getStorageSync('foodName')
 			this.foodId = uni.getStorageSync('foodId')
+			this.indexList = uni.getStorageSync('indexList')
 			const selectFoodTag = uni.getStorageSync('selectFoodTag')
 			const foodNameTag = uni.getStorageSync('foodNameTag')
 			this.selectFoodTag = selectFoodTag
@@ -271,6 +396,63 @@
 		},
 		//方法
 		methods: {
+			scrolltolower() {
+			
+			},
+			getFoodInfoValue(name) {
+				switch (name) {
+					case '热量(kcal)':
+						return this.foodInfo.kcal = this.indexList.kcal;
+					case '蛋白质(克)':
+						return this.foodInfo.protein = this.indexList.protein;
+					case '脂肪(克)':
+						return this.foodInfo.fat = this.indexList.fat;
+					case '碳水化合物(克)':
+						return this.foodInfo.carbohydrates = this.indexList.carbohydrates;
+					case '膳食纤维(克)':
+						return this.foodInfo.dietary_fiber = this.indexList.dietary_fiber;
+					case '维生素A(微克)':
+						return this.foodInfo.VA = this.indexList.VA;
+					case '胡萝卜素(微克)':
+						return this.foodInfo.carotene = this.indexList.carotene;
+					case '视黄醇单量(微克)':
+						return this.foodInfo.retinol = this.indexList.retinol;
+					case '维生素B1(毫克)':
+						return this.foodInfo.VB1 = this.indexList.VB1;
+					case '维生素B2(毫克)':
+						return this.foodInfo.VB2 = this.indexList.VB2;
+					case '烟酸(毫克)':
+						return this.foodInfo.niacin = this.indexList.niacin;
+					case '维生素C(毫克)':
+						return this.foodInfo.VC = this.indexList.VC;
+					case '维生素E(毫克)':
+						return this.foodInfo.VE = this.indexList.VE;
+					case '胆固醇(毫克)':
+						return this.foodInfo.cholesterol = this.indexList.cholesterol;
+					case '钾(毫克)':
+						return this.foodInfo.K = this.indexList.K;
+					case '钠(毫克)':
+						return this.foodInfo.Na = this.indexList.Na;
+					case '钙(毫克)':
+						return this.foodInfo.Ca = this.indexList.Ca;
+					case '镁(毫克)':
+						return this.foodInfo.Mg = this.indexList.Mg;
+					case '铁(毫克)':
+						return this.foodInfo.Fe = this.indexList.Fe;
+					case '锰(毫克)':
+						return this.foodInfo.Mn = this.indexList.Mn;
+					case '锌(毫克))':
+						return this.foodInfo.Zn = this.indexList.Zn;
+					case '铜(毫克)':
+						return this.foodInfo.Cu = this.indexList.Cu;
+					case '磷(毫克)':
+						return this.foodInfo.P = this.indexList.P;
+					case '硒(微克)':
+						return this.foodInfo.Se = this.indexList.Se;
+					default:
+						return '0.0'; // 没有匹配的情况下返回空字符串
+				}
+			},
 			getUnit(unitCode) {
 				// 假设1表示kg，2表示g等，你可以根据实际情况添加更多的单位判断
 				switch (unitCode) {
@@ -717,6 +899,25 @@
 					}
 				}
 			}
+			.list {
+				background-color: white;
+				.data-item {
+					display: flex;
+					/* height: 50px; */
+					background-color: white;
+					.left {
+						flex: 1;
+					}
+					
+					.right {
+						flex: 1;
+					
+					}
+				}
+			}
+			
+			
+			
 		}
 	}
 

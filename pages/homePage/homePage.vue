@@ -198,8 +198,7 @@
 			this.getRelationList()
 		},
 		created() {
-			// Start the timer to display data every 3 seconds
-			this.startDataDisplayTimer();
+
 		},
 		mounted() {
 			this.startTimer();
