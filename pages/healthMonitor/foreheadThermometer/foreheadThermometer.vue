@@ -9,30 +9,26 @@
 		<TipInfo title="体温趋势" @trend="foreheadThermometerTrend"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
-		
+
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveHeat"></u-button>
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleJump()">
 		</u--text>
 		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center"
-				@click="onPageSelectDocter">
+			<view class="d-flex flex-column a-center" @click="onPageSelectDocter">
 				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[0].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageMonth">
+			<view class="d-flex flex-column a-center" @click="onPageMonth">
 				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[1].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageDevice">
+			<view class="d-flex flex-column a-center" @click="onPageDevice">
 				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[2].title }}</text>
 			</view>
-			<view class="d-flex flex-column a-center"
-				@click="onPageWrite">
+			<view class="d-flex flex-column a-center" @click="onPageWrite">
 				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
 				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
@@ -60,12 +56,12 @@
 		},
 		data() {
 			return {
-				uid:0,//用户id
-				name:'',//选择之后的名字
-				username:'',//登录开始的名字
+				uid: 0, //用户id
+				name: '', //选择之后的名字
+				username: '', //登录开始的名字
 				btnColor: '#dadada',
 				deviceStatus: 0,
-				heat: 0, //测量温度
+				heat: 36, //测量温度
 				blueDeviceList: [],
 				owner: '2222',
 				deviceId: uni.getStorageSync('frDeviceId'), // 蓝牙设备的id
@@ -78,8 +74,7 @@
 				// 底部工具栏
 				page: '',
 				userInfo: '',
-				toolList: [
-					{
+				toolList: [{
 						img: require('@/static/icon/select_docter.png'),
 						title: '找医生',
 						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
@@ -103,10 +98,11 @@
 
 			};
 		},
-		onLoad(e) {
+		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.username = this.userInfo.name;
 			this.uid = this.userInfo.uid
+			console.log(111,this.uid)
 			this.initBlue();
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
@@ -116,8 +112,8 @@
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			uni.$on('backWithData', (data) => {
-			    this.uid = data.uid;
-			    this.name = data.name;
+				this.uid = data.uid;
+				this.name = data.name;
 			});
 		},
 		methods: {
@@ -133,19 +129,20 @@
 			},
 			foreheadThermometerTrend() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerTrend?uid='+this.uid, // 跳转到指定的目标页面
+					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerTrend?uid=' + this
+					.uid, // 跳转到指定的目标页面
 				});
 			},
 			handleJump() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory?uid='+this.uid,
+					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerHistory?uid=' + this.uid,
 				});
 			},
-			
+
 			handleSaveHeat() {
-				if(this.heat != 0){
+				if (this.heat != 0) {
 					this.$http.post('/tem/create', {
-						uid: this.uid,					
+						uid: this.uid,
 						value: this.heat,
 						time: this.formatDate(new Date()),
 						type: 1
@@ -157,7 +154,7 @@
 							})
 							this.btnColor = '#dadada'
 							this.heat = 0
-						}else{
+						} else {
 							this.$refs.uToast.show({
 								message: '保存失败',
 								type: 'error',
@@ -166,7 +163,7 @@
 							this.heat = 0
 						}
 					})
-				}else{
+				} else {
 					this.$refs.uToast.show({
 						message: '保存失败，请检查网络',
 						type: 'error',
@@ -174,7 +171,7 @@
 					this.btnColor = '#dadada'
 					this.heat = 0
 				}
-				
+
 			},
 			// 初始化蓝牙
 			initBlue() {
@@ -361,24 +358,24 @@
 				this.heat = Math.floor(parseFloat(this.heat) * 10) / 10;
 				this.btnColor = '#01b09a'
 			},
-			onPageSelectDocter(){
+			onPageSelectDocter() {
 				uni.navigateTo({
-					url:'/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
 				})
 			},
-			onPageMonth(){
+			onPageMonth() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth?uid='+this.uid,
+					url: '/pages/healthMonitor/foreheadThermometer/foreheadThermometerMonth?uid=' + this.uid,
 				})
 			},
-			onPageDevice(){
+			onPageDevice() {
 				uni.navigateTo({
 					url: '/pages/mine/myDevice',
 				})
 			},
-			onPageWrite(){
+			onPageWrite() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/foreheadThermometer/frManualEntry?uid='+this.uid,
+					url: '/pages/healthMonitor/foreheadThermometer/frManualEntry?uid=' + this.uid,
 				})
 			},
 
