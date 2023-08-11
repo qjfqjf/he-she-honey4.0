@@ -46,9 +46,9 @@
 					style="background-color: rgb(6,158,193); color: aliceblue;"><span>用户</span></view>
 			</u-button>
 
-			<!-- <view class="scroll-container">
+			<view class="scroll-container">
 				<HeadImgList :defaultSelect="defaultSelect" v-on:change="changeHeadImg" :imgs="userList"></HeadImgList>
-			</view> -->
+			</view>
 
 			<u-button class="rightRoundButton shadow-lg border" @click="toCalendar" style="z-index: 1">
 				<view class="rounded-circle bg-success-dark m-1 w-50 h-50 roundButton d-flex a-center j-center"
@@ -153,13 +153,22 @@
 				userInfo: '',
 				defaultSelect: 0, //默认选中下标，从0开始
 				userList: [
-
+					{
+						images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+						name: '张淑芳'
+					},
+					{
+						images: '../../static/logo.png',
+						name: '王立群'
+					},
 				],
 				// 当前用户
 				currentUser: {},
 				dataList: [], // Your list of data items
 				currentIndex: 0,
-				currentData: ''
+				currentData: '',
+				loginUrl:'',
+				createUrl:'',
 			};
 		},
 		components: {
@@ -223,10 +232,13 @@
 				})
 			},
 			selectImg(e) {
+				console.log('e',e);
+				console.log('appManage',this.appManage[4]);
 				this.appManage[4].icon = "/" + e.icon
 				this.appManage[4].name = e.name;
 				this.appManage[4].path = e.path;
 				this.appManage[4].name = this.appManage[4].name + "服务"
+				console.log('appManage',this.appManage[4]);
 			},
 			toCalendar() {
 				uni.navigateTo({
@@ -279,20 +291,24 @@
 			// 获取亲属关系列表
 			getRelationList() {
 				console.log('执行getRelationList')
+				console.log(uni.getStorageSync('userInfo'));
+				this.currentUser.id  = uni.getStorageSync('userInfo');
+				console.log('id', this.currentUser.id);
+				// this.userList = res.result.result.map((item) => {
+				// 	return {
+				// 				...item,
+				// 				uid: item.id,
+				// 				images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+				// 	}
+				// })
 				this.$http
-					.post('/getRelatives', {
-						uid: this.userInfo.uid,
+					.post('/user/info', {
+						id: this.currentUser.id
 					})
 					.then((res) => {
-						console.log('res:', res)
-						this.userList = res.result.result.map((item) => {
-							return {
-								...item,
-								uid: item.id,
-								images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-							}
-						})
-						this.currentUser = this.userList[0]
+						console.log('res:',res)
+						this.userList[0].images = res.data.headurl;
+						this.userList[0].name = res.data.fullname;
 					})
 			},
 			bindUser() {
@@ -342,21 +358,75 @@
 
 			},
 			changeHeadImg(index) {
+				console.log(this.currentUser)
+				console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
+				this.$http.post('/login/getCode', {
+					mobile: this.phonenum,
+					type:'reset'
+					}).then((res) => {
+					console.log(res);
+					this.code = res.message
+					this.getCodeState()
+					})
 				//登录一下获取一下token
-				uni.request({
-					url: 'http://106.14.140.92:8881/platform/login',
-					method: 'post',
-					data: {
-						params: {
-							login: this.currentUser.login,
-							password: '123456'
+				this.$http.post('/login/login', {
+					mobile: this.phonenum,
+					code: this.code
+				})
+				.then((res) => {
+					console.log('res',res)
+					//登录成功
+					if (res.code == 20000) {
+					// 用户的信息和token存放进localStorage里面去
+					// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
+					// uni.setStorageSync('userInfo', JSON.stringify(res.data))
+					uni.setStorageSync('userInfo', res.data.uid)
+					uni.setStorageSync('mobile', this.form.phonenum)
+					uni.setStorageSync('access-token', res.data.token)
+					uni.showToast({
+						title: '登录成功',
+						duration: 2000,
+						success: () => {
+						setTimeout(() => {
+							uni.switchTab({
+							url: '/pages/homePage/homePage',
+							success: (res) => {
+								console.log(res)
+							},
+							fail: (err) => {
+								console.log(err)
+							},
+							})
+						}, 1000)
 						},
-					},
-					success: (res) => {
-						uni.setStorageSync('access-token', res.data.result.data.token)
+					})
+					}
+					//登陆失败
+					else {
+					uni.showToast({
+						title: '登陆失败',
+						icon: 'none',
+						duration: 2000,
+					})
 					}
 				})
+				.catch((error) => {
+					console.log(error)
+				})
+				// uni.request({
+				// 			url: 'http://106.14.140.92:8881/platform/login',
+				// 			method: 'post',
+				// 			data: {
+				// 				params: {
+				// 					login:this.currentUser.login,
+				// 					password:'123456'
+				// 				},
+				// 			},
+				// 			success: (res) => {
+				// 				uni.setStorageSync('access-token', res.data.result.data.token)
+				// 			}
+				// })
 
 				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
 				console.log(this.currentUser)
