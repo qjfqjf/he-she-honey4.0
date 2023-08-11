@@ -90,6 +90,17 @@
 						<div>倒计时 - 确定</div>
 					</template></u-picker>
 			</view>
+			<view>
+				<u-picker :columns="counts" :show="show1" close-on-click-overlay @cancel="cancel1" @close="close1"
+					@confirm="confirm1">
+					<!-- 在确定和取消事件中间添加文本 -->
+					<template #cancel>
+						<div>倒计数 - 取消</div>
+					</template>
+					<template #confirm>
+						<div>倒计数 - 确定</div>
+					</template></u-picker>
+			</view>
 		</view>
 	</view>
 </template>
@@ -122,12 +133,11 @@
 						this.showCountdownNumber = false;
 					} else if (item.title === '倒计时') {
 						this.show0 = true;
-
-
 					} else if (item.title === '倒计数') {
-						this.showFreeJump = false;
-						this.showCountdown = false;
-						this.showCountdownNumber = true;
+						this.show1 = true;
+						// this.showFreeJump = false;
+						// this.showCountdown = false;
+						// this.showCountdownNumber = true;
 					}
 				},
 				currentTab: 'tab1', //但前选项卡
@@ -153,45 +163,25 @@
 				// 日期范围
 				range: [this.getFirstDayOfMonth().format('yyyy-MM-dd'), this.getLastDayOfMonth().format('yyyy-MM-dd')],
 				recordList: [
-				{
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, {
-					date: '2022-03-11 23:34',
-					skippingType: '自由跳',
-					skippingCount: 103,
-					skippingKcal: 6,
-					takeTime: '00:30'
-				}, ],
+				
+				],
 				macAddr: uni.getStorageSync('macAddr'),
 				name: uni.getStorageSync('name'),
 				communicationType: uni.getStorageSync('communicationType'),
 				dataResult: '',
 				show0: false,
-
+				show1: false,
 				citys: [
-					["东城"]
+					["半分钟"],
+					["一分钟"],
+					["五分钟"],
+					["十分钟"],
+				],
+				counts: [
+					["30"],
+					["60"],
+					["120"],
+					["自定义"],
 				],
 			};
 		},
@@ -203,13 +193,12 @@
 		},
 		async onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			
 			this.uid = this.userInfo.uid
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
-			
+			this.getSkipData();
 		},
 		mounted() {
 			this.getSkipData();
@@ -271,6 +260,19 @@
 				this.showCountdown = true;
 				this.showCountdownNumber = false;
 				this.show0 = false;
+			},
+			cancel1() {
+				this.show1 = false
+			},
+			close1() {
+				this.show1 = false
+			},
+			confirm1(e) {
+				// this.city = e.value[0]
+				this.showFreeJump = false;
+				this.showCountdown = false;
+				this.showCountdownNumber = true;
+				this.show1 = false;
 			},
 			getSkipData(){
 				this.$http.post('/skip/index', {

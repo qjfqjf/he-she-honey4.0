@@ -2,16 +2,16 @@
 
 	<view class="container">
 		<view class="jump-count">
-			{{JumpRoleDataValue}}
+			{{this.JumpRoleDataValue}}
 		</view>
 		<view class="jump-time">
-			{{JumpRoleTimeMinute}}:{{JumpRoleTimeSecond}}
+			{{this.JumpRoleTimeMinute}}:{{this.JumpRoleTimeSecond}}
 		</view>
 
 		<view class="jump-content">
 			<view class="jump-count-left">
 				<view class="jump-content-top">
-					{{Calories}} kcal
+					{{this.burned}} kcal
 				</view>
 				<view class="jump-content-buttom">
 					热量消耗
@@ -19,7 +19,7 @@
 			</view>
 			<view class="jump-count-right">
 				<view class="jump-count-top">
-					{{FatBurn}} kcal/hr
+					{{this.efficiency}} kcal/hr
 				</view>
 				<view class="jump-count-buttom">
 					燃脂效率
@@ -31,11 +31,12 @@
 			</u-text>
 		</view>
 
-		<button class="button" @click="save">结束</button>
+		<button class="button" :color="btnColor" @click="save">结束</button>
 	</view>
 </template>
 
 <script>
+	import baseUrl from '@/config/baseUrl.js'
 	const bluethModule = uni.requireNativePlugin('plugin-BtModule');
 	export default {
 		data() {
@@ -50,21 +51,20 @@
 				JumpRoleDataValue: "0",
 				JumpRoleTimeMinute: "00",
 				JumpRoleTimeSecond: "00",
-				Calories: "0",
-				FatBurn: "0",
-				type:0,
-				setting:0,
-				time:0,
-				avg_freq:90,
-				fastest_freq:90,
-				freqs:'[{"duration":8, "skip_count":12}]',
-				freq_count:0,
-				most_jump:12,
-				burned:1.0,
-				efficiency:450.0,
+				time: '',
+				avg_freq: '',
+				fastest_freq: '',
+				freqs: '[{"duration":8, "skip_count":12}]',
+				freq_count: '',
+				most_jump: '',
+				burned: '0',
+				efficiency: '0',
+				btnColor: '#dadada',
 			}
 		},
 		mounted() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo.uid
 			this.initPrinter(); // 等待 initPrinter 函数完成
 			this.timer = setTimeout(async () => {
 				this.connectedDevice(); // 等待 connectedDevice 函数完成
@@ -73,40 +73,45 @@
 		//方法
 		methods: {
 			save(){
-				this.$http.post('/skip/create', {
-					uid: 355,
-					type:this.type,
-					setting:0,
-					elapsed_time:30,
-					value:30,
-					avg_freq:this.avg_freq,
-					fastest_freq:this.fastest_freq,
-					freqs:this.freqs,
-					freq_count:this.freq_count,
-					most_jump:this.most_jump,
-					burned:this.burned,
-					efficiency:this.efficiency,
-					time:this.formatDate(new Date()),
-
-					// uid: this.uid,
-					// type:this.type,
-					// setting:this.setting,
-					// elapsed_time:this.time,
-					// value:this.JumpRoleDataValue,
-					// avgFreq:this.avg_freq,
-					// fastest_freq:this.fastest_freq,
-					// freqs:this.freqs,
-					// freq_count:this.freq_count,
-					// most_jump:this.most_jump,
-					// burned:this.burned,
-					// efficiency:this.efficiency,
-					// time:this.formatDate(new Date()),
-				}).then(res => {
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
+				const value = parseFloat(this.JumpRoleDataValue)
+				if(value != 0){
+					this.$http.post('/skip/create', {
+						uid:this.uid,
+						type:0,
+						setting:0,
+						elapsed_time:parseFloat(this.time),
+						value:parseFloat(this.JumpRoleDataValue),
+						avg_freq:parseFloat(this.avg_freq),
+						fastest_freq:parseFloat(this.fastest_freq),
+						freqs:this.freqs,
+						freq_count:parseFloat(this.freq_count),
+						most_jump:parseFloat(this.most_jump),
+						burned:parseFloat(this.burned),
+						efficiency:parseFloat(this.efficiency),
+						time:this.formatDate(new Date()),
+					}).then(res => {
+						if (value != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+						}else{
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+						}
 					})
-				})
+				}else{
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+				}
+				this.getSkipData();
 			},
 			test() {
 				console.log("方法被调用");
@@ -141,6 +146,7 @@
 						}
 					});
 				}
+				this.btnColor = '#01b09a'
 			},
 			getValue(dataResult) {
 				const startIndexUnit = dataResult.indexOf('mode=');
@@ -156,14 +162,30 @@
 					const Time = dataResult.substring(startTimeIndex + 12, endTimeIndex);
 					this.time = Time;
 					this.formatStringNumberToTime(Time)
+					const startAvgFreqIndex = dataResult.indexOf('avg_freq=');
+					const endAvgFreqIndex = dataResult.indexOf(',', startAvgFreqIndex);
+					const AvgFreq = dataResult.substring(startAvgFreqIndex + 9, endAvgFreqIndex);
+					this.favg_freq = AvgFreq
+					const startFastestFreqIndex = dataResult.indexOf('fastest_freq=');
+					const endFastestFreqIndex = dataResult.indexOf(',', startFastestFreqIndex);
+					const FastestFreq = dataResult.substring(startFastestFreqIndex + 13, endFastestFreqIndex);
+					this.fastest_freq = FastestFreq
+					const startFreqCountIndex = dataResult.indexOf('freq_count=');
+					const endFreqCountIndex = dataResult.indexOf(',', startFreqCountIndex);
+					const FreqCount = dataResult.substring(startFreqCountIndex + 11, endFreqCountIndex);
+					this.freq_count = FreqCount
+					const startMostJumpIndex = dataResult.indexOf('most_jump=');
+					const endMostJumpIndex = dataResult.indexOf(',', startMostJumpIndex);
+					const MostJump = dataResult.substring(startMostJumpIndex + 10, endMostJumpIndex);
+					this.most_jump = MostJump
 					const startCaloriesIndex = dataResult.indexOf('calories_burned=');
 					const endCaloriesIndex = dataResult.indexOf(',', startCaloriesIndex);
 					const Calories = dataResult.substring(startCaloriesIndex + 16, endCaloriesIndex);
-					this.Calories = Calories
-					const startFatBurnIndex = dataResult.indexOf('fat_burn_efficiency=');
-					const endFatBurnIndex = dataResult.indexOf(',', startFatBurnIndex);
-					const FatBurn = dataResult.substring(startFatBurnIndex + 20, endFatBurnIndex);
-					this.FatBurn = FatBurn
+					this.burned = Calories
+					const startEfficiencyIndex = dataResult.indexOf('fat_burn_efficiency=');
+					const endEfficiencyIndex = dataResult.indexOf(',', startEfficiencyIndex);
+					const Efficiency = dataResult.substring(startEfficiencyIndex + 20, endEfficiencyIndex);
+					this.efficiency = Efficiency
 				} else {
 					this.JumpRoleDataValue = "未查找到设备"
 				}
@@ -192,6 +214,15 @@
 				var second = date.getSeconds();
 				second = second < 10 ? ('0' + second) : second;
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
+			getSkipData() {
+				this.$http.post('/skip/index', {
+					uid: this.uid,
+					start_date: this.range[0],
+					end_date: this.range[1]
+				}).then(res => {
+					this.recordList = res.data;
+				})
 			},
 		},
 	}
@@ -238,6 +269,7 @@
 	.button {
 		margin: 5px;
 		/* 可以调整子元素之间的间距 */
+
 	}
 
 
