@@ -124,7 +124,7 @@ $http.requestStart = function(options) {
   //请求前加入token和uid
   const token = uni.getStorageSync('access-token')
   let userInfo = ''
-  if (token) {
+  if (token && uni.getStorageSync('userInfo')) {
     options.header['authorization'] = token
     userInfo = JSON.parse(uni.getStorageSync('userInfo'))
   }

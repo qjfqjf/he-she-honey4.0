@@ -187,6 +187,7 @@
               // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
               // uni.setStorageSync('userInfo', JSON.stringify(res.data))
               uni.setStorageSync('userInfo', res.data.uid)
+			  console.log(uni.getStorageSync('userInfo'));
               uni.setStorageSync('User', JSON.stringify(res.data))
               uni.setStorageSync('access-token', res.data.token)
               uni.showToast({
