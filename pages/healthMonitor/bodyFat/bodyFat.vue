@@ -60,6 +60,8 @@
 		},
 		data() {
 			return {
+				uid: 0, //用户id
+				userInfo: '',
 				btnColor: '#dadada',
 				deviceStatus: 0,
 
@@ -217,6 +219,8 @@
 			};
 		},
 		async onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
@@ -230,7 +234,7 @@
 			},
 			handleSave() {
 				this.$http.post('/bmi/create', {
-					uid: 355,
+					uid: this.uid,
 					weight: 50.7,
 					bmi: 20.3,
 					body_fat_percent: 0,

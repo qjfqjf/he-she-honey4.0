@@ -178,7 +178,7 @@
 		//第一次加载
 		onLoad(e) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			//拿到用户列表

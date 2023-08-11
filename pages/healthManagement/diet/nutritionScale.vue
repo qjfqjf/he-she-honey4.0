@@ -101,11 +101,8 @@
 								</view>
 							</view>
 							<view class="right">
-								<view class="value" v-if='this.this.selectFoodTag'>
-									0
-								</view>
-								<view class="value" v-else>
-									{{ getFoodInfoValue(item.name) }}
+								<view class="value" >
+									{{ getFoodInfoValue(item.name)}}
 								</view>
 							</view>
 						</view>
@@ -302,7 +299,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 			this.selectFoodTag = selectFoodTag
 			this.foodNameTag = foodNameTag
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()

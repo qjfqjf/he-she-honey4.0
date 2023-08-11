@@ -119,8 +119,8 @@
 		},
 		onLoad(e) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.username = this.userInfo.name;
-			this.uid = this.userInfo.uid
+			// this.username = this.userInfo.name;
+			this.uid = this.userInfo
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
@@ -138,7 +138,6 @@
 				this.selectedCategory = name+1
 			},
 			handleSaveSugar() {
-				this.value = 250
 				if(this.value != '0' && this.value != '' && this.selectedCategory != 0){                   
 					this.$http.post('/blood_sugar/create', {
 						uid: this.uid,

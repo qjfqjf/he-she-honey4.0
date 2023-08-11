@@ -49,9 +49,9 @@
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
-			const uid = this.userInfo.uid;
+			const uid = this.userInfo;
 			if (uid == 0) {
-				this.uid = this.userInfo.uid
+				this.uid = this.userInfo
 			} else {
 				this.uid = uid
 			}
