@@ -169,6 +169,7 @@
 				},
 				loginUrl: '',
 				createUrl: '',
+				
 			};
 		},
 		components: {
@@ -199,7 +200,7 @@
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			this.getAllHistoryList();
-
+			this.getUserList();
 			//判断蓝牙是否开启
 			this.openBlue();
 
@@ -236,6 +237,14 @@
 					uid: this.uid,
 				}).then(res => {
 					this.dataList = res.data.data
+				})
+			},
+			getUserList(){
+				this.$http.post('/user/index', {
+					uid: this.uid,
+				}).then(res => {
+					console.log('sig',res)
+					// this.dataList = res.data.data
 				})
 			},
 			selectImg(e) {
