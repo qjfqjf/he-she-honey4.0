@@ -97,7 +97,6 @@
     methods: {
       exit() {
         this.showExit = true
-        console.log('1111111111111')
       },
       confirmExit() {
         this.showExit = false

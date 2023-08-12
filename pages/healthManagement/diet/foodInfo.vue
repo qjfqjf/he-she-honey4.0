@@ -171,7 +171,6 @@
 					id: this.cid
 				}).then(res => {
 					this.indexList = res.data;
-					console.log(11111111,this.indexList.kcal)
 				})
 			},
 			scrolltolower() {
@@ -236,8 +235,8 @@
 				uni.setStorageSync('foodName',this.indexList.name)
 				uni.setStorageSync('foodId',this.indexList.food_id)
 				uni.setStorageSync('indexList',this.indexList)
-				uni.setStorageSync('selectFoodTag',false)
-				uni.setStorageSync('foodNameTag',true)
+				// uni.setStorageSync('selectFoodTag',false)
+				// uni.setStorageSync('foodNameTag',true)
 				uni.navigateTo({
 					url: '/pages/healthManagement/diet/nutritionScale'
 				})

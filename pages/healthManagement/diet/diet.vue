@@ -56,8 +56,8 @@
 				uni.navigateTo({
 					url: url
 				});
-				uni.setStorageSync('selectFoodTag',true)
-				uni.setStorageSync('foodNameTag',false)
+				// uni.setStorageSync('selectFoodTag',true)
+				// uni.setStorageSync('foodNameTag',false)
 			},
 			goDiet(){
 				uni.navigateTo({
@@ -67,10 +67,14 @@
 
 		},
 		onLoad(e) {
-
+			uni.removeStorageSync('foodName')
+			uni.removeStorageSync('indexList')
 		},
 		//页面显示
-		onShow() {},
+		onShow() {
+			uni.removeStorageSync('foodName')
+			uni.removeStorageSync('indexList')
+		},
 	};
 </script>
 
