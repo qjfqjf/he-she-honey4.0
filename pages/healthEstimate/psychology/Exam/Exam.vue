@@ -44,7 +44,7 @@
 				QuestionList: [],
 				id:'',
 				QuestionUrl:'/mmpt_question/info',
-			}
+			}	
 		},
 		onLoad: function (opt) {
 			console.log(opt.e); 

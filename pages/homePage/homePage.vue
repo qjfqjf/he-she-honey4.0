@@ -181,6 +181,7 @@
 			this.uid = this.userInfo.uid
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			console.log('appManage', this.appManage[4]);
 			//拿到用户列表
 			// this.getRelationList()
 			// console.log(this.userList)
@@ -196,6 +197,7 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// this.getUserList()
 			// 隐藏原生的tabbar
+			
 			uni.hideTabBar();
 			// this.getUserList();
 			this.getAllHistoryList();
@@ -232,7 +234,6 @@
 			},
 			selectImg(e) {
 				console.log('e', e);
-				console.log('appManage', this.appManage[4]);
 				this.appManage[4].icon = "/" + e.icon
 				this.appManage[4].name = e.name;
 				this.appManage[4].path = e.path;
