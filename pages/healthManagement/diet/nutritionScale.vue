@@ -79,8 +79,8 @@
 								{{ KitchenScaleDataValue }}
 							</view>
 						</view>
-						<button @click="selectFood" v-if="this.selectFoodTag">选择食物</button>
-						<button @click="selectFood" v-if="this.foodNameTag">{{this.foodName}}</button>
+						<button style="height: 30px;" @click="selectFood" v-if="this.foodNameTag">选择食物</button>
+						<button style="height: 30px;" @click="selectFood" v-else>{{this.foodName}}</button>
 					</view>
 					<!-- 单位、保存 -->
 					<view class="btns">
@@ -101,11 +101,8 @@
 								</view>
 							</view>
 							<view class="right">
-								<view class="value" v-if='this.this.selectFoodTag'>
-									0
-								</view>
-								<view class="value" v-else>
-									{{ getFoodInfoValue(item.name) }}
+								<view class="value">
+									{{ getFoodInfoValue(item.name)}}
 								</view>
 							</view>
 						</view>
@@ -179,9 +176,10 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				uid: 0, //用户id
 				unit: 0,
 				foodName: '',
-				foodId: '',
-				selectFoodTag: '',
-				foodNameTag: '',
+				foodNameTag:true,
+				// foodId: '',
+				// selectFoodTag: '',
+				// foodNameTag: '',
 				KitchenScaleDataValueFloat: 0,
 				indexList:[],
 				data: [
@@ -294,15 +292,25 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 			};
 		},
 		async onLoad() {
-			this.foodName = uni.getStorageSync('foodName')
-			this.foodId = uni.getStorageSync('foodId')
+			const foodName = uni.getStorageSync('foodName')
+			const indexList = uni.getStorageSync('indexList')
+			if(foodName === ''){
+				this.foodName = '选择食物'
+				this.foodNameTag = true
+			}else{
+				this.foodName = foodName
+				this.foodNameTag = false
+			}
+			// this.foodId = uni.getStorageSync('foodId')
 			this.indexList = uni.getStorageSync('indexList')
-			const selectFoodTag = uni.getStorageSync('selectFoodTag')
-			const foodNameTag = uni.getStorageSync('foodNameTag')
+			this.foodName = uni.getStorageSync('foodName')
+			
+			// const selectFoodTag = uni.getStorageSync('selectFoodTag')
+			// const foodNameTag = uni.getStorageSync('foodNameTag')
 			this.selectFoodTag = selectFoodTag
 			this.foodNameTag = foodNameTag
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()

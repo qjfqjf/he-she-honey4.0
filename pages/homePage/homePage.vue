@@ -165,9 +165,11 @@
 				currentUser: {},
 				dataList: [], // Your list of data items
 				currentIndex: 0,
-				currentData: '',
+				currentData: {
+				},
 				loginUrl: '',
 				createUrl: '',
+				
 			};
 		},
 		components: {
@@ -178,7 +180,8 @@
 		//第一次加载
 		onLoad(e) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
+			
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
 			console.log('appManage', this.appManage[4]);
@@ -195,17 +198,14 @@
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// this.getUserList()
 			// 隐藏原生的tabbar
 			
 			uni.hideTabBar();
-			// this.getUserList();
 			this.getAllHistoryList();
-
+			this.getUserList();
 			//判断蓝牙是否开启
 			this.openBlue();
 
-			// this.getRelationList()
 		},
 		created() {
 
@@ -221,8 +221,17 @@
 				this.timer = setInterval(this.updateData, 5000); // 每隔五秒更新数据
 			},
 			updateData() {
-				this.currentData = this.dataList[this.currentIndex];
-				this.currentIndex = (this.currentIndex + 1) % this.dataList.length; // 循环切换数据
+				if(this.dataList[0] != undefined){
+					this.currentData = this.dataList[this.currentIndex];
+					this.currentIndex = (this.currentIndex + 1) % this.dataList.length; // 循环切换数据
+				}else{
+					this.currentData = {
+						name:'null',
+						value:'null',
+						eval:'null'
+					}
+				}
+				
 			},
 			// 查询最新所有历史记录
 			getAllHistoryList() {
@@ -230,6 +239,14 @@
 					uid: this.uid,
 				}).then(res => {
 					this.dataList = res.data.data
+				})
+			},
+			getUserList(){
+				this.$http.post('/user/index', {
+					uid: this.uid,
+				}).then(res => {
+					console.log('sig',res)
+					// this.dataList = res.data.data
 				})
 			},
 			selectImg(e) {

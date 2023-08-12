@@ -130,7 +130,7 @@
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.username = this.userInfo.name;
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
 			this.initBlue()
 			
 			if (this.deviceId && this.deviceStatus === 0) {
