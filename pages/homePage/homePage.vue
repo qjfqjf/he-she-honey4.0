@@ -246,6 +246,8 @@
 					uid: this.uid,
 				}).then(res => {
 					console.log('sig',res)
+					this.userList = res.data.data
+					console.log('userList',this.userList)
 					// this.dataList = res.data.data
 				})
 			},
@@ -378,31 +380,17 @@
 				console.log(this.currentUser)
 				console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
-				this.$http.post('/login/getCode', {
-					mobile: this.phonenum,
-					type: 'reset'
-				}).then((res) => {
-					console.log(res);
-					this.code = res.message
-					this.getCodeState()
-				})
-				//登录一下获取一下token
-				this.$http.post('/login/login', {
-						mobile: this.phonenum,
-						code: this.code
-					})
-					.then((res) => {
-						console.log('res', res)
-						//登录成功
-						if (res.code == 20000) {
-							// 用户的信息和token存放进localStorage里面去
-							// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-							// uni.setStorageSync('userInfo', JSON.stringify(res.data))
-							uni.setStorageSync('userInfo', res.data.uid)
-							uni.setStorageSync('mobile', this.form.phonenum)
-							uni.setStorageSync('access-token', res.data.token)
-							uni.showToast({
-								title: '登录成功',
+				uni.setStorageSync('userInfo', this.currentUser.user_id)
+				console.log('userId',this.currentUser.user_id)
+				this.$http.post('/user/sig',{
+					uid:this.currentUser.user_id
+				}).then((res)=>{
+					console.log(res)
+					if(res.code==20000){
+						uni.setStorageSync('access-token', res.data)
+						console.log('token',uni.getStorageSync('access-token'))
+						uni.showToast({
+								title: '切换成功',
 								duration: 2000,
 								success: () => {
 									setTimeout(() => {
@@ -418,19 +406,75 @@
 									}, 1000)
 								},
 							})
-						}
-						//登陆失败
-						else {
+					}
+					else {
 							uni.showToast({
-								title: '登陆失败',
+								title: '切换失败',
 								icon: 'none',
 								duration: 2000,
 							})
 						}
-					})
-					.catch((error) => {
+				})
+				.catch((error) => {
 						console.log(error)
 					})
+				// this.$http.post('/login/getCode', {
+				// 	mobile: this.phonenum,
+				// 	type: 'reset'
+				// }).then((res) => {
+				// 	console.log(res);
+				// 	this.code = res.message
+				// 	this.getCodeState()
+				// })
+				//登录一下获取一下token
+				// this.$http.post('/login/login', {
+				// 		mobile: this.phonenum,
+				// 		code: this.code
+				// 	})
+				// 	.then((res) => {
+				// 		console.log('res', res)
+				// 		//登录成功
+				// 		if (res.code == 20000) {
+				// 			// 用户的信息和token存放进localStorage里面去
+				// 			// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
+				// 			// uni.setStorageSync('userInfo', JSON.stringify(res.data))
+				// 			uni.setStorageSync('userInfo', res.data.uid)
+				// 			uni.setStorageSync('mobile', this.form.phonenum)
+				// 			uni.setStorageSync('access-token', res.data.token)
+				// 			uni.showToast({
+				// 				title: '登录成功',
+				// 				duration: 2000,
+				// 				success: () => {
+				// 					setTimeout(() => {
+				// 						uni.switchTab({
+				// 							url: '/pages/homePage/homePage',
+				// 							success: (res) => {
+				// 								console.log(res)
+				// 							},
+				// 							fail: (err) => {
+				// 								console.log(err)
+				// 							},
+				// 						})
+				// 					}, 1000)
+				// 				},
+				// 			})
+				// 		}
+				// 		//登陆失败
+				// 		else {
+				// 			uni.showToast({
+				// 				title: '登陆失败',
+				// 				icon: 'none',
+				// 				duration: 2000,
+				// 			})
+				// 		}
+				// 	})
+				// 	.catch((error) => {
+				// 		console.log(error)
+				// 	})
+
+
+
+
 				// uni.request({
 				// 			url: 'http://106.14.140.92:8881/platform/login',
 				// 			method: 'post',
@@ -445,8 +489,7 @@
 				// 			}
 				// })
 
-				uni.setStorageSync('userInfo', JSON.stringify(this.currentUser))
-				console.log(this.currentUser)
+				
 			},
 
 
