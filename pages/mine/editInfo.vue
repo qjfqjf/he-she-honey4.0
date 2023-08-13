@@ -429,6 +429,7 @@
       // this.avatar = this.userInfo.avatar || ''
       // this.nickname = this.userInfo.nickname || ''
       // this.phone = this.userInfo.phone || ''
+      console.log('type',e.type);
       this.type = e.type
       //判断是否为添加页面，如果不是，则查询当前用户数据并回显
       if(this.type !== 'add'){
@@ -440,60 +441,52 @@
     //方法
     methods: {
       selectUser(){
-          const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
-          const uid = userInfo.uid
-          const token = userInfo.token
+          this.userInfo.id = uni.getStorageSync('userInfo');
+          console.log('userInfo', this.userInfo.id);
           this.$http
-              .post('http://106.14.140.92:8881/platform/dataset/search_read',{
-                  model:"res.users",
-                  domain:[["id","=",uid]],
-                  fields:[
-                      "gender",
-                      "head_picture",
-                      "name",
-                      "height",
-                      "weight",
-                      "birthday",
-                      "phone_number",
-                      "ownership_relationship"
-                  ]
+              .post('/user/info',{
+                  id:this.userInfo.id,
               })
               .then(res => {
                 console.log(res)
-                    //拿到此用户数据并且显示在页面上
-                    this.userInfo = res.result.records[0]
+                    this.userInfo = res.data
                     console.log(this.userInfo)
-                    if(userInfo){
-                      if(this.userInfo.name){
-                        this.name = this.userInfo.name
+                    if(this.userInfo){
+                      if(this.userInfo.fullname){
+                        this.name = this.userInfo.fullname
                       }
-                      if(this.userInfo.gender == 0){
+                      if(this.userInfo.sex == 1){
                           this.genderText = '男'
                       }
-                      if(this.userInfo.gender == 1){
+                      if(this.userInfo.sex == 2){
                           this.genderText = '女'
                       }
                       if(this.userInfo.birthday){
                         this.birth = this.userInfo.birthday
                       }
-                      if(this.userInfo.phone_number){
-                        this.tel = this.userInfo.phone_number
+                      if(this.userInfo.phone){
+                        this.tel = this.userInfo.phone
                       }
-                      if(this.userInfo.height){
-                        this.height = this.userInfo.height
+                      if(this.userInfo.stature){
+                        this.height = this.userInfo.stature
                       }
                       if(this.userInfo.weight){
                         this.weight = this.userInfo.weight
                       }
-                      if(this.userInfo.ownership_relationship){
-                        switch(this.userInfo.ownership_relationship){
-                          case 'myself': this.relationShipText = '本人';break;
-                          case 'children': this.relationShipText = '子女';break;
-                          case 'parents': this.relationShipText = '父母';break;
-                          case 'other_relatives': this.relationShipText = '其他亲戚';break;
-                        }
-                      
+                      if(this.userInfo.idCardNumberValue){
+                        this.idCardNumberValue = this.userInfo.id_card
                       }
+                      if(this.userInfo.type_cn){
+                        this.relationShipText = this.userInfo.type_cn
+                        console.log('relationShipText', this.relationShipText);
+                      }
+                    }
+                    else{
+                      uni.showToast({
+                        title: '数据出错',
+                        icon: 'none',
+                        duration: 2000,
+                      })
                     }
               })
       },
@@ -529,27 +522,11 @@
             })
         } else {
           console.log("修改")
-            const userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-            const uid = userInfo.uid;
-            const token = userInfo.token
+          console.log("userInfo",this.userInfo)
           // 编辑接口
           this.$http
-              .post('http://106.14.140.92:8881/platform/dataset/call_kw',{
-                  model:"res.users",
-                  method:"write",
-                  args:[
-                      [uid],
-                      this.userInfo,
-                      // {
-                      //     name:this.nameValue,
-                      //     gender:this.gender,
-                      //     birthday:this.birth,
-                      //     height:this.heightValue,
-                      //     weight:this.weightValue,
-                      //     phone_number:this.tel,
-                      // }
-                  ],
-                  kwargs:{}
+              .post('/user/update',{
+                  ...this.userInfo
               }).then((res)=>{
               console.log(res)
               this.selectUser()

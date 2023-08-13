@@ -10,8 +10,8 @@
 					<text class="blank" :style="{width:leftRightW}"></text> <!-- 左边空白块 -->
 					<view v-for="(item,index) in imgs" id="item" :key="index" class="item" :style="{width:itemW+'px'}">
 						<image @click="switchHead(index)" :style="{width:imgW+'rpx'}" class="headImg"
-							:class="[ tobigactive==index?'toBig':'']" :src="item.images"></image>
-						<text style="margin-left: -16px;color: #000;" v-if="tobigactive==index">{{item.name}}</text>
+							:class="[ tobigactive==index?'toBig':'']" :src="item.head"></image>
+						<text style="margin-left: -16px;color: #000;" v-if="tobigactive==index">{{item.fullname}}</text>
 					</view>
 					<text class="blank" :style="{width:leftRightW}"></text> <!-- 右边空白块 -->
 				</block>

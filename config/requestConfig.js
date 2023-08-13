@@ -126,7 +126,7 @@ $http.requestStart = function(options) {
   let userInfo = ''
   if (token && uni.getStorageSync('userInfo')) {
     options.header['authorization'] = token
-    userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+    userInfo  = uni.getStorageSync('userInfo');
   }
   options.data = {
     //params: {
