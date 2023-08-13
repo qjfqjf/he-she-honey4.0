@@ -216,7 +216,7 @@
 		methods: {
 			startTimer() {
 				this.updateData();
-				this.timer = setInterval(this.updateData, 5000); // 每隔五秒更新数据
+				this.timer = setInterval(this.updateData, 3000); // 每隔五秒更新数据
 			},
 			updateData() {
 				if(this.dataList[0] != undefined){
@@ -224,9 +224,9 @@
 					this.currentIndex = (this.currentIndex + 1) % this.dataList.length; // 循环切换数据
 				}else{
 					this.currentData = {
-						name:'null',
-						value:'null',
-						eval:'null'
+						name:'未测量',
+						value:'未测量',
+						eval:'未测量'
 					}
 				}
 				
@@ -242,6 +242,7 @@
 			getUserList(){
 				this.$http.post('/user/index', {
 					uid: this.uid,
+					
 				}).then(res => {
 					console.log('sig',res)
 					// this.dataList = res.data.data

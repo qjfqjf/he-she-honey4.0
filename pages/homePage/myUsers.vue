@@ -46,7 +46,8 @@
 			this.type = e.type
 		},
 		onShow() {
-			this.getRelationList()
+			// this.getRelationList()
+			this.getUserList()
 		},
 		methods: {
 			selectUser(item) {
@@ -56,6 +57,15 @@
 				} else {
 
 				}
+			},
+			getUserList(){
+				this.$http.post('/user/index', {
+					uid: this.uid,
+					
+				}).then(res => {
+					console.log('sig',res)
+					// this.dataList = res.data.data
+				})
 			},
 			// 获取亲属关系列表
 			getRelationList() {
