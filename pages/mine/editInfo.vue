@@ -276,6 +276,7 @@
 						console.log(res)
 						this.userInfo = res.data
 						console.log(this.userInfo)
+						console.log(this.userInfo.id_card)
 						if (this.userInfo) {
 							if (this.userInfo.fullname) {
 								this.name = this.userInfo.fullname
@@ -298,8 +299,9 @@
 							if (this.userInfo.weight) {
 								this.weight = this.userInfo.weight
 							}
-							if (this.userInfo.idCardNumberValue) {
+							if (this.userInfo.id_card) {
 								this.idCardNumberValue = this.userInfo.id_card
+								console.log('idCardNumberValue', this.idCardNumberValue);
 							}
 							if (this.userInfo.type_cn) {
 								this.relationShipText = this.userInfo.type_cn
