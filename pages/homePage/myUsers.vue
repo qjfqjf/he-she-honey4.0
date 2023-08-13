@@ -4,11 +4,10 @@
 		<z-nav-bar home title="我的用户" class="HomeNavBar" fontColor="black"> </z-nav-bar>
 		<view class="">
 			<uni-list :border="true">
-
-					<uni-list-item v-for="(item, index) in userList" :key="index" :title="item.name"
-						:note="item.relation || '其他' + ' ' + item.gender + ' ' + item.age"
-						thumb="https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png" thumb-size="lg"
-						:clickable="true" @click="selectUser(item)">
+					<uni-list-item v-for="(item, index) in userIndex" :key="index" :title="item.fullname"
+						:note="item.type_cn + ',' + item.sex_cn + ',' + item.birthday_cn"
+						:thumb="item.head" thumb-size="lg"
+						:clickable="true">
 						<template v-slot:footer>
 							<view class="d-flex a-center" style="width: 240rpx">
 								<u-button type="primary" size="mini" class="mr-1" @click="handleEdit">编辑</u-button>
@@ -39,6 +38,8 @@
 					age: 36,
 				}, ],
 				type: '',
+				userIndex:[],
+				uid:0
 			}
 		},
 		//第一次加载
@@ -46,25 +47,17 @@
 			this.type = e.type
 		},
 		onShow() {
-			// this.getRelationList()
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
 			this.getUserList()
 		},
 		methods: {
-			selectUser(item) {
-				if (this.type == 'select') {
-					uni.$emit('backWithData', { uid: item.id, name: item.name });
-					uni.navigateBack({ delta: 1 });
-				} else {
-
-				}
-			},
 			getUserList(){
 				this.$http.post('/user/index', {
 					uid: this.uid,
-					
 				}).then(res => {
-					console.log('sig',res)
-					// this.dataList = res.data.data
+					console.log(11,res.code)
+					this.userIndex = res.data.data
 				})
 			},
 			// 获取亲属关系列表

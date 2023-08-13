@@ -165,11 +165,10 @@
 				currentUser: {},
 				dataList: [], // Your list of data items
 				currentIndex: 0,
-				currentData: {
-				},
+				currentData: {},
 				loginUrl: '',
 				createUrl: '',
-				
+
 			};
 		},
 		components: {
@@ -181,10 +180,10 @@
 		onLoad(e) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
-			
+			console.log('onLoad', this.uid)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
-			console.log('appManage', this.appManage[4]);
+			// console.log('appManage', this.appManage[4]);
 			//拿到用户列表
 			// this.getRelationList()
 			// console.log(this.userList)
@@ -193,13 +192,13 @@
 					url: '/pages/login/login',
 				})
 			}
-			console.log('onLoad', e);
+			// console.log('onLoad', e);
 		},
 		//页面显示
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			console.log('onshow', this.userInfo)
 			// 隐藏原生的tabbar
-			
 			uni.hideTabBar();
 			this.getAllHistoryList();
 			this.getUserList();
@@ -221,36 +220,40 @@
 				this.timer = setInterval(this.updateData, 3000); // 每隔五秒更新数据
 			},
 			updateData() {
-				if(this.dataList[0] != undefined){
+				if (this.dataList[0] != undefined) {
 					this.currentData = this.dataList[this.currentIndex];
 					this.currentIndex = (this.currentIndex + 1) % this.dataList.length; // 循环切换数据
-				}else{
+				} else {
 					this.currentData = {
-						name:'未测量',
-						value:'未测量',
-						eval:'未测量'
+						name: '未测量',
+						value: '未测量',
+						eval: '未测量'
 					}
 				}
-				
+
 			},
 			// 查询最新所有历史记录
 			getAllHistoryList() {
+				console.log('当前方法的uid', this.uid)
 				this.$http.post('/monitor/index', {
 					uid: this.uid,
 				}).then(res => {
 					this.dataList = res.data.data
 				})
 			},
-			getUserList(){
-				this.$http.post('/user/index', {
-					uid: this.uid,
-					
-				}).then(res => {
-					console.log('sig',res)
-					this.userList = res.data.data
-					console.log('userList',this.userList)
-					// this.dataList = res.data.data
-				})
+			getUserList() {
+				const uid = JSON.parse(uni.getStorageSync('userInfo'))
+				if (uid === '') {
+					console.log('未查找到用户')
+				} else {
+					this.$http.post('/user/index', {
+						uid: uid,
+					}).then(res => {
+						this.userList = res.data.data
+						console.log('userList', this.userList)
+					})
+				}
+
 			},
 			selectImg(e) {
 				console.log('e', e);
@@ -314,13 +317,6 @@
 				console.log(uni.getStorageSync('userInfo'));
 				this.currentUser.id = uni.getStorageSync('userInfo');
 				console.log('id', this.currentUser.id);
-				// this.userList = res.result.result.map((item) => {
-				// 	return {
-				// 				...item,
-				// 				uid: item.id,
-				// 				images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-				// 	}
-				// })
 				this.$http
 					.post('/user/info', {
 						id: this.currentUser.id
@@ -382,116 +378,51 @@
 				console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
 				uni.setStorageSync('userInfo', this.currentUser.user_id)
-				console.log('userId',this.currentUser.user_id)
-				this.$http.post('/user/sig',{
-					uid:this.currentUser.user_id
-				}).then((res)=>{
-					console.log(res)
-					if(res.code==20000){
-						uni.setStorageSync('access-token', res.data)
-						console.log('token',uni.getStorageSync('access-token'))
-						uni.showToast({
-								title: '切换成功',
-								duration: 2000,
-								success: () => {
-									setTimeout(() => {
-										uni.switchTab({
-											url: '/pages/homePage/homePage',
-											success: (res) => {
-												console.log(res)
-											},
-											fail: (err) => {
-												console.log(err)
-											},
-										})
-									}, 1000)
-								},
-							})
-					}
-					else {
-							uni.showToast({
-								title: '切换失败',
-								icon: 'none',
-								duration: 2000,
-							})
-						}
-				})
-				.catch((error) => {
-						console.log(error)
-					})
-				// this.$http.post('/login/getCode', {
-				// 	mobile: this.phonenum,
-				// 	type: 'reset'
-				// }).then((res) => {
-				// 	console.log(res);
-				// 	this.code = res.message
-				// 	this.getCodeState()
-				// })
-				//登录一下获取一下token
-				// this.$http.post('/login/login', {
-				// 		mobile: this.phonenum,
-				// 		code: this.code
-				// 	})
-				// 	.then((res) => {
-				// 		console.log('res', res)
-				// 		//登录成功
-				// 		if (res.code == 20000) {
-				// 			// 用户的信息和token存放进localStorage里面去
-				// 			// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-				// 			// uni.setStorageSync('userInfo', JSON.stringify(res.data))
-				// 			uni.setStorageSync('userInfo', res.data.uid)
-				// 			uni.setStorageSync('mobile', this.form.phonenum)
-				// 			uni.setStorageSync('access-token', res.data.token)
-				// 			uni.showToast({
-				// 				title: '登录成功',
-				// 				duration: 2000,
-				// 				success: () => {
-				// 					setTimeout(() => {
-				// 						uni.switchTab({
-				// 							url: '/pages/homePage/homePage',
-				// 							success: (res) => {
-				// 								console.log(res)
-				// 							},
-				// 							fail: (err) => {
-				// 								console.log(err)
-				// 							},
-				// 						})
-				// 					}, 1000)
-				// 				},
-				// 			})
-				// 		}
-				// 		//登陆失败
-				// 		else {
-				// 			uni.showToast({
-				// 				title: '登陆失败',
-				// 				icon: 'none',
-				// 				duration: 2000,
-				// 			})
-				// 		}
-				// 	})
-				// 	.catch((error) => {
-				// 		console.log(error)
-				// 	})
-
-
-
-
-				// uni.request({
-				// 			url: 'http://106.14.140.92:8881/platform/login',
-				// 			method: 'post',
-				// 			data: {
-				// 				params: {
-				// 					login:this.currentUser.login,
-				// 					password:'123456'
-				// 				},
-				// 			},
-				// 			success: (res) => {
-				// 				uni.setStorageSync('access-token', res.data.result.data.token)
-				// 			}
-				// })
-
-				
+				this.uid = uni.getStorageSync('userInfo')
+				this.getAllHistoryList()
 			},
+			// changeHeadImg(index) {
+			// 	console.log(this.currentUser)
+			// 	console.log('当前选中' + index)
+			// 	this.currentUser = this.userList[index]
+			// 	uni.setStorageSync('userInfo', this.currentUser.user_id)
+			// 	this.$http.post('/user/sig',{
+			// 		uid:this.currentUser.user_id
+			// 	}).then((res)=>{
+			// 		console.log(res)
+			// 		if(res.code==20000){
+			// 			uni.setStorageSync('access-token', res.data)
+			// 			console.log('token',uni.getStorageSync('access-token'))
+			// 			uni.showToast({
+			// 					title: '切换成功',
+			// 					duration: 2000,
+			// 					success: () => {
+			// 						setTimeout(() => {
+			// 							uni.switchTab({
+			// 								url: '/pages/homePage/homePage',
+			// 								success: (res) => {
+			// 									console.log(res)
+			// 								},
+			// 								fail: (err) => {
+			// 									console.log(err)
+			// 								},
+			// 							})
+			// 						}, 1000)
+			// 					},
+			// 				})
+			// 		}
+			// 		else {
+			// 				uni.showToast({
+			// 					title: '切换失败',
+			// 					icon: 'none',
+			// 					duration: 2000,
+			// 				})
+			// 			}
+			// 	})
+			// 	.catch((error) => {
+			// 			console.log(error)
+			// 	})
+			// },
 
 
 			addUser() {
