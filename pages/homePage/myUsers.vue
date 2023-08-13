@@ -4,22 +4,21 @@
 		<z-nav-bar home title="我的用户" class="HomeNavBar" fontColor="black"> </z-nav-bar>
 		<view class="">
 			<uni-list :border="true">
-					<uni-list-item v-for="(item, index) in userIndex" :key="index" :title="item.fullname"
-						:note="item.type_cn + ',' + item.sex_cn + ',' + item.birthday_cn"
-						:thumb="item.head" thumb-size="lg"
-						:clickable="true">
-						<template v-slot:footer>
-							<view class="d-flex a-center" style="width: 240rpx">
-								<u-button type="primary" size="mini" class="mr-1" @click="handleEdit">编辑</u-button>
-								<u-button type="error" size="mini" @click="handleDel">删除</u-button>
-							</view>
-						</template>
-					</uni-list-item>
+				<uni-list-item v-for="(item, index) in userIndex" :key="index" :title="item.fullname"
+					:note="item.type_cn + ',' + item.sex_cn + ',' + item.birthday_cn" :thumb="item.head" thumb-size="lg"
+					:clickable="true">
+					<template v-slot:footer>
+						<view class="d-flex a-center" style="width: 240rpx">
+							<u-button type="primary" size="mini" class="mr-1" @click="handleEdit">编辑</u-button>
+							<u-button type="error" size="mini" @click="handleDel(item.user_id)">删除</u-button>
+						</view>
+					</template>
+				</uni-list-item>
 			</uni-list>
 		</view>
 		<!-- 手动添加日常程按钮 -->
 		<view class="add" @click="addPeople"></view>
-		<u-modal v-model="show" :content="content"></u-modal>
+
 	</view>
 </template>
 
@@ -27,6 +26,7 @@
 	export default {
 		data() {
 			return {
+
 				show: false,
 				content: '确定要删除吗？',
 				userInfo: JSON.parse(uni.getStorageSync('userInfo')),
@@ -38,8 +38,8 @@
 					age: 36,
 				}, ],
 				type: '',
-				userIndex:[],
-				uid:0
+				userIndex: [],
+				uid: 0
 			}
 		},
 		//第一次加载
@@ -52,11 +52,11 @@
 			this.getUserList()
 		},
 		methods: {
-			getUserList(){
+			getUserList() {
 				this.$http.post('/user/index', {
 					uid: this.uid,
 				}).then(res => {
-					console.log(11,res.code)
+					// console.log(11,res.code)
 					this.userIndex = res.data.data
 				})
 			},
@@ -79,9 +79,31 @@
 					url: '/pages/mine/editInfo',
 				})
 			},
-			handleDel() {
-				console.log(1111)
-				this.show = true
+			handleDel(e) {
+				console.log(e)
+				uni.showModal({
+					content: '是否删除关系用户',
+					success: (res) => {
+						if (res.confirm) {
+							// 用户点击了确认按钮
+							this.$http.post('/user/delete', {
+								id: e,
+							}).then(res => {
+								if (res.code === 20000) {
+									uni.showToast({
+										title: '删除成功',
+									})
+									this.getUserList();
+								}
+								// this.userIndex = res.data.data
+							})
+						} else if (res.cancel) {
+							// 用户点击了取消按钮
+							console.log('用户点击了取消按钮');
+						}
+					}
+				});
+
 			},
 			addPeople() {
 				uni.navigateTo({
@@ -89,7 +111,7 @@
 				})
 				console.log('添加用户')
 			},
-			
+
 		},
 	}
 </script>

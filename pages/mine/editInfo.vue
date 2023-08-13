@@ -157,6 +157,7 @@
 	export default {
 		data() {
 			return {
+				images:'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 				iconStyle: {
 					"font-size": '10px',
 					"color": 'red'
@@ -236,8 +237,8 @@
 				height: '请输入您的身高',
 				weight: '请输入您的体重',
 				type: '',
-				genderValue:0,
-				relationValue:0
+				genderValue: 0,
+				relationValue: 0
 			}
 		},
 		computed: {
@@ -256,12 +257,12 @@
 		onShow() {},
 		//方法
 		methods: {
-			getCode(){
+			getCode() {
 				this.$http.post('/login/getCode', {
-				  mobile: this.tel,
-				  type:'reset'
+					mobile: this.tel,
+					type: 'reset'
 				}).then((res) => {
-				  console.log(res);
+					console.log(res);
 				})
 			},
 			selectUser() {
@@ -317,30 +318,31 @@
 				//增添接口
 				if (this.type == 'add') {
 					console.log("增添")
-					if(this.genderText === '男'){
+					if (this.genderText === '男') {
 						this.genderValue = 1
-					}else{
+					} else {
 						this.genderValue = 2
 					}
-					if(this.relationShipText === '本人'){
+					if (this.relationShipText === '本人') {
 						this.relationValue = 0
-					}else if(this.relationShipText === '父母'){
+					} else if (this.relationShipText === '父母') {
 						this.genderValue = 2
-					}else if(this.relationShipText === '子女'){
+					} else if (this.relationShipText === '子女') {
 						this.genderValue = 4
-					}else{
+					} else {
 						this.genderValue = 9
 					}
 					this.$http
 						.post('/user/create', {
-							fullname:this.name,
-							sex:this.genderValue,
-							type:this.genderValue,
-							birthday:this.birth,
-							mobile:this.tel,
-							code:this.code,
-							stature:this.height,
-							weight:this.weight
+							head:this.images,
+							fullname: this.name,
+							sex: this.genderValue,
+							type: this.genderValue,
+							birthday: this.birth,
+							mobile: this.tel,
+							code: this.code,
+							stature: this.height,
+							weight: this.weight
 						})
 						.then((res) => {
 							console.log(res)
@@ -354,18 +356,64 @@
 									uni.navigateBack({
 										delta: 1,
 									})
-								}, 2000)
+								}, 1000)
+							}else{
+								uni.showToast({
+									title: '添加失败',
+									icon: 'none',
+									duration: 2000,
+								})
+								setTimeout(() => {
+									uni.navigateBack({
+										delta: 1,
+									})
+								}, 1000)
 							}
 						})
 				} else {
 					console.log("修改")
-					console.log("userInfo", this.userInfo)
+					// this.getCode();
+					if (this.genderText === '男') {
+						this.genderValue = 1
+					} else {
+						this.genderValue = 2
+					}
+					if (this.relationShipText === '本人') {
+						this.relationValue = 0
+					} else if (this.relationShipText === '父母') {
+						this.genderValue = 2
+					} else if (this.relationShipText === '子女') {
+						this.genderValue = 4
+					} else {
+						this.genderValue = 9
+					}
 					// 编辑接口
 					this.$http
 						.post('/user/update', {
-							...this.userInfo
+							
+							uid:this.userInfo.user_id,
+							fullname: this.name,
+							sex: this.genderValue,
+							type: this.genderValue,
+							birthday: this.birth,
+							mobile: this.tel,
+							// code: this.code,
+							stature: this.height,
+							weight: this.weight
 						}).then((res) => {
 							console.log(res)
+							if (res.code == 20000) {
+								uni.showToast({
+									title: '修改成功',
+									icon: 'none',
+									duration: 2000,
+								})
+								setTimeout(() => {
+									uni.navigateBack({
+										delta: 1,
+									})
+								}, 2000)
+							}
 							this.selectUser()
 							uni.showToast({
 								title: "保存成功"
@@ -477,7 +525,7 @@
 				this.showTel = false
 			},
 			confirmCode() {
-				
+
 				this.code = this.codeValue
 				this.userInfo.code = this.code
 				this.showCode = false
