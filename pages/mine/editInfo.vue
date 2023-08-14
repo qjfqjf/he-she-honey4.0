@@ -157,7 +157,7 @@
 	export default {
 		data() {
 			return {
-				images:'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+				images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 				iconStyle: {
 					"font-size": '10px',
 					"color": 'red'
@@ -252,13 +252,11 @@
 			if (this.type !== 'add') {
 				this.selectUser()
 			}
-			this.getUserInfo();
 		},
 		//页面显示
 		onShow() {},
 		//方法
 		methods: {
-			
 			getCode() {
 				this.$http.post('/login/getCode', {
 					mobile: this.tel,
@@ -275,8 +273,10 @@
 						id: this.userInfo.id,
 					})
 					.then(res => {
+						console.log(res)
 						this.userInfo = res.data
-						console.log('this.userInfo',this.userInfo)
+						console.log(this.userInfo)
+						console.log(this.userInfo.id_card)
 						if (this.userInfo) {
 							if (this.userInfo.fullname) {
 								this.name = this.userInfo.fullname
@@ -290,8 +290,8 @@
 							if (this.userInfo.birthday) {
 								this.birth = this.userInfo.birthday
 							}
-							if (this.userInfo.mobile) {
-								this.tel = this.userInfo.mobile
+							if (this.userInfo.phone) {
+								this.tel = this.userInfo.phone
 							}
 							if (this.userInfo.stature) {
 								this.height = this.userInfo.stature
@@ -299,8 +299,9 @@
 							if (this.userInfo.weight) {
 								this.weight = this.userInfo.weight
 							}
-							if (this.userInfo.idCardNumberValue) {
+							if (this.userInfo.id_card) {
 								this.idCardNumberValue = this.userInfo.id_card
+								console.log('idCardNumberValue', this.idCardNumberValue);
 							}
 							if (this.userInfo.type_cn) {
 								this.relationShipText = this.userInfo.type_cn
@@ -335,7 +336,7 @@
 					}
 					this.$http
 						.post('/user/create', {
-							head:this.images,
+							head: this.images,
 							fullname: this.name,
 							sex: this.genderValue,
 							type: this.genderValue,
@@ -358,7 +359,7 @@
 										delta: 1,
 									})
 								}, 1000)
-							}else{
+							} else {
 								uni.showToast({
 									title: '添加失败',
 									icon: 'none',
@@ -391,8 +392,8 @@
 					// 编辑接口
 					this.$http
 						.post('/user/update', {
-							
-							uid:this.userInfo.user_id,
+
+							uid: this.userInfo.user_id,
 							fullname: this.name,
 							sex: this.genderValue,
 							type: this.genderValue,

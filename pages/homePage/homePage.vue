@@ -196,6 +196,7 @@
 		},
 		//页面显示
 		onShow() {
+			
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			console.log('onshow', this.userInfo)
 			// 隐藏原生的tabbar
@@ -358,57 +359,55 @@
 				// console.log(this.doctorId)
 
 			},
-			changeHeadImg(index) {
-				console.log(this.currentUser)
-				console.log('当前选中' + index)
-				this.currentUser = this.userList[index]
-				uni.setStorageSync('userInfo', this.currentUser.user_id)
-				this.uid = uni.getStorageSync('userInfo')
-				this.getAllHistoryList()
-			},
 			// changeHeadImg(index) {
 			// 	console.log(this.currentUser)
 			// 	console.log('当前选中' + index)
 			// 	this.currentUser = this.userList[index]
 			// 	uni.setStorageSync('userInfo', this.currentUser.user_id)
-			// 	console.log('this.uid',)
-			// 	this.$http.post('/user/sig', {
-			// 			uid: this.currentUser.user_id
-			// 		}).then((res) => {
-			// 			console.log(res)
-			// 			if (res.code == 20000) {
-			// 				uni.setStorageSync('access-token', res.data)
-			// 				console.log('token', uni.getStorageSync('access-token'))
-			// 				uni.showToast({
-			// 					title: '切换成功',
-			// 					duration: 2000,
-			// 					success: () => {
-			// 						setTimeout(() => {
-			// 							uni.switchTab({
-			// 								url: '/pages/homePage/homePage',
-			// 								success: (res) => {
-			// 									console.log(res)
-			// 								},
-			// 								fail: (err) => {
-			// 									console.log(err)
-			// 								},
-			// 							})
-			// 						}, 1000)
-			// 					},
-			// 				})
-			// 				this.getAllHistoryList()
-			// 			} else {
-			// 				uni.showToast({
-			// 					title: '切换失败',
-			// 					icon: 'none',
-			// 					duration: 2000,
-			// 				})
-			// 			}
-			// 		})
-			// 		.catch((error) => {
-			// 			console.log(error)
-			// 		})
+			// 	this.uid = uni.getStorageSync('userInfo')
+			// 	this.getAllHistoryList()
 			// },
+			changeHeadImg(index) {
+				console.log(this.currentUser)
+				console.log('当前选中' + index)
+				this.currentUser = this.userList[index]
+				uni.setStorageSync('userInfo', this.currentUser.user_id)
+				this.$http.post('/user/sig', {
+						uid: this.currentUser.user_id
+					}).then((res) => {
+						console.log(res)
+						if (res.code == 20000) {
+							// uni.setStorageSync('access-token', res.data)
+							console.log('token', uni.getStorageSync('access-token'))
+							uni.showToast({
+								title: '切换成功',
+								duration: 2000,
+								success: () => {
+									setTimeout(() => {
+										uni.switchTab({
+											url: '/pages/homePage/homePage',
+											success: (res) => {
+												console.log(res)
+											},
+											fail: (err) => {
+												console.log(err)
+											},
+										})
+									}, 1000)
+								},
+							})
+						} else {
+							uni.showToast({
+								title: '切换失败',
+								icon: 'none',
+								duration: 2000,
+							})
+						}
+					})
+					.catch((error) => {
+						console.log(error)
+					})
+			},
 
 
 			addUser() {
