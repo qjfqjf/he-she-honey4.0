@@ -120,18 +120,19 @@ $http.requestStart = function(options) {
   if (version_code) {
     options.header['version_code'] = version_code
   }
+  console.log(options)
   // #endif
   //请求前加入token和uid
   const token = uni.getStorageSync('access-token')
   let userInfo = ''
-  if (token && uni.getStorageSync('userInfo')) {
-    options.header['authorization'] = token
+  if (token) {
+    options.header["authorization"] = token
     userInfo  = uni.getStorageSync('userInfo');
   }
   options.data = {
-    //params: {
-      token,
-      uid: userInfo ? userInfo.uid : 1,
+    // params: {
+  
+      uid: userInfo ? userInfo.uid : null,
       ...options.data,
     //},
   }

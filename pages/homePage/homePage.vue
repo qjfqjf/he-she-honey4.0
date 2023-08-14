@@ -196,7 +196,6 @@
 		},
 		//页面显示
 		onShow() {
-			
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			console.log('onshow', this.userInfo)
 			// 隐藏原生的tabbar

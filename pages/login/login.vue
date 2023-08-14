@@ -121,14 +121,26 @@
 				this.getCodeState()
 
 				//发送验证码接口(未实现)
-				this.$http.post('/login/getCode', {
-					mobile: this.form.phonenum,
-					type: 'reset'
+				uni.request({
+					url:'http://127.0.0.1:8000/api/login/getCode',
+					method:"POST",
+					data:{
+						mobile: this.form.phonenum,
+						type: 'reset'
+					},
 				}).then((res) => {
 					console.log(res);
-					this.form.pass = res.message
+					this.form.pass = res.data.message
 					this.getCodeState()
 				})
+				// this.$http.post('/login/getCode', {
+				// 	mobile: this.form.phonenum,
+				// 	type: 'reset'
+				// }).then((res) => {
+				// 	console.log(res);
+				// 	this.form.pass = res.message
+				// 	this.getCodeState()
+				// })
 			},
 			//验证码按钮文字状态
 			getCodeState() {
@@ -174,25 +186,29 @@
 						})
 						return
 					}
-					this.$http.post('/login/login', {
+					
+					uni.request({
+						url:'http://127.0.0.1:8000/api/login/login',
+						method:"POST",
+						data:{
 							mobile: this.form.phonenum,
 							code: this.form.code
-						})
-						.then((res) => {
+						},
+					}).then((res) => {
 							console.log('res', res)
 							//登录成功
-							if (res.code == 20000) {
+							if (res.data.code == 20000) {
+								console.log('111111111111')
 								uni.setStorageSync('access-token', res.data.token)
-								// 用户的信息和token存放进localStorage里面去
-								// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-								// uni.setStorageSync('userInfo', JSON.stringify(res.data))
-								if (!res.data.uid) {
-									this.$http.post('/login/getCode', {
+								uni.request({
+									url:'http://127.0.0.1:8000/api/login/getCode',
+									method:"POST",
+									data:{
 										mobile: this.form.phonenum,
 										type: 'reset'
-									}).then((res) => {
-										console.log(res);
-										this.form.pass = res.message
+									}.then((res) => {
+										console.log(111111111111,res);
+										this.form.pass = res.data.message
 										this.$http.post("/user/create", {
 											mobile: this.form.phonenum,
 											code: this.form.pass,
@@ -200,7 +216,6 @@
 											utype: "0"
 										}).then((response) => {
 											console.log(response)
-											// uni.setStorageSync('userInfo', response.data.uid)
 											uni.showToast({
 												title: '新用户成功',
 												duration: 2000,
@@ -220,28 +235,31 @@
 											})
 										})
 									})
-								} else {
-									uni.setStorageSync('userInfo', res.data.uid)
-									console.log(uni.getStorageSync('userInfo'));
-									uni.setStorageSync('User', JSON.stringify(res.data))
-									uni.showToast({
-										title: '登录成功',
-										duration: 2000,
-										success: () => {
-											setTimeout(() => {
-												uni.switchTab({
-													url: '/pages/homePage/homePage',
-													success: (res) => {
-														console.log(res)
-													},
-													fail: (err) => {
-														console.log(err)
-													},
-												})
-											}, 1000)
-										},
-									})
-								}
+								})
+								// if (!res.data.uid) {
+									
+								// } else {
+								// 	uni.setStorageSync('userInfo', res.data.uid)
+								// 	console.log(uni.getStorageSync('userInfo'));
+								// 	uni.setStorageSync('User', JSON.stringify(res.data))
+								// 	uni.showToast({
+								// 		title: '登录成功',
+								// 		duration: 2000,
+								// 		success: () => {
+								// 			setTimeout(() => {
+								// 				uni.switchTab({
+								// 					url: '/pages/homePage/homePage',
+								// 					success: (res) => {
+								// 						console.log(res)
+								// 					},
+								// 					fail: (err) => {
+								// 						console.log(err)
+								// 					},
+								// 				})
+								// 			}, 1000)
+								// 		},
+								// 	})
+								// }
 
 							}
 							//登陆失败
@@ -256,6 +274,13 @@
 						.catch((error) => {
 							console.log(error)
 						})
+						
+					// this.$http.post('/login/login', {
+					// 		mobile: this.form.phonenum,
+					// 		code: this.form.code
+					// 	})
+						
+						
 					//模拟验证码登录成功(未实现)
 					//模拟登录成功
 					// uni.showToast({
@@ -544,6 +569,3 @@
 		}
 	}
 </style>
-
-
-
