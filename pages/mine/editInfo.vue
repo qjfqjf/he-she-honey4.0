@@ -252,11 +252,13 @@
 			if (this.type !== 'add') {
 				this.selectUser()
 			}
+			this.getUserInfo();
 		},
 		//页面显示
 		onShow() {},
 		//方法
 		methods: {
+			
 			getCode() {
 				this.$http.post('/login/getCode', {
 					mobile: this.tel,
@@ -273,9 +275,8 @@
 						id: this.userInfo.id,
 					})
 					.then(res => {
-						console.log(res)
 						this.userInfo = res.data
-						console.log(this.userInfo)
+						console.log('this.userInfo',this.userInfo)
 						if (this.userInfo) {
 							if (this.userInfo.fullname) {
 								this.name = this.userInfo.fullname
@@ -289,8 +290,8 @@
 							if (this.userInfo.birthday) {
 								this.birth = this.userInfo.birthday
 							}
-							if (this.userInfo.phone) {
-								this.tel = this.userInfo.phone
+							if (this.userInfo.mobile) {
+								this.tel = this.userInfo.mobile
 							}
 							if (this.userInfo.stature) {
 								this.height = this.userInfo.stature

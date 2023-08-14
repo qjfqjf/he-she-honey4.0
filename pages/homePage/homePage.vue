@@ -311,22 +311,7 @@
 
 			},
 
-			// 获取亲属关系列表
-			getRelationList() {
-				console.log('执行getRelationList')
-				console.log(uni.getStorageSync('userInfo'));
-				this.currentUser.id = uni.getStorageSync('userInfo');
-				console.log('id', this.currentUser.id);
-				this.$http
-					.post('/user/info', {
-						id: this.currentUser.id
-					})
-					.then((res) => {
-						console.log('res:', res)
-						this.userList[0].images = res.data.headurl;
-						this.userList[0].name = res.data.fullname;
-					})
-			},
+
 			bindUser() {
 				console.log()
 			},
@@ -386,14 +371,15 @@
 			// 	console.log('当前选中' + index)
 			// 	this.currentUser = this.userList[index]
 			// 	uni.setStorageSync('userInfo', this.currentUser.user_id)
-			// 	this.$http.post('/user/sig',{
-			// 		uid:this.currentUser.user_id
-			// 	}).then((res)=>{
-			// 		console.log(res)
-			// 		if(res.code==20000){
-			// 			uni.setStorageSync('access-token', res.data)
-			// 			console.log('token',uni.getStorageSync('access-token'))
-			// 			uni.showToast({
+			// 	console.log('this.uid',)
+			// 	this.$http.post('/user/sig', {
+			// 			uid: this.currentUser.user_id
+			// 		}).then((res) => {
+			// 			console.log(res)
+			// 			if (res.code == 20000) {
+			// 				uni.setStorageSync('access-token', res.data)
+			// 				console.log('token', uni.getStorageSync('access-token'))
+			// 				uni.showToast({
 			// 					title: '切换成功',
 			// 					duration: 2000,
 			// 					success: () => {
@@ -410,18 +396,18 @@
 			// 						}, 1000)
 			// 					},
 			// 				})
-			// 		}
-			// 		else {
+			// 				this.getAllHistoryList()
+			// 			} else {
 			// 				uni.showToast({
 			// 					title: '切换失败',
 			// 					icon: 'none',
 			// 					duration: 2000,
 			// 				})
 			// 			}
-			// 	})
-			// 	.catch((error) => {
+			// 		})
+			// 		.catch((error) => {
 			// 			console.log(error)
-			// 	})
+			// 		})
 			// },
 
 
