@@ -130,8 +130,8 @@ $http.requestStart = function(options) {
   }
   options.data = {
     //params: {
-      token,
-      uid: userInfo ? userInfo.uid : 1,
+      // token,
+      // uid: userInfo ? userInfo.uid : 1,
       ...options.data,
     //},
   }
