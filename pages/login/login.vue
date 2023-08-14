@@ -122,9 +122,9 @@
 
 				//发送验证码接口(未实现)
 				uni.request({
-					url:'http://127.0.0.1:8000/api/login/getCode',
-					method:"POST",
-					data:{
+					url: 'http://127.0.0.1:8000/api/login/getCode',
+					method: "POST",
+					data: {
 						mobile: this.form.phonenum,
 						type: 'reset'
 					},
@@ -186,30 +186,50 @@
 						})
 						return
 					}
-					
+
 					uni.request({
-						url:'http://127.0.0.1:8000/api/login/login',
-						method:"POST",
-						data:{
-							mobile: this.form.phonenum,
-							code: this.form.code
-						},
-					}).then((res) => {
+							url: 'http://127.0.0.1:8000/api/login/login',
+							method: "POST",
+							data: {
+								mobile: this.form.phonenum,
+								code: this.form.code
+							},
+						}).then((res) => {
 							console.log('res', res)
-							
+
 							//登录成功
 							if (res[1].data.code == 20000) {
-								console.log(1111)
+
 								uni.setStorageSync('access-token', res[1].data.data.token)
+
+								const uid = uni.getStorageSync('access-token')
+								const parts = uid.split('.');
+								const payload = JSON.parse(atob(parts[1])); // 解码并解析负载
+
+								// 提取"Audience"字段的值
+								const audience = payload.aud;
+								uni.setStorageSync('userInfo', audience)
+								console.log('this.uid', uni.getStorageSync('userInfo'))
 								this.$http.post("/user/create", {
 									mobile: this.form.phonenum,
 									code: this.form.pass,
 									type: 0,
 									utype: "0"
-								}).then((response) => {
-									console.log(response)
+								}).then((res) => {
+									console.log(1111111111, res)
+									// 判断第一次登录结果
+									if (res.data && Object.keys(res.data).length !== 0) {
+										// 第一次登录成功的处理逻辑
+										uni.setStorageSync('userInfo', res.data.uid)
+										console.log("第一次登录");
+									} else {
+										console.log('第二次登录')
+									}
+
+
+
 									uni.showToast({
-										title: '新用户成功',
+										title: '登录成功',
 										duration: 2000,
 										success: () => {
 											setTimeout(() => {
@@ -226,6 +246,7 @@
 										},
 									})
 								})
+
 								// uni.request({
 								// 	url:'http://127.0.0.1:8000/api/login/getCode',
 								// 	method:"POST",
@@ -235,11 +256,11 @@
 								// 	}.then((res) => {
 								// 		console.log(111111111111,res);
 								// 		this.form.pass = res[1].data.message
-										
+
 								// 	})
 								// })
 								// if (!res.data.uid) {
-									
+
 								// } else {
 								// 	uni.setStorageSync('userInfo', res.data.uid)
 								// 	console.log(uni.getStorageSync('userInfo'));
@@ -263,6 +284,7 @@
 								// 	})
 								// }
 
+
 							}
 							//登陆失败
 							else {
@@ -276,13 +298,13 @@
 						.catch((error) => {
 							console.log(error)
 						})
-						
+
 					// this.$http.post('/login/login', {
 					// 		mobile: this.form.phonenum,
 					// 		code: this.form.code
 					// 	})
-						
-						
+
+
 					//模拟验证码登录成功(未实现)
 					//模拟登录成功
 					// uni.showToast({
