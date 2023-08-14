@@ -130,7 +130,7 @@
 					},
 				}).then((res) => {
 					console.log(res);
-					this.form.pass = res.data.message
+					this.form.pass = res[1].data.message
 					this.getCodeState()
 				})
 				// this.$http.post('/login/getCode', {
@@ -196,46 +196,48 @@
 						},
 					}).then((res) => {
 							console.log('res', res)
+							
 							//登录成功
-							if (res.data.code == 20000) {
-								console.log('111111111111')
-								uni.setStorageSync('access-token', res.data.token)
-								uni.request({
-									url:'http://127.0.0.1:8000/api/login/getCode',
-									method:"POST",
-									data:{
-										mobile: this.form.phonenum,
-										type: 'reset'
-									}.then((res) => {
-										console.log(111111111111,res);
-										this.form.pass = res.data.message
-										this.$http.post("/user/create", {
-											mobile: this.form.phonenum,
-											code: this.form.pass,
-											type: 0,
-											utype: "0"
-										}).then((response) => {
-											console.log(response)
-											uni.showToast({
-												title: '新用户成功',
-												duration: 2000,
-												success: () => {
-													setTimeout(() => {
-														uni.switchTab({
-															url: '/pages/homePage/homePage',
-															success: (res) => {
-																console.log(res)
-															},
-															fail: (err) => {
-																console.log(err)
-															},
-														})
-													}, 1000)
-												},
-											})
-										})
+							if (res[1].data.code == 20000) {
+								console.log(1111)
+								uni.setStorageSync('access-token', res[1].data.data.token)
+								this.$http.post("/user/create", {
+									mobile: this.form.phonenum,
+									code: this.form.pass,
+									type: 0,
+									utype: "0"
+								}).then((response) => {
+									console.log(response)
+									uni.showToast({
+										title: '新用户成功',
+										duration: 2000,
+										success: () => {
+											setTimeout(() => {
+												uni.switchTab({
+													url: '/pages/homePage/homePage',
+													success: (res) => {
+														console.log(res)
+													},
+													fail: (err) => {
+														console.log(err)
+													},
+												})
+											}, 1000)
+										},
 									})
 								})
+								// uni.request({
+								// 	url:'http://127.0.0.1:8000/api/login/getCode',
+								// 	method:"POST",
+								// 	data:{
+								// 		mobile: this.form.phonenum,
+								// 		type: 'reset'
+								// 	}.then((res) => {
+								// 		console.log(111111111111,res);
+								// 		this.form.pass = res[1].data.message
+										
+								// 	})
+								// })
 								// if (!res.data.uid) {
 									
 								// } else {
