@@ -355,8 +355,8 @@
 							sex: this.genderValue,
 							type: this.genderValue,
 							birthday: this.birth,
-							// mobile: this.tel,
-							phone:this.tel,
+							mobile: this.tel,
+							// phone:this.tel,
 							code: this.code,
 							stature: this.height,
 							weight: this.weight
