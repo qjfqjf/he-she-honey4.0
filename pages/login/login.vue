@@ -64,29 +64,30 @@
 </template>
 
 <script>
-  import md5 from '@/plugins/md5'
-  var clear
-  export default {
-    data() {
-      return {
-        params: {
-          login: '',
-          password: '',
-        },
-        value: '',
-        form: { //手机号
-                phonenum: '',
-                //输入的验证码
-                code: '', 
-                pass: '', 
-                type: '' },
-        type: '1000',
-        codeText: '获取验证码',
-        readonly: '',
-      }
-    },
-    methods: {
-      back() {},
+	import md5 from '@/plugins/md5'
+	var clear
+	export default {
+		data() {
+			return {
+				params: {
+					login: '',
+					password: '',
+				},
+				value: '',
+				form: { //手机号
+					phonenum: '',
+					//输入的验证码
+					code: '',
+					pass: '',
+					type: ''
+				},
+				type: '1000',
+				codeText: '获取验证码',
+				readonly: '',
+			}
+		},
+		methods: {
+			back() {},
 
 			//改变登录方式
 			changeType(type) {
@@ -119,188 +120,272 @@
 				//模拟验证码发送后的验证码按钮变化
 				this.getCodeState()
 
-        //发送验证码接口(未实现)
-        this.$http.post('/login/getCode', {
-          mobile: this.form.phonenum,
-          type:'reset'
-        }).then((res) => {
-          console.log(res);
-          this.form.pass = res.message
-          this.getCodeState()
-        })
-      },
-      //验证码按钮文字状态
-      getCodeState() {
-        clear && clearInterval(clear)
-        const _this = this
-        this.readonly = true
-        this.codeText = '60S'
-        var s = 60
-        clear = setInterval(() => {
-          s--
-          _this.codeText = s + 'S'
-          if (s <= 0) {
-            clearInterval(clear)
-            _this.codeText = '获取验证码'
-            _this.readonly = false
-          }
-        }, 1000)
-      },
+				//发送验证码接口(未实现)
+				uni.request({
+					url: 'http://127.0.0.1:8000/api/login/getCode',
+					method: "POST",
+					data: {
+						mobile: this.form.phonenum,
+						type: 'reset'
+					},
+				}).then((res) => {
+					console.log(res);
+					this.form.pass = res[1].data.message
+					this.getCodeState()
+				})
+				// this.$http.post('/login/getCode', {
+				// 	mobile: this.form.phonenum,
+				// 	type: 'reset'
+				// }).then((res) => {
+				// 	console.log(res);
+				// 	this.form.pass = res.message
+				// 	this.getCodeState()
+				// })
+			},
+			//验证码按钮文字状态
+			getCodeState() {
+				clear && clearInterval(clear)
+				const _this = this
+				this.readonly = true
+				this.codeText = '60S'
+				var s = 60
+				clear = setInterval(() => {
+					s--
+					_this.codeText = s + 'S'
+					if (s <= 0) {
+						clearInterval(clear)
+						_this.codeText = '获取验证码'
+						_this.readonly = false
+					}
+				}, 1000)
+			},
 
-      //登录按钮
-      onsubmit() {
-        console.log('code',this.form.code);
-        //登录方式为验证码登录时的非空判断和手机号格式判断(未实现)
-        if (this.type == 1000) {
-          if (!this.form.phonenum) {
-            uni.showToast({
-              title: '请输入手机号',
-              icon: 'none',
-            })
-            return
-          }
-          if (!this.$base.phoneRegular.test(this.form.phonenum)) {
-            uni.showToast({
-              title: '手机号码格式不正确',
-              icon: 'none',
-            })
-            return
-          }
-          if (!this.form.code) {
-            uni.showToast({
-              title: '请输入验证码',
-              icon: 'none',
-            })
-            return
-          }
-          this.$http.post('/login/login', {
-            mobile: this.form.phonenum,
-            code: this.form.code
-          })
-          .then((res) => {
-            console.log('res',res)
-            
+			//登录按钮
+			onsubmit() {
+				console.log('code', this.form.code);
+				//登录方式为验证码登录时的非空判断和手机号格式判断(未实现)
+				if (this.type == 1000) {
+					if (!this.form.phonenum) {
+						uni.showToast({
+							title: '请输入手机号',
+							icon: 'none',
+						})
+						return
+					}
+					if (!this.$base.phoneRegular.test(this.form.phonenum)) {
+						uni.showToast({
+							title: '手机号码格式不正确',
+							icon: 'none',
+						})
+						return
+					}
+					if (!this.form.code) {
+						uni.showToast({
+							title: '请输入验证码',
+							icon: 'none',
+						})
+						return
+					}
 
-            //登录成功
-            if (res.code == 20000) {
-              // 用户的信息和token存放进localStorage里面去
-              // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-              // uni.setStorageSync('userInfo', JSON.stringify(res.data))
-              uni.setStorageSync('userInfo', res.data.uid)
-			  console.log(uni.getStorageSync('userInfo'));
-              uni.setStorageSync('User', JSON.stringify(res.data))
-              uni.setStorageSync('access-token', res.data.token)
-              uni.showToast({
-                title: '登录成功',
-                duration: 2000,
-                success: () => {
-                  setTimeout(() => {
-                    uni.switchTab({
-                      url: '/pages/homePage/homePage',
-                      success: (res) => {
-                        console.log(res)
-                      },
-                      fail: (err) => {
-                        console.log(err)
-                      },
-                    })
-                  }, 1000)
-                },
-              })
-            }
-            //登陆失败
-            else {
-              uni.showToast({
-                title: '登陆失败',
-                icon: 'none',
-                duration: 2000,
-              })
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-          //模拟验证码登录成功(未实现)
-          //模拟登录成功
-          // uni.showToast({
-          //   title: '登录成功',
-          //   duration: 2000,
-          //   success: () => {
-          //     setTimeout(() => {
-          //       uni.switchTab({
-          //         url: '/pages/homePage/homePage',
-          //         success: (res) => {
-          //           console.log(res)
-          //         },
-          //         fail: (err) => {
-          //           console.log(err)
-          //         },
-          //       })
-          //     }, 1000)
-          //   },
-          // })
-        }
-        //登录方式为账号密码登录
-        else {
-          if (!this.params.login) {
-            uni.showToast({
-              title: '请输入账号',
-              icon: 'none',
-            })
-            return
-          }
-          if (!this.params.password) {
-            uni.showToast({
-              title: '请输入密码',
-              icon: 'none',
-            })
-            return
-          }
+					uni.request({
+							url: 'http://127.0.0.1:8000/api/login/login',
+							method: "POST",
+							data: {
+								mobile: this.form.phonenum,
+								code: this.form.code
+							},
+						}).then((res) => {
+							console.log('res', res)
+
+							//登录成功
+							if (res[1].data.code == 20000) {
+
+								uni.setStorageSync('access-token', res[1].data.data.token)
+
+								const uid = uni.getStorageSync('access-token')
+								const parts = uid.split('.');
+								const payload = JSON.parse(atob(parts[1])); // 解码并解析负载
+
+								// 提取"Audience"字段的值
+								const audience = payload.aud;
+								uni.setStorageSync('userInfo', audience)
+								console.log('this.uid', uni.getStorageSync('userInfo'))
+								this.$http.post("/user/create", {
+									mobile: this.form.phonenum,
+									code: this.form.pass,
+									type: 0,
+									utype: "0"
+								}).then((res) => {
+									console.log(1111111111, res)
+									// 判断第一次登录结果
+									if (res.data && Object.keys(res.data).length !== 0) {
+										// 第一次登录成功的处理逻辑
+										uni.setStorageSync('userInfo', res.data.uid)
+										console.log("第一次登录");
+									} else {
+										console.log('第二次登录')
+									}
 
 
-          this.$http.post('/login/accountLogin', {
-            mobile: this.params.login,
-            pwd: this.params.password
-          })
-          .then((res) => {
-            console.log(res)
-            //登录成功
-            if (res.code == 20000) {
-              // 用户的信息和token存放进localStorage里面去
-              // localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
-              uni.setStorageSync('userInfo', res.data.uid)
-              uni.setStorageSync('User', JSON.stringify(res.data))
-              uni.setStorageSync('access-token', res.data.token)
-              uni.showToast({
-                title: '登录成功',
-                duration: 2000,
-                success: () => {
-                  setTimeout(() => {
-                    uni.switchTab({
-                      url: '/pages/homePage/homePage',
-                      success: (res) => {
-                        console.log(res)
-                      },
-                      fail: (err) => {
-                        console.log(err)
-                      },
-                    })
-                  }, 1000)
-                },
-              })
-            }
-            //登陆失败
-            else {
-              uni.showToast({
-                title: '登陆失败',
-                icon: 'none',
-                duration: 2000,
-              })
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+
+									uni.showToast({
+										title: '登录成功',
+										duration: 2000,
+										success: () => {
+											setTimeout(() => {
+												uni.switchTab({
+													url: '/pages/homePage/homePage',
+													success: (res) => {
+														console.log(res)
+													},
+													fail: (err) => {
+														console.log(err)
+													},
+												})
+											}, 1000)
+										},
+									})
+								})
+
+								// uni.request({
+								// 	url:'http://127.0.0.1:8000/api/login/getCode',
+								// 	method:"POST",
+								// 	data:{
+								// 		mobile: this.form.phonenum,
+								// 		type: 'reset'
+								// 	}.then((res) => {
+								// 		console.log(111111111111,res);
+								// 		this.form.pass = res[1].data.message
+
+								// 	})
+								// })
+								// if (!res.data.uid) {
+
+								// } else {
+								// 	uni.setStorageSync('userInfo', res.data.uid)
+								// 	console.log(uni.getStorageSync('userInfo'));
+								// 	uni.setStorageSync('User', JSON.stringify(res.data))
+								// 	uni.showToast({
+								// 		title: '登录成功',
+								// 		duration: 2000,
+								// 		success: () => {
+								// 			setTimeout(() => {
+								// 				uni.switchTab({
+								// 					url: '/pages/homePage/homePage',
+								// 					success: (res) => {
+								// 						console.log(res)
+								// 					},
+								// 					fail: (err) => {
+								// 						console.log(err)
+								// 					},
+								// 				})
+								// 			}, 1000)
+								// 		},
+								// 	})
+								// }
+
+
+							}
+							//登陆失败
+							else {
+								uni.showToast({
+									title: '登陆失败',
+									icon: 'none',
+									duration: 2000,
+								})
+							}
+						})
+						.catch((error) => {
+							console.log(error)
+						})
+
+					// this.$http.post('/login/login', {
+					// 		mobile: this.form.phonenum,
+					// 		code: this.form.code
+					// 	})
+
+
+					//模拟验证码登录成功(未实现)
+					//模拟登录成功
+					// uni.showToast({
+					//   title: '登录成功',
+					//   duration: 2000,
+					//   success: () => {
+					//     setTimeout(() => {
+					//       uni.switchTab({
+					//         url: '/pages/homePage/homePage',
+					//         success: (res) => {
+					//           console.log(res)
+					//         },
+					//         fail: (err) => {
+					//           console.log(err)
+					//         },
+					//       })
+					//     }, 1000)
+					//   },
+					// })
+				}
+				//登录方式为账号密码登录
+				else {
+					if (!this.params.login) {
+						uni.showToast({
+							title: '请输入账号',
+							icon: 'none',
+						})
+						return
+					}
+					if (!this.params.password) {
+						uni.showToast({
+							title: '请输入密码',
+							icon: 'none',
+						})
+						return
+					}
+
+
+					this.$http.post('/login/accountLogin', {
+							mobile: this.params.login,
+							pwd: this.params.password
+						})
+						.then((res) => {
+							console.log(res)
+							//登录成功
+							if (res.code == 20000) {
+								// 用户的信息和token存放进localStorage里面去
+								// localStorage.setItem('access-admin', JSON.stringify(res.data.result.data))
+								uni.setStorageSync('userInfo', res.data.uid)
+								uni.setStorageSync('User', JSON.stringify(res.data))
+								uni.setStorageSync('access-token', res.data.token)
+								uni.showToast({
+									title: '登录成功',
+									duration: 2000,
+									success: () => {
+										setTimeout(() => {
+											uni.switchTab({
+												url: '/pages/homePage/homePage',
+												success: (res) => {
+													console.log(res)
+												},
+												fail: (err) => {
+													console.log(err)
+												},
+											})
+										}, 1000)
+									},
+								})
+							}
+							//登陆失败
+							else {
+								uni.showToast({
+									title: '登陆失败',
+									icon: 'none',
+									duration: 2000,
+								})
+							}
+						})
+						.catch((error) => {
+							console.log(error)
+						})
 
 
 					// uni.request({
