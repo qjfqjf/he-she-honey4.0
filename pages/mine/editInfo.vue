@@ -258,11 +258,13 @@
 			this.type = opt.type
 			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
 			console.log('id0',uni.getStorageSync('userInfo'));
-			if (this.type != 'add' && opt.e) {
-				uni.setStorageSync('userInfo', opt.e)
-				console.log('id',uni.getStorageSync('userInfo'));
+			if (this.type != 'add') {
+				if(opt.e){
+					uni.setStorageSync('userInfo', opt.e)
+					console.log('id',uni.getStorageSync('userInfo'));
+				}
+				this.selectUser()
 			}
-			this.selectUser()
 		},
 		// computed: {
 		// 	...mapState(['userInfo']),
