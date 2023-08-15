@@ -378,23 +378,23 @@
 						if (res.code == 20000) {
 							// uni.setStorageSync('access-token', res.data)
 							console.log('token', uni.getStorageSync('access-token'))
-							uni.showToast({
-								title: '切换成功',
-								duration: 2000,
-								success: () => {
-									setTimeout(() => {
-										uni.switchTab({
-											url: '/pages/homePage/homePage',
-											success: (res) => {
-												console.log(res)
-											},
-											fail: (err) => {
-												console.log(err)
-											},
-										})
-									}, 1000)
-								},
-							})
+							// uni.showToast({
+							// 	title: '切换成功',
+							// 	duration: 2000,
+							// 	success: () => {
+							// 		setTimeout(() => {
+							// 			uni.switchTab({
+							// 				url: '/pages/homePage/homePage',
+							// 				success: (res) => {
+							// 					console.log(res)
+							// 				},
+							// 				fail: (err) => {
+							// 					console.log(err)
+							// 				},
+							// 			})
+							// 		}, 1000)
+							// 	},
+							// })
 						} else {
 							uni.showToast({
 								title: '切换失败',

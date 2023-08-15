@@ -268,7 +268,7 @@
 		methods: {
 			getCode() {
 				uni.request({
-					url: 'http://127.0.0.1:8000/api/login/getCode',
+					url: 'https://new-hn.ttmjk.com/api/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.tel,

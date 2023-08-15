@@ -122,7 +122,7 @@
 
 				//发送验证码接口(未实现)
 				uni.request({
-					url: 'http://127.0.0.1:8000/api/login/getCode',
+					url: 'https://new-hn.ttmjk.com/api/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.form.phonenum,
@@ -188,7 +188,7 @@
 					}
 
 					uni.request({
-							url: 'http://127.0.0.1:8000/api/login/login',
+							url: 'https://new-hn.ttmjk.com/api/login/login',
 							method: "POST",
 							data: {
 								mobile: this.form.phonenum,
