@@ -80,7 +80,7 @@
 				<u-cell size="large" title="身份信息" titleStyle="font-weight: bold;" :border="false"></u-cell>
 				<u-cell @click="showIdCardNumberModel" size="large" title="身份证号" titleStyle="font-size: 14px"
 					:isLink="true">
-					<text slot="value" class="u-slot-value">{{ idCardNumber }}</text>
+					<text slot="value" class="u-slot-value">{{ idCardNumberValue }}</text>
 				</u-cell>
 				<u-cell size="large" title="亲属关系" titleStyle="font-size: 14px" :isLink="true"
 					@click="showRelation = true">
@@ -163,7 +163,7 @@
 					"color": 'red'
 				},
 				userInfo: {
-
+					name:'',
 				},
 				showInfo: {
 
@@ -205,15 +205,23 @@
 						value: 'myself',
 					},
 					{
+						name: '父亲',
+						value: 'father',
+					},
+					{
+						name: '母亲',
+						value: 'mother',
+					},
+					{
+						name: '兄弟姐妹',
+						value: 'broAndSis',
+					},
+					{
 						name: '子女',
-						value: 'children',
+						value: 'child',
 					},
 					{
-						name: '父母',
-						value: 'parents',
-					},
-					{
-						name: '其他亲戚',
+						name: '其他',
 						value: 'other_relatives',
 					},
 				],
@@ -238,12 +246,13 @@
 				weight: '请输入您的体重',
 				type: '',
 				genderValue: 0,
-				relationValue: 0
+				relationValue: 0,
+				codeMsg:''
 			}
 		},
-		computed: {
-			...mapState(['userInfo']),
-		},
+		// computed: {
+		// 	...mapState(['userInfo']),
+		// },
 		//第一次加载
 		onLoad(e) {
 			console.log('type', e.type);
@@ -262,7 +271,8 @@
 					mobile: this.tel,
 					type: 'reset'
 				}).then((res) => {
-					console.log(res);
+					this.codeMsg = res.message
+					console.log('code',this.codeMsg);
 				})
 			},
 			selectUser() {
@@ -281,17 +291,14 @@
 							if (this.userInfo.fullname) {
 								this.name = this.userInfo.fullname
 							}
-							if (this.userInfo.sex == 1) {
-								this.genderText = '男'
-							}
-							if (this.userInfo.sex == 2) {
-								this.genderText = '女'
+							if (this.userInfo.sex_cn) {
+								this.genderText = this.userInfo.sex_cn
 							}
 							if (this.userInfo.birthday) {
 								this.birth = this.userInfo.birthday
 							}
-							if (this.userInfo.phone) {
-								this.tel = this.userInfo.phone
+							if (this.userInfo.mobile) {
+								this.tel = this.userInfo.mobile
 							}
 							if(this.userInfo.mobile){
 								this.tel = this.userInfo.mobile
@@ -319,7 +326,7 @@
 						}
 					})
 			},
-			bindUser() {
+			async bindUser() {
 				//增添接口
 				if (this.type == 'add') {
 					console.log("增添")
@@ -329,12 +336,16 @@
 						this.genderValue = 2
 					}
 					if (this.relationShipText === '本人') {
-						this.relationValue = 0
-					} else if (this.relationShipText === '父母') {
+						this.userInfo.type = 0
+					} else if (this.relationShipText === '父亲') {
+						this.genderValue = 1
+					} else if (this.relationShipText === '母亲') {
 						this.genderValue = 2
-					} else if (this.relationShipText === '子女') {
+					} else if (this.relationShipText === '兄弟姐妹') {
+						this.genderValue = 3
+					}else if (this.relationShipText === '子女') {
 						this.genderValue = 4
-					} else {
+					}else {
 						this.genderValue = 9
 					}
 					this.$http
@@ -378,54 +389,56 @@
 						})
 				} else {
 					console.log("修改")
-					// this.getCode();
-					if (this.genderText === '男') {
-						this.genderValue = 1
-					} else {
-						this.genderValue = 2
-					}
-					if (this.relationShipText === '本人') {
-						this.relationValue = 0
-					} else if (this.relationShipText === '父母') {
-						this.genderValue = 2
-					} else if (this.relationShipText === '子女') {
-						this.genderValue = 4
-					} else {
-						this.genderValue = 9
-					}
-					// 编辑接口
-					this.$http
-						.post('/user/update', {
-
-							uid: this.userInfo.user_id,
-							fullname: this.name,
-							sex: this.genderValue,
-							type: this.genderValue,
-							birthday: this.birth,
-							mobile: this.tel,
-							// code: this.code,
-							stature: this.height,
-							weight: this.weight
-						}).then((res) => {
-							console.log(res)
-							if (res.code == 20000) {
-								uni.showToast({
-									title: '修改成功',
-									icon: 'none',
-									duration: 2000,
-								})
-								setTimeout(() => {
-									uni.navigateBack({
-										delta: 1,
+					this.$http.post('/login/getCode', {
+						mobile: this.tel,
+						type: 'reset'
+					}).then((res) => {
+						this.userInfo.code = res.message
+						console.log('code',this.userInfo.code);
+						if (this.genderText === '男') {
+							this.userInfo.sex = 1
+						} else {
+							this.userInfo.sex = 2
+						}
+						if (this.relationShipText === '本人') {
+							this.userInfo.type = 0
+						} else if (this.relationShipText === '父亲') {
+							this.genderValue = 1
+						} else if (this.relationShipText === '母亲') {
+							this.genderValue = 2
+						} else if (this.relationShipText === '兄弟姐妹') {
+							this.genderValue = 3
+						}else if (this.relationShipText === '子女') {
+							this.genderValue = 4
+						}else {
+							this.genderValue = 9
+						}
+						// 编辑接口
+						console.log(this.userInfo);
+						this.$http
+							.post('/user/update', {
+								...this.userInfo,
+							}).then((res) => {
+								console.log(res)
+								if (res.code == 20000) {
+									uni.showToast({
+										title: '修改成功',
+										icon: 'none',
+										duration: 2000,
 									})
-								}, 2000)
-							}
-							this.selectUser()
-							uni.showToast({
-								title: "保存成功"
+									// setTimeout(() => {
+									// 	uni.navigateBack({
+									// 		delta: 1,
+									// 	})
+									// }, 2000)
+								}
+								this.selectUser()
+								uni.showToast({
+									title: "保存成功"
+								})
 							})
 						})
-				}
+					}
 			},
 			showNameModal() {
 				this.showName = true
@@ -453,7 +466,7 @@
 			},
 			relationSelect(e) {
 				this.relationShip = e.value
-				this.userInfo.ownership_relationship = this.relationShip
+				this.userInfo.type = this.relationShip
 				this.relationShipText = e.name
 			},
 			confirmName() {
@@ -467,7 +480,7 @@
 					return
 				}
 				this.name = this.nameValue
-				this.userInfo.name = this.nameValue
+				this.userInfo.fullname = this.nameValue
 				this.showName = false
 			},
 			confirmBirth() {
@@ -482,7 +495,6 @@
 			},
 			genderSelect(e) {
 				this.gender = e.value
-				this.userInfo.gender = this.gender
 				this.genderText = e.name
 			},
 			confirmIdCardNumber() {
@@ -514,6 +526,7 @@
 					return
 				}
 				this.idCardNumber = this.idCardNumberValue
+				this.userInfo.id_card = this.idCardNumberValue
 				this.showIdCardNumber = false
 			},
 			confirmTel() {
@@ -564,7 +577,8 @@
 					return
 				}
 				this.height = this.heightValue
-				this.userInfo.height = this.height
+				this.userInfo.stature = this.height
+				console.log('stature',this.userInfo.stature);
 				this.showHeight = false
 			},
 			confirmWeight() {
@@ -676,16 +690,16 @@
 						httpData.phone = this.phone
 					}
 				}
-				this.$http.post('api/common/v1/edit_user_info', httpData).then((res) => {
-					this.setUserInfo({
-						nickname: this.nickname,
-						avatar: this.avatar,
-						phone: this.phone || this.userInfo.phone,
-					})
-					uni.showToast({
-						title: '修改成功！',
-					})
-				})
+				// this.$http.post('api/common/v1/edit_user_info', httpData).then((res) => {
+				// 	this.setuserInfo({
+				// 		nickname: this.nickname,
+				// 		avatar: this.avatar,
+				// 		phone: this.phone || this.userInfo.phone,
+				// 	})
+				// 	uni.showToast({
+				// 		title: '修改成功！',
+				// 	})
+				// })
 			},
 		},
 		//页面隐藏
