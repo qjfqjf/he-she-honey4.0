@@ -9,7 +9,7 @@
 					:clickable="true">
 					<template v-slot:footer>
 						<view class="d-flex a-center" style="width: 240rpx">
-							<u-button type="primary" size="mini" class="mr-1" @click="handleEdit">编辑</u-button>
+							<u-button type="primary" size="mini" class="mr-1" @click="handleEdit(item.user_id)">编辑</u-button>
 							<u-button type="error" size="mini" @click="handleDel(item.user_id)">删除</u-button>
 						</view>
 					</template>
@@ -74,9 +74,10 @@
 						})
 					})
 			},
-			handleEdit() {
+			handleEdit(e) {
+				console.log('user_id',e)
 				uni.navigateTo({
-					url: '/pages/mine/editInfo',
+					url: '/pages/mine/editInfo?e=' + e,
 				})
 			},
 			handleDel(e) {
