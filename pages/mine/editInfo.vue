@@ -247,21 +247,26 @@
 				type: '',
 				genderValue: 0,
 				relationValue: 0,
-				codeMsg: ''
+				codeMsg: '',
 			}
+		},
+		onLoad: function (opt) {
+			console.log(opt.e); 
+			// console.log(111)
+			// _this = this;
+			console.log('type', opt.type);
+			this.type = opt.type
+			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
+			console.log('id0',uni.getStorageSync('userInfo'));
+			if (this.type != 'add' && opt.e) {
+				uni.setStorageSync('userInfo', opt.e)
+				console.log('id',uni.getStorageSync('userInfo'));
+			}
+			this.selectUser()
 		},
 		// computed: {
 		// 	...mapState(['userInfo']),
 		// },
-		//第一次加载
-		onLoad(e) {
-			console.log('type', e.type);
-			this.type = e.type
-			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
-			if (this.type !== 'add') {
-				this.selectUser()
-			}
-		},
 		//页面显示
 		onShow() {},
 		//方法
