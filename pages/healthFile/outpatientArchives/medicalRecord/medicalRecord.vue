@@ -158,7 +158,6 @@
 				//拿到用户信息
 				const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
 				let uid = userInfo.uid;
-				uid = 172
 				const token = userInfo.token;
 				//接口调用
 
