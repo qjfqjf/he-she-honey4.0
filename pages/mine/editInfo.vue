@@ -426,11 +426,11 @@
 										icon: 'none',
 										duration: 2000,
 									})
-									// setTimeout(() => {
-									// 	uni.navigateBack({
-									// 		delta: 1,
-									// 	})
-									// }, 2000)
+									setTimeout(() => {
+										uni.navigateBack({
+											delta: 1,
+										})
+									}, 2000)
 								}
 								this.selectUser()
 								uni.showToast({
