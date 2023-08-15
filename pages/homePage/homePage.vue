@@ -378,6 +378,7 @@
 						if (res.code == 20000) {
 							// uni.setStorageSync('access-token', res.data)
 							console.log('token', uni.getStorageSync('access-token'))
+							this.getAllHistoryList()
 							// uni.showToast({
 							// 	title: '切换成功',
 							// 	duration: 2000,

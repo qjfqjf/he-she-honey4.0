@@ -225,9 +225,6 @@
 									} else {
 										console.log('第二次登录')
 									}
-
-
-
 									uni.showToast({
 										title: '登录成功',
 										duration: 2000,
