@@ -29,7 +29,7 @@
 			if (store.state.userInfo.token) {
 				socket.init()
 			}
-			APPUpdate()
+			// APPUpdate()
 			// #endif
 		},
 		onShow: function(e) {

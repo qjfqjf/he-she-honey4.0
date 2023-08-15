@@ -316,17 +316,17 @@ $http.dataFactory = async function(res) {
 	}
 }
 // 错误回调
-// $http.requestError = function(e) {
-// 	// e.statusCode === 0 是参数效验错误抛出的
-// 	console.log(e)
-// 	if (e.statusCode === 0) {
-// 		throw e
-// 	} else {
-// 		// console.log(e)
-// 		uni.showToast({
-// 			title: '网络错误，请检查一下网络',
-// 			icon: 'none',
-// 		})
-// 	}
-// }
+$http.requestError = function (e) {
+  // e.statusCode === 0 是参数效验错误抛出的
+  if (e.statusCode === 0) {
+    throw e
+  } else {
+    console.log(e)
+    uni.showToast({
+      title: '网络错误，请检查一下网络',
+      icon: 'none'
+    })
+  }
+}
 export default $http
+
