@@ -4,23 +4,32 @@
     "version" : "0.0",
     "configurations" : [
         {
-            "app-plus" : {
-                "launchtype" : "local"
-            },
-            "default" : {
-                "launchtype" : "local"
-            },
-            "h5" : {
-                "launchtype" : "local"
-            },
-            "type" : "uniCloud",
-            "uniapp" : {
-                "launchtype" : "local"
-            }
+        	"app-plus" : 
+        	{
+        		"launchtype" : "local"
+        	},
+        	"default" : 
+        	{
+        		"launchtype" : "local"
+        	},
+        	"h5" : 
+        	{
+        		"launchtype" : "local"
+        	},
+        	"type" : "uniCloud",
+        	"uniapp" : 
+        	{
+        		"launchtype" : "local"
+        	}
         },
         {
+            "openVueDevtools" : true,
             "playground" : "standard",
             "type" : "uni-app:app-android"
+        },
+        {
+            "openVueDevtools" : true,
+            "type" : "uni-app:app-ios"
         }
     ]
 }

@@ -132,6 +132,7 @@
 	import $http from '@/config/requestConfig.js';
 	import HeadImgList from "@/components/head-img/head-img.vue";
 
+
 	export default {
 
 		computed: {
@@ -178,6 +179,7 @@
 		},
 		//第一次加载
 		onLoad(e) {
+			console.log(uni.getStorageSync('userInfo'), 111)
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
 			console.log('onLoad', this.uid)
@@ -206,9 +208,7 @@
 			this.openBlue();
 
 		},
-		created() {
 
-		},
 		mounted() {
 			this.startTimer();
 		},

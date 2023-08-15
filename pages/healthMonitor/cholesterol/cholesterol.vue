@@ -5,11 +5,11 @@
 		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader></HealthHeader>
-		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="heat" unit="mmol/L" color="#fba723"></MyCircle>
+		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="cholestrol" unit="mmol/L" color="#fba723"></MyCircle>
 		<TipInfo title="胆固醇趋势"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
-		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveHeat"></u-button>
+		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveCholestrol"></u-button>
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
@@ -52,6 +52,11 @@
 	import TipInfo from '../components/tipInfo/TipInfo.vue'
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	import MyCircle from '../components/circle/Circle.vue'
+	import {
+		BeneCheckEntity,
+		mul,
+		div
+	} from '@/plugins/parseBeneCheck'
 	export default {
 		components: {
 			HealthHeader,
@@ -63,59 +68,77 @@
 			return {
 				btnColor: '#dadada',
 				deviceStatus: 0,
-				heat: 0, //测量温度
+				deviceCode: 0,
 				blueDeviceList: [],
-				deviceId: '', // 蓝牙设备的id
-				serviceId: '', //设备的服务值
-				characteristicId: '', // 设备的特征值
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/cholesterol/cholesterolMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/cholesterol/cholesterolManualEntry'
-        	},
-        ],
+				uaDeviceData: [
+					1, 1, 1, 0, 65, 2, 2, 0, 12, -128, 0, 119, 5, 1, 17, 15, 56, 1, 0, 0
+				],
+				deviceTimer: null,
+				cholestrol: 0, //胆固醇值
+				deviceId: uni.getStorageSync('ytDeviceId'), // 蓝牙设备的id
+				serviceId: '00001000-0000-1000-8000-00805F9B34FB', //设备的服务值
+				characteristicId: '00001002-0000-1000-8000-00805F9B34FB', // 设备的特征值
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/cholesterol/cholesterolMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/cholesterol/cholesterolManualEntry'
+					},
+				],
 			};
 		},
 		onLoad(e) {
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
-				this.connect()
-
+				this.createInterval()
 			}
 		},
+		onUnload() {
+			clearInterval(this.deviceTimer)
+		},
 		methods: {
-			handleDevelop() {
-				// this.$refs.uToast.show({
-				// 	message: '开发中...'
-				// })
-        uni.navigateTo({
-          url:'/pages/healthMonitor/cholesterol/cholesterolHistory'
-        })
-			},
-			handleSaveHeat() {
+			// 保存胆固醇值
+			handleSaveCholestrol() {
 
-				if (this.heat !== 0) {
+				if (this.cholestrol !== 0) {
 					this.$refs.uToast.show({
 						message: '保存成功',
 						type: 'success',
 					})
 					this.btnColor = '#dadada'
-					this.heat = 0
+					this.cholestrol = 0
 				}
 			},
+			// 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
+			createInterval() {
+				this.listenConnectState()
+				this.deviceTimer = setInterval(() => {
+					if (this.deviceCode == 0) {
+						this.connect()
+					}
+				}, 1000)
+
+			},
+			handleDevelop() {
+				// this.$refs.uToast.show({
+				// 	message: '开发中...'
+				// })
+				uni.navigateTo({
+					url: '/pages/healthMonitor/cholesterol/cholesterolHistory'
+				})
+			},
+
 			// 初始化蓝牙
 			initBlue() {
 				uni.openBluetoothAdapter({
@@ -161,32 +184,37 @@
 				if (this.deviceId.length === 0) {
 					this.deviceId = data.deviceId
 				}
+				try {
+					uni.createBLEConnection({
+						deviceId: this.deviceId,
+						success(res) {
+							console.log('连接成功')
 
-				uni.createBLEConnection({
-					deviceId: this.deviceId,
-					success(res) {
-						console.log('连接成功')
-						console.log(res)
-						// 停止搜索
+							// 停止搜索
 
-						setTimeout(() => {
 							_this.notify()
-						}, 1000)
-						uni.showToast({
-							title: '连接成功'
-						})
-					},
-					fail(err) {
-						console.log('连接失败')
-						console.error(err)
-						if (err.errCode === -1) {
-							// 如果已经连接过则订阅通知
+
+							uni.showToast({
+								title: '连接成功'
+							})
+							_this.deviceCode = 1
 							_this.deviceStatus = 1
-							_this.notify()
-							return
+						},
+						fail(err) {
+							// console.log('连接失败')
+							console.error(err)
+							if (err.errCode === -1) {
+								// 如果已经连接过则订阅通知
+								_this.deviceStatus = 1
+								_this.deviceCode = 1
+								_this.notify()
+								return
+							}
 						}
-					}
-				})
+					})
+				} catch (error) {
+					console.error('连接时发生异常：', error);
+				}
 			},
 
 			// 【5】停止搜索
@@ -255,62 +283,94 @@
 					serviceId: this.serviceId,
 					characteristicId: this.characteristicId,
 					success(res) {
-						console.log(res)
+						uni.showToast({
+							title: '监听成功',
+							icon: 'success'
+						})
+						console.log(res, '监听成功')
 						_this.deviceStatus = 1
 						_this.listenValueChange()
 
 					},
 					fail(err) {
 						console.error(err)
-						uni.showToast({
-							title: '监听失败',
-							icon: 'error'
-						})
+						// uni.showToast({
+						// 	title: '监听失败',
+						// 	icon: 'error'
+						// })
+						_this.notify()
 					}
 				})
 			},
 			// ArrayBuffer转16进度字符串示例
 			ab2hex(buffer) {
-				const hexArr = Array.prototype.map.call(
-					new Uint8Array(buffer),
-					function(bit) {
-						return ('00' + bit.toString(16)).slice(-2)
-					}
-				)
-
-				return hexArr.join('')
+				console.log('--------------------16进制开始---------------------------------')
+				console.log(buffer)
+				console.log('--------------------16进制结束---------------------------------')
+				const hexArr = Array.prototype.map.call(new Uint8Array(buffer), function(bit) {
+					return ('00' + bit.toString(16)).slice(-2)
+				})
+				const resHex = hexArr.join('')
+				console.log('--------------------hexArr进制开始---------------------------------')
+				console.log(hexArr)
+				console.log(hexArr.join(''))
+				console.log('--------------------hexArr进制结束---------------------------------')
+				return [hexArr, resHex]
 			},
 			// 【9】监听消息变化
 			listenValueChange() {
-				uni.onBLECharacteristicValueChange(res => {
+				uni.onBLECharacteristicValueChange((res) => {
+					console.log(
+						'--------------------onBLECharacteristicValueChange开始---------------------------------'
+					)
 					console.log(res)
-					let resHex = this.ab2hex(res.value)
-					this.processHeatData(res.value)
+					console.log(
+						'--------------------onBLECharacteristicValueChange结束---------------------------------'
+					)
+					let [hexArr, resHex] = this.ab2hex(res.value)
+					this.processCholestrol(hexArr)
 					console.log(resHex)
 				})
 			},
-			// 处理温度
-			processHeatData(buffer) {
-				const data = new Int8Array(buffer);
+			// 监听蓝牙的连接状态
+			listenConnectState() {
+				uni.onBLEConnectionStateChange((res) => {
+					console.log(res)
+					if (!res.connected) {
+						this.deviceStatus = 0
+						this.deviceCode = 0
+						uni.showToast({
+							title: '连接已断开',
+							icon: 'error',
+						})
+					} else {
+						this.deviceStatus = 1
+						this.deviceCode = 1
+						clearInterval(this.deviceTimer)
+					
 
-				if (this.heat.length > 0 && this.heat.length < 8) {
-					this.heat = new Int8Array([...this.heat, ...data]);
-				} else if (data[0] === -81) {
-					this.heat = data;
-				}
-				if (this.heat.length !== 8) return
-				this.heat = (((this.heat[4] & 0xFF) << 8) + (this.heat[5] & 0xFF)) * 0.01;
-				this.heat = Math.floor(parseFloat(this.heat) * 10) / 10;
+					}
+				})
+			},
+			// 处理胆固醇
+			processCholestrol(hexArray) {
+				// 使用formatArray函数解析设备数据
+				// 将每个十六进制字符串转换为十进制数值
+				const decimalArray = hexArray.map((hex) => parseInt(hex, 16))
+				const parsedData = BeneCheckEntity.formatArray(decimalArray)
+				this.cholestrol = parsedData.value
+				// 输出解析后的数据
+				console.log(parsedData, 1111111)
 				this.btnColor = '#01b09a'
 
 
 			},
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
 
 		}
 	}

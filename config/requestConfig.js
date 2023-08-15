@@ -323,7 +323,7 @@ $http.requestError = function (e) {
     console.log(e)
     uni.showToast({
       title: '网络错误，请检查一下网络',
-      icon: 'none',
+      icon: 'none'
     })
   }
 }

@@ -16,7 +16,8 @@
         size="large"
         class="message"
         icon="list-dot"
-        url="/pages/mine/myDevice"
+        
+		@click="onPageJump('/pages/mine/myDevice')"
         title="我的设备"
       ></u-cell>
       <u-cell
