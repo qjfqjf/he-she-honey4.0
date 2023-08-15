@@ -293,6 +293,9 @@
 							if (this.userInfo.phone) {
 								this.tel = this.userInfo.phone
 							}
+							if(this.userInfo.mobile){
+								this.tel = this.userInfo.mobile
+							}
 							if (this.userInfo.stature) {
 								this.height = this.userInfo.stature
 							}
@@ -341,7 +344,8 @@
 							sex: this.genderValue,
 							type: this.genderValue,
 							birthday: this.birth,
-							mobile: this.tel,
+							// mobile: this.tel,
+							phone:this.tel,
 							code: this.code,
 							stature: this.height,
 							weight: this.weight
