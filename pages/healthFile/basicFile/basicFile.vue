@@ -150,11 +150,11 @@ export default {
 			show: false,
 			current: 0,
 			avatar: 'https://cdn.uviewui.com/uview/album/1.jpg',
-			name: '彭老师',
-			gender: '男',
-			height: 173,
-			age: '60岁',
-			weight: 73,
+			name: '',
+			gender: '',
+			height: 222,
+			age: '',
+			weight: 111,
 			list: ['签约信息', '基本信息', '既往史', '家族史'],
 			signInfo: ['签约日期', '签约医生', '签约类型'],
 			baseInfo: ['身份证号码:', '手机号码:', '出生日期:', '联系人姓名:', '联系人电话:', '常驻户籍:', '民族;', '家庭住址:', '所属机构:', '血型:'
@@ -190,10 +190,10 @@ export default {
 		//拿去用户信息
 		getRecordsList() {
 			console.log(uni.getStorageSync('userInfo'));
-			this.uid = uni.getStorageSync('userInfo').uid;
+			this.uid = uni.getStorageSync('userInfo');
 			// this.uid = 3
 			// console.log(this.uid);
-				const token = uni.getStorageSync('userInfo').token;
+				const token = uni.getStorageSync('access-token');
 				this.$http
 					.post(this.toUrl2,{
 						uid : this.uid

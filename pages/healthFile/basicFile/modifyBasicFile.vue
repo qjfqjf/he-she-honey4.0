@@ -98,11 +98,11 @@ export default {
 			show: false,
 			current: 0,
 			avatar: 'https://cdn.uviewui.com/uview/album/1.jpg',
-			name: '彭老师',
-			gender: '男',
-			height: 173,
-			age: '60岁',
-			weight: 73,
+			name: '',
+			gender: '',
+			height: 222,
+			age: '',
+			weight: 111,
 			list: ['签约信息', '基本信息', '既往史', '家族史'],
 			dataListText: [
 				[{
@@ -275,28 +275,28 @@ export default {
 				this.dataText.register = this.dataListText[1][5].value
 			}
 			if(this.dataListText[1][9]){
-				this.dataText.blood_type = this.dataListText[1][9].value
+				this.dataText.blood_type = this.dataListText[1][8].value
 			}
 			if(this.dataListText[1][10]){
-				this.dataText.rh = this.dataListText[1][10].value
+				this.dataText.rh = this.dataListText[1][9].value
 			}
 			if(this.dataListText[1][11]){
-				this.dataText.education = this.dataListText[1][11].value
+				this.dataText.education = this.dataListText[1][10].value
 			}
 			if(this.dataListText[1][12]){
-				this.dataText.occupation = this.dataListText[1][12].value
+				this.dataText.occupation = this.dataListText[1][11].value
 			}
 			if(this.dataListText[1][13]){
-				this.dataText.marriage = this.dataListText[1][13].value
+				this.dataText.marriage = this.dataListText[1][12].value
 			}
 			if(this.dataListText[2][1]){
 				this.dataText.drug_allergy = this.dataListText[2][1].value
 			}
 			if(this.dataListText[1][15]){
-				this.dataText.expose = this.dataListText[1][15].value
+				this.dataText.expose = this.dataListText[1][14].value
 			}
 			if(this.dataListText[1][16]){
-				this.dataText.other_allergy = this.dataListText[1][16].value
+				this.dataText.other_allergy = this.dataListText[1][15].value
 			}
 			if(this.dataListText[2][0]){
 				this.dataText.disease = this.dataListText[2][0].value
@@ -328,7 +328,7 @@ export default {
 			// for(let i=0;i<this.dataListText[3].length;i++){
 			// 	this.ListText[3][i]=this.dataListText[3][i];
 			// }
-			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			const userInfo = uni.getStorageSync('userInfo');
 			this.uid = userInfo.uid;
 			console.log(this.uid);
 			const _this = this;
@@ -337,16 +337,25 @@ export default {
 			};
 			console.log('requestData',requestData);
 			this.$http
-					.post(this.toUrl2,
-						requestData
+					.post(this.toUrl2,{
+						...requestData,
+						uid : this.uid
+					}
 						// model:this.Records[this.current].model,
 						// domain:[["user_id", "=", this.uid]],
 						// fields:this.Records[this.current].fields
 					).then(res=>{
 						console.log(res);
-						uni.showToast({
-						title: "保存成功"
-					})
+						if(res.code==20000){
+							uni.showToast({
+								title: "保存成功"
+							})
+						}else{
+							uni.showToast({
+								title: res.message
+							})
+						}
+						
 			}).catch(error => {
 				console.error('请求发生错误', error);
 			});
