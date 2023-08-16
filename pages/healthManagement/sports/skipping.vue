@@ -89,7 +89,8 @@
 					</template>
 					<template #confirm>
 						<div>倒计时 - 确定</div>
-					</template></u-picker>
+					</template>
+				</u-picker>
 			</view>
 			<view>
 				<u-picker mode="selector" :columns="counts" :show="show1" close-on-click-overlay @cancel="cancel1" @close="close1"

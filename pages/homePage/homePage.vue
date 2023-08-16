@@ -325,6 +325,7 @@
 				const _this = this
 				await uni.scanCode({
 					success: function(res) {
+						console.log(res)
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
 						_this.doctorId = res.result
@@ -333,19 +334,19 @@
 							content: '确定要关注该医生吗？',
 							success: function(res) {
 								if (res.confirm) {
-									_this.$http.post('/bindDockerUser', {
-										uid: _this.userInfo.uid,
-										did: _this.doctorId,
-									}).then((res) => {
-										console.log(res)
-										if (res.result.code == 200) {
-											uni.showToast({
-												title: '绑定成功',
-												icon: 'none',
-												duration: 2000,
-											})
-										}
-									})
+									// _this.$http.post('/bindDockerUser', {
+									// 	uid: _this.userInfo.uid,
+									// 	did: _this.doctorId,
+									// }).then((res) => {
+									// 	console.log(res)
+									// 	if (res.result.code == 200) {
+									// 		uni.showToast({
+									// 			title: '绑定成功',
+									// 			icon: 'none',
+									// 			duration: 2000,
+									// 		})
+									// 	}
+									// })
 								} else if (res.cancel) {
 									console.log('用户点击取消');
 								}
