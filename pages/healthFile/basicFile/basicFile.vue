@@ -189,9 +189,9 @@ export default {
 		},
 		//拿去用户信息
 		getRecordsList() {
-			console.log(uni.getStorageSync('userInfo'));
-			this.uid = uni.getStorageSync('userInfo');
-			// this.uid = 3
+			console.log(JSON.parse(uni.getStorageSync('userInfo')));
+			this.uid = JSON.parse(uni.getStorageSync('userInfo'));
+			// this.uid = 6
 			// console.log(this.uid);
 				const token = uni.getStorageSync('access-token');
 				this.$http
@@ -236,6 +236,13 @@ export default {
 						console.log('data3',this.data3)
 						console.log('data4',this.data4)
 						this.name = res.data.fullname
+						this.height = res.data.stature
+						this.weight = res.data.weight
+						this.gender = res.data.sex === 1 ? '男' : '女';
+						let birthday = res.data.birthday
+						let today = new Date();
+						console.log('age',today);
+						this.age = today.getFullYear() - parseInt(birthday.substr(0, 4));
 			}).catch(error => {
 				console.error('请求发生错误', error);
 			});

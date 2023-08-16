@@ -328,8 +328,8 @@ export default {
 			// for(let i=0;i<this.dataListText[3].length;i++){
 			// 	this.ListText[3][i]=this.dataListText[3][i];
 			// }
-			const userInfo = uni.getStorageSync('userInfo');
-			this.uid = userInfo.uid;
+			const userInfo = JSON.parse(uni.getStorageSync('userInfo'));
+			this.uid = userInfo;
 			console.log(this.uid);
 			const _this = this;
 			const requestData = {
