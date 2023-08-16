@@ -218,9 +218,20 @@
 									utype: "0"
 								}).then((res) => {
 									console.log(1111111111, res)
-									// 第一次登录成功的处理逻辑
-									uni.setStorageSync('userInfo', res.data.uid)
-									console.log("第一次登录");
+// <<<<<<< HEAD
+// 									// 判断第一次登录结果
+// 									if (res.data && Object.keys(res.data).length !== 0) {
+// 										// 第一次登录成功的处理逻辑
+// 										uni.setStorageSync('userInfo', res.data.uid)
+// 										console.log("第一次登录");
+// 									} else {
+// 										console.log('第二次登录')
+// 									}
+// =======
+// 									// 第一次登录成功的处理逻辑
+// 									uni.setStorageSync('userInfo', res.data.uid)
+// 									console.log("第一次登录");
+// >>>>>>> f615491b3761a868f3addab69094fcec4944638b
 									uni.showToast({
 										title: '登录成功',
 										duration: 2000,
