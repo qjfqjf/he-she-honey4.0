@@ -196,7 +196,7 @@ export default {
 				const token = uni.getStorageSync('userInfo').token;
 				this.$http
 					.post(this.toUrl2,{
-						uid : 3
+						uid : this.uid
 						// model:this.Records[this.current].model,
 						// domain:[["user_id", "=", this.uid]],
 						// fields:this.Records[this.current].fields

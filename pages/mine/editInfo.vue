@@ -163,7 +163,7 @@
 					"color": 'red'
 				},
 				userInfo: {
-					name:'',
+					name: '',
 				},
 				showInfo: {
 
@@ -247,33 +247,51 @@
 				type: '',
 				genderValue: 0,
 				relationValue: 0,
-				codeMsg:''
+				codeMsg: '',
+			}
+		},
+		onLoad: function (opt) {
+			console.log(opt.e); 
+			// console.log(111)
+			// _this = this;
+			console.log('type', opt.type);
+			this.type = opt.type
+			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
+			console.log('id0',uni.getStorageSync('userInfo'));
+			if (this.type != 'add') {
+				if(opt.e){
+					uni.setStorageSync('userInfo', opt.e)
+					console.log('id',uni.getStorageSync('userInfo'));
+				}
+				this.selectUser()
 			}
 		},
 		// computed: {
 		// 	...mapState(['userInfo']),
 		// },
-		//第一次加载
-		onLoad(e) {
-			console.log('type', e.type);
-			this.type = e.type
-			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
-			if (this.type !== 'add') {
-				this.selectUser()
-			}
-		},
 		//页面显示
 		onShow() {},
 		//方法
 		methods: {
 			getCode() {
-				this.$http.post('/login/getCode', {
-					mobile: this.tel,
-					type: 'reset'
+				uni.request({
+					url: 'http://127.0.0.1:8000/api/login/getCode',
+					method: "POST",
+					data: {
+						mobile: this.tel,
+						type: 'reset'
+					},
 				}).then((res) => {
-					this.codeMsg = res.message
-					console.log('code',this.codeMsg);
+					console.log(res);
+					this.codeMsg = res[1].data.message
 				})
+				// this.$http.post('/login/getCode', {
+				// 	mobile: this.tel,
+				// 	type: 'reset'
+				// }).then((res) => {
+				// 	this.codeMsg = res.message
+				// 	console.log('code', this.codeMsg);
+				// })
 			},
 			selectUser() {
 				this.userInfo.id = uni.getStorageSync('userInfo');
@@ -300,7 +318,7 @@
 							if (this.userInfo.mobile) {
 								this.tel = this.userInfo.mobile
 							}
-							if(this.userInfo.mobile){
+							if (this.userInfo.mobile) {
 								this.tel = this.userInfo.mobile
 							}
 							if (this.userInfo.stature) {
@@ -336,57 +354,50 @@
 						this.genderValue = 2
 					}
 					if (this.relationShipText === '本人') {
-						this.userInfo.type = 0
+						this.relationValue = 0
 					} else if (this.relationShipText === '父亲') {
-						this.genderValue = 1
+						this.relationValue = 1
 					} else if (this.relationShipText === '母亲') {
-						this.genderValue = 2
+						this.relationValue = 2
 					} else if (this.relationShipText === '兄弟姐妹') {
-						this.genderValue = 3
-					}else if (this.relationShipText === '子女') {
-						this.genderValue = 4
-					}else {
-						this.genderValue = 9
+						this.relationValue = 3
+					} else if (this.relationShipText === '子女') {
+						this.relationValue = 4
+					} else {
+						this.relationValue = 9
 					}
-					this.$http
-						.post('/user/create', {
-							head: this.images,
-							fullname: this.name,
-							sex: this.genderValue,
-							type: this.genderValue,
-							birthday: this.birth,
-							mobile: this.tel,
-							// phone:this.tel,
-							code: this.code,
-							stature: this.height,
-							weight: this.weight
-						})
-						.then((res) => {
-							console.log(res)
-							if (res.code == 20000) {
-								uni.showToast({
-									title: '添加成功',
-									icon: 'none',
-									duration: 2000,
-								})
+					this.$http.post("/user/create", {
+						head: this.images,
+						fullname: this.name,
+						sex: this.genderValue,
+						type: this.relationValue,
+						birthday: this.birth,
+						mobile: this.tel,
+						// phone:this.tel,
+						code: this.code,
+						stature: this.height,
+						weight: this.weight,
+						utype: 0
+					}).then((res) => {
+						console.log(1111111111, res)
+						uni.showToast({
+							title: '添加成功',
+							duration: 2000,
+							success: () => {
 								setTimeout(() => {
-									uni.navigateBack({
-										delta: 1,
+									uni.switchTab({
+										url: '/pages/homePage/homePage',
+										success: (res) => {
+											console.log(res)
+										},
+										fail: (err) => {
+											console.log(err)
+										},
 									})
 								}, 1000)
-							} else {
-								uni.showToast({
-									title: '添加失败',
-									icon: 'none',
-									duration: 2000,
-								})
-								setTimeout(() => {
-									uni.navigateBack({
-										delta: 1,
-									})
-								}, 1000)
-							}
+							},
 						})
+					})
 				} else {
 					console.log("修改")
 					this.$http.post('/login/getCode', {
@@ -394,7 +405,7 @@
 						type: 'reset'
 					}).then((res) => {
 						this.userInfo.code = res.message
-						console.log('code',this.userInfo.code);
+						console.log('code', this.userInfo.code);
 						if (this.genderText === '男') {
 							this.userInfo.sex = 1
 						} else {
@@ -408,9 +419,9 @@
 							this.genderValue = 2
 						} else if (this.relationShipText === '兄弟姐妹') {
 							this.genderValue = 3
-						}else if (this.relationShipText === '子女') {
+						} else if (this.relationShipText === '子女') {
 							this.genderValue = 4
-						}else {
+						} else {
 							this.genderValue = 9
 						}
 						// 编辑接口
@@ -437,8 +448,8 @@
 									title: "保存成功"
 								})
 							})
-						})
-					}
+					})
+				}
 			},
 			showNameModal() {
 				this.showName = true
@@ -578,7 +589,7 @@
 				}
 				this.height = this.heightValue
 				this.userInfo.stature = this.height
-				console.log('stature',this.userInfo.stature);
+				console.log('stature', this.userInfo.stature);
 				this.showHeight = false
 			},
 			confirmWeight() {
