@@ -80,8 +80,9 @@
 				</view>
 			</view>
 			<view>
-				<u-picker :columns="citys" :show="show0" close-on-click-overlay @cancel="cancel0" @close="close0"
+				<u-picker mode="selector" :columns="citys" :show="show0" close-on-click-overlay @cancel="cancel0" @close="close0"
 					@confirm="confirm0">
+					<!-- <u-select v-model="show0" mode="single-column" :list="citys" @confirm="confirm0"></u-select> -->
 					<!-- 在确定和取消事件中间添加文本 -->
 					<template #cancel>
 						<div>倒计时 - 取消</div>
@@ -91,7 +92,7 @@
 					</template></u-picker>
 			</view>
 			<view>
-				<u-picker :columns="counts" :show="show1" close-on-click-overlay @cancel="cancel1" @close="close1"
+				<u-picker mode="selector" :columns="counts" :show="show1" close-on-click-overlay @cancel="cancel1" @close="close1"
 					@confirm="confirm1">
 					<!-- 在确定和取消事件中间添加文本 -->
 					<template #cancel>
@@ -111,12 +112,14 @@
 	import FreeJump from '../components/freeJump.vue'
 	import CountDownJump from '../components/countDownJump.vue'
 	import CountDownNumberJump from '../components/countDownNumberJump.vue'
+	import UPicker from "../../../uni_modules/uview-ui/components/u-picker/u-picker.vue";
 	export default {
 		components: {
 			HealthHeader,
 			FreeJump,
 			CountDownJump,
 			CountDownNumberJump,
+			UPicker
 		},
 		data() {
 			return {
@@ -172,16 +175,13 @@
 				show0: false,
 				show1: false,
 				citys: [
-					["半分钟"],
-					["一分钟"],
-					["五分钟"],
-					["十分钟"],
+					["半分钟",
+					"一分钟",
+					"五分钟",
+					"十分钟",]
 				],
 				counts: [
-					["30"],
-					["60"],
-					["120"],
-					["自定义"],
+					["30","60","120","自定义"],
 				],
 			};
 		},
