@@ -86,7 +86,7 @@
 					@click="showRelation = true">
 					<text slot="value" class="u-slot-value">{{ relationShipText }}</text>
 				</u-cell>
-				<u-cell size="large" title="手机号" titleStyle="font-size: 14px" :isLink="true">
+				<u-cell @click="showTelModel" size="large" title="手机号" titleStyle="font-size: 14px" :isLink="true">
 					<text slot="value" class="u-slot-value">{{ tel }}</text>
 				</u-cell>
 			</u-cell-group>
@@ -250,18 +250,18 @@
 				codeMsg: '',
 			}
 		},
-		onLoad: function(opt) {
-			console.log(opt.e);
+		onLoad: function (opt) {
+			console.log(opt.e); 
 			// console.log(111)
 			// _this = this;
 			console.log('type', opt.type);
 			this.type = opt.type
 			//判断是否为添加页面，如果不是，则查询当前用户数据并回显
-			console.log('id0', uni.getStorageSync('userInfo'));
+			console.log('id0',uni.getStorageSync('userInfo'));
 			if (this.type != 'add') {
-				if (opt.e) {
+				if(opt.e){
 					uni.setStorageSync('userInfo', opt.e)
-					console.log('id', uni.getStorageSync('userInfo'));
+					console.log('id',uni.getStorageSync('userInfo'));
 				}
 				this.selectUser()
 			}
@@ -275,7 +275,7 @@
 		methods: {
 			getCode() {
 				uni.request({
-					url: 'http://127.0.0.1:8000/api/login/getCode',
+					url: 'https://new-hn.ttmjk.com/api/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.tel,
@@ -400,56 +400,55 @@
 					})
 				} else {
 					console.log("修改")
-					if (this.genderText === '男') {
-						this.userInfo.sex = 1
-					} else {
-						this.userInfo.sex = 2
-					}
-					if (this.relationShipText === '本人') {
-						this.userInfo.type = 0
-					} else if (this.relationShipText === '父亲') {
-						this.genderValue = 1
-					} else if (this.relationShipText === '母亲') {
-						this.genderValue = 2
-					} else if (this.relationShipText === '兄弟姐妹') {
-						this.genderValue = 3
-					} else if (this.relationShipText === '子女') {
-						this.genderValue = 4
-					} else {
-						this.genderValue = 9
-					}
-					// 编辑接口
-					console.log(this.userInfo);
-					this.$http
-						.post('/user/update', {
-							...this.userInfo,
-						}).then((res) => {
-							console.log(res)
-							if (res.code == 20000) {
-								uni.showToast({
-									title: '修改成功',
-									icon: 'none',
-									duration: 2000,
-								})
-								setTimeout(() => {
-									uni.navigateBack({
-										delta: 1,
+					this.$http.post('/login/getCode', {
+						mobile: this.tel,
+						type: 'reset'
+					}).then((res) => {
+						this.userInfo.code = res.message
+						console.log('code', this.userInfo.code);
+						if (this.genderText === '男') {
+							this.userInfo.sex = 1
+						} else {
+							this.userInfo.sex = 2
+						}
+						if (this.relationShipText === '本人') {
+							this.userInfo.type = 0
+						} else if (this.relationShipText === '父亲') {
+							this.genderValue = 1
+						} else if (this.relationShipText === '母亲') {
+							this.genderValue = 2
+						} else if (this.relationShipText === '兄弟姐妹') {
+							this.genderValue = 3
+						} else if (this.relationShipText === '子女') {
+							this.genderValue = 4
+						} else {
+							this.genderValue = 9
+						}
+						// 编辑接口
+						console.log(this.userInfo);
+						this.$http
+							.post('/user/update', {
+								...this.userInfo,
+							}).then((res) => {
+								console.log(res)
+								if (res.code == 20000) {
+									uni.showToast({
+										title: '修改成功',
+										icon: 'none',
+										duration: 2000,
 									})
-								}, 2000)
-							}
-							this.selectUser()
-							uni.showToast({
-								title: "保存成功"
+									setTimeout(() => {
+										uni.navigateBack({
+											delta: 1,
+										})
+									}, 2000)
+								}
+								this.selectUser()
+								uni.showToast({
+									title: "保存成功"
+								})
 							})
-						})
-					// this.$http.post('/login/getCode', {
-					// 	mobile: this.tel,
-					// 	type: 'reset'
-					// }).then((res) => {
-					// 	this.userInfo.code = res.message
-					// 	console.log('code', this.userInfo.code);
-						
-					// })
+					})
 				}
 			},
 			showNameModal() {
@@ -552,7 +551,7 @@
 					return
 				}
 				this.tel = this.telValue
-				// this.userInfo.phone_number = this.tel
+				this.userInfo.phone_number = this.tel
 				this.showTel = false
 			},
 			confirmCode() {
