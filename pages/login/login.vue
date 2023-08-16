@@ -122,7 +122,7 @@
 
 				//发送验证码接口(未实现)
 				uni.request({
-					url: 'https://new-hn.ttmjk.com/api/login/getCode',
+					url: 'http://127.0.0.1:8000/api/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.form.phonenum,
@@ -188,7 +188,7 @@
 					}
 
 					uni.request({
-							url: 'https://new-hn.ttmjk.com/api/login/login',
+							url: 'http://127.0.0.1:8000/api/login/login',
 							method: "POST",
 							data: {
 								mobile: this.form.phonenum,
@@ -210,21 +210,28 @@
 								const audience = payload.aud;
 								uni.setStorageSync('userInfo', audience)
 								console.log('this.uid', uni.getStorageSync('userInfo'))
-								this.$http.post("/user/create", {
+								if(!uni.getStorageSync('userInfo')){
+									this.$http.post("/user/create", {
 									mobile: this.form.phonenum,
 									code: this.form.pass,
 									type: 0,
 									utype: "0"
 								}).then((res) => {
 									console.log(1111111111, res)
-									// 判断第一次登录结果
-									if (res.data && Object.keys(res.data).length !== 0) {
-										// 第一次登录成功的处理逻辑
-										uni.setStorageSync('userInfo', res.data.uid)
-										console.log("第一次登录");
-									} else {
-										console.log('第二次登录')
-									}
+// <<<<<<< HEAD
+// 									// 判断第一次登录结果
+// 									if (res.data && Object.keys(res.data).length !== 0) {
+// 										// 第一次登录成功的处理逻辑
+// 										uni.setStorageSync('userInfo', res.data.uid)
+// 										console.log("第一次登录");
+// 									} else {
+// 										console.log('第二次登录')
+// 									}
+// =======
+// 									// 第一次登录成功的处理逻辑
+// 									uni.setStorageSync('userInfo', res.data.uid)
+// 									console.log("第一次登录");
+// >>>>>>> f615491b3761a868f3addab69094fcec4944638b
 									uni.showToast({
 										title: '登录成功',
 										duration: 2000,
@@ -242,7 +249,32 @@
 											}, 1000)
 										},
 									})
-								})
+									})
+								}else{
+									console.log('第二次登录')
+									uni.showToast({
+										title: '登录成功',
+										duration: 2000,
+										success: () => {
+											setTimeout(() => {
+												uni.switchTab({
+													url: '/pages/homePage/homePage',
+													success: (res) => {
+														console.log(res)
+													},
+													fail: (err) => {
+														console.log(err)
+													},
+												})
+											}, 1000)
+										},
+									})
+								}
+								
+
+
+
+									
 
 								// uni.request({
 								// 	url:'http://127.0.0.1:8000/api/login/getCode',
