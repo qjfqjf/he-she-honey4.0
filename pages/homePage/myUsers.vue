@@ -6,10 +6,11 @@
 			<uni-list :border="true">
 				<uni-list-item v-for="(item, index) in userIndex" :key="index" :title="item.fullname"
 					:note="item.type_cn + ',' + item.sex_cn + ',' + item.birthday_cn" :thumb="item.head" thumb-size="lg"
-					:clickable="true">
+					:clickable="true" @click="selectUser(item)">
 					<template v-slot:footer>
 						<view class="d-flex a-center" style="width: 240rpx">
-							<u-button type="primary" size="mini" class="mr-1" @click="handleEdit(item.user_id)">编辑</u-button>
+							<u-button type="primary" size="mini" class="mr-1"
+								@click="handleEdit(item.user_id)">编辑</u-button>
 							<u-button type="error" size="mini" @click="handleDel(item.user_id)">删除</u-button>
 						</view>
 					</template>
@@ -45,6 +46,7 @@
 		//第一次加载
 		onLoad(e) {
 			this.type = e.type
+			console.log(this.type)
 		},
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
@@ -52,6 +54,19 @@
 			this.getUserList()
 		},
 		methods: {
+			selectUser(item) {
+				if (this.type == 'select') {
+					uni.$emit('backWithData', {
+						uid: item.user_id,
+						name: item.fullname,
+					}, );
+					uni.navigateBack({
+						delta: 1
+					});
+				} else {
+
+				}
+			},
 			getUserList() {
 				this.$http.post('/user/index', {
 					uid: this.uid,
@@ -75,7 +90,7 @@
 					})
 			},
 			handleEdit(e) {
-				console.log('user_id',e)
+				console.log('user_id', e)
 				uni.navigateTo({
 					url: '/pages/mine/editInfo?e=' + e,
 				})

@@ -189,10 +189,12 @@
 		onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			uni.$on('backWithData', (data) => {
-				this.uid = data.uid;
-				this.name = data.name;
+				console.log(11111111111,data)
 			});
 		},
+		created() {
+		    uni.$on('backWithData', this.handleBackWithData);
+		  },
 		methods: {
 			handleMyUser() {
 				uni.navigateTo({
@@ -614,6 +616,9 @@
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 
+		},
+		destroyed() {
+		  uni.$off('backWithData');
 		}
 	}
 </script>
