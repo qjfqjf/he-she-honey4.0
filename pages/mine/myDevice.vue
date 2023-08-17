@@ -205,6 +205,8 @@
             item.deviceInfo = deviceInfo
           }
         })
+		this.$emit('updateDeviceM',deviceInfo)
+		
       },
       async click(url, name, deviceInfo) {
         if (!url) {

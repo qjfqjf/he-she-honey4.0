@@ -8,21 +8,21 @@
  *
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-let baseUrl = ''
+export let baseUrl = ''
 let socketUrl = ''
 if (process.env.NODE_ENV === 'development') {
   // 开发环境
   // baseUrl = "http://localhost:7001/";
   //   socketUrl = 'ws://localhost:6001/'
   // baseUrl = "http://121.37.31.233:8888/";
-  baseUrl = 'http://127.0.0.1:8000/api'
-  // baseUrl = 'https://new-hn.ttmjk.com/api'
+  // baseUrl = 'http://127.0.0.1:8000/api'
+  baseUrl = 'https://new-hn.ttmjk.com/api'
   // baseUrl = "https://twin-ui.com/demo/";
   // socketUrl = "ws://8.129.186.35:6001/";
 } else if (process.env.NODE_ENV === 'production') {
   // 生产环境
-  baseUrl = 'http://127.0.0.1:8000/api'
-  // baseUrl = 'https://new-hn.ttmjk.com/api'
+  // baseUrl = 'http://127.0.0.1:8000/api'
+  baseUrl = 'https://new-hn.ttmjk.com/api'
   // baseUrl = "https://twin-ui.com/demo/";
   // socketUrl = "ws://twin-ui.com:6001/";
 }

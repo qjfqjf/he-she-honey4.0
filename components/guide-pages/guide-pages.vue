@@ -1,6 +1,6 @@
 <template>
 	<view v-if="show">
-		<swiper class="guide_pages_swiper">
+	<!-- 	<swiper class="guide_pages_swiper">
 			<swiper-item>
 				<view class="guide_pages_bg1">第一屏</view>
 			</swiper-item>
@@ -12,7 +12,7 @@
 				<button v-if="screenHeight > 667" class="guide_pages_close close_1624" @click="onClose">关闭</button>
 				<button v-else class="guide_pages_close close_1334" @click="onClose">关闭</button>
 			</swiper-item>
-		</swiper>
+		</swiper> -->
 	</view>
 </template>
 
@@ -29,17 +29,17 @@
 			};
 		},
 		created() {
-			if(uni.getStorageSync('guidePages') != 2){
-				let systemInfo = uni.getSystemInfoSync();
-				this.screenHeight = systemInfo.screenHeight;
-				this.show = true;
-			}
+			// if(uni.getStorageSync('guidePages') != 2){
+			// 	let systemInfo = uni.getSystemInfoSync();
+			// 	this.screenHeight = systemInfo.screenHeight;
+			// 	this.show = true;
+			// }
 		},
 		methods:{
-			onClose(){
-				uni.setStorageSync('guidePages', 2);
-				this.show = false;
-			}
+			// onClose(){
+			// 	uni.setStorageSync('guidePages', 2);
+			// 	this.show = false;
+			// }
 		}
 	}
 </script>

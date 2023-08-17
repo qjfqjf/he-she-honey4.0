@@ -179,18 +179,21 @@
 		},
 		//第一次加载
 		onLoad(e) {
-			console.log(uni.getStorageSync('userInfo'), 111)
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo
-			console.log('onLoad', this.uid)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			console.log(uni.getStorageSync('userInfo'), 111)
+			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.uid = this.userInfo
+			console.log('onLoad', this.uid)
+			console.log()
+			this.token = uni.getStorageSync('access-token')
+			console.log(this.token,222222)
 			// console.log('appManage', this.appManage[4]);
 			//拿到用户列表
 			// this.getRelationList()
 			// console.log(this.userList)
 			if (!this.token) {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/login/login',
 				})
 			}
@@ -198,10 +201,11 @@
 		},
 		//页面显示
 		onShow() {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			console.log('onshow', this.userInfo)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			console.log('onshow', this.userInfo)
+		
 			this.getAllHistoryList();
 			this.getUserList();
 			//判断蓝牙是否开启
