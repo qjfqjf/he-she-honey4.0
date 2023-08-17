@@ -238,9 +238,8 @@
 			},
 			// 查询最新所有历史记录
 			getAllHistoryList() {
-				console.log('当前方法的uid', this.uid)
 				this.$http.post('/monitor/index', {
-					uid: this.uid,
+					uid: uni.getStorageSync('userInfo'),
 				}).then(res => {
 					this.dataList = res.data.data
 				})
@@ -375,6 +374,7 @@
 				console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
 				uni.setStorageSync('userInfo', this.currentUser.user_id)
+				console.log('userInfo', uni.getStorageSync('userInfo'))
 				this.$http.post('/user/sig', {
 						uid: this.currentUser.user_id
 					}).then((res) => {
@@ -382,23 +382,24 @@
 						if (res.code == 20000) {
 							// uni.setStorageSync('access-token', res.data)
 							console.log('token', uni.getStorageSync('access-token'))
-							uni.showToast({
-								title: '切换成功',
-								duration: 2000,
-								success: () => {
-									setTimeout(() => {
-										uni.switchTab({
-											url: '/pages/homePage/homePage',
-											success: (res) => {
-												console.log(res)
-											},
-											fail: (err) => {
-												console.log(err)
-											},
-										})
-									}, 1000)
-								},
-							})
+							this.getAllHistoryList()
+							// uni.showToast({
+							// 	title: '切换成功',
+							// 	duration: 2000,
+							// 	success: () => {
+							// 		setTimeout(() => {
+							// 			uni.switchTab({
+							// 				url: '/pages/homePage/homePage',
+							// 				success: (res) => {
+							// 					console.log(res)
+							// 				},
+							// 				fail: (err) => {
+							// 					console.log(err)
+							// 				},
+							// 			})
+							// 		}, 1000)
+							// 	},
+							// })
 						} else {
 							uni.showToast({
 								title: '切换失败',
