@@ -6,26 +6,30 @@
 		<u-search placeholder="请输入关键字" :show-action="false" shape="round" class="searchBar m-3" margin="20rpx"
 			v-model="searchWords" height="40" :clearabled="true"></u-search>
 		<u-tabs :list="tabList" class="tab_top" :activeStyle="{
-        color: '#303133',
-        fontWeight: 'bold',
-        transform: 'scale(1.05)',
-      }" :inactiveStyle="{
-        color: '#606266',
-        transform: 'scale(1)',
-      }" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px; width: 50%" @change="tabChange">
+			color: '#303133',
+			fontWeight: 'bold',
+			transform: 'scale(1.05)',
+		}" :inactiveStyle="{
+	color: '#606266',
+	transform: 'scale(1)',
+}" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px; width: 50%" @change="tabChange">
 		</u-tabs>
 
 		<view>
-			<!-- <u-index-list ref="indexList" :index-list="indexList" active-color="#71d5a1">
-				<template v-for="(item, i) in indexList" :key="i">
+			<u-index-list ref="indexList" :index-list="indexList" active-color="#71d5a1">
+				<template v-for="(item, i) in newArr">
 					<u-index-item>
-						<u-index-anchor :text="item"></u-index-anchor>
-						<view class="list-cell" v-for="(cell, index) in itemArr[i]" :key="index">
-							{{ cell.name }}
+						<u-index-anchor v-show="item.length>0" style="" :text="indexList[i]"></u-index-anchor>
+						<view class="list-cell" v-for="(cell, index) in item" :key="index">
+							<view class="d-flex j-center a-center my-1">
+								<u--image shape="circle" :showLoading="true" :src="avatar" width="40px"
+									height="40px"></u--image>
+								<span class="list-cell">{{ cell }}</span>
+							</view>
 						</view>
 					</u-index-item>
 				</template>
-			</u-index-list> -->
+			</u-index-list>
 		</view>
 	</view>
 </template>
@@ -39,7 +43,7 @@
 		data() {
 			return {
 				tabList: [{
-						name: '签到医生',
+						name: '签约医生',
 						id: 1,
 					},
 					{
@@ -82,21 +86,20 @@
 				// 	"https://cdn.uviewui.com/uview/album/1.jpg"
 				// ],
 				itemArr: [
-
+					[]
+				],
+				doctorArr: [
+					[]
 				],
 				newArr: [],
 				hairline: false,
 				userInfo: '',
-				uid: 0,
-				dockerList: [],
-
 			}
 		},
 		async onShow() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo
 			await this.getDockerUserList()
-			await this.getDockerList()
+			await this.getDoctorList()
 		},
 		watch: {
 			// 监听itemArr的变化
@@ -106,17 +109,11 @@
 			},
 		},
 		methods: {
-			getDockerList() {
-				this.$http.post('/doctor/index', {}).then(res => {
-					this.dockerList = res.data.data
-					// this.userIndex = res.data.data
-				})
-			},
 			tabChange(e) {
 				if (e.index == 1) {
-					this.newArr = this.itemArr
+					this.newArr = this.itemArr.filter(item => !!item);
 				} else {
-					this.newArr = []
+					this.newArr = this.doctorArr.filter(item => !!item);
 				}
 			},
 			chineseToInitials(word) {
@@ -167,58 +164,78 @@
 			goBack() {
 				uni.navigateBack({})
 			},
+			// 获取关注医生列表
 			async getDockerUserList() {
-				try {
-					const response = await this.$http.post('/doctor/contact', {});
-					console.log('查看医生', response.data.data);
-
-					// Process the response data to populate itemArr
-					this.itemArr = this.processApiResponse(response.data.data);
-				} catch (error) {
-					console.error('获取医生列表出错', error);
-				}
+				const _this = this
+				let valList = []
+				let temArr = []
+				await this.$http
+					.post('/doctor/contact', {
+						type: 2
+					})
+					.then((res) => {
+						console.log('res', res);
+						res.data.data.forEach((item) => {
+							const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(
+								0)
+							valList.push({
+								name: item.fullname,
+								img: item.headurl,
+								flag: py,
+							})
+							this.indexList.forEach((val, index) => {
+								if (py === val) {
+									temArr = []
+									valList.forEach((tem, i) => {
+										if (valList[i].flag == val) {
+											temArr.push(tem.name)
+										}
+									})
+									_this.itemArr[index] = temArr
+								} else {
+									this.itemArr[index] = []
+								}
+							})
+						})
+						console.log('itemArr', this.itemArr)
+					})
 			},
-			// async getDockerUserList() {
-			// 	await this.$http.post('/doctor/contact', {
-			// 	}).then((res) => {
-			// 		console.log('查看医生',res.data.data)
-			// 		this.itemArr = res.data
-			// 	})
-			// },
-			//获取亲属关系列表
-			// async getDockerUserList() {
-			// 	const _this = this
-			// 	let valList = []
-			// 	let temArr = []
-			// 	await this.$http
-			// 		.post('/doctor/contact', {})
-			// 		.then((res) => {
-			// 			res.data.data.forEach((item) => {
-			// 				const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(
-			// 					0)
-			// 				valList.push({
-			// 					name: item.fullname,
-			// 					img: item.headurl,
-			// 					flag: py,
-			// 				})
-			// 				console.log('vallist', valList)
-			// 				this.indexList.forEach((val, index) => {
-			// 					if (py === val) {
-			// 						temArr = []
-			// 						valList.forEach((tem, i) => {
-			// 							if (valList[i].flag == val) {
-			// 								temArr.push(tem.fullname)
-			// 							}
-			// 						})
-			// 						_this.itemArr[index] = temArr
-			// 					} else {
-			// 						this.itemArr[index] = []
-			// 					}
-			// 				})
-			// 			})
-			// 			console.log(1111111111, this.itemArr)
-			// 		})
-			// },
+			// 获取签约医生列表
+			async getDoctorList() {
+				const _this = this
+				let valList = []
+				let temArr = []
+				await this.$http
+					.post('/doctor/contact', {
+						type: 1
+					})
+					.then((res) => {
+						console.log('res', res);
+						res.data.data.forEach((item) => {
+							const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(
+								0)
+							valList.push({
+								name: item.fullname,
+								img: item.headurl,
+								flag: py,
+							})
+							this.indexList.forEach((val, index) => {
+								if (py === val) {
+									temArr = []
+									valList.forEach((tem, i) => {
+										if (valList[i].flag == val) {
+											temArr.push(tem.name)
+										}
+									})
+									_this.doctorArr[index] = temArr
+								} else {
+									this.doctorArr[index] = []
+								}
+							})
+						})
+						console.log('doctorArr', this.doctorArr)
+					})
+			},
 		},
 		components: {
 			IndexList,

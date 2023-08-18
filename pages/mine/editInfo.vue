@@ -285,8 +285,13 @@
 						type: 'reset'
 					},
 				}).then((res) => {
-					console.log(res);
-					this.codeMsg = res[1].data.message
+					if (Array.isArray(res)) {
+					    console.log(res);
+					    this.codeMsg = res[1].data.message
+					} else {
+					    this.codeMsg = res.message
+					}
+					
 				})
 			},
 			selectUser() {
