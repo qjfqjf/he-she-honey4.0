@@ -365,12 +365,12 @@
 				console.log(this.currentUser)
 				uni.setStorageSync('userInfo', this.currentUser.user_id)
 				console.log('userInfo', uni.getStorageSync('userInfo'))
-				this.$http.post('/user/sig', {
-						uid: this.currentUser.user_id
+				this.$http.post('/user/switchUser', {
+						id: this.currentUser.user_id
 					}).then((res) => {
 						console.log(res)
 						if (res.code == 20000) {
-							// uni.setStorageSync('access-token', res.data)
+							uni.setStorageSync('access-token', res.message)
 							console.log('token', uni.getStorageSync('access-token'))
 							this.getAllHistoryList()
 							// uni.showToast({
