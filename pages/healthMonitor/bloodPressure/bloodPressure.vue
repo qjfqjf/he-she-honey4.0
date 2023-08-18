@@ -4,7 +4,7 @@
 			<view slot="right" class="p-2" @click="handleWarningRule">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader :name="name" :username="username" @myUser="handleMyUser"></HealthHeader>
+		<HealthHeader  :username="username" @myUser="handleMyUser"></HealthHeader>
 		<!-- tab切换 -->
 		<view class="tab-container d-flex j-center my-3">
 			<view class="tab tab1" :class="{ active: currentTab === 'tab1' }" @click="()=>currentTab = 'tab1'">左侧</view>
@@ -148,9 +148,8 @@
 				serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				userInfo: '',
-				uid: 0, //用户id
-				name: '', //选择之后的名字
-				username: '', //登录开始的名字
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
 				// 底部工具栏
 				page: '',
 				toolList: [{
@@ -177,9 +176,10 @@
 				tag:'left'
 			};
 		},
-		onLoad(e) {
+		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
+			this.getUserInfo()
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
@@ -187,15 +187,19 @@
 		},
 		//页面显示
 		onShow() {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			uni.$on('backWithData', (data) => {
-				console.log(11111111111,data)
+			    this.uid = data.uid;
+			    this.username = data.name;
 			});
 		},
-		created() {
-		    uni.$on('backWithData', this.handleBackWithData);
-		  },
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
 			handleMyUser() {
 				uni.navigateTo({
 					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
@@ -617,9 +621,6 @@
 			},
 
 		},
-		destroyed() {
-		  uni.$off('backWithData');
-		}
 	}
 </script>
 <script module="echarts" lang="renderjs">

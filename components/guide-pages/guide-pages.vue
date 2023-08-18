@@ -1,6 +1,10 @@
 <template>
 	<view v-if="show">
+<<<<<<< HEAD
+	<!-- 	<swiper class="guide_pages_swiper">
+=======
 		<!-- <swiper class="guide_pages_swiper">
+>>>>>>> f4a9a16619c980a0ac4ea2a4b0dcaf21b615e9ad
 			<swiper-item>
 				<view class="guide_pages_bg1">第一屏</view>
 			</swiper-item>
@@ -29,17 +33,17 @@
 			};
 		},
 		created() {
-			if(uni.getStorageSync('guidePages') != 2){
-				let systemInfo = uni.getSystemInfoSync();
-				this.screenHeight = systemInfo.screenHeight;
-				this.show = true;
-			}
+			// if(uni.getStorageSync('guidePages') != 2){
+			// 	let systemInfo = uni.getSystemInfoSync();
+			// 	this.screenHeight = systemInfo.screenHeight;
+			// 	this.show = true;
+			// }
 		},
 		methods:{
-			onClose(){
-				uni.setStorageSync('guidePages', 2);
-				this.show = false;
-			}
+			// onClose(){
+			// 	uni.setStorageSync('guidePages', 2);
+			// 	this.show = false;
+			// }
 		}
 	}
 </script>

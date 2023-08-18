@@ -154,6 +154,9 @@
 	import {
 		use
 	} from "../../static/js/echarts";
+	import {
+		baseUrl
+	} from '@/config/baseUrl.js'
 	export default {
 		data() {
 			return {
@@ -275,7 +278,7 @@
 		methods: {
 			getCode() {
 				uni.request({
-					url: 'https://new-hn.ttmjk.com/api/login/getCode',
+					url:baseUrl + '/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.tel,
@@ -285,13 +288,6 @@
 					console.log(res);
 					this.codeMsg = res[1].data.message
 				})
-				// this.$http.post('/login/getCode', {
-				// 	mobile: this.tel,
-				// 	type: 'reset'
-				// }).then((res) => {
-				// 	this.codeMsg = res.message
-				// 	console.log('code', this.codeMsg);
-				// })
 			},
 			selectUser() {
 				this.userInfo.id = uni.getStorageSync('userInfo');

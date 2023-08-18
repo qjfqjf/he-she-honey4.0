@@ -104,12 +104,14 @@
 				currentDeviceType: 0, //0家康设备，1一体机设备
 				deviceInfoList: [{
 						//家康血糖仪
+						dName: 'jkxtDeviceId',
 						deviceId: uni.getStorageSync('jkxtDeviceId'), // 蓝牙设备的id
 						serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB', //设备的服务值
 						characteristicId: '0000FFF2-0000-1000-8000-00805F9B34FB', // 设备的特征值
 					},
 					{
 						//三合一
+						dName: 'ytDeviceId',
 						deviceId: uni.getStorageSync('ytDeviceId'), // 蓝牙设备的id
 						serviceId: '00001000-0000-1000-8000-00805F9B34FB', //设备的服务值
 						characteristicId: '00001002-0000-1000-8000-00805F9B34FB', // 设备的特征值
@@ -139,10 +141,9 @@
 			}
 		},
 		onLoad(e) {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// this.username = this.userInfo.name;
-			this.uid = this.userInfo
-
+			// this.uid = this.userInfo
 			this.initBlue()
 			if (
 				(this.deviceInfoList[0].deviceId || this.deviceInfoList[1].deviceId) &&
@@ -150,16 +151,49 @@
 			) {
 				this.createInterval()
 			}
+			console.log('---------------------------------load----------------------------------------------')
 		},
 		//页面显示
 		onShow() {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+
+			// uni.$on('updateDeviceStatus', this.handleDeviceStatusUpdate)
+			// uni.$on('updateDeviceM', this.handleDeviceUpdate)
+			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		onUnload() {
+			// 在组件销毁前移除事件监听
+			uni.$off('updateDeviceM')
+			uni.$off('updateDeviceStatus')
+
 			clearInterval(this.connectYtDeviceTimer)
 			clearInterval(this.connectJKDeviceTimer)
 		},
 		methods: {
+			handleDeviceStatusUpdate(deviceStatus) {
+				this.deviceStatus = 0
+				this.deviceStatus = deviceStatus
+
+				console.log(deviceStatus, '--------------------------------------------取消---------------------------')
+			},
+			handleDeviceUpdate(deviceInfo) {
+				console.log(deviceInfo)
+				this.currentDeviceId = uni.getStorageSync(item.dName)
+				this.deviceStatus = 1
+				console.log(this.currentDeviceId,
+					'--------------------------------------------我是handleDeviceUpdateM---------------------------')
+				this.deviceInfoList.forEach((item) => {
+					if (item.dName === deviceInfo.dName) {
+						item = deviceInfo
+						this.currentDeviceId = uni.getStorageSync(item.dName)
+						console.log(item)
+					}
+				})
+
+
+			},
+			connectTimer() {
+			
+			},
 			radioClick(name) {
 				this.radios.map((item, index) => {
 					item.checked = index === name ? true : false
@@ -381,16 +415,16 @@
 						_this.currentDeviceType = deviceType
 						_this.currentDeviceId = deviceId
 						_this.listenValueChange()
-						uni.showToast({
-							title: '已开启监听'
-						})
+						// uni.showToast({
+						// 	title: '已开启监听'
+						// })
 					},
 					fail(err) {
 						console.error(err)
-						uni.showToast({
-							title: '监听失败',
-							icon: 'error',
-						})
+						// uni.showToast({
+						// 	title: '监听失败',
+						// 	icon: 'error',
+						// })
 						_this.notify(deviceId, serviceId, characteristicId)
 					},
 				})

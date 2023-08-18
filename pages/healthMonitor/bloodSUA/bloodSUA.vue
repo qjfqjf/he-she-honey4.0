@@ -316,10 +316,10 @@
 					serviceId: this.serviceId,
 					characteristicId: this.characteristicId,
 					success(res) {
-						uni.showToast({
-							title: '监听成功',
-							icon: 'success',
-						})
+						// uni.showToast({
+						// 	title: '监听成功',
+						// 	icon: 'success',
+						// })
 						console.log(res, '监听成功')
 						_this.deviceStatus = 1
 						_this.listenValueChange()

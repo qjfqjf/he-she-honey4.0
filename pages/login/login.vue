@@ -65,6 +65,9 @@
 
 <script>
 	import md5 from '@/plugins/md5'
+	import {
+		baseUrl
+	} from '@/config/baseUrl.js'
 	var clear
 	export default {
 		data() {
@@ -120,7 +123,7 @@
 				this.getCodeState()
 				//发送验证码接口
 				uni.request({
-					url: 'https://new-hn.ttmjk.com/api/login/getCode',
+					url: baseUrl + '/login/getCode',
 					method: "POST",
 					data: {
 						mobile: this.form.phonenum,
@@ -177,7 +180,7 @@
 						return
 					}
 					uni.request({
-							url: 'https://new-hn.ttmjk.com/api/login/login',
+							url: baseUrl + '/login/login',
 							method: "POST",
 							data: {
 								mobile: this.form.phonenum,

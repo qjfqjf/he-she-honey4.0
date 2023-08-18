@@ -153,7 +153,8 @@
 				doctorId: 0,
 				userInfo: '',
 				defaultSelect: 0, //默认选中下标，从0开始
-				userList: [{
+				userList: [
+					{
 						images: 'https://img2.baidu.com/it/u=1834432083,2460596852&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
 						name: '张淑芳'
 					},
@@ -179,18 +180,18 @@
 		},
 		//第一次加载
 		onLoad(e) {
-			console.log(uni.getStorageSync('userInfo'), 111)
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo
-			console.log('onLoad', this.uid)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			console.log(uni.getStorageSync('userInfo'), 111)
+			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.uid = this.userInfo
+			console.log('onLoad', this.uid)
+			console.log()
+			this.token = uni.getStorageSync('access-token')
+			console.log(this.token,222222)
 			// console.log('appManage', this.appManage[4]);
-			//拿到用户列表
-			// this.getRelationList()
-			// console.log(this.userList)
 			if (!this.token) {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/login/login',
 				})
 			}
@@ -198,10 +199,10 @@
 		},
 		//页面显示
 		onShow() {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			console.log('onshow', this.userInfo)
 			// 隐藏原生的tabbar
 			uni.hideTabBar();
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			console.log('onshow', this.userInfo)
 			this.getAllHistoryList();
 			this.getUserList();
 			//判断蓝牙是否开启
@@ -334,19 +335,19 @@
 							content: '确定要关注该医生吗？',
 							success: function(res) {
 								if (res.confirm) {
-									// _this.$http.post('/bindDockerUser', {
-									// 	uid: _this.userInfo.uid,
-									// 	did: _this.doctorId,
-									// }).then((res) => {
-									// 	console.log(res)
-									// 	if (res.result.code == 200) {
-									// 		uni.showToast({
-									// 			title: '绑定成功',
-									// 			icon: 'none',
-									// 			duration: 2000,
-									// 		})
-									// 	}
-									// })
+									_this.$http.post('/doctor/follow', {
+										id: _this.doctorId,
+										status:1
+									}).then((res) => {
+										console.log(11111111,res)
+										if (res.code == 20000) {
+											uni.showToast({
+												title: '绑定成功',
+												icon: 'none',
+												duration: 2000,
+											})
+										}
+									})
 								} else if (res.cancel) {
 									console.log('用户点击取消');
 								}
@@ -358,18 +359,10 @@
 				// console.log(this.doctorId)
 
 			},
-			// changeHeadImg(index) {
-			// 	console.log(this.currentUser)
-			// 	console.log('当前选中' + index)
-			// 	this.currentUser = this.userList[index]
-			// 	uni.setStorageSync('userInfo', this.currentUser.user_id)
-			// 	this.uid = uni.getStorageSync('userInfo')
-			// 	this.getAllHistoryList()
-			// },
 			changeHeadImg(index) {
-				console.log(this.currentUser)
 				console.log('当前选中' + index)
 				this.currentUser = this.userList[index]
+				console.log(this.currentUser)
 				uni.setStorageSync('userInfo', this.currentUser.user_id)
 				console.log('userInfo', uni.getStorageSync('userInfo'))
 				this.$http.post('/user/sig', {

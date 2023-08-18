@@ -24,6 +24,7 @@
 </template>
 
 <script>
+	
 	export default {
 		data() {
 			return {
@@ -56,13 +57,12 @@
 		methods: {
 			selectUser(item) {
 				if (this.type == 'select') {
-					uni.$emit('backWithData', {
-						uid: item.user_id,
-						name: item.fullname,
-					}, );
-					uni.navigateBack({
-						delta: 1
+					uni.$emit('backWithData', { 
+						uid: item.user_id, 
+						name: item.fullname ,
 					});
+					uni.navigateBack({ delta: 1 });
+					// this.$store.commit("getUser", item);
 				} else {
 
 				}
