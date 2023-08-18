@@ -131,7 +131,7 @@
 					},
 				}).then((res) => {
 					console.log(res);
-					this.form.pass = res[1].data.message
+					this.form.pass = res.data.message
 					this.getCodeState()
 				})
 			},
@@ -189,8 +189,8 @@
 						}).then((res) => {
 							console.log('res', res)
 							//登录成功
-							if (res[1].data.code == 20000) {
-								uni.setStorageSync('access-token', res[1].data.data.token)
+							if (res.data.code == 20000) {
+								uni.setStorageSync('access-token', res.data.data.token)
 								const uid = uni.getStorageSync('access-token')
 								const parts = uid.split('.');
 								const payload = JSON.parse(atob(parts[1])); // 解码并解析负载

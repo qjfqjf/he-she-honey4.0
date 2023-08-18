@@ -1707,7 +1707,34 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		      "path": "TUIKit/components/TUIConversation/index",
+		      "style": {
+		        "navigationBarTitleText": "云通信 IM"
+		      }
+		    },
+		    {
+		      "path": "TUIKit/components/TUIChat/index",
+		      "style": {
+		        "navigationBarTitleText": "云通信 IM"
+		      }
+		    },
+		    {
+		      "path": "TUIKit/components/TUIChat/video-play"
+		    },
+		    {
+		      "path": "TUIKit/components/TUIContact/index",
+		      "style": {
+		        "navigationBarTitleText": "云通信 IM"
+		      }
+		    },
+		    {
+		      "path": "TUIKit/components/TUIGroup/manage-group/index",
+		      "style": {
+		        "navigationBarTitleText": "群管理"
+		      }
+		    }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -1745,6 +1772,7 @@
 				"selectedIconPath": "static/icon/tab/icon_my_c.png",
 				"text": "我的"
 			}
+		
 		]
 	},
 	"condition": {
