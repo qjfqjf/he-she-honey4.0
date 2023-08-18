@@ -43,10 +43,9 @@
 		  </view>
     </view>
 </template>
-<script setup>
+<script>
 import ZNavBar from "../../uni_modules/z-nav-bar/components/z-nav-bar/z-nav-bar.vue";
 import PublicModule from "../../components/public-module/public-module.vue";
-// export {goBack} from "./common"
 export default {
     methods: {
         goBack(){
