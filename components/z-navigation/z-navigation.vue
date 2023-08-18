@@ -67,14 +67,14 @@
 						"selectedIconPath": "static/icon/tab/icon_my_c.png",
 						"text": "我的"
 					},
-					{
-						"pagePath": "TUIKit/components/TUIConversation/index",
-						"text": "消息"
-					},
-					{
-						"pagePath": "TUIKit/components/TUIContact/index",
-						"text": "通讯录"
-					}
+					// {
+					// 	"pagePath": "TUIKit/components/TUIConversation/index",
+					// 	"text": "消息"
+					// },
+					// {
+					// 	"pagePath": "TUIKit/components/TUIContact/index",
+					// 	"text": "通讯录"
+					// }
 				],
 				popupShow: false
 			};

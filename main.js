@@ -12,10 +12,10 @@
 import App from './App'
 import Vue from 'vue'
 import VueCompositionAPI from '@vue/composition-api'
-import unifyPromiseVue2 from "./TUIKit/utils/unifyPromiseVue2";
+// import unifyPromiseVue2 from "./TUIKit/utils/unifyPromiseVue2";
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI)
-unifyPromiseVue2();
+// unifyPromiseVue2();
 //数据管理中心
 import store from '@/store'
 // uview
