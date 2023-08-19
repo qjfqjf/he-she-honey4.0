@@ -2,7 +2,7 @@
 	<view class="p-2">
 		<z-nav-bar title="血糖"></z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<MyCircle style="margin: 100rpx 0 20rpx 0" :value="value.length === 0 ? 0 : value" unit="mmol/L"
 			color="#ff8575">
 		</MyCircle>
@@ -121,7 +121,10 @@
 				// 底部工具栏
 				page: '',
 				userInfo: '',
-				toolList: [{
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
+				toolList: [
+					{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
 						url: '/pages/healthMonitor/bloodSugar/bloodSugarMonth',
@@ -141,9 +144,9 @@
 			}
 		},
 		onLoad(e) {
-			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// this.username = this.userInfo.name;
-			// this.uid = this.userInfo
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			this.getUserInfo()
 			this.initBlue()
 			if (
 				(this.deviceInfoList[0].deviceId || this.deviceInfoList[1].deviceId) &&
@@ -155,10 +158,11 @@
 		},
 		//页面显示
 		onShow() {
-
-			// uni.$on('updateDeviceStatus', this.handleDeviceStatusUpdate)
-			// uni.$on('updateDeviceM', this.handleDeviceUpdate)
-			// this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+			
 		},
 		onUnload() {
 			// 在组件销毁前移除事件监听
@@ -169,6 +173,18 @@
 			clearInterval(this.connectJKDeviceTimer)
 		},
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			handleDeviceStatusUpdate(deviceStatus) {
 				this.deviceStatus = 0
 				this.deviceStatus = deviceStatus
@@ -245,7 +261,7 @@
 			},
 			handleDevelop() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodSugar/bloodSugarHistory',
+					url: '/pages/healthMonitor/bloodSugar/bloodSugarHistory?uid=' + this.uid,
 				})
 			},
 			// 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
