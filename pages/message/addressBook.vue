@@ -165,77 +165,57 @@
 				uni.navigateBack({})
 			},
 			// 获取关注医生列表
-			async getDockerUserList() {
-				const _this = this
-				let valList = []
-				let temArr = []
-				await this.$http
-					.post('/doctor/contact', {
-						type: 2
-					})
-					.then((res) => {
-						console.log('res', res);
-						res.data.data.forEach((item) => {
-							const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(
-								0)
-							valList.push({
-								name: item.fullname,
-								img: item.headurl,
-								flag: py,
-							})
-							this.indexList.forEach((val, index) => {
-								if (py === val) {
-									temArr = []
-									valList.forEach((tem, i) => {
-										if (valList[i].flag == val) {
-											temArr.push(tem.name)
-										}
-									})
-									_this.itemArr[index] = temArr
-								} else {
-									this.itemArr[index] = []
-								}
-							})
-						})
-						console.log('itemArr', this.itemArr)
-					})
-			},
-			// 获取签约医生列表
-			async getDoctorList() {
-				const _this = this
-				let valList = []
-				let temArr = []
-				await this.$http
-					.post('/doctor/contact', {
-						type: 1
-					})
-					.then((res) => {
-						console.log('res', res);
-						res.data.data.forEach((item) => {
-							const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(
-								0)
-							valList.push({
-								name: item.fullname,
-								img: item.headurl,
-								flag: py,
-							})
-							this.indexList.forEach((val, index) => {
-								if (py === val) {
-									temArr = []
-									valList.forEach((tem, i) => {
-										if (valList[i].flag == val) {
-											temArr.push(tem.name)
-										}
-									})
-									_this.doctorArr[index] = temArr
-								} else {
-									this.doctorArr[index] = []
-								}
-							})
-						})
-						console.log('doctorArr', this.doctorArr)
-					})
-			},
+			getDockerUserList() {
+			this.$http
+				.post('/doctor/contact', {
+					type:2
+				})
+				.then((res) => {
+					console.log('res',res);
+					// res.data.data.push({fullname:'法外狂徒'});
+					const valList = res.data.data.map((item) => {
+						const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(0);
+						return {
+						name: item.fullname,
+						img: item.headurl,
+						flag: py,
+						};
+					});
+					// console.log('valList',valList);
+					this.itemArr = this.indexList.map((val) => {
+						const temArr = valList
+						.filter((tem) => tem.flag === val)
+						.map((tem) => tem.name);
+						return temArr;
+					});
+					});
+		},
+		// 获取签约医生列表
+		async getDoctorList() {
+			let valList = []
+			await this.$http
+				.post('/doctor/contact', {
+					type:1
+				})
+				.then((res) => {
+					console.log('res',res);
+					const valList = res.data.data.map((item) => {
+						const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(0);
+						return {
+						name: item.fullname,
+						img: item.headurl,
+						flag: py,
+						};
+					});
+					this.doctorArr = this.indexList.map((val) => {
+						const temArr = valList
+						.filter((tem) => tem.flag === val)
+						.map((tem) => tem.name);
+						return temArr;
+					});
+					console.log('doctorArr', this.doctorArr);
+					});
+		},
 		},
 		components: {
 			IndexList,
