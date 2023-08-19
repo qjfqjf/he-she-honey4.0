@@ -4,7 +4,7 @@
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="cholestrol" unit="mmol/L" color="#fba723"></MyCircle>
 		<TipInfo title="胆固醇趋势"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
@@ -96,18 +96,41 @@
 						url: '/pages/healthMonitor/cholesterol/cholesterolManualEntry'
 					},
 				],
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
 			};
 		},
 		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			this.getUserInfo()
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
 			}
 		},
+		onShow() {
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+		},
 		onUnload() {
 			clearInterval(this.deviceTimer)
 		},
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			// 保存胆固醇值
 			handleSaveCholestrol() {
 

@@ -129,8 +129,8 @@
 		},
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.username = this.userInfo.name;
 			this.uid = this.userInfo
+			this.getUserInfo()
 			this.initBlue()
 			
 			if (this.deviceId && this.deviceStatus === 0) {
@@ -172,6 +172,18 @@
 		},
 
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			handleWarningRule(){
 				uni.navigateTo({
 					url: '/pages/healthMonitor/warningRule/warningRule' // 跳转到指定的目标页面
@@ -513,11 +525,6 @@
 			handleOximeterTrend() {
 				uni.navigateTo({
 					url: '/pages/healthMonitor/oximeter/oximeterTrend?uid='+this.uid, // 跳转到指定的目标页面
-				});
-			},
-			handleMyUser() {
-				uni.navigateTo({
-					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
 				});
 			},
 			//时间格式转换
