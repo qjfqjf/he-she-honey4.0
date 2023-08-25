@@ -48,7 +48,6 @@
 		},
 		//方法
 		methods: {
-
 			click(url, name) {
 				if (!url) {
 					this.$refs.uToast.default('开发中...')
@@ -56,8 +55,6 @@
 				uni.navigateTo({
 					url: url
 				});
-				// uni.setStorageSync('selectFoodTag',true)
-				// uni.setStorageSync('foodNameTag',false)
 			},
 			goDiet(){
 				uni.navigateTo({

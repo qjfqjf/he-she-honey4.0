@@ -4,7 +4,7 @@
 
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<view class="mt-3 mb-3" style="height: 350rpx;">
 			<l-ecg ref="ecgRef"></l-ecg>
 		</view>
@@ -70,28 +70,46 @@
 					122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122
 				],
 				time: null,
-        // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/ergometer/ergometerMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/'+this.page
-        	},
-        ],
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/ergometer/ergometerMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/' + this.page
+					},
+				],
 			}
 		},
+		onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			this.getUserInfo()
+			this.initBlue()
+			if (this.deviceId && this.deviceStatus === 0) {
+				this.connect()
+			}
+		},
+		//页面显示
+		onShow() {
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+		},
 		async mounted() {
+			
 			await this.$refs.ecgRef.init({
 				// 小格和大格的border color
 				lineColor: ['#c7dff5', '#63b3f8'],
@@ -119,6 +137,18 @@
 			this.pause()
 		},
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			resume() {
 				// console.log(ecgRef.value)
 				this.$refs.ecgRef.update(this.value)
@@ -143,13 +173,13 @@
 			handleSave() {
 				console.log('提交')
 			},
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
-      
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
+
 		},
 	}
 </script>

@@ -1,11 +1,10 @@
-\
 <template>
 	<view class="content p-2">
 		<z-nav-bar title="血脂">
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 
 		<view class="data d-flex j-sb flex-wrap" style="margin-top: 100rpx;">
 			<view class="item d-flex flex-column a-center w-50" v-for="item in data" :key="item.unit">
@@ -73,37 +72,61 @@
 				deviceId: '', // 蓝牙设备的id
 				serviceId: '', //设备的服务值
 				characteristicId: '', // 设备的特征值
- // 底部工具栏
-        page:'',
-        toolList: [
-        	{
-        		img: require('@/static/icon/bloodPressure/month.png'),
-        		title: '月报',
-        		url: '/pages/healthMonitor/bloodFat/bloodFatMonth'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/device.png'),
-        		title: '设备',
-        		url: '/pages/mine/myDevice'
-        	},
-        	{
-        		img: require('@/static/icon/bloodPressure/write.png'),
-        		title: '手动录入',
-        		url: '/pages/healthMonitor/bloodFat/bloodFatManualEntry'
-        	},
-        ],
+				userInfo: '',
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
+				// 底部工具栏
+				page: '',
+				toolList: [{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/bloodFat/bloodFatMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/write.png'),
+						title: '手动录入',
+						url: '/pages/healthMonitor/bloodFat/bloodFatManualEntry'
+					},
+				],
 			};
 		},
 		onLoad(e) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			this.getUserInfo()
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.connect()
 
 			}
 		},
+		//页面显示
+		onShow() {
+			uni.$on('backWithData', (data) => {
+				this.uid = data.uid;
+				this.username = data.name;
+			});
+		},
 		methods: {
+			getUserInfo() {
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			handleDevelop() {
-				
+
 			},
 			handleSaveHeat() {
 
@@ -305,12 +328,12 @@
 
 
 			},
-      onPageJump(url) {
-      	uni.navigateTo({
-      		url: url
-      	});
-      
-      },
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
 
 		}
 	}

@@ -39,6 +39,20 @@
 				]
 			};
 		},
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.uid = this.userInfo
+			// 获取URL参数
+			const uid = options.uid;
+			if (uid == 0) {
+				this.uid = this.userInfo
+				console.log(111111,this.uid)
+			} else {
+				this.uid = uid
+			}
+			console.log(111111,this.uid)
+			this.getHistoryList();
+		},
 		computed: {
 			data() {
 				return this.dataList[0];
@@ -270,11 +284,6 @@
 				}
 
 			}
-		},
-		onLoad() {
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo
-			this.getHistoryList();
 		},
 
 	}

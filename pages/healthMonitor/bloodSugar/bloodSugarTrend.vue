@@ -1,6 +1,6 @@
 <template>
 	<view class="b-content p-2">
-		<z-nav-bar title="血压趋势">
+		<z-nav-bar title="血糖趋势">
 
 		</z-nav-bar>
 		<public-module @getDate="getDate"></public-module>
@@ -88,15 +88,16 @@
 		created() {
 			dayjs.extend(isBetween)
 		},
-		onLoad() {
+		onLoad(options) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// 获取URL参数
-			const uid = this.userInfo;
+			const uid = options.uid;
 			if (uid == 0) {
 				this.uid = this.userInfo
 			} else {
 				this.uid = uid
 			}
+			console.log(111111,this.uid)
 			dayjs.extend(isBetween);
 			this.getHistoryList();
 		},

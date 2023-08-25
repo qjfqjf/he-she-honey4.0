@@ -4,7 +4,7 @@
 			<view slot="right" class="p-2" @click="handleDevelop">预警规则</view>
 		</z-nav-bar>
 		<public-module></public-module>
-		<HealthHeader></HealthHeader>
+		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<u-read-more class="p-2 mt-3" :toggle="true" closeText="查看更多">
 			<view class="d-flex j-center">
 				<image src="@/static/icon/bodyFat/logo.png" mode="aspectFit"></image>
@@ -61,6 +61,7 @@
 		data() {
 			return {
 				uid: 0, //用户id
+				username: '', //登录的名字
 				userInfo: '',
 				btnColor: '#dadada',
 				deviceStatus: 0,
@@ -221,15 +222,37 @@
 		async onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
+			console.log(111111,this.uid)
+			this.getUserInfo()
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
 		},
+		//页面显示
+		onShow() {
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+			console.log(111111,this.uid)
+		},
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			handleDevelop() {
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bodyFat/bodyFatHistory'
+					url: '/pages/healthMonitor/bodyFat/bodyFatHistory?uid=' + this.uid,
 				})
 			},
 			handleSave() {
@@ -260,55 +283,14 @@
 					target_weight:0,
 					standard:'{"water_mass_max":0.0, "water_mass_min":0.0, "bone_max":0.0, "bone_min":0.0, "protein_mass_max":0.0, "protein_mass_min":0.0, "muscle_mass_max":0.0, "muscle_mass_min":0.0, "weight_standard":0.0, "smm_standard":0.0, "bfm_standard":0.0, "bmr_standard":0}',
 					time: this.formatDate(new Date()),
-					// uid: this.uid,
-					// weight: this.weight_kg,
-					// bmi: this.bmi,
-					// body_fat_percent: this.bodyFatPercent,
-					// muscle_percent: this.musclePercent,
-					// subcutaneous_fat_percent: this.subcutaneousFatPercent,
-					// visceral_fat: this.visceralFat,
-					// bmr: this.bmr,
-					// bone_mass: this.boneMass,
-					// moisture_percent: this.moisturePercent,
-					// physical_age: this.physicalAge,
-					// protein_percent: this.proteinPercent,
-					// sm_percent: this.boneMass,
-					// time: this.formatDate(new Date()),
-					// type: 1
+		
 				}).then(res => {
 					this.$refs.uToast.show({
 						message: '保存成功',
 						type: 'success',
 					})
 					this.btnColor = '#dadada'
-					// this.measureResult.SYS = 0
-					// this.measureResult.DIA = 0
-					// this.measureResult.PUL = 0
-					// this.measureResult.pressure = 0
-					// this.option.series[0].data[0].value = 0
-					// if (this.measureResult.pressure != 0) {
-					// 	this.$refs.uToast.show({
-					// 		message: '保存成功',
-					// 		type: 'success',
-					// 	})
-					// 	this.btnColor = '#dadada'
-					// 	this.measureResult.SYS = 0
-					// 	this.measureResult.DIA = 0
-					// 	this.measureResult.PUL = 0
-					// 	this.measureResult.pressure = 0
-					// 	this.option.series[0].data[0].value = 0
-					// } else {
-					// 	this.$refs.uToast.show({
-					// 		message: '保存失败',
-					// 		type: 'error',
-					// 	})
-					// 	this.btnColor = '#dadada'
-					// 	this.measureResult.SYS = 0
-					// 	this.measureResult.DIA = 0
-					// 	this.measureResult.PUL = 0
-					// 	this.measureResult.pressure = 0
-					// 	this.option.series[0].data[0].value = 0
-					// }
+					
 				})
 			},
 			/* 初始化 */
