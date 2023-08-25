@@ -64,6 +64,7 @@
 			}else{
 				this.uid = uid
 			}
+			console.log(111111,this.uid)
 			this.getHistoryList();
 		},
 		//页面显示

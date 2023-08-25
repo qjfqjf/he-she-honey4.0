@@ -103,14 +103,20 @@
 				selectedCategory:0,
 			};
 		},
-		onLoad(e) {
+		onLoad(options) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			// this.username = this.userInfo.name;
-			this.uid = this.userInfo
-			this.initBlue()
-			if (this.deviceId && this.deviceStatus === 0) {
-				this.connect()
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo
+			}else{
+				this.uid = uid
 			}
+			console.log(111111,this.uid)
+			// this.initBlue()
+			// if (this.deviceId && this.deviceStatus === 0) {
+			// 	this.connect()
+			// }
 		},
 		//页面显示
 		onShow() {

@@ -99,6 +99,7 @@
 			} else {
 				this.uid = uid
 			}
+			console.log(111111,this.uid)
 			dayjs.extend(isBetween);
 			this.getHistoryList();
 		},

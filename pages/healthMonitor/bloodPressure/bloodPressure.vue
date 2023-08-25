@@ -179,6 +179,7 @@
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
+			console.log(111111,this.uid)
 			this.getUserInfo()
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
@@ -191,6 +192,7 @@
 			    this.uid = data.uid;
 			    this.username = data.name;
 			});
+			console.log(111111,this.uid)
 		},
 		methods: {
 			getUserInfo(){

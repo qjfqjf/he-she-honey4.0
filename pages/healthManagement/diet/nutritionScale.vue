@@ -61,7 +61,7 @@
 			<view class="checkCard" v-else>
 				<view class="top">
 					<!-- 切换会员 -->
-					<HealthHeader></HealthHeader>
+					<HealthHeader  :username="username" @myUser="handleMyUser"></HealthHeader>
 					<!-- 设备状态 -->
 					<view class="device-state">
 						<u--text class="d-flex j-center" color="#01b09a"
@@ -172,14 +172,12 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				dataResult: '',
 				showRenderValue: true, // 添加一个标志位，默认为true，表示显示renderValue(dataResult)
 				KitchenScaleDataValue: "正在获取数据",
+				username: '', //登录的名字
 				userInfo: '',
 				uid: 0, //用户id
 				unit: 0,
 				foodName: '',
 				foodNameTag:true,
-				// foodId: '',
-				// selectFoodTag: '',
-				// foodNameTag: '',
 				KitchenScaleDataValueFloat: 0,
 				indexList:[],
 				data: [
@@ -292,6 +290,10 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 			};
 		},
 		async onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			console.log(111111,this.uid)
+			this.getUserInfo()
 			const foodName = uni.getStorageSync('foodName')
 			const indexList = uni.getStorageSync('indexList')
 			if(foodName === ''){
@@ -301,23 +303,22 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				this.foodName = foodName
 				this.foodNameTag = false
 			}
-			// this.foodId = uni.getStorageSync('foodId')
 			this.indexList = uni.getStorageSync('indexList')
 			this.foodName = uni.getStorageSync('foodName')
-			
-			// const selectFoodTag = uni.getStorageSync('selectFoodTag')
-			// const foodNameTag = uni.getStorageSync('foodNameTag')
-			this.selectFoodTag = selectFoodTag
-			this.foodNameTag = foodNameTag
-			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
 			this.getNutritionScaleData();
 		},
-
+		//页面显示
+		onShow() {
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+			console.log(111111,this.uid)
+		},
 		mounted() {
 			this.getNutritionScaleData();
 
@@ -368,6 +369,18 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 		},
 		//方法
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			scrolltolower() {
 			
 			},

@@ -63,6 +63,7 @@
 			}else{
 				this.uid = uid
 			}
+			console.log(111111,this.uid)
 			dayjs.extend(isBetween)
 			//拿到所有历史记录
 			this.getHistoryList();

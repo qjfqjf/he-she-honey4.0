@@ -52,7 +52,7 @@
 			<!-- 检测页面 -->
 			<view class="checkCard" v-else>
 				<!-- 切换会员 -->
-				<HealthHeader></HealthHeader>
+				<HealthHeader  :username="username" @myUser="handleMyUser"></HealthHeader>
 
 				<view v-if="showFreeJump" class="devices-warp mt-2">
 					<FreeJump></FreeJump>
@@ -124,7 +124,7 @@
 		},
 		data() {
 			return {
-				
+				username: '', //登录的名字
 				showFreeJump: false,
 				showCountdown: false,
 				showCountdownNumber: false,
@@ -194,18 +194,41 @@
 		},
 		async onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
+			console.log(111111,this.uid)
+			this.getUserInfo()
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
 			}, 2000)
 			this.getSkipData();
 		},
+		
+		//页面显示
+		onShow() {
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+			console.log(111111,this.uid)
+		},
 		mounted() {
 			this.getSkipData();
 		},
 		//方法
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			/* 初始化 */
 			initPrinter() {
 				bluethModule.initBluetooth((res) => {

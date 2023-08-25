@@ -373,6 +373,7 @@
 						sex: this.genderValue,
 						type: this.relationValue,
 						birthday: this.birth,
+						id_card:this.idCardNumberValue,
 						mobile: this.tel,
 						// phone:this.tel,
 						code: this.code,

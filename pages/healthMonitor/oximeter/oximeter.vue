@@ -130,9 +130,9 @@
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
+			console.log(111111,this.uid)
 			this.getUserInfo()
 			this.initBlue()
-			
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
 			}
@@ -164,11 +164,12 @@
 		},
 		//页面显示
 		onShow() {
-			this.initBlue()
+			// this.initBlue()
 			uni.$on('backWithData', (data) => {
 			    this.uid = data.uid;
 			    this.name = data.name;
 			});
+			console.log(111111,this.uid)
 		},
 
 		methods: {
