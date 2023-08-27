@@ -44,7 +44,7 @@
 					{
 						img: require('./static/heathy.png'),
 						title: '健康咨询',
-						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod'
+						url: '/pages/healthAdvisory/health/health'
 					},
 					{
 						img: require('./static/psychology.png'),

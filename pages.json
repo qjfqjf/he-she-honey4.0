@@ -1432,6 +1432,13 @@
 			}
 		},
 		{
+			"path": "pages/healthEstimate/health/search",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthEstimate/record/record",
 			"style": {
 				"navigationBarTitleText": "",
@@ -1692,6 +1699,24 @@
         }
         ,{
             "path" : "pages/healthEstimate/psychology/Exam/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+            "path" : "pages/healthEstimate/health/Exam/Exam",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthEstimate/health/Exam/index",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

@@ -59,573 +59,573 @@
 				    text: "流量优先"
 				  },
 				],
-				navList: [
-					{
-						title: '健康',
-						data: [
-						{
-							title: '综合心理健康测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你的心理压...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '焦虑自评量表SAS',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '贝克-拉范森躁狂...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '贝克抑郁测评量...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '伯恩斯抑郁症清...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '精神分裂测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '阿森斯失眠测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你是否需要...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '汉米尔顿焦虑...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '心理成熟度测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '孤独感测试-UCLA',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '密西根酒精依赖测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '心理年龄测试...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '心理适应性测评量表...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '亚健康状况自我...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '心理垃圾对照检查表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '拖延症测评：...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '强迫症测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '你是否患上了...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '网瘾测评：你是否',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '心理承受能力测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '抑郁程度测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '马洛斯安全感...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '自信心测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '贝克焦虑测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '恐惧症测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '安全感测试：...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '抗挫折能力测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '情感缺失测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '艾森克情绪稳定...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '爱丁堡产后抑郁...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '老年人抑郁筛查...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '自杀态度调查...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '自卑心理测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '产前抑郁测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '厌食症风险测评...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '双向情感障碍自测',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						],
-					},
-					{
-						title: '情感',
-						data: [
-						{
-							title: '测试你的恋爱智...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '成人依恋-亲密...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '恋爱类型测试-...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你的恋爱...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '婚姻幸福度测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '婚姻安全界线测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '生活满意度测试',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你的"爱情..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '婚姻质量综合评估...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你们之间是纯...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你是一个重..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '离婚危险性测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测测他有家暴倾向',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试哪种类型的..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你们会旧情复燃...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测测他有家暴倾向',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试哪种类型的..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你们会旧情复燃...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你的桃花运',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测你陷入爱情雷区的..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '3分钟测出你们的真实...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测你会嫁给那种人会..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你是不是花心大萝卜...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测一测你的古代身份',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '回到古代你会嫁给哪..."',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '你的恋爱距离有多远...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测测你的最佳"婚点"...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测一测你是古代哪个...',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						],
-					},
-					{
-					title: '亲子',
-					data: [
-						{
-							title: '亲子关系测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '家庭环境测评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '中学生综合心理健康',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '考试焦虑自评量表',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '青春期逆反心理测评',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '测试你属于哪一类型',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '儿童孤独症/自闭症',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '儿童孤独症/自闭症',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '孩子专注力测试',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-						{
-							title: '逆反心理测试',
-							description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
-							imgUrl: '/static/icon/healthEstimate/brain.png',
-						},
-					],
-					},
-					{
-					title: '人格',
-					data: [
-						{
-							title: '大五人格测评量表',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '性格内外倾向测量',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '菲尔人格测评量表',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '人格魅力测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '气质类型测试',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你是讨好型人格',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你是一个杠精么',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '医学AB型人格测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你的虚荣心有多强',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '自恋人格测试',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '潜意识分析：你隐藏',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你是否具有幽默感',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '情商(EQ)测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-					],
-					},
-					{
-					title: '人际',
-					data: [
-						{
-							title: '社交恐惧症测评',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '人际关系综合诊断测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '社会适应能力测评',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '人际信任(ITS)测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '容纳他人程度测评',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '交际他人程度测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '交际能力测评',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '大学生人际交往心理',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '社交回避及苦恼量表',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你最出众的能力',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-					],
-					},
-					{
-					title: '性心理',
-					data: [
-						{
-							title: '同性恋倾向测试',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '哈佛性向测试',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试男人你对你的性幻想',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '贝姆性别角色测评',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '性取向测试',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '性心理成熟度测试',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测试你的好色程度',
-							description: '描述3',
-							imgUrl: 'xxx',
-						},
-						{
-							title: '测测你的性生活够...',
-							description: '描述4',
-							imgUrl: 'xxx',
-						},
-					],
-					},
-		      ],
+			// 	navList: [
+			// 		{
+			// 			title: '健康',
+			// 			data: [
+			// 			{
+			// 				title: '综合心理健康测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你的心理压...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '焦虑自评量表SAS',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '贝克-拉范森躁狂...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '贝克抑郁测评量...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '伯恩斯抑郁症清...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '精神分裂测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '阿森斯失眠测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你是否需要...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '汉米尔顿焦虑...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '心理成熟度测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '孤独感测试-UCLA',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '密西根酒精依赖测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '心理年龄测试...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '心理适应性测评量表...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '亚健康状况自我...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '心理垃圾对照检查表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '拖延症测评：...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '强迫症测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '你是否患上了...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '网瘾测评：你是否',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '心理承受能力测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '抑郁程度测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '马洛斯安全感...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '自信心测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '贝克焦虑测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '恐惧症测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '安全感测试：...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '抗挫折能力测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '情感缺失测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '艾森克情绪稳定...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '爱丁堡产后抑郁...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '老年人抑郁筛查...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '自杀态度调查...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '自卑心理测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '产前抑郁测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '厌食症风险测评...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '双向情感障碍自测',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			],
+			// 		},
+			// 		{
+			// 			title: '情感',
+			// 			data: [
+			// 			{
+			// 				title: '测试你的恋爱智...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '成人依恋-亲密...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '恋爱类型测试-...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你的恋爱...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '婚姻幸福度测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '婚姻安全界线测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '生活满意度测试',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你的"爱情..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '婚姻质量综合评估...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你们之间是纯...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你是一个重..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '离婚危险性测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测测他有家暴倾向',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试哪种类型的..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你们会旧情复燃...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测测他有家暴倾向',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试哪种类型的..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你们会旧情复燃...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你的桃花运',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测你陷入爱情雷区的..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '3分钟测出你们的真实...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测你会嫁给那种人会..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你是不是花心大萝卜...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测一测你的古代身份',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '回到古代你会嫁给哪..."',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '你的恋爱距离有多远...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测测你的最佳"婚点"...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测一测你是古代哪个...',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			],
+			// 		},
+			// 		{
+			// 		title: '亲子',
+			// 		data: [
+			// 			{
+			// 				title: '亲子关系测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '家庭环境测评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '中学生综合心理健康',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '考试焦虑自评量表',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '青春期逆反心理测评',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '测试你属于哪一类型',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '儿童孤独症/自闭症',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '儿童孤独症/自闭症',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '孩子专注力测试',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 			{
+			// 				title: '逆反心理测试',
+			// 				description: '在现实生活中，心理健康和生理健康是互相联系、互相作用的...',
+			// 				imgUrl: '/static/icon/healthEstimate/brain.png',
+			// 			},
+			// 		],
+			// 		},
+			// 		{
+			// 		title: '人格',
+			// 		data: [
+			// 			{
+			// 				title: '大五人格测评量表',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '性格内外倾向测量',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '菲尔人格测评量表',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '人格魅力测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '气质类型测试',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你是讨好型人格',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你是一个杠精么',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '医学AB型人格测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你的虚荣心有多强',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '自恋人格测试',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '潜意识分析：你隐藏',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你是否具有幽默感',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '情商(EQ)测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 		],
+			// 		},
+			// 		{
+			// 		title: '人际',
+			// 		data: [
+			// 			{
+			// 				title: '社交恐惧症测评',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '人际关系综合诊断测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '社会适应能力测评',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '人际信任(ITS)测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '容纳他人程度测评',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '交际他人程度测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '交际能力测评',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '大学生人际交往心理',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '社交回避及苦恼量表',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你最出众的能力',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 		],
+			// 		},
+			// 		{
+			// 		title: '性心理',
+			// 		data: [
+			// 			{
+			// 				title: '同性恋倾向测试',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '哈佛性向测试',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试男人你对你的性幻想',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '贝姆性别角色测评',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '性取向测试',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '性心理成熟度测试',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测试你的好色程度',
+			// 				description: '描述3',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 			{
+			// 				title: '测测你的性生活够...',
+			// 				description: '描述4',
+			// 				imgUrl: 'xxx',
+			// 			},
+			// 		],
+			// 		},
+		    //   ],
 
 				dataList: [],
 				dataTextList:[],
@@ -637,7 +637,7 @@
 		    };
 		},
 		mounted() {
-		    this.dataList = this.navList[this.currentIndex].data;
+		    this.dataList = this.area[this.currentIndex].data;
 		},
 		onLoad() {
 			this.getQuestion();
@@ -679,7 +679,7 @@
 			handleNavClick(index,e) {
 			    if (this.currentIndex !== index) {
 			        this.currentIndex = index;
-			        this.dataList = this.navList[this.currentIndex].data;
+			        this.dataList = this.area[this.currentIndex].data;
 			    }
 				this.$http.get(this.questionUrl,{
 					question_area_id:e

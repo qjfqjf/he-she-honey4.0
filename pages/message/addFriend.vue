@@ -5,31 +5,38 @@
 
 		</z-nav-bar>
 		<view class="searchBar">
-			<u-search input-align="center" :show-action="false" :clearabled="true" margin="30rpx" shape="round" placeholder="搜索" v-model="keyword" height="30"></u-search>
+			<view class="top">
+			<u-search
+				class="search-left" 
+				placeholder="请输入搜索内容" 
+				v-model="searchText" 
+				borderColor="#dadada"
+				:showAction="false"
+				>
+			</u-search>
+			<view class="search-right" @click="search">搜索</view>
+		</view>
 
 		</view>
 		<view class="u-page">
-			<u-list
+			<u-index-list
 					@scrolltolower="scrolltolower"
 			>
-				<u-list-item
-						v-for="(item, index) in urls"
-						:key="index"
-						class=""
-				>
-					<u-cell
-							:title="`列表长度-${index + 1}`"
-					>
-						<u-avatar
-								slot="icon"
-								shape="circle"
-								size="40"
-								:src="item"
-								customStyle="margin: -3px 5px -3px 0"
-						></u-avatar>
-					</u-cell>
-				</u-list-item>
-			</u-list>
+					<template v-for="(item, i) in newArr">
+						<!-- #ifdef APP-NVUE -->
+						<!--					<u-index-anchor :text="indexList[index]"></u-index-anchor>-->
+						<!-- #endif -->
+						<u-index-item>
+							<u-index-anchor v-show="item.length>0" style="" ></u-index-anchor>
+								<view class="d-flex j-center a-center my-1">
+									<u--image shape="circle" :showLoading="true" :src="avatar" width="40px"
+										height="40px"></u--image>
+									<span class="list-cell">{{ item.fullname }}</span>
+									<span class="list-cell-right" @click="addFriend(item)">添加好友</span>
+							</view>
+						</u-index-item>
+					</template>
+			</u-index-list>
 		</view>
 	</view>
 </template>
@@ -47,23 +54,45 @@
 		components: {UIcon, USearch, UAvatar, UCell, UListItem, UList, ZNavBar},
 		data() {
 			return {
-				keyword: "",
-			indexList: [],
-					urls: [
-				'https://cdn.uviewui.com/uview/album/1.jpg',
-				'https://cdn.uviewui.com/uview/album/2.jpg',
-				'https://cdn.uviewui.com/uview/album/3.jpg',
-				'https://cdn.uviewui.com/uview/album/4.jpg',
-				'https://cdn.uviewui.com/uview/album/5.jpg',
-				'https://cdn.uviewui.com/uview/album/6.jpg',
-				'https://cdn.uviewui.com/uview/album/7.jpg',
-				'https://cdn.uviewui.com/uview/album/8.jpg',
-				'https://cdn.uviewui.com/uview/album/9.jpg',
-				'https://cdn.uviewui.com/uview/album/10.jpg',
-			]
+				searchText: "",
+				indexList: [],
+				newArr:[],
+				avatar: "https://cdn.uviewui.com/uview/album/1.jpg",
 			}
 		},
 		methods: {
+			search() {
+				this.$http.post('/friend/user', {
+					name: this.searchText
+				}).then((res) => {
+					console.log(res);
+					console.log(Array.isArray(this.newArr));
+					if (Array.isArray(this.newArr)) {
+					res.data.data.forEach((element, index) => {
+						console.log('index', index);
+						if (index >= 0) {
+							console.log('element', element);
+							this.newArr.push(element);
+						}
+					});
+					}
+					console.log('newArr', this.newArr);
+				});
+			},
+			addFriend(e){
+				console.log(e.user_id);
+				this.$http.post('/friend/create', {
+					uid: e.user_id
+				}).then((res) => {
+					console.log(res);
+					uni.showToast({
+						title: '添加成功',
+						icon: 'none',
+						duration: 2000,
+					})
+				});
+
+			},
 			goBack(){
 				uni.navigateBack({})
 			},
@@ -81,6 +110,48 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	.search-left{
+		width: 85%;
+	}
+	.search-right{
+		width: 15%;
+		font-size: 30rpx;
+		display: flex;
+		justify-content: center; /* 水平居中 */
+		align-items: center; /* 垂直居中 */
+		color: #1AB76C;
+	}
+	.top{
+		font-size: 40rpx;
+		overflow-wrap: break-word;
+		word-break: break-all;
+		width: 100%;
+		height: 50%;
+		display: flex;
+		align-items: center; /* 垂直居中 */
+	}
+	.list-cell {
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10px 24rpx;
+	overflow: hidden;
+	color: #323233;
+	font-size: 14px;
+	line-height: 24px;
+	background-color: #fff;
+	}
+	.list-cell-right{
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10px 24rpx;
+	overflow: hidden;
+	color: blue; /* 将字体颜色改为绿色 */
+	font-size: 14px;
+	line-height: 24px;
+	background-color: #fff;
+	justify-content: flex-end; /* 将内容靠右对齐 */
+	}
 </style>

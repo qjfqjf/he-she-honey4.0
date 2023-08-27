@@ -336,6 +336,10 @@
 								this.relationShipText = this.userInfo.type_cn
 								console.log('relationShipText', this.relationShipText);
 							}
+							if (this.userInfo.head) {
+								this.avatar = this.userInfo.head
+								console.log('avatar', this.avatar);
+							}
 						} else {
 							uni.showToast({
 								title: '数据出错',

@@ -13,7 +13,7 @@
 		<uni-list >
 			<uni-list :border="true">
 				<!-- 显示圆形头像 -->
-				<uni-list-chat v-for="(item, index) in list" :key="index" :avatar-circle="true" :title="item.title" :avatar="item.avatarUrl" :note="item.note" :time="item.time" :to="item.url"></uni-list-chat>
+				<uni-list-chat v-for="(item, index) in list" :key="index" :avatar-circle="true" :title="item.fullname" :avatar="item.headurl" :note="item.content" :time="item.createtime" :clickable="true" @click="onClick(item)"></uni-list-chat>
 				<!-- 右侧带角标 -->
 			</uni-list>
 		</uni-list>
@@ -26,39 +26,29 @@
 		data() {
 			return {
 				keyword: '',
-				list: [{
-					title: '张奇誉',
-					note: '666666',
-					time: '2023-02-02 20:20',
-					avatarUrl: 'https://img.36krcdn.com/20200410/v2_224a699a06504292804e4bdf70ca87bb_img_png',
-					url: '/pages/mine/commentDetail',
-					},
-					{
-					title: '肖子杨',
-					note: '666666',
-					time: '2023-02-02 20:20',
-					avatarUrl: 'https://cdn.uviewui.com/uview/album/1.jpg',
-					url: '/pages/mine/commentDetail',
-					},
-					{
-					title: '翔子',
-					note: '666666',
-					time: '2023-02-02 20:20',
-					avatarUrl: 'https://cdn.uviewui.com/uview/album/3.jpg',
-					url: '/pages/mine/commentDetail',
-					},
-					{
-					title: '朱朱侠',
-					note: '666666',
-					time: '2023-02-02 20:20',
-					avatarUrl: 'https://cdn.uviewui.com/uview/album/7.jpg',
-					url: '/pages/mine/commentDetail',
-					},
-				]
+				list: [],
 			}
 		},
+		onLoad() {
+			this.getComment();
+		},
 		methods: {
-			
+			getComment(){
+				this.$http.post('/rating/index',{
+
+				}).then((res)=>{
+					console.log(res)
+					res.data.data.forEach((element,index) => {
+						if(element.content) this.list.push(element);
+					});
+				})
+			},
+			onClick(e){
+				console.log(e);
+				uni.navigateTo({
+					url:'/pages/mine/commentDetail?id='+e.id
+				})
+			}
 		}
 	}
 </script>

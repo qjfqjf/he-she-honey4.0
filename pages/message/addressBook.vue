@@ -112,8 +112,10 @@
 			tabChange(e) {
 				if (e.index == 1) {
 					this.newArr = this.itemArr.filter(item => !!item);
+					console.log('newArr',this.newArr);
 				} else {
 					this.newArr = this.doctorArr.filter(item => !!item);
+					console.log('newArr' ,this.newArr);
 				}
 			},
 			chineseToInitials(word) {
@@ -188,6 +190,7 @@
 								.map((tem) => tem.name);
 							return temArr;
 						});
+						console.log('itemArr',this.itemArr);
 					});
 			},
 			// 获取签约医生列表
@@ -214,7 +217,6 @@
 								.map((tem) => tem.name);
 							return temArr;
 						});
-						console.log('doctorArr', this.doctorArr);
 					});
 			},
 		},
