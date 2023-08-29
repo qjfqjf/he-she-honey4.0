@@ -1,49 +1,83 @@
 <template>
   <view>
     <z-nav-bar title="睡眠管理">
-
-    </z-nav-bar>
+      <view slot="right" class="p-2" @click="addRecords">
+        <image style="width: 40rpx;height: 40rpx;" src="/static/icon/healthManagement/addRecords.png"></image>
+      </view></z-nav-bar>
     <public-module></public-module>
-
-
+    
     <!-- 内容 -->
     <view class="container">
-      <view class="nothing" v-if="baseList.length === 0">
-			<!-- 健康管理组件 -->
-			<empty-state :title="title" :tourl="tourl"></empty-state>
-		  </view>
+      <view class="item" v-for="(item, index) in baseList" :key="index">
+        <view class="public name">{{item.name}}</view>
+        <view class="public content">内容：{{item.content}}</view>
+        <view class="public date">时间：{{item.date}}</view>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-  import emptyState from '../../healthFile/outpatientArchives/components/emptyState.vue'
   export default {
-    components: {
-      emptyState
-    },
     data() {
       return {
-        baseList: []
+        baseList: [
+          // {
+          //   name: '彭老师',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: '一定记得'
+          // }, {
+          //   name: '平台管理员',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: ''
+          // }, {
+          //   name: '李老师',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: '一定记得'
+          // },
+        ],
       };
     },
-    methods: {
-      deleteReport(id) {
-        console.log('删除', id)
+    onLoad: function (option) {
+          this.getDoctorAdvice()
+      },
+    methods:{
+      addRecords(){
+        uni.navigateTo({
+          url:'/pages/healthManagement/medical/addSymptomSelfReport?type=' + 5
+        })
+      },
+      getDoctorAdvice(){
+        this.$http.post('/medical_file/index',{
+          type:5
+        }).then((res)=>{
+          res.data.data.forEach(element => {
+            const newData = {};
+            newData.name = element.fullname;
+            newData.content = element.eval;
+            newData.date = element.time;
+            this.baseList.push(newData);
+          });
+        })
+        console.log('baseList',this.baseList);
       }
     }
   }
 </script>
 
 <style lang="scss">
-  .container {
-    background-color: #FFFFFF;
-		height: 100%;
-		.nothing{
-			text-align: center;
-			padding-top: 300rpx;
-			width: 400rpx;
-			margin: 0 auto;
-		}
+.container{
+  .item{
+    background-color: white;
+    margin: 16rpx 0;
+    padding: 30rpx;
+    font-size: 30rpx;
+    .public{
+      margin: 14rpx;
+    }
   }
+}
 </style>

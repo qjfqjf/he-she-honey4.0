@@ -697,6 +697,13 @@
 			}
 		},
 		{
+			"path": "pages/mine/addComment",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/mine/order",
 			"style": {
 				"navigationBarTitleText": "",
@@ -889,6 +896,13 @@
 		},
 		{
 			"path": "pages/healthManagement/medical/medical",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/medical/medicalController",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -1516,6 +1530,27 @@
 		{
 			"path": "pages/applicationService/index",
 			"style": {}
+		},
+		{
+			"path": "pages/applicationService/workAndService/work",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/applicationService/workAndService/workview",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/applicationService/workAndService/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 		},
 		//健康教育
 		{

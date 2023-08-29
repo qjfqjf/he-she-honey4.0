@@ -1,6 +1,6 @@
 <template>
 	<view class="d-flex flex-column bg-white">
-		<z-nav-bar title="通讯录">
+		<z-nav-bar :title="title">
 			<u-icon @click="goBack" class="ml-2" name="arrow-left" slot="left" color="#000000" size="24"></u-icon>
 		</z-nav-bar>
 		<u-search placeholder="请输入关键字" :show-action="false" shape="round" class="searchBar m-3" margin="20rpx"
@@ -20,7 +20,7 @@
 				<template v-for="(item, i) in newArr">
 					<u-index-item>
 						<u-index-anchor v-show="item.length>0" style="" :text="indexList[i]"></u-index-anchor>
-						<view class="list-cell" v-for="(cell, index) in item" :key="index">
+						<view class="list-cell" v-for="(cell, index) in item" :key="index" @click="selectDoctor(item)">
 							<view class="d-flex j-center a-center my-1">
 								<u--image shape="circle" :showLoading="true" :src="avatar" width="40px"
 									height="40px"></u--image>
@@ -42,6 +42,7 @@
 	export default {
 		data() {
 			return {
+				title:'通讯录',
 				tabList: [{
 						name: '签约医生',
 						id: 1,
@@ -91,6 +92,7 @@
 				doctorArr: [
 					[]
 				],
+				doctorList:[],
 				newArr: [],
 				hairline: false,
 				userInfo: '',
@@ -108,7 +110,23 @@
 				deep: true,
 			},
 		},
+		onLoad: function (option) {
+			if(option.title)this.title= option.title;
+			console.log('title',this.title);
+	},
 		methods: {
+			selectDoctor(e){
+				const result = this.doctorList.find(obj => obj.fullname === e[0]);
+				console.log(result);
+				if(this.title='服务人员'){
+					uni.setStorageSync('did', result.user_id)
+					uni.setStorageSync('didName', result.fullname)
+					uni.navigateTo({
+						url:'/pages/applicationService/workAndService/service'
+					})
+				}
+
+			},
 			tabChange(e) {
 				if (e.index == 1) {
 					this.newArr = this.itemArr.filter(item => !!item);
@@ -175,6 +193,7 @@
 					.then((res) => {
 						console.log('res', res);
 						// res.data.data.push({fullname:'法外狂徒'});
+						this.doctorList = res.data.data
 						const valList = res.data.data.map((item) => {
 							const py = this.chineseToInitials(this.chineseToPinYin(item.fullname)).charAt(0);
 							return {
@@ -211,6 +230,7 @@
 								flag: py,
 							};
 						});
+						// console.log('valList',valList);
 						this.doctorArr = this.indexList.map((val) => {
 							const temArr = valList
 								.filter((tem) => tem.flag === val)
