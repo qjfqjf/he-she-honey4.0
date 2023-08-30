@@ -6,7 +6,7 @@
 		<public-module></public-module>
 		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<MyCircle style="margin: 100rpx 0 20rpx 0" :value="sua" unit="umol/L" color="#25c264"></MyCircle>
-		<TipInfo title="血尿酸趋势"></TipInfo>
+		<TipInfo title="血尿酸趋势" @trend="handleBloodSUATrend"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus === 0 ? '设备状态：未连接' : '设备状态：已连接' + '(' + deviceId + ')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveSUA"></u-button>
@@ -15,36 +15,25 @@
 		</u--text>
 		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-				@click="onPageJump(item.url)">
-				<image :src="item.img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
-				<text class="mt-1">{{ item.title }}</text>
+			<view class="d-flex flex-column a-center" @click="onPageSelectDocter">
+				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[0].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageMonth">
+				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[1].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageDevice">
+				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[2].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageWrite">
+				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
 		</view>
 
 		<u-toast ref="uToast"></u-toast>
-		<!-- 	<scroll-view scroll-y class="box">
-			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
-				<view>
-					<text>id: {{ item.deviceId }}</text>
-				</view>
-				<view>
-					<text>name: {{ item.name }}</text>
-				</view>
-			</view>
-		</scroll-view>
-
-		<button @click="discovery">2 搜索附近蓝牙设备</button>
-
-		<button @click="getServices">3 获取蓝牙服务</button>
-
-		<button @click="getCharacteristics">4 获取特征值</button>
-		<button @click="notify">5 开启消息监听</button>
-		<view class="heat">
-			<view class="">
-				温度：{{heat}}
-			</view>
-		</view> -->
 	</view>
 </template>
 
@@ -101,20 +90,26 @@
 				characteristicId: '00001002-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				// 底部工具栏
 				page: '',
-				toolList: [{
+				toolList: [
+					{
+						img: require('@/static/icon/select_docter.png'),
+						title: '找医生',
+						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					},
+					{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
-						url: '/pages/healthMonitor/bloodSUA/bloodSUAMonth',
+						url: '/pages/healthMonitor/bloodSugar/bloodSugarMonth'
 					},
 					{
 						img: require('@/static/icon/bloodPressure/device.png'),
 						title: '设备',
-						url: '/pages/mine/myDevice',
+						url: '/pages/mine/myDevice'
 					},
 					{
 						img: require('@/static/icon/bloodPressure/write.png'),
 						title: '手动录入',
-						url: '/pages/healthMonitor/bloodSUA/suaManualEntry',
+						url: '/pages/healthMonitor/bloodSugar/sugarManualEntry'
 					},
 				],
 				uid: 0, //用户选择的id
@@ -127,7 +122,7 @@
 			this.uid = this.userInfo
 			this.getUserInfo()
 			console.log(this.deviceId)
-
+			console.log(111111,this.uid)
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
@@ -138,6 +133,7 @@
 			    this.uid = data.uid;
 			    this.username = data.name;
 			});
+			console.log(111111,this.uid)
 		},
 		mounted() {
 			// this.processSUA(this.uaDeviceData)
@@ -160,11 +156,33 @@
 			},
 			// 保存胆固醇值
 			handleSaveSUA() {
-
 				if (this.sua !== 0) {
+					this.$http.post('/blood_ua/create', {
+						uid: this.uid,
+						value: this.sua,
+						time: this.formatDate(new Date()),
+						type: 1,
+					}).then(res => {
+						if (this.sua != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							this.sua = 0
+						} else {
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							this.sua = 0
+						}
+					})
+				}else {
 					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
+						message: '保存失败，请检查网络',
+						type: 'error',
 					})
 					this.btnColor = '#dadada'
 					this.sua = 0
@@ -181,11 +199,8 @@
 				}, 1000)
 			},
 			handleDevelop() {
-				// this.$refs.uToast.show({
-				// 	message: '开发中...'
-				// })
 				uni.navigateTo({
-					url: '/pages/healthMonitor/bloodSUA/bloodSUAHistory',
+					url: '/pages/healthMonitor/bloodSUA/bloodSUAHistory?uid=' + this.uid,
 				})
 			},
 			// handleSaveHeat() {
@@ -411,21 +426,54 @@
 				// 输出解析后的数据
 				console.log(parsedData, 1111111)
 				this.btnColor = '#01b09a'
-				// const data = new Int8Array(buffer);
-
-				// if (this.heat.length > 0 && this.heat.length < 8) {
-				// 	this.heat = new Int8Array([...this.heat, ...data]);
-				// } else if (data[0] === -81) {
-				// 	this.heat = data;
-				// }
-				// if (this.heat.length !== 8) return
-				// this.heat = (((this.heat[4] & 0xFF) << 8) + (this.heat[5] & 0xFF)) * 0.01;
-				// this.heat = Math.floor(parseFloat(this.heat) * 10) / 10;
-				// this.btnColor = '#01b09a'
+				
 			},
 			onPageJump(url) {
 				uni.navigateTo({
 					url: url,
+				})
+			},
+			
+			handleBloodSUATrend() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSUA/bloodSUATrend?uid=' + this.uid, // 跳转到指定的目标页面
+				})
+			},
+			
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear()
+				var m = date.getMonth() + 1
+				m = m < 10 ? '0' + m : m
+				var d = date.getDate()
+				d = d < 10 ? '0' + d : d
+				var h = date.getHours()
+				h = h < 10 ? '0' + h : h
+				var minute = date.getMinutes()
+				minute = minute < 10 ? '0' + minute : minute
+				var second = date.getSeconds()
+				second = second < 10 ? '0' + second : second
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
+			},
+			
+			onPageSelectDocter() {
+				uni.navigateTo({
+					url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+				})
+			},
+			onPageMonth() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSUA/bloodSUAMonth?uid=' + this.uid,
+				})
+			},
+			onPageDevice() {
+				uni.navigateTo({
+					url: '/pages/mine/myDevice',
+				})
+			},
+			onPageWrite() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/bloodSUA/suaManualEntry?uid=' + this.uid,
 				})
 			},
 		},

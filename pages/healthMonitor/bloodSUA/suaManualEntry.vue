@@ -45,8 +45,8 @@
 		data() {
 			return {
 				show: false,
-				time: new Date().format('yyyy-MM-dd hh:mm'),
-				selectTime: new Date().format('yyyy-MM-dd hh:mm'),
+				time: new Date().format('yyyy-MM-dd hh:mm:ss'),
+				selectTime: new Date().format('yyyy-MM-dd hh:mm:ss'),
 				scrollLeftNow: 208, // 页面显示
 				scrollLeft: 208, //初始值
 				scrollStart: 100, //滚动区域起始值
@@ -55,6 +55,21 @@
 
 
 			};
+		},
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// 获取URL参数
+			const uid = options.uid;
+			if(uid == 0){
+				this.uid = this.userInfo
+			}else{
+				this.uid = uid
+			}
+			console.log(111111,this.uid)
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 		},
 		methods: {
 
@@ -69,7 +84,7 @@
 			confirm(time) {
 				console.log(time)
 				this.show = false
-				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm')
+				this.selectTime = new Date(time.value).format('yyyy-MM-dd hh:mm:ss')
 
 			},
 			cancel() {
@@ -80,8 +95,38 @@
 			},
 			// 处理保存
 			handleSaveInfo() {
-
-				console.log(111)
+				if (this.scrollLeftNow != '0' && this.scrollLeftNow != '') {
+					this.$http.post('/blood_ua/create', {
+						uid: this.uid,
+						value: this.scrollLeftNow,
+						time: this.selectTime,
+						type: 2
+					}).then(res => {
+						if (this.scrollLeftNow != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							
+						} else {
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							
+						}
+					})
+				}else {
+					this.$refs.uToast.show({
+						message: '保存失败，请检查网络',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+				
+				}
+				
 			}
 		}
 	}

@@ -131,7 +131,7 @@
 				const params = {
 					macAddr: this.macAddr,
 					name: this.name,
-					communicationType: this.communicationType,
+					communicationType: this.communicationType
 				};
 				console.log(111111111111, params)
 				if (this.deviceId != '') {

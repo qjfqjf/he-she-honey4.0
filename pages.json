@@ -1,6 +1,7 @@
 {
 
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/homePage/homePage",
 			"style": {
 				"navigationBarTitleText": "数字健康管理",
@@ -36,6 +37,16 @@
 			"style": {
 				"navigationBarTitleText": "功能示例"
 			}
+		},
+		{
+		    "path" : "pages/testsdk/testIndex",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+		        
+		    }
+		    
 		},
 		{
 			"path": "pages/demo/list",
@@ -436,7 +447,21 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/bloodSUA/bloodSUATrend",
+			"style": {
+				"navigationBarTitleText": "血尿酸",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthMonitor/cholesterol/cholesterol",
+			"style": {
+				"navigationBarTitleText": "胆固醇",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/cholesterol/cholestrolTrend",
 			"style": {
 				"navigationBarTitleText": "胆固醇",
 				"enablePullDownRefresh": false
@@ -788,6 +813,13 @@
 			}
 		},
 		{
+			"path": "pages/template/ecgDeviceConnection",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/template/JumpRopeConnection",
 			"style": {
 				"navigationBarTitleText": "",
@@ -860,6 +892,13 @@
 		},
 		{
 			"path": "pages/healthManagement/diet/foodInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/diet/addFood",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false

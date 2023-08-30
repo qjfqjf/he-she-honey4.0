@@ -117,7 +117,7 @@
           {
             img: require('@/static/icon/device/xindiantu.png'),
             title: '心电图仪',
-            url: '/pages/template/deviceConnection',
+            url: '/pages/template/ecgDeviceConnection',
             detail: '',
             deviceInfo: {
               deviceId: uni.getStorageSync('xdDeviceId'),

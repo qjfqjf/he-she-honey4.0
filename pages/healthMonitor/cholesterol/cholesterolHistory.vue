@@ -12,27 +12,21 @@
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="index">
 				<view class="date"
-					>
-					{{item.test_time}}</view>
+					v-if="index === 0 || item.time.split(' ')[0] !== historyList[index - 1].time.split(' ')[0]">
+					{{item.time.split(" ")[0]}}</view>
 				<view class="record">
-					<text>{{item.test_time}}</text>
+					<text>{{item.time.split(" ")[1]}}</text>
 					<!-- <text>{{item.category}}</text> -->
-					<text v-if="item.category=='kf'">空腹</text>
-					<text v-else-if="item.category=='wch2'">晚餐前</text>
-					<text v-else-if="item.category=='lc'">凌晨</text>
-					<text v-else="item.category=='wch1'">晚餐后</text>
-					<view class="index up" v-if="item.oml_l > targetIndex">
-						<text class="text">{{item.oml_l}}</text>
-						<text class="arrow">{{arrowUp}}</text>
+					<text>胆固醇</text>
+					
+					<view class="index up">
+						<text class="text" :style="getSugarColor(item.warning_level)">{{item.value}}</text>
+						<text class="arrow" v-if="item.warning_level>0" :style="getSugarColor(item.warning_level)">{{arrowUp}}</text>
 					</view>
-					<view class="index down" v-else>
-						<text class="text">{{item.oml_l}}</text>
-						<text class="arrow">{{arrowDown}}</text>
-					</view>
-
+					
+		
 					<!-- 手动录入 -->
-					<text class="write-by-hand" v-if="item.input_type=='equipment'">设备输入</text>
-					<text class="write-by-hand" v-else="item.input_type=='hend'">手动输入</text>
+					<text class="write-by-hand">{{item.type_cn}}</text>
 				</view>
 			</view>
 		</view>
@@ -47,50 +41,27 @@
 				arrowUp: '↑',
 				arrowDown: '↓',
 				historyList: [
-					// {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '3.65',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '2.89',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '3.89',
-				// 		writeByHand: ''
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '2.78',
-				// 		writeByHand: '手动录入'
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '3.65',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '胆固醇',
-				// 		index: '2.89',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, 
+					
 				],
 			};
 		},
-
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.uid = this.userInfo
+			// 获取URL参数
+			const uid = options.uid;
+			if (uid == 0) {
+				this.uid = this.userInfo
+			} else {
+				this.uid = uid
+			}
+			console.log(111111,this.uid)
+			this.getHistoryList();
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			handleDevelop() {
 				uni.navigateTo({
@@ -99,52 +70,31 @@
 			},
 			//查询胆固醇历史记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "blood.glucose.uric.acid.cholesterol",
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"category",
-						"oml_l",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/chol/index', {
+					uid: this.uid,
 				}).then(res => {
-					this.historyList = res.result.records
+					this.historyList = res.data
+					console.log(this.historyList)
 				})
-				// const userInfoStr = uni.getStorageSync('userInfo');
-				// const userInfo = JSON.parse(userInfoStr);
-				// const uid = userInfo.uid;
-				// const token = uni.getStorageSync('access-token');
-				// uni.request({
-				// 	url: 'http://106.14.140.92:8881/platform/dataset/search_read',
-				// 	method: 'post',
-				// 	data: {
-				// 		params: {
-				// 			model: "blood.glucose.uric.acid.cholesterol",
-				// 			token: token,
-				// 			uid: uid,
-				// 			fields: [
-				// 				"name",
-				// 				"numbers",
-				// 				"owner",
-				// 				"category",
-				// 				"oml_l",
-				// 				"input_type",
-				// 				"test_time"
-				// 			]
-				// 		}
-				// 	},
-				// 	success: (res) => {
-				// 		this.historyList = res.data.result.records
-				// 	}
-				// })
-			}
+			},
+			getSugarColor(suagrLevel) {
+				switch (suagrLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
 		},
-		onLoad() {
-			this.getHistoryList();
-		},
+		
 	}
 </script>
 
@@ -161,38 +111,38 @@
 				.date {
 					padding: 26rpx;
 				}
-
+		
 				.record {
 					display: flex;
 					background-color: white;
 					padding: 30rpx 20rpx;
 					border-top: 1rpx solid #ddd;
 					box-sizing: border-box;
-
+		
 					text {
 						margin-right: 40rpx;
 					}
-
+		
 					.index {
 						margin-left: 20rpx;
-
+		
 						.text {
 							margin-right: 10rpx;
 						}
-
+		
 						.arrow {
 							font-weight: 700;
 						}
 					}
-
+		
 					.up {
 						color: #f10000;
 					}
-
+		
 					.down {
 						color: #ffa053;
 					}
-
+		
 					.write-by-hand {
 						color: #01b09a;
 					}
