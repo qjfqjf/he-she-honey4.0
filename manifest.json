@@ -1,6 +1,6 @@
 {
-    "name" : "tatami",
-    "appid" : "__UNI__BED270F",
+    "name" : "tatamitest",
+    "appid" : "__UNI__31BA192",
     "description" : "健康服务",
     "transformPx" : false,
     "icons" : [
@@ -75,7 +75,8 @@
                     "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ],
-                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ]
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ],
+                "targetSdkVersion" : 31
             },
             "sdkConfigs" : {
                 "ad" : {},
@@ -102,6 +103,20 @@
                 "__plugin_info__" : {
                     "name" : "plugin-BtModule",
                     "description" : "蓝牙API原生插件",
+                    "platforms" : "Android",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {}
+                }
+            },
+            "My-ECGView" : {
+                "__plugin_info__" : {
+                    "name" : "My-ECGView",
+                    "description" : "心电图工具",
                     "platforms" : "Android",
                     "url" : "",
                     "android_package_name" : "",

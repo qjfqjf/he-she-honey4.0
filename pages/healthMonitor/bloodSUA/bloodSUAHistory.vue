@@ -12,24 +12,28 @@
 		<view class="content-body">
 			<view class="item" v-for="(item, index) in historyList" :key="index">
 				<view class="date"
-					v-if="index === 0 || item.test_time.split(' ')[0] !== historyList[index - 1].test_time.split(' ')[0]">
-					{{item.test_time.split(" ")[0]}}</view>
+					v-if="index === 0 || item.time.split(' ')[0] !== historyList[index - 1].time.split(' ')[0]">
+					{{item.time.split(" ")[0]}}</view>
 				<view class="record">
-					<text>{{item.test_time.split(" ")[1]}}</text>
+					<text>{{item.time.split(" ")[1]}}</text>
 					<!-- <text>{{item.category}}</text> -->
 					<text>血尿酸</text>
-					<view class="index up" v-if="item.oml_l > targetIndex">
-						<text class="text">{{item.oml_l}}</text>
+					
+					<view class="index up">
+						<text class="text" :style="getSugarColor(item.warning_level)">{{item.value}}</text>
+						<text class="arrow" v-if="item.warning_level>0" :style="getSugarColor(item.warning_level)">{{arrowUp}}</text>
+					</view>
+					<!-- <view class="index up" v-if="item.value > targetIndex">
+						<text class="text">{{item.value}}</text>
 						<text class="arrow">{{arrowUp}}</text>
 					</view>
 					<view class="index down" v-else>
-						<text class="text">{{item.oml_l}}</text>
+						<text class="text">{{item.value}}</text>
 						<text class="arrow">{{arrowDown}}</text>
-					</view>
+					</view> -->
 		
 					<!-- 手动录入 -->
-					<text class="write-by-hand" v-if="item.input_type=='equipment'">设备输入</text>
-					<text class="write-by-hand" v-else="item.input_type=='hend'">手动输入</text>
+					<text class="write-by-hand">{{item.type_cn}}</text>
 				</view>
 			</view>
 		</view>
@@ -44,51 +48,28 @@
 				arrowUp: '↑',
 				arrowDown: '↓',
 				historyList: [
-					// {
-					// date: '2021-02-24',
-					// record: [
-				// 		{
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '478',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '389',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '455',
-				// 		writeByHand: ''
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '390',
-				// 		writeByHand: '手动录入'
-				// 	}, ]
-				// }, {
-				// 	date: '2021-02-24',
-				// 	record: [{
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '478',
-				// 		writeByHand: '手动录入'
-				// 	}, {
-				// 		time: '07:23:30',
-				// 		state: '血尿酸',
-				// 		index: '389',
-				// 		writeByHand: ''
-				// 	}, ]
-				// }, 
+					
 				],
 			};
 		},
 
+		onLoad(options) {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			// this.uid = this.userInfo
+			// 获取URL参数
+			const uid = options.uid;
+			if (uid == 0) {
+				this.uid = this.userInfo
+			} else {
+				this.uid = uid
+			}
+			console.log(111111,this.uid)
+			this.getHistoryList();
+		},
+		//页面显示
+		onShow() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+		},
 		methods: {
 			handleDevelop() {
 				uni.navigateTo({
@@ -97,25 +78,31 @@
 			},
 			//查询血尿酸历史记录
 			getHistoryList() {
-				this.$http.post('/platform/dataset/search_read', {
-					model: "blood.glucose.uric.acid.cholesterol",
-					fields: [
-						"name",
-						"numbers",
-						"owner",
-						"category",
-						"oml_l",
-						"input_type",
-						"test_time"
-					]
+				this.$http.post('/blood_ua/index', {
+					uid: this.uid,
 				}).then(res => {
-					this.historyList = res.result.records
+					this.historyList = res.data
+					console.log(this.historyList)
 				})
-			}
+			},
+			getSugarColor(suagrLevel) {
+				switch (suagrLevel) {
+					case 0:
+						return 'color: black';
+					case 1:
+						return 'color: rgb(234, 229, 170)';
+					case 2:
+						return 'color: rgb(255, 117, 112)';
+					case 3:
+						return 'color: orange';
+					case 4:
+						return 'color: red';
+					default:
+						return '';
+				}
+			},
 		},
-		onLoad() {
-			this.getHistoryList();
-		},
+
 	}
 </script>
 

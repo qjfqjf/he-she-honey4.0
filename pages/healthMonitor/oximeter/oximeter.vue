@@ -66,15 +66,15 @@
 			return {
 				oxData: [
 					{
-						value: 97,
+						value: 0,
 						name: '血氧',
 					},
 					{
-						value: 12.2,
+						value: 0.0,
 						name: 'PI',
 					},
 					{
-						value: 95,
+						value: 0,
 						name: '脉率',
 					},
 				],

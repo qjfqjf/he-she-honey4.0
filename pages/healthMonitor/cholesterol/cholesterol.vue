@@ -6,7 +6,7 @@
 		<public-module></public-module>
 		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<MyCircle style="margin: 100rpx 0 20rpx 0;" :value="cholestrol" unit="mmol/L" color="#fba723"></MyCircle>
-		<TipInfo title="胆固醇趋势"></TipInfo>
+		<TipInfo title="胆固醇趋势" @trend="handleCholestrolTrend"></TipInfo>
 		<u--text class="d-flex j-center" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSaveCholestrol"></u-button>
@@ -15,35 +15,25 @@
 		</u--text>
 		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
-			<view class="d-flex flex-column a-center" v-for="item in toolList" :key="item.title"
-				@click="onPageJump(item.url)">
-				<image :src="item.img" style="width: 100rpx; height: 100rpx;" mode="aspectFit"></image>
-				<text class="mt-1">{{item.title}}</text>
+			<view class="d-flex flex-column a-center" @click="onPageSelectDocter">
+				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[0].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageMonth">
+				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[1].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageDevice">
+				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[2].title }}</text>
+			</view>
+			<view class="d-flex flex-column a-center" @click="onPageWrite">
+				<image :src="this.toolList[3].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[3].title }}</text>
 			</view>
 		</view>
 		<u-toast ref="uToast"></u-toast>
-		<!-- 	<scroll-view scroll-y class="box">
-			<view class="item" v-for="item in blueDeviceList" @click="connect(item)">
-				<view>
-					<text>id: {{ item.deviceId }}</text>
-				</view>
-				<view>
-					<text>name: {{ item.name }}</text>
-				</view>
-			</view>
-		</scroll-view>
-
-		<button @click="discovery">2 搜索附近蓝牙设备</button>
-
-		<button @click="getServices">3 获取蓝牙服务</button>
-
-		<button @click="getCharacteristics">4 获取特征值</button>
-		<button @click="notify">5 开启消息监听</button>
-		<view class="heat">
-			<view class="">
-				温度：{{heat}}
-			</view>
-		</view> -->
+		
 	</view>
 </template>
 
@@ -74,13 +64,20 @@
 					1, 1, 1, 0, 65, 2, 2, 0, 12, -128, 0, 119, 5, 1, 17, 15, 56, 1, 0, 0
 				],
 				deviceTimer: null,
-				cholestrol: 0, //胆固醇值
+				cholestrol: 3.98, //胆固醇值
 				deviceId: uni.getStorageSync('ytDeviceId'), // 蓝牙设备的id
 				serviceId: '00001000-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '00001002-0000-1000-8000-00805F9B34FB', // 设备的特征值
 				// 底部工具栏
 				page: '',
-				toolList: [{
+				
+				toolList: [
+					{
+						img: require('@/static/icon/select_docter.png'),
+						title: '找医生',
+						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					},
+					{
 						img: require('@/static/icon/bloodPressure/month.png'),
 						title: '月报',
 						url: '/pages/healthMonitor/cholesterol/cholesterolMonth'
@@ -96,6 +93,7 @@
 						url: '/pages/healthMonitor/cholesterol/cholesterolManualEntry'
 					},
 				],
+				
 				uid: 0, //用户选择的id
 				username: '', //登录的名字
 			};
@@ -104,6 +102,8 @@
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			this.uid = this.userInfo
 			this.getUserInfo()
+			console.log(this.deviceId)
+			console.log(111111,this.uid)
 			this.initBlue()
 			if (this.deviceId && this.deviceStatus === 0) {
 				this.createInterval()
@@ -114,6 +114,7 @@
 			    this.uid = data.uid;
 			    this.username = data.name;
 			});
+			console.log(111111,this.uid)
 		},
 		onUnload() {
 			clearInterval(this.deviceTimer)
@@ -133,15 +134,38 @@
 			},
 			// 保存胆固醇值
 			handleSaveCholestrol() {
-
 				if (this.cholestrol !== 0) {
+					this.$http.post('/chol/create', {
+						uid: this.uid,
+						value: this.cholestrol,
+						time: this.formatDate(new Date()),
+						type: 1,
+					}).then(res => {
+						if (this.cholestrol != 0) {
+							this.$refs.uToast.show({
+								message: '保存成功',
+								type: 'success',
+							})
+							this.btnColor = '#dadada'
+							this.cholestrol = 0
+						} else {
+							this.$refs.uToast.show({
+								message: '保存失败',
+								type: 'error',
+							})
+							this.btnColor = '#dadada'
+							this.cholestrol = 0
+						}
+					})
+				}else {
 					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
+						message: '保存失败，请检查网络',
+						type: 'error',
 					})
 					this.btnColor = '#dadada'
 					this.cholestrol = 0
 				}
+				
 			},
 			// 由于蓝牙设备的特殊性，需要使用时才能连接，所以在这里使用定时器进行连接
 			createInterval() {
@@ -158,7 +182,7 @@
 				// 	message: '开发中...'
 				// })
 				uni.navigateTo({
-					url: '/pages/healthMonitor/cholesterol/cholesterolHistory'
+					url: '/pages/healthMonitor/cholesterol/cholesterolHistory?uid=' + this.uid,
 				})
 			},
 
@@ -393,6 +417,51 @@
 					url: url
 				});
 
+			},
+			
+			
+			handleCholestrolTrend() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/cholesterol/cholestrolTrend?uid=' + this.uid, // 跳转到指定的目标页面
+				})
+			},
+			
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear()
+				var m = date.getMonth() + 1
+				m = m < 10 ? '0' + m : m
+				var d = date.getDate()
+				d = d < 10 ? '0' + d : d
+				var h = date.getHours()
+				h = h < 10 ? '0' + h : h
+				var minute = date.getMinutes()
+				minute = minute < 10 ? '0' + minute : minute
+				var second = date.getSeconds()
+				second = second < 10 ? '0' + second : second
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
+			},
+			
+			
+			onPageSelectDocter() {
+				uni.navigateTo({
+					url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+				})
+			},
+			onPageMonth() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/cholesterol/cholesterolMonth?uid=' + this.uid,
+				})
+			},
+			onPageDevice() {
+				uni.navigateTo({
+					url: '/pages/mine/myDevice',
+				})
+			},
+			onPageWrite() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/cholesterol/cholesterolManualEntry?uid=' + this.uid,
+				})
 			},
 
 		}

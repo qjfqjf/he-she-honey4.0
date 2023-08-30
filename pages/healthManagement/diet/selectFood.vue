@@ -39,7 +39,7 @@
 			<!-- 自定义页面 -->
 			<view class="zidingyi" v-if="currentTab === 'tab3'">
 
-				<u-button type="primary" class="submit-btn" text="添加自定义食物"></u-button>
+				<u-button type="primary" class="submit-btn" text="添加自定义食物" @click="gotoAddFood"></u-button>
 			</view>
 		</view>
 	</view>
@@ -68,6 +68,12 @@
 			foodList(cid,name,icon){
 				uni.navigateTo({
 					url: `/pages/healthManagement/diet/foodList?cid=${cid}&name=${name}&icon=${icon}`,
+					// url: '/pages/healthManagement/diet/foodList?cid=' + cid + '&name=' + name + '&icon=' + icon
+				})
+			},
+			gotoAddFood(){
+				uni.navigateTo({
+					url:'/pages/healthManagement/diet/addFood',
 					// url: '/pages/healthManagement/diet/foodList?cid=' + cid + '&name=' + name + '&icon=' + icon
 				})
 			}
