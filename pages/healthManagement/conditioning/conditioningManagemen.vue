@@ -1,81 +1,83 @@
 <template>
   <view>
     <z-nav-bar title="调理管理">
-
-    </z-nav-bar>
+      <view slot="right" class="p-2" @click="addRecords">
+        <image style="width: 40rpx;height: 40rpx;" src="/static/icon/healthManagement/addRecords.png"></image>
+      </view></z-nav-bar>
     <public-module></public-module>
-
-
+    
     <!-- 内容 -->
     <view class="container">
-      <view class="nothing" v-if="baseList.length === 0">
-        <empty-state :description="'暂无数据'"  />
-      </view>
-      <view class="item" v-for="(item, index) in baseList" :key="index" v-else>
-        <text class="date">{{item.date}}</text>
-        <view class="delete">
-          <button plain="true" type="default" @click="deleteReport">删除</button>
-        </view>
+      <view class="item" v-for="(item, index) in baseList" :key="index">
+        <view class="public name">{{item.name}}</view>
+        <view class="public content">内容：{{item.content}}</view>
+        <view class="public date">时间：{{item.date}}</view>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-  import EmptyState from '../components/emptyState.vue'
   export default {
-    components: {
-      EmptyState
-    },
     data() {
       return {
-        baseList: [{
-          date: '2022-12-1415:32:47'
-        },{
-          date: '2022-12-1415:32:47'
-        },{
-          date: '2022-12-1415:32:47'
-        },]
+        baseList: [
+          // {
+          //   name: '彭老师',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: '一定记得'
+          // }, {
+          //   name: '平台管理员',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: ''
+          // }, {
+          //   name: '李老师',
+          //   content: '鹏辉你血压很高,明天到我这来复诊。',
+          //   date: '2022-09-24 19:33:00',
+          //   remarks: '一定记得'
+          // },
+        ],
       };
     },
-    methods: {
-      deleteReport(id) {
-        console.log('删除', id)
+    onLoad: function (option) {
+          this.getDoctorAdvice()
+      },
+    methods:{
+      addRecords(){
+        uni.navigateTo({
+          url:'/pages/healthManagement/medical/addSymptomSelfReport?type=' + 2
+        })
+      },
+      getDoctorAdvice(){
+        this.$http.post('/medical_file/index',{
+          type:2
+        }).then((res)=>{
+          res.data.data.forEach(element => {
+            const newData = {};
+            newData.name = element.fullname;
+            newData.content = element.eval;
+            newData.date = element.time;
+            this.baseList.push(newData);
+          });
+        })
+        console.log('baseList',this.baseList);
       }
     }
   }
 </script>
 
 <style lang="scss">
-  .container {
-    .item {
-      background-color: white;
-      border-top: 1rpx solid #ececec;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin: 10rpx 0;
-      padding-left: 20rpx;
-
-      font-size: 30rpx;
-
-      .date {}
-
-      .delete {
-        padding: 10rpx;
-
-        button {
-          width: 150rpx;
-          font-size: 20rpx;
-          border-radius: 50rpx;
-          margin: 0 10rpx;
-          border: #01b09a 1rpx solid;
-
-          color: #01b09a;
-          font-weight: 600;
-        }
-      }
+.container{
+  .item{
+    background-color: white;
+    margin: 16rpx 0;
+    padding: 30rpx;
+    font-size: 30rpx;
+    .public{
+      margin: 14rpx;
     }
   }
+}
 </style>

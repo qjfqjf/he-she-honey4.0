@@ -3,7 +3,7 @@
 			<z-nav-bar title="健康咨询"></z-nav-bar>
 					<view class="d-flex">
 							<view class="m-1 f-grow-1 d-flex j-center a-center rounded-20 py-2" style="background-color: lightpink">
-								<view class="flex-column d-flex">
+								<view class="flex-column d-flex" @click = "service()">
 									<u--image class="appManeger_block_icon" style="margin: auto;" src="/static/icon/homePage/Glu.png"
 														:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 									</u--image>
@@ -11,7 +11,7 @@
 								</view>
 							</view>
 							<view class="m-1 f-grow-1 d-flex j-center a-center rounded-20 py-2" style="background-color: hotpink">
-								<view class="flex-column d-flex">
+								<view class="flex-column d-flex" @click = "work()">
 									<u--image style="margin: auto" class="appManeger_block_icon" src="/static/icon/homePage/Glu.png"
 														:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 									</u--image>
@@ -26,10 +26,10 @@
 			</view>
 					<view class="d-flex flex-column">
 						<u-cell
-								v-for="i in 5"
+								v-for="i in baseList"
 								:key="i"
 								size="large"
-								title="单元格"
+								:title="i"
 								isLink
 						></u-cell>
 					</view>
@@ -44,9 +44,28 @@ import PublicModule from "../../components/public-module/public-module.vue";
 import UGrid from "../../uni_modules/uview-ui/components/u-grid/u-grid.vue";
 
 export default {
-	components: {UGrid, PublicModule, ZNavBar}
-
-}
+	components: {UGrid, PublicModule, ZNavBar},
+      data() {
+        return {
+          baseList: ['医养机构','医疗保健','康复护理','生活照料','临终关怀','文化娱乐','老年用品服务','日间托管','临时托养','安全援助','定期寻访','转介服务'],
+          title:""
+        };
+      },
+      //方法
+      methods: {
+		service(){
+			uni.navigateTo({
+			    url:'/pages/applicationService/workAndService/service'
+			  })
+		},
+		work(){
+			uni.navigateTo({
+			    url:'/pages/applicationService/workAndService/work'
+			  })
+		}
+      },
+    }
+	
 
 </script>
 

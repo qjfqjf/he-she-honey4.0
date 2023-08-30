@@ -1,19 +1,23 @@
 <template>
 	<view style="background-color: #ffffff;">
-		<z-nav-bar title="评价详情"></z-nav-bar>
+		<z-nav-bar title="评价详情">
+			<view class="preview" slot="right" @click="addComment(did)">
+				<text style="font-size: 20rpx;" v-if="addtext">{{ addtext }}</text>
+			</view>
+		</z-nav-bar>
 		<view class="u-demo-block">
 			<view class="u-demo-block__content">
-				<view class="album">
+				<view class="album" v-for="(item, index) in commentList">
 					<view class="album__avatar">
 						<image
-							src="https://chris-project.oss-cn-guangzhou.aliyuncs.com/coding/images/2022-12-01/6d992bd9-9bae-440c-b616-0ce3cd8705a0.jpg"
+							:src="item.headurl"
 							mode=""
 							style="width: 32px;height: 32px; "
 						></image>
 					</view>
 					<view class="album__content">
 						<u--text
-							text="Chris"
+							:text="item.fullname"
 							bold
 							size="17"
 						></u--text>
@@ -23,21 +27,21 @@
 							width: albumWidth + 'px'
 						}">					
 							<u--text
-								text="张老师的服务太好了,和他聊天非常开心"
+								:text="item.content"
 								:customStyle="{
 									width: albumWidth + 'px'
 								}"
 							></u--text>
 						</view>
 						<u-album
-							:urls="urls2"
+							:urls="item.urls"
 							@albumWidth="width => albumWidth = width"
 							multipleSize="68"
 						></u-album>
 						<u-gap
 							height="5"
 						></u-gap>
-						<u-rate active-color="#26c2a2" inactive-color="#b2b2b2" :count="count" v-model="value" readonly></u-rate>
+						<u-rate active-color="#26c2a2" inactive-color="#b2b2b2" :count="count" v-model="item.level" readonly></u-rate>
 						<u-gap
 							height="5"
 						></u-gap>
@@ -46,7 +50,7 @@
 				</view>
 			</view>
 		</view>
-		<z-navigation></z-navigation>
+		<!-- <z-navigation></z-navigation> -->
 	</view>
 </template>
 
@@ -54,9 +58,10 @@
 	export default {
 		data() {
 			return {
+				addtext:'添加评价',
 				count: 5,
 				value: 2,
-				albumWidth: 0,
+				albumWidth: 200,
 				datetime: '2023-02-02 20:20',
 				urls2: [
 					'https://cdn.uviewui.com/uview/album/1.jpg',
@@ -70,10 +75,35 @@
 					'https://cdn.uviewui.com/uview/album/9.jpg',
 					'https://cdn.uviewui.com/uview/album/10.jpg',
 				],
+				commentList:[],
+				did:" ",
 			}
 		},
+		onLoad: function (option) {
+			console.log(option.did); 
+			this.did = option.did;
+			console.log('did',this.did);
+			this.getComment();
+		},
 		methods: {
-			
+			getComment(){
+				this.$http.post('/rating/info',{
+					did:this.did
+				}).then((res)=>{
+					console.log('res',res);
+					// this.commentList = res.data.data
+					res.data.data.forEach((element,index) => {
+						this.commentList.push(element)
+						if(this.commentList[index].urls)	this.commentList[index].urls = element.imgurl.split(',');
+						
+					});
+				})
+			},
+			addComment(e){
+				uni.navigateTo({
+			    	url:'/pages/mine/addComment?did=' + e
+			  })
+			}
 		}
 	}
 </script>

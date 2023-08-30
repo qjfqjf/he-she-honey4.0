@@ -13,7 +13,7 @@
         <text>症状自述</text>
         <uni-icons type="forward" size="16"></uni-icons>
       </view>
-      <view class="item medical-assessment">
+      <view class="item medical-assessment" @click="gotoMedicalController">
         <text>医疗管理</text>
         <uni-icons type="forward" size="16"></uni-icons>
       </view>
@@ -37,6 +37,11 @@
       gotoSymptomSelfReport(){
         uni.navigateTo({
           url:'/pages/healthManagement/medical/symptomSelfReport'
+        })
+      },
+      gotoMedicalController(){
+        uni.navigateTo({
+          url:'/pages/healthManagement/medical/medicalController'
         })
       }
     }

@@ -11,66 +11,57 @@
     <!-- 内容 -->
     <view class="container">
       <view class="item" v-for="(item, index) in baseList" :key="index">
-        <text class="date">{{item.date}}</text>
-        <view class="delete">
-          <button plain="true" type="default" @click="deleteReport">删除</button>
+        <view class="public name">{{item.name}}</view>
+        <view class="public content">内容：{{item.content}}</view>
+        <view class="public date">时间：{{item.date}}</view>
         </view>
       </view>
     </view>
-  </view>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        baseList: [{
-          date: '2022-12-1415:32:47'
-        }]
+        baseList: [],
+        data:{}
       };
     },
+    onLoad: function (option) {
+          this.getDoctorAdvice()
+      },
     methods: {
       addRecords(){
         uni.navigateTo({
-          url:'/pages/healthManagement/medical/addSymptomSelfReport'
+          url:'/pages/healthManagement/medical/addSymptomSelfReport?type=' + 0
         })
       },
-      deleteReport(id){
-        console.log('删除', id)
-      }
+      getDoctorAdvice(){
+        this.$http.post('/medical_file/index',{
+          type:0
+        }).then((res)=>{
+          res.data.data.forEach(element => {
+            const newData = {};
+            newData.name = element.fullname;
+            newData.content = element.symptom;
+            newData.date = element.time;
+            this.baseList.push(newData);
+          });
+        })
+      },
     }
   }
 </script>
 
 <style lang="scss">
   .container {
-    .item {
+    .item{
       background-color: white;
-      border-top: 1rpx solid #ececec;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin: 10rpx 0;
-      padding-left: 20rpx;
-
+      margin: 16rpx 0;
+      padding: 30rpx;
       font-size: 30rpx;
-
-      .date {}
-
-      .delete {
-        padding: 10rpx;
-
-        button {
-          width: 150rpx;
-          font-size: 20rpx;
-          border-radius: 50rpx;
-          margin: 0 10rpx;
-          border: #01b09a 1rpx solid;
-
-          color: #01b09a;
-          font-weight: 600;
-        }
+      .public{
+        margin: 14rpx;
       }
     }
   }
