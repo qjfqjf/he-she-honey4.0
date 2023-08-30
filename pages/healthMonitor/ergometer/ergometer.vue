@@ -9,7 +9,7 @@
 			<My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" />
 			
 		</view> -->
-		<view class="way" @click="checkWay()">进入</view>
+		
 		<br>
 		<br><br>
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-	const checkSdk=uni.requireNativePlugin("CL-CheckSdk")
+	
 	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 	export default {
@@ -119,26 +119,7 @@
 			console.log(111111,this.uid)
 		},
 		methods: {
-			checkWay:function(){
-				
-				checkSdk.checkPri(result=>{
-					
-					if(result.code==1){
-						// uni.navigateTo({
-						// 	url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
-						// });
-						uni.navigateTo({
-							url:"/pages/testsdk/testIndex"
-						})
-					}
-					else{
-						uni.showModal({
-							content:JSON.stringify(result)
-						})
-					}
-				})
-				
-			},
+			
 			getUserInfo(){
 				this.$http.post('/user/info', {
 					id: this.uid,

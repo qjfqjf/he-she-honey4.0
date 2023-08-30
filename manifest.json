@@ -1,5 +1,5 @@
 {
-    "name" : "tatamitest",
+    "name" : "tatami",
     "appid" : "__UNI__31BA192",
     "description" : "健康服务",
     "transformPx" : false,
@@ -9,8 +9,8 @@
             "src" : "图片路径"
         }
     ],
-    "versionName" : "1.1.0",
-    "versionCode" : 110,
+    "versionName" : "1.1.1",
+    "versionCode" : 111,
     "app-plus" : {
         "compatible" : {
             "ignoreVersion" : true
@@ -76,7 +76,8 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ],
                 "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ],
-                "targetSdkVersion" : 31
+                "targetSdkVersion" : 31,
+                "minSdkVersion" : 21
             },
             "sdkConfigs" : {
                 "ad" : {},

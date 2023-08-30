@@ -23,12 +23,15 @@
 				<u-button  @click="handleData" type="primary" class="select-btn" text="检测数据一览"></u-button>
 			</view>
 		</view>
+		
+		<view class="way" @click="checkWay()">进入</view>
 
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
+	const checkSdk=uni.requireNativePlugin("CL-CheckSdk")
 	export default {
 		data() {
 			return {
@@ -87,7 +90,26 @@
 		},
 		//方法
 		methods: {
-
+			checkWay:function(){
+				
+				checkSdk.checkPri(result=>{
+					
+					if(result.code==1){
+						// uni.navigateTo({
+						// 	url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+						// });
+						uni.navigateTo({
+							url:"/pages/testsdk/testIndex"
+						})
+					}
+					else{
+						uni.showModal({
+							content:JSON.stringify(result)
+						})
+					}
+				})
+				
+			},
 			click(url, name) {
 				if (!url) {
 					this.$refs.uToast.default('开发中...')
