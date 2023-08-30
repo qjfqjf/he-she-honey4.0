@@ -7,7 +7,7 @@
 									<u--image class="appManeger_block_icon" style="margin: auto;" src="/static/icon/homePage/Glu.png"
 														:customStyle="{paddingLeft:15+'rpx'}" height="100upx" width="100upx">
 									</u--image>
-									<view class="font-md" >服务申请</view>
+									<view class="font-md" >工单申请</view>
 								</view>
 							</view>
 							<view class="m-1 f-grow-1 d-flex j-center a-center rounded-20 py-2" style="background-color: hotpink">

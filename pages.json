@@ -955,6 +955,20 @@
 			}
 		},
 		{
+			"path": "pages/healthManagement/psychology/psychologyIndex",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthManagement/psychology/addPsychology",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/healthManagement/sports/sports",
 			"style": {
 				"navigationBarTitleText": "",
