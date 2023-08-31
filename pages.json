@@ -799,6 +799,13 @@
 			}
 		},
 		{
+			"path": "pages/healthMonitor/ergometer/ergometerIndex",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/template/deviceConnection",
 			"style": {
 				"navigationBarTitleText": "",

@@ -1,7 +1,10 @@
 <template>
 	<view class="bgView">
-		<br><br><br><br>
-		<My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" />
+		<z-nav-bar title="心电图">
+		</z-nav-bar>
+		<view>
+                <Lt-ECG :ecgArr="ecgArr" :pageNum="0"></Lt-ECG>
+		</view>
 		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="startConnect()">开始连接</view>
 		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="showReport()">显示心电图记录</view>
 		<view><text>状态监听：{{stateData}}</text></view>
@@ -15,20 +18,38 @@
 	export default {
 		data() {
 			return {
+				ecgArr:[],
 				stateData: "",
-				eventData: ""
+				eventData: "",
+				id:10
 			}
+		},
+		onLoad(options) {
+			// this.uid = this.userInfo
+			// 获取URL参数
+			this.id = options.id
 		},
 		mounted() {
 
 			ecgView = this.$refs.ecgView;
 			console.log(111111111111111111, ecgView);
+			this.getEcg()
 
 			
 
 
 		},
 		methods: {
+			getEcg(){
+				this.$http.post("/ecg/info",{
+					id: this.id
+				}).then((res)=>{
+					this.ecgArr = res.data.value.split(",").map(Number)
+					const divider = 10;
+					this.ecgArr = this.ecgArr.map((num) => num / divider);
+				})
+				console.log('ecgArr',this.ecgArr);
+			},
 			startConnect: function() {
 				console.log(1111)
 				ecgView.connect();
