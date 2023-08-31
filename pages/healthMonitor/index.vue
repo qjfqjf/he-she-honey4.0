@@ -65,14 +65,14 @@
 						title: '血脂',
 						url: '/pages/healthMonitor/bloodFat/bloodFat'
 					},
+					// {
+					// 	img: require('@/static/icon/health/heart.png'),
+					// 	title: '心电图',
+					// 	url: '/pages/healthMonitor/ergometer/ergometer'
+					// },
 					{
 						img: require('@/static/icon/health/heart.png'),
 						title: '心电图',
-						url: '/pages/healthMonitor/ergometer/ergometer'
-					},
-					{
-						img: require('@/static/icon/health/heart.png'),
-						title: '心电图测试',
 						url: '/pages/healthMonitor/ergometer/ergometerTest'
 					},
 					{

@@ -62,7 +62,7 @@
 			//查询心电图历史记录
 			getHistoryList() {
 				this.$http.post('/ecg/index', {
-					uid: 3,
+					uid: this.uid,
 				}).then(res => {
 					this.historyList = res.data.data
 				})
@@ -70,7 +70,7 @@
 			gotoEcgInfo(id){
 				console.log(id)
 				uni.navigateTo({
-					url: '/pages/testsdk/testIndex?id='+id
+					url: '/pages/testsdk/index?id='+id
 				})
 			}
 		},
