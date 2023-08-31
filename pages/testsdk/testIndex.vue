@@ -45,8 +45,8 @@
 					id: this.id
 				}).then((res)=>{
 					this.ecgArr = res.data.value.split(",").map(Number)
-					const divider = 10;
-					this.ecgArr = this.ecgArr.map((num) => num / divider);
+					const divider = 2;
+					this.ecgArr = this.ecgArr.map((num) => (num-2000) / divider);
 				})
 				console.log('ecgArr',this.ecgArr);
 			},
