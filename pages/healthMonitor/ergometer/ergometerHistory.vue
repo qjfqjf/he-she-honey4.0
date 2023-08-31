@@ -70,7 +70,7 @@
 			gotoEcgInfo(id){
 				console.log(id)
 				uni.navigateTo({
-					url: '/pages/testsdk/testIndex?id='+id
+					url: '/pages/testsdk/index?id='+id
 				})
 			}
 		},
