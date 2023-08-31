@@ -71,9 +71,11 @@
 		},0);
 	},
 	render() {
-  	return (
-    	<canvas type="2d" id="canvas" style={{width: 375, height: 1250}}/>
-  	);
+//   	return [
+// 	<canvas id="canvas"  style="width: 375px; height: 1250px;"></canvas>
+// ]
+		
+//   	;
 }
 	}
 </script>

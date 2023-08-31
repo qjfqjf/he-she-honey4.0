@@ -46,6 +46,7 @@
 			} else {
 				this.uid = uid
 			}
+			this.uid =3
 			console.log(111111,this.uid)
 			this.getHistoryList();
 		},
