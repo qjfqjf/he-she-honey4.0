@@ -5,13 +5,12 @@
 		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
-		<!-- <view class="mt-3 mb-3" >
-			<My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" />
-			
-		</view> -->
 		
-		<br>
-		<br><br>
+		<view class="mt-3 mb-3" style="height: 500rpx;width: 750rpx;">
+			
+		</view>
+		
+		
 		<u--text class="d-flex j-center mb-3" color="#01b09a"
 			:text="deviceStatus===0?'设备状态：未连接':'设备状态：已连接'+'('+deviceId+')'"></u--text>
 		<u-button class="mt-2" :color="btnColor" text="保存" @click="handleSave"></u-button>
@@ -21,7 +20,6 @@
 		<u--text class="d-flex j-center" color="#20baa6" suffixIcon="arrow-right"
 			iconStyle="font-size: 15px;color:#20baa6" text="查看监测历史" @click="handleDevelop">
 		</u--text>
-		<!-- <BottomNavigation page="bloodSUA/suaManualEntry"></BottomNavigation> -->
 		<view class="tools d-flex j-sb mt-5 p-4">
 			<view class="d-flex flex-column a-center" @click="onPageSelectDocter">
 				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
@@ -43,18 +41,18 @@
 </template>
 
 <script>
-	
+	const checkSdk=uni.requireNativePlugin("CL-CheckSdk")
 	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
+
 	export default {
 		components: {
 			HealthHeader,
-			BottomNavigation
+			BottomNavigation,
+			
 		},
 		data() {
 			return {
-				stateData: "",
-				eventData: "",
 				btnColor: '#dadada',
 				deviceStatus: 0,
 				ecgRef: null,
@@ -103,7 +101,7 @@
 			console.log(111111,this.uid)
 			this.getUserInfo()
 			
-			// this.startConnect()
+			this.startConnect()
 			
 			// this.initBlue()
 			// if (this.deviceId && this.deviceStatus === 0) {
@@ -119,7 +117,16 @@
 			console.log(111111,this.uid)
 		},
 		methods: {
-			
+			startConnect(){
+				checkSdk.checkPri(result=>{
+				})
+			},
+			getReportData(){
+				ecgView.getReportData(result=>{
+					this.value = result.data
+					console.log(1111111111111111,this.value)
+				})
+			},
 			getUserInfo(){
 				this.$http.post('/user/info', {
 					id: this.uid,
@@ -185,11 +192,5 @@
 </script>
 
 <style lang="scss">
-	.bgView {
-		position: fixed;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: 0;
-	}
+
 </style>

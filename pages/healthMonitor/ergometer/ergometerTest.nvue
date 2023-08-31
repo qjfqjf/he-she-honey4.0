@@ -1,0 +1,266 @@
+<template>
+	<view>
+		<view @click="goDiet"
+			style="margin-top: 50px;display: flex; flex-direction: row; align-items: center;margin-left: 10px;">
+			<image :src="gotoback" style="width: 50rpx; height: 50rpx" mode="aspectFit"></image>
+			<text style="text-align: center;margin-left: 100px;">心电检测</text>
+		</view>
+
+		<view style="margin-top: 20px">
+			<view style="display: flex; flex-direction: row; align-items: center;">
+				<text style="margin-left: 10px;">当前会员：</text>
+				<text style="width: 100px;">{{username}}</text>
+				<text style="margin-left: 40px;color:#20baa6" @click="handleMyUser">切换会员</text>
+			</view>
+		</view>
+		<view style="height: 500rpx;width: 750rpx;">
+			<My-ECGView ref="ecgView" style="height: 500rpx; width: 750rpx;" />
+			
+		</view>
+
+		<text style="color: #01b09a; margin-top: 20px;text-align: center;">
+			{{ deviceStatus === 0 ? '设备状态：未连接' : '设备状态：已连接' + '(' + deviceId + ')' }}
+		</text>
+		<text style="text-align: center;font-size: 15px;margin-top: 10px;">心跳结果：{{avgHR}}</text>
+		<text style="text-align: center;font-size: 15px;margin-top: 10px;">检测结果：{{result}}</text>
+		<!-- <text style="text-align: center;font-size: 15px;margin-top: 10px;">波形数据：{{value}}</text> -->
+		<view style="width: 200rpx;height: 50rpx;margin-top: 10px" @click="getReportData()">获取数据</view>
+		<u-button :color="btnColor" style="margin-top: 20px;" text="保存" @click="handleSave"></u-button>
+
+		<text style="text-align: center;color:#20baa6;font-size: 15px;margin-top: 20px;"
+			@click="handleDevelop">查看监测历史</text>
+		<view
+			style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin:auto;margin-top: 20px;">
+			<view @click="onPageSelectDocter" style="margin-left: 40px;">
+				<image :src="this.toolList[0].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[0].title }}</text>
+			</view>
+			<view @click="onPageMonth">
+				<image :src="this.toolList[1].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[1].title }}</text>
+			</view>
+			<view @click="onPageDevice" style="margin-right: 40px;">
+				<image :src="this.toolList[2].img" style="width: 100rpx; height: 100rpx" mode="aspectFit"></image>
+				<text class="mt-1">{{ this.toolList[2].title }}</text>
+			</view>
+		</view>
+		<u-toast ref="uToast"></u-toast>
+	</view>
+</template>
+
+
+
+<script>
+	let ecgView = null;
+	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
+	import {
+		baseUrl
+	} from '@/config/baseUrl.js'
+	export default {
+		components: {
+			HealthHeader,
+
+		},
+		data() {
+			return {
+				gotoback: require('@/static/demo/back2.png'),
+				btnColor: '#dadada',
+				stateData: "",
+				eventData: "",
+				value:[],
+				deviceStatus: 0,
+				deviceId: uni.getStorageSync('xdDeviceId'), // 蓝牙设备的id
+				uid: 0, //用户选择的id
+				username: '', //登录的名字
+				userInfo: '',
+				token: uni.getStorageSync('access-token'),
+				toolList: [{
+						img: require('@/static/icon/select_docter.png'),
+						title: '找医生',
+						url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+					},
+					{
+						img: require('@/static/icon/bloodPressure/month.png'),
+						title: '月报',
+						url: '/pages/healthMonitor/ergometer/ergometerMonth'
+					},
+					{
+						img: require('@/static/icon/bloodPressure/device.png'),
+						title: '设备',
+						url: '/pages/mine/myDevice'
+					},
+				],
+				result: '',
+				avgHR: 0,
+			}
+		},
+		onLoad() {
+			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.uid = this.userInfo
+			console.log(111111, this.uid)
+			this.getUserInfo()
+			
+		},
+		//页面显示
+		onShow() {
+			if (this.deviceId === '') {
+				this.deviceStatus = 0
+			}
+			uni.$on('backWithData', (data) => {
+				this.uid = data.uid;
+				this.username = data.name;
+			});
+			console.log(111111, this.uid)
+		},
+		
+		mounted() {
+			ecgView = this.$refs.ecgView;
+			ecgView.onConnectState(result => {
+				this.stateData = JSON.stringify(result)
+			})
+			ecgView.onEventInfo(result => {
+				this.eventData = JSON.stringify(result)
+				const {
+					type
+				} = result;
+			})
+			this.startConnect()
+
+		},
+		methods: {
+			
+			startConnect() {
+				console.log("startconnnect被调用")
+				ecgView.connect();
+				this.deviceStatus = 1
+			},
+			// startConnect: function() {
+			// 	ecgView.connect();
+			// },
+			showReport: function() {
+
+				ecgView.showReport(result => {
+					console.log(result)
+				});
+			},
+
+			getReportData() {
+				console.log(33333333)
+				ecgView.getReportData(result => {
+					console.log(result)
+					this.value = result.data
+					
+					this.avgHR = result.avgHR
+					this.result = result.result
+				})
+
+			},
+			goDiet() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/index'
+				})
+			},
+			getUserInfo() {
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+				// console.log("this.token", this.token)
+				// uni.request({
+				// 	url: baseUrl + '/user/info',
+				// 	method: "POST",
+				// 	header: {
+				// 		authorization: uni.getStorageSync('access-token')
+				// 	},
+				// 	data: {
+				// 		id: this.uid,
+				// 	},
+				// }).then((res) => {
+				// 	console.log(111111111, res)
+				// 	this.username = res[1].data.data.fullname
+
+				// })
+
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
+			handleDevelop() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/ergometer/ergometerHistory?uid=' + this.uid,
+				})
+			},
+			handleSave() {
+				// this.getReportData()
+				console.log("this.token", this.token)
+				uni.request({
+					url: 'http://127.0.0.1:8000/api/ecg/create',
+					method: "POST",
+					header: {
+						authorization: uni.getStorageSync('access-token')
+					},
+					data: {
+						id: this.uid,
+						value:JSON.stringify(this.value),
+						result:0,
+						hr:this.avgHR,
+						time: this.formatDate(new Date()),
+						type: 1
+					},
+				}).then((res) => {
+					console.log(111111111, res)
+					// this.username = res[1].data.data.fullname
+				
+				})
+				
+			},
+			onPageJump(url) {
+				uni.navigateTo({
+					url: url
+				});
+
+			},
+
+
+			onPageSelectDocter() {
+				uni.navigateTo({
+					url: '/pages/healthAdvisory/treatmentMethod/treatmentMethod',
+				})
+			},
+			onPageMonth() {
+				uni.navigateTo({
+					url: '/pages/healthMonitor/ergometer/ergometerMonth?uid=' + this.uid,
+				})
+			},
+			onPageDevice() {
+				uni.navigateTo({
+					url: '/pages/mine/myDevice',
+				})
+			},
+
+			//时间格式转换
+			formatDate(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var second = date.getSeconds();
+				second = second < 10 ? ('0' + second) : second;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+			},
+		}
+	}
+</script>
+
+<style lang="scss">
+
+
+</style>

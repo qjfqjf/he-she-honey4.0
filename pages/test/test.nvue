@@ -1,0 +1,69 @@
+<template>
+	<view class="bgView">
+		<view class="">
+			11111111111
+		</view>
+		<My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" />
+		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="startConnect()">开始连接</view>
+		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="showReport()">显示心电图记录</view>
+		<view><text>状态监听：{{stateData}}</text></view>
+	
+		<view><text>数据监听：{{eventData}}</text></view>
+		
+		<view  @click="getReportData()">获取数据</view>
+	</view>
+	
+</template>
+
+<script>
+	let ecgView = null;
+	export default {
+		data() {
+			return {
+				stateData: "",
+				eventData: "",
+				value:[]
+			}
+		},
+		mounted() {
+			ecgView = this.$refs.ecgView;
+			ecgView.onConnectState(result => {
+				console.log(result)
+				this.stateData = JSON.stringify(result)
+			})
+			ecgView.onEventInfo(result => {
+				this.eventData = JSON.stringify(result)
+				const {
+					type
+				} = result;
+			})
+			
+
+		},
+		methods: {
+			startConnect: function() {
+				ecgView.connect();
+			},
+			showReport: function() {
+				
+				ecgView.showReport();
+			},
+			getReportData(){
+				ecgView.getReportData(result=>{
+					this.value = result.data
+					console.log(1111111111111111,this.value)
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.bgView {
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+	}
+</style>

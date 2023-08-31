@@ -1,0 +1,58 @@
+.flex_layout{display: flex; align-items: center; flex-wrap: wrap;}
+.bg-blue{background: #0d69b2; color: #fff;}
+
+
+/*iconfont文件*/
+@font-face {
+  font-family: 'iconfont';  /* project id 1340048 */
+  src: url('//at.alicdn.com/t/font_1340048_cbji2q6575r.eot');
+  src: url('//at.alicdn.com/t/font_1340048_cbji2q6575r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1340048_cbji2q6575r.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1340048_cbji2q6575r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1340048_cbji2q6575r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1340048_cbji2q6575r.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jinru:before {
+  content: "\e615";
+}
+
+.icon-icon:before {
+  content: "\e630";
+}
+
+.icon-right:before {
+  content: "\e63b";
+}
+
+.icon-hide:before {
+  content: "\e600";
+}
+
+.icon-address:before {
+  content: "\e62a";
+}
+
+.icon-dianhua:before {
+  content: "\e61b";
+}
+
+.icon-dianhua1:before {
+  content: "\e601";
+}
+
+.icon-biao:before {
+  content: "\e6d5";
+}
+
+.icon-rili:before {
+  content: "\e642";
+}

@@ -39,12 +39,17 @@
 			}
 		},
 		{
-		    "path" : "pages/testsdk/testIndex",
+		    "path" : "pages/testsdk/index",
+		    "style": {
+		    	"navigationBarTitleText": ""
+		    }
+		},
+		{
+		    "path" : "pages/test/test",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-		        
+		        "enablePullDownRefresh": false
 		    }
 		    
 		},
@@ -795,6 +800,15 @@
 			"path": "pages/healthMonitor/ergometer/ergometer",
 			"style": {
 				"navigationBarTitleText": "",
+				
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/healthMonitor/ergometer/ergometerTest",
+			"style": {
+				"navigationBarTitleText": "",
+				
 				"enablePullDownRefresh": false
 			}
 		},

@@ -1,0 +1,34 @@
+{
+	"name": "My-ECGView",
+	"id": "My-ECGView",
+	"version": "1.0.0",
+	"description": "心电图工具",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [
+				{
+					"type": "component",
+					"name": "My-ECGView",
+					"class": "com.myplugin.myecgtool.MyECGView"
+				},
+				{
+					"type": "module",
+					"name": "CL-CheckSdk",
+					"class": "com.myplugin.myecgtool.InitECGSdk"
+				}
+			],
+			"integrateType": "aar",
+			"minSdkVersion": 21,
+			"dependencies": [
+				
+				"com.github.getActivity:XXPermissions:16.8",
+				
+				"androidx.appcompat:appcompat:1.2.0"
+			],
+			"useAndroidX": true
+
+		}
+
+	}
+}

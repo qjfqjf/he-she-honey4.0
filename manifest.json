@@ -1,6 +1,6 @@
 {
     "name" : "tatami",
-    "appid" : "__UNI__31BA192",
+    "appid" : "__UNI__F4191A9",
     "description" : "健康服务",
     "transformPx" : false,
     "icons" : [
@@ -9,8 +9,8 @@
             "src" : "图片路径"
         }
     ],
-    "versionName" : "1.1.1",
-    "versionCode" : 111,
+    "versionName" : "1.1.3",
+    "versionCode" : 113,
     "app-plus" : {
         "compatible" : {
             "ignoreVersion" : true

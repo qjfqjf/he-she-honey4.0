@@ -1,6 +1,18 @@
 <template>
 	<view class="content p-2">
-		<z-nav-bar title="健康监测"></z-nav-bar>
+		<view class="bar">
+			<view class="bar-left">
+				<image class="img" src="/static/demo/back2.png" style="width: 16px;height: 16px;" shape="circle"
+					mode="aspectFill" @click="goDiet"></image>
+			</view>
+			<view class="bar-center">
+				健康监测
+			</view>
+			<view class="bar-right">
+		
+			</view>
+		</view>
+		
 		<public-module></public-module>
 		<view class="title">
 			<span>健康监测</span>
@@ -15,6 +27,7 @@
 				</u-grid-item>
 			</u-grid>
 		</view>
+		<br><br>
 		<view class="container">
 			<view class="submit">
 				<u-button type="primary" class="submit-btn" text="手动录入"></u-button>
@@ -23,9 +36,6 @@
 				<u-button  @click="handleData" type="primary" class="select-btn" text="检测数据一览"></u-button>
 			</view>
 		</view>
-		
-		<view class="way" @click="checkWay()">进入</view>
-
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -61,6 +71,11 @@
 						url: '/pages/healthMonitor/ergometer/ergometer'
 					},
 					{
+						img: require('@/static/icon/health/heart.png'),
+						title: '心电图测试',
+						url: '/pages/healthMonitor/ergometer/ergometerTest'
+					},
+					{
 						img: require('@/static/icon/health/bodyFat.png'),
 						title: '体脂率',
 						url: '/pages/healthMonitor/bodyFat/bodyFat'
@@ -84,31 +99,17 @@
 						title: '血氧',
 						url: '/pages/healthMonitor/oximeter/oximeter'
 					},
+					
 
 				]
 			};
 		},
 		//方法
 		methods: {
-			checkWay:function(){
-				
-				checkSdk.checkPri(result=>{
-					
-					if(result.code==1){
-						// uni.navigateTo({
-						// 	url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
-						// });
-						uni.navigateTo({
-							url:"/pages/testsdk/testIndex"
-						})
-					}
-					else{
-						uni.showModal({
-							content:JSON.stringify(result)
-						})
-					}
+			checkWay(){
+				uni.navigateTo({
+					url:"/pages/testsdk/index"
 				})
-				
 			},
 			click(url, name) {
 				if (!url) {
@@ -124,6 +125,11 @@
 					url: '/pages/healthMonitor/healthMonitorData',
 				});
 			},
+			goDiet() {
+				uni.switchTab({
+					url: '/pages/homePage/homePage',
+				})
+			}
 
 		},
 		onLoad(e) {
@@ -142,7 +148,42 @@
 				padding-left: 20rpx;
 			}
 		}
-
+		
+		.bar {
+			display: flex;
+			justify-content: space-between;
+			/* 将子元素平分空间 */
+			align-items: center;
+			height: 70px;
+		
+			background-color: white;
+		
+			.bar-left {
+				text-align: center;
+				margin-left: 20px;
+				width: 50px;
+				margin-top: 20px;
+			}
+		
+			.bar-center {
+				display: flex;
+				/* 使用 Flex 布局 */
+				justify-content: center;
+				/* 水平居中 */
+				align-items: center;
+				text-align: center;
+				font-size: 17px;
+				font-weight: bold;
+				margin-top: 20px;
+			}
+		
+			.bar-right {
+				text-align: center;
+				font-size: 15px;
+				width: 60px;
+			}
+		}
+		
 		.devices-warp {
 			.item {
 				padding: 20rpx;
