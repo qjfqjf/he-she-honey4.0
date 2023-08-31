@@ -5,7 +5,11 @@
 		</z-nav-bar>
 		<public-module></public-module>
 		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
-		
+
+		<view class="mt-3 mb-3" >
+			<!-- <My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" /> -->
+			<lime-ecg />
+		</view>
 		<view class="mt-3 mb-3" style="height: 500rpx;width: 750rpx;">
 			
 		</view>
@@ -41,7 +45,10 @@
 </template>
 
 <script>
-	const checkSdk=uni.requireNativePlugin("CL-CheckSdk")
+
+	import Vue from 'vue'
+	import VueCompositionAPI from '@vue/composition-api'
+	Vue.use(VueCompositionAPI)
 	import HealthHeader from "../components/healthHeader/HealthHeader.vue"
 	import BottomNavigation from '../components/bottomNav/BottomNavigation.vue'
 

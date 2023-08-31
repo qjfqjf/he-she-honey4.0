@@ -44,7 +44,10 @@
 			})
 			
 			const init = (options: EcgOptions) => {
+<<<<<<< HEAD
 				console.log(options)
+=======
+>>>>>>> d1407863f7f884a2cd169271fdde88d74a9a7439
 				if(ecgChart) {return}
 				watch(canvas, (v) => {
 					if(v) {

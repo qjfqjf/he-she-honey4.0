@@ -76,6 +76,18 @@ import Vue from 'vue'
 import VueCompositionAPI from '@vue/composition-api'
 Vue.use(VueCompositionAPI)
 ```
+<<<<<<< HEAD
+=======
+另外插件也用到了TS，vue2可能会遇过官方的TS版本过低的问题,找到HX目录下的`compile-typescript`目录
+```js
+// \HBuilderX\plugins\compile-typescript
+yarn add typescript -D
+- or - 
+npm install typescript -D
+```
+
+
+>>>>>>> d1407863f7f884a2cd169271fdde88d74a9a7439
 
 ## API
 
