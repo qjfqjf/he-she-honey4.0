@@ -1,6 +1,13 @@
 {
   "dependencies": {
     "@tencentcloud/chat-uikit-uniapp-vue2": "^0.0.5",
-    "decimal.js": "^10.4.3"
+    "decimal.js": "^10.4.3",
+    "react": "^18.2.0",
+    "react-native": "^0.72.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.14",
+    "@babel/preset-react": "^7.22.5"
   }
 }

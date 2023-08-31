@@ -5,6 +5,8 @@
 </template>
 <script>
 	import EGC from "./EGC.js"
+	import React from 'react';
+	// import { View, findNodeHandle, UIManager } from 'react-native';
 	export default {
 		props: {
 			ecgArr: {
@@ -37,15 +39,17 @@
 			}
 		},
 		mounted() {
-			let query = this.createSelectorQuery(); // 存一个 SelectorQuery 对象实例
-			query.select('#canvas') // 在当前页面下选择 canvas 的节点，返回一个 NodesRef 对象实例，可以用于获取节点信息。
-				.fields({ // 获取节点的相关信息
-					node: true, // 是否返回节点对应的 Node 实例
-					size: true // 是否返回节点尺寸
-				})
+			setTimeout(() => {
+			// let query = React.createRef(); // 存一个 SelectorQuery 对象实例
+			// console.log(query);
+			// query.select('#canvas') // 在当前页面下选择 canvas 的节点，返回一个 NodesRef 对象实例，可以用于获取节点信息。
+			// 	.fields({ // 获取节点的相关信息
+			// 		node: true, // 是否返回节点对应的 Node 实例
+			// 		size: true // 是否返回节点尺寸
+			// 	})
 
 			// #ifdef H5
-			query = document.getElementById("canvas");
+			let query = document.getElementById("canvas");
 			// #endif
 			uni.showLoading({
 				title: '加载数据中',
@@ -64,7 +68,15 @@
 			 */
 
 			this.ecg = new EGC(query, 3, 10, 2, "y", this.pageNum);
-		}
+		},0);
+	},
+	render() {
+//   	return [
+// 	<canvas id="canvas"  style="width: 375px; height: 1250px;"></canvas>
+// ]
+		
+//   	;
+}
 	}
 </script>
 <style>

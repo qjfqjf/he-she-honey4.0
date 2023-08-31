@@ -211,7 +211,7 @@
 						authorization: uni.getStorageSync('access-token')
 					},
 					data: {
-						id: this.uid,
+						uid: this.uid,
 						value:JSON.stringify(this.value),
 						result:0,
 						hr:this.avgHR,
