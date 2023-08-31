@@ -106,7 +106,6 @@
 			if (this.deviceId === '') {
 				this.deviceStatus = 0
 			}
-			this.value = [1234,123,132123,13213,1231]
 			uni.$on('backWithData', (data) => {
 				this.uid = data.uid;
 				this.username = data.name;
@@ -195,6 +194,7 @@
 			},
 			handleSave() {
 				// this.getReportData()
+				console.log("this.token", this.token)
 				uni.request({
 					url: 'http://127.0.0.1:8000/api/ecg/create',
 					method: "POST",
