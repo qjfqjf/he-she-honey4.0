@@ -64,7 +64,7 @@
 				this.$http.post('/ecg/index', {
 					uid: 3,
 				}).then(res => {
-					this.historyList = res.data
+					this.historyList = res.data.data
 				})
 			},
 			gotoEcgInfo(id){
