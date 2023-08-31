@@ -161,26 +161,25 @@
 				})
 			},
 			getUserInfo() {
-				this.$http.post('/user/info', {
-					id: this.uid,
-				}).then(res => {
-					this.username = res.data.fullname
-				})
-				// console.log("this.token", this.token)
-				// uni.request({
-				// 	url: baseUrl + '/user/info',
-				// 	method: "POST",
-				// 	header: {
-				// 		authorization: uni.getStorageSync('access-token')
-				// 	},
-				// 	data: {
-				// 		id: this.uid,
-				// 	},
-				// }).then((res) => {
-				// 	console.log(111111111, res)
-				// 	this.username = res[1].data.data.fullname
-
+				// this.$http.post('/user/info', {
+				// 	id: this.uid,
+				// }).then(res => {
+				// 	this.username = res.data.fullname
 				// })
+				console.log("this.token", this.token)
+				uni.request({
+					url:'https://new-hn.ttmjk.com/api/user/info',
+					method: "POST",
+					header: {
+						authorization: uni.getStorageSync('access-token')
+					},
+					data: {
+						id: this.uid,
+					},
+				}).then((res) => {
+					this.username = res[1].data.data.fullname
+
+				})
 
 			},
 			handleMyUser() {
