@@ -30,14 +30,9 @@
 			this.id = options.id
 		},
 		mounted() {
-
 			ecgView = this.$refs.ecgView;
 			console.log(111111111111111111, ecgView);
 			this.getEcg()
-
-			
-
-
 		},
 		methods: {
 			getEcg(){

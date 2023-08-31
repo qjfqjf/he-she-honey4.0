@@ -15,7 +15,7 @@
 		</view>
 		<view style="height: 500rpx;width: 750rpx;">
 			<My-ECGView ref="ecgView" style="height: 500rpx; width: 750rpx;" />
-			
+
 		</view>
 
 		<text style="color: #01b09a; margin-top: 20px;text-align: center;">
@@ -23,8 +23,11 @@
 		</text>
 		<text style="text-align: center;font-size: 15px;margin-top: 10px;">心跳结果：{{avgHR}}</text>
 		<text style="text-align: center;font-size: 15px;margin-top: 10px;">检测结果：{{result}}</text>
-		<!-- <text style="text-align: center;font-size: 15px;margin-top: 10px;">波形数据：{{value}}</text> -->
-		<view style="width: 200rpx;height: 50rpx;margin-top: 10px" @click="getReportData()">获取数据</view>
+		<text style="text-align: center;font-size: 15px;margin-top: 10px;" @click="getReportData()">获取数据</text>
+		<!-- <view><text>状态监听：{{stateData}}</text></view>
+
+		<view><text>数据监听：{{eventData}}</text></view>
+		<view style="width: 200rpx;height: 50rpx;margin-top: 10px" @click="getReportData()">获取数据</view> -->
 		<u-button :color="btnColor" style="margin-top: 20px;" text="保存" @click="handleSave"></u-button>
 
 		<text style="text-align: center;color:#20baa6;font-size: 15px;margin-top: 20px;"
@@ -67,7 +70,7 @@
 				btnColor: '#dadada',
 				stateData: "",
 				eventData: "",
-				value:[],
+				value: [],
 				deviceStatus: 0,
 				deviceId: uni.getStorageSync('xdDeviceId'), // 蓝牙设备的id
 				uid: 0, //用户选择的id
@@ -99,7 +102,7 @@
 			this.uid = this.userInfo
 			console.log(111111, this.uid)
 			this.getUserInfo()
-			
+
 		},
 		//页面显示
 		onShow() {
@@ -110,48 +113,56 @@
 				this.uid = data.uid;
 				this.username = data.name;
 			});
-			console.log(111111, this.uid)
 		},
-		
+
 		mounted() {
 			ecgView = this.$refs.ecgView;
 			ecgView.onConnectState(result => {
+				console.log("当前结果", result.msg)
+				if (result.msg === "连接成功") {
+					this.result = '正在检测'
+				} else {
+					this.avgHR = 0
+					this.result = ''
+				}
 				this.stateData = JSON.stringify(result)
 			})
 			ecgView.onEventInfo(result => {
-				this.eventData = JSON.stringify(result)
-				const {
-					type
-				} = result;
+				if (result === null && result === undefined ) {
+					// result 为空
+					this.avgHR = 0
+					this.result = ''
+				} else {
+					// result 不为空
+					this.eventData = JSON.stringify(result);
+					const {
+						type
+					} = result;
+				}
+
 			})
 			this.startConnect()
 
 		},
 		methods: {
-			
+
 			startConnect() {
 				console.log("startconnnect被调用")
 				ecgView.connect();
 				this.deviceStatus = 1
 			},
-			// startConnect: function() {
-			// 	ecgView.connect();
-			// },
 			showReport: function() {
-
 				ecgView.showReport(result => {
 					console.log(result)
 				});
 			},
 
 			getReportData() {
-				console.log(33333333)
 				ecgView.getReportData(result => {
-					console.log(result)
 					this.value = result.data
-					
 					this.avgHR = result.avgHR
 					this.result = result.result
+					this.btnColor = '#01b09a'
 				})
 
 			},
@@ -161,13 +172,9 @@
 				})
 			},
 			getUserInfo() {
-				// this.$http.post('/user/info', {
-				// 	id: this.uid,
-				// }).then(res => {
-				// 	this.username = res.data.fullname
-				// })
 				console.log("this.token", this.token)
 				uni.request({
+
 					url:'https://new-hn.ttmjk.com/api/user/info',
 					method: "POST",
 					header: {
@@ -178,7 +185,6 @@
 					},
 				}).then((res) => {
 					this.username = res[1].data.data.fullname
-
 				})
 
 			},
@@ -193,10 +199,13 @@
 				})
 			},
 			handleSave() {
-				// this.getReportData()
+				this.btnColor = '#dadada'
+				this.avgHR = 0
+				this.result = ''
 				console.log("this.token", this.token)
 				uni.request({
-					url: 'http://127.0.0.1:8000/api/ecg/create',
+					
+					url: baseUrl + '/ecg/create',
 					method: "POST",
 					header: {
 						authorization: uni.getStorageSync('access-token')
@@ -211,10 +220,10 @@
 					},
 				}).then((res) => {
 					console.log(111111111, res)
-					// this.username = res[1].data.data.fullname
-				
+					
+
 				})
-				
+
 			},
 			onPageJump(url) {
 				uni.navigateTo({
