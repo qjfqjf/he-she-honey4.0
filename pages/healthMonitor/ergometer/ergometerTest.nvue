@@ -74,7 +74,7 @@
 				uid: 0, //用户选择的id
 				username: '', //登录的名字
 				userInfo: '',
-				token: uni.getStorageSync('access-token'),
+				token: " ",
 				toolList: [{
 						img: require('@/static/icon/select_docter.png'),
 						title: '找医生',
@@ -98,6 +98,7 @@
 		},
 		onLoad() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
+			this.token = uni.getStorageSync('access-token')
 			this.uid = this.userInfo
 			console.log(111111, this.uid)
 			this.getUserInfo()
@@ -110,6 +111,7 @@
 			uni.$on('backWithData', (data) => {
 				this.uid = data.uid;
 				this.username = data.name;
+				if(data) this.changeUsers()
 			});
 		},
 
@@ -127,6 +129,32 @@
 			this.startConnect()
 		},
 		methods: {
+			changeUsers(){
+				uni.request({
+				url:baseUrl + '/user/switchUser',
+				method: "POST",
+				header: {
+					authorization:uni.getStorageSync('access-token')
+				},
+				data: {
+					id: this.uid,
+				},
+				}).then((res) => {
+					console.log(res)
+					if (res[1].data.code == 20000) {
+						this.token = res[1].data.message
+						uni.setStorageSync('access-token', this.token)
+						uni.setStorageSync('userInfo', this.uid)
+						console.log('token', this.token)
+					} else {
+						uni.showToast({
+							title: '切换失败',
+							icon: 'none',
+							duration: 2000,
+						})
+					}
+				})
+			},
 			startConnect() {
 				console.log("startconnnect被调用")
 				ecgView.connect();
@@ -159,7 +187,8 @@
 			getUserInfo() {
 				console.log("this.token", this.token)
 				uni.request({
-					url: 'https://new-hn.ttmjk.com/api/user/info',
+					url: baseUrl +'/user/info',
+
 					method: "POST",
 					header: {
 						authorization: uni.getStorageSync('access-token')
@@ -176,6 +205,8 @@
 				uni.navigateTo({
 					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
 				});
+				
+				
 			},
 			handleDevelop() {
 				uni.navigateTo({
@@ -183,8 +214,7 @@
 				})
 			},
 			handleSave() {
-				this.getReportData()
-				
+				this.getReportData()	
 				setTimeout(() => {
 					// 在这里写你需要延迟执行的代码
 					// 例如：显示一个提示框
@@ -219,8 +249,6 @@
 					}else{
 						this.ecgTag = 0
 					}
-					
-					
 					uni.request({
 						url: baseUrl + '/ecg/create',
 						method: "POST",
