@@ -1,11 +1,7 @@
 {
   "id": "lime-ecg",
   "displayName": "心电图",
-<<<<<<< HEAD
-  "version": "0.0.5",
-=======
   "version": "0.0.6",
->>>>>>> d1407863f7f884a2cd169271fdde88d74a9a7439
   "description": "uniapp vue3 canvas 心电图插件， vue2只要配置@vue/composition-api。",
   "keywords": [
     "心电图"

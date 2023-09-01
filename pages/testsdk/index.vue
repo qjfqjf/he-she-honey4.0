@@ -3,7 +3,17 @@
 		<z-nav-bar title="心电图">
 		</z-nav-bar>
 		<view>
-                <Lt-ECG :ecgArr="ecgArr" :pageNum="0"></Lt-ECG>
+                <!-- <Lt-ECG :ecgArr="ecgArr" :pageNum="0"></Lt-ECG> -->
+				<!-- <Ecg 
+					:height="240"
+					:width="750"
+					:tip="true"
+					:maxV="500"
+					:ecgData="[]"
+				></Ecg> -->
+				<view class="mt-3 mb-3" >
+					<lime-ecg :ecgList="ecgArr"/>
+				</view>
 		</view>
 		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="startConnect()">开始连接</view>
 		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="showReport()">显示心电图记录</view>
