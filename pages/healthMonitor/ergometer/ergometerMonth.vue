@@ -114,7 +114,7 @@
 					end_date: this.date.endTime
 				}).then(res => {
 					
-					this.historyList = res.data.data
+					this.historyList = res.data
 				})
 			},
 			gotoEcgInfo(id){

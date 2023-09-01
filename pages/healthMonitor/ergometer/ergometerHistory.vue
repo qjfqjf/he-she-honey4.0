@@ -35,7 +35,6 @@
 				
 			};
 		},
-
 		onLoad(options) {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
 			// this.uid = this.userInfo
@@ -46,7 +45,7 @@
 			} else {
 				this.uid = uid
 			}
-			this.uid =3
+			this.uid = 3
 			console.log(111111,this.uid)
 			this.getHistoryList();
 		},
@@ -70,8 +69,10 @@
 			},
 			gotoEcgInfo(id){
 				console.log(id)
+				
 				uni.navigateTo({
-					url: '/pages/testsdk/index?id='+id
+					url: `/pages/testsdk/index?id=${id}&uid=${this.uid}`,
+					
 				})
 			}
 		},
