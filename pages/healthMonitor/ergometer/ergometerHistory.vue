@@ -45,7 +45,6 @@
 			} else {
 				this.uid = uid
 			}
-			this.uid = 3
 			console.log(111111,this.uid)
 			this.getHistoryList();
 		},
@@ -64,7 +63,8 @@
 				this.$http.post('/ecg/index', {
 					uid: this.uid,
 				}).then(res => {
-					this.historyList = res.data.data
+					this.historyList = res.data
+					console.log(this.historyList);
 				})
 			},
 			gotoEcgInfo(id){

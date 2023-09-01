@@ -1,6 +1,6 @@
-<template id="ecg">
+<template id="Ecg">
     <div ref="ecgContent" class="ecgContent" id="ecgContent" :style="{ width: width + 2 + 'px', height: height + 'px' }">
-        <canvas ref="ecgCanvas" id="ecgCanvas" v-if="show"></canvas>
+        <canvas ref="ecgCanvas" id="ecgCanvas" ></canvas>
     </div>
 </template>
  
@@ -9,7 +9,6 @@ export default {
     data() {
         return {
             ecgList: [],
-            show: true,
             canvas: null,
         }
     },
@@ -56,16 +55,17 @@ export default {
     methods: {
         init() {
             if (!this.$refs.ecgCanvas) {
+                console.log("无法获取到canvas元素");
                 setTimeout(() => {
                     this.init()
                 }, 50)
                 return
             }
-
-            let canvas = (this.canvas = this.$refs.ecgCanvas)
-            canvas.width = Math.floor(this.width / 50) * 50 + 2
-            canvas.height = this.height
             this.$nextTick(() => {
+                let canvas = (this.canvas = this.$refs.ecgCanvas.$el)
+                canvas.width = Math.floor(this.width / 50) * 50 + 2
+                canvas.height = this.height
+
                 setTimeout(() => {
                     console.log(this.width, this.height)
                     this.draw()
@@ -73,9 +73,12 @@ export default {
             })
         },
         draw() {
+            console.log('drawing...');
             var canvas = this.canvas
-            if (canvas.getContext) {
-                var ctx = canvas.getContext('2d')
+            console.log(this.canvas);
+            // console.log(canvas.getContext());
+            if (this.canvas) {
+                var ctx = this.canvas.getContext('2d')
                 var offsetx = 50
                 var offsety = 1
                 var width = this.width
@@ -133,6 +136,7 @@ export default {
 
                 this.drawLine(gridHeight / 2)
             }
+            console.log('drawout');
         },
         drawLine(zero) {
             var context = this.canvas.getContext('2d')
@@ -160,6 +164,7 @@ export default {
             }
             context.stroke()
             context.closePath()
+            console.log('drawline');
         },
         getPoiont(value, zero) {
             let point = zero

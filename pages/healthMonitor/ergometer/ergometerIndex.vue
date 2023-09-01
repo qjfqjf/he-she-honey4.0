@@ -6,11 +6,7 @@
 		<HealthHeader :username="username" @myUser="handleMyUser"></HealthHeader>
 		<view class="mt-3 mb-3" >
 			<!-- <My-ECGView ref="ecgView" style="height: 500rpx;width: 750rpx;" /> -->
-			<view class="content">
-                <text class="unit-text">1mV</text>
-                <Lt-ECG :ecgArr="ecgArr" :pageNum="0"></Lt-ECG>
-                <text class="unit-time-text">10s</text>
-            </view>
+			<lime-ecg />
 		</view>
 		
 		<br>
@@ -34,7 +30,7 @@
 	export default {
 		components: {
 			HealthHeader,
-			BottomNavigation
+			BottomNavigation,
 		},
 		data() {
 			return {
