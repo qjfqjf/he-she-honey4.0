@@ -105,9 +105,9 @@
 		},
 		//页面显示
 		onShow() {
-			if (this.deviceId === '') {
-				this.deviceStatus = 0
-			}
+			// if (this.deviceId === '') {
+			// 	this.deviceStatus = 0
+			// }
 			uni.$on('backWithData', (data) => {
 				this.uid = data.uid;
 				this.username = data.name;
