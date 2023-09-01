@@ -64,7 +64,7 @@
 					1, 1, 1, 0, 65, 2, 2, 0, 12, -128, 0, 119, 5, 1, 17, 15, 56, 1, 0, 0
 				],
 				deviceTimer: null,
-				cholestrol: 3.98, //胆固醇值
+				cholestrol: 0, //胆固醇值
 				deviceId: uni.getStorageSync('ytDeviceId'), // 蓝牙设备的id
 				serviceId: '00001000-0000-1000-8000-00805F9B34FB', //设备的服务值
 				characteristicId: '00001002-0000-1000-8000-00805F9B34FB', // 设备的特征值

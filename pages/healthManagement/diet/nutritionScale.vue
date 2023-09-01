@@ -111,6 +111,7 @@
 				</u-list>
 			</view>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -152,7 +153,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				}, ],
 				inputValue: '',
 				sliderHeight: 100,
-				value: 10,
+				value: 0,
 				// 基本案列数据
 				radiolist1: [{
 						name: '当前',
@@ -171,7 +172,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				communicationType: uni.getStorageSync('communicationType'),
 				dataResult: '',
 				showRenderValue: true, // 添加一个标志位，默认为true，表示显示renderValue(dataResult)
-				KitchenScaleDataValue: "正在获取数据",
+				KitchenScaleDataValue: "正在连接设备",
 				username: '', //登录的名字
 				userInfo: '',
 				uid: 0, //用户id
@@ -180,6 +181,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				foodNameTag:true,
 				KitchenScaleDataValueFloat: 0,
 				indexList:[],
+				footId:0,
 				data: [
 					{
 						name: '热量(kcal)',
@@ -296,6 +298,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 			this.getUserInfo()
 			const foodName = uni.getStorageSync('foodName')
 			const indexList = uni.getStorageSync('indexList')
+			
 			if(foodName === ''){
 				this.foodName = '选择食物'
 				this.foodNameTag = true
@@ -305,6 +308,7 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 			}
 			this.indexList = uni.getStorageSync('indexList')
 			this.foodName = uni.getStorageSync('foodName')
+			this.foodId = uni.getStorageSync('foodId')
 			this.initPrinter()
 			this.timer = setTimeout(() => {
 				this.connectedDevice()
@@ -573,20 +577,31 @@ import indexList from '../../../uni_modules/uview-ui/libs/config/props/indexList
 				console.log('value 发生变化：' + e.detail.value)
 			},
 			save() {
-				this.$http.post('/nutrition/create', {
-					uid: this.uid,
-					food_id: this.foodId,
-					unit: this.unit,
-					quantity: parseFloat(this.KitchenScaleDataValue).toFixed(2),
-					value: parseFloat(this.KitchenScaleDataValue).toFixed(2),
-					createtime: this.formatDate(new Date()),
-				}).then(res => {
-					this.$refs.uToast.show({
-						message: '保存成功',
-						type: 'success',
+				
+				if(!isNaN(this.kitchenScaleDataValue) && kitchenScaleDataValue.toFixed(2) !== '0.00' ){
+					this.$http.post('/nutrition/create', {
+						uid: this.uid,
+						food_id: this.foodId,
+						unit: this.unit,
+						quantity: parseFloat(this.KitchenScaleDataValue).toFixed(2),
+						value: parseFloat(this.KitchenScaleDataValue).toFixed(2),
+						createtime: this.formatDate(new Date()),
+					}).then(res => {
+						this.$refs.uToast.show({
+							message: '保存成功',
+							type: 'success',
+						})
 					})
-				})
-				this.getNutritionScaleData()
+					this.getNutritionScaleData()
+				}else{
+					this.$refs.uToast.show({
+						message: '保存失败',
+						type: 'error',
+					})
+					this.btnColor = '#dadada'
+					this.KitchenScaleDataValue = "0"
+				}
+				
 			},
 
 			selectFood() {

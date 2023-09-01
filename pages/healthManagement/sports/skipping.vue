@@ -51,8 +51,7 @@
 
 			<!-- 检测页面 -->
 			<view class="checkCard" v-else>
-				<!-- 切换会员 -->
-				<HealthHeader  :username="username" @myUser="handleMyUser"></HealthHeader>
+				
 
 				<view v-if="showFreeJump" class="devices-warp mt-2">
 					<FreeJump></FreeJump>

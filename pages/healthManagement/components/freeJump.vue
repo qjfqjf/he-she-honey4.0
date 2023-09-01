@@ -1,6 +1,8 @@
 <template>
-
+	
 	<view class="container">
+		<!-- 切换会员 -->
+		<HealthHeader  :username="username" @myUser="handleMyUser"></HealthHeader>
 		<view class="jump-count">
 			{{this.JumpRoleDataValue}}
 		</view>
@@ -32,13 +34,19 @@
 		</view>
 
 		<button class="button" :color="btnColor" @click="save">结束</button>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
 	import baseUrl from '@/config/baseUrl.js'
+	import HealthHeader from '@/pages/healthMonitor/components/healthHeader/HealthHeader.vue'
 	const bluethModule = uni.requireNativePlugin('plugin-BtModule');
 	export default {
+		components: {
+			HealthHeader,
+			
+		},
 		data() {
 			return {
 				// 设备状态
@@ -60,11 +68,20 @@
 				burned: '0',
 				efficiency: '0',
 				btnColor: '#dadada',
+				uid:0,
+				username: '', //登录的名字
 			}
 		},
 		mounted() {
 			this.userInfo = JSON.parse(uni.getStorageSync('userInfo'))
-			this.uid = this.userInfo.uid
+			this.uid = this.userInfo
+			console.log(111111,this.uid)
+			this.getUserInfo()
+			uni.$on('backWithData', (data) => {
+			    this.uid = data.uid;
+			    this.username = data.name;
+			});
+			console.log(111111,this.uid)
 			this.initPrinter(); // 等待 initPrinter 函数完成
 			this.timer = setTimeout(async () => {
 				this.connectedDevice(); // 等待 connectedDevice 函数完成
@@ -72,7 +89,20 @@
 		},
 		//方法
 		methods: {
+			getUserInfo(){
+				this.$http.post('/user/info', {
+					id: this.uid,
+				}).then(res => {
+					this.username = res.data.fullname
+				})
+			},
+			handleMyUser() {
+				uni.navigateTo({
+					url: '/pages/homePage/myUsers?type=select' // 跳转到指定的目标页面
+				});
+			},
 			save(){
+				console.log(11111111)
 				const value = parseFloat(this.JumpRoleDataValue)
 				if(value != 0){
 					this.$http.post('/skip/create', {
@@ -221,6 +251,7 @@
 					start_date: this.range[0],
 					end_date: this.range[1]
 				}).then(res => {
+					console.log(777777777,res)
 					this.recordList = res.data;
 				})
 			},

@@ -544,7 +544,7 @@
 				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 			},
 			handleSave() {
-				if(this.res >=0 && this.res <= 11){
+				if(this.res >=0 && this.res <= 11 && this.oxData[0].value){
 					this.$http.post('/pod/create', {
 						uid: this.uid,
 						spo: this.oxData[0].value,
