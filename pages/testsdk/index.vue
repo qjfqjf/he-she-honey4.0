@@ -15,11 +15,13 @@
 					<lime-ecg :ecgList="ecgArr"/>
 				</view>
 		</view>
-		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="startConnect()">开始连接</view>
-		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="showReport()">显示心电图记录</view>
-		<view><text>状态监听：{{stateData}}</text></view>
-
-		<view><text>数据监听：{{eventData}}</text></view>
+		<!-- <view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="startConnect()">开始连接</view>
+		<view style="width: 200rpx;height: 50rpx;background-color: bisque;" @click="showReport()">显示心电图记录</view> -->
+		<view><text>姓名 :{{name}} , 性别 :{{sex}}</text></view>
+		<view><text>出生日期 :{{birthday}}</text></view>
+		<view><text>身高(cm) :{{stature}} , 体重(kg) :{{weight}}</text></view>
+		<view><text>时间 :{{time}},心率 :{{ hr }}</text></view>
+		<view><text>分析结果 :{{result_cn}}</text></view>
 	</view>
 </template>
 
@@ -29,8 +31,14 @@
 		data() {
 			return {
 				ecgArr:[],
-				stateData: "",
-				eventData: "",
+				name: "",
+				sex: "",
+				birthday: "",
+				stature: "",
+				weight: "",
+				time: "",
+				hr: "",
+				result_cn: "",
 				id:10
 			}
 		},
@@ -50,6 +58,14 @@
 					id: this.id
 				}).then((res)=>{
 					if(res.data){
+						this.name = res.message.fullname
+						this.sex = res.message.sex_cn
+						this.birthday = res.message.birthday
+						this.stature = res.message.stature
+						this.weight = res.message.weight
+						this.time = res.data.time
+						this.hr = res.data.hr
+						this.result_cn = res.data.result_cn
 						this.ecgArr = res.data.value.split(",").map(Number)
 						const divider = 2;
 						this.ecgArr = this.ecgArr.map((num) => (num-2000) / divider);
