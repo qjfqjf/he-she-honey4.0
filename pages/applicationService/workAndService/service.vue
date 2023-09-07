@@ -140,13 +140,29 @@
                     date:this.date,
                 }).then((res)=>{
                     console.log(res);
+                    if(res.message=='提交成功'){
+                        uni.showToast({
+                            title: '提交成功',
+                            icon:'success',
+                            duration:2000
+                        })
+                    }else{
+                        uni.showToast({
+                            title: '提交失败',
+                            icon:'none',
+                            duration:2000
+                        })
+                    }
+                    uni.navigateTo({
+						url:'/pages/applicationService/index'
+					})
                 })
             },
 			selectDoctor(){
                 let index = '服务人员'
-                localStorage.setItem('data',this.data)
-                localStorage.setItem('date',this.date)
-                localStorage.setItem('did',this.did)
+                uni.getStorageSync('data',this.data)
+                uni.getStorageSync('date',this.date)
+                uni.getStorageSync('did',this.did)
 				uni.navigateTo({
 			    	url:'/pages/message/addressBook?title=' + index
 			  })
